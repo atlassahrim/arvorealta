@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Video work — Atlas Sahrim</title>
+<meta name="description" content="Vertical video editing for social — cuts, pacing, type and sound. Selected reels by Atlas Sahrim.">
+<meta property="og:title" content="Video work — Atlas Sahrim">
+<meta property="og:description" content="Vertical video editing for social: cuts, pacing, type and sound.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://arvorealta.com/video/">
+<meta name="theme-color" content="#17352C">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" media="all"
+  href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Shippori+Mincho:wght@400;500&display=swap">
+<link rel="stylesheet" href="/assets/style.css">
+
+<style>
+/* page-specific: vertical video grid */
+.reels{
+  display:grid;gap:clamp(1.75rem,4vw,3rem);
+  grid-template-columns:repeat(auto-fill,minmax(min(100%,17rem),1fr));
+  margin-top:3rem;
+}
+.reel figure{margin:0}
+.reel .frame{
+  position:relative;padding-top:177.78%;   /* 9:16 */
+  background:var(--ink);overflow:hidden;
+}
+.reel .frame iframe{
+  position:absolute;top:0;left:0;width:100%;height:100%;border:0;
+}
+.reel figcaption{padding-top:1rem;border-top:1px solid var(--rule);margin-top:1rem}
+.reel h3{margin:0 0 .5rem}
+.reel .role{
+  font-family:var(--font-label);font-size:.66rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-soft);margin:0 0 .5rem;
+}
+.reel p{font-size:.9rem;line-height:1.6;color:var(--ink-soft);margin:0;max-width:none}
+.backlink{margin-top:3.5rem}
+</style>
+</head>
+
+<body>
+
+<header class="wrap">
+  <div class="bar">
+    <a class="mark" href="/">Arvorealta</a>
+    <nav>
+      <a class="ln" href="/">the offer</a>
+      <a class="ln on" href="/video/">video</a>
+      <a class="ln" href="https://www.behance.net/arvorealta">behance</a>
+      <a class="ln" href="mailto:awe@arvorealta.com">contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero wrap">
+  <p class="eyebrow rv">Video work</p>
+  <h1 class="rv">Cut for the scroll.<br>Built to survive it.</h1>
+  <p class="sub rv">
+    Vertical edits for social: pacing, type, sound and colour. The same
+    discipline as the print work — decide what matters, then remove
+    everything competing with it.
+  </p>
+</section>
+
+<hr class="rule">
+
+<section class="wrap">
+  <p class="tag rv"><b>01</b> selected reels</p>
+
+  <div class="reels">
+
+    <div class="reel rv">
+      <figure>
+        <div class="frame">
+          <iframe
+            src="https://player.vimeo.com/video/1218349876?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1"
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            title="Reel — Fashion Industry"
+            loading="lazy"></iframe>
+        </div>
+        <figcaption>
+          <h3>Fashion industry reel</h3>
+          <p class="role"><!-- TRUE ROLE ONLY --> Edit · Motion · Sound</p>
+          <p><!-- One line: what the brief was, what the edit had to do. --></p>
+        </figcaption>
+      </figure>
+    </div>
+
+    <!-- Duplicate the .reel block above for each additional video.
+         Replace the Vimeo ID, the title attribute, the h3, the role line
+         and the caption. Set autoplay=0 on everything past the first two —
+         several autoplaying videos on one page will stall on mobile data. -->
+
+  </div>
+
+  <p class="backlink rv">
+    <a class="ln on" href="/">← Back to the offer</a>
+  </p>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <h4>Arvorealta</h4>
+        <p style="font-size:.85rem;line-height:1.7">
+          Atlas Sahrim<br>
+          Espírito Santo, Brazil<br>
+          Working with clients across Europe
+        </p>
+      </div>
+
+      <div>
+        <h4>Elsewhere</h4>
+        <nav>
+          <a class="ln" href="mailto:awe@arvorealta.com">Email</a>
+          <a class="ln" href="https://wa.me/5561999845147">WhatsApp</a>
+          <a class="ln" href="https://www.behance.net/arvorealta">Behance</a>
+          <a class="ln" href="https://www.linkedin.com/in/atlassahrim">LinkedIn</a>
+        </nav>
+      </div>
+
+      <div>
+        <h4>Overlap</h4>
+        <div class="clocks">
+          <div class="clock"><b id="cl-br">--:--</b><span>brt · here</span></div>
+          <div class="clock"><b id="cl-eu">--:--</b><span>cet · you</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="legal">
+      <span>© 2026 Arvorealta</span>
+      <span>Built and maintained in-house</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/site.js" defer></script>
+</body>
+</html>
