@@ -94,12 +94,24 @@ header{padding-block:2rem}
 .bar nav{display:flex;flex-wrap:wrap;gap:1.6rem;font-family:var(--font-label);font-size:.78rem;letter-spacing:.12em;color:var(--ink-soft)}
 
 /* ---------- hero ---------- */
-.hero{padding-top:clamp(3rem,9vw,8rem);padding-bottom:clamp(3.5rem,8vw,7rem)}
-.hero h1{max-width:15ch}
-.hero .sub{
-  font-size:clamp(1rem,.95rem + .45vw,1.3rem);color:var(--ink-soft);
-  max-width:40ch;margin-top:2.75rem;line-height:1.65;
+.hero{padding-top:clamp(2rem,6vw,5rem);padding-bottom:clamp(3rem,7vw,6rem)}
+.hero h1{max-width:14ch}
+.eyebrow{
+  font-family:var(--font-label);font-size:.7rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ink-soft);margin:0 0 1.75rem;max-width:none;
 }
+.hero .sub{
+  font-size:clamp(1.05rem,.95rem + .5vw,1.35rem);color:var(--ink-soft);
+  max-width:40ch;margin-top:2rem;line-height:1.6;
+}
+.heroact{
+  margin-top:clamp(2.25rem,5vw,3.25rem);padding-top:1.75rem;
+  border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;
+  gap:1.25rem 3rem;align-items:baseline;
+}
+.herocta{font-family:var(--font-display);font-size:clamp(1.15rem,1rem + .9vw,1.7rem);letter-spacing:-.01em}
+.heronote{margin:0;font-size:.9rem;line-height:1.7;color:var(--ink-soft);max-width:34ch}
+.heronote b{font-weight:400;color:var(--ink)}
 .scrollcue{margin-top:clamp(3rem,7vw,6rem);font-family:var(--font-label);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft)}
 
 /* ---------- inverted ---------- */
@@ -229,11 +241,21 @@ footer{padding-block:4rem 3rem;font-size:.85rem;color:var(--ink-soft);border-top
 </header>
 
 <section class="hero wrap">
-  <h1 class="rv">Document standards<br>for industrial<br>manufacturers.</h1>
+  <p class="eyebrow rv">Document standards for industrial manufacturers</p>
+  <h1 class="rv">Stop losing points<br>you already earned.</h1>
   <p class="sub rv">
-    Spec sheets, reference cards and tender annexes your team can produce
-    without a designer. Built as a system, delivered in two weeks, remote.
+    Reference projects are scored in public tenders. An install nobody
+    documented scores zero — however well you built it.
   </p>
+
+  <div class="heroact rv">
+    <a class="ln on herocta" href="mailto:awe@arvorealta.com?subject=Document%20standard%20enquiry">Send me your worst document</a>
+    <p class="heronote">
+      From <b>€600</b> for one document · <b>€2,400</b> for the full standard<br>
+      Two weeks. Remote. Your team runs it afterwards.
+    </p>
+  </div>
+
   <p class="scrollcue rv">scroll</p>
 </section>
 
@@ -241,11 +263,12 @@ footer{padding-block:4rem 3rem;font-size:.85rem;color:var(--ink-soft);border-top
 <section class="inv">
   <div class="wrap">
     <p class="tag rv"><b>01</b> the problem</p>
-    <h2 class="rv">Reference projects<br>are scored in public tenders.<br>An install nobody<br>documented scores zero.</h2>
+    <h2 class="rv">The work was done.<br>The points went<br>to someone else.</h2>
     <p class="rv" style="margin-top:2.5rem">
       Most manufacturers have the installs. What they don't have is the paperwork
       in a form a buyer can score — consistent, verified, and ready the day the
-      tender opens. The work was done. The points went to someone else.
+      tender opens. Every undocumented job is a reference you paid to create and
+      cannot use.
     </p>
 
     <div class="figures">
