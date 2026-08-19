@@ -1,0 +1,88 @@
+name: Export deck PDFs
+
+# Builds a print-correct PDF for every deck and attaches it to the run,
+# so an export can be downloaded from any device — including an iPad,
+# which has no custom paper sizes and so cannot print one itself.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'deck/**'
+      - 'assets/**'
+      - '.github/workflows/deck-pdf.yml'
+  workflow_dispatch:
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Export each deck to PDF
+        run: |
+          set -euo pipefail
+          mkdir -p out
+
+          # Serve the repo locally: printing from the working tree rather
+          # than the live URL keeps this independent of the Pages deploy.
+          python3 -m http.server 8080 >/dev/null 2>&1 &
+          for _ in $(seq 1 40); do
+            curl -sf -o /dev/null http://localhost:8080/ && break
+            sleep 0.25
+          done
+
+          shopt -s nullglob
+          found=0
+          for dir in deck/*/; do
+            slug=$(basename "$dir")
+            [ -f "$dir/index.html" ] || continue
+            found=1
+            echo "::group::$slug"
+            # --virtual-time-budget lets the webfonts finish loading before
+            # the page is printed; without it the PDF can capture fallback
+            # serifs, which changes every hand-broken line ending.
+            google-chrome \
+              --headless --disable-gpu --no-sandbox \
+              --no-pdf-header-footer \
+              --virtual-time-budget=15000 \
+              --print-to-pdf="out/$slug.pdf" \
+              "http://localhost:8080/deck/$slug/"
+            echo "::endgroup::"
+          done
+
+          if [ "$found" = 0 ]; then
+            echo "No decks found under deck/*/ — nothing to export."
+            exit 1
+          fi
+
+      - name: Verify page size and count
+        run: |
+          python3 - <<'PY'
+          import glob, re, sys
+
+          # 1920x1080 px at 0.75 pt/px. PDFs are measured in points.
+          EXPECTED = b'0 0 1440 810'
+          failed = False
+
+          for path in sorted(glob.glob('out/*.pdf')):
+              data = open(path, 'rb').read()
+              pages = len(re.findall(rb'/Type\s*/Page[^s]', data))
+              boxes = set(re.findall(rb'/MediaBox\s*\[([^\]]+)\]', data))
+              bad = boxes - {EXPECTED}
+              if bad or pages == 0:
+                  failed = True
+                  print(f"FAIL {path}: {pages} pages, unexpected page size {bad or 'none'}")
+                  print("     Expected every page at 1440x810pt (= 1920x1080px).")
+              else:
+                  print(f"ok   {path}: {pages} pages, all 1440x810pt (1920x1080px)")
+
+          sys.exit(1 if failed else 0)
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: deck-pdfs
+          path: out/*.pdf
+          if-no-files-found: error
+          retention-days: 90
