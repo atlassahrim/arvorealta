@@ -89,8 +89,21 @@
 .col-8{grid-column:span 8}
 .col-12{grid-column:span 12}
 
-/* ---------- the three type sizes ---------- */
-.label{
+/* ---------- the three type sizes ----------
+   Body is the default role for a bare <p>; label and display are
+   opt-in classes. All three are scoped to .slide so an explicit
+   role always outranks the element default — otherwise `.slide p`
+   would win on specificity and drag labels back to body type. */
+.slide p,.slide .body{
+  margin:0 0 calc(40 * var(--px));
+  font-family:var(--font-body);
+  font-size:calc(24 * var(--px));
+  line-height:calc(40 * var(--px));
+  max-width:none;        /* the grid column sets the measure here, not --measure */
+}
+.slide p:last-child{margin-bottom:0}
+
+.slide .label{
   font-family:var(--font-label);
   font-size:calc(17 * var(--px));
   line-height:calc(40 * var(--px));
@@ -98,9 +111,9 @@
   text-transform:uppercase;
   color:var(--ink-soft);
 }
-.inv .label{color:rgba(233,231,228,.6)}
+.slide.inv .label{color:rgba(233,231,228,.6)}
 
-.display,.slide h1,.slide h2{
+.slide .display,.slide h1,.slide h2{
   margin:0;
   font-family:var(--font-display);
   font-weight:400;
@@ -109,27 +122,53 @@
   letter-spacing:-.012em;
 }
 
-.slide p,.body{
-  margin:0 0 calc(40 * var(--px));
-  font-family:var(--font-body);
-  font-size:calc(24 * var(--px));
-  line-height:calc(40 * var(--px));
-}
-.slide p:last-child{margin-bottom:0}
-
 /* section label — "01 · THE PROBLEM" + hairline to the margin */
-.section-label{
+.slide .section-label{
   display:flex;
   align-items:center;
   gap:calc(24 * var(--px));
   margin-bottom:calc(40 * var(--px));
+  font-family:var(--font-label);
+  font-size:calc(17 * var(--px));
+  line-height:calc(40 * var(--px));
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
 }
+.slide.inv .section-label{color:rgba(233,231,228,.6)}
 .section-label::after{content:"";flex:1;height:1px;background:var(--rule)}
 .inv .section-label::after{background:var(--rule-inv)}
 
 /* hairline rule — 1px, ink at 18% */
 .rule{border:0;height:1px;background:var(--rule);margin:0}
 .inv .rule{background:var(--rule-inv)}
+
+/* ---------- slide roles ----------
+   Every value below is a baseline multiple (40). Display is the one
+   documented off-grid case, at the spec's own 96/100. */
+
+/* cover — label at the top, display, then the addressee line */
+.cover .display{margin-top:calc(200 * var(--px))}
+.cover .meta{margin-top:calc(80 * var(--px))}
+
+/* image band + its caption */
+.band-caption{margin-top:calc(40 * var(--px))}
+
+/* closing — centred in the live area */
+.closing .slide-body{display:flex;flex-direction:column;justify-content:center}
+.closing .meta{margin-top:calc(80 * var(--px))}
+
+/* two-column — headline left, body right of the 12-col grid */
+.col-head{grid-column:1 / span 5}
+.col-body{grid-column:7 / span 6}
+
+/* The one intermediate Playfair size CLAUDE.md allows as a rare
+   exception — a headline that has to sit inside a 5-column measure.
+   It is a documented exception, not a fourth level in the scale. */
+.slide .display.mid{
+  font-size:calc(56 * var(--px));
+  line-height:calc(60 * var(--px));
+}
 
 /* ---------- statement slide — reversed, display type only ---------- */
 .slide.statement{
@@ -146,7 +185,7 @@
 /* ---------- image band ---------- */
 .band{
   width:100%;
-  aspect-ratio:1640 / 460;
+  height:calc(480 * var(--px));   /* 12 baselines — snapped, unlike a raw ratio */
   background:
     linear-gradient(135deg,var(--ink) 0%,var(--ink-soft) 100%);
 }
@@ -155,7 +194,7 @@
 /* ---------- print — one slide per PDF page, full bleed ---------- */
 @media print{
   @page{size:1920px 1080px;margin:0}
-  html,body{margin:0;padding:0;background:#fff}
+  html,body{margin:0;padding:0}
   .deck{padding:0;gap:0;background:none}
   .slide{
     width:1920px;
