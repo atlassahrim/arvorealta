@@ -59,10 +59,12 @@ is 1.75; display is 1.04. That contrast is the system's signature — keep it.
 
 ### Deck spec (1920 × 1080)
 
-- Margins 140 px on all four sides — first ink and last ink sit the same
-  distance from their edge. On a slide carrying the footer the content area
-  stops at 860 so the footer can hold the bottom margin: live area 1640 × 720,
-  footer on the baseline below it, 140 clear of the bottom edge
+- Margins are set so the **headline** and the footer sit the same distance
+  from their edges — 155 px of ink to ink. Balance to the section label
+  instead and you are weighing a tick mark against a line of type, which is
+  what made the top look heavy. Content area starts at 100, the label rides
+  above the headline as a kicker, the headline itself starts at 140, and the
+  footer holds 140 clear of the bottom edge
 - Grid 12 columns × 100 px, 40 px gutters (12×100 + 11×40 = 1640)
 - Baseline 40 px — 20 per slide. **Display is exempt** and always was: 96/100
   is not a multiple of 40. Label and body snap; display keeps the 1.04

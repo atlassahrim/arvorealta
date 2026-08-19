@@ -84,7 +84,12 @@
   position:absolute;
   left:calc(140 * var(--px));
   right:calc(140 * var(--px));
-  top:calc(140 * var(--px));
+  top:calc(100 * var(--px));      /* the label rides above the headline as a
+                                     kicker; the headline itself then starts
+                                     at 140 and its ink lands 155 from the top,
+                                     matching the footer's 155 from the bottom.
+                                     Measuring to the label instead balanced a
+                                     tick mark against a line of type. */
   bottom:calc(220 * var(--px));   /* stops one baseline clear of the footer */
 }
 
@@ -153,7 +158,7 @@
   display:flex;
   align-items:center;
   gap:calc(24 * var(--px));
-  margin-bottom:calc(40 * var(--px));
+  margin-bottom:0;               /* sits directly on the headline it labels */
   font-family:var(--font-label);
   font-size:calc(17 * var(--px));
   line-height:calc(40 * var(--px));
@@ -283,8 +288,10 @@
                                       the whole useful field, and the margin
                                       it leaves is the deck's own 140 */
   width:calc(1640 * var(--px));
-  top:calc(140 * var(--px));
-  height:calc(720 * var(--px));
+  top:calc(100 * var(--px));      /* the same 100 the content starts at on
+                                     every other slide, so the panel edge
+                                     lines up with the type beside it */
+  height:calc(760 * var(--px));
   padding:calc(80 * var(--px));
   display:flex;
   flex-direction:column;
