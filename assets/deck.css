@@ -3,7 +3,8 @@
    Structure only — no colour, no typefaces of its own; reads
    the tokens the theme defines. Load AFTER theme + system.css.
 
-   Canvas 1920×1080. Margins 140px → live area 1640×800.
+   Canvas 1920×1080. Margins 140px on all four sides; on a slide
+   carrying the footer the content area stops at 860 → 1640×720.
    Grid 12 × 100px cols, 40px gutters (12×100 + 11×40 = 1640).
    Baseline unit 40px — 20 per slide. Snap everything to it.
 
@@ -59,7 +60,11 @@
   position:absolute;
   left:calc(140 * var(--px));
   right:calc(140 * var(--px));
-  bottom:calc(60 * var(--px));
+  bottom:calc(140 * var(--px));   /* the same 140 as every other margin, so
+                                     first ink and last ink sit the same
+                                     distance from their edge. At 60 it was
+                                     mirroring a running header that is gone,
+                                     which left 152px of air above and 75 below */
   display:flex;
   justify-content:space-between;
   align-items:baseline;
@@ -74,19 +79,19 @@
 .slide.inv .slide-foot{color:rgba(233,231,228,.6)}
 .slide-foot .num::before{content:counter(slide) " of " var(--deck-total)}
 
-/* ---------- live area — 1640 × 800, inset 140px ---------- */
+/* ---------- live area — 1640 × 720, inset 140px ---------- */
 .slide-body{
   position:absolute;
   left:calc(140 * var(--px));
   right:calc(140 * var(--px));
   top:calc(140 * var(--px));
-  bottom:calc(140 * var(--px));
+  bottom:calc(220 * var(--px));   /* stops one baseline clear of the footer */
 }
 
-/* One composition rule for interior slides: the section label is pinned
-   to the top of the live area and everything below it centres in the
-   space that remains. Without it a short content block simply falls to
-   the top and leaves half the slide empty under it. */
+/* Interior slides hang their content from the top left: the section label
+   holds the top of the live area and the headline sits directly under it,
+   at full display size. The air collects at the foot, which is where a
+   large opening headline wants it. */
 .slide-body{display:flex;flex-direction:column}
 
 /* 12 × 100px columns, 40px gutters — 1fr keeps the 100px math
@@ -96,11 +101,11 @@
   grid-template-columns:repeat(12,1fr);
   gap:calc(40 * var(--px));
   flex:1;
-  align-content:center;
+  align-content:start;
 }
 
-/* the same centring for slides whose content is not on the grid */
-.stack{flex:1;display:flex;flex-direction:column;justify-content:center}
+/* the same top alignment for slides whose content is not on the grid */
+.stack{flex:1;display:flex;flex-direction:column;justify-content:flex-start}
 .col-4{grid-column:span 4}
 .col-5{grid-column:span 5}
 .col-6{grid-column:span 6}
@@ -182,16 +187,8 @@
 .closing .meta{margin-top:calc(80 * var(--px))}
 
 /* two-column — headline left, body right of the 12-col grid */
-.col-head{grid-column:1 / span 5}
-.col-body{grid-column:7 / span 6}
-
-/* The one intermediate Playfair size CLAUDE.md allows as a rare
-   exception — a headline that has to sit inside a 5-column measure.
-   It is a documented exception, not a fourth level in the scale. */
-.slide .display.mid{
-  font-size:calc(56 * var(--px));
-  line-height:calc(60 * var(--px));
-}
+.col-head{grid-column:1 / span 7}
+.col-body{grid-column:8 / span 5}
 
 /* ---------- statement slide — reversed, display type only ---------- */
 .slide.statement{
@@ -201,7 +198,8 @@
   text-align:center;
 }
 .slide.statement .display{
-  max-width:16ch;
+  /* no measure cap — the <br>s own every line ending, and a cap here
+     silently re-wraps them */
   color:var(--paper-3);
 }
 
@@ -286,11 +284,11 @@
                                       it leaves is the deck's own 140 */
   width:calc(1640 * var(--px));
   top:calc(140 * var(--px));
-  height:calc(800 * var(--px));
+  height:calc(720 * var(--px));
   padding:calc(80 * var(--px));
   display:flex;
   flex-direction:column;
-  justify-content:center;
+  justify-content:flex-start;
   background:rgba(23,53,44,.62);
   backdrop-filter:blur(18px);
   -webkit-backdrop-filter:blur(18px);

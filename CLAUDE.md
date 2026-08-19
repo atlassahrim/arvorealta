@@ -59,11 +59,14 @@ is 1.75; display is 1.04. That contrast is the system's signature — keep it.
 
 ### Deck spec (1920 × 1080)
 
-- Margins 140 px; live area 1640 × 800
+- Margins 140 px on all four sides — first ink and last ink sit the same
+  distance from their edge. On a slide carrying the footer the content area
+  stops at 860 so the footer can hold the bottom margin: live area 1640 × 720,
+  footer on the baseline below it, 140 clear of the bottom edge
 - Grid 12 columns × 100 px, 40 px gutters (12×100 + 11×40 = 1640)
 - Baseline 40 px — 20 per slide. **Display is exempt** and always was: 96/100
-  and the intermediate 56/60 are not multiples of 40. Label and body snap;
-  display keeps the 1.04 leading, which is the part that reads as ours
+  is not a multiple of 40. Label and body snap; display keeps the 1.04
+  leading, which is the part that reads as ours
 - Display **Playfair Display 96/100**, tracking −0.012em
 - Body **Shippori Mincho 24/40**
 - Label **Cinzel ALL CAPS 17/40**, tracking +0.16em
@@ -72,7 +75,9 @@ is 1.75; display is 1.04. That contrast is the system's signature — keep it.
   identification sits at the foot so a page pulled out of the deck still says
   what it is. Contact details are not running chrome; they close the deck
 - Section labels read `01 · THE PROBLEM` with a hairline rule to the right margin
-- Statement slides reverse out: full-bleed ink, display type only
+- Statement slides reverse out: full-bleed ink, display type only, no chrome
+- Interior slides hang from the top left: section label, then the headline at
+  full display size. The air collects at the foot
 - Rules 1 px, ink at 18% opacity
 
 ## Rules that matter
@@ -80,10 +85,10 @@ is 1.75; display is 1.04. That contrast is the system's signature — keep it.
 **Hand-break headlines** with `<br>`. Never let display type wrap on its own —
 every line ending is a decision.
 
-**Three type sizes per slide. Four in the system.** Display 96, intermediate
-Playfair 56, body 24, label 17. The intermediate is a real level — it is what
-lets a headline sit in a five- or six-column measure without collapsing — but
-no single slide should show more than three of the four.
+**Three type sizes.** Display 96, body 24, label 17 — that is the whole scale.
+An intermediate Playfair was tried and retired: giving the headline a wider
+column solved what the extra size was covering for. If a fourth seems
+necessary, widen the column before you add a level.
 
 **Snap to the baseline**, including captions and table rows. Display excepted, above.
 
