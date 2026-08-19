@@ -83,14 +83,24 @@
   bottom:calc(140 * var(--px));
 }
 
+/* One composition rule for interior slides: the section label is pinned
+   to the top of the live area and everything below it centres in the
+   space that remains. Without it a short content block simply falls to
+   the top and leaves half the slide empty under it. */
+.slide-body{display:flex;flex-direction:column}
+
 /* 12 × 100px columns, 40px gutters — 1fr keeps the 100px math
    exact at any scale instead of drifting from rounded calc() */
 .grid12{
   display:grid;
   grid-template-columns:repeat(12,1fr);
   gap:calc(40 * var(--px));
-  height:100%;
+  flex:1;
+  align-content:center;
 }
+
+/* the same centring for slides whose content is not on the grid */
+.stack{flex:1;display:flex;flex-direction:column;justify-content:center}
 .col-4{grid-column:span 4}
 .col-5{grid-column:span 5}
 .col-6{grid-column:span 6}
@@ -158,9 +168,11 @@
    Every value below is a baseline multiple (40). Display is the one
    documented off-grid case, at the spec's own 96/100. */
 
-/* cover — label at the top, display, then the addressee line */
+/* cover — label at the top, display, and the addressee line held to the
+   foot of the live area, the way a title page hangs its imprint */
 .cover .display{margin-top:calc(200 * var(--px))}
-.cover .meta{margin-top:calc(80 * var(--px))}
+/* outranks `.slide .display + p`, which would otherwise pin this at 40 */
+.cover .display + .meta{margin-top:auto}
 
 /* image band + its caption */
 .band-caption{margin-top:calc(40 * var(--px))}
@@ -237,7 +249,7 @@
 /* ---------- image band ---------- */
 .band{
   width:100%;
-  height:calc(480 * var(--px));   /* 12 baselines — snapped, unlike a raw ratio */
+  height:calc(560 * var(--px));   /* 14 baselines — snapped, unlike a raw ratio */
   overflow:hidden;
   background:
     linear-gradient(135deg,var(--ink) 0%,var(--ink-soft) 100%);
@@ -269,10 +281,12 @@
 .slide.glass .slide-foot{color:rgba(233,231,228,.65)}
 .glass-panel{
   position:absolute;
-  left:calc(420 * var(--px));      /* columns 3–10, symmetric in the frame */
-  width:calc(1080 * var(--px));
-  top:calc(220 * var(--px));
-  height:calc(640 * var(--px));    /* 16 baselines */
+  left:calc(140 * var(--px));      /* the live area itself — the panel takes
+                                      the whole useful field, and the margin
+                                      it leaves is the deck's own 140 */
+  width:calc(1640 * var(--px));
+  top:calc(140 * var(--px));
+  height:calc(800 * var(--px));
   padding:calc(80 * var(--px));
   display:flex;
   flex-direction:column;
@@ -282,10 +296,10 @@
   -webkit-backdrop-filter:blur(18px);
   border:1px solid rgba(233,231,228,.22);
 }
-/* The panel is 920px of usable width — wide enough to run body copy past
-   a readable measure, so it keeps one here even though slides otherwise
-   let the grid column do that job. */
-.glass-panel .body{max-width:calc(640 * var(--px))}
+/* The panel is 1480px of usable width — far past a readable measure, so
+   it sets one here even though slides otherwise let the grid column do
+   that job. 880px runs body copy at about 53 characters. */
+.glass-panel .body{max-width:calc(880 * var(--px))}
 
 /* ---------- print — one slide per PDF page, full bleed ---------- */
 @media print{
