@@ -1,0 +1,26 @@
+/* ==========================================================
+   THEME — Arvorealta
+   Copy this file to add a client. Change values only; never
+   add rules here. Structure lives in assets/system.css.
+
+   Fonts must also be loaded in the page <head>:
+   Cinzel · Playfair Display · Shippori Mincho (Google Fonts)
+   ========================================================== */
+:root{
+  --paper:#D9D7D4;        /* warm greige ground */
+  --paper-2:#E4E2DF;
+  --paper-3:#EFEEEC;
+  --ink:#17352C;          /* deep green, from the deck */
+  --ink-soft:#5A6B63;
+  --accent:#C7392F;
+  --rule:rgba(23,53,44,.18);
+  --rule-inv:rgba(233,231,228,.22);
+
+  --measure:34rem;
+  --gap:clamp(4.5rem,10vw,11rem);
+
+  /* Cinzel = labels · Playfair Display = display · Shippori Mincho = body */
+  --font-label:"Cinzel","Playfair Display",Georgia,serif;
+  --font-display:"Playfair Display",Georgia,"Times New Roman",serif;
+  --font-body:"Shippori Mincho",Georgia,"Times New Roman",serif;
+}
