@@ -43,35 +43,18 @@
 /* reversed slides — full-bleed ink ground */
 .slide.inv{background:var(--ink);color:var(--paper-3)}
 
-/* ---------- running header — baseline 100px from top ---------- */
-.slide-head{
-  position:absolute;
-  left:calc(140 * var(--px));
-  right:calc(140 * var(--px));
-  top:calc(60 * var(--px));
-  display:flex;
-  justify-content:space-between;
-  align-items:baseline;
-  font-family:var(--font-label);
-  font-size:calc(17 * var(--px));
-  line-height:calc(40 * var(--px));
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  color:var(--ink-soft);
-}
-.inv .slide-head{color:rgba(233,231,228,.6)}
-.slide-head .num::before{content:counter(slide,decimal-leading-zero)}
-
-.deck{counter-reset:slide}
+/* Set --deck-total to the number of slides. It must be a quoted string —
+   var() resolves inside content(), but counters cannot total themselves,
+   and hard-coding it here keeps the deck free of a script. */
+.deck{counter-reset:slide; --deck-total:"7"}
 .slide{counter-increment:slide}
 
 /* ---------- running footer — baseline 100px from the bottom ----------
-   Mirrors the header, and like the header it sits in the 140px margin,
-   so neither costs the live area a pixel. Contact details belong on the
-   cover and the closing only: a deck is linear and ends on its contact,
-   so repeating a phone number on every interior slide only dilutes it.
-   The header carries identification instead, because a page pulled out
-   of the deck and scored on its own still has to say what it is. */
+   All the running identification lives at the foot: project, page, site.
+   It sits in the 140px bottom margin, so it costs the live area nothing.
+   A page pulled out of a deck and scored on its own still has to say
+   what it is — which is why this repeats, and why contact details, which
+   belong once on the closing slide, do not. */
 .slide-foot{
   position:absolute;
   left:calc(140 * var(--px));
@@ -89,6 +72,7 @@
   color:var(--ink-soft);
 }
 .slide.inv .slide-foot{color:rgba(233,231,228,.6)}
+.slide-foot .num::before{content:counter(slide) " of " var(--deck-total)}
 
 /* ---------- live area — 1640 × 800, inset 140px ---------- */
 .slide-body{
@@ -247,17 +231,61 @@
    The live area itself is left alone: narrowing .slide-body would re-fit
    the 12-column grid into half the width and collapse every column from
    100px to 30px. Columns 1–6 measure 800px (6×100 + 5×40). */
-.image-bleed .slide-head{right:calc(980 * var(--px))}
+.image-bleed .slide-foot{right:calc(980 * var(--px))}
 .image-bleed .section-label{width:calc(800 * var(--px))}
 
 /* ---------- image band ---------- */
 .band{
   width:100%;
   height:calc(480 * var(--px));   /* 12 baselines — snapped, unlike a raw ratio */
+  overflow:hidden;
   background:
     linear-gradient(135deg,var(--ink) 0%,var(--ink-soft) 100%);
 }
 .inv .band{background:rgba(233,231,228,.08)}
+/* A portrait photograph in a 1640×480 band is a deliberate detail crop:
+   object-position holds the subject rather than the centre of the frame. */
+.band img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 38%;
+}
+
+/* ---------- full-bleed image with a floating panel ----------
+   The panel is a translucent ink plane, not a decorative frosted card:
+   it keeps the deck's hairline and its right angles, and it is opaque
+   enough to hold paper type on its own if the blur is unavailable —
+   backdrop-filter is the first thing a print pipeline drops. */
+.slide-bg{position:absolute;inset:0;overflow:hidden}
+.slide-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.slide-bg::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(23,53,44,.42);   /* scrim, so the footer stays legible */
+}
+.slide.glass{color:var(--paper-3)}
+.slide.glass .slide-foot{color:rgba(233,231,228,.65)}
+.glass-panel{
+  position:absolute;
+  left:calc(420 * var(--px));      /* columns 3–10, symmetric in the frame */
+  width:calc(1080 * var(--px));
+  top:calc(220 * var(--px));
+  height:calc(640 * var(--px));    /* 16 baselines */
+  padding:calc(80 * var(--px));
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  background:rgba(23,53,44,.62);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border:1px solid rgba(233,231,228,.22);
+}
+/* The panel is 920px of usable width — wide enough to run body copy past
+   a readable measure, so it keeps one here even though slides otherwise
+   let the grid column do that job. */
+.glass-panel .body{max-width:calc(640 * var(--px))}
 
 /* ---------- print — one slide per PDF page, full bleed ---------- */
 @media print{
@@ -277,5 +305,17 @@
   html,.slide,.slide.inv,.slide.statement{
     print-color-adjust:exact;
     -webkit-print-color-adjust:exact;
+  }
+
+  /* Chrome drops backdrop-filter when it writes the PDF — verified by
+     rasterising the output, where the panel came through as a flat plane
+     with the photograph sharp behind the headline. The blur was doing
+     the separating, so print takes the opacity up to do it instead:
+     9.00:1 on paper type, and the image still shows through faintly
+     enough to keep the panel reading as glass rather than a filled box. */
+  .glass-panel{
+    background:rgba(23,53,44,.82);
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
   }
 }
