@@ -65,6 +65,31 @@
 .deck{counter-reset:slide}
 .slide{counter-increment:slide}
 
+/* ---------- running footer — baseline 100px from the bottom ----------
+   Mirrors the header, and like the header it sits in the 140px margin,
+   so neither costs the live area a pixel. Contact details belong on the
+   cover and the closing only: a deck is linear and ends on its contact,
+   so repeating a phone number on every interior slide only dilutes it.
+   The header carries identification instead, because a page pulled out
+   of the deck and scored on its own still has to say what it is. */
+.slide-foot{
+  position:absolute;
+  left:calc(140 * var(--px));
+  right:calc(140 * var(--px));
+  bottom:calc(60 * var(--px));
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:calc(40 * var(--px));
+  font-family:var(--font-label);
+  font-size:calc(17 * var(--px));
+  line-height:calc(40 * var(--px));
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.slide.inv .slide-foot{color:rgba(233,231,228,.6)}
+
 /* ---------- live area — 1640 × 800, inset 140px ---------- */
 .slide-body{
   position:absolute;
@@ -102,6 +127,8 @@
   max-width:none;        /* the grid column sets the measure here, not --measure */
 }
 .slide p:last-child{margin-bottom:0}
+/* display sets margin:0, so body copy following it needs its own baseline */
+.slide .display + p{margin-top:calc(40 * var(--px))}
 
 .slide .label{
   font-family:var(--font-label);
@@ -181,6 +208,47 @@
   max-width:16ch;
   color:var(--paper-3);
 }
+
+/* ---------- the third ground ----------
+   Warm taupe, carrying ink type at 6.16:1. Two rules the contrast maths
+   makes non-negotiable:
+     · never the accent red on this ground — it measures 2.40:1
+     · never taupe as a panel beside paper — they are 1.50:1 apart and
+       read as a printing error, not a choice. It is a whole-slide ground.
+   Its job is evidence: image and case slides, so a deck reads
+   paper (argument) → taupe (evidence) → ink (statement). */
+.slide.ground-2{background:var(--ground-2);color:var(--ink)}
+
+/* ---------- half-bleed figure ----------
+   A portrait photograph in a landscape slide. Cropping one to full-bleed
+   16:9 throws away the top and bottom, which in a moving subject is the
+   whole picture — so the image takes a full-height panel from column 8
+   to the right edge and the type keeps columns 1–6. */
+.figure-bleed{
+  position:absolute;
+  top:0;
+  bottom:0;
+  right:0;
+  width:calc(800 * var(--px));
+  margin:0;              /* <figure> carries a UA margin that breaks the bleed */
+  overflow:hidden;
+}
+.figure-bleed img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+}
+.col-half{grid-column:1 / span 6}
+
+/* The panel covers columns 8–12, so the chrome and the section rule stop
+   at column 6 rather than running underneath it — otherwise the name in
+   the running header is simply hidden behind the photograph.
+   The live area itself is left alone: narrowing .slide-body would re-fit
+   the 12-column grid into half the width and collapse every column from
+   100px to 30px. Columns 1–6 measure 800px (6×100 + 5×40). */
+.image-bleed .slide-head{right:calc(980 * var(--px))}
+.image-bleed .section-label{width:calc(800 * var(--px))}
 
 /* ---------- image band ---------- */
 .band{

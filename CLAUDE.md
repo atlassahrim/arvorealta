@@ -42,6 +42,18 @@ Palette: ink `#17352C`, ground `#D9D7D4`, secondary `#5A6B63`, accent red
 `#C7392F` — the red is used **once per page at most**, to mark the point of
 failure. Never decoration.
 
+Third ground: warm taupe `#BEAE9E`, carrying **ink** type at 6.16:1. A third
+ground cannot be a mid-tone — every clay and umber between paper and ink
+fails both text colours at once (4.4:1 and below). Two rules follow from the
+contrast, and both are hard:
+
+- **Never the accent red on taupe** — 2.40:1. The red mark lives on paper or ink.
+- **Never taupe as a panel beside paper** — 1.50:1 apart, so they read as a
+  printing error rather than a choice. Taupe is a whole-slide ground.
+
+Its job is evidence — image and case slides — so a deck reads
+**paper** (argument) → **taupe** (evidence) → **ink** (statement).
+
 Web type scale lives in `system.css` and is fluid (`clamp`). Body line-height
 is 1.75; display is 1.04. That contrast is the system's signature — keep it.
 
