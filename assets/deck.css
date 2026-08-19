@@ -1,0 +1,174 @@
+/* ==========================================================
+   DECK — slide geometry + print rules.
+   Structure only — no colour, no typefaces of its own; reads
+   the tokens the theme defines. Load AFTER theme + system.css.
+
+   Canvas 1920×1080. Margins 140px → live area 1640×800.
+   Grid 12 × 100px cols, 40px gutters (12×100 + 11×40 = 1640).
+   Baseline unit 40px — 20 per slide. Snap everything to it.
+
+   On screen the canvas scales to fit its container: --px is
+   1 spec-pixel expressed in container-query width units, so
+   every calc(N * var(--px)) below is exactly N CSS px at the
+   deck's native 1920px size, and shrinks in lockstep at any
+   other size because width and height scale uniformly (the
+   frame's aspect-ratio is locked to 16:9, so cqw alone is
+   enough to convert both axes — no cqh needed).
+   ========================================================== */
+
+.deck{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:2.5rem;
+  padding-block:2.5rem;
+  background:var(--paper-2);
+}
+
+.slide{
+  --px:calc(1cqw / 19.2);  /* 19.2 = 1920 / 100 */
+  container-type:inline-size;
+  position:relative;
+  width:100%;
+  max-width:1920px;
+  aspect-ratio:16 / 9;
+  flex:0 0 auto;
+  overflow:hidden;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  box-shadow:0 1px 2px rgba(0,0,0,.12),0 18px 44px rgba(0,0,0,.16);
+}
+
+/* reversed slides — full-bleed ink ground */
+.slide.inv{background:var(--ink);color:var(--paper-3)}
+
+/* ---------- running header — baseline 100px from top ---------- */
+.slide-head{
+  position:absolute;
+  left:calc(140 * var(--px));
+  right:calc(140 * var(--px));
+  top:calc(60 * var(--px));
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  font-family:var(--font-label);
+  font-size:calc(17 * var(--px));
+  line-height:calc(40 * var(--px));
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.inv .slide-head{color:rgba(233,231,228,.6)}
+.slide-head .num::before{content:counter(slide,decimal-leading-zero)}
+
+.deck{counter-reset:slide}
+.slide{counter-increment:slide}
+
+/* ---------- live area — 1640 × 800, inset 140px ---------- */
+.slide-body{
+  position:absolute;
+  left:calc(140 * var(--px));
+  right:calc(140 * var(--px));
+  top:calc(140 * var(--px));
+  bottom:calc(140 * var(--px));
+}
+
+/* 12 × 100px columns, 40px gutters — 1fr keeps the 100px math
+   exact at any scale instead of drifting from rounded calc() */
+.grid12{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:calc(40 * var(--px));
+  height:100%;
+}
+.col-4{grid-column:span 4}
+.col-5{grid-column:span 5}
+.col-6{grid-column:span 6}
+.col-7{grid-column:span 7}
+.col-8{grid-column:span 8}
+.col-12{grid-column:span 12}
+
+/* ---------- the three type sizes ---------- */
+.label{
+  font-family:var(--font-label);
+  font-size:calc(17 * var(--px));
+  line-height:calc(40 * var(--px));
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.inv .label{color:rgba(233,231,228,.6)}
+
+.display,.slide h1,.slide h2{
+  margin:0;
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:calc(96 * var(--px));
+  line-height:calc(100 * var(--px));
+  letter-spacing:-.012em;
+}
+
+.slide p,.body{
+  margin:0 0 calc(40 * var(--px));
+  font-family:var(--font-body);
+  font-size:calc(24 * var(--px));
+  line-height:calc(40 * var(--px));
+}
+.slide p:last-child{margin-bottom:0}
+
+/* section label — "01 · THE PROBLEM" + hairline to the margin */
+.section-label{
+  display:flex;
+  align-items:center;
+  gap:calc(24 * var(--px));
+  margin-bottom:calc(40 * var(--px));
+}
+.section-label::after{content:"";flex:1;height:1px;background:var(--rule)}
+.inv .section-label::after{background:var(--rule-inv)}
+
+/* hairline rule — 1px, ink at 18% */
+.rule{border:0;height:1px;background:var(--rule);margin:0}
+.inv .rule{background:var(--rule-inv)}
+
+/* ---------- statement slide — reversed, display type only ---------- */
+.slide.statement{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+.slide.statement .display{
+  max-width:16ch;
+  color:var(--paper-3);
+}
+
+/* ---------- image band ---------- */
+.band{
+  width:100%;
+  aspect-ratio:1640 / 460;
+  background:
+    linear-gradient(135deg,var(--ink) 0%,var(--ink-soft) 100%);
+}
+.inv .band{background:rgba(233,231,228,.08)}
+
+/* ---------- print — one slide per PDF page, full bleed ---------- */
+@media print{
+  @page{size:1920px 1080px;margin:0}
+  html,body{margin:0;padding:0;background:#fff}
+  .deck{padding:0;gap:0;background:none}
+  .slide{
+    width:1920px;
+    max-width:none;
+    aspect-ratio:auto;
+    height:1080px;
+    box-shadow:none;
+    break-after:page;
+    break-inside:avoid;
+  }
+  .slide:last-child{break-after:auto}
+  html,.slide,.slide.inv,.slide.statement{
+    print-color-adjust:exact;
+    -webkit-print-color-adjust:exact;
+  }
+}
