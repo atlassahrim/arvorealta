@@ -87,8 +87,30 @@ Decks print to PDF from the same source that serves them. In `deck.css`:
 `@page { size: 1920px 1080px; margin: 0 }`, each slide `break-after: page`,
 and `print-color-adjust: exact` so reversed slides keep their ground.
 
-Chrome → Print → Destination "Save as PDF" → paper size matching, margins
-None, **Background graphics ON**, scale 100%. One slide per page, no clipping.
+**Export with the command, not the print dialog.** Chrome's dialog has no
+1920 × 1080 paper size and its Paper size dropdown overrides `@page`, so
+printing by hand silently gives you Letter. Run this instead:
+
+```sh
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+  --headless --disable-gpu --no-pdf-header-footer \
+  --print-to-pdf="$HOME/Desktop/deck.pdf" \
+  "https://arvorealta.com/deck/<slug>/"
+```
+
+Verified output: 5 pages, 1440 × 810 pt — that is exactly 1920 × 1080 px,
+since 1 px = 0.75 pt — with both grounds intact. Backgrounds need no flag;
+`print-color-adjust: exact` carries them. If Chrome rejects
+`--no-pdf-header-footer`, drop it and add `--headless=old`.
+
+Points, not pixels, is what the page is really measured in. If you ever need
+the GUI, macOS can do it: Print → **Print Using System Dialog** → Paper Size →
+Manage Custom Sizes → **20 in × 11.25 in**, margins 0. Same page — 1920 ÷ 96
+and 1080 ÷ 96.
+
+iPadOS has no custom paper sizes and no Chrome CLI, so it cannot produce a
+correct export at all. Generate the PDF elsewhere, or present the deck
+full-screen from the browser — it is already responsive at any width.
 
 ## Deploy
 
