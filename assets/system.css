@@ -100,6 +100,9 @@ header{padding-block:2rem}
 /* ---------- offer ---------- */
 .tiers{display:grid;gap:1.25rem;grid-template-columns:1fr}
 @media(min-width:34rem){.tiers{grid-template-columns:1fr 1fr}}
+@media(min-width:62rem){.tiers{grid-template-columns:repeat(3,1fr)}}
+.offer.beyond{background:transparent;outline:1px solid var(--rule);outline-offset:-1px}
+.offer .bridge{margin-top:1.25rem;font-size:.85rem;line-height:1.55;color:var(--ink-soft);font-style:italic}
 .offer{background:var(--paper-3);padding:clamp(1.5rem,3.5vw,2.25rem);display:flex;flex-direction:column}
 .offer.full{outline:1px solid var(--ink);outline-offset:-1px}
 .step{font-family:var(--font-label);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
