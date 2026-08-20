@@ -10,7 +10,8 @@ deploys in about ten seconds.**
 |---|---|
 | arvorealta.com | `index.html` — the offer page |
 | arvorealta.com/video/ | `video/index.html` — video portfolio |
-| arvorealta.com/deck/`<slug>`/ | decks (see below) |
+| arvorealta.com/deck/`<slug>`/ | decks — 1920 × 1080, for presenting |
+| arvorealta.com/annex/`<slug>`/ | annexes — A4, for submitting |
 
 **`index.html` and `video/index.html` are live and in use.** Do not restructure
 them without being asked. Copy changes are fine; layout surgery is not.
@@ -21,10 +22,12 @@ them without being asked. Copy changes are fine; layout surgery is not.
 index.html              offer page
 video/index.html        video portfolio
 deck/<slug>/index.html  one deck per folder
+annex/<slug>/index.html one A4 annex per folder
 assets/
   themes/<name>.css     tokens only — colour, type, measure
   system.css            structure only — no colour, no typefaces
   deck.css              slide geometry + print rules
+  annex.css             A4 document geometry + print rules
   site.js               live clocks, scroll reveal
 CNAME                   custom domain
 ```
@@ -82,6 +85,29 @@ is 1.75; display is 1.04. That contrast is the system's signature — keep it.
   full display size. The air collects at the foot
 - Rules 1 px, ink at 18% opacity
 
+### Annex spec (A4)
+
+A deck is for presenting; an annex is for submitting, and the two obey
+different masters. The deck scales a 1920 × 1080 canvas with a `--px` unit.
+`annex.css` does not scale at all — it is set in the units print is measured
+in, millimetres for the page and points for the type.
+
+- Page 210 × 297 mm. Margins 20 mm sides, 24 mm head, 27 mm foot. The
+  strictest published tender rule found is 15 mm, so every edge clears it
+- Content 170 × 246 mm — 41 baselines of 6 mm
+- Grid 12 columns × 10.5 mm, 4 mm gutters (12×10.5 + 11×4 = 170)
+- **Every size a reader reads is 11 pt or above.** Published tender rules put
+  the floor for proposal body text at 9–11 pt depending on the procedure;
+  11 pt clears all of them. The section label carries the same 11 pt as the
+  body and takes its hierarchy from face and tracking instead of from size.
+  Only the running foot sits at 9 pt — it is page furniture, not submitted text
+- Scale 34 / 22 / 11: title, heading, body and label
+- Narrative sits in eight columns — 112 mm, about 58 characters. The full
+  170 mm measure runs past 85 characters and stops being readable
+- **Page budget is the design constraint.** A tender that caps pages discards
+  the overflow unread, so air costs content. Measure every block against the
+  246 mm before adding to a sheet
+
 ## Rules that matter
 
 **Hand-break headlines** with `<br>`. Never let display type wrap on its own —
@@ -135,8 +161,30 @@ Manage Custom Sizes → **20 in × 11.25 in**, margins 0. Same page — 1920 ÷ 
 and 1080 ÷ 96.
 
 iPadOS has no custom paper sizes and no Chrome CLI, so it cannot produce a
-correct export at all. Generate the PDF elsewhere, or present the deck
+correct deck export at all. Generate the PDF elsewhere, or present the deck
 full-screen from the browser — it is already responsive at any width.
+
+**Annexes are the easy case.** A4 is a standard paper size, so an annex
+*can* be exported from the print dialog — Destination "Save as PDF", Paper
+size A4, Margins None, scale 100%. The same command works too, and is still
+what CI runs:
+
+```sh
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+  --headless --disable-gpu --no-pdf-header-footer \
+  --print-to-pdf="$HOME/Desktop/annex.pdf" \
+  "https://arvorealta.com/annex/<slug>/"
+```
+
+Verified output: 594.96 × 841.92 pt against a 595.28 × 841.89 pt A4 — Chrome
+rounds by about a tenth of a millimetre, which no printer will show. The
+export is tagged, carries a document language and keeps the `alt` text, so
+it already meets the EN 301 549 floor for a non-web document. It is **not**
+PDF/A; if a notice demands that profile, post-process with Ghostscript.
+
+`.github/workflows/deck-pdf.yml` exports every deck and annex on push and
+attaches them to the run, asserting 1440 × 810 pt for decks and A4 for
+annexes so a wrong page size cannot ship quietly.
 
 ## Deploy
 

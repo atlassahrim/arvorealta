@@ -1,14 +1,16 @@
-name: Export deck PDFs
+name: Export PDFs
 
-# Builds a print-correct PDF for every deck and attaches it to the run,
-# so an export can be downloaded from any device — including an iPad,
-# which has no custom paper sizes and so cannot print one itself.
+# Builds a print-correct PDF for every deck and every annex and attaches
+# them to the run, so an export can be downloaded from any device —
+# including an iPad, which has no custom paper sizes and so cannot print
+# a 1920×1080 deck itself.
 
 on:
   push:
     branches: [main]
     paths:
       - 'deck/**'
+      - 'annex/**'
       - 'assets/**'
       - '.github/workflows/deck-pdf.yml'
   workflow_dispatch:
@@ -19,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Export each deck to PDF
+      - name: Export every deck and annex to PDF
         run: |
           set -euo pipefail
           mkdir -p out
@@ -34,55 +36,75 @@ jobs:
 
           shopt -s nullglob
           found=0
-          for dir in deck/*/; do
-            slug=$(basename "$dir")
-            [ -f "$dir/index.html" ] || continue
-            found=1
-            echo "::group::$slug"
-            # --virtual-time-budget lets the webfonts finish loading before
-            # the page is printed; without it the PDF can capture fallback
-            # serifs, which changes every hand-broken line ending.
-            google-chrome \
-              --headless --disable-gpu --no-sandbox \
-              --no-pdf-header-footer \
-              --virtual-time-budget=15000 \
-              --print-to-pdf="out/$slug.pdf" \
-              "http://localhost:8080/deck/$slug/"
-            echo "::endgroup::"
+          for kind in deck annex; do
+            for dir in "$kind"/*/; do
+              slug=$(basename "$dir")
+              [ -f "$dir/index.html" ] || continue
+              found=1
+              echo "::group::$kind/$slug"
+              # --virtual-time-budget lets the webfonts finish loading before
+              # the page is printed; without it the PDF can capture fallback
+              # serifs, which changes every hand-broken line ending.
+              google-chrome \
+                --headless --disable-gpu --no-sandbox \
+                --no-pdf-header-footer \
+                --virtual-time-budget=20000 \
+                --print-to-pdf="out/$kind-$slug.pdf" \
+                "http://localhost:8080/$kind/$slug/"
+              echo "::endgroup::"
+            done
           done
 
           if [ "$found" = 0 ]; then
-            echo "No decks found under deck/*/ — nothing to export."
+            echo "Nothing found under deck/*/ or annex/*/ to export."
             exit 1
           fi
 
       - name: Verify page size and count
         run: |
           python3 - <<'PY'
-          import glob, re, sys
+          import glob, os, re, sys
 
-          # 1920x1080 px at 0.75 pt/px. PDFs are measured in points.
-          EXPECTED = b'0 0 1440 810'
+          # A deck page is 1920x1080px at 0.75pt/px. An annex page is A4.
+          # Chrome rounds by a fraction of a point, so allow 1.5pt either way.
+          EXPECTED = {
+              'deck':  (1440.0, 810.0,  '1920x1080px'),
+              'annex': (595.28, 841.89, 'A4, 210x297mm'),
+          }
+          TOL = 1.5
           failed = False
 
           for path in sorted(glob.glob('out/*.pdf')):
+              kind = os.path.basename(path).split('-', 1)[0]
+              if kind not in EXPECTED:
+                  print(f"FAIL {path}: cannot tell whether this is a deck or an annex")
+                  failed = True
+                  continue
+              want_w, want_h, human = EXPECTED[kind]
+
               data = open(path, 'rb').read()
               pages = len(re.findall(rb'/Type\s*/Page[^s]', data))
               boxes = set(re.findall(rb'/MediaBox\s*\[([^\]]+)\]', data))
-              bad = boxes - {EXPECTED}
+
+              bad = []
+              for box in boxes:
+                  w, h = [float(v) for v in box.split()[2:4]]
+                  if abs(w - want_w) > TOL or abs(h - want_h) > TOL:
+                      bad.append(f"{w:.2f}x{h:.2f}pt")
+
               if bad or pages == 0:
                   failed = True
-                  print(f"FAIL {path}: {pages} pages, unexpected page size {bad or 'none'}")
-                  print("     Expected every page at 1440x810pt (= 1920x1080px).")
+                  print(f"FAIL {path}: {pages} pages, unexpected size {bad or 'none'}")
+                  print(f"     Expected every page at {want_w}x{want_h}pt ({human}).")
               else:
-                  print(f"ok   {path}: {pages} pages, all 1440x810pt (1920x1080px)")
+                  print(f"ok   {path}: {pages} pages, all {want_w}x{want_h}pt ({human})")
 
           sys.exit(1 if failed else 0)
           PY
 
       - uses: actions/upload-artifact@v4
         with:
-          name: deck-pdfs
+          name: pdfs
           path: out/*.pdf
           if-no-files-found: error
           retention-days: 90
