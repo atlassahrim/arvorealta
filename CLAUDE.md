@@ -24,7 +24,8 @@ video/index.html        video portfolio
 deck/<slug>/index.html  one deck per folder
 annex/<slug>/index.html one A4 annex per folder
 assets/
-  themes/<name>.css     tokens only — colour, type, measure
+  themes/arvorealta.css tokens for the deck — editorial
+  themes/technical.css  tokens for annexes — technical
   system.css            structure only — no colour, no typefaces
   deck.css              slide geometry + print rules
   annex.css             A4 document geometry + print rules
@@ -92,6 +93,28 @@ different masters. The deck scales a 1920 × 1080 canvas with a `--px` unit.
 `annex.css` does not scale at all — it is set in the units print is measured
 in, millimetres for the page and points for the type.
 
+**Annexes use a second theme.** `themes/technical.css`: white stock,
+near-black ink, **IBM Plex Sans** for anything read as a sentence and
+**IBM Plex Mono** for every label and figure. The deck theme persuades; this
+one is built to be scored by an engineer, and IBM Plex was drawn for
+technical documentation. The two themes share exactly one value — the accent
+red `#C7392F` — which is what keeps them the same firm's work.
+
+Two differences from the deck's rules, both deliberate:
+
+- **The accent is a system colour here, not a single mark.** It carries the
+  reference number, the section labels and the statement bar. On a deck the
+  red appears once; on a technical sheet it is the wayfinding.
+- **Two rule weights, and only two.** 0.6 mm in ink closes the page — above
+  the masthead, below the last block. 0.25 mm at 20% separates rows inside a
+  block. Nothing else draws a line.
+
+Facts are stated as **fields, not sentences**: a mono label with the value
+under it, so an evaluator scanning for a sum or a date finds it without
+reading. Narrative prose stays sentence case — the reference sets its
+overview in full capitals, and past about forty characters that stops being
+readable, so it is the one thing from the reference not copied.
+
 - Page 210 × 297 mm. Margins 20 mm sides, 24 mm head, 27 mm foot. The
   strictest published tender rule found is 15 mm, so every edge clears it
 - Content 170 × 246 mm — 41 baselines of 6 mm
@@ -101,8 +124,9 @@ in, millimetres for the page and points for the type.
   11 pt clears all of them. The section label carries the same 11 pt as the
   body and takes its hierarchy from face and tracking instead of from size.
   Only the running foot sits at 9 pt — it is page furniture, not submitted text
-- Scale 34 / 22 / 11: title, heading, body and label
-- Narrative sits in eight columns — 112 mm, about 58 characters. The full
+- Scale 30 / 22 / 15 / 11: reference number, title, heading and value, then
+  body and label together at the floor
+- Narrative sits in seven columns — 97 mm, about 55 characters. The full
   170 mm measure runs past 85 characters and stops being readable
 - **Page budget is the design constraint.** A tender that caps pages discards
   the overflow unread, so air costs content. Measure every block against the

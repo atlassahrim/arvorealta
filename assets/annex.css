@@ -2,6 +2,7 @@
    ANNEX — A4 document geometry + print rules.
    Structure only — no colour, no typefaces of its own; reads
    the tokens the theme defines. Load AFTER theme + system.css.
+   Pairs with themes/technical.css.
 
    The deck scales a 1920×1080 canvas with a --px unit. This does
    not: an annex is a print document first, so it is set in the
@@ -19,11 +20,16 @@
    TYPE — every size at or above 11 pt.
    Published tender rules put the floor for proposal body text at
    9–11 pt depending on the procedure; 11 pt clears all of them.
-   The section label carries the same 11 pt as the body and takes
-   its hierarchy from face and tracking instead of from size, so
+   Labels carry the same 11 pt as the body and take their
+   hierarchy from face and tracking instead of from size, so
    nothing a reader is meant to read falls under the floor. Only
    the running foot sits at 9 pt: it is page furniture, not part
    of the submitted text.
+
+   RULE WEIGHTS carry meaning and there are only two.
+   0.6 mm in ink closes the page — above the masthead and below
+   the last block. 0.25 mm at 20% separates rows inside a block.
+   Nothing else draws a line.
    ========================================================== */
 
 .annex{
@@ -44,7 +50,7 @@
   height:297mm;
   flex:0 0 auto;
   overflow:hidden;
-  background:var(--paper-3);
+  background:var(--paper);
   color:var(--ink);
   font-family:var(--font-body);
   box-shadow:0 1px 2px rgba(0,0,0,.10),0 8px 26px rgba(0,0,0,.14);
@@ -61,6 +67,205 @@
   flex-direction:column;
 }
 
+/* ---------- type roles ---------- */
+.sheet p,.sheet li{
+  margin:0 0 6mm;
+  font-family:var(--font-body);
+  font-size:11pt;
+  line-height:6mm;
+  max-width:none;
+}
+.sheet p:last-child{margin-bottom:0}
+
+/* the reference number — the first thing an evaluator matches
+   against their own file, so it is the loudest mark on the page */
+.sheet .ref{
+  margin:0;
+  font-family:var(--font-display);
+  font-size:30pt;
+  font-weight:600;
+  line-height:12mm;
+  letter-spacing:-.02em;
+  color:var(--accent);
+  font-variant-numeric:tabular-nums;
+}
+
+.sheet .title{
+  margin:0;
+  font-family:var(--font-display);
+  font-size:22pt;
+  font-weight:400;
+  line-height:12mm;      /* 2 baselines */
+  letter-spacing:-.018em;
+  text-wrap:balance;
+}
+.sheet h2,.sheet .heading{
+  margin:0;
+  font-family:var(--font-display);
+  font-size:15pt;
+  font-weight:600;
+  line-height:6mm;
+  letter-spacing:-.008em;
+}
+.sheet .heading + p,.sheet h2 + p{margin-top:6mm}
+
+/* every label is mono — mono is already wide, so it needs far
+   less tracking than a serif small-cap to read as a label */
+.sheet .label{
+  font-family:var(--font-label);
+  font-size:11pt;        /* the body floor — hierarchy from face, not size */
+  line-height:6mm;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.sheet .label-accent{color:var(--accent)}
+
+/* ---------- the two rules, and only these two ---------- */
+.rule-heavy{border:0;height:.6mm;background:var(--rule-heavy);margin:0;flex:none}
+.rule-hair{border:0;height:.25mm;background:var(--rule);margin:0;flex:none}
+
+/* ---------- masthead: reference number left, identity right ---------- */
+.masthead{flex:none}
+.masthead-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:6mm;
+  padding-block:3mm;
+}
+
+/* ---------- grid ---------- */
+.grid12{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:4mm;
+}
+.col-8{grid-column:span 8}
+.col-7{grid-column:span 7}
+.col-6{grid-column:span 6}
+.col-5{grid-column:span 5}
+.col-4{grid-column:span 4}
+.col-12{grid-column:span 12}
+
+/* narrative sits in seven columns — 97 mm, about 55 characters.
+   The full 170 mm measure runs past 85 and is unreadable. */
+.measure{max-width:97mm}
+
+/* a column rule, the way a technical sheet divides its fields */
+.col-divide{
+  padding-left:4mm;
+  border-left:.25mm solid var(--rule);
+}
+
+/* ---------- data fields: label over value ----------
+   The reference sheets state facts as fields, not sentences —
+   a small mono label with the value under it. An evaluator
+   scanning for a sum or a date finds it without reading. */
+.fields{
+  display:grid;
+  gap:6mm 4mm;
+  flex:none;
+}
+.fields.of-2{grid-template-columns:repeat(2,1fr)}
+.fields.of-4{grid-template-columns:repeat(4,1fr)}
+.field .label{display:block}
+.field .value{
+  display:block;
+  font-family:var(--font-body);
+  font-size:11pt;
+  font-weight:600;
+  line-height:6mm;
+  font-variant-numeric:tabular-nums;
+}
+.field .value-big{
+  font-family:var(--font-display);
+  font-size:15pt;
+  font-weight:600;
+  line-height:6mm;
+  letter-spacing:-.01em;
+}
+.field-ruled{border-top:.25mm solid var(--rule);padding-top:2mm}
+
+/* ---------- the row table, for anything genuinely tabular ---------- */
+.facts{
+  flex:none;
+  width:100%;
+  border-collapse:collapse;
+  font-size:11pt;
+  line-height:6mm;
+}
+.facts th,.facts td{
+  text-align:left;
+  vertical-align:top;
+  padding:0 4mm 0 0;
+  border-bottom:.25mm solid var(--rule);
+  height:12mm;           /* 2 baselines per row, so the table keeps the grid */
+}
+.facts tr:last-child th,.facts tr:last-child td{border-bottom:0}
+.facts th{
+  width:50mm;
+  font-family:var(--font-label);
+  font-size:11pt;
+  font-weight:400;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.facts td{font-family:var(--font-data);font-variant-numeric:tabular-nums}
+
+/* ---------- the statement line, marked by the accent ----------
+   One per document. It carries the claim the whole sheet exists
+   to support, and the bar is the only place the accent touches
+   a block of type. */
+.statement{
+  flex:none;
+  display:flex;
+  gap:4mm;
+  align-items:stretch;
+}
+.statement::before{
+  content:"";
+  flex:none;
+  width:1.2mm;
+  background:var(--accent);
+}
+.statement p{
+  margin:0;
+  font-family:var(--font-display);
+  font-size:15pt;
+  font-weight:600;
+  line-height:6mm;
+  letter-spacing:-.008em;
+  text-transform:uppercase;
+}
+
+/* ---------- figure plate ---------- */
+.plate{
+  width:100%;
+  height:48mm;           /* 8 baselines */
+  flex:none;
+  overflow:hidden;
+  background:var(--ground-2);
+}
+.plate img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.plate-caption{margin-top:2mm;color:var(--ink-soft)}
+
+/* ---------- certificate block — the thing an evaluator looks for ---------- */
+.certificate{
+  flex:none;
+  border:.25mm solid var(--rule-heavy);
+  padding:6mm;
+}
+.certificate .label{color:var(--ink)}
+.sign{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:6mm;
+  margin-top:12mm;
+}
+.sign div{border-top:.25mm solid var(--rule-heavy);padding-top:2mm}
+
 /* ---------- running foot, inside the bottom margin ---------- */
 .sheet-foot{
   position:absolute;
@@ -74,153 +279,18 @@
   font-family:var(--font-label);
   font-size:9pt;
   line-height:6mm;
-  letter-spacing:.14em;
+  letter-spacing:.06em;
   text-transform:uppercase;
   color:var(--ink-soft);
 }
 .sheet-foot .num::before{content:counter(sheet) " of " var(--annex-total)}
 
-/* ---------- the type scale: 34 / 22 / 11 ---------- */
-.sheet p,.sheet li{
-  margin:0 0 6mm;
-  font-family:var(--font-body);
-  font-size:11pt;
-  line-height:6mm;
-  max-width:none;
-}
-.sheet p:last-child{margin-bottom:0}
-
-.sheet .title{
-  margin:0;
-  font-family:var(--font-display);
-  font-weight:400;
-  font-size:34pt;
-  line-height:18mm;      /* 3 baselines */
-  letter-spacing:-.012em;
-}
-.sheet h2,.sheet .heading{
-  margin:0;
-  font-family:var(--font-display);
-  font-weight:400;
-  font-size:22pt;
-  line-height:12mm;      /* 2 baselines */
-  letter-spacing:-.008em;
-}
-.sheet .heading + p,.sheet h2 + p{margin-top:6mm}
-
-.sheet .label{
-  font-family:var(--font-label);
-  font-size:11pt;        /* the body floor — hierarchy from face, not size */
-  line-height:6mm;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  color:var(--ink-soft);
-}
-
-/* section label with a hairline to the right margin */
-.sheet .section-label{
-  display:flex;
-  align-items:center;
-  gap:4mm;
-  margin-bottom:6mm;
-  font-family:var(--font-label);
-  font-size:11pt;
-  line-height:6mm;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  color:var(--ink-soft);
-}
-.sheet .section-label::after{content:"";flex:1;height:.25mm;background:var(--rule)}
-
-/* ---------- grid ---------- */
-.grid12{
-  display:grid;
-  grid-template-columns:repeat(12,1fr);
-  gap:4mm;
-}
-.col-8{grid-column:span 8}
-.col-7{grid-column:span 7}
-.col-5{grid-column:span 5}
-.col-4{grid-column:span 4}
-.col-12{grid-column:span 12}
-
-/* narrative sits in eight columns — 112 mm, about 58 characters.
-   The full 170 mm measure runs past 85 and is unreadable. */
-.measure{max-width:112mm}
-
-/* ---------- masthead block ---------- */
-.masthead{
-  flex:none;
-  display:flex;
-  flex-direction:column;
-  gap:6mm;
-  padding-bottom:6mm;
-  border-bottom:.5mm solid var(--ink);
-}
-.masthead .title{margin-top:6mm}
-
-/* ---------- the data table: the Annex XII fields ---------- */
-.facts{
-  flex:none;
-  width:100%;
-  border-collapse:collapse;
-  font-size:11pt;
-  line-height:6mm;
-}
-.facts th,.facts td{
-  text-align:left;
-  vertical-align:top;
-  padding:0 6mm 0 0;
-  border-bottom:.25mm solid var(--rule);
-  height:12mm;           /* 2 baselines per row, so the table keeps the grid */
-}
-.facts tr:last-child th,.facts tr:last-child td{border-bottom:0}
-.facts th{
-  width:50mm;            /* tracked caps at 11pt need the room; at 46 the
-                            longer labels wrapped and broke the row rule */
-  font-family:var(--font-label);
-  font-size:11pt;
-  font-weight:400;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:var(--ink-soft);
-}
-.facts td{font-variant-numeric:tabular-nums}
-
-/* ---------- figure plate ---------- */
-.plate{
-  width:100%;
-  height:72mm;           /* 12 baselines */
-  flex:none;             /* a flex child shrinks past its height without this */
-  overflow:hidden;
-  background:var(--ground-2);
-}
-.plate img{width:100%;height:100%;object-fit:cover;object-position:center top}
-.plate-caption{margin-top:0;color:var(--ink-soft)}
-
-/* ---------- certificate block — the thing an evaluator looks for ---------- */
-.certificate{
-  flex:none;
-  border:.5mm solid var(--ink);
-  padding:6mm;
-  margin-top:6mm;
-}
-.certificate .label{color:var(--ink)}
-.sign{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:6mm;
-  margin-top:12mm;
-}
-.sign div{border-top:.25mm solid var(--ink);padding-top:2mm}
-
-/* a footnote is running text, not a label — tracked capitals past about
-   forty characters stop being readable, and an email address in capitals
-   is worse still */
+/* a footnote is running text, not a label — tracked capitals past
+   about forty characters stop being readable */
 .footnote{color:var(--ink-soft)}
 
-/* the one red mark an annex is allowed: the field that voids the
-   reference if it is left blank */
+/* the one red mark on a sheet, beside the accent bar: the field
+   that voids the reference if it is left blank */
 .required{color:var(--accent)}
 
 .spacer{flex:1}

@@ -1,0 +1,38 @@
+/* ==========================================================
+   THEME — Technical
+   For submitted documents: annexes, spec sheets, reference
+   cards. Values only; never add rules here.
+
+   The deck theme (arvorealta.css) is editorial — warm greige,
+   deep green, three serifs. It is built to persuade. This one
+   is built to be scored: white stock, near-black ink, a single
+   accent, and type from a family drawn for technical
+   documentation. The two share exactly one value, the accent
+   red, which is what keeps them the same firm's work.
+
+   Fonts must also be loaded in the page <head>:
+   IBM Plex Sans · IBM Plex Mono (Google Fonts)
+   ========================================================== */
+:root{
+  --paper:#FFFFFF;        /* the sheet — documents are white */
+  --paper-2:#E9E9E7;      /* the surround, on screen only */
+  --paper-3:#F6F6F5;      /* a filled cell or panel */
+  --ground-2:#E4E2DE;     /* image plate backing */
+  --ink:#141414;
+  --ink-soft:#6A6A68;
+  --accent:#C7392F;       /* carried over from arvorealta.css */
+
+  --rule:rgba(20,20,20,.20);      /* hairline — between rows */
+  --rule-inv:rgba(255,255,255,.24);
+  --rule-heavy:#141414;           /* the structural rule, 0.6mm */
+
+  --measure:112mm;
+
+  /* IBM Plex was drawn for technical documentation. Mono carries
+     every label and every figure; Sans carries everything read
+     as a sentence. */
+  --font-label:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;
+  --font-display:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  --font-body:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  --font-data:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;
+}
