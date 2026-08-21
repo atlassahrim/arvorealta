@@ -79,7 +79,6 @@ header{padding-block:2rem}
 .herocta{font-family:var(--font-display);font-size:clamp(1.15rem,1rem + .9vw,1.7rem);letter-spacing:-.01em}
 .heronote{margin:0;font-size:.9rem;line-height:1.7;color:var(--ink-soft);max-width:34ch}
 .heronote b{font-weight:400;color:var(--ink)}
-.scrollcue{margin-top:clamp(3rem,7vw,6rem);font-family:var(--font-label);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft)}
 
 /* ---------- inverted ---------- */
 .inv{background:var(--ink);color:var(--paper-3)}
@@ -137,10 +136,9 @@ ul.ticks li::before{content:"";position:absolute;left:0;top:.75em;width:.8rem;he
 /* Names the documents and the provisions in the reader's own language, before
    any claim is made about them. Type only — no image, nothing asserted that
    the page does not already state elsewhere. */
-.vocab{padding-block:1.5rem;border-block:1px solid var(--rule)}
-.vocab .what{margin:0 0 1.15rem;max-width:none;font-family:var(--font-label);
-  font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft)}
-.vocab ul{display:flex;flex-wrap:wrap;gap:.55rem .6rem;margin:0;padding:0;list-style:none}
+/* Sits where the scroll cue used to, at the foot of the hero. */
+.vocab{display:flex;flex-wrap:wrap;gap:.55rem .6rem;list-style:none;padding:0;
+  margin:clamp(3rem,7vw,6rem) 0 0}
 .vocab li{font-family:var(--font-label);font-size:.68rem;letter-spacing:.1em;line-height:1.5;
   text-transform:uppercase;color:var(--ink);border:1px solid var(--rule);padding:.45em .8em}
 
