@@ -10,6 +10,7 @@ deploys in about ten seconds.**
 |---|---|
 | arvorealta.com | `index.html` — the offer page |
 | arvorealta.com/video/ | `video/index.html` — video portfolio |
+| arvorealta.com/templates/ | `templates/index.html` — index of every template |
 | arvorealta.com/deck/`<slug>`/ | decks — 1920 × 1080, for presenting |
 | arvorealta.com/annex/`<slug>`/ | annexes — A4, for submitting |
 
@@ -21,13 +22,15 @@ them without being asked. Copy changes are fine; layout surgery is not.
 ```
 index.html              offer page
 video/index.html        video portfolio
+templates/index.html    index of every template
 deck/<slug>/index.html  one deck per folder
 annex/<slug>/index.html one A4 annex per folder
 assets/
-  themes/arvorealta.css tokens for the deck — editorial
-  themes/technical.css  tokens for annexes — technical
+  themes/arvorealta.css tokens for the editorial system
+  themes/technical.css  tokens for the technical system
   system.css            structure only — no colour, no typefaces
-  deck.css              slide geometry + print rules
+  deck.css              editorial deck — slide geometry + print
+  deck-technical.css    technical deck — slide geometry + print
   annex.css             A4 document geometry + print rules
   site.js               live clocks, scroll reveal
 CNAME                   custom domain
@@ -36,7 +39,32 @@ CNAME                   custom domain
 Pages load a **theme first, then `system.css`.** Order matters: the theme
 defines the custom properties the system reads.
 
-## The design system
+## Two systems, kept apart
+
+There are two visual identities and they are meant to stay separate.
+
+| | Editorial | Technical |
+|---|---|---|
+| Theme | `themes/arvorealta.css` | `themes/technical.css` |
+| Type | Cinzel · Playfair · Shippori Mincho | IBM Plex Sans · IBM Plex Mono |
+| Ground | warm greige, ink green, taupe | white, near-black |
+| Job | presenting concepts | products, manufacturing clients, tenders |
+| Deck | `deck.css` → `deck/_template/` | `deck-technical.css` → `deck/_technical/` |
+| Document | — | `annex.css` → `annex/_template/` |
+
+They share exactly one value — the accent red `#C7392F`. That is what keeps
+them the same firm's work while letting each do a job the other cannot.
+
+**The two deck stylesheets duplicate the canvas maths on purpose.** Sharing a
+base would mean every editorial tweak risked the technical deck and the
+reverse. The geometry is identical so a slide can be moved between them;
+nothing else is. Their root classes differ — `.deck` and `.deck-t` — so the
+two can never be loaded onto one page by accident.
+
+Rules below marked **editorial** apply to `deck.css` only. The technical
+system's rules live in the annex spec and in `deck-technical.css`.
+
+## The editorial system
 
 Three typefaces, loaded from Google Fonts in each page `<head>`:
 **Cinzel** for labels, **Playfair Display** for display type and numerals,
@@ -85,6 +113,25 @@ is 1.75; display is 1.04. That contrast is the system's signature — keep it.
 - Interior slides hang from the top left: section label, then the headline at
   full display size. The air collects at the foot
 - Rules 1 px, ink at 18% opacity
+
+### Technical deck spec (1920 × 1080)
+
+`deck-technical.css` with `themes/technical.css`. Same canvas, margins, grid
+and baseline as the editorial deck, so a slide can move between them. What
+differs:
+
+- **Four type roles, not three.** Display 96/100 weight 600 · **Value 56/80**
+  · Body 24/40 · Label mono 17/40. A technical sheet states figures as
+  fields, and a figure set at body size is not a figure. That extra level is
+  the reason this system exists
+- Labels are **IBM Plex Mono**, tracking +0.06em. Mono is already wide, so it
+  needs far less tracking than a serif small cap to read as a label
+- **Two rule weights only:** 3 px in ink closes a slide, 1 px at 20% divides
+  columns and field rows
+- The accent carries the reference number, section labels and the statement
+  bar — it is wayfinding here, not a single mark
+- Grounds are white and near-black. There is no third ground; the taupe
+  belongs to the editorial system
 
 ### Annex spec (A4)
 

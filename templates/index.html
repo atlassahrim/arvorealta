@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Templates — Arvorealta</title>
+<meta name="robots" content="noindex">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" media="all"
+  href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600&display=swap">
+
+<link rel="stylesheet" href="/assets/themes/technical.css">
+
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:1rem;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{width:min(100% - 3rem,64rem);margin-inline:auto}
+
+  header{padding-block:clamp(3rem,8vw,6rem) 2.5rem}
+  .rule-heavy{border:0;height:3px;background:var(--rule-heavy);margin:0}
+  .rule-hair{border:0;height:1px;background:var(--rule);margin:0}
+  .masthead-row{
+    display:flex;justify-content:space-between;align-items:baseline;
+    gap:1.5rem;flex-wrap:wrap;padding-block:1rem;
+  }
+  .ref{
+    margin:0;font-family:var(--font-display);font-weight:600;
+    font-size:clamp(2rem,1.2rem + 3vw,3rem);letter-spacing:-.02em;
+    color:var(--accent);line-height:1.1;
+  }
+  .label{
+    font-family:var(--font-label);font-size:.8rem;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--ink-soft);margin:0;
+  }
+  h1{
+    margin:2.5rem 0 0;font-family:var(--font-display);font-weight:600;
+    font-size:clamp(2rem,1.3rem + 2.6vw,3.25rem);line-height:1.08;
+    letter-spacing:-.022em;max-width:18ch;text-wrap:balance;
+  }
+  .lede{margin:1.5rem 0 0;max-width:56ch;color:var(--ink-soft)}
+
+  main{padding-bottom:clamp(3rem,8vw,6rem)}
+  .row{
+    display:grid;gap:1rem 2rem;grid-template-columns:1fr;
+    padding-block:2rem;border-bottom:1px solid var(--rule);
+    text-decoration:none;color:inherit;
+  }
+  @media(min-width:48rem){
+    .row{grid-template-columns:14rem 1fr 9rem;align-items:baseline}
+  }
+  .row:hover .row-name{color:var(--accent)}
+  .row-name{
+    font-family:var(--font-display);font-weight:600;font-size:1.35rem;
+    letter-spacing:-.012em;line-height:1.2;
+  }
+  .row-what{margin:0;max-width:48ch;color:var(--ink-soft);font-size:.95rem}
+  .row-meta{font-family:var(--font-label);font-size:.8rem;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--ink-soft)}
+  .row:first-of-type{border-top:1px solid var(--rule)}
+
+  .note{
+    margin-top:3rem;padding-top:1.5rem;border-top:3px solid var(--rule-heavy);
+    display:grid;gap:1.5rem 2rem;grid-template-columns:1fr;
+  }
+  @media(min-width:48rem){.note{grid-template-columns:repeat(2,1fr)}}
+  .note h2{
+    margin:0 0 .5rem;font-family:var(--font-display);font-weight:600;
+    font-size:1rem;letter-spacing:-.008em;
+  }
+  .note p{margin:0;font-size:.92rem;color:var(--ink-soft);max-width:44ch}
+  code{
+    font-family:var(--font-label);font-size:.85em;
+    background:var(--paper-3);padding:.1em .35em;
+  }
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+</style>
+</head>
+
+<body>
+
+<header class="wrap">
+  <hr class="rule-heavy">
+  <div class="masthead-row">
+    <p class="ref">Templates</p>
+    <p class="label">Arvorealta · Internal</p>
+  </div>
+  <hr class="rule-hair">
+  <h1>Two decks. One annex. Two identities.</h1>
+  <p class="lede">
+    The editorial system presents concepts. The technical system is built to
+    be scored by an engineer. They share one value — the accent red — and
+    nothing else, deliberately.
+  </p>
+</header>
+
+<main class="wrap">
+
+  <a class="row" href="/deck/_template/">
+    <span class="row-name">Concept deck</span>
+    <p class="row-what">
+      The editorial system — Cinzel, Playfair Display, Shippori Mincho on
+      warm greige, with the taupe evidence ground. For presenting concepts
+      and the offer.
+    </p>
+    <span class="row-meta">1920 × 1080 · 7</span>
+  </a>
+
+  <a class="row" href="/deck/_technical/">
+    <span class="row-name">Technical deck</span>
+    <p class="row-what">
+      The technical system — IBM Plex Sans and Mono on white, figures stated
+      as fields. For manufacturing clients, products and tender work.
+    </p>
+    <span class="row-meta">1920 × 1080 · 7</span>
+  </a>
+
+  <a class="row" href="/annex/_template/">
+    <span class="row-name">Reference annex</span>
+    <p class="row-what">
+      A4, print-native, every size at or above 11 pt. The reference project
+      sheet Annex XII Part II(a) effectively specifies, with the certificate
+      form to be signed at handover.
+    </p>
+    <span class="row-meta">A4 · 2</span>
+  </a>
+
+  <div class="note">
+    <div>
+      <h2>Making a new one</h2>
+      <p>
+        Copy the folder, rename it, edit the words. It is live at
+        <code>arvorealta.com/deck/&lt;slug&gt;/</code> about ten seconds
+        after the push.
+      </p>
+    </div>
+    <div>
+      <h2>Getting the PDF</h2>
+      <p>
+        Every deck and annex is exported on each push. GitHub → Actions →
+        newest run → Artifacts → <code>pdfs</code>. Works from an iPad,
+        which cannot print a 1920 × 1080 page itself.
+      </p>
+    </div>
+  </div>
+
+</main>
+
+</body>
+</html>

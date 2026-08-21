@@ -1,0 +1,308 @@
+/* ==========================================================
+   DECK — TECHNICAL. Slide geometry + print rules, 1920 × 1080.
+   Structure only; reads the tokens themes/technical.css defines.
+   Load AFTER theme + system.css.
+
+   This is a SECOND, self-contained deck stylesheet. It repeats the
+   canvas maths in deck.css on purpose: the two decks carry two
+   identities that must never drift into each other, and sharing a
+   base would mean every editorial tweak risked the technical deck
+   and the reverse. The geometry is identical so a slide can be
+   moved between them; nothing else is.
+
+   deck.css          editorial — concepts, for the company
+   deck-technical.css technical — products, for manufacturing clients
+
+   Canvas 1920×1080. Margins 140px all four sides.
+   Grid 12 × 100px cols, 40px gutters (12×100 + 11×40 = 1640).
+   Baseline 40px. Content starts at 100; the footer holds 140
+   clear of the bottom edge, so headline ink and footer ink sit
+   the same distance from their edges.
+
+   --px is one spec-pixel in container-query units, so every
+   calc(N * var(--px)) is exactly N CSS px at native size and
+   shrinks in lockstep at any other width.
+
+   TYPE — four roles, and the field value is a real level here.
+   Display 96 · Value 56 · Body 24 · Label 17. A technical sheet
+   states figures as fields, and a figure set at body size is not
+   a figure. The editorial deck has three sizes; this one has four,
+   and that difference is the point of having two systems.
+   ========================================================== */
+
+.deck-t{
+  counter-reset:slide;
+  --deck-total:"7";
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:2.5rem;
+  padding-block:2.5rem;
+  background:var(--paper-2);
+}
+
+.slide{
+  --px:calc(1cqw / 19.2);  /* 19.2 = 1920 / 100 */
+  counter-increment:slide;
+  container-type:inline-size;
+  position:relative;
+  width:100%;
+  max-width:1920px;
+  aspect-ratio:16 / 9;
+  flex:0 0 auto;
+  overflow:hidden;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  box-shadow:0 1px 2px rgba(0,0,0,.12),0 18px 44px rgba(0,0,0,.16);
+}
+.slide.inv{background:var(--ink);color:var(--paper)}
+
+/* ---------- live area ---------- */
+.slide-body{
+  position:absolute;
+  left:calc(140 * var(--px));
+  right:calc(140 * var(--px));
+  top:calc(100 * var(--px));
+  bottom:calc(220 * var(--px));
+  display:flex;
+  flex-direction:column;
+}
+
+/* ---------- running foot ---------- */
+.slide-foot{
+  position:absolute;
+  left:calc(140 * var(--px));
+  right:calc(140 * var(--px));
+  bottom:calc(140 * var(--px));
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:calc(40 * var(--px));
+  font-family:var(--font-label);
+  font-size:calc(17 * var(--px));
+  line-height:calc(40 * var(--px));
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.slide.inv .slide-foot{color:rgba(255,255,255,.62)}
+.slide-foot .num::before{content:counter(slide) " of " var(--deck-total)}
+
+/* ---------- the two rules, and only these two ---------- */
+.rule-heavy{border:0;height:calc(3 * var(--px));background:var(--rule-heavy);margin:0;flex:none}
+.rule-hair{border:0;height:calc(1 * var(--px));background:var(--rule);margin:0;flex:none}
+.slide.inv .rule-heavy{background:var(--paper)}
+.slide.inv .rule-hair{background:var(--rule-inv)}
+
+/* ---------- masthead ---------- */
+.masthead{flex:none}
+.masthead-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:calc(40 * var(--px));
+  padding-block:calc(20 * var(--px));
+}
+
+/* ---------- type roles ---------- */
+.slide p,.slide .body{
+  margin:0 0 calc(40 * var(--px));
+  font-family:var(--font-body);
+  font-size:calc(24 * var(--px));
+  line-height:calc(40 * var(--px));
+  max-width:none;
+}
+.slide p:last-child{margin-bottom:0}
+.slide .display + p{margin-top:calc(40 * var(--px))}
+
+.slide .label{
+  font-family:var(--font-label);
+  font-size:calc(17 * var(--px));
+  line-height:calc(40 * var(--px));
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.slide.inv .label{color:rgba(255,255,255,.62)}
+.slide .label-accent{color:var(--accent)}
+
+.slide .display,.slide h1,.slide h2{
+  margin:0;
+  font-family:var(--font-display);
+  font-size:calc(96 * var(--px));
+  font-weight:600;
+  line-height:calc(100 * var(--px));
+  letter-spacing:-.022em;
+}
+
+/* the reference number — loudest mark, matched against a file */
+.slide .ref{
+  margin:0;
+  font-family:var(--font-display);
+  font-size:calc(56 * var(--px));
+  font-weight:600;
+  line-height:calc(60 * var(--px));
+  letter-spacing:-.02em;
+  color:var(--accent);
+  font-variant-numeric:tabular-nums;
+}
+
+/* section label, with a hairline to the right margin */
+.slide .section-label{
+  display:flex;
+  align-items:center;
+  gap:calc(24 * var(--px));
+  margin-bottom:calc(40 * var(--px));
+  font-family:var(--font-label);
+  font-size:calc(17 * var(--px));
+  line-height:calc(40 * var(--px));
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  flex:none;
+}
+.slide .section-label::after{content:"";flex:1;height:1px;background:var(--rule)}
+.slide.inv .section-label{color:rgba(255,255,255,.62)}
+.slide.inv .section-label::after{background:var(--rule-inv)}
+
+/* ---------- grid ---------- */
+.grid12{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:calc(40 * var(--px));
+  flex:1;
+  align-content:start;
+}
+.col-4{grid-column:span 4}
+.col-5{grid-column:span 5}
+.col-6{grid-column:span 6}
+.col-7{grid-column:span 7}
+.col-8{grid-column:span 8}
+.col-12{grid-column:span 12}
+.col-head{grid-column:1 / span 7}
+.col-body{grid-column:8 / span 5}
+.col-half{grid-column:1 / span 6}
+.col-divide{padding-left:calc(40 * var(--px));border-left:1px solid var(--rule)}
+.slide.inv .col-divide{border-left-color:var(--rule-inv)}
+
+/* ---------- data fields: label over value ----------
+   The whole reason this deck exists. A manufacturing client
+   scans for a figure; a figure has to be findable without
+   reading the sentence around it. */
+.fields{display:grid;gap:calc(40 * var(--px));flex:none}
+.fields.of-2{grid-template-columns:repeat(2,1fr)}
+.fields.of-3{grid-template-columns:repeat(3,1fr)}
+.fields.of-4{grid-template-columns:repeat(4,1fr)}
+.field{border-top:1px solid var(--rule);padding-top:calc(16 * var(--px))}
+.slide.inv .field{border-top-color:var(--rule-inv)}
+.field .label{display:block}
+.field .value{
+  display:block;
+  font-family:var(--font-display);
+  font-size:calc(56 * var(--px));
+  font-weight:600;
+  line-height:calc(80 * var(--px));
+  letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;
+}
+
+/* ---------- the statement bar ---------- */
+.statement-bar{
+  flex:none;
+  display:flex;
+  gap:calc(24 * var(--px));
+  align-items:stretch;
+}
+.statement-bar::before{
+  content:"";
+  flex:none;
+  width:calc(6 * var(--px));
+  background:var(--accent);
+}
+.statement-bar p{
+  margin:0;
+  font-family:var(--font-display);
+  font-size:calc(40 * var(--px));
+  font-weight:600;
+  line-height:calc(40 * var(--px));
+  letter-spacing:-.015em;
+  text-transform:uppercase;
+}
+
+/* ---------- statement slide: reversed, display only ---------- */
+.slide.statement{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  padding-inline:calc(140 * var(--px));
+}
+
+/* ---------- specification table ---------- */
+.spec{
+  width:100%;
+  border-collapse:collapse;
+  font-size:calc(24 * var(--px));
+  line-height:calc(40 * var(--px));
+  flex:none;
+}
+.spec th,.spec td{
+  text-align:left;
+  vertical-align:top;
+  padding:0 calc(40 * var(--px)) 0 0;
+  height:calc(80 * var(--px));
+  border-bottom:1px solid var(--rule);
+}
+.slide.inv .spec th,.slide.inv .spec td{border-bottom-color:var(--rule-inv)}
+.spec th{
+  width:calc(420 * var(--px));
+  font-family:var(--font-label);
+  font-size:calc(17 * var(--px));
+  font-weight:400;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.slide.inv .spec th{color:rgba(255,255,255,.62)}
+.spec td{font-family:var(--font-body);font-variant-numeric:tabular-nums}
+
+/* ---------- image ---------- */
+.figure-bleed{
+  position:absolute;
+  top:0;
+  bottom:0;
+  right:0;
+  width:calc(800 * var(--px));
+  margin:0;
+  overflow:hidden;
+}
+.figure-bleed img{width:100%;height:100%;object-fit:cover;object-position:center}
+.image-bleed .slide-foot{right:calc(980 * var(--px))}
+.image-bleed .section-label{width:calc(800 * var(--px))}
+
+.band{width:100%;height:calc(520 * var(--px));overflow:hidden;flex:none;background:var(--paper-3)}
+.band img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.slide .band-caption{margin-top:0}
+
+.spacer{flex:1}
+
+/* ---------- print ---------- */
+@media print{
+  @page{size:1920px 1080px;margin:0}
+  html,body{margin:0;padding:0}
+  .deck-t{padding:0;gap:0;background:none}
+  .slide{
+    width:1920px;
+    max-width:none;
+    aspect-ratio:auto;
+    height:1080px;
+    box-shadow:none;
+    break-after:page;
+    break-inside:avoid;
+  }
+  .slide:last-child{break-after:auto}
+  html,.slide,.slide.inv{
+    print-color-adjust:exact;
+    -webkit-print-color-adjust:exact;
+  }
+}
