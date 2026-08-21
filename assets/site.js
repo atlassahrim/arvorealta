@@ -1,3 +1,7 @@
+/* Report in before the head timer fires, so the reveal failsafe in
+   system.css knows this file actually loaded. Must stay first. */
+document.documentElement.classList.add('rv-ready');
+
 /* live clocks — answers "you're in Brazil" without a word */
 (function(){
   var f=function(tz){

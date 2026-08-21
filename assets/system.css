@@ -60,7 +60,9 @@ header{padding-block:2rem}
 
 /* ---------- hero ---------- */
 .hero{padding-top:clamp(2rem,6vw,5rem);padding-bottom:clamp(3rem,7vw,6rem)}
-.hero h1{max-width:14ch}
+/* width:max-content holds the hand-broken lines exactly as written. A ch
+   cap was narrower than the line itself, so every headline re-wrapped. */
+.hero h1{width:max-content;max-width:100%}
 .eyebrow{
   font-family:var(--font-label);font-size:.7rem;letter-spacing:.2em;
   text-transform:uppercase;color:var(--ink-soft);margin:0 0 1.75rem;max-width:none;
@@ -192,6 +194,12 @@ footer{padding-block:4rem 3rem;font-size:.85rem;color:var(--ink-soft);border-top
 .rv{opacity:0;transform:translateY(1.25rem);
     transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
 .rv.in{opacity:1;transform:none}
+/* Failsafe. Every content block on the page carries .rv, so if the reveal
+   never runs the page is blank, not degraded. Two ways that happens and both
+   are covered: scripting off entirely (no .js on <html>), and site.js blocked
+   or stripped by a corporate proxy while scripting is on (.rv-off, set by the
+   inline timer in the page head when site.js has not reported in). */
+html:not(.js) .rv,html.rv-off .rv{opacity:1;transform:none;transition:none}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .rv{opacity:1;transform:none;transition:none}

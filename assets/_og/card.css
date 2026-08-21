@@ -1,0 +1,21 @@
+/* Source for the social cards. Structure only, like system.css — every
+   colour and typeface comes from the theme, so a theme swap redraws the
+   card. Render with assets/_og/render.sh; the PNGs are committed. */
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ink);color:var(--paper-3);font-family:var(--font-body)}
+.card{
+  width:1200px;height:630px;padding:80px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  -webkit-font-smoothing:antialiased;
+}
+.label{
+  margin:0;font-family:var(--font-label);font-size:20px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--paper-3);opacity:.62;
+}
+h1{
+  margin:0;font-family:var(--font-display);font-weight:400;
+  font-size:84px;line-height:1.04;letter-spacing:-.012em;color:var(--paper-3);
+}
+.foot{padding-top:28px;border-top:1px solid var(--rule-inv)}
+.foot p{margin:0;font-size:22px;line-height:1.5;color:var(--paper-3);opacity:.75}

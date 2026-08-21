@@ -28,6 +28,19 @@ jobs:
         with:
           enablement: true
 
+      - name: Withhold internal work from the public site
+        # GitHub Pages on a public repo has no access control. robots.txt and
+        # noindex only ask search engines nicely; anyone with the URL still
+        # gets the page. Not deploying a path is the only real lock, so the
+        # internal work is deleted from the checkout before the artifact is
+        # built. Nothing is removed from the repo itself: sessions edit these
+        # files in the working tree, and deck-pdf.yml prints from the working
+        # tree too, so PDF export is unaffected.
+        #
+        # The rule is the leading underscore. deck/_template stays private;
+        # deck/acme, a real client deck, publishes as normal.
+        run: rm -rf templates deck/_* annex/_* assets/_og
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .

@@ -10,12 +10,48 @@ deploys in about ten seconds.**
 |---|---|
 | arvorealta.com | `index.html` — the offer page |
 | arvorealta.com/video/ | `video/index.html` — video portfolio |
-| arvorealta.com/templates/ | `templates/index.html` — index of every template |
 | arvorealta.com/deck/`<slug>`/ | decks — 1920 × 1080, for presenting |
 | arvorealta.com/annex/`<slug>`/ | annexes — A4, for submitting |
 
 **`index.html` and `video/index.html` are live and in use.** Do not restructure
 them without being asked. Copy changes are fine; layout surgery is not.
+
+## Not published
+
+`templates/`, every `_`-prefixed folder under `deck/` and `annex/`, and
+`assets/_og/` are working files. They live in the repo, sessions edit them
+normally, and `deck-pdf.yml` prints them from the working tree — but
+`pages.yml` deletes them from the checkout before the artifact is built, so
+they never reach the internet. Pages on a public repo has no access control;
+`noindex` only asks search engines nicely. Not deploying is the only real lock.
+
+The rule is the leading underscore. `deck/_template` stays private,
+`deck/acme` publishes. Preview a private one with `python3 -m http.server`
+from the repo root, or take the PDF from the Actions run.
+
+## The pricing ladder
+
+Three tiers on `index.html`, and the mechanic between them is the design.
+**€600** one document · **€2,400** the full document standard · **€8,000**
+identity system.
+
+Every tier credits in full into the one above. €600 comes off the €2,400,
+€2,400 comes off the €8,000, and €600 credits into €8,000 directly if the
+middle rung is skipped. Credits never expire.
+
+**€8,000 is chosen, not rounded.** High enough that €2,400 reads as reasonable
+rather than suspiciously cheap, close enough that the step does not look like
+it is missing a rung, and under the €10,000 mark where most of these companies
+need a second approval signature. The credit is what holds that: a client who
+walks the whole ladder spends €8,000 in total, not €11,000, and so never
+crosses the threshold. Break the credit and the price logic goes with it.
+
+Do not simplify the mechanic and do not round the numbers. If a price looks
+wrong, say so and give the reasoning. Changing one is not a copy edit.
+
+€2,400 includes one revision round. Past that it is a new agreement at a new
+budget, never an extension. What €8,000 excludes is settled in the scope
+document agreed before the work starts, not listed on the page.
 
 ## Files
 
