@@ -110,6 +110,18 @@ Palette: ink `#17352C`, ground `#D9D7D4`, secondary `#5A6B63`, accent red
 `#C7392F` — the red is used **once per page at most**, to mark the point of
 failure. Never decoration.
 
+The red cannot carry small text on paper. It measures 3.61:1 there, under the
+4.5:1 a reader needs, so on a light ground it is available as a graphic mark
+and not as a word. The offer page currently spends it nowhere, which the rule
+allows; eight red dashes in the comparison did not.
+
+Brass `#C9A227` is the **mark**, and it is not the red. The red says something
+failed; the brass says here is the thing. It is 5.49:1 on ink and 1.68:1 on
+paper, so the rule is absolute and follows from the contrast: **brass appears
+on the ink grounds only.** Two marks on the offer page — the section numeral
+in the inverted sections, and the rule under the primary action in the close.
+A third would make it decoration.
+
 Third ground: warm taupe `#BEAE9E`, carrying **ink** type at 6.16:1. A third
 ground cannot be a mid-tone — every clay and umber between paper and ink
 fails both text colours at once (4.4:1 and below). Two rules follow from the

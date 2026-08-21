@@ -37,7 +37,9 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 .tag b{font-weight:400;font-variant-numeric:tabular-nums;color:var(--ink)}
 .tag::after{content:"";flex:1;height:1px;background:var(--rule);transform:translateY(-.15em)}
 .inv .tag{color:rgba(233,231,228,.6)}
-.inv .tag b{color:var(--paper-3)}
+/* The brass marks the section number on the ink grounds. 5.49:1 there;
+   1.68:1 on paper, so it never appears on a light ground. */
+.inv .tag b{color:var(--mark)}
 .inv .tag::after{background:var(--rule-inv)}
 
 /* line-draw links */
@@ -129,6 +131,17 @@ ul.ticks{list-style:none;margin:1.9rem 0 0;padding:0}
 ul.ticks li{position:relative;padding-left:1.7rem;margin-bottom:.7rem;line-height:1.55;font-size:.95rem}
 ul.ticks li::before{content:"";position:absolute;left:0;top:.75em;width:.8rem;height:1px;background:currentColor;opacity:.5}
 
+/* ---------- vocabulary strip ---------- */
+/* Names the documents and the provisions in the reader's own language, before
+   any claim is made about them. Type only — no image, nothing asserted that
+   the page does not already state elsewhere. */
+.vocab{padding-block:1.5rem;border-block:1px solid var(--rule)}
+.vocab .what{margin:0 0 1.15rem;max-width:none;font-family:var(--font-label);
+  font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft)}
+.vocab ul{display:flex;flex-wrap:wrap;gap:.55rem .6rem;margin:0;padding:0;list-style:none}
+.vocab li{font-family:var(--font-label);font-size:.68rem;letter-spacing:.1em;line-height:1.5;
+  text-transform:uppercase;color:var(--ink);border:1px solid var(--rule);padding:.45em .8em}
+
 /* ---------- relief ---------- */
 .relief{display:grid;gap:clamp(2.5rem,5vw,4.5rem);grid-template-columns:1fr}
 @media(min-width:50rem){.relief{grid-template-columns:1fr 1.7fr}}
@@ -150,7 +163,10 @@ ul.ticks li::before{content:"";position:absolute;left:0;top:.75em;width:.8rem;he
 .opt li{margin-bottom:.55rem;padding-left:1.2rem;position:relative;color:var(--ink-soft);line-height:1.5}
 .opt li::before{position:absolute;left:0;top:0}
 .opt li.y::before{content:"+";color:var(--ink)}
-.opt li.n::before{content:"–";color:var(--accent)}
+/* The minus recedes rather than alarms. The accent red is reserved for a
+   single mark per page and eight red dashes was not that; it also carries
+   only 3.61:1 on paper, below what small text needs. */
+.opt li.n::before{content:"–";color:var(--ink-soft)}
 .opt.this li{color:var(--ink)}
 
 /* ---------- case ---------- */
@@ -177,6 +193,8 @@ ul.ticks li::before{content:"";position:absolute;left:0;top:.75em;width:.8rem;he
 .cta h2{max-width:13ch}
 .buttons{display:flex;flex-wrap:wrap;gap:2rem;margin-top:3rem;font-family:var(--font-display);
   font-size:clamp(1.2rem,1rem + 1.1vw,2rem);letter-spacing:-.01em}
+/* The second brass mark: the rule under the primary action, on ink. */
+.cta .buttons .ln.on::after{background:var(--mark)}
 
 /* ---------- footer ---------- */
 footer{padding-block:4rem 3rem;font-size:.85rem;color:var(--ink-soft);border-top:1px solid var(--rule)}
