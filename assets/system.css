@@ -96,11 +96,20 @@ header{padding-block:2rem}
 .split{display:grid;gap:clamp(2.5rem,6vw,5.5rem);grid-template-columns:1fr}
 @media(min-width:58rem){.split{grid-template-columns:1fr 1fr;align-items:start}}
 .lede{color:var(--ink-soft);margin-top:1.75rem}
+.lede:first-child{margin-top:0}
 
 /* ---------- offer ---------- */
-.tiers{display:grid;gap:1.25rem;grid-template-columns:1fr}
-@media(min-width:34rem){.tiers{grid-template-columns:1fr 1fr}}
-@media(min-width:62rem){.tiers{grid-template-columns:repeat(3,1fr)}}
+/* .tiers spans the full measure — never nest it in a .split column, or the
+   cards drop below a readable line and the section reads as tall stripes. */
+.tiers{display:grid;gap:1.25rem;grid-template-columns:1fr;margin-top:clamp(2.5rem,5vw,4rem)}
+@media(min-width:40rem){
+  .tiers{grid-template-columns:1fr 1fr}
+  .tiers .offer.beyond{grid-column:1/-1}
+}
+@media(min-width:62rem){
+  .tiers{grid-template-columns:repeat(3,1fr)}
+  .tiers .offer.beyond{grid-column:auto}
+}
 .offer.beyond{background:transparent;outline:1px solid var(--rule);outline-offset:-1px}
 .offer .bridge{margin-top:1.25rem;font-size:.85rem;line-height:1.55;color:var(--ink-soft);font-style:italic}
 .offer{background:var(--paper-3);padding:clamp(1.5rem,3.5vw,2.25rem);display:flex;flex-direction:column}

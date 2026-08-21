@@ -23,8 +23,9 @@ values. Every page follows.
 
 **Words on the offer page** → `index.html`. Search for the sentence.
 
-**The price** → `index.html`, three places: the fold, the two offer cards, and
-the comparison column. Search `€`.
+**The price** → `index.html`: the fold, the three offer cards, and the
+comparison column. Search `€`. The cards live in `.tiers`, which spans the
+full measure — do not put it back inside a `.split` column.
 
 **A video** → `video/index.html`. Copy a `.reel` block, swap the Vimeo ID,
 title, heading and role line. Set `autoplay=0` past the second one.
