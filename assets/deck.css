@@ -318,6 +318,59 @@
    that job. 880px runs body copy at about 53 characters. */
 .glass-panel .body{max-width:calc(880 * var(--px))}
 
+/* ---------- opportunity map ----------
+   Two bands: the pipeline as it ran, and the pipeline as designed. Six
+   cells to a band at two columns each, so 6 × 2 fills the 12 exactly and
+   the grid places everything — nothing is positioned by hand.
+
+   Cells carry a number and a short label, nothing else. A cell is 240px
+   wide, where body type sets about twelve characters to the line, so the
+   sentence that explains a band belongs to the band head and not to the
+   cell. Same failure as any column pushed below its measure.
+
+   The accent marks one cell — the stage where the value is actually lost.
+   One red mark to the page, as everywhere else in the system. */
+.map{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:calc(80 * var(--px));   /* two baselines between the bands */
+}
+.map-band{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:calc(40 * var(--px));
+}
+.map-head{
+  grid-column:1 / span 12;
+  display:flex;
+  align-items:baseline;
+  gap:calc(40 * var(--px));
+}
+/* the head belongs to the row under it, so it keeps only the grid's own
+   40px gap — a paragraph margin on top of that floats it between bands */
+.map-head p{margin:0}
+.map-head .body{color:var(--ink-soft)}
+.map-node{
+  grid-column:span 2;
+  border-top:1px solid var(--rule);
+  padding-top:calc(20 * var(--px));
+}
+.map-node.built{border-top:1px solid var(--ink)}
+.map-node b,.map-node span{
+  display:block;
+  font-family:var(--font-label);
+  font-size:calc(17 * var(--px));
+  line-height:calc(40 * var(--px));
+  font-weight:400;
+  text-transform:uppercase;
+}
+.map-node b{letter-spacing:.16em;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.map-node span{letter-spacing:.1em}
+.map-node.leak{border-top:2px solid var(--accent)}
+.map-node.leak b,.map-node.leak span{color:var(--accent)}
+
 /* ---------- print — one slide per PDF page, full bleed ---------- */
 @media print{
   @page{size:1920px 1080px;margin:0}
