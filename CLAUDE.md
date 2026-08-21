@@ -115,12 +115,21 @@ The red cannot carry small text on paper. It measures 3.61:1 there, under the
 and not as a word. The offer page currently spends it nowhere, which the rule
 allows; eight red dashes in the comparison did not.
 
-Brass `#C9A227` is the **mark**, and it is not the red. The red says something
-failed; the brass says here is the thing. It is 5.49:1 on ink and 1.68:1 on
-paper, so the rule is absolute and follows from the contrast: **brass appears
-on the ink grounds only.** Two marks on the offer page — the section numeral
-in the inverted sections, and the rule under the primary action in the close.
-A third would make it decoration.
+Muted brick `#A85751` is the **mark**. The red says something failed; the mark
+says here is the thing. Its contrast writes its own rules, and all three are
+hard:
+
+- **Never on ink.** 2.62:1, below the 3:1 a graphic mark needs. The mark
+  belongs to the light grounds — 3.53:1 on paper, 3.92 on paper-2, 4.37 on
+  the paper-3 cards
+- **Never a word, on any ground.** It clears 4.5:1 nowhere, so it is a line,
+  a rule or a fill, and not type
+- **Never in the same block as the accent red.** They sit 1.02 apart in
+  luminance, which is to say the mark is the red at lower saturation. Read
+  together they look like a printing inconsistency rather than two decisions
+
+One mark on the offer page: the rule around the tier being recommended. A
+second would make it decoration.
 
 Third ground: warm taupe `#BEAE9E`, carrying **ink** type at 6.16:1. A third
 ground cannot be a mid-tone — every clay and umber between paper and ink

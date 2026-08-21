@@ -37,9 +37,7 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 .tag b{font-weight:400;font-variant-numeric:tabular-nums;color:var(--ink)}
 .tag::after{content:"";flex:1;height:1px;background:var(--rule);transform:translateY(-.15em)}
 .inv .tag{color:rgba(233,231,228,.6)}
-/* The brass marks the section number on the ink grounds. 5.49:1 there;
-   1.68:1 on paper, so it never appears on a light ground. */
-.inv .tag b{color:var(--mark)}
+.inv .tag b{color:var(--paper-3)}
 .inv .tag::after{background:var(--rule-inv)}
 
 /* line-draw links */
@@ -117,7 +115,11 @@ header{padding-block:2rem}
 .offer.beyond{background:transparent;outline:1px solid var(--rule);outline-offset:-1px}
 .offer .bridge{margin-top:1.25rem;font-size:.85rem;line-height:1.55;color:var(--ink-soft);font-style:italic}
 .offer{background:var(--paper-3);padding:clamp(1.5rem,3.5vw,2.25rem);display:flex;flex-direction:column}
-.offer.full{outline:1px solid var(--ink);outline-offset:-1px}
+/* The mark. One per page: the rule around the tier being recommended.
+   #A85751 is 3.53:1 on paper and 4.37:1 on the card's paper-3, so it is
+   available as a line and never as a word. On ink it is 2.62:1 and cannot
+   appear at all. */
+.offer.full{outline:1px solid var(--mark);outline-offset:-1px}
 .step{font-family:var(--font-label);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
   color:var(--ink-soft);margin:0 0 1.1rem}
 .offer h3{margin:0 0 .9rem}
@@ -193,8 +195,6 @@ ul.ticks li::before{content:"";position:absolute;left:0;top:.75em;width:.8rem;he
 .cta h2{max-width:13ch}
 .buttons{display:flex;flex-wrap:wrap;gap:2rem;margin-top:3rem;font-family:var(--font-display);
   font-size:clamp(1.2rem,1rem + 1.1vw,2rem);letter-spacing:-.01em}
-/* The second brass mark: the rule under the primary action, on ink. */
-.cta .buttons .ln.on::after{background:var(--mark)}
 
 /* ---------- footer ---------- */
 footer{padding-block:4rem 3rem;font-size:.85rem;color:var(--ink-soft);border-top:1px solid var(--rule)}
