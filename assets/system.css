@@ -77,7 +77,7 @@ header{padding-block:2rem}
   gap:1.25rem 3rem;align-items:baseline;
 }
 .herocta{font-family:var(--font-display);font-size:clamp(1.15rem,1rem + .9vw,1.7rem);letter-spacing:-.01em}
-.heronote{margin:0;font-size:.9rem;line-height:1.7;color:var(--ink-soft);max-width:46ch}
+.heronote{margin:1.75rem 0 0;font-size:.9rem;line-height:1.7;color:var(--ink-soft);max-width:58ch}
 .heronote b{font-weight:400;color:var(--ink)}
 /* the same note repeated in the close, where the ground is ink */
 .inv .heronote b{color:var(--paper-3)}
@@ -94,6 +94,11 @@ header{padding-block:2rem}
 .figures b{display:block;font-family:var(--font-display);font-weight:400;letter-spacing:-.015em;line-height:1;
   font-size:clamp(2.4rem,1.4rem + 3.2vw,4rem)}
 .figures span{display:block;margin-top:.9rem;font-size:.85rem;line-height:1.5;color:rgba(233,231,228,.65)}
+
+/* The disqualifier. Set apart from the argument above it and deliberately
+   quieter, because it is the one block asking the reader to leave. */
+.disq{margin-top:clamp(3rem,6vw,4.5rem);padding-top:1.5rem;
+  border-top:1px solid var(--rule-inv);font-size:.88rem;line-height:1.65;max-width:58ch}
 
 /* ---------- layout ---------- */
 .split{display:grid;gap:clamp(2.5rem,6vw,5.5rem);grid-template-columns:1fr}
@@ -150,8 +155,10 @@ ul.ticks li::before{content:"";position:absolute;left:0;top:.75em;width:.8rem;he
 .relief h3{margin-bottom:1.3rem}
 .relief .you{border-top:2px solid var(--ink);padding-top:1.3rem}
 .relief .me{border-top:1px solid var(--rule);padding-top:1.3rem}
+/* max-content, like the h1: the breaks are written by hand and a ch cap
+   narrower than the line itself would re-wrap them. */
 .kicker{margin-top:4rem;font-family:var(--font-display);font-size:clamp(1.5rem,1rem + 2vw,2.75rem);
-  line-height:1.18;letter-spacing:-.01em;max-width:22ch;color:var(--ink)}
+  line-height:1.18;letter-spacing:-.01em;width:max-content;max-width:100%;color:var(--ink)}
 
 /* ---------- comparison ---------- */
 .compare{display:grid;gap:2rem;grid-template-columns:1fr;margin-top:3rem}
@@ -176,7 +183,7 @@ ul.ticks li::before{content:"";position:absolute;left:0;top:.75em;width:.8rem;he
 /* the firm's own statement, not a testimonial — no quotes, no italic */
 .case .claim{margin:0;font-family:var(--font-display);
   font-size:clamp(1.35rem,1rem + 1.5vw,2.2rem);line-height:1.24;letter-spacing:-.005em;max-width:30ch}
-.meta{margin-top:2rem;color:var(--ink-soft);font-size:.95rem}
+.meta{margin-top:2rem;color:var(--ink-soft);font-size:.95rem;max-width:46ch}
 
 /* ---------- FAQ ---------- */
 .faq{margin-top:3rem;border-top:1px solid var(--rule)}
@@ -193,6 +200,7 @@ ul.ticks li::before{content:"";position:absolute;left:0;top:.75em;width:.8rem;he
 
 /* ---------- CTA ---------- */
 .cta h2{max-width:13ch}
+.fineprint{margin-top:1.75rem;font-size:.8rem;letter-spacing:.02em}
 .buttons{display:flex;flex-wrap:wrap;gap:2rem;margin-top:3rem;font-family:var(--font-display);
   font-size:clamp(1.2rem,1rem + 1.1vw,2rem);letter-spacing:-.01em}
 
