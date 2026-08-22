@@ -122,14 +122,19 @@ hard:
 - **Never on ink.** 2.62:1, below the 3:1 a graphic mark needs. The mark
   belongs to the light grounds — 3.53:1 on paper, 3.92 on paper-2, 4.37 on
   the paper-3 cards
-- **Never a word, on any ground.** It clears 4.5:1 nowhere, so it is a line,
-  a rule or a fill, and not type
+- **As a fill it carries only `--on-mark`**, the warm beige `#F7F3EC`, at
+  4.58:1. Paper-3 on the mark is 4.37 and fails, so the beige is not
+  interchangeable with the other light values
+- **As type it is under 4.5:1 everywhere** — 3.53 on paper is the eyebrows'
+  real number. Atlas took that trade knowingly for the labels. Do not extend
+  it to anything a reader has to read as a sentence. `#8E4A45`, the same hue
+  darker, clears 4.55 on paper if the eyebrows ever need to pass
 - **Never in the same block as the accent red.** They sit 1.02 apart in
   luminance, which is to say the mark is the red at lower saturation. Read
   together they look like a printing inconsistency rather than two decisions
 
-One mark on the offer page: the rule around the tier being recommended. A
-second would make it decoration.
+On the offer page it grounds the tier being recommended and colours the
+eyebrows. Nothing else.
 
 Third ground: warm taupe `#BEAE9E`, carrying **ink** type at 6.16:1. A third
 ground cannot be a mid-tone — every clay and umber between paper and ink

@@ -15,6 +15,7 @@
   --ink-soft:#5A6B63;
   --accent:#C7392F;
   --mark:#A85751;         /* muted brick — graphic marks, light grounds only */
+  --on-mark:#F7F3EC;      /* warm beige — the only type that sits on the mark */
   --rule:rgba(23,53,44,.18);
   --rule-inv:rgba(233,231,228,.22);
 
