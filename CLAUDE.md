@@ -125,16 +125,15 @@ hard:
 - **As a fill it carries only `--on-mark`**, the warm beige `#F7F3EC`, at
   4.58:1. Paper-3 on the mark is 4.37 and fails, so the beige is not
   interchangeable with the other light values
-- **As type it is under 4.5:1 everywhere** — 3.53 on paper is the eyebrows'
-  real number. Atlas took that trade knowingly for the labels. Do not extend
-  it to anything a reader has to read as a sentence. `#8E4A45`, the same hue
-  darker, clears 4.55 on paper if the eyebrows ever need to pass
+- **Never a word, on any ground.** It clears 4.5:1 nowhere, so it is a line,
+  a rule or a fill, and not type. It was tried on the eyebrows at 3.53:1 on
+  paper and taken back out
 - **Never in the same block as the accent red.** They sit 1.02 apart in
   luminance, which is to say the mark is the red at lower saturation. Read
   together they look like a printing inconsistency rather than two decisions
 
-On the offer page it grounds the tier being recommended and colours the
-eyebrows. Nothing else.
+One use on the offer page: the ground of the tier being recommended. A
+second would make it decoration.
 
 Third ground: warm taupe `#BEAE9E`, carrying **ink** type at 6.16:1. A third
 ground cannot be a mid-tone — every clay and umber between paper and ink

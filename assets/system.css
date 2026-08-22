@@ -29,14 +29,12 @@ section{padding-block:var(--gap)}
 hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
 
 /* tiny lowercase labels */
-/* Eyebrows carry the mark on the light grounds. The inverted sections keep
-   paper, since the mark is 2.62:1 on ink and cannot appear there at all. */
 .tag{
   display:flex;align-items:baseline;gap:.85rem;
   font-family:var(--font-label);font-size:.72rem;letter-spacing:.16em;line-height:1;
-  color:var(--mark);margin:0 0 2.75rem;text-transform:lowercase;
+  color:var(--ink-soft);margin:0 0 2.75rem;text-transform:lowercase;
 }
-.tag b{font-weight:400;font-variant-numeric:tabular-nums;color:var(--mark)}
+.tag b{font-weight:400;font-variant-numeric:tabular-nums;color:var(--ink)}
 .tag::after{content:"";flex:1;height:1px;background:var(--rule);transform:translateY(-.15em)}
 .inv .tag{color:rgba(233,231,228,.6)}
 .inv .tag b{color:var(--paper-3)}
@@ -67,7 +65,7 @@ header{padding-block:2rem}
 .hero h1{width:max-content;max-width:100%}
 .eyebrow{
   font-family:var(--font-label);font-size:.7rem;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--mark);margin:0 0 1.75rem;max-width:none;
+  text-transform:uppercase;color:var(--ink-soft);margin:0 0 1.75rem;max-width:none;
 }
 .hero .sub{
   font-size:clamp(1.05rem,.95rem + .5vw,1.35rem);color:var(--ink-soft);
@@ -129,7 +127,7 @@ header{padding-block:2rem}
 .offer.full .step,.offer.full .price em,.offer.full .terms,.offer.full .credit{color:var(--on-mark)}
 .offer.full .credit{border-top-color:rgba(247,243,236,.4)}
 .step{font-family:var(--font-label);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--mark);margin:0 0 1.1rem}
+  color:var(--ink-soft);margin:0 0 1.1rem}
 .offer h3{margin:0 0 .9rem}
 .credit{margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--rule);
   font-size:.85rem;color:var(--ink-soft)}
