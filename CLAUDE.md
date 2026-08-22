@@ -115,25 +115,27 @@ The red cannot carry small text on paper. It measures 3.61:1 there, under the
 and not as a word. The offer page currently spends it nowhere, which the rule
 allows; eight red dashes in the comparison did not.
 
-Muted brick `#A85751` is the **mark**. The red says something failed; the mark
+Muted brick `#8E4A45` is the **mark**. The red says something failed; the mark
 says here is the thing. Its contrast writes its own rules, and all three are
 hard:
 
-- **Never on ink.** 2.62:1, below the 3:1 a graphic mark needs. The mark
-  belongs to the light grounds — 3.53:1 on paper, 3.92 on paper-2, 4.37 on
+- **Never on ink.** 2.03:1, far below the 3:1 a graphic mark needs. The mark
+  belongs to the light grounds — 4.55:1 on paper, 5.05 on paper-2, 5.63 on
   the paper-3 cards
 - **As a fill it carries only `--on-mark`**, the warm beige `#F7F3EC`, at
-  4.58:1. Paper-3 on the mark is 4.37 and fails, so the beige is not
-  interchangeable with the other light values
-- **Never a word, on any ground.** It clears 4.5:1 nowhere, so it is a line,
-  a rule or a fill, and not type. It was tried on the eyebrows at 3.53:1 on
-  paper and taken back out
-- **Never in the same block as the accent red.** They sit 1.02 apart in
-  luminance, which is to say the mark is the red at lower saturation. Read
-  together they look like a printing inconsistency rather than two decisions
+  5.90:1. Paper-3 on the mark is 4.55, which passes but sits far closer to
+  the floor, so the beige is not interchangeable with the other light values
+- **It is `#8E4A45` and not `#A85751` for one reason.** The lighter brick was
+  the first choice and it measures 3.53:1 on paper, under what small text
+  needs. Darkening the value four steps clears 4.5 while reading as the same
+  colour at eyebrow size. Do not lighten it back
+- **Never in the same block as the accent red.** They sit 1.26 apart in
+  luminance and share a hue family. Read together they look like a printing
+  inconsistency rather than two decisions
 
-One use on the offer page: the ground of the tier being recommended. A
-second would make it decoration.
+Two uses on the offer page: the eyebrows on the light grounds — `.eyebrow`,
+`.tag` and `.step` — and the ground of the tier being recommended. Nothing
+else.
 
 Third ground: warm taupe `#BEAE9E`, carrying **ink** type at 6.16:1. A third
 ground cannot be a mid-tone — every clay and umber between paper and ink
