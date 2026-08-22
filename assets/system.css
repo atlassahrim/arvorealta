@@ -201,7 +201,9 @@ ul.ticks li::before{content:"";position:absolute;left:0;top:.75em;width:.8rem;he
 .faq p{padding:0 0 1.6rem;color:var(--ink-soft);max-width:52ch}
 
 /* ---------- CTA ---------- */
-.cta h2{max-width:13ch}
+/* max-content, like the h1 and the kicker: a ch cap narrower than the line
+   re-wraps the hand breaks. */
+.cta h2{width:max-content;max-width:100%}
 .fineprint{margin-top:1.75rem;font-size:.8rem;letter-spacing:.02em}
 .buttons{display:flex;flex-wrap:wrap;gap:2rem;margin-top:3rem;font-family:var(--font-display);
   font-size:clamp(1.2rem,1rem + 1.1vw,2rem);letter-spacing:-.01em}
