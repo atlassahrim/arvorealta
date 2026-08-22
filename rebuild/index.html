@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>See it on your own document · Arvorealta</title>
+<meta name="description" content="Send one page from a bid that mattered. In 48 hours you get it back rebuilt, with a list of every fact a buyer would struggle to verify in the original.">
+<meta property="og:title" content="See it on your own document">
+<meta property="og:description" content="One page from a bid that mattered, rebuilt and sent back within 48 hours. No charge, no call, no obligation.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://arvorealta.com/rebuild/">
+<meta property="og:image" content="https://arvorealta.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#17352C">
+
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" media="all"
+  href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Shippori+Mincho:wght@400;500&display=swap">
+
+<script>
+(function(h){h.className+=" js";setTimeout(function(){
+  if(!h.classList.contains("rv-ready"))h.className+=" rv-off";},4000)})(document.documentElement);
+</script>
+<link rel="stylesheet" href="/assets/themes/arvorealta.css">
+<link rel="stylesheet" href="/assets/system.css">
+</head>
+
+<body>
+
+<header class="wrap">
+  <div class="bar">
+    <a class="mark" href="/">Arvorealta</a>
+    <nav>
+      <a class="ln" href="/">back to the offer</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero wrap">
+  <p class="eyebrow rv">The 48 hour rebuild</p>
+  <h1 class="rv">See it on<br>your own<br>document</h1>
+  <p class="sub rv">
+    One page from a bid that mattered. In 48 hours you get it back rebuilt,
+    with a list of every fact a buyer would struggle to verify in the original.
+  </p>
+  <p class="heronote rv">
+    No charge. No call. No obligation. The rebuild is yours to keep and use
+    even if you never write back.
+  </p>
+</section>
+
+<section class="wrap" style="padding-top:0">
+  <div class="confid rv">
+    <h2>Before you send anything</h2>
+    <p>
+      Nothing you send is published, shown to another client, or used as a
+      sample. Redact anything you need to. Client name, values, contacts, all
+      of it. A redacted page shows the same thing.
+    </p>
+    <p>
+      If your procurement policy needs an NDA in place first, do not upload
+      anything. Email me yours and I sign it before you send a file.
+    </p>
+  </div>
+
+  <!-- The action is the one thing still to be set. GitHub Pages cannot
+       receive a post, so this needs a form service. Nothing is wired until
+       Atlas picks one, and this page is not linked from the site until then. -->
+  <form class="form rv" method="post" enctype="multipart/form-data"
+        action="https://formspree.io/f/PENDING-ENDPOINT">
+
+    <div class="field">
+      <label for="file">The file</label>
+      <p class="hint">PDF, Word, InDesign, or a photo of a printout. Whatever you actually have.</p>
+      <input type="file" id="file" name="file"
+             accept=".pdf,.doc,.docx,.indd,.idml,.png,.jpg,.jpeg,.heic,.tif,.tiff" required>
+    </div>
+
+    <div class="field">
+      <label for="email">Your work email</label>
+      <input type="email" id="email" name="email" autocomplete="email" required>
+    </div>
+
+    <div class="field">
+      <label for="company">Company</label>
+      <input type="text" id="company" name="company" autocomplete="organization" required>
+    </div>
+
+    <div class="field">
+      <label for="tender">Which tender was this for, and how did it score <span class="optlabel">optional</span></label>
+      <p class="hint">One line is enough. If you got a clarification request on it, say what they asked.</p>
+      <textarea id="tender" name="tender" rows="3"></textarea>
+    </div>
+
+    <div class="field">
+      <label for="known">What do you already know is wrong with it <span class="optlabel">optional</span></label>
+      <textarea id="known" name="known" rows="3"></textarea>
+    </div>
+
+    <button class="submit" type="submit">Send it</button>
+    <p class="fineprint">The 48 hours starts when the file lands, not when I open it.</p>
+  </form>
+</section>
+
+<section class="inv">
+  <div class="wrap">
+    <p class="tag rv"><b>next</b> what happens</p>
+    <ol class="steps rv">
+      <li>
+        <b>1</b>
+        <span>You get a reply confirming the file arrived and the clock started.</span>
+      </li>
+      <li>
+        <b>2</b>
+        <span>Within 48 hours, the page rebuilt, plus the verification list.</span>
+      </li>
+      <li>
+        <b>3</b>
+        <span>A fixed price if you want the rest. If you do not, nothing happens.
+        I do not follow up more than once.</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="legal">
+      <span>© 2026 Arvorealta</span>
+      <span><a class="ln" href="mailto:awe@arvorealta.com">awe@arvorealta.com</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/site.js" defer></script>
+</body>
+</html>
