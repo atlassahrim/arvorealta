@@ -141,15 +141,15 @@ ul.ticks{list-style:none;margin:1.9rem 0 0;padding:0}
 ul.ticks li{position:relative;padding-left:1.7rem;margin-bottom:.7rem;line-height:1.55;font-size:.95rem}
 ul.ticks li::before{content:"";position:absolute;left:0;top:.75em;width:.8rem;height:1px;background:currentColor;opacity:.5}
 
-/* ---------- vocabulary strip ---------- */
-/* Names the documents and the provisions in the reader's own language, before
-   any claim is made about them. Type only — no image, nothing asserted that
-   the page does not already state elsewhere. */
-/* Sits where the scroll cue used to, at the foot of the hero. */
-.vocab{display:flex;flex-wrap:wrap;gap:.55rem .6rem;list-style:none;padding:0;
-  margin:clamp(3rem,7vw,6rem) 0 0}
-.vocab li{font-family:var(--font-label);font-size:.68rem;letter-spacing:.1em;line-height:1.5;
-  text-transform:uppercase;color:var(--ink);border:1px solid var(--rule);padding:.45em .8em}
+/* ---------- vocabulary line ---------- */
+/* Names the documents in the reader's own language, at the foot of the hero
+   where the scroll cue used to sit. Type only, nothing asserted. */
+.vocab{margin:clamp(3rem,7vw,6rem) 0 0;max-width:62ch;
+  font-size:.8rem;line-height:1.75;color:var(--ink-soft)}
+
+/* The second path, kept deliberately quiet so it cannot read as a rival
+   button to the one above it. */
+.heroalt{margin:1.4rem 0 0;font-size:.85rem;color:var(--ink-soft);max-width:none}
 
 /* ---------- relief ---------- */
 .relief{display:grid;gap:clamp(2.5rem,5vw,4.5rem);grid-template-columns:1fr}
