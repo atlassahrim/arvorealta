@@ -49,6 +49,7 @@ Arvorealta's — always before `system.css`. Structure is untouched.
 
 ## Before changing DNS
 
-`awe@arvorealta.com` is Google Workspace. Keep the MX records exactly as they
+`awe@arvorealta.com` is the Google Workspace mailbox (the site now writes to
+`atlas@arvorealta.com`, which must resolve to it). Keep the MX records exactly as they
 are. Nameservers are still Wix — **cancelling Wix takes down DNS and email.**
 Move DNS to Cloudflare first if you want to leave.
