@@ -135,6 +135,18 @@ header{padding-block:2rem}
   font-size:.85rem;color:var(--ink-soft)}
 .price{display:flex;flex-wrap:wrap;align-items:baseline;gap:.85rem;margin-bottom:.35rem}
 .price b{font-family:var(--font-display);font-size:clamp(2.2rem,1.4rem + 2.2vw,3rem);font-weight:400;letter-spacing:-.015em;line-height:1}
+/* The price carries the gradient, but only on the light grounds. Against the
+   mark card its lightest stop measures 1.04:1 and the numeral disappears, so
+   that one keeps the beige. Guarded, so a browser without background-clip
+   shows ink rather than nothing. */
+@supports ((background-clip:text) or (-webkit-background-clip:text)){
+  .offer:not(.full) .price b{
+    display:inline-block;
+    background-image:linear-gradient(45deg,var(--grad-1) 0%,var(--grad-2) 52%,var(--grad-3) 100%);
+    -webkit-background-clip:text;background-clip:text;
+    color:transparent;-webkit-text-fill-color:transparent;
+  }
+}
 .price em{font-style:normal;color:var(--ink-soft);font-size:.9rem;letter-spacing:.02em}
 .terms{color:var(--ink-soft);font-size:.9rem}
 ul.ticks{list-style:none;margin:1.9rem 0 0;padding:0}

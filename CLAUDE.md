@@ -137,6 +137,15 @@ Two uses on the offer page: the eyebrows on the light grounds — `.eyebrow`,
 `.tag` and `.step` — and the ground of the tier being recommended. Nothing
 else.
 
+The **price gradient** is sampled off the Turvatikas ground: amber `#954D13`
+running through `#743813` to chocolate `#5A200A`, at 45deg so the light end
+sits at the low corner as it does in the original. It fills the tier prices
+and nothing else. It cannot go on the mark card — its lightest stop is 1.04:1
+there and the numeral vanishes — so that tier keeps `--on-mark`. On the light
+grounds the stops run 4.37 to 11.01, and the prices are display size, where
+the floor is 3:1. The rule is guarded by `@supports`, so a browser without
+`background-clip:text` shows ink rather than an invisible price.
+
 Third ground: warm taupe `#BEAE9E`, carrying **ink** type at 6.16:1. A third
 ground cannot be a mid-tone — every clay and umber between paper and ink
 fails both text colours at once (4.4:1 and below). Two rules follow from the

@@ -16,6 +16,12 @@
   --accent:#C7392F;
   --mark:#8E4A45;         /* muted brick — marks and eyebrows, light grounds only */
   --on-mark:#F7F3EC;      /* warm beige — the only type that sits on the mark */
+
+  /* the price gradient, sampled off the Turvatikas ground:
+     amber at the low corner running to chocolate at the high one */
+  --grad-1:#954D13;
+  --grad-2:#743813;
+  --grad-3:#5A200A;
   --rule:rgba(23,53,44,.18);
   --rule-inv:rgba(233,231,228,.22);
 
