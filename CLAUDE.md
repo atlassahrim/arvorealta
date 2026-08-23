@@ -133,18 +133,21 @@ hard:
   luminance and share a hue family. Read together they look like a printing
   inconsistency rather than two decisions
 
-Two uses on the offer page: the eyebrows on the light grounds — `.eyebrow`,
-`.tag` and `.step` — and the ground of the tier being recommended. Nothing
-else.
+One use on the offer page: the eyebrows on the light grounds — `.eyebrow`,
+`.tag` and `.step`. The recommended tier used to take the mark as its ground
+and now takes the price gradient instead.
 
 The **price gradient** is sampled off the Turvatikas ground: amber `#954D13`
 running through `#743813` to chocolate `#5A200A`, at 45deg so the light end
-sits at the low corner as it does in the original. It fills the tier prices
-and nothing else. It cannot go on the mark card — its lightest stop is 1.04:1
-there and the numeral vanishes — so that tier keeps `--on-mark`. On the light
-grounds the stops run 4.37 to 11.01, and the prices are display size, where
-the floor is 3:1. The rule is guarded by `@supports`, so a browser without
-`background-clip:text` shows ink rather than an invisible price.
+sits at the low corner as it does in the original. Two uses. It fills the
+prices on the two light tiers, and it grounds the recommended tier. It cannot
+do both on the same card — a gradient numeral on a gradient ground is the same
+colour at the same point — so that tier's price stays `--on-mark`, which
+measures 5.67:1 against the amber stop at its worst and 11.54 at the
+chocolate end. As price fill on the light grounds the stops run 4.37 to 11.01,
+and prices are display size, where the floor is 3:1. That rule is guarded by
+`@supports`, so a browser without `background-clip:text` shows ink rather than
+an invisible price.
 
 Third ground: warm taupe `#BEAE9E`, carrying **ink** type at 6.16:1. A third
 ground cannot be a mid-tone — every clay and umber between paper and ink

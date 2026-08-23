@@ -123,9 +123,12 @@ header{padding-block:2rem}
 .offer.beyond{background:transparent;outline:1px solid var(--rule);outline-offset:-1px}
 .offer .bridge{margin-top:1.25rem;font-size:.85rem;line-height:1.55;color:var(--ink-soft);font-style:italic}
 .offer{background:var(--paper-3);padding:clamp(1.5rem,3.5vw,2.25rem);display:flex;flex-direction:column}
-/* The mark as a ground rather than a line. Only --on-mark may sit on it:
-   that beige measures 4.58:1 here, where paper-3 would be 4.37 and fail. */
-.offer.full{background:var(--mark);color:var(--on-mark)}
+/* The recommended tier takes the gradient as its ground, at the same 45deg
+   as the price and the original box, so the amber sits at the low corner.
+   Only --on-mark sits on it: 5.67:1 against the amber stop, its worst point,
+   rising to 11.54 at the chocolate end. */
+.offer.full{color:var(--on-mark);
+  background-image:linear-gradient(45deg,var(--grad-1) 0%,var(--grad-2) 52%,var(--grad-3) 100%)}
 .offer.full .step,.offer.full .price em,.offer.full .terms,.offer.full .credit{color:var(--on-mark)}
 .offer.full .credit{border-top-color:rgba(247,243,236,.4)}
 .step{font-family:var(--font-label);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
