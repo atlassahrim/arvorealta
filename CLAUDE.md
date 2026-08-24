@@ -303,6 +303,10 @@ readable, so it is the one thing from the reference not copied.
   evaluator matches against their own file
 - Narrative sits in seven columns — 97 mm, about 55 characters. The full
   170 mm measure runs past 85 characters and stops being readable
+- **On screen a sheet scales, it never reflows.** A published annex is a
+  210 mm page on a phone, so below a viewport that fits one the whole sheet
+  is zoomed down to fit, the way a document viewer behaves — the reader sees
+  the shape and pinches in to read. Screen only; print never sees it
 - **Page budget is the design constraint.** A tender that caps pages discards
   the overflow unread, so air costs content. Measure every block against the
   246 mm before adding to a sheet

@@ -425,6 +425,18 @@
 
 .spacer{flex:1}
 
+/* ---------- narrow screens ----------
+   A sheet is 210 mm and does not negotiate — that is the whole
+   point of setting it in the units print is measured in. Below a
+   viewport that fits one, the sheet is scaled down to fit rather
+   than reflowed, the way a document viewer behaves: the reader
+   sees the shape and pinches in to read. Screen only; the print
+   rules below never see this. */
+@media screen and (max-width:819px){ .sheet{zoom:.88} }
+@media screen and (max-width:767px){ .sheet{zoom:.70} }
+@media screen and (max-width:639px){ .sheet{zoom:.55} }
+@media screen and (max-width:499px){ .sheet{zoom:.42} }
+
 /* ---------- print ---------- */
 @media print{
   @page{size:A4;margin:0}
