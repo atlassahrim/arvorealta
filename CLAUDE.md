@@ -257,11 +257,12 @@ readable, so it is the one thing from the reference not copied.
   one size read as a mistake before they read as a hierarchy. The statement
   block is the only capitals on the page that are not a label; it is display
   type carrying a sentence, and it keeps its own size
-- Scale 30 / 22 / 18 / 15 / 11 / 10 / 9 / 8: reference number, sheet 2 title,
-  sheet 1 title, heading, statement and field value, table figure, body,
-  standfirst, every label. Sheet 1's title came down a step because two long
-  lines sat level with the reference number and competed with it.
-  The number wins
+- Scale 30 / 22 / 15 / 11 / 10 / 9 / 8: reference number, title, heading,
+  statement and field value, table figure, body, standfirst, every label.
+  Sheet 1's title spent a while at 18 pt, because two long lines were sitting
+  level with the reference number and competing with it. Tighter leading and
+  two baselines of air under the masthead fixed that at the cause, so the
+  title is back at 22
 - **The proportions are the design, not the sizes.** A label sits well under
   the body because a label is found rather than read; a field value sits well
   over it because the whole point of setting a fact as a field is that the
@@ -274,7 +275,8 @@ readable, so it is the one thing from the reference not copied.
   grid, and there are none left
 - A title that runs to two lines takes `.title-2`, which tightens the leading
   to 9 mm so the pair reads as one object and still lands on the grid at 18.
-  It is for two lines and only two
+  It is for two lines and only two, and it is what lets a two-line title hold
+  the full 22 pt without crowding the reference number
 - **A signature row is three baselines and all of its air is above the rule**,
   because that is where the pen goes. 12 mm to write in, the rule, then the
   label immediately under it. Space below the rule is space nobody can use,

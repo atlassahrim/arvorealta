@@ -113,10 +113,6 @@
   font-variant-numeric:tabular-nums;
 }
 
-/* Sheet 1 sets its title a step down. Two long lines at 22pt sat level
-   with the reference number and competed with it; the number is the first
-   thing an evaluator matches, so it wins. */
-.sheet h1.title{font-size:18pt}
 .sheet .title{
   margin:0;
   font-family:var(--font-display);
@@ -129,7 +125,13 @@
 /* A title that runs to two lines takes tighter leading, because display
    type set on body leading reads as two headings rather than one. Two
    lines at 9 mm land back on the grid at 18. Hand-break the title, then
-   add this — it is for two lines, and only two. */
+   add this — it is for two lines, and only two.
+
+   This is what lets sheet 1 keep the full 22 pt. The title came down a
+   step once, because two long lines sat level with the reference number
+   and competed with it. Tightening the leading and opening two baselines
+   above the title fixed that properly: the pair now reads as one object
+   below the masthead rather than as lines beside the number. */
 .sheet .title-2{line-height:9mm}
 .sheet h2,.sheet .heading{
   margin:0;
