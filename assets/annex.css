@@ -19,8 +19,14 @@
 
    TYPE  30 · 22 · 18 · 15 · 11 · 10 · 9 · 8
    reference number · sheet 2 title · sheet 1 title · heading,
-   statement and field value · signature label and table figure ·
-   body · standfirst and running foot · label.
+   statement and field value · table figure · body · standfirst ·
+   every label. There is one label size on the sheet and there are
+   no exceptions to it — section eyebrow, field label, table row
+   label, signature line and running foot are all 8 pt mono.
+   Capitals at more than one size read as a mistake before they
+   read as a hierarchy. The statement block is the only capitals
+   on the page that are not a label; it is display type carrying a
+   sentence, and it keeps its own size.
 
    The proportions matter more than the sizes. A label sits well
    under the body, because a label is found rather than read, and
@@ -33,9 +39,8 @@
    10 pt clears most. Body runs at 10 and the standfirst at 9 to
    buy the page budget back. Check the procedure before submitting
    an annex built from this template, and take body back to 11 pt
-   if it names a higher floor. The labels on the signature lines
-   hold 11 pt whatever happens — sheet 2 is printed, signed and
-   scanned, and those have to survive it.
+   if it names a higher floor. Labels are not read, they are found,
+   and at 8 pt they are furniture rather than submitted text.
 
    SPACE is measured in baselines, not in taste. 6 mm sets a block
    off from the one above; 12 mm opens a new section; a block with
@@ -136,19 +141,12 @@
 }
 .sheet .heading + p,.sheet h2 + p{margin-top:6mm}  /* a heading is a block, not a label */
 
-/* Every label is mono, and there is exactly one label size on the
-   sheet — the running foot included, and with no exception for the
-   signature lines. A label is not read, it is found, so it sits well
-   under the body; the reference this page is proportioned against
-   sets its labels at about three quarters of body size and lets
-   tracking and case do the rest. At 8 pt the mono needs more tracking
-   than it did at 11 to still read as a label.
-
-   Capitals set at more than one size read as a mistake before they
-   read as a hierarchy, which is what happened while the signature
-   labels sat at 11 and the foot at 9. The statement block is the one
-   thing on the sheet set in capitals that is not a label — it is
-   display type carrying a sentence, and it keeps its own size. */
+/* Every label is mono, and there is one label size on the sheet with
+   no exceptions to it. A label is not read, it is found, so it sits
+   well under the body; the reference this page is proportioned
+   against sets its labels at about three quarters of body size and
+   lets tracking and case do the rest. At 8 pt the mono needs more
+   tracking than it did at 11 to still read as a label. */
 .sheet .label{
   font-family:var(--font-label);
   font-size:8pt;
@@ -178,7 +176,7 @@
 
 /* a signature line needs the space above its rule to write in, so it
    keeps its own even when a label sits directly above it */
-.sheet .label + .sign{margin-top:6mm}
+.sheet .label + .sign{margin-top:12mm}
 /* the standards line belongs to the statement it sits under */
 .statement + .label{margin-top:2mm}
 
@@ -335,17 +333,18 @@
   padding:6mm;
 }
 .certificate .label{color:var(--ink)}
-.certificate .sign-tight{margin-top:4mm}
+/* Space to write, a rule, then the label naming what was signed.
+   All of the air belongs above the rule, because that is where the
+   pen goes. Below it the label is one object with its own line, so
+   nothing sits between the two. A row is three baselines: twelve
+   millimetres to write in, the rule, and the label. */
 .sign{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:6mm;
   margin-top:12mm;
 }
-.sign div{border-top:.25mm solid var(--rule-heavy);padding-top:2mm}
-/* Space to write, a rule, then the label naming what was signed. Tighter
-   than .sign, for the blocks that carry four lines rather than two. */
-.sign-tight{margin-top:6mm}
+.sign div{border-top:.25mm solid var(--rule-heavy);padding-top:0}
 .sign-4{grid-template-columns:repeat(4,1fr);gap:4mm}
 /* a signature row where one label is far longer than the other */
 .sign-wide{grid-template-columns:1fr 2fr}

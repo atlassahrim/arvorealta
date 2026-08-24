@@ -275,6 +275,15 @@ readable, so it is the one thing from the reference not copied.
 - A title that runs to two lines takes `.title-2`, which tightens the leading
   to 9 mm so the pair reads as one object and still lands on the grid at 18.
   It is for two lines and only two
+- **A signature row is three baselines and all of its air is above the rule**,
+  because that is where the pen goes. 12 mm to write in, the rule, then the
+  label immediately under it. Space below the rule is space nobody can use,
+  and it pushes the label away from the line it names
+- **The sheets carry no maker's mark.** No Arvorealta in the running foot, no
+  credit line, nothing that tells an evaluator who set the document. What
+  goes out under a client's name is theirs. The foot identifies the document
+  and nothing else — reference number, sheet, and the framework reference an
+  evaluator matches against their own file
 - Narrative sits in seven columns — 97 mm, about 55 characters. The full
   170 mm measure runs past 85 characters and stops being readable
 - **Page budget is the design constraint.** A tender that caps pages discards
