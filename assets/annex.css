@@ -134,6 +134,10 @@
   gap:6mm;
   padding-block:3mm;
 }
+.masthead-row p{margin-bottom:0}
+
+/* nothing hangs dead margin off the bottom of a grid column */
+.grid12 > div > :last-child{margin-bottom:0}
 
 /* ---------- grid ---------- */
 .grid12{
@@ -214,6 +218,11 @@
 }
 .facts td{font-family:var(--font-data);font-variant-numeric:tabular-nums}
 
+/* One baseline per row rather than two, and columns that size to content.
+   For short tables, where the page budget is the scarce thing. */
+.facts-tight th,.facts-tight td{height:6mm;padding-right:2mm;width:auto}
+.facts-tight td{font-weight:600;color:var(--ink)}
+
 /* ---------- the statement line, marked by the accent ----------
    One per document. It carries the claim the whole sheet exists
    to support, and the bar is the only place the accent touches
@@ -243,7 +252,7 @@
 /* ---------- figure plate ---------- */
 .plate{
   width:100%;
-  height:48mm;           /* 8 baselines */
+  height:36mm;           /* 6 baselines */
   flex:none;
   overflow:hidden;
   background:var(--ground-2);
@@ -265,6 +274,7 @@
   padding:6mm;
 }
 .certificate .label{color:var(--ink)}
+.certificate .sign-tight{margin-top:4mm}
 .sign{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -272,6 +282,12 @@
   margin-top:12mm;
 }
 .sign div{border-top:.25mm solid var(--rule-heavy);padding-top:2mm}
+/* Space to write, a rule, then the label naming what was signed. Tighter
+   than .sign, for the blocks that carry four lines rather than two. */
+.sign-tight{margin-top:6mm}
+.sign-4{grid-template-columns:repeat(4,1fr);gap:4mm}
+/* a signature row where one label is far longer than the other */
+.sign-wide{grid-template-columns:1fr 2fr}
 
 /* ---------- running foot, inside the bottom margin ---------- */
 .sheet-foot{
@@ -295,6 +311,10 @@
 /* a footnote is running text, not a label — tracked capitals past
    about forty characters stop being readable */
 .footnote{color:var(--ink-soft)}
+
+/* Identification an evaluator matches against their own file. Quiet, because
+   it is for looking up rather than for reading. */
+.ident{margin-top:6mm;color:var(--ink-soft)}
 
 /* the one red mark on a sheet, beside the accent bar: the field
    that voids the reference if it is left blank */
