@@ -281,6 +281,21 @@ readable, so it is the one thing from the reference not copied.
   because that is where the pen goes. 12 mm to write in, the rule, then the
   label immediately under it. Space below the rule is space nobody can use,
   and it pushes the label away from the line it names
+- **`annex/sample/` is the published one, and it is redacted.** It is the
+  same two sheets with the client, the contract values, the notice references
+  and both images removed, marked `Redacted sample` in the running foot the
+  way a real document carries its status. **The mark removes the content, it
+  does not cover it** — a black rectangle drawn over live text in a PDF is
+  not a redaction, because the text is still in the file and still
+  selectable. The `.redact` elements are empty and there is nothing
+  underneath them; the export is checked by decompressing every stream and
+  searching for what should be gone. Redaction widths are set in `em`, so one
+  class covers about the same number of characters at 22 pt as at 10 pt
+- **Redact by judgement, not by rule.** The standards, the material grade,
+  the unit counts and the CPV code stay — they are public, they identify
+  nobody, and they are what an evaluator actually scores. What goes is the
+  authority, the money, the notice numbers and the signatures. A sheet
+  blacked out everywhere proves nothing
 - **The sheets carry no maker's mark.** No Arvorealta in the running foot, no
   credit line, nothing that tells an evaluator who set the document. What
   goes out under a client's name is theirs. The foot identifies the document

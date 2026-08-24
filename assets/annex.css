@@ -349,6 +349,48 @@
 /* a signature row where one label is far longer than the other */
 .sign-wide{grid-template-columns:1fr 2fr}
 
+/* ---------- redaction ----------
+   A published copy of a real submission. The mark removes the
+   content; it does not cover it. A black rectangle drawn over
+   live text in a PDF is not a redaction — the text is still in
+   the file and still selectable — so these elements are empty
+   and there is nothing underneath them to recover.
+
+   Widths are set in em, so a mark keeps the proportions of the
+   type it replaces: the same class covers about the same number
+   of characters at 22 pt as at 10 pt. The names say roughly how
+   many characters are gone. */
+.redact{
+  display:inline-block;
+  height:.72em;
+  vertical-align:-.08em;
+  background:var(--ink);
+}
+.redact-4{width:2em}
+.redact-8{width:4em}
+.redact-12{width:6em}
+.redact-16{width:8em}
+.redact-24{width:12em}
+
+/* A plate whose image is withheld. The block keeps the plate's
+   place on the grid, so the page reads as it was set. */
+.plate-withheld{
+  background:var(--ink);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.plate-withheld .label{color:var(--on-ink)}
+
+/* A signature row that was completed and then redacted. The mark
+   sits on the rule, where the writing was, and the row still runs
+   to three baselines. */
+.sign-filled{margin-top:6mm}
+.sign-filled div{border-top:0}
+.sign-filled .redact{display:block;height:6mm;width:62%;margin:0}
+.sign-filled .redact-full{width:88%}
+.sign-filled .label{display:block;border-top:.25mm solid var(--rule-heavy)}
+
 /* ---------- running foot, inside the bottom margin ---------- */
 .sheet-foot{
   position:absolute;

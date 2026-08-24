@@ -22,6 +22,8 @@
   --ink-soft:#6A6A68;
   --accent:#C7392F;       /* carried over from arvorealta.css */
 
+  --on-ink:#F6F6F5;       /* the only type that sits on an ink ground */
+
   --rule:rgba(20,20,20,.20);      /* hairline — between rows */
   --rule-inv:rgba(255,255,255,.24);
   --rule-heavy:#141414;           /* the structural rule, 0.6mm */
