@@ -251,10 +251,24 @@ readable, so it is the one thing from the reference not copied.
   stay at 11 pt — they are what an evaluator scans, and they are what the mono
   face is carrying. Only the running foot sits at 9 pt by right; it is page
   furniture, not submitted text
-- Scale 30 / 22 / 18 / 15 / 11 / 10 / 9: reference number, sheet 2 title,
-  sheet 1 title, heading, then label and field value, then body, then the
-  standfirst. Sheet 1's title came down a step because two long lines sat
-  level with the reference number and competed with it. The number wins
+- Scale 30 / 22 / 18 / 15 / 11 / 10 / 9 / 8: reference number, sheet 2 title,
+  sheet 1 title, heading and field value, signature label and table figure,
+  body, standfirst and running foot, label. Sheet 1's title came down a step
+  because two long lines sat level with the reference number and competed
+  with it. The number wins
+- **The proportions are the design, not the sizes.** A label sits well under
+  the body because a label is found rather than read; a field value sits well
+  over it because the whole point of setting a fact as a field is that the
+  figure is bigger than its name. Both sat at 11 pt for a while, which is
+  exactly why neither worked
+- **Space is measured in baselines.** 6 mm sets a block off from the one
+  above, 12 mm opens a new section, and a block with neither belongs to the
+  thing above it. A label is one object with what it labels, so nothing at
+  all sits between them. Arbitrary 4 mm gaps are what drift a page off the
+  grid, and there are none left
+- A title that runs to two lines takes `.title-2`, which tightens the leading
+  to 9 mm so the pair reads as one object and still lands on the grid at 18.
+  It is for two lines and only two
 - Narrative sits in seven columns — 97 mm, about 55 characters. The full
   170 mm measure runs past 85 characters and stops being readable
 - **Page budget is the design constraint.** A tender that caps pages discards

@@ -17,15 +17,30 @@
    Grid      12 columns × 10.5 mm, 4 mm gutters
              (12×10.5 + 11×4 = 170)
 
-   TYPE — mono at 11 pt, body at 10 pt, standfirst at 9 pt.
+   TYPE  30 · 22 · 18 · 15 · 11 · 10 · 9 · 8
+   reference number · sheet 2 title · sheet 1 title · heading,
+   statement and field value · signature label and table figure ·
+   body · standfirst and running foot · label.
+
+   The proportions matter more than the sizes. A label sits well
+   under the body, because a label is found rather than read, and
+   a field value sits well over it, because the whole point of
+   setting a fact as a field is that the figure is bigger than its
+   name. Both used to sit at 11 pt, which is why neither worked.
+
    Published tender rules put the floor for proposal body text at
    9–11 pt depending on the procedure. 11 pt clears all of them;
-   10 pt clears most. Body was taken down a step deliberately, to
-   stop the two columns on sheet 1 competing with the reference
-   number. Every mono label and every field value stays at 11 pt,
-   because sheet 2 is printed, signed and scanned, and those are
-   the sizes that have to survive it. Check the procedure before
-   submitting an annex built from this template.
+   10 pt clears most. Body runs at 10 and the standfirst at 9 to
+   buy the page budget back. Check the procedure before submitting
+   an annex built from this template, and take body back to 11 pt
+   if it names a higher floor. The labels on the signature lines
+   hold 11 pt whatever happens — sheet 2 is printed, signed and
+   scanned, and those have to survive it.
+
+   SPACE is measured in baselines, not in taste. 6 mm sets a block
+   off from the one above; 12 mm opens a new section; a block with
+   neither belongs to the thing above it. A label is one object
+   with what it labels, so there is no gap between them at all.
 
    RULE WEIGHTS carry meaning and there are only two.
    0.6 mm in ink closes the page — above the masthead and below
@@ -106,6 +121,11 @@
   letter-spacing:-.018em;
   text-wrap:balance;
 }
+/* A title that runs to two lines takes tighter leading, because display
+   type set on body leading reads as two headings rather than one. Two
+   lines at 9 mm land back on the grid at 18. Hand-break the title, then
+   add this — it is for two lines, and only two. */
+.sheet .title-2{line-height:9mm}
 .sheet h2,.sheet .heading{
   margin:0;
   font-family:var(--font-display);
@@ -114,19 +134,52 @@
   line-height:6mm;
   letter-spacing:-.008em;
 }
-.sheet .heading + p,.sheet h2 + p{margin-top:6mm}
+.sheet .heading + p,.sheet h2 + p{margin-top:6mm}  /* a heading is a block, not a label */
 
-/* every label is mono — mono is already wide, so it needs far
-   less tracking than a serif small-cap to read as a label */
+/* Every label is mono. A label is not read, it is found, so it sits
+   well under the body — the reference this page is proportioned
+   against sets its labels at about three quarters of body size and
+   lets tracking and case do the rest. At 8 pt the mono needs more
+   tracking than it did at 11 to still read as a label. */
 .sheet .label{
   font-family:var(--font-label);
-  font-size:11pt;        /* the body floor — hierarchy from face, not size */
+  font-size:8pt;
+  font-weight:500;
   line-height:6mm;
-  letter-spacing:.04em;
+  letter-spacing:.1em;
   text-transform:uppercase;
   color:var(--ink-soft);
 }
 .sheet .label-accent{color:var(--accent)}
+
+/* The exception, and the only one. Sheet 2 is printed, signed and
+   scanned, and a label somebody writes against is not an eyebrow, so
+   the labels on the signature lines hold the 11 pt floor. The heading
+   above a block is not one of them — that is an eyebrow like any
+   other, and at 11 pt it was louder than the sentence beneath it. */
+.sign .label{font-size:11pt;letter-spacing:.04em}
+
+/* A label and the thing it labels are one object, so the whole gap
+   between them is the label's own 6 mm line and nothing more. Air
+   belongs between blocks, where it separates; inside a block it
+   only divides. */
+.sheet p.label{margin-bottom:0}
+.sheet .label + *{margin-top:0}
+
+/* ---------- vertical rhythm ----------
+   Space is measured in baselines and there are two steps, so the
+   page cannot drift off the 6 mm grid one arbitrary 4 mm at a time.
+   .gap-1 sets a block off from the one above it. .gap-2 opens a new
+   section. A block with neither belongs to the thing above it. */
+.gap-1{margin-top:6mm}
+.gap-2{margin-top:12mm}
+.flush{margin-bottom:0}
+
+/* a signature line needs the space above its rule to write in, so it
+   keeps its own even when a label sits directly above it */
+.sheet .label + .sign{margin-top:6mm}
+/* the standards line belongs to the statement it sits under */
+.statement + .label{margin-top:2mm}
 
 /* ---------- the two rules, and only these two ---------- */
 .rule-heavy{border:0;height:.6mm;background:var(--rule-heavy);margin:0;flex:none}
@@ -181,20 +234,18 @@
 .fields.of-2{grid-template-columns:repeat(2,1fr)}
 .fields.of-4{grid-template-columns:repeat(4,1fr)}
 .field .label{display:block}
+/* Small label, large value. That inversion is the whole point of
+   setting a fact as a field, and it was missing while both sat at
+   11 pt. The size carries it now, so the weight comes back down —
+   a figure does not need to be bold to be found. */
 .field .value{
   display:block;
   font-family:var(--font-body);
-  font-size:11pt;
-  font-weight:600;
-  line-height:6mm;
-  font-variant-numeric:tabular-nums;
-}
-.field .value-big{
-  font-family:var(--font-display);
   font-size:15pt;
-  font-weight:600;
+  font-weight:400;
   line-height:6mm;
   letter-spacing:-.01em;
+  font-variant-numeric:tabular-nums;
 }
 .field-ruled{border-top:.25mm solid var(--rule);padding-top:2mm}
 /* a field the reader completes rather than reads — a line to write on */
@@ -219,9 +270,9 @@
 .facts th{
   width:50mm;
   font-family:var(--font-label);
-  font-size:11pt;
-  font-weight:400;
-  letter-spacing:.04em;
+  font-size:8pt;
+  font-weight:500;
+  letter-spacing:.1em;
   text-transform:uppercase;
   color:var(--ink-soft);
 }
