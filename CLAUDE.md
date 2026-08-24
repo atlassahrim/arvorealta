@@ -241,13 +241,20 @@ readable, so it is the one thing from the reference not copied.
   strictest published tender rule found is 15 mm, so every edge clears it
 - Content 170 × 246 mm — 41 baselines of 6 mm
 - Grid 12 columns × 10.5 mm, 4 mm gutters (12×10.5 + 11×4 = 170)
-- **Every size a reader reads is 11 pt or above.** Published tender rules put
-  the floor for proposal body text at 9–11 pt depending on the procedure;
-  11 pt clears all of them. The section label carries the same 11 pt as the
-  body and takes its hierarchy from face and tracking instead of from size.
-  Only the running foot sits at 9 pt — it is page furniture, not submitted text
-- Scale 30 / 22 / 15 / 11: reference number, title, heading and value, then
-  body and label together at the floor
+- **Nothing a reader reads sits under 9 pt, and the floor is a compliance
+  decision, not a taste one.** Published tender rules put the floor for
+  proposal body text at 9–11 pt depending on the procedure. 11 pt clears all
+  of them; 10 pt clears most. The template runs body at 10 pt and the sheet 2
+  standfirst at 9 pt, which buys the page budget back. **Check the procedure
+  before submitting an annex built from this template**, and take body back to
+  11 pt if it names a higher floor. Labels, field values and table figures
+  stay at 11 pt — they are what an evaluator scans, and they are what the mono
+  face is carrying. Only the running foot sits at 9 pt by right; it is page
+  furniture, not submitted text
+- Scale 30 / 22 / 18 / 15 / 11 / 10 / 9: reference number, sheet 2 title,
+  sheet 1 title, heading, then label and field value, then body, then the
+  standfirst. Sheet 1's title came down a step because two long lines sat
+  level with the reference number and competed with it. The number wins
 - Narrative sits in seven columns — 97 mm, about 55 characters. The full
   170 mm measure runs past 85 characters and stops being readable
 - **Page budget is the design constraint.** A tender that caps pages discards

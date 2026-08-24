@@ -17,14 +17,15 @@
    Grid      12 columns × 10.5 mm, 4 mm gutters
              (12×10.5 + 11×4 = 170)
 
-   TYPE — every size at or above 11 pt.
+   TYPE — mono at 11 pt, body at 10 pt, standfirst at 9 pt.
    Published tender rules put the floor for proposal body text at
-   9–11 pt depending on the procedure; 11 pt clears all of them.
-   Labels carry the same 11 pt as the body and take their
-   hierarchy from face and tracking instead of from size, so
-   nothing a reader is meant to read falls under the floor. Only
-   the running foot sits at 9 pt: it is page furniture, not part
-   of the submitted text.
+   9–11 pt depending on the procedure. 11 pt clears all of them;
+   10 pt clears most. Body was taken down a step deliberately, to
+   stop the two columns on sheet 1 competing with the reference
+   number. Every mono label and every field value stays at 11 pt,
+   because sheet 2 is printed, signed and scanned, and those are
+   the sizes that have to survive it. Check the procedure before
+   submitting an annex built from this template.
 
    RULE WEIGHTS carry meaning and there are only two.
    0.6 mm in ink closes the page — above the masthead and below
@@ -71,10 +72,12 @@
 .sheet p,.sheet li{
   margin:0 0 6mm;
   font-family:var(--font-body);
-  font-size:11pt;
+  font-size:10pt;
   line-height:6mm;
   max-width:none;
 }
+/* the longest block of running text on a form, one step below body */
+.standfirst{font-size:9pt}
 .sheet p:last-child{margin-bottom:0}
 
 /* the reference number — the first thing an evaluator matches
@@ -90,6 +93,10 @@
   font-variant-numeric:tabular-nums;
 }
 
+/* Sheet 1 sets its title a step down. Two long lines at 22pt sat level
+   with the reference number and competed with it; the number is the first
+   thing an evaluator matches, so it wins. */
+.sheet h1.title{font-size:18pt}
 .sheet .title{
   margin:0;
   font-family:var(--font-display);
@@ -158,7 +165,7 @@
 
 /* a column rule, the way a technical sheet divides its fields */
 .col-divide{
-  padding-left:4mm;
+  padding-left:8mm;
   border-left:.25mm solid var(--rule);
 }
 
@@ -190,6 +197,8 @@
   letter-spacing:-.01em;
 }
 .field-ruled{border-top:.25mm solid var(--rule);padding-top:2mm}
+/* a field the reader completes rather than reads — a line to write on */
+.value-blank{border-bottom:.25mm solid var(--rule)}
 
 /* ---------- the row table, for anything genuinely tabular ---------- */
 .facts{
