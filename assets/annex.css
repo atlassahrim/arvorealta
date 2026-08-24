@@ -249,6 +249,13 @@
   background:var(--ground-2);
 }
 .plate img{width:100%;height:100%;object-fit:cover;object-position:center top}
+
+/* Two plates side by side: the unit as built and the same unit as drawn.
+   Held to the height of a single plate, so the page budget does not move,
+   and split on the grid gutter. */
+.plate-pair{display:grid;grid-template-columns:1fr 1fr;gap:4mm;flex:none}
+.plate-pair .plate img{object-position:center}
+.plate-ink{background:var(--ink)}
 .plate-caption{margin-top:2mm;color:var(--ink-soft)}
 
 /* ---------- certificate block — the thing an evaluator looks for ---------- */
