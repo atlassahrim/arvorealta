@@ -70,6 +70,14 @@ header{padding-block:2rem}
 /* width:max-content holds the hand-broken lines exactly as written. A ch
    cap was narrower than the line itself, so every headline re-wrapped. */
 .hero h1{width:max-content;max-width:100%}
+/* A written line can still be wider than a phone. Below 33rem the display
+   type breaks again, and it breaks where we decide rather than where the
+   browser would — a br set to display:none carries no break at all, so the
+   wide reading is the one with the space and the narrow one is the break.
+   The switch sits well clear of the width where the two-line setting stops
+   fitting, so a slow webfont cannot land the page on the wrong side of it. */
+.brs{display:none}
+@media(max-width:33rem){.brs{display:inline}}
 .eyebrow{
   font-family:var(--font-label);font-size:.7rem;letter-spacing:.2em;
   text-transform:uppercase;color:var(--mark);margin:0 0 1.75rem;max-width:none;

@@ -451,5 +451,17 @@
 </footer>
 
 <script src="/assets/site.js" defer></script>
-</body>
+<script>
+function go(){try{
+ var h=document.querySelector(".hero h1");
+ var cs=getComputedStyle(h);
+ var lh=parseFloat(cs.lineHeight)||parseFloat(cs.fontSize)*1.04;
+ var lines=Math.round(h.getBoundingClientRect().height/lh);
+ var d=document.documentElement;
+ var pre=document.createElement("pre");pre.id="p";
+ pre.textContent="vw "+d.clientWidth+" | h1 lines "+lines+" | size "+cs.fontSize+" | w "+Math.round(h.getBoundingClientRect().width)+" | overflow "+(d.scrollWidth-d.clientWidth);
+ document.body.appendChild(pre);
+}catch(e){var pre=document.createElement("pre");pre.id="p";pre.textContent="ERR "+e.message;document.body.appendChild(pre);}}
+window.addEventListener("load",function(){setTimeout(go,900)});
+</script></body>
 </html>
