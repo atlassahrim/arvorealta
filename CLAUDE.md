@@ -247,15 +247,21 @@ readable, so it is the one thing from the reference not copied.
   of them; 10 pt clears most. The template runs body at 10 pt and the sheet 2
   standfirst at 9 pt, which buys the page budget back. **Check the procedure
   before submitting an annex built from this template**, and take body back to
-  11 pt if it names a higher floor. Labels, field values and table figures
-  stay at 11 pt — they are what an evaluator scans, and they are what the mono
-  face is carrying. Only the running foot sits at 9 pt by right; it is page
-  furniture, not submitted text
+  11 pt if it names a higher floor. Field values and table figures carry the
+  weight instead — they are what an evaluator scans, and they sit at 15 and
+  11 pt. Labels are not read, they are found, and at 8 pt they are furniture
+  rather than submitted text
+- **There is one label size on the sheet and no exceptions to it.** Every set
+  of capitals that names something — section eyebrow, field label, table row
+  label, signature line, running foot — is 8 pt mono. Capitals at more than
+  one size read as a mistake before they read as a hierarchy. The statement
+  block is the only capitals on the page that are not a label; it is display
+  type carrying a sentence, and it keeps its own size
 - Scale 30 / 22 / 18 / 15 / 11 / 10 / 9 / 8: reference number, sheet 2 title,
-  sheet 1 title, heading and field value, signature label and table figure,
-  body, standfirst and running foot, label. Sheet 1's title came down a step
-  because two long lines sat level with the reference number and competed
-  with it. The number wins
+  sheet 1 title, heading, statement and field value, table figure, body,
+  standfirst, every label. Sheet 1's title came down a step because two long
+  lines sat level with the reference number and competed with it.
+  The number wins
 - **The proportions are the design, not the sizes.** A label sits well under
   the body because a label is found rather than read; a field value sits well
   over it because the whole point of setting a fact as a field is that the

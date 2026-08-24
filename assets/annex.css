@@ -136,11 +136,19 @@
 }
 .sheet .heading + p,.sheet h2 + p{margin-top:6mm}  /* a heading is a block, not a label */
 
-/* Every label is mono. A label is not read, it is found, so it sits
-   well under the body — the reference this page is proportioned
-   against sets its labels at about three quarters of body size and
-   lets tracking and case do the rest. At 8 pt the mono needs more
-   tracking than it did at 11 to still read as a label. */
+/* Every label is mono, and there is exactly one label size on the
+   sheet — the running foot included, and with no exception for the
+   signature lines. A label is not read, it is found, so it sits well
+   under the body; the reference this page is proportioned against
+   sets its labels at about three quarters of body size and lets
+   tracking and case do the rest. At 8 pt the mono needs more tracking
+   than it did at 11 to still read as a label.
+
+   Capitals set at more than one size read as a mistake before they
+   read as a hierarchy, which is what happened while the signature
+   labels sat at 11 and the foot at 9. The statement block is the one
+   thing on the sheet set in capitals that is not a label — it is
+   display type carrying a sentence, and it keeps its own size. */
 .sheet .label{
   font-family:var(--font-label);
   font-size:8pt;
@@ -151,13 +159,6 @@
   color:var(--ink-soft);
 }
 .sheet .label-accent{color:var(--accent)}
-
-/* The exception, and the only one. Sheet 2 is printed, signed and
-   scanned, and a label somebody writes against is not an eyebrow, so
-   the labels on the signature lines hold the 11 pt floor. The heading
-   above a block is not one of them — that is an eyebrow like any
-   other, and at 11 pt it was louder than the sentence beneath it. */
-.sign .label{font-size:11pt;letter-spacing:.04em}
 
 /* A label and the thing it labels are one object, so the whole gap
    between them is the label's own 6 mm line and nothing more. Air
@@ -360,9 +361,10 @@
   align-items:baseline;
   gap:6mm;
   font-family:var(--font-label);
-  font-size:9pt;
+  font-size:8pt;
+  font-weight:500;
   line-height:6mm;
-  letter-spacing:.06em;
+  letter-spacing:.1em;
   text-transform:uppercase;
   color:var(--ink-soft);
 }
