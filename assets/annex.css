@@ -179,8 +179,6 @@
 /* a signature line needs the space above its rule to write in, so it
    keeps its own even when a label sits directly above it */
 .sheet .label + .sign{margin-top:12mm}
-/* the standards line belongs to the statement it sits under */
-.statement + .label{margin-top:2mm}
 
 /* ---------- the two rules, and only these two ---------- */
 .rule-heavy{border:0;height:.6mm;background:var(--rule-heavy);margin:0;flex:none}
@@ -313,7 +311,7 @@
 /* ---------- figure plate ---------- */
 .plate{
   width:100%;
-  height:36mm;           /* 6 baselines */
+  height:42mm;           /* 7 baselines */
   flex:none;
   overflow:hidden;
   background:var(--ground-2);
