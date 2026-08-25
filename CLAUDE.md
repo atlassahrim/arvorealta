@@ -134,8 +134,16 @@ hard:
   inconsistency rather than two decisions
 
 One use on the offer page: the eyebrows on the light grounds — `.eyebrow`,
-`.tag` and `.step`. The recommended tier used to take the mark as its ground
-and now takes the price gradient instead.
+`.tag`, `.step` and the label on `.heroqual`. The recommended tier used to
+take the mark as its ground and now takes the price gradient instead.
+
+**`.heroqual` is a label over the line it names**, which is the annex field
+move brought across: a small mark eyebrow that is found, and under it a
+sentence in ink that is read. It carries the hero's audience gate, which was
+set in the notes' size and grey while doing a different job. Caps and a
+contour were the obvious fix and the wrong one — the line runs to 58
+characters, past where tracked capitals stop reading, and a single box
+repeats the `.vocab` strip's own language a fold above the strip.
 
 The **price gradient** is sampled off the Turvatikas ground: amber `#954D13`
 running through `#743813` to chocolate `#5A200A`, at 45deg so the light end
