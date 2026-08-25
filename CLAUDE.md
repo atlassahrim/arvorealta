@@ -145,6 +145,17 @@ contour were the obvious fix and the wrong one — the line runs to 58
 characters, past where tracked capitals stop reading, and a single box
 repeats the `.vocab` strip's own language a fold above the strip.
 
+**`--ink-soft` measures 3.93:1 on paper, under the 4.5:1 small text needs.**
+It carries the standfirst, every hero note, the figure captions and the
+second line of the document caption, so this is the one contrast on the page
+that does not clear. Darkening the token to about `#4C5B54` fixes all of them
+at once and changes nothing structural. It has not been done because it
+shifts the whole page's temperature, which is a decision rather than a fix.
+
+On the ink ground the same value measures 2.35:1 and is unusable. Anything
+crossing into `.inv` takes `rgba(233,231,228,.75)` at 6.73:1, and an eyebrow
+there takes `.6` at 4.91:1. **The mark never crosses** — 2.03:1.
+
 The **price gradient** is sampled off the Turvatikas ground: amber `#954D13`
 running through `#743813` to chocolate `#5A200A`, at 45deg so the light end
 sits at the low corner as it does in the original. Two uses. It fills the
@@ -318,6 +329,18 @@ readable, so it is the one thing from the reference not copied.
 - **Page budget is the design constraint.** A tender that caps pages discards
   the overflow unread, so air costs content. Measure every block against the
   246 mm before adding to a sheet
+
+**The close is the hero again, on ink.** Same eyebrow, headline, standfirst,
+qualifier, call to action and both notes, word for word. Every class the hero
+owns therefore needs an `.inv` counterpart, and the ones that were missing
+are the reason `.sub` sat at 2.35:1 there for a while.
+
+**`.doc` is the one photograph on the page and it is of a document** — the
+redacted sample, at full measure, because a document is judged at the size it
+is read at. Its caption runs two lines: what the thing is, in ink, then its
+status in `--ink-soft`, quieter because it qualifies the first line rather
+than adding to it. Regenerate the image from `annex/sample/` if the sheets
+change.
 
 ## Rules that matter
 

@@ -82,7 +82,7 @@ header{padding-block:2rem}
   font-family:var(--font-label);font-size:.7rem;letter-spacing:.2em;
   text-transform:uppercase;color:var(--mark);margin:0 0 1.75rem;max-width:none;
 }
-.hero .sub{
+.hero .sub,.cta .sub{
   font-size:clamp(1.05rem,.95rem + .5vw,1.35rem);color:var(--ink-soft);
   max-width:40ch;margin-top:2rem;line-height:1.6;
 }
@@ -109,16 +109,38 @@ header{padding-block:2rem}
 
 /* ---------- inverted ---------- */
 .inv{background:var(--ink);color:var(--paper-3)}
+/* The mark measures 2.03:1 on ink and is barred from it, so every eyebrow
+   that crosses into the close takes the light value the .tag already uses.
+   It measures 4.91:1 there, which clears what small type needs. */
+/* .sub is set on the hero and the close by name, which outranks the .inv p
+   rule underneath it. Left alone the standfirst kept its ink-soft on the ink
+   ground, where it measures 2.35:1 and cannot be read at all. */
+.inv .sub{color:rgba(233,231,228,.75)}
+.inv .eyebrow,.inv .heroqual b{color:rgba(233,231,228,.6)}
+.inv .heroqual{color:var(--paper-3)}
+.inv .heroact{border-top-color:var(--rule-inv)}
 .inv p{color:rgba(233,231,228,.75)}
 .inv h2,.inv h3{color:var(--paper-3)}
 
 /* ---------- figures ---------- */
 .figures{display:grid;gap:2.5rem 3rem;grid-template-columns:repeat(2,1fr);margin-top:4.5rem}
 @media(min-width:58rem){.figures{grid-template-columns:repeat(4,1fr)}}
-.figures div{border-top:1px solid var(--rule-inv);padding-top:1.2rem}
+.figures div{border-top:1px solid var(--rule);padding-top:1.2rem}
 .figures b{display:block;font-family:var(--font-display);font-weight:400;letter-spacing:-.015em;line-height:1;
   font-size:clamp(2.4rem,1.4rem + 3.2vw,4rem)}
-.figures span{display:block;margin-top:.9rem;font-size:.85rem;line-height:1.5;color:rgba(233,231,228,.65)}
+.figures span{display:block;margin-top:.9rem;font-size:.85rem;line-height:1.5;color:var(--ink-soft)}
+.inv .figures div{border-top-color:var(--rule-inv)}
+.inv .figures span{color:rgba(233,231,228,.65)}
+
+/* The one photograph on the page, and it is of a document. Full measure,
+   because a document is judged at the size it is read at. The caption
+   carries two lines: what the thing is, then its status, and the status
+   sits quieter because it qualifies the first line rather than adding to it. */
+.doc{margin:2.75rem 0 0}
+.doc img{display:block;width:100%;height:auto;background:var(--paper-3)}
+.doccap{margin:1.1rem 0 0;font-size:.85rem;line-height:1.6;color:var(--ink);max-width:58ch}
+.doccap span{display:block;margin-top:.35rem;color:var(--ink-soft)}
+.inv .doccap{color:var(--paper-3)}
 
 /* The disqualifier. Set apart from the argument above it and deliberately
    quieter, because it is the one block asking the reader to leave. */
