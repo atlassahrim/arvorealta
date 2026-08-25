@@ -136,7 +136,7 @@ header{padding-block:2rem}
    because a document is judged at the size it is read at. The caption
    carries two lines: what the thing is, then its status, and the status
    sits quieter because it qualifies the first line rather than adding to it. */
-.doc{margin:2.75rem 0 0}
+.doc{margin:clamp(3rem,6vw,5rem) 0 0}
 .doc img{display:block;width:100%;height:auto;background:var(--paper-3)}
 .doccap{margin:1.1rem 0 0;font-size:.85rem;line-height:1.6;color:var(--ink);max-width:58ch}
 .doccap span{display:block;margin-top:.35rem;color:var(--ink-soft)}
