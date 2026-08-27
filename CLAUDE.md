@@ -347,6 +347,13 @@ change.
 **Hand-break headlines** with `<br>`. Never let display type wrap on its own —
 every line ending is a decision.
 
+**Every label carries the same weight.** The label face is set at 600
+wherever it appears at eyebrow size — eyebrows, section tags, card steps, the
+vocabulary chips, the comparison headings, the nav, the footer headings and
+the form's own labels. A label found at one weight and read at another is two
+systems. The wordmark is the exception: it is the mark itself, not a label,
+and it keeps 400.
+
 **Three type sizes.** Display 96, body 24, label 17 — that is the whole scale.
 An intermediate Playfair was tried and retired: giving the headline a wider
 column solved what the extra size was covering for. If a fourth seems
