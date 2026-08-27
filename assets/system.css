@@ -78,9 +78,22 @@ header{padding-block:2rem}
    fitting, so a slow webfont cannot land the page on the wrong side of it. */
 .brs{display:none}
 @media(max-width:33rem){.brs{display:inline}}
+/* The hero's eyebrow carries the same trailing rule the section tags do, and
+   stops at the same measure, so the two read as one device rather than two.
+   The rule sits on the baseline and takes whatever width the label leaves. */
 .eyebrow{
-  font-family:var(--font-label);font-size:.7rem;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--mark);margin:0 0 1.75rem;max-width:none;
+  display:flex;align-items:baseline;gap:.85rem;
+  font-family:var(--font-label);font-size:.7rem;letter-spacing:.2em;line-height:1;
+  text-transform:uppercase;color:var(--mark);margin:0 0 1.75rem;
+  max-width:var(--measure);
+}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--rule);transform:translateY(-.15em)}
+.inv .eyebrow::after{background:var(--rule-inv)}
+/* Under 28rem the label eats the measure and what is left of the rule is a
+   stub rather than a rule. It goes, and the label is free to take two lines. */
+@media(max-width:28rem){
+  .eyebrow{display:block;line-height:1.5}
+  .eyebrow::after{content:none}
 }
 .hero .sub,.cta .sub{
   font-size:clamp(1.05rem,.95rem + .5vw,1.35rem);color:var(--ink-soft);
