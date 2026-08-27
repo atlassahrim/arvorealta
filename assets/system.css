@@ -33,10 +33,10 @@ hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
    inverted sections keep paper: the mark is under 3:1 on ink either way. */
 .tag{
   display:flex;align-items:baseline;gap:.85rem;
-  font-family:var(--font-label);font-size:.72rem;letter-spacing:.16em;line-height:1;
-  color:var(--mark);margin:0 0 2.75rem;text-transform:lowercase;
+  font-family:var(--font-label);font-size:.72rem;font-weight:600;letter-spacing:.16em;
+  line-height:1;color:var(--mark);margin:0 0 2.75rem;text-transform:lowercase;
 }
-.tag b{font-weight:400;font-variant-numeric:tabular-nums;color:var(--mark)}
+.tag b{font-weight:600;font-variant-numeric:tabular-nums;color:var(--mark)}
 .tag::after{content:"";flex:1;height:1px;background:var(--rule);transform:translateY(-.15em)}
 .inv .tag{color:rgba(233,231,228,.6)}
 .inv .tag b{color:var(--paper-3)}
@@ -78,23 +78,18 @@ header{padding-block:2rem}
    fitting, so a slow webfont cannot land the page on the wrong side of it. */
 .brs{display:none}
 @media(max-width:33rem){.brs{display:inline}}
-/* The hero's eyebrow carries the same trailing rule the section tags do, and
-   stops at the same measure, so the two read as one device rather than two.
-   The rule sits on the baseline and takes whatever width the label leaves. */
+/* The hero's eyebrow sits on a rule rather than trailing one. A trailing
+   hairline is the section tags' device and marks a section; this one is the
+   page's first line, so it takes the shelf instead — the same move the annex
+   fields make, where the rule is above the label and the label names what
+   comes under it. The rule runs the measure, which is where the tags' own
+   rules stop. */
 .eyebrow{
-  display:flex;align-items:baseline;gap:.85rem;
-  font-family:var(--font-label);font-size:.7rem;letter-spacing:.2em;line-height:1;
-  text-transform:uppercase;color:var(--mark);margin:0 0 1.75rem;
-  max-width:var(--measure);
+  font-family:var(--font-label);font-size:.7rem;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--mark);max-width:var(--measure);
+  border-top:1px solid var(--rule);padding-top:1.1rem;margin:0 0 1.75rem;
 }
-.eyebrow::after{content:"";flex:1;height:1px;background:var(--rule);transform:translateY(-.15em)}
-.inv .eyebrow::after{background:var(--rule-inv)}
-/* Under 28rem the label eats the measure and what is left of the rule is a
-   stub rather than a rule. It goes, and the label is free to take two lines. */
-@media(max-width:28rem){
-  .eyebrow{display:block;line-height:1.5}
-  .eyebrow::after{content:none}
-}
+.inv .eyebrow{border-top-color:var(--rule-inv)}
 .hero .sub,.cta .sub{
   font-size:clamp(1.05rem,.95rem + .5vw,1.35rem);color:var(--ink-soft);
   max-width:40ch;margin-top:2rem;line-height:1.6;
