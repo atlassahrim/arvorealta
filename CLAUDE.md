@@ -18,8 +18,8 @@ them without being asked. Copy changes are fine; layout surgery is not.
 
 ## Not published
 
-`templates/`, every `_`-prefixed folder under `deck/` and `annex/`,
-`assets/_og/` and `.claude/` are working files. They live in the repo, sessions edit them
+`templates/`, every `_`-prefixed folder under `deck/` and `annex/`, and
+`assets/_og/` are working files. They live in the repo, sessions edit them
 normally, and `deck-pdf.yml` prints them from the working tree — but
 `pages.yml` deletes them from the checkout before the artifact is built, so
 they never reach the internet. Pages on a public repo has no access control;
@@ -70,7 +70,6 @@ assets/
   annex.css             A4 document geometry + print rules
   site.js               live clocks, scroll reveal
 CNAME                   custom domain
-.claude/skills/         agent skills, vendored — tooling, never deployed
 ```
 
 Pages load a **theme first, then `system.css`.** Order matters: the theme
@@ -364,22 +363,6 @@ necessary, widen the column before you add a level.
 
 **No inline colour or font values.** Everything reads from tokens, so a theme
 swap is total.
-
-## Skills
-
-`.claude/skills/<name>/SKILL.md` holds skills vendored into this repo, so
-every session working here gets them and they survive a container being
-reclaimed. A user-level install under `~/.claude/` does not — this is a
-remote environment and only what is committed persists.
-
-Vendored copies stay **verbatim**. Each carries a `SOURCE.md` naming the
-upstream repo, path and commit; to update one, pull the upstream file again
-rather than editing it here.
-
-Installed: **find-skills** (vercel-labs/skills @ 435076e) — helps locate and
-install other skills through the `npx skills` CLI and skills.sh. Note that it
-suggests `npx skills add … -y`, which installs without a prompt. Read a skill
-before it lands, the way this one was read before it was vendored.
 
 ## Adding a client theme
 

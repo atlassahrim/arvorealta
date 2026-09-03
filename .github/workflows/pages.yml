@@ -39,7 +39,8 @@ jobs:
         #
         # The rule is the leading underscore. deck/_template stays private;
         # deck/acme, a real client deck, publishes as normal. .claude is on
-        # the list for the same reason — agent skills are tooling, not site.
+        # the list because agent tooling is never site, and the upload takes
+        # the whole checkout.
         run: rm -rf templates deck/_* annex/_* assets/_og .claude
 
       - uses: actions/upload-pages-artifact@v3
