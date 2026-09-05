@@ -223,10 +223,6 @@ ul.ticks li::before{content:"";position:absolute;left:0;top:.75em;width:.8rem;he
 .vocab li{font-family:var(--font-label);font-size:.68rem;font-weight:600;letter-spacing:.1em;line-height:1.5;
   text-transform:uppercase;color:var(--ink);border:1px solid var(--rule);padding:.45em .8em}
 
-/* The second path, kept deliberately quiet so it cannot read as a rival
-   button to the one above it. */
-.heroalt{margin:1.4rem 0 0;font-size:.85rem;color:var(--ink-soft);max-width:none}
-
 /* ---------- relief ---------- */
 .relief{display:grid;gap:clamp(2.5rem,5vw,4.5rem);grid-template-columns:1fr}
 @media(min-width:50rem){.relief{grid-template-columns:1fr 1.7fr}}
