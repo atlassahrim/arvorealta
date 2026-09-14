@@ -41,7 +41,7 @@ jobs:
         # deck/acme, a real client deck, publishes as normal. .claude is on
         # the list because agent tooling is never site, and the upload takes
         # the whole checkout.
-        run: rm -rf templates deck/_* annex/_* assets/_og .claude
+        run: rm -rf templates deck/_* annex/_* _research assets/_og .claude
 
       - uses: actions/upload-pages-artifact@v3
         with:
