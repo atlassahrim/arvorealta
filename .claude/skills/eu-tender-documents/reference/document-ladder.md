@@ -95,8 +95,11 @@ the whole ladder where design and structure change a score rather than satisfy a
 checkbox.
 
 **16. Environmental documentation.** EPD to EN 15804, carbon footprint, recycled
-content, GWP. Note the CPR shift: for priority construction-product categories the
-GWP figure is now a mandatory DoP entry rather than a voluntary EPD.
+content, GWP. **The CPR does not yet make GWP mandatory for anyone** — the
+obligation phases in per product family under Article 95(9), one year after an
+implementing act makes the relevant harmonised standard mandatory, and no family
+has started that clock. See the correction note in `SKILL.md`. Today the EPD is
+demanded by *buyers as an award criterion*, not by product law.
 *Fails when:* no product-specific EPD exists, so the buyer substitutes
 conservative default data — the **default-data penalty**, recorded in
 `_research/notes.md` as one of only three explained mechanisms in this market.

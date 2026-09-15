@@ -115,9 +115,39 @@ Verified 2026-09-14. **Never round or approximate these.**
 | Date | Instrument | What it demands |
 |---|---|---|
 | 1 January 2024 | Norway, anskaffelsesforskriften § 7-9 | Climate and environment weighted **minimum 30 per cent**, follow-or-explain, for procurements announced on Doffin from that date. |
-| 8 January 2026 | Construction Products Regulation (EU) 2024/3110 | Most operational requirements apply. **GWP must be declared in the Declaration of Performance** for priority categories — moving the carbon figure out of a voluntary EPD and into mandatory CE marking. |
+| 8 January 2026 | Construction Products Regulation (EU) 2024/3110 | The Regulation applies generally from this date. **It does not oblige any manufacturer to declare GWP on this date** — see the correction note below. |
 | 18 February 2027 | Battery Regulation (EU) 2023/1542 | Battery passport mandatory for EV, industrial >2 kWh and LMT batteries. The first legally fixed product-passport date. |
 | 9 September 2026 | Proposed EU Public Procurement Act | **A proposal, not law.** A single Regulation intended to replace Directives 2014/24, 2014/25 and 2014/23. Best price-quality ratio as standard award method, quality at minimum 30 per cent (50 per cent labour-intensive), comply-or-explain. Must still pass Parliament and Council. |
+
+**Correction, 2026-09-15 — the CPR does not bite yet, for anyone.**
+
+An earlier version of this file stated that GWP became a mandatory Declaration of
+Performance entry for priority categories on 8 January 2026. **That was wrong and
+it was corrected at source.** The mechanism is:
+
+- **Article 95(9)** — the requirements and obligations on economic operators in
+  Chapters I, II and III apply to a given product family or category **only from
+  one year after the date of adoption of an implementing act making a harmonised
+  standard mandatory**, unless a later date is specified.
+- **Article 92** — penalties, including enforcement of the environmental
+  performance declaration obligations, from **8 January 2027**. That is
+  enforcement machinery, not the start of an obligation.
+- As of 2026-09-15 the Commission had adopted **three standardisation requests**
+  (precast concrete products, structural metallic products and ancillaries,
+  cement and hydraulic binders — two of them still under the 2011 Regulation),
+  with four more in preparation. A standardisation request is not a harmonised
+  standard, and a harmonised standard is not an implementing act citing it.
+  **No product family has started its one-year clock.**
+- The first CPR working plan covers 2026 to 2029. Realistic first obligations for
+  most families are years out.
+
+**What this means commercially.** There is no CPR deadline to put in front of a
+construction-products manufacturer today, and none is imminent. This *reinforces*
+the reading in `_research/profile.md` that do-nothing is currently rational for
+most of this market rather than overturning it. The one genuinely live, dated
+instrument for a Nordic manufacturer remains **Norway's 30 per cent weighting,
+in force since 1 January 2024** — which argues for Norway as the sharp segment,
+not construction products.
 
 **Contradiction to record, not resolve.** `_research/trigger.md` dates ESPR full
 application at 19 July 2026 with an EU Central DPP Registry live. Sources

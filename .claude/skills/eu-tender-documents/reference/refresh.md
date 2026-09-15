@@ -62,6 +62,18 @@ certificates get renamed. **Run this once a year.** It takes a session.
 Each of these was unresolved at the last refresh. Named specifically so the next
 pass does not have to rediscover the problem.
 
+0. **CPR obligation start, per product family.** The live question, and the one
+   most likely to change. Track whether the Commission has adopted an
+   **implementing act making a harmonised standard mandatory** under CPR
+   2024/3110 for any family — that act starts a one-year clock (Article 95(9))
+   after which GWP and the other environmental declarations become obligations
+   for that family. Watch precast concrete, structural metallic products and
+   ancillaries, and cement and hydraulic binders first: standardisation requests
+   for those were adopted by 2026-09-15. A standardisation request is not an
+   implementing act. **The moment the first one lands, a real dated obligation
+   exists for a definable set of manufacturers, and that is commercially
+   significant for Arvorealta.**
+
 1. **ESPR timing contradiction.** `_research/trigger.md` dates ESPR full
    application at 19 July 2026 with a central DPP registry live. Sources
    retrieved 2026-09-14 state no delegated act had been adopted as of August
@@ -119,3 +131,37 @@ Two corrections to `_research/trigger.md` recorded rather than silently applied:
 Not established: any evidence that buyers write coming standards into award
 criteria ahead of the legal date. `trigger.md` flags this as plausible and
 unevidenced; this pass did not change that.
+
+### 2026-09-15 — CPR correction at source
+
+The 2026-09-14 entry recorded CPR (EU) 2024/3110 as putting GWP into the
+Declaration of Performance for priority categories from 8 January 2026, and
+described it as a live obligation for a construction-products manufacturer today.
+**That was wrong.** It rested on secondary sources — consultancy and EPD-vendor
+explainers — which compressed "the Regulation applies" into "the obligation
+starts". Checked against the Regulation:
+
+- **Article 95(9):** obligations on economic operators apply to a product family
+  only from **one year after adoption of an implementing act making a harmonised
+  standard mandatory**.
+- **Article 92:** penalties, including for environmental performance
+  declarations, from **8 January 2027** — enforcement machinery, not obligation
+  start.
+- Three standardisation requests adopted as of 2026-09-15 (precast concrete;
+  structural metallic products and ancillaries; cement and hydraulic binders —
+  two still under the 2011 Regulation), four more in preparation. None is an
+  implementing act. **No family has started its clock.** First working plan runs
+  2026–2029.
+
+**Consequence.** The segmentation argument built on this the previous day — that
+construction-products manufacturers face a live obligation and are therefore the
+urgent segment — does not hold and was withdrawn. `_research/profile.md` was
+right: do-nothing is rational for most of this market. Norway's 30 per cent
+weighting, in force 1 January 2024, remains the only live dated instrument
+reaching a general Nordic manufacturer.
+
+**Method note for future refreshes.** Two of the three errors found so far came
+from secondary sources restating a regulation. The Norwegian HMS-egenerklæring
+problem is the same shape — well-ranked guidance describing repealed rules.
+**Go to the legal text for anything that will be said to a client.** Vendor and
+consultancy explainers are a search index, not a source.
