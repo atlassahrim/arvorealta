@@ -3,6 +3,9 @@
 Everything located that carries a supplier's own words, plus the written record of the searches that returned nothing.
 
 **Market:** industrial manufacturers · **Geography:** north and northeast Europe · **Retrieved:** 2026-09-13
+**Amended 2026-09-15.** Three stale cross-file references fixed. **No source
+material, quote, translation or observation changed** — nothing in this file
+carried the CPR error, because this file quotes suppliers rather than regulations.
 
 Sources are kept separate within this file. Each section is one source: what it is, the URL, the date retrieved, the extracted material, then tagged observations held apart from that material.
 
@@ -66,10 +69,10 @@ Section: "Krångelfaktorn består", free-text examples.
 
 - `[VERIFIED]` The 300-to-1000 hours line is the best available candidate for a low position with texture rather than category. It is a specific person describing a specific four-year change with an explicit statement that nothing improved. https://www.almega.se/app/uploads/2024/10/Rapport-Offentlig-upphandling-ur-tjansteforetagens-perspektiv.pdf
 - `[VERIFIED]` The recurring complaint is not "we can't write" — it is "we already proved this and are being asked to prove it again." That is a documents-system problem, not a copywriting problem. Section "Förenklingsreformen hittills utan tydlig effekt för företagen".
-- `[VERIFIED]` The requirement to have already delivered to the public sector is named by suppliers as an irrelevant barrier, and the same barrier is named in the EU reform draft as something to be curbed. Two independent sources, one from each side. See `trigger-eu-public-procurement-act.md`.
+- `[VERIFIED]` The requirement to have already delivered to the public sector is named by suppliers as an irrelevant barrier, and the same barrier is named in the EU reform draft as something to be curbed. Two independent sources, one from each side. See `trigger.md`, the Public Procurement Act section. `[AMENDED 2026-09-15 — filename updated; the Act is a proposal and a Regulation, see that file.]`
 - `[INFERRED]` "We manage without them" is a real, articulated version of *do nothing* in this market, and it is stated with pride rather than regret. That changes what an opening is allowed to imply about the reader's competence. Rests on the free-text answers in "Krångelfaktorn består".
 - `[INFERRED]` Reluctance to bid on price-dominated tenders rose 15 points in roughly four years while the EU is simultaneously legislating quality floors. If both hold, there is a window where the manufacturers who withdrew are the ones the new rules were designed to bring back. **Unverified as a causal link; the two facts come from different sources and different years.**
-- `[VERIFIED]` **Contradiction to record.** Almega gives 4.8 average bids per advertised Swedish procurement (2022 data). TED-based EU figures give 3.2 average bidders per tender (2021). These are different populations and different counting rules, not necessarily a conflict, but they cannot be used in the same sentence. See `notes-market-structure-and-competition.md`.
+- `[VERIFIED]` **Contradiction to record.** Almega gives 4.8 average bids per advertised Swedish procurement (2022 data). TED-based EU figures give 3.2 average bidders per tender (2021). These are different populations and different counting rules, not necessarily a conflict, but they cannot be used in the same sentence. See `notes.md`, market structure and competition.
 
 **Image note.** The report's 15 diagrams are images and I cannot read them. Diagram 3 (reasons for not participating) and Diagram 11 (reluctance by price focus) carry the survey's load. Worth a screenshot from the PDF.
 
@@ -104,7 +107,7 @@ One quote, FICIL on the downstream effect: "These problems discourage companies 
 
 - `[VERIFIED]` 73% lowest-price-only awards in Latvia, 2021–2023, is the hardest number in this pack for the Baltic half of the geography. Same URL.
 - `[VERIFIED]` FICIL explicitly ranks Latvia worse than Estonia and Lithuania on fairness perception. The three Baltic states are not one market for this purpose and should not be addressed as one. Same URL.
-- `[INFERRED]` If 73% of Latvian awards turn on price alone, a documents-and-reputation offer has a much smaller addressable slice in Latvia than the EU quality-floor narrative implies. The reform that would change this applies 2029–2030 at the earliest. Rests on combining the FICIL figure with the timeline in `trigger-eu-public-procurement-act.md`.
+- `[INFERRED]` If 73% of Latvian awards turn on price alone, a documents-and-reputation offer has a much smaller addressable slice in Latvia than the EU quality-floor narrative implies. The reform that would change this applies 2029–2030 at the earliest. Rests on combining the FICIL figure with the timeline in `trigger.md`.
 - `[INFERRED]` The trust objection in this market may not be "will this work" but "does any of it matter when the outcome is decided elsewhere." That is a belief-in-self objection with a political edge, and no guarantee touches it. **Unverified — no Latvian or Lithuanian manufacturer was heard from directly. See closing questions.**
 - `[VERIFIED]` Follow-up worth fetching, **not retrieved:** LSM, "Ministries given one month to prepare procurement reviews", 26 August 2026 — https://eng.lsm.lv/article/economy/economy/26.08.2026-ministries-given-one-month-to-prepare-procurement-reviews.a660407/ — a live Latvian reform event three weeks before this research, likely trigger material.
 - `[VERIFIED]` Primary source behind the participation figure, **not retrieved:** State Audit Office of Latvia, https://www.lrvk.gov.lv/en/news/a-structural-reform-will-be-implemented-to-make-the-public-procurement-system-more-effective
