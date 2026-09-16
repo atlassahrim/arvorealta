@@ -1,0 +1,358 @@
+/* ==========================================================
+   SYSTEM — structure only. No colours, no typefaces.
+   Everything here reads from the tokens a theme file defines.
+   Load a theme BEFORE this file.
+   ========================================================== */
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--font-body);
+  font-size:clamp(1.02rem,.96rem + .3vw,1.14rem);
+  line-height:1.75;                    /* loose body, Izanami H240 */
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;height:auto;display:block}
+
+/* display type: very large, line-height 1.0, tight tracking */
+h1,h2{margin:0;font-family:var(--font-display);font-weight:400;letter-spacing:-.012em;line-height:1.04}
+h3{margin:0;font-family:var(--font-label);font-weight:600;letter-spacing:.04em;line-height:1.35;text-transform:uppercase}
+h1{font-size:clamp(2.6rem,1.1rem + 6.4vw,6.5rem)}
+h2{font-size:clamp(2rem,1.1rem + 3.8vw,4.25rem)}
+h3{font-size:clamp(.82rem,.78rem + .2vw,.95rem)}
+p{margin:0 0 1.2em;max-width:var(--measure)}
+p:last-child{margin-bottom:0}
+
+.wrap{width:min(100% - 2.5rem,80rem);margin-inline:auto}
+section{padding-block:var(--gap)}
+hr.rule{border:0;border-top:1px solid var(--rule);margin:0}
+
+/* Every label on the site carries the same weight. The label face is set at
+   600 wherever it appears at eyebrow size — eyebrows, section tags, card
+   steps, the vocabulary chips, the comparison headings, the nav, the footer
+   headings and the form's own labels. A label found at one weight and read
+   at another is two systems. The wordmark is the exception: it is the mark
+   itself, not a label, and it keeps 400.
+
+   Eyebrows carry the mark on the light grounds, 4.55:1 on paper. The
+   inverted sections keep paper: the mark is under 3:1 on ink either way. */
+.tag{
+  display:flex;align-items:baseline;gap:.85rem;
+  font-family:var(--font-label);font-size:.72rem;font-weight:600;letter-spacing:.16em;
+  line-height:1;color:var(--mark);margin:0 0 2.75rem;text-transform:lowercase;
+}
+.tag b{font-weight:600;font-variant-numeric:tabular-nums;color:var(--mark)}
+.tag::after{content:"";flex:1;height:1px;background:var(--rule);transform:translateY(-.15em)}
+.inv .tag{color:rgba(233,231,228,.6)}
+.inv .tag b{color:var(--paper-3)}
+.inv .tag::after{background:var(--rule-inv)}
+
+/* line-draw links */
+a{color:inherit;text-decoration:none}
+.ln{position:relative;display:inline-block;padding-bottom:.18em}
+.ln::after{
+  content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;
+  background:currentColor;transform:scaleX(0);transform-origin:right;
+  transition:transform .45s cubic-bezier(.22,1,.36,1);
+}
+.ln:hover::after,.ln:focus-visible::after{transform:scaleX(1);transform-origin:left}
+.ln.on::after{transform:scaleX(1)}
+.ln.on:hover::after{transform:scaleX(0);transform-origin:right}
+
+/* ---------- header ---------- */
+header{padding-block:2rem}
+.bar{display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:baseline;justify-content:space-between}
+.mark{font-family:var(--font-label);font-size:.95rem;letter-spacing:.2em;text-transform:uppercase}
+.bar nav{display:flex;flex-wrap:wrap;align-items:center;gap:1.6rem;font-family:var(--font-label);font-size:.78rem;font-weight:600;letter-spacing:.12em;color:var(--ink-soft)}
+/* The one featured link on the page. The mark as a fill, carrying --on-mark
+   at 5.90:1, which is the only type allowed on it. */
+.navcta{font-family:var(--font-label);font-size:.7rem;font-weight:600;letter-spacing:.14em;line-height:1.5;
+  text-transform:uppercase;color:var(--on-mark);background:var(--mark);padding:.55em 1.1em}
+.navcta:hover,.navcta:focus-visible{background:var(--ink)}
+
+/* ---------- hero ---------- */
+.hero{padding-top:clamp(2rem,6vw,5rem);padding-bottom:clamp(3rem,7vw,6rem)}
+/* width:max-content holds the hand-broken lines exactly as written. A ch
+   cap was narrower than the line itself, so every headline re-wrapped. */
+.hero h1{width:max-content;max-width:100%}
+/* A written line can still be wider than a phone. Below 33rem the display
+   type breaks again, and it breaks where we decide rather than where the
+   browser would — a br set to display:none carries no break at all, so the
+   wide reading is the one with the space and the narrow one is the break.
+   The switch sits well clear of the width where the two-line setting stops
+   fitting, so a slow webfont cannot land the page on the wrong side of it. */
+.brs{display:none}
+@media(max-width:33rem){.brs{display:inline}}
+/* The hero's eyebrow sits on a rule rather than trailing one. A trailing
+   hairline is the section tags' device and marks a section; this one is the
+   page's first line, so it takes the shelf instead — the same move the annex
+   fields make, where the rule is above the label and the label names what
+   comes under it. The rule runs the measure, which is where the tags' own
+   rules stop. */
+.eyebrow{
+  font-family:var(--font-label);font-size:.7rem;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--mark);max-width:var(--measure);
+  border-top:1px solid var(--rule);padding-top:1.1rem;margin:0 0 1.75rem;
+}
+.inv .eyebrow{border-top-color:var(--rule-inv)}
+.hero .sub,.cta .sub{
+  font-size:clamp(1.05rem,.95rem + .5vw,1.35rem);color:var(--ink-soft);
+  max-width:40ch;margin-top:2rem;line-height:1.6;
+}
+.heroact{
+  margin-top:clamp(2.25rem,5vw,3.25rem);padding-top:1.75rem;
+  border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;
+  gap:1.25rem 3rem;align-items:baseline;
+}
+.herocta{font-family:var(--font-display);font-size:clamp(1.15rem,1rem + .9vw,1.7rem);letter-spacing:-.01em}
+/* The audience gate, and not fine print — it was wearing the notes' size and
+   grey while doing a different job. A small label in the mark over the line
+   it names: the annex field move, where the label is found and the line
+   under it is read. */
+.heroqual{margin:1.5rem 0 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:58ch}
+.heroqual b{
+  display:block;margin-bottom:.5rem;
+  font-family:var(--font-label);font-weight:600;font-size:.68rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--mark);
+}
+.heronote{margin:1.75rem 0 0;font-size:.9rem;line-height:1.7;color:var(--ink-soft);max-width:58ch}
+.heronote b{font-weight:400;color:var(--ink)}
+/* the same note repeated in the close, where the ground is ink */
+.inv .heronote b{color:var(--paper-3)}
+
+/* ---------- inverted ---------- */
+.inv{background:var(--ink);color:var(--paper-3)}
+/* The mark measures 2.03:1 on ink and is barred from it, so every eyebrow
+   that crosses into the close takes the light value the .tag already uses.
+   It measures 4.91:1 there, which clears what small type needs. */
+/* .sub is set on the hero and the close by name, which outranks the .inv p
+   rule underneath it. Left alone the standfirst kept its ink-soft on the ink
+   ground, where it measures 2.35:1 and cannot be read at all. */
+.inv .sub{color:rgba(233,231,228,.75)}
+.inv .eyebrow,.inv .heroqual b{color:rgba(233,231,228,.6)}
+.inv .heroqual{color:var(--paper-3)}
+.inv .heroact{border-top-color:var(--rule-inv)}
+.inv p{color:rgba(233,231,228,.75)}
+.inv h2,.inv h3{color:var(--paper-3)}
+
+/* ---------- figures ---------- */
+.figures{display:grid;gap:2.5rem 3rem;grid-template-columns:repeat(2,1fr);margin-top:4.5rem}
+@media(min-width:58rem){.figures{grid-template-columns:repeat(4,1fr)}}
+.figures div{border-top:1px solid var(--rule);padding-top:1.2rem}
+.figures b{display:block;font-family:var(--font-display);font-weight:400;letter-spacing:-.015em;line-height:1;
+  font-size:clamp(2.4rem,1.4rem + 3.2vw,4rem)}
+.figures span{display:block;margin-top:.9rem;font-size:.85rem;line-height:1.5;color:var(--ink-soft)}
+.inv .figures div{border-top-color:var(--rule-inv)}
+.inv .figures span{color:rgba(233,231,228,.65)}
+
+/* The one photograph on the page, and it is of a document. Full measure,
+   because a document is judged at the size it is read at. The caption
+   carries two lines: what the thing is, then its status, and the status
+   sits quieter because it qualifies the first line rather than adding to it. */
+.doc{margin:clamp(3rem,6vw,5rem) 0 0}
+.doc img{display:block;width:100%;height:auto;background:var(--paper-3)}
+.doccap{margin:1.1rem 0 0;font-size:.85rem;line-height:1.6;color:var(--ink);max-width:58ch}
+.doccap span{display:block;margin-top:.35rem;color:var(--ink-soft)}
+.inv .doccap{color:var(--paper-3)}
+
+/* The disqualifier. Set apart from the argument above it and deliberately
+   quieter, because it is the one block asking the reader to leave. */
+.disq{margin-top:clamp(3rem,6vw,4.5rem);padding-top:1.5rem;
+  border-top:1px solid var(--rule-inv);font-size:.88rem;line-height:1.65;max-width:58ch}
+
+/* ---------- layout ---------- */
+.split{display:grid;gap:clamp(2.5rem,6vw,5.5rem);grid-template-columns:1fr}
+@media(min-width:58rem){.split{grid-template-columns:1fr 1fr;align-items:start}}
+.lede{color:var(--ink-soft);margin-top:1.75rem}
+.lede:first-child{margin-top:0}
+
+/* ---------- offer ---------- */
+/* .tiers spans the full measure — never nest it in a .split column, or the
+   cards drop below a readable line and the section reads as tall stripes. */
+.tiers{display:grid;gap:1.25rem;grid-template-columns:1fr;margin-top:clamp(2.5rem,5vw,4rem)}
+@media(min-width:40rem){
+  .tiers{grid-template-columns:1fr 1fr}
+  .tiers .offer.beyond{grid-column:1/-1}
+}
+@media(min-width:62rem){
+  .tiers{grid-template-columns:repeat(3,1fr)}
+  .tiers .offer.beyond{grid-column:auto}
+}
+.offer.beyond{background:transparent;outline:1px solid var(--rule);outline-offset:-1px}
+.offer .bridge{margin-top:1.25rem;font-size:.85rem;line-height:1.55;color:var(--ink-soft);font-style:italic}
+.offer{background:var(--paper-3);padding:clamp(1.5rem,3.5vw,2.25rem);display:flex;flex-direction:column}
+/* The recommended tier takes the gradient as its ground, at the same 45deg
+   as the price and the original box, so the amber sits at the low corner.
+   Only --on-mark sits on it: 5.67:1 against the amber stop, its worst point,
+   rising to 11.54 at the chocolate end. */
+.offer.full{color:var(--on-mark);
+  background-image:linear-gradient(45deg,var(--grad-1) 0%,var(--grad-2) 52%,var(--grad-3) 100%)}
+.offer.full .step,.offer.full .price em,.offer.full .terms,.offer.full .credit{color:var(--on-mark)}
+.offer.full .credit{border-top-color:rgba(247,243,236,.4)}
+.step{font-family:var(--font-label);font-size:.66rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--mark);margin:0 0 1.1rem}
+.offer h3{margin:0 0 .9rem}
+.credit{margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--rule);
+  font-size:.85rem;color:var(--ink-soft)}
+.price{display:flex;flex-wrap:wrap;align-items:baseline;gap:.85rem;margin-bottom:.35rem}
+.price b{font-family:var(--font-display);font-size:clamp(2.2rem,1.4rem + 2.2vw,3rem);font-weight:400;letter-spacing:-.015em;line-height:1}
+/* The price carries the gradient, but only on the light grounds. Against the
+   mark card its lightest stop measures 1.04:1 and the numeral disappears, so
+   that one keeps the beige. Guarded, so a browser without background-clip
+   shows ink rather than nothing. */
+@supports ((background-clip:text) or (-webkit-background-clip:text)){
+  .offer:not(.full) .price b{
+    display:inline-block;
+    background-image:linear-gradient(45deg,var(--grad-1) 0%,var(--grad-2) 52%,var(--grad-3) 100%);
+    -webkit-background-clip:text;background-clip:text;
+    color:transparent;-webkit-text-fill-color:transparent;
+  }
+}
+.price em{font-style:normal;color:var(--ink-soft);font-size:.9rem;letter-spacing:.02em}
+.terms{color:var(--ink-soft);font-size:.9rem}
+ul.ticks{list-style:none;margin:1.9rem 0 0;padding:0}
+ul.ticks li{position:relative;padding-left:1.7rem;margin-bottom:.7rem;line-height:1.55;font-size:.95rem}
+ul.ticks li::before{content:"";position:absolute;left:0;top:.75em;width:.8rem;height:1px;background:currentColor;opacity:.5}
+
+/* ---------- vocabulary chips ---------- */
+/* Names the documents in the reader's own language, at the foot of the hero
+   where the scroll cue used to sit. Type only, nothing asserted. */
+.vocab{display:flex;flex-wrap:wrap;gap:.55rem .6rem;list-style:none;padding:0;
+  margin:clamp(3rem,7vw,6rem) 0 0}
+.vocab li{font-family:var(--font-label);font-size:.68rem;font-weight:600;letter-spacing:.1em;line-height:1.5;
+  text-transform:uppercase;color:var(--ink);border:1px solid var(--rule);padding:.45em .8em}
+
+/* ---------- relief ---------- */
+.relief{display:grid;gap:clamp(2.5rem,5vw,4.5rem);grid-template-columns:1fr}
+@media(min-width:50rem){.relief{grid-template-columns:1fr 1.7fr}}
+.relief h3{margin-bottom:1.3rem}
+.relief .you{border-top:2px solid var(--ink);padding-top:1.3rem}
+.relief .me{border-top:1px solid var(--rule);padding-top:1.3rem}
+/* max-content, like the h1: the breaks are written by hand and a ch cap
+   narrower than the line itself would re-wrap them. */
+.kicker{margin-top:4rem;font-family:var(--font-display);font-size:clamp(1.5rem,1rem + 2vw,2.75rem);
+  line-height:1.18;letter-spacing:-.01em;width:max-content;max-width:100%;color:var(--ink)}
+
+/* ---------- comparison ---------- */
+.compare{display:grid;gap:2rem;grid-template-columns:1fr;margin-top:3rem}
+@media(min-width:50rem){.compare{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:72rem){.compare{grid-template-columns:repeat(4,1fr)}}
+.opt{border-top:1px solid var(--rule);padding-top:1.3rem}
+.opt.this{border-top:2px solid var(--ink);background:var(--paper-3);padding:1.3rem 1.4rem 1.7rem;margin-top:-1px}
+.opt h3{margin-bottom:.2rem}
+.opt .who{font-family:var(--font-label);font-size:.7rem;font-weight:600;letter-spacing:.12em;color:var(--ink-soft);margin-bottom:1.1rem;text-transform:uppercase}
+.opt ul{list-style:none;margin:0;padding:0;font-size:.92rem}
+.opt li{margin-bottom:.55rem;padding-left:1.2rem;position:relative;color:var(--ink-soft);line-height:1.5}
+.opt li::before{position:absolute;left:0;top:0}
+.opt li.y::before{content:"+";color:var(--ink)}
+/* The minus recedes rather than alarms. The accent red is reserved for a
+   single mark per page and eight red dashes was not that; it also carries
+   only 3.61:1 on paper, below what small text needs. */
+.opt li.n::before{content:"–";color:var(--ink-soft)}
+.opt.this li{color:var(--ink)}
+
+/* ---------- case ---------- */
+.case{background:var(--paper-2)}
+/* the firm's own statement, not a testimonial — no quotes, no italic */
+.case .claim{margin:0;font-family:var(--font-display);
+  font-size:clamp(1.35rem,1rem + 1.5vw,2.2rem);line-height:1.24;letter-spacing:-.005em;max-width:30ch}
+.meta{margin-top:2rem;color:var(--ink-soft);font-size:.95rem;max-width:46ch}
+
+/* ---------- FAQ ---------- */
+.faq{margin-top:3rem;border-top:1px solid var(--rule)}
+.faq details{border-bottom:1px solid var(--rule)}
+.faq summary{
+  cursor:pointer;list-style:none;padding:1.4rem 2.5rem 1.4rem 0;position:relative;
+  font-family:var(--font-display);font-size:clamp(1.05rem,.95rem + .45vw,1.35rem);
+  letter-spacing:-.005em;line-height:1.35;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:.3rem;top:1.25rem;color:var(--ink-soft);font-size:1.1rem}
+.faq details[open] summary::after{content:"–"}
+.faq p{padding:0 0 1.6rem;color:var(--ink-soft);max-width:52ch}
+
+/* ---------- CTA ---------- */
+/* max-content, like the h1 and the kicker: a ch cap narrower than the line
+   re-wraps the hand breaks. */
+.cta h2{width:max-content;max-width:100%}
+.fineprint{margin-top:1.75rem;font-size:.8rem;letter-spacing:.02em}
+.buttons{display:flex;flex-wrap:wrap;gap:2rem;margin-top:3rem;font-family:var(--font-display);
+  font-size:clamp(1.2rem,1rem + 1.1vw,2rem);letter-spacing:-.01em}
+
+/* ---------- the rebuild form ---------- */
+/* Structure only, like everything else here. The confidentiality block comes
+   before the fields on purpose: it answers the objection while the reader is
+   still deciding whether to attach anything. */
+.confid{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  padding-block:1.75rem;margin-bottom:clamp(2.5rem,5vw,4rem);max-width:58ch}
+.confid h2{font-family:var(--font-label);font-size:.7rem;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;line-height:1;color:var(--mark);margin-bottom:1.25rem}
+.confid p{font-size:.92rem;line-height:1.7;color:var(--ink-soft);max-width:none}
+.confid p + p{margin-top:1rem}
+
+.form{max-width:34rem}
+.field{margin-bottom:clamp(1.75rem,3.5vw,2.5rem)}
+.field label{display:block;font-family:var(--font-label);font-size:.72rem;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;line-height:1.5;color:var(--ink)}
+.field .optlabel{font-size:.92em;letter-spacing:.1em;color:var(--ink-soft);text-transform:lowercase}
+.field .hint{margin:.5rem 0 0;font-size:.88rem;line-height:1.6;color:var(--ink-soft);max-width:none}
+.field input,.field textarea{
+  display:block;width:100%;margin-top:.9rem;padding:.7rem .85rem;
+  font-family:inherit;font-size:1rem;line-height:1.6;color:var(--ink);
+  background:var(--paper-3);border:1px solid var(--rule);border-radius:0;
+  -webkit-appearance:none;appearance:none;
+}
+.field textarea{resize:vertical}
+.field input:focus-visible,.field textarea:focus-visible{outline:2px solid var(--mark);outline-offset:2px}
+.field input[type=file]{padding:.85rem;cursor:pointer;font-size:.92rem}
+.field input[type=file]::file-selector-button{
+  margin-right:.85rem;padding:.45rem .9rem;cursor:pointer;
+  font-family:var(--font-label);font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--on-mark);background:var(--mark);border:0;border-radius:0;
+}
+.submit{
+  display:inline-block;margin-top:.5rem;padding:.85rem 1.9rem;cursor:pointer;
+  font-family:var(--font-display);font-size:clamp(1.05rem,.95rem + .5vw,1.35rem);
+  letter-spacing:-.01em;color:var(--on-mark);background:var(--mark);
+  border:0;border-radius:0;
+}
+.submit:hover,.submit:focus-visible{background:var(--ink)}
+
+/* numbered steps on the ink ground */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:2rem;grid-template-columns:1fr}
+@media(min-width:50rem){.steps{grid-template-columns:repeat(3,1fr);gap:2.5rem}}
+.steps li{border-top:1px solid var(--rule-inv);padding-top:1.2rem}
+.steps b{display:block;font-family:var(--font-display);font-weight:400;line-height:1;
+  font-size:clamp(2rem,1.4rem + 1.6vw,2.75rem);color:var(--paper-3)}
+.steps span{display:block;margin-top:.9rem;font-size:.92rem;line-height:1.6;
+  color:rgba(233,231,228,.75)}
+
+/* ---------- footer ---------- */
+footer{padding-block:4rem 3rem;font-size:.85rem;color:var(--ink-soft);border-top:1px solid var(--rule)}
+.foot{display:grid;gap:2.5rem;grid-template-columns:1fr}
+@media(min-width:50rem){.foot{grid-template-columns:1.2fr 1fr 1fr}}
+.foot h4{margin:0 0 .9rem;font-family:var(--font-label);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--ink)}
+.foot nav{display:flex;flex-direction:column;gap:.6rem}
+.clocks{display:flex;gap:2.5rem}
+.clock b{display:block;font-family:var(--font-display);font-weight:400;font-size:1.55rem;letter-spacing:.01em;
+  font-variant-numeric:tabular-nums;color:var(--ink);line-height:1.1}
+.clock span{display:block;margin-top:.35rem;font-size:.72rem;letter-spacing:.06em}
+.legal{margin-top:3rem;display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:space-between;font-size:.78rem}
+
+/* ---------- reveal (CSS + tiny IO, no library) ---------- */
+.rv{opacity:0;transform:translateY(1.25rem);
+    transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+/* Failsafe. Every content block on the page carries .rv, so if the reveal
+   never runs the page is blank, not degraded. Two ways that happens and both
+   are covered: scripting off entirely (no .js on <html>), and site.js blocked
+   or stripped by a corporate proxy while scripting is on (.rv-off, set by the
+   inline timer in the page head when site.js has not reported in). */
+html:not(.js) .rv,html.rv-off .rv{opacity:1;transform:none;transition:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none;transition:none}
+  .ln::after{transition:none}
+}
+:focus-visible{outline:2px solid currentColor;outline-offset:4px}
