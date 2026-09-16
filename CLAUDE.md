@@ -18,16 +18,26 @@ them without being asked. Copy changes are fine; layout surgery is not.
 
 ## Not published
 
-`templates/`, every `_`-prefixed folder under `deck/` and `annex/`, and
-`assets/_og/` are working files. They live in the repo, sessions edit them
-normally, and `deck-pdf.yml` prints them from the working tree — but
-`pages.yml` deletes them from the checkout before the artifact is built, so
-they never reach the internet. Pages on a public repo has no access control;
-`noindex` only asks search engines nicely. Not deploying is the only real lock.
+`templates/`, `.claude/`, and **every `_`-prefixed file or folder at any
+depth** are working files. They live in the repo, sessions edit them normally,
+and `deck-pdf.yml` prints them from the working tree — but `pages.yml` deletes
+them from the checkout before the artifact is built, so they never reach the
+internet. Pages on a public repo has no access control; `noindex` only asks
+search engines nicely. Not deploying is the only real lock.
 
-The rule is the leading underscore. `deck/_template` stays private,
-`deck/acme` publishes. Preview a private one with `python3 -m http.server`
-from the repo root, or take the PDF from the Actions run.
+The rule is the leading underscore, and depth does not matter. `deck/_template`
+stays private, `_research/` stays private, and a new `_scratch/` at the repo
+root would stay private too. `deck/acme` publishes. Preview a private one with
+`python3 -m http.server` from the repo root, or take the PDF from the Actions
+run.
+
+**The step sweeps with `find`, not a list of paths.** It used to name
+`deck/_*` and `annex/_*` one at a time, which meant the rule held only where
+someone had remembered to write it down, and an underscore folder anywhere
+else published in full. `.git` and `.github` are pruned from the sweep, and
+the step prints any underscore path still standing afterwards so a miss fails
+loudly instead of quietly shipping. **If you add a private area, give it a
+leading underscore and nothing else is needed.**
 
 ## The pricing ladder
 
