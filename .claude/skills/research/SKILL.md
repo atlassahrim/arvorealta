@@ -42,6 +42,9 @@ on the seller side.
 
 ### A. Seller side — expect good coverage
 
+*Names, positioning and pricing go to `competitor.md`. The claim inventory,
+sophistication reading, market structure and contradictions go to `notes.md`.*
+
 - Who sells to this market. Names, positioning, how they describe the problem.
 - What claims repeat across sellers. **Claims seen three or more times are dead
   on arrival for a new entrant.** This is the sophistication reading.
@@ -53,6 +56,8 @@ on the seller side.
 
 ### B. Buyer side — expect thin coverage, mine hard anyway
 
+*All of it goes to `voice.md`, including the record of searches that found nothing.*
+
 - Reviews, especially the middling ones. Five-star and one-star are both
   performances. Three-star is where people explain.
 - Forums, trade association discussions, industry comment threads.
@@ -63,6 +68,8 @@ on the seller side.
   highest-value seam in any regulated market, and usually the last one tried.
 
 ### C. Triggers — public signal only
+
+*All of it goes to `trigger.md`.*
 
 - Regulatory or standards changes, with dates.
 - Procurement or budget cycles.
@@ -123,6 +130,10 @@ first; repeating searches already recorded is wasted effort. Then:
   Another vendor blog dilutes what does not.
 
 Append to the existing files, keeping their structure. Do not rewrite them.
+
+**If one of the four files is absent, create it.** A market researched before this
+pipeline existed may have only some of them. A missing file is not a reason to
+skip that category — `/profile` gates on all four and runs degraded without them.
 
 ---
 
