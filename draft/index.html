@@ -18,36 +18,32 @@
 <link rel="stylesheet" href="/assets/system.css">
 
 <style>
-  /* Structure only, tokens only, matching the house rule in CLAUDE.md.
-     Nothing here sets a literal colour or typeface. */
+  /* Structure only, tokens only. Nothing here sets a literal colour or face. */
 
-  /* Taupe is the evidence ground and it is never a panel beside paper,
-     so it runs full bleed as a whole section. Ink type on it reads 6.16:1. */
+  /* Taupe is the evidence ground and never a panel beside paper, so it runs
+     full bleed. Ink on taupe reads 6.16:1. */
   .ground2{background:var(--ground-2)}
   .ground2 .eyebrow{color:var(--ink);border-top-color:var(--rule)}
 
-  /* Source lines. Set in ink rather than --ink-soft: the soft token measures
-     3.93:1 on paper, under what small text needs, and these are the lines
-     whose whole job is being checkable. */
-  .src{margin-top:1.6rem;padding-top:.9rem;border-top:1px solid var(--rule);
-    font-family:var(--font-label);font-size:.7rem;font-weight:600;
+  /* Source lines. Ink, not --ink-soft, which measures 3.93:1 and is the one
+     contrast on the site that does not clear. These lines exist to be read. */
+  .src{margin-top:1.4rem;padding-top:.85rem;border-top:1px solid var(--rule);
+    font-family:var(--font-label);font-size:.68rem;font-weight:600;
     letter-spacing:.11em;line-height:1.7;text-transform:uppercase;
     color:var(--ink);max-width:58ch}
 
-  /* The three links, below the close. A link inside the argument is an exit. */
-  .refs{list-style:none;margin:0;padding:0;display:grid;gap:1.1rem}
-  .refs a{font-family:var(--font-display);
-    font-size:clamp(1.05rem,.95rem + .5vw,1.4rem);letter-spacing:-.005em}
+  /* The reassurance. Its own object, because a line that defuses the reader's
+     worst reading of the offer should not be buried in a paragraph. */
+  .reassure{margin-top:clamp(2.5rem,5vw,3.5rem);padding:1.4rem 1.6rem;
+    background:var(--paper-3);border-left:2px solid var(--ink);
+    font-size:1rem;line-height:1.7;color:var(--ink);max-width:56ch}
 
   .foot{padding-block:3.5rem;border-top:1px solid var(--rule);
     font-family:var(--font-label);font-size:.7rem;font-weight:600;
     letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
-  .worknote{margin-top:1.5rem;font-family:var(--font-body);font-size:.8rem;
-    font-weight:400;letter-spacing:0;text-transform:none;line-height:1.7;
-    color:var(--ink);max-width:62ch}
 
-  /* Hand-written line breaks, per the house rule. Below the measure where
-     they stop helping, they fold back to normal wrapping. */
+  /* Hand-written breaks, per the house rule. Below the measure where they
+     stop helping they fold back to normal wrapping. */
   .brs{display:none}
   @media(min-width:46rem){.brs{display:inline}}
 </style>
@@ -69,12 +65,20 @@
 <section class="wrap hero">
   <p class="eyebrow">For manufacturers who bid locally</p>
   <h1>Nobody told you<br class="brs"> which page cost you<br class="brs"> the contract.</h1>
-  <p class="sub">Public buyers score the documents you hand in. Not the plant, not the price list, not the twenty years. In October 2025 a Danish contractor was the cheapest bidder and the fastest, lost anyway, and had to go to a complaints board to find out why.</p>
+  <p class="sub">Public buyers score the documents you hand in. Not the plant, not the price list, not the twenty years.</p>
   <p class="heroqual"><b>Who this is for</b> Manufacturers of 50 to 250 people who want a few contracts close to home.</p>
   <div class="heroact">
     <a class="herocta ln on" href="mailto:page@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost&amp;body=Attach%20the%20page%20before%20sending.%0A%0ACompany%3A%0AWhat%20the%20tender%20was%20for%3A%0ARoughly%20when%20you%20submitted%3A">Get your page scored</a>
-    <p class="sub">Send one page from a tender you lost. It comes back scored against the criteria it was judged on, with the points located. No charge and no call.</p>
+    <p class="sub">Send one page from a tender you lost. No charge and no call.</p>
   </div>
+  <ul class="vocab">
+    <li>Method statement</li>
+    <li>Quality plan</li>
+    <li>Reference projects</li>
+    <li>Environmental evidence</li>
+    <li>Capability statement</li>
+    <li>ESPD</li>
+  </ul>
 </section>
 
 <hr class="rule">
@@ -82,16 +86,16 @@
 <section class="wrap case">
   <p class="eyebrow">What the file actually said</p>
   <h2>They were cheapest.<br class="brs"> They were fastest.<br class="brs"> They lost on five days.</h2>
-  <div class="split">
-    <div>
-      <p class="lede">P. Olesen og Sønner bid for a demolition contract and lost it. They were the cheapest bidder. They were also the fastest.</p>
-      <p>Not five days on the work. Five days on when they said the quality-assurance paperwork would be handed over. Time carried 55% of the score and price carried 45%.</p>
-      <p>Their own sentence is in the ruling.</p>
-      <p class="claim">It makes no sense that so few days have had such great significance.</p>
-      <p class="meta">They also told the board that nothing in the award explained the criteria their bid had been assessed against.</p>
-      <p class="src">Klagenævnet for Udbud · J.nr. 25/03606 · 13 October 2025</p>
-    </div>
+  <p class="lede">P. Olesen og Sønner bid for a demolition contract in Denmark and lost it on when they said the quality-assurance paperwork would be handed over. Not on the work. On a date inside a document.</p>
+  <div class="figures">
+    <div><b>55%</b><span>Of the score carried by time</span></div>
+    <div><b>45%</b><span>Of the score carried by price</span></div>
+    <div><b>5</b><span>Days between their handover date and the winner's</span></div>
+    <div><b>0</b><span>Lines of the award explaining the criteria, by their own account</span></div>
   </div>
+  <p class="claim">It makes no sense that so few days have had such great significance.</p>
+  <p class="meta">The complainant's own words, in the published ruling.</p>
+  <p class="src">Klagenævnet for Udbud · J.nr. 25/03606 · 13 October 2025</p>
 </section>
 
 <hr class="rule">
@@ -99,29 +103,51 @@
 <section class="wrap">
   <p class="eyebrow">The evaluation scores the document</p>
   <h2>The paperwork is a separate<br class="brs"> object from the company.</h2>
-  <div class="split">
-    <div>
-      <p class="lede">An evaluator sits with a scoring template and your submission, and awards points for what is present, findable and specific. They cannot award points for what you know and did not write down. They are not permitted to.</p>
-      <p>A Norwegian road contractor argued the same thing from the other end. Mesta complained to KOFA that the authority had assessed how each supplier scored on the documentation requirements rather than on the award criterion itself, and had given weight to matters no documentation was ever asked for.</p>
-      <p>That is two countries, two industries, and the same complaint. It is not an accusation of unfairness. It is a description of the machine, and the machine is why the feedback you get back names the outcome and never the line.</p>
-      <p class="src">KOFA 2023/472 · Mesta AS mod Rogaland fylkeskommune</p>
-    </div>
-  </div>
+  <p class="lede">An evaluator sits with a scoring template and your submission. What happens next is not a judgement about your firm.</p>
+  <ul class="ticks">
+    <li>They award points for what is present, findable and specific</li>
+    <li>They cannot award points for what you know and did not write down</li>
+    <li>They are not permitted to</li>
+  </ul>
+  <p class="claim">Scored on the documentation requirements rather than on the award criterion, and marked down for matters no documentation was asked for.</p>
+  <p class="meta">What a Norwegian road contractor complained of, from the other end of the same machine. It is a complaint, not a finding.</p>
+  <p class="src">KOFA 2023/472 · Mesta AS mod Rogaland fylkeskommune</p>
 </section>
 
 <hr class="rule">
 
 <section class="wrap">
   <p class="eyebrow">Before you say it is all price anyway</p>
-  <h2>Sometimes it is.</h2>
-  <div class="split">
-    <div>
-      <p class="lede">In Latvia between 2021 and 2023 the winner of 73% of procurements was picked on lowest price alone. If that is your market, stop reading. You are right and I have nothing to sell you.</p>
-      <p>Norway is the other end. Since 1 January 2024 contracting authorities there have had to weight climate and environmental criteria at a minimum of 30%, and in the first year around 75% of tenders carried it. A third of the score, decided on documents, before anyone opens the commercial envelope.</p>
-      <p>Most of the tenders you bid sit between those two. The honest question is not whether price matters. It is how much of the score was never about price, and whether you have ever seen that part written down.</p>
+  <h2>Where price is the whole<br class="brs"> score, stop reading.</h2>
+  <p class="lede">Sometimes it really is price, and where it is, nothing here helps you. The tenders you bid sit somewhere on this range, and it is worth knowing where.</p>
+  <div class="compare">
+    <div class="opt">
+      <h3>Latvia</h3>
+      <p class="who">2021 to 2023</p>
+      <ul>
+        <li class="n">73% of procurements decided on lowest price alone</li>
+        <li class="n">No document changes the outcome</li>
+      </ul>
+    </div>
+    <div class="opt this">
+      <h3>Most of what you bid</h3>
+      <p class="who">Between the two</p>
+      <ul>
+        <li class="y">Part of the score is price</li>
+        <li class="y">Part of it was never about price</li>
+        <li class="y">You have probably never seen that part written down</li>
+      </ul>
+    </div>
+    <div class="opt">
+      <h3>Norway</h3>
+      <p class="who">From 1 January 2024</p>
+      <ul>
+        <li class="y">Climate and environmental criteria weighted at 30% minimum</li>
+        <li class="y">A third of the score, decided on documents</li>
+      </ul>
     </div>
   </div>
-  <p class="disq">If your losses are price losses and nothing else, no document changes the outcome, and this is the wrong page for you.</p>
+  <p class="disq">If your losses are price losses and nothing else, this is the wrong page and I have nothing to sell you.</p>
 </section>
 
 <hr class="rule">
@@ -129,12 +155,14 @@
 <section class="wrap">
   <p class="eyebrow">What a document standard is</p>
   <h2>Written once, properly,<br class="brs"> in the form an evaluator scores.</h2>
-  <div class="split">
-    <div>
-      <p class="lede">The set of things your firm asserts about itself. Capability, process, references with the detail that makes them count, environmental and quality evidence stated as figures rather than adjectives.</p>
-      <p>It is not a management system. Nothing changes in the workshop. It belongs to you, your own people edit it, and the next tender starts from it instead of from nothing.</p>
-    </div>
-  </div>
+  <p class="lede">The set of things your firm asserts about itself, in the language of the template it will be read against.</p>
+  <ul class="ticks">
+    <li>Capability, stated as what you have done rather than what you can do</li>
+    <li>Process, in the detail a scoring template asks for</li>
+    <li>Reference projects, with the specifics that make them count</li>
+    <li>Environmental and quality evidence, as figures rather than adjectives</li>
+  </ul>
+  <p class="reassure">It is not a management system. Nothing changes in the workshop. The standard is a document, it belongs to you, and your own people edit it.</p>
 </section>
 
 <hr class="rule">
@@ -142,17 +170,12 @@
 <section class="wrap">
   <p class="eyebrow">What it takes from you</p>
   <h2>Four hours.</h2>
-  <div class="split">
-    <div>
-      <p class="lede">Two conversations of about ninety minutes, and one read-through at the end.</p>
-      <p>You supply what already exists. Past submissions, certificates, drawings, whatever you sent last time. I do not need you to prepare anything, and I am not going to ask you to fill in a questionnaire so that I can sell you the answers.</p>
-      <p>If you have sat through a pre-tender dialogue and come away feeling you had just given a day of free consulting to someone who was never going to buy, you know why that sentence is in here.</p>
-    </div>
-  </div>
+  <p class="lede">You supply what already exists. Past submissions, certificates, drawings, whatever you sent last time.</p>
   <div class="figures">
     <div><b>4</b><span>Hours of your time, in total</span></div>
     <div><b>2</b><span>Conversations, about ninety minutes each</span></div>
   </div>
+  <p class="reassure">I do not need you to prepare anything, and I am not going to ask you to fill in a questionnaire so that I can sell you the answers. If you have come out of a pre-tender dialogue feeling you gave away a day of free consulting, you know why that sentence is here.</p>
 </section>
 
 <hr class="rule">
@@ -160,6 +183,7 @@
 <section class="wrap">
   <p class="eyebrow">Price</p>
   <h2>Every tier credits<br class="brs"> into the one above it.</h2>
+  <p class="lede">Walk the whole ladder and you pay €8,000 in total, not €11,000. Credits never expire.</p>
   <div class="tiers">
     <div class="offer">
       <p class="step">One document</p>
@@ -170,39 +194,65 @@
     <div class="offer full">
       <p class="step">The document standard</p>
       <div class="price"><b>€2,400</b><em>one revision round included</em></div>
-      <p class="terms">The full standard. Capability, process, references, environmental and quality evidence.</p>
+      <p class="terms">Capability, process, references, environmental and quality evidence.</p>
       <p class="credit">The €2,400 comes off the €8,000.</p>
     </div>
     <div class="offer beyond">
       <p class="step">Identity system</p>
       <div class="price"><b>€8,000</b></div>
       <p class="terms">The whole identity system.</p>
-      <p class="credit">Walk the whole ladder and you pay €8,000 in total, not €11,000.</p>
+      <p class="credit">The end of the ladder.</p>
     </div>
   </div>
-  <p class="bridge">For comparison, a Swedish bid consultancy publishes 15,000 kr excluding VAT for a single draft of a single bid, delivered as a Word file. That is roughly what the full standard costs here, and theirs expires the day that tender closes.</p>
+  <p class="bridge">A Swedish bid consultancy publishes 15,000 kr excluding VAT for a single draft of a single bid, delivered as a Word file. Roughly what the full standard costs here, and theirs expires the day that tender closes.</p>
 </section>
 
 <section class="ground2">
   <div class="wrap">
     <p class="eyebrow">We manage without them</p>
-    <h2>They are not wrong.</h2>
-    <div class="split">
-      <div>
-        <p class="lede">A Swedish firm said that to a trade body survey, with pride rather than regret. We manage without them. We get paid in full by private clients, completely without hassle.</p>
-        <p>Public work argues about scope, pays on its own schedule, and costs you a week of unpaid writing before anyone looks at your price. A firm that walked away and filled the capacity with private customers made a sound decision, and nothing here says otherwise.</p>
-        <p>One number complicates it. The field is thinning, and it is thinning for the reason above. Firms are leaving because the paperwork became unreasonable, not because they stopped being able to do the work.</p>
-        <p>So the contest is getting easier to win at the same time as it is getting harder to enter. Everyone who withdraws hands their share to whoever can still produce the documents.</p>
-        <p>You bid three times a year. That will not change and it does not need to. A firm bidding constantly can absorb a bad submission, because there is another one next month. Yours carries a third of your public work, and the one you lose on a paperwork date is not replaced.</p>
-        <p>Bidding more is not the offer. The offer is that the few you do bid stop being lost on the part nobody explained to you.</p>
-      </div>
-    </div>
+    <h2>Plenty of firms have stopped<br class="brs"> bidding. They were right to.</h2>
+    <p class="lede">A Swedish firm said it to a trade body survey with pride rather than regret. We manage without them, we get paid in full by private clients, completely without hassle. Public work argues about scope and costs a week of unpaid writing before anyone looks at your price.</p>
     <div class="figures">
       <div><b>32%</b><span>Of small firms take part in public procurement at all. Företagarna, Sweden</span></div>
       <div><b>17%</b><span>Of those staying out say it is too complicated and takes too long. Företagarna, Sweden</span></div>
       <div><b>5.7</b><span>Average bidders per procedure in 2011. EU-wide</span></div>
       <div><b>3.2</b><span>Average bidders per procedure in 2021. EU-wide</span></div>
     </div>
+    <p>The field is thinning, and it is thinning for the reason above. Firms are leaving because the paperwork became unreasonable, not because they stopped being able to do the work. Everyone who withdraws hands their share to whoever can still produce the documents.</p>
+    <p>You bid three times a year, and that does not need to change. Bidding more is not the offer. The offer is that the few you do bid stop being lost on the part nobody explained to you.</p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="wrap">
+  <p class="eyebrow">Scope and evidence</p>
+  <h2>Questions you should ask me.</h2>
+  <div class="faq">
+    <details open>
+      <summary>Can I check the numbers on this page?</summary>
+      <p>Most of them, now. The Danish ruling is published under J.nr. 25/03606 and the Norwegian one under KOFA 2023/472, both searchable by case number. The Latvian and Norwegian weighting figures come from published sources. Two are weaker and I would rather say so than let you find out. The 15,000 kr comparison and the fall from 5.7 to 3.2 bidders per procedure are drawn from my own research notes and I have not yet re-verified either against the original source. Treat them as indicative until I have.</p>
+    </details>
+    <details>
+      <summary>Is this a quality management system?</summary>
+      <p>No, and it is the wrong thing to compare it to. A management system changes how you work and then asks you to keep proving that you do. This is a document. Nothing in the workshop changes, nobody is audited, and there is no annual renewal. If a supplier has told you that complicated quality management systems are an unreasonable requirement, they were right, and this is not one.</p>
+    </details>
+    <details>
+      <summary>What happens if my losses really are about price?</summary>
+      <p>Then you have wasted a page and I have wasted an afternoon, which is the whole reason the first step is free. Send a page from a tender you lost. If it comes back scored and the score was fair, you have your answer and it did not cost you anything to get it.</p>
+    </details>
+    <details>
+      <summary>Who actually does the work?</summary>
+      <p>I do. There is no team behind this page and no account manager. That is a real constraint and it is why the engagement is four hours of your time rather than a project, and why there is a limit to how many of these run at once.</p>
+    </details>
+    <details>
+      <summary>Do you have clients I can speak to?</summary>
+      <p>Not yet in this segment, and I am not going to invent one. That is a fair reason to start with the free scored page rather than with €2,400, and it is the honest reason the ladder starts where it does.</p>
+    </details>
+    <details>
+      <summary>Do you work outside the Nordics?</summary>
+      <p>The work is built around Finnish, Swedish, Norwegian and Danish procurement practice, and that is where I can be useful today. Elsewhere in the EU is a direction rather than a readiness claim I will make now.</p>
+    </details>
   </div>
 </section>
 
@@ -210,28 +260,17 @@
   <p class="eyebrow">For manufacturers who bid locally</p>
   <h2>Nobody told you<br class="brs"> which page cost you<br class="brs"> the contract.</h2>
   <p class="sub">Send one page from a tender you lost. A method statement, a quality section, a capability answer. Whatever you would have to write again next time.</p>
-  <p class="sub">It comes back scored against the criteria it was judged on, with the points located and the reasoning written out. You will be able to see whether the thing above is true in your case, which is the only way you should decide.</p>
-  <p class="sub">No charge. No call. If the page comes back and you conclude the score was fair and the loss was price, you have lost a page and I have lost an afternoon.</p>
+  <p class="sub">It comes back scored against the criteria it was judged on, with the points located and the reasoning written out.</p>
   <div class="buttons">
     <a class="ln on" href="mailto:page@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost&amp;body=Attach%20the%20page%20before%20sending.%0A%0ACompany%3A%0AWhat%20the%20tender%20was%20for%3A%0ARoughly%20when%20you%20submitted%3A">Get your page scored</a>
   </div>
-  <p class="fineprint">Before you spend €2,400 finding that out, spend nothing.</p>
-</section>
-
-<section class="wrap">
-  <p class="eyebrow">If you want the detail first</p>
-  <ul class="refs">
-    <li><a class="ln" href="#top">The five-day case, in full</a></li>
-    <li><a class="ln" href="#top">Where price is the whole score, and where it is not</a></li>
-    <li><a class="ln" href="#top">What is in a document standard, and what €2,400 buys</a></li>
-  </ul>
+  <p class="fineprint">No charge. No call. Before you spend €2,400 finding out, spend nothing.</p>
 </section>
 
 </main>
 
 <footer class="wrap foot">
   Arvorealta · Document standards for public tenders
-  <p class="worknote">Working draft, carrying <code>noindex</code>. Not linked from anywhere on the site. Two figures here still trace to research files that are not in the repository and are not yet independently checked. The 15,000 kr comparison, and the fall from 5.7 to 3.2 bidders per procedure. The three links above are placeholders and resolve to the top of this page.</p>
 </footer>
 
 </body>
