@@ -1,6 +1,6 @@
 ---
 name: audit
-description: "Step 03 of the copy pipeline. Run a live draft down the ten-rung ladder from 09, find the rung where it actually breaks, stop there, and rewrite one section in the draft's own voice. Use when asked to audit, review, diagnose or fix a piece of copy, or when a draft feels flat and nobody can say why. Fixes the break, not the sentences beneath it."
+description: "Step 03 of the copy pipeline. Audit a finished draft against the ten-rung ladder, descending from 09 and stopping at the first real break, then rewrite one section in the draft's own voice. Use when asked to audit, review, diagnose or fix a piece of copy, or when a draft feels flat and nobody can say why. Distinguishes a structural break from a preference and fixes the break, not the sentences beneath it."
 ---
 
 # Audit — step 03
@@ -10,54 +10,110 @@ especially**. Confirm you have read it.
 
 **Invocation:** `/audit <market-slug> <draft-file>`
 
-Read the draft and `_research/<market-slug>/profile.md`. If the profile is missing,
-say so — you can still audit, but rungs 09, 07, 06 and 03 will be guesswork and
-you must say which findings are guesses.
+**Run this in a fresh conversation.** If you wrote the draft in this same chat,
+say so and recommend starting a new one. Reviewing your own work minutes after
+producing it is the weakest available review, because you will defend the choices
+instead of testing them.
 
 ---
 
-## How to run it
+## Inputs
 
-**Descend from 09. Stop at the first rung that fails.**
-
-Repairs made below a break do not hold. A page with the wrong altitude at 09 does
-not get fixed by better verbs at 00, and every minute spent on the verbs is a
-minute the real problem survives.
-
-Work the checklists in Part II of the ladder in order: 09 sophistication and
-awareness · 08 big idea and mechanism · 07 positioning · 06 offer and risk · 05
-the gradient · 04 shape and sequence · 03 the silent argument · 02 proof and
-specificity · 01 voice and register · 00 the line.
-
-When you find the break, **stop descending.** Do not produce a full ten-rung
-report. Name the rung, quote the lines that demonstrate it, and say what it costs.
+- The draft.
+- `_research/<market-slug>/profile.md`, if available. **Without it you can still
+  audit rungs 05 to 00, but you cannot verify 09 through 06. Say which you are
+  doing.**
 
 ---
 
-## Then rewrite one section
+## How it runs
 
-Diagnosis without rewrite is criticism, not help.
+Descend from 09. At each rung, decide: pass, or break.
 
-Rewrite **one** section — the one where the break does the most damage — **in the
-draft's own voice and language.** If the original is profane, challenger or
-unconventional, the rewrite is too.
+**Stop at the first break. Do not continue to the bottom.** Repairs made below a
+break do not hold, and a list of line-level fixes under a broken mechanism is
+worse than useless, because it gives the user something to do that will not work.
 
-**Never sand challenger copy down to corporate-safe.** That is the failure mode
-this step exists to prevent. Your job is to strengthen the spine, not soften it.
-Cut the lines that slip out of voice. Keep the lines that hold it, even when they
-are rough.
+State it plainly: which rung, what broke, what it takes to fix. Then rewrite one
+section to show the fix rather than describe it. **Diagnosis without a rewrite is
+criticism, not help.**
+
+**If the piece passes all ten, say that — and name the weakest rung anyway.**
+
+---
+
+## The bar for calling a break
+
+A break is a rung where the piece fails **structurally**, not one where you would
+have made a different choice. Two tests before you call it:
+
+1. **Can you name the specific line or absence that fails, and quote it?**
+2. **Would fixing it change whether the reader acts, or only how the piece reads
+   to another writer?**
+
+If the answer to the second is "how it reads", **that is a note, not a break.**
+Collect those and give them at the end, after the break.
+
+This bar is what stops the audit from becoming precious. Most drafts have a dozen
+lines you would have written differently. None of them is the reason the page is
+not converting.
+
+---
+
+## Protect the voice
+
+If the draft is challenger, profane, fragmented or unconventional, **the rewrite
+is too. Never sand challenger copy down to corporate-safe.** That is the single
+most common failure of this kind of review.
+
+Before suggesting any change to voice, ask whether it is the voice the offer earns
+or the writer drifting. If it is earned, strengthen the spine. Cut only the lines
+that slip out of it.
 
 **Substitute, do not append.** Replace the line. Do not leave the old one above
-the new one. Do not add a paragraph nobody asked for.
+the new one.
+
+Do not apologise for being direct. The draft was submitted for a real read.
 
 ---
 
-## What to watch for
+## The checklist
 
-**Most requests to make a piece hit harder are requests to fix rung 00.** Most of
-the actual breaks are at 09, 08 or 06. Say so when that is what you find — a
-writer who can locate the real rung is worth more than one who can write a better
-line.
+Work Part II of the ladder in order. The short form:
+
+- **09 Sophistication and awareness** — awareness nameable in one word; opening
+  enters the conversation already running; not making a claim to a market that
+  stopped believing claims.
+- **08 Big idea and mechanism** — big idea changes what the reader believes about
+  their own life when stated without the product; a **problem** mechanism exists,
+  not just a solution one; non-obvious and blame-removing; solution mechanism
+  causal rather than a list of deliverables.
+- **07 Positioning** — *do nothing* engaged explicitly; a named axis with a
+  credible player at the far end; the category the reader is pricing against.
+- **06 Offer and risk** — which risk is binding; whether the reversal addresses
+  that one or money by reflex; what the reader must supply, named precisely;
+  whether price reads as the right category.
+- **05 The gradient** — low position texture or category; high position as
+  concrete as the low one; bridge visible; direction deliberate.
+- **04 Shape and sequence** — no claim arriving before the belief it depends on;
+  shape matching awareness; nothing movable without damage; nothing disputable in
+  the first hundred words.
+- **03 The silent argument** — three objections in the reader's actual words; at
+  least one on **belief in self**; raised where the copy causes them, not parked
+  in an FAQ.
+- **02 Proof and specificity** — highest level present; nothing there merely
+  because it is impressive; no rounded numbers or vague quantities; everything
+  checkable and true.
+- **01 Voice and register** — the register the reader and offer earn; voice
+  matching what the copy claims about the world; no lines slipping out; no throat
+  clearing; survives being forwarded to a colleague.
+- **00 The line** — verbs doing rather than describing; one idea per sentence;
+  length variation; exactly one action named with a verb; urgency real; worst
+  paragraph cut.
+
+---
+
+## Two things to catch that the checklist does not
 
 **Completeness as a failure mode.** Copy grows because everything in it is
 defensible on its own. The FAQ answering eleven questions, the bullet list
@@ -78,11 +134,12 @@ gradient lens; do not impose long-form structure on short-form work.
 
 ## Output
 
-Four parts, in this order, and nothing else.
+`_research/<market-slug>/audit-v<n>.md`, containing four parts and nothing else:
 
-1. **The rung that breaks**, named, with the lines that demonstrate it.
-2. **What it costs** — one or two sentences.
-3. **The rewritten section**, in the draft's own voice.
-4. **One line** on what to check next if the rewrite holds.
+1. **The break** — rung, what failed, quoted evidence.
+2. **The fix** — what it takes, in two or three lines.
+3. **The rewrite** — one section, in the draft's own voice and language.
+4. **Notes** — everything that is a preference rather than a break, kept short.
 
-Do not apologise for being direct. The draft was handed over for a real read.
+No summary of the piece. No praise paragraph. No restating what the draft was
+trying to do.

@@ -19,10 +19,19 @@ calls it for the writing itself.
 refuses to draft on a broken profile. That refusal is the most valuable thing
 here — one round of drafting on a bad profile costs more than going back.
 
-**Provenance note.** `stepzero-research.md`, `steptwo-plan.md`, the buyer-side
-rerun prompt, `copywriting-ladder.md` and `gradient-copy` were folded in from
-their originals. **`stepone-profile.md` and `stepthree-audit.md` were never
-supplied.** `/profile` was reconstructed from a completed `profile.md` v2 output
-plus the rules the other files state; `/audit` is built on Part II of the
-ladder, which is the audit in full. Check `/profile` against your original
-before trusting it.
+**Provenance.** All six originals were folded in: `stepzero-research.md`,
+`stepone-profile.md`, `steptwo-plan.md`, `stepthree-audit.md`, the buyer-side
+rerun prompt, and `copywriting-ladder.md`. `gradient-copy` stays account-level.
+
+**One deliberate deviation from the originals.** `stepzero-research.md` says one
+file per source, never merged. The pipeline writes four stacked files instead —
+one per category — because that override was given explicitly in use. Sourcing is
+preserved at section level inside each file, which is what section 10 actually
+depends on.
+
+**The tag set is five, not four.** `[VERIFIED]`, `[INFERRED]`, `[CLIENT]`,
+`[MISSING]`, and `[ENTAILED]`. The last is permitted only in section 6 of the
+profile and only under the deposition test. `/plan` is told whether section 6 is
+sourced or entailed, and writes entailed material as the flattest thing on the
+page. Breaking that link is how a gradient with no ceiling gets dressed up into an
+invented one.
