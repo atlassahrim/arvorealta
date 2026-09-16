@@ -37,11 +37,24 @@ jobs:
         # files in the working tree, and deck-pdf.yml prints from the working
         # tree too, so PDF export is unaffected.
         #
-        # The rule is the leading underscore. deck/_template stays private;
-        # deck/acme, a real client deck, publishes as normal. .claude is on
-        # the list because agent tooling is never site, and the upload takes
-        # the whole checkout.
-        run: rm -rf templates deck/_* annex/_* _research assets/_og .claude
+        # The rule is the leading underscore, and it applies at every depth.
+        # deck/_template stays private; deck/acme, a real client deck,
+        # publishes as normal. .claude is on the list because agent tooling is
+        # never site, and the upload takes the whole checkout.
+        #
+        # This used to name deck/_* and annex/_* one path at a time, which
+        # meant a new underscore folder anywhere else, _draft at the top of
+        # the repo for instance, published in full. The find covers every
+        # depth so the rule holds wherever the folder is put. .git and .github
+        # are pruned so the sweep cannot walk into repository plumbing.
+        run: |
+          set -euo pipefail
+          rm -rf templates .claude
+          find . \( -name .git -o -name .github \) -prune -o \
+               -name '_*' -print0 | xargs -0 -r rm -rf
+          echo "Remaining underscore paths (expect none):"
+          find . \( -name .git -o -name .github \) -prune -o \
+               -name '_*' -print
 
       - uses: actions/upload-pages-artifact@v3
         with:
