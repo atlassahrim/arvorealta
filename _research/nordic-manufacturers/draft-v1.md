@@ -57,15 +57,19 @@ cheapest and fastest can still lose.*
 5. What a document standard is, and what it is not. Provokes *what will this cost
    me in hours*
 6. What it needs from you, named precisely. Owes the reader the price
-7. Price and the ladder. Provokes *we only bid a few, and only locally*
-8. That objection, answered. Owes the action
+7. Price and the ladder. Provokes *we manage without them*
+8. `[AMENDED 2026-09-16 — audit-v1, rung 07]` Do nothing, conceded as rational
+   and then answered on the thinning field. Carries the three-bids-a-year
+   arithmetic after the concession. Owes the action
 9. The action
 10. The close, repeating the hero word for word
 
 **Objection placement.** Mechanism doubt (*it is all price*) at section 4, where
-the copy causes it. Belief in self (*we bid three times a year, locally*) at
-section 8, beside the arithmetic that provokes it. Cost and effort (*free
-consulting we cannot afford*) at section 6, before the price rather than after.
+the copy causes it. `[AMENDED 2026-09-16 — audit-v1, rung 07]` Do nothing
+(*we manage without them*) and belief in self (*we bid three times a year*) both
+at section 8, after the price rather than before it, because that is where the
+copy causes them. Cost and effort (*free consulting we cannot afford*) at
+section 6, before the price rather than after.
 
 **Proof — level 1 and level 2, and nothing below.** Demonstration, via the scored
 page, which is the action itself. Verifiable specifics, via two published rulings
@@ -137,8 +141,8 @@ to KOFA that the authority had not assessed whether it could do the work at all.
 It had only assessed how each supplier scored on the documentation requirements.
 Mesta also said it had been marked down for things that were never asked for.
 
-That is two countries, two industries, and one finding. What gets scored is the
-paperwork, and the paperwork is a separate object from the company.
+That is two countries, two industries, and the same complaint. What gets scored
+is the paperwork, and the paperwork is a separate object from the company.
 
 This is not a complaint about fairness. It is a description of the machine. An
 evaluator sits with a scoring template and your submission, and awards points for
@@ -216,17 +220,41 @@ For comparison, a Swedish bid consultancy publishes 15,000 kr excluding VAT for 
 single draft of a single bid, delivered as a Word file. That is roughly what the
 full standard costs here, and theirs expires the day that tender closes.
 
-## We only bid three times a year, and only nearby
+## We manage without them
 
-Good. That is the reader this is built for.
+A Swedish firm said that to a trade body survey, and said it with pride rather
+than regret. We manage without them. We get paid in full by private clients,
+completely without hassle.
 
-A firm bidding constantly can absorb a bad submission, because there is another
-one next month. A firm bidding three times a year cannot. Each one carries a
-third of your public work, and the one you lose on a paperwork date is not
-replaced.
+That is what this page is competing with, and it is winning. Företagarna puts
+small-company participation at 32%. Of the firms staying out, 17% say it is too
+complicated and takes too long.
+
+They are not wrong. Public work argues about scope, pays on its own schedule,
+and costs you a week of unpaid writing before anyone looks at your price. A firm
+that walked away and filled the capacity with private customers made a sound
+decision, and nothing here says otherwise.
+
+One number complicates it.
+
+The average number of bidders per EU procedure fell from 5.7 in 2011 to 3.2 in
+2021. The field is thinning, and it is thinning for the reason above. Firms are
+leaving because the paperwork became unreasonable, not because they stopped
+being able to do the work.
+
+So the contest is getting easier to win at the same time as it is getting harder
+to enter. Everyone who withdraws hands their share to whoever can still produce
+the documents.
+
+You bid three times a year. That will not change and it does not need to. A firm
+bidding constantly can absorb a bad submission, because there is another one
+next month. Yours carries a third of your public work, and the one you lose on a
+paperwork date is not replaced.
 
 Bidding more is not the offer. The offer is that the few you do bid stop being
 lost on the part nobody explained to you.
+
+Before you spend €2,400 finding that out, spend nothing.
 
 ## Get your page scored
 
