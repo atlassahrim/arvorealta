@@ -21,7 +21,7 @@ Priority order: Sweden, Norway, Denmark, then Estonia, then the rest.
 - **Characteristic demand:** *sanningsförsäkran* — a truth declaration — plus
   heavy use of collective-agreement-equivalent labour terms (*arbetsrättsliga
   villkor*) in contract conditions.
-- **Note for this offer:** Swedish suppliers in `_research/voice.md` complain
+- **Note for this offer:** Swedish suppliers in `_research/nordic-manufacturers/voice.md` complain
   more about **irrelevant requirements and price dominance** than about document
   format. 73 per cent of small companies say irrelevant requirements are often
   set (Företagarna, 1,114 respondents, 2023).
@@ -102,7 +102,7 @@ Priority order: Sweden, Norway, Denmark, then Estonia, then the rest.
 ## Iceland, Latvia, Lithuania — lower priority
 
 - **Iceland (EEA):** Útboðsvefur / Ríkiskaup. Small market, EEA-aligned.
-- **Latvia:** `_research/voice.md` records that **73 per cent of awards
+- **Latvia:** `_research/nordic-manufacturers/voice.md` records that **73 per cent of awards
   2021–2023 were decided on lowest price alone** (FICIL). A document-and-quality
   offer has a much smaller addressable slice here. The profile explicitly
   excludes Latvia and it should stay excluded until that figure moves.

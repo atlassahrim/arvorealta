@@ -17,7 +17,7 @@ certificates get renamed. **Run this once a year.** It takes a session.
 3. **Re-verify every dated instrument** in `SKILL.md`. A date that has passed is
    not automatically correct — proposals slip and transitions extend.
 4. **Search in national languages, not English.** This was the finding that made
-   `_research/voice.md` worth having: English-language search returns UK bid
+   `_research/nordic-manufacturers/voice.md` worth having: English-language search returns UK bid
    consultancies and EU institutional pages. Use Swedish, Norwegian, Danish,
    Finnish and Estonian against the national sources below.
 5. **Update `SKILL.md`, bump the verification date, and append to the changelog**
@@ -74,7 +74,7 @@ pass does not have to rediscover the problem.
    exists for a definable set of manufacturers, and that is commercially
    significant for Arvorealta.**
 
-1. **ESPR timing contradiction.** `_research/trigger.md` dates ESPR full
+1. **ESPR timing contradiction.** `_research/nordic-manufacturers/trigger.md` dates ESPR full
    application at 19 July 2026 with a central DPP registry live. Sources
    retrieved 2026-09-14 state no delegated act had been adopted as of August
    2026, each carrying at least eighteen months' transition. Framework
@@ -91,7 +91,7 @@ pass does not have to rediscover the problem.
    Norway and Iceland through the EEA agreement**, which is a separate and later
    question.
 4. **Whether the 30 per cent quality floor changes supplier behaviour.**
-   `_research/notes.md` records a Springer/Stake finding that switching Swedish
+   `_research/nordic-manufacturers/notes.md` records a Springer/Stake finding that switching Swedish
    awards from lowest price to most-economically-advantageous did **not** raise
    SME participation or success rates. That is a direct challenge to this
    offer's premise and it is still unresolved. Look for post-2024 Norwegian
@@ -114,7 +114,7 @@ Built from a research pass in Finnish, Swedish, Norwegian and Danish. Establishe
 the four-tier ranking, the national layer for five countries, and four dated
 instruments.
 
-Two corrections to `_research/trigger.md` recorded rather than silently applied:
+Two corrections to `_research/nordic-manufacturers/trigger.md` recorded rather than silently applied:
 
 - The September 2026 Public Procurement Act is a **proposed single Regulation
   replacing all three 2014 directives**, not an amendment to them, and it is a
@@ -155,7 +155,7 @@ starts". Checked against the Regulation:
 
 **Consequence.** The segmentation argument built on this the previous day — that
 construction-products manufacturers face a live obligation and are therefore the
-urgent segment — does not hold and was withdrawn. `_research/profile.md` was
+urgent segment — does not hold and was withdrawn. `_research/nordic-manufacturers/profile.md` was
 right: do-nothing is rational for most of this market. Norway's 30 per cent
 weighting, in force 1 January 2024, remains the only live dated instrument
 reaching a general Nordic manufacturer.

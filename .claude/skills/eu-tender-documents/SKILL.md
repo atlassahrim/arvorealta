@@ -24,20 +24,20 @@ reaches them only through EEA incorporation, on its own timetable. Never write
 
 **This file is for business planning and production. It is not a copy source.**
 
-`_research/notes.md` records ten claims already heard three or more times across
+`_research/nordic-manufacturers/notes.md` records ten claims already heard three or more times across
 sellers in this market. Two of them are "the admin burden is crushing SMEs" and
 "sustainability documentation is a scoring asset, not a brochure." A
 comprehensive list of everything a tender can demand is the raw material for
 writing exactly those claims again.
 
-`_research/voice.md` carries the specific warning: a Swedish small-business
+`_research/nordic-manufacturers/voice.md` carries the specific warning: a Swedish small-business
 respondent named *"orimliga krav i form av komplicerade kvalitetsledningssystem"*
 — unreasonable requirements in the form of complicated quality management
 systems. The reader already thinks documents are the burden. A longer list of
 documents does not move them.
 
 Use this skill to decide **what to build and what to charge**. Use
-`_research/voice.md` to decide **what to say**.
+`_research/nordic-manufacturers/voice.md` to decide **what to say**.
 
 ---
 
@@ -74,10 +74,10 @@ procurement and Tier 0 in another that makes it a mandatory minimum requirement.
 
 | # | Document | Notes |
 |---|---|---|
-| 7 | **References — similar deliveries** | The most contested document in the whole set. Every complaint archive in `_research/voice.md` turns on it. Typically three, within three to five years, with named contact persons, scope, value and date. |
+| 7 | **References — similar deliveries** | The most contested document in the whole set. Every complaint archive in `_research/nordic-manufacturers/voice.md` turns on it. Typically three, within three to five years, with named contact persons, scope, value and date. |
 | 8 | **Financial standing** | Annual accounts, turnover thresholds, credit rating, sometimes a parent guarantee. |
 | 9 | **Liability and product insurance** | Certificate with sums and validity. |
-| 10 | **Capacity and organisation** | Staffing plan, key roles, delivery capacity. A general statement of intent is a known failure — see KOFA 2025/1900 in `_research/voice.md`. |
+| 10 | **Capacity and organisation** | Staffing plan, key roles, delivery capacity. A general statement of intent is a known failure — see KOFA 2025/1900 in `_research/nordic-manufacturers/voice.md`. |
 | 11 | **Reliance on other entities** | ESPD Part II C plus a binding commitment declaration from the entity relied on. Its validity at award is litigated. |
 | 12 | **Quality management** | ISO 9001 or a documented equivalent system. "Or equivalent" is where disputes start. |
 | 13 | **Environmental management** | ISO 14001 or EMAS, or equivalent. |
@@ -89,7 +89,7 @@ procurement and Tier 0 in another that makes it a mandatory minimum requirement.
 |---|---|---|
 | 15 | **Quality response / method statement** | The scored narrative. Usually page-capped. This is the document Arvorealta's standard exists for. |
 | 16 | **Environmental documentation** | EPD to EN 15804, carbon footprint, recycled content, GWP. Norway weights climate and environment at minimum 30 per cent since 1 January 2024. |
-| 17 | **Delivery and implementation plan** | Dates, milestones, handover. **Scored more finely than suppliers expect** — a Danish contract turned on five days' difference in when QA documentation would be delivered (P. Olesen, `_research/voice.md`). |
+| 17 | **Delivery and implementation plan** | Dates, milestones, handover. **Scored more finely than suppliers expect** — a Danish contract turned on five days' difference in when QA documentation would be delivered (P. Olesen, `_research/nordic-manufacturers/voice.md`). |
 | 18 | **CVs and key personnel** | Named individuals, often with a commitment to actually deploy them. |
 | 19 | **Service, maintenance, spare parts, lifecycle cost** | For equipment, frequently a heavier scoring block than the product itself. |
 | 20 | **Social and labour conditions** | Collective agreements, wage conditions, apprentices, supply-chain due diligence. Norway's rules on lønns- og arbeidsvilkår are the strictest in the region. |
@@ -143,13 +143,13 @@ it was corrected at source.** The mechanism is:
 
 **What this means commercially.** There is no CPR deadline to put in front of a
 construction-products manufacturer today, and none is imminent. This *reinforces*
-the reading in `_research/profile.md` that do-nothing is currently rational for
+the reading in `_research/nordic-manufacturers/profile.md` that do-nothing is currently rational for
 most of this market rather than overturning it. The one genuinely live, dated
 instrument for a Nordic manufacturer remains **Norway's 30 per cent weighting,
 in force since 1 January 2024** — which argues for Norway as the sharp segment,
 not construction products.
 
-**Contradiction to record, not resolve.** `_research/trigger.md` dates ESPR full
+**Contradiction to record, not resolve.** `_research/nordic-manufacturers/trigger.md` dates ESPR full
 application at 19 July 2026 with an EU Central DPP Registry live. Sources
 retrieved 2026-09-14 state that as of August 2026 **no ESPR delegated act had yet
 been adopted**, and that each act carries a transition period of at least

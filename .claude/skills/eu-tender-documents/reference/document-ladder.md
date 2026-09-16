@@ -2,7 +2,7 @@
 
 Same order as `SKILL.md`. For each document: what it typically contains, and how
 it typically fails. Failure modes marked `[EVIDENCED]` are drawn from a named
-complaint or survey in `_research/voice.md`; the rest are `[GENERAL]` domain
+complaint or survey in `_research/nordic-manufacturers/voice.md`; the rest are `[GENERAL]` domain
 knowledge and should be treated as weaker.
 
 ---
@@ -19,7 +19,7 @@ had been struck off the register on 25 October 2025.
 
 **2. Tender and price form.** The buyer's locked template.
 *Fails when:* the bidder attaches its own format or adds terms. `[EVIDENCED]` A
-Finnish law-firm summary in `_research/voice.md` names "own attachments added
+Finnish law-firm summary in `_research/nordic-manufacturers/voice.md` names "own attachments added
 with information differing from the competition conditions" as a routine
 exclusion cause.
 
@@ -102,7 +102,7 @@ has started that clock. See the correction note in `SKILL.md`. Today the EPD is
 demanded by *buyers as an award criterion*, not by product law.
 *Fails when:* no product-specific EPD exists, so the buyer substitutes
 conservative default data — the **default-data penalty**, recorded in
-`_research/notes.md` as one of only three explained mechanisms in this market.
+`_research/nordic-manufacturers/notes.md` as one of only three explained mechanisms in this market.
 
 **17. Delivery and implementation plan.**
 *Fails when:* a schedule detail the supplier treated as administrative turns out
@@ -130,7 +130,7 @@ agreements, apprentices, supply-chain due diligence. Norway strictest. `[GENERAL
 
 **22. Security and defence.** Facility and personnel clearance, national security
 authority approval, NATO codification, export control.
-*Relevant note:* `_research/notes.md` records **restricted-procedure gating** as a
+*Relevant note:* `_research/nordic-manufacturers/notes.md` records **restricted-procedure gating** as a
 named mechanism — where there is no open procedure, documents decide who is
 invited and the solution is never evaluated. `[EVIDENCED]` from the supplier side
 by Zeppelin Danmark A/S against the Danish defence procurement agency, arguing the
@@ -143,14 +143,14 @@ contradiction in `SKILL.md` and `refresh.md`.
 
 **26. Prequalification systems.** Achilles communities run EUR 210–940 per
 community per year with annual renewal and information updates
-(`_research/competitor.md`). Not a tender document, but a gate in utilities and
+(`_research/nordic-manufacturers/competitor.md`). Not a tender document, but a gate in utilities and
 energy, and a line item the reader already recognises.
 
 ---
 
 ## What this ladder is missing
 
-`_research/voice.md` is explicit that no industrial manufacturer in this
+`_research/nordic-manufacturers/voice.md` is explicit that no industrial manufacturer in this
 geography has been heard describing their own submission end to end. This ladder
 is assembled from law, portals, complaint rulings and supplier surveys. **It
 describes what is demanded. It does not describe what it is like to assemble.**
