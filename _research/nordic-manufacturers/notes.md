@@ -5,7 +5,10 @@ every contradiction found and deliberately left unresolved.
 
 **Market:** industrial manufacturers · **Offer being researched:** document
 standards for public tenders and industrial partnerships
-**Geography:** Finland, Sweden, Norway, Estonia, Latvia, England
+**Geography:** Finland, Sweden, Norway, Estonia, Latvia.
+**England removed from scope 2026-09-16 by the client.** England-derived material
+below is retained and labelled, and must not be cited as a trigger for this
+market. See `voice.md`, client answers.
 **Created:** 2026-09-16.
 
 ---
@@ -275,7 +278,12 @@ losing for years without finding out why.
 `[VERIFIED]` Either that inference is wrong, or complainants are a self-selecting
 minority who complain *because* they know, and the silent majority is the reader.
 **Desk research cannot separate these two and a third pass will not either.**
-Carried forward as question 2 in the handoff.
+
+`[CLIENT]` **Resolved 2026-09-16, by the client rather than by research.** Atlas
+Sahrim: *"They usually do not know why they lose."* The second reading is the
+right one. **The complaint archives are the wrong population for section 8** —
+every objection drawn from them describes an unusually informed supplier. See
+`voice.md`, client answers.
 
 ### 6. EPD registration fees that cannot both be true
 

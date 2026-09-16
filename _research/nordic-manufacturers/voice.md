@@ -1016,3 +1016,118 @@ list: *the authority's own documents contradicted each other.* That is a
 belief-in-mechanism objection aimed at the whole category — if the tender pack is
 incoherent, better supplier documents do not obviously help. **Nothing in three
 passes answers it.**
+
+---
+---
+
+# Client answers, 2026-09-16
+
+**What this is.** The research skill's closing rule: where the user cannot reach
+a buyer, the five questions go to the user, who sells to this market and has
+heard these answers even if nobody wrote them down. Recorded as `[CLIENT]` —
+**weaker than a source, stronger than a guess.** Atlas Sahrim, awe@arvorealta.com.
+
+`[CLIENT]` **A real buyer could not be reached.** The five questions went to the
+user instead. Two of the five came back answered, one of them with material
+nothing in three passes had produced.
+
+---
+
+## Q2 — do they know why they lose?
+
+> They usually do not know why they lose
+
+`[CLIENT]` **This resolves contradiction 5 in `notes.md` in the profile's
+favour.** Three passes found every Danish, Norwegian and Finnish complainant
+arguing at length that they knew exactly why they lost. The reading recorded as
+the alternative — that complainants are a self-selecting minority who complain
+*because* they know, and the silent majority is the reader — is the one the
+client confirms.
+
+`[CLIENT]` **The complaint archives are therefore the wrong population for
+section 8**, and every objection drawn from them describes a supplier who is
+already unusually informed. They stay in the pack as voice. They do not stand
+for the reader's state of knowledge.
+
+`[INFERRED]` *You are losing points you do not know you are losing* is true of
+this reader. It is also claim 3 in the inventory, heard three or more times
+across sellers, and dead on arrival as an opening. **The fact is available. The
+sentence is not.** Rests on `notes.md`, claim inventory.
+
+---
+
+## Q-new — what they actually want to win
+
+> they usually do not want to win all tenders, just the local ones
+
+`[CLIENT]` **Nothing in three passes and five languages contains this, and it
+changes the shape of the offer.**
+
+`[CLIENT]` The reader is not optimising win rate. They are trying to win a
+**specific, geographically bounded subset** and are indifferent to the rest.
+
+### Why this matters more than anything else in the pack
+
+- `[INFERRED]` **It kills the volume argument.** Every seller located in
+  `competitor.md` sells per-bid help, and the implied promise is *bid more, win
+  more*. A reader who wants the local ones does not want to bid more. They want
+  the few that matter not to be lost on paperwork. Rests on the client answer
+  against the seller field.
+- `[INFERRED]` **It rewrites the high position, which three passes could not
+  fill.** Section 6 was empty because nobody publishes what it is like after. The
+  client answer says what *after* is for: not a bigger pipeline, but the nearby
+  contract that should have been theirs. That is concrete, bounded and
+  checkable. **Still `[CLIENT]`, not `[VERIFIED]` — no manufacturer has said it.**
+- `[INFERRED]` **It makes the falling-competition data an asset rather than a
+  problem.** `notes.md` records bidders per EU procedure falling 5.7 to 3.2, and
+  39% of Swedish service procurements drawing two bids or fewer — recorded there
+  as cutting *against* urgency. For a reader who only wants the local ones, a
+  thin local field is the whole opportunity. **The same number reverses sign once
+  the reader's goal is bounded.**
+- `[INFERRED]` **It reframes the reusable asset.** A document standard pays back
+  over repetition. A reader bidding a handful of local tenders a year repeats
+  rarely, so the payback argument cannot lean on volume. It has to lean on the
+  cost of losing one that was winnable. Rests on the client answer.
+- `[INFERRED]` **It is a disqualification line.** A manufacturer chasing national
+  frameworks at scale is a different reader, and the offer as priced is probably
+  wrong for them.
+
+`[CLIENT]` **"Local" is not defined and was not defined.** Municipality, region,
+county, or simply *near enough to drive to* are materially different
+catchments. **Section 9 cannot be written precisely until this is pinned down**,
+and it is now the single highest-value open question in the pack.
+
+---
+
+## Q1 — geography
+
+`[CLIENT]` **England is out of scope.** The market is Finland, Sweden, Norway,
+Estonia and Latvia.
+
+`[CLIENT]` The England material gathered in the third pass **stays in the files
+and is not deleted.** It is sound research, it is clearly labelled, and the
+Knitster account remains the only first-person manufacturer voice in the pack.
+It is now **out-of-scope reference material**, on the same footing as the Danish
+complaint rulings, which were also outside the brief and were kept.
+
+`[CLIENT]` **Consequence for `trigger.md`:** the Procurement Act 2023 section and
+the further-reforms consultation are **out of scope** and must not be cited as
+triggers for this market. The regime split they record still matters as a
+warning — it is why the remaining five countries have to be checked for regime
+differences rather than assumed to be one unit. **Norway is EEA, not EU**, and
+that distinction is live and already flagged in `trigger.md`.
+
+---
+
+## What the client answers do not fix
+
+`[CLIENT]` **Three of the five questions came back unanswered**: what a
+manufacturer's week actually looks like and who assembles the submission
+(section 1); whether *document standard* reads as the cure or as more of the
+disease (the Företagarna warning); and the decision mechanics of section 9 — who
+signs, who can veto without signing.
+
+`[INFERRED]` Section 6 is now **partially filled from a client answer rather than
+from evidence**, which is better than empty and worse than sourced. Any copy
+drafted on it should be treated as a hypothesis the first real buyer conversation
+will confirm or break. Rests on the tag discipline in this file.
