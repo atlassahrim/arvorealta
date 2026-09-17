@@ -182,6 +182,10 @@
   /* The reader's own row is marked with a rule, not a fill. Paper-3 on paper is
      about 1.3:1 and would not read as a decision. */
   .rangerow.here{border-left-color:var(--ink)}
+  /* .meta is cut to 46ch for a line under a quotation. Under three compact
+     rows it stacked into a tall narrow column and outweighed them, so the
+     qualifier takes the measure the rows' own text uses. */
+  .range + .meta{max-width:64ch}
 
   /* Anchored sections land clear of the top edge instead of flush against it. */
   #case,#standard,#price,#scope{scroll-margin-top:2rem}
@@ -316,23 +320,23 @@
   <p class="lede">Sometimes it really is price, and where it is, nothing here helps you. The tenders you bid sit somewhere on this range, and it is worth knowing where.</p>
   <ol class="range">
     <li class="rangerow">
-      <p class="rangek">Latvia<span>2021 to 2023</span></p>
+      <p class="rangek">Price<span>Latvia, 2021 to 2023</span></p>
       <p class="rangev">73%</p>
-      <p class="ranget">of procurements decided on lowest price alone. No document changes that outcome, and nothing on this page would have helped.</p>
+      <p class="ranget">of procurements decided on lowest price alone. No document changes that.</p>
     </li>
     <li class="rangerow here">
-      <p class="rangek">Sweden<span>2020</span></p>
-      <p class="rangev">41%</p>
-      <p class="ranget">of announced procurements were decided on something other than price alone, which is the closest published read on where your own bids sit. In those, part of the score is documents, and the buyer has to state how big that part is in the tender documents you were sent.</p>
+      <p class="rangek">Mix<span>European Union, 2020</span></p>
+      <p class="rangev">42%</p>
+      <p class="ranget">of tenders score something besides price. You have never seen how much of yours does.</p>
     </li>
     <li class="rangerow">
-      <p class="rangek">Norway<span>Since 2024</span></p>
+      <p class="rangek">Environment<span>Norway, since 2024</span></p>
       <p class="rangev">30%</p>
-      <p class="ranget">the minimum weight on climate and environmental criteria, or a place among the three highest ranked where a buyer ranks them instead. Close to a third of the score, decided on documents, before anyone opens the commercial envelope.</p>
+      <p class="ranget">the minimum on climate and environmental criteria, or a place in the top three.</p>
     </li>
   </ol>
-  <p class="meta">The split a buyer publishes is not always a single percentage. The article allows a range with a maximum spread, and where weighting is not possible for objective reasons the criteria are listed in decreasing order of importance instead. Any of the three tells you more than you have now.</p>
-  <p class="src">Sweden, Upphandlingsmyndigheten 2020 · Norway, anskaffelsesloven § 5 b, which took the rule over from forskriften § 7-9 on 1 July 2026 · Weighting rule, Directive 2014/24/EU Article 67(5)</p>
+  <p class="meta">Where a contract is not awarded on price alone, the buyer has to state that split in the tender documents you were sent. It is not always a single percentage. The article allows a range with a maximum spread, and where weighting is not possible for objective reasons the criteria are listed in decreasing order of importance instead. Any of the three tells you more than you have now.</p>
+  <p class="src">European Union, Konkurrence- og Forbrugerstyrelsen 2020 · Norway, anskaffelsesloven § 5 b, which took the rule over from forskriften § 7-9 on 1 July 2026 · Weighting rule, Directive 2014/24/EU Article 67(5)</p>
   <p class="disq">If your losses are price losses and nothing else, this is the wrong page and I have nothing to sell you.</p>
 </section>
 
@@ -488,7 +492,7 @@
     <div class="faq">
       <details open>
         <summary>Can I check the numbers on this page?</summary>
-        <p>All of them, and here is where. The Danish ruling is published under J.nr. 25/03606 and the Norwegian one under KOFA 2023/472, both searchable by case number. The rule that a buyer must publish the weighting is Article 67(5) of Directive 2014/24/EU. The fall from 5.7 to 3.2 bidders per procedure is the European Court of Auditors, Special Report 28/2023, which puts single bidding at 23.5% of procedures in 2011 against 41.8% in 2021. The Swedish 41% is Upphandlingsmyndigheten's own statistics on announced procurements. Norway's 30% moved from anskaffelsesforskriften § 7-9 into anskaffelsesloven § 5 b on 1 July 2026 and applies from 500,000 kroner. The 15,000 kr comparison is a published list price from a Swedish bid consultancy, for drafts of the texts and attachments a bid needs, delivered as Word files. Every number on this page is one you can look up, and if you find one that is wrong I would rather hear it from you than not.</p>
+        <p>All of them, and here is where. The Danish ruling is published under J.nr. 25/03606 and the Norwegian one under KOFA 2023/472, both searchable by case number. The rule that a buyer must publish the weighting is Article 67(5) of Directive 2014/24/EU. The fall from 5.7 to 3.2 bidders per procedure is the European Court of Auditors, Special Report 28/2023, which puts single bidding at 23.5% of procedures in 2011 against 41.8% in 2021. The 42% is the complement of the figure the Danish competition authority publishes for the rest of the EU, where tenders weighting price alone average 58%. Norway's 30% moved from anskaffelsesforskriften § 7-9 into anskaffelsesloven § 5 b on 1 July 2026 and applies from 500,000 kroner. The 15,000 kr comparison is a published list price from a Swedish bid consultancy, for drafts of the texts and attachments a bid needs, delivered as Word files. Every number on this page is one you can look up, and if you find one that is wrong I would rather hear it from you than not.</p>
       </details>
       <details>
         <summary>Is this a quality management system?</summary>
