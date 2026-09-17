@@ -254,9 +254,14 @@ ul.ticks li::before{content:"";position:absolute;left:0;top:.75em;width:.8rem;he
 
 /* ---------- case ---------- */
 .case{background:var(--paper-2)}
-/* the firm's own statement, not a testimonial — no quotes, no italic */
-.case .claim{margin:0;font-family:var(--font-display);
+/* the firm's own statement, not a testimonial — no quotes, no italic.
+   Not scoped to .case. The same element belongs in any fold that has a
+   sourced quotation to set, and scoping it meant it silently rendered as
+   body copy everywhere else. It also carried margin:0, which sat it hard
+   against whatever came before with nothing to separate the two. */
+.claim{margin:clamp(2rem,4vw,2.75rem) 0 0;font-family:var(--font-display);
   font-size:clamp(1.35rem,1rem + 1.5vw,2.2rem);line-height:1.24;letter-spacing:-.005em;max-width:30ch}
+.inv .claim{color:var(--paper-3)}
 .meta{margin-top:2rem;color:var(--ink-soft);font-size:.95rem;max-width:46ch}
 
 /* ---------- FAQ ---------- */

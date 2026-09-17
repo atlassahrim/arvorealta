@@ -51,22 +51,23 @@
      because taupe is a darker ground than the three papers the token was set
      against. CLAUDE.md does not record this. Captions on taupe therefore take
      ink, which measures 6.16:1 there. */
-  .ground2 .figures span,.ground2 .terms,.ground2 .sub{color:var(--ink)}
+  .ground2 .figures span,.ground2 .terms,.ground2 .sub,
+  .ground2 .lede,.ground2 .bridge{color:var(--ink)}
+  /* A paper-3 card measures 1.86:1 against taupe, close to the 1.50 that
+     CLAUDE.md says reads as a printing error rather than a choice. The fills
+     stay as they are and each card takes an edge instead, so the object is
+     defined by a line rather than by a difference nobody can see. */
+  .ground2 .offer{outline:1px solid var(--rule);outline-offset:-1px}
 
   /* INK FOLDS. --ink-soft measures 2.35:1 on ink and is unusable there, so
      every class that reads from it needs an .inv counterpart. Anything
      crossing takes rgba(233,231,228,.75) at 6.73:1. The mark never crosses
      at all, 2.03:1, and system.css already hands .inv .tag its own value. */
-  .inv .lede,.inv .meta,.inv .src,.inv .bridge{color:rgba(233,231,228,.75)}
+  .inv .lede,.inv .meta,.inv .src{color:rgba(233,231,228,.75)}
   .inv .src{border-top-color:var(--rule-inv)}
   .inv .ticks li{color:rgba(233,231,228,.75)}
-  .inv .claim{color:var(--paper-3)}
-  /* The tier cards carry their own light ground, so everything inside them
-     keeps the ink values it was measured against. */
-  .inv .offer,.inv .offer *{color:var(--ink)}
-  .inv .offer.full,.inv .offer.full *{color:var(--on-mark)}
-  .inv .offer.beyond{outline-color:var(--rule-inv)}
-  .inv .offer.beyond,.inv .offer.beyond *{color:var(--paper-3)}
+  /* .kicker is set in --ink, so on the ink ground it was ink on ink. */
+  .inv .kicker{color:var(--paper-3)}
   .bridge{margin-top:2rem;font-size:.9rem;line-height:1.6;font-style:italic;max-width:56ch}
 
   /* Source lines. Ink, not --ink-soft, which measures 3.93:1 and is the one
@@ -88,20 +89,17 @@
      the page sits on it. Ink caption reads 6.16:1 there. */
   /* Grounds. No two folds in sequence share one, and ink carries the two
      featured folds, the mechanism and the ladder, plus the close. */
+  /* .figures sets a top margin and no bottom one, so whatever follows a
+     figure block started hard against its captions. */
+  .figures + p,.figures + .kicker,.figures + .reassure{
+    margin-top:clamp(2.5rem,5vw,3.5rem)}
+
   .g-p2{background:var(--paper-2)}
   .g-p3{background:var(--paper-3)}
   /* .case sets paper-2 and sits later in system.css than .inv, so the record
      fold needs both classes named to take ink. */
   .case.inv{background:var(--ink)}
 
-  /* .claim carried its display type only inside .case, so the same element in
-     another fold rendered as body copy. And it sat at margin:0, hard against
-     whatever came before it. Both are fixed here rather than in system.css,
-     which the live offer page shares. */
-  .claim{margin:clamp(2rem,4vw,2.75rem) 0 0;font-family:var(--font-display);
-    font-size:clamp(1.35rem,1rem + 1.5vw,2.2rem);line-height:1.24;
-    letter-spacing:-.005em;max-width:30ch}
-  .case .claim{margin:clamp(2rem,4vw,2.75rem) 0 0}
 
   /* The sheet sits beside its caption rather than at full measure. At full
      width it was the loudest thing on the page and outweighed the argument
@@ -350,7 +348,7 @@
 </section>
 
 
-<section id="price" class="inv">
+<section id="price" class="ground2">
   <div class="wrap">
     <p class="tag"><b>07</b> the ladder</p>
     <h2>Every tier credits<br class="brs"> into the one above it.</h2>
@@ -379,7 +377,7 @@
   </div>
 </section>
 
-<section class="ground2">
+<section class="inv">
   <div class="wrap">
     <p class="tag"><b>08</b> doing nothing</p>
     <h2>Plenty of firms have stopped<br class="brs"> bidding. They were right to.</h2>
