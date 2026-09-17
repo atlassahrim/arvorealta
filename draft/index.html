@@ -53,6 +53,22 @@
      ink, which measures 6.16:1 there. */
   .ground2 .figures span,.ground2 .terms,.ground2 .sub{color:var(--ink)}
 
+  /* INK FOLDS. --ink-soft measures 2.35:1 on ink and is unusable there, so
+     every class that reads from it needs an .inv counterpart. Anything
+     crossing takes rgba(233,231,228,.75) at 6.73:1. The mark never crosses
+     at all, 2.03:1, and system.css already hands .inv .tag its own value. */
+  .inv .lede,.inv .meta,.inv .src,.inv .bridge{color:rgba(233,231,228,.75)}
+  .inv .src{border-top-color:var(--rule-inv)}
+  .inv .ticks li{color:rgba(233,231,228,.75)}
+  .inv .claim{color:var(--paper-3)}
+  /* The tier cards carry their own light ground, so everything inside them
+     keeps the ink values it was measured against. */
+  .inv .offer,.inv .offer *{color:var(--ink)}
+  .inv .offer.full,.inv .offer.full *{color:var(--on-mark)}
+  .inv .offer.beyond{outline-color:var(--rule-inv)}
+  .inv .offer.beyond,.inv .offer.beyond *{color:var(--paper-3)}
+  .bridge{margin-top:2rem;font-size:.9rem;line-height:1.6;font-style:italic;max-width:56ch}
+
   /* Source lines. Ink, not --ink-soft, which measures 3.93:1 and is the one
      contrast on the site that does not clear. These lines exist to be read. */
   .src{margin-top:1.4rem;padding-top:.85rem;border-top:1px solid var(--rule);
@@ -70,6 +86,19 @@
 
   /* The document band. Taupe is the evidence ground, so the one photograph on
      the page sits on it. Ink caption reads 6.16:1 there. */
+  /* Grounds. No two folds in sequence share one, and ink carries the two
+     featured folds, the mechanism and the ladder, plus the close. */
+  .g-p3{background:var(--paper-3)}
+
+  /* The sheet sits beside its caption rather than at full measure. At full
+     width it was the loudest thing on the page and outweighed the argument
+     it is evidence for. */
+  .docsplit{display:grid;gap:clamp(1.5rem,4vw,2.75rem);grid-template-columns:1fr;
+    align-items:start;margin-top:clamp(2rem,4vw,3rem)}
+  @media(min-width:52rem){.docsplit{grid-template-columns:1.25fr 1fr}}
+  .docsplit img{width:100%}
+  .docsplit .doccap{margin:0;max-width:40ch}
+
   .docband .doc{margin-top:clamp(2rem,4vw,3rem)}
   .docband .doccap{color:var(--ink)}
   .docband .doccap span{color:var(--ink);opacity:.72}
@@ -81,6 +110,12 @@
 
   /* Nav anchors sit quiet beside the one gold action. */
   .bar nav .ln{font-size:.78rem}
+
+  /* system.css takes .compare from one column to two at 50rem and to four at
+     72rem, which it was built for. This range has three, so between those
+     breakpoints Norway sat alone on a row of its own. Three columns from the
+     point the row fits. */
+  @media(min-width:54rem){.compare{grid-template-columns:repeat(3,1fr)}}
 
   /* Anchored sections land clear of the top edge instead of flush against it. */
   #case,#standard,#price,#scope{scroll-margin-top:2rem}
@@ -161,7 +196,6 @@
   </ul>
 </section>
 
-<hr class="rule">
 
 <section id="case" class="case">
   <div class="wrap">
@@ -180,23 +214,23 @@
   </div>
 </section>
 
-<hr class="rule">
 
-<section class="wrap">
+<section class="inv">
   <p class="tag"><b>02</b> the mechanism</p>
-  <h2>The paperwork is a separate<br class="brs"> object from the company.</h2>
-  <p class="lede">An evaluator sits with a scoring template and your submission. What happens next is not a judgement about your firm.</p>
-  <ul class="ticks">
-    <li>They award points for what is present, findable and specific</li>
-    <li>They cannot award points for what you know and did not write down</li>
-    <li>They are not permitted to</li>
-  </ul>
-  <p class="claim">Scored on the documentation requirements rather than on the award criterion, and marked down for matters no documentation was asked for.</p>
-  <p class="meta">What a Norwegian road contractor complained of, from the other end of the same machine. It is a complaint, not a finding.</p>
-  <p class="src">KOFA 2023/472 · Mesta AS mod Rogaland fylkeskommune</p>
+  <div class="wrap">
+    <h2>The paperwork is a separate<br class="brs"> object from the company.</h2>
+    <p class="lede">An evaluator sits with a scoring template and your submission. What happens next is not a judgement about your firm.</p>
+    <ul class="ticks">
+      <li>They award points for what is present, findable and specific</li>
+      <li>They cannot award points for what you know and did not write down</li>
+      <li>They are not permitted to</li>
+    </ul>
+    <p class="claim">Scored on the documentation requirements rather than on the award criterion, and marked down for matters no documentation was asked for.</p>
+    <p class="meta">What a Norwegian road contractor complained of, from the other end of the same machine. It is a complaint, not a finding.</p>
+    <p class="src">KOFA 2023/472 · Mesta AS mod Rogaland fylkeskommune</p>
+  </div>
 </section>
 
-<hr class="rule">
 
 <section class="wrap">
   <p class="tag"><b>03</b> where the score is decided</p>
@@ -232,26 +266,28 @@
   <p class="disq">If your losses are price losses and nothing else, this is the wrong page and I have nothing to sell you.</p>
 </section>
 
-<hr class="rule">
 
-<section id="standard" class="wrap">
-  <p class="tag"><b>04</b> the thing itself</p>
-  <h2>Written once, properly,<br class="brs"> in the form an evaluator scores.</h2>
-  <p class="lede">The set of things your firm asserts about itself, in the language of the template it will be read against.</p>
-  <ul class="ticks">
-    <li>Capability, stated as what you have done rather than what you can do</li>
-    <li>Process, in the detail a scoring template asks for</li>
-    <li>Reference projects, with the specifics that make them count</li>
-    <li>Environmental and quality evidence, as figures rather than adjectives</li>
-  </ul>
-  <p class="reassure">It is not a management system. Nothing changes in the workshop. The standard is a document, it belongs to you, and your own people edit it.</p>
+<section id="standard" class="g-p3">
+  <div class="wrap">
+    <p class="tag"><b>04</b> the thing itself</p>
+    <h2>Written once, properly,<br class="brs"> in the form an evaluator scores.</h2>
+    <p class="lede">The set of things your firm asserts about itself, in the language of the template it will be read against.</p>
+    <ul class="ticks">
+      <li>Capability, stated as what you have done rather than what you can do</li>
+      <li>Process, in the detail a scoring template asks for</li>
+      <li>Reference projects, with the specifics that make them count</li>
+      <li>Environmental and quality evidence, as figures rather than adjectives</li>
+    </ul>
+    <p class="reassure">It is not a management system. Nothing changes in the workshop. The standard is a document, it belongs to you, and your own people edit it.</p>
+  </div>
 </section>
 
 
 <section class="ground2 docband">
   <div class="wrap">
-    <p class="tag"><b>05</b> what it looks like</p>
-    <figure class="doc">
+    <p class="tag"><b>05</b> a finished sheet</p>
+    <h2>This is the object<br class="brs"> being scored.</h2>
+    <figure class="doc docsplit">
       <img src="/assets/Document-redacted.jpeg" width="1426" height="1076" loading="lazy"
            alt="Two sheets of a reference project annex, photographed at an angle. A
                 record of the work, and the certificate of satisfactory delivery that
@@ -266,7 +302,6 @@
     </figure>
   </div>
 </section>
-<hr class="rule">
 
 <section class="wrap">
   <p class="tag"><b>06</b> what it costs you</p>
@@ -301,33 +336,34 @@
   <p class="reassure">I do not need you to prepare anything, and I am not going to ask you to fill in a questionnaire so that I can sell you the answers. If you have come out of a pre-tender dialogue feeling you gave away a day of free consulting, you know why that sentence is here.</p>
 </section>
 
-<hr class="rule">
 
-<section id="price" class="wrap">
-  <p class="tag"><b>07</b> the ladder</p>
-  <h2>Every tier credits<br class="brs"> into the one above it.</h2>
-  <p class="lede">Walk the whole ladder and you pay €8,000 in total, not €11,000. Credits never expire.</p>
-  <div class="tiers">
-    <div class="offer">
-      <p class="step">One document</p>
-      <div class="price"><b>€600</b></div>
-      <p class="terms">One document, done properly.</p>
-      <p class="credit">The full €600 comes off the €2,400.</p>
+<section id="price" class="inv">
+  <div class="wrap">
+    <p class="tag"><b>07</b> the ladder</p>
+    <h2>Every tier credits<br class="brs"> into the one above it.</h2>
+    <p class="lede">Walk the whole ladder and you pay €8,000 in total, not €11,000. Credits never expire.</p>
+    <div class="tiers">
+      <div class="offer">
+        <p class="step">One document</p>
+        <div class="price"><b>€600</b></div>
+        <p class="terms">One document, done properly.</p>
+        <p class="credit">The full €600 comes off the €2,400.</p>
+      </div>
+      <div class="offer full">
+        <p class="step">The document standard</p>
+        <div class="price"><b>€2,400</b><em>one revision round included</em></div>
+        <p class="terms">Capability, process, references, environmental and quality evidence.</p>
+        <p class="credit">The €2,400 comes off the €8,000.</p>
+      </div>
+      <div class="offer beyond">
+        <p class="step">Identity system</p>
+        <div class="price"><b>€8,000</b></div>
+        <p class="terms">The whole identity system.</p>
+        <p class="credit">The end of the ladder.</p>
+      </div>
     </div>
-    <div class="offer full">
-      <p class="step">The document standard</p>
-      <div class="price"><b>€2,400</b><em>one revision round included</em></div>
-      <p class="terms">Capability, process, references, environmental and quality evidence.</p>
-      <p class="credit">The €2,400 comes off the €8,000.</p>
-    </div>
-    <div class="offer beyond">
-      <p class="step">Identity system</p>
-      <div class="price"><b>€8,000</b></div>
-      <p class="terms">The whole identity system.</p>
-      <p class="credit">The end of the ladder.</p>
-    </div>
+    <p class="bridge">A Swedish bid consultancy publishes 15,000 kr excluding VAT for a single draft of a single bid, delivered as a Word file. Roughly what the full standard costs here, and theirs expires the day that tender closes.</p>
   </div>
-  <p class="bridge">A Swedish bid consultancy publishes 15,000 kr excluding VAT for a single draft of a single bid, delivered as a Word file. Roughly what the full standard costs here, and theirs expires the day that tender closes.</p>
 </section>
 
 <section class="ground2">
@@ -347,7 +383,6 @@
   </div>
 </section>
 
-<hr class="rule">
 
 <section id="scope" class="scope">
   <div class="wrap">
@@ -382,15 +417,17 @@
   </div>
 </section>
 
-<section class="wrap cta inv">
-  <p class="eyebrow">For manufacturers who bid locally</p>
-  <h2>Nobody told you<br class="brs"> which page cost you<br class="brs"> the contract.</h2>
-  <p class="sub">Send one page from a tender you lost. A method statement, a quality section, a capability answer. Whatever you would have to write again next time.</p>
-  <p class="sub">It comes back scored against the criteria it was judged on, with the points located and the reasoning written out.</p>
-  <div class="buttons">
-    <a class="ln on" href="mailto:atlas@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost&amp;body=Attach%20the%20page%20before%20sending.%0A%0ACompany%3A%0AWhat%20the%20tender%20was%20for%3A%0ARoughly%20when%20you%20submitted%3A">Get your page scored</a>
+<section class="cta inv">
+  <div class="wrap">
+    <p class="eyebrow">For manufacturers who bid locally</p>
+    <h2>Nobody told you<br class="brs"> which page cost you<br class="brs"> the contract.</h2>
+    <p class="sub">Send one page from a tender you lost. A method statement, a quality section, a capability answer. Whatever you would have to write again next time.</p>
+    <p class="sub">It comes back scored against the criteria it was judged on, with the points located and the reasoning written out.</p>
+    <div class="buttons">
+      <a class="ln on" href="mailto:atlas@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost&amp;body=Attach%20the%20page%20before%20sending.%0A%0ACompany%3A%0AWhat%20the%20tender%20was%20for%3A%0ARoughly%20when%20you%20submitted%3A">Get your page scored</a>
+    </div>
+    <p class="fineprint">No charge. No call. Before you spend €2,400 finding out, spend nothing.</p>
   </div>
-  <p class="fineprint">No charge. No call. Before you spend €2,400 finding out, spend nothing.</p>
 </section>
 
 </main>
