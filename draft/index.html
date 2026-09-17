@@ -22,16 +22,36 @@
 <link rel="stylesheet" media="all"
   href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Shippori+Mincho:wght@400;500&display=swap">
 
+<script>
+/* Marks scripting as available, then hands the reveal failsafe a deadline,
+   exactly as the offer page does. site.js reports in by adding rv-ready. */
+(function(h){h.className+=" js";setTimeout(function(){
+  if(!h.classList.contains("rv-ready"))h.className+=" rv-off";},4000)})(document.documentElement);
+</script>
 <link rel="stylesheet" href="/assets/themes/arvorealta.css">
 <link rel="stylesheet" href="/assets/system.css">
 
 <style>
-  /* Structure only, tokens only. Nothing here sets a literal colour or face. */
+  /* Structure only, tokens only. Nothing here sets a literal colour or face.
+     One exception, and it is a token value rather than a component literal. */
+
+  /* SCOPED TEST of the --ink-soft darkening CLAUDE.md describes but has not
+     taken. Measured on this page: #5A6B63 gives 3.93:1 on paper, under the
+     4.5:1 small text needs, and it carries the standfirst, every hero note
+     and every figure caption. #4C5B54 measures 4.99 on paper, 5.54 on
+     paper-2 and 6.18 on paper-3, so all three clear at once. Scoped here so
+     the temperature shift can be judged before the site takes it. */
+  :root{--ink-soft:#4C5B54}
 
   /* Taupe is the evidence ground and never a panel beside paper, so it runs
      full bleed. Ink on taupe reads 6.16:1. */
   .ground2{background:var(--ground-2)}
   .ground2 .eyebrow{color:var(--ink);border-top-color:var(--rule)}
+  /* --ink-soft fails on taupe at BOTH values, 2.62:1 before and 3.32:1 after,
+     because taupe is a darker ground than the three papers the token was set
+     against. CLAUDE.md does not record this. Captions on taupe therefore take
+     ink, which measures 6.16:1 there. */
+  .ground2 .figures span,.ground2 .terms,.ground2 .sub{color:var(--ink)}
 
   /* Source lines. Ink, not --ink-soft, which measures 3.93:1 and is the one
      contrast on the site that does not clear. These lines exist to be read. */
@@ -46,9 +66,7 @@
     background:var(--paper-3);border-left:2px solid var(--ink);
     font-size:1rem;line-height:1.7;color:var(--ink);max-width:56ch}
 
-  .foot{padding-block:3.5rem;border-top:1px solid var(--rule);
-    font-family:var(--font-label);font-size:.7rem;font-weight:600;
-    letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+  footer{padding-block:clamp(3rem,6vw,4.5rem);border-top:1px solid var(--rule)}
 
   /* The document band. Taupe is the evidence ground, so the one photograph on
      the page sits on it. Ink caption reads 6.16:1 there. */
@@ -73,7 +91,7 @@
      else, and chrome that cannot be clicked on paper is noise. Every answer
      opens, because a closed accordion prints as a list of questions. */
   @media print{
-    header,.heroact,.buttons,.navcta,.bar nav,.foot{display:none}
+    header,.heroact,.buttons,.navcta,.bar nav,.clocks,.legal{display:none}
     body{background:#fff;color:#000;font-size:10pt;line-height:1.55}
     .ground2,.scope,.case,.inv{background:#fff!important;color:#000!important}
     .inv h2,.inv .sub,.inv .eyebrow,.inv .fineprint{color:#000!important}
@@ -97,7 +115,7 @@
       <a class="ln" href="#standard">What it is</a>
       <a class="ln" href="#price">Price</a>
       <a class="ln" href="#scope">Scope</a>
-      <a class="navcta" href="mailto:page@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost&amp;body=Attach%20the%20page%20before%20sending.%0A%0ACompany%3A%0AWhat%20the%20tender%20was%20for%3A%0ARoughly%20when%20you%20submitted%3A">Get your page scored</a>
+      <a class="navcta" href="mailto:atlas@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost&amp;body=Attach%20the%20page%20before%20sending.%0A%0ACompany%3A%0AWhat%20the%20tender%20was%20for%3A%0ARoughly%20when%20you%20submitted%3A">Get your page scored</a>
     </nav>
   </div>
 </header>
@@ -110,7 +128,7 @@
   <p class="sub">Public buyers score the documents you hand in. Not the plant, not the price list, not the twenty years.</p>
   <p class="heroqual"><b>Who this is for</b> Manufacturers of 50 to 250 people who want a few contracts close to home.</p>
   <div class="heroact">
-    <a class="herocta ln on" href="mailto:page@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost&amp;body=Attach%20the%20page%20before%20sending.%0A%0ACompany%3A%0AWhat%20the%20tender%20was%20for%3A%0ARoughly%20when%20you%20submitted%3A">Get your page scored</a>
+    <a class="herocta ln on" href="mailto:atlas@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost&amp;body=Attach%20the%20page%20before%20sending.%0A%0ACompany%3A%0AWhat%20the%20tender%20was%20for%3A%0ARoughly%20when%20you%20submitted%3A">Get your page scored</a>
     <p class="sub">Send one page from a tender you lost. No charge and no call.</p>
   </div>
   <ul class="vocab">
@@ -233,7 +251,29 @@
 <section class="wrap">
   <p class="eyebrow">What it takes from you</p>
   <h2>Four hours.</h2>
-  <p class="lede">You supply what already exists. Past submissions, certificates, drawings, whatever you sent last time.</p>
+  <p class="lede">You supply what already exists. I do the rest.</p>
+  <div class="relief">
+    <div class="you">
+      <h3>You send</h3>
+      <ul class="ticks" style="margin-top:0">
+        <li>Past submissions, however they are filed</li>
+        <li>Certificates and drawings you already hold</li>
+        <li>Whatever you sent the last time you bid</li>
+        <li>Two conversations of about ninety minutes</li>
+        <li>One read-through at the end</li>
+      </ul>
+    </div>
+    <div class="me">
+      <h3>I return</h3>
+      <ul class="ticks" style="margin-top:0">
+        <li>Capability, stated as what you have done</li>
+        <li>Process, in the detail a scoring template asks for</li>
+        <li>Reference projects with the specifics that make them count</li>
+        <li>Environmental and quality evidence as figures</li>
+        <li>One revision round, included</li>
+      </ul>
+    </div>
+  </div>
   <div class="figures">
     <div><b>4</b><span>Hours of your time, in total</span></div>
     <div><b>2</b><span>Conversations, about ninety minutes each</span></div>
@@ -328,16 +368,53 @@
   <p class="sub">Send one page from a tender you lost. A method statement, a quality section, a capability answer. Whatever you would have to write again next time.</p>
   <p class="sub">It comes back scored against the criteria it was judged on, with the points located and the reasoning written out.</p>
   <div class="buttons">
-    <a class="ln on" href="mailto:page@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost&amp;body=Attach%20the%20page%20before%20sending.%0A%0ACompany%3A%0AWhat%20the%20tender%20was%20for%3A%0ARoughly%20when%20you%20submitted%3A">Get your page scored</a>
+    <a class="ln on" href="mailto:atlas@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost&amp;body=Attach%20the%20page%20before%20sending.%0A%0ACompany%3A%0AWhat%20the%20tender%20was%20for%3A%0ARoughly%20when%20you%20submitted%3A">Get your page scored</a>
   </div>
   <p class="fineprint">No charge. No call. Before you spend €2,400 finding out, spend nothing.</p>
 </section>
 
 </main>
 
-<footer class="wrap foot">
-  Arvorealta · Document standards for public tenders
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <h4>Arvorealta</h4>
+        <p style="font-size:.85rem;line-height:1.7">
+          Atlas Sahrim<br>
+          Espírito Santo, Brazil<br>
+          Working with clients across Europe
+        </p>
+      </div>
+
+      <div>
+        <h4>Elsewhere</h4>
+        <nav>
+          <a class="ln" href="mailto:atlas@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost&amp;body=Attach%20the%20page%20before%20sending.%0A%0ACompany%3A%0AWhat%20the%20tender%20was%20for%3A%0ARoughly%20when%20you%20submitted%3A">Email</a>
+          <a class="ln" href="/video/">Video work</a>
+          <a class="ln" href="https://wa.me/5561999845147">WhatsApp</a>
+          <a class="ln" href="https://www.behance.net/arvorealta">Behance</a>
+          <a class="ln" href="https://www.linkedin.com/in/atlassahrim">LinkedIn</a>
+        </nav>
+      </div>
+
+      <div>
+        <h4>Overlap</h4>
+        <div class="clocks">
+          <div class="clock"><b id="cl-br">--:--</b><span>brt · here</span></div>
+          <div class="clock"><b id="cl-eu">--:--</b><span>cet · you</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="legal">
+      <span>© 2026 Arvorealta</span>
+      <span>Working draft, not linked from the site</span>
+    </div>
+  </div>
 </footer>
+
+<script src="/assets/site.js" defer></script>
 
 </body>
 </html>
