@@ -122,11 +122,32 @@
   /* Nav anchors sit quiet beside the one gold action. */
   .bar nav .ln{font-size:.78rem}
 
-  /* system.css takes .compare from one column to two at 50rem and to four at
-     72rem, which it was built for. This range has three, so between those
-     breakpoints Norway sat alone on a row of its own. Three columns from the
-     point the row fits. */
-  @media(min-width:54rem){.compare{grid-template-columns:repeat(3,1fr)}}
+  /* The range reads down, not across. Three columns set Latvia, the reader
+     and Norway as parallel options to choose between, which is not what they
+     are. They are three positions on one scale, so they stack as rows and the
+     scale runs top to bottom, with the reader's own row marked in the middle
+     of it. Rows also give the two figures a column of their own to line up in,
+     and the middle row has no figure because not knowing it is the point. */
+  .range{list-style:none;margin:clamp(2.5rem,5vw,3.5rem) 0 0;padding:0;
+    border-top:1px solid var(--rule)}
+  .rangerow{display:grid;gap:.5rem 2rem;grid-template-columns:1fr;
+    padding:1.5rem 0 1.5rem 1.25rem;border-bottom:1px solid var(--rule);
+    border-left:2px solid transparent}
+  @media(min-width:50rem){
+    .rangerow{grid-template-columns:13rem 6rem 1fr;align-items:baseline;
+      gap:0 2.5rem;padding-block:1.75rem}
+  }
+  .rangek{margin:0;font-family:var(--font-label);font-size:.82rem;font-weight:600;
+    letter-spacing:.08em;text-transform:uppercase;line-height:1.4;color:var(--ink)}
+  .rangek span{display:block;margin-top:.4rem;font-size:.68rem;letter-spacing:.1em;
+    color:var(--ink-soft)}
+  .rangev{margin:0;font-family:var(--font-display);font-size:clamp(1.8rem,1.2rem + 1.6vw,2.4rem);
+    line-height:1;letter-spacing:-.015em;font-variant-numeric:tabular-nums;color:var(--ink)}
+  .ranget{margin:0;font-size:.95rem;line-height:1.65;color:var(--ink);max-width:52ch}
+  /* The reader's own row is marked with a rule rather than a fill. Paper-3 on
+     paper is about 1.3:1 and would not read as a decision. */
+  .rangerow.here{border-left-color:var(--ink)}
+  .rangerow.here .rangev{color:var(--ink-soft)}
 
   /* Anchored sections land clear of the top edge instead of flush against it. */
   #case,#standard,#price,#scope{scroll-margin-top:2rem}
@@ -247,33 +268,23 @@
   <p class="tag"><b>03</b> where the score is decided</p>
   <h2>Where price is the whole<br class="brs"> score, stop reading.</h2>
   <p class="lede">Sometimes it really is price, and where it is, nothing here helps you. The tenders you bid sit somewhere on this range, and it is worth knowing where.</p>
-  <div class="compare">
-    <div class="opt">
-      <h3>Latvia</h3>
-      <p class="who">2021 to 2023</p>
-      <ul>
-        <li class="n">73% of procurements decided on lowest price alone</li>
-        <li class="n">No document changes the outcome</li>
-      </ul>
-    </div>
-    <div class="opt this">
-      <h3>Most of what you bid</h3>
-      <p class="who">Between the two</p>
-      <ul>
-        <li class="y">Part of the score is price</li>
-        <li class="y">Part of it was never about price</li>
-        <li class="y">You have probably never seen that part written down</li>
-      </ul>
-    </div>
-    <div class="opt">
-      <h3>Norway</h3>
-      <p class="who">From 1 January 2024</p>
-      <ul>
-        <li class="y">Climate and environmental criteria weighted at 30% minimum</li>
-        <li class="y">A third of the score, decided on documents</li>
-      </ul>
-    </div>
-  </div>
+  <ol class="range">
+    <li class="rangerow">
+      <p class="rangek">Latvia<span>2021 to 2023</span></p>
+      <p class="rangev">73%</p>
+      <p class="ranget">of procurements decided on lowest price alone. No document changes that outcome, and nothing on this page would have helped.</p>
+    </li>
+    <li class="rangerow here">
+      <p class="rangek">Most of what you bid<span>Between the two</span></p>
+      <p class="rangev" aria-hidden="true">·</p>
+      <p class="ranget">Part of the score is price. Part of it was never about price. You have probably never seen that part written down, which is the whole reason the split above is worth knowing.</p>
+    </li>
+    <li class="rangerow">
+      <p class="rangek">Norway<span>From 1 January 2024</span></p>
+      <p class="rangev">30%</p>
+      <p class="ranget">the minimum weight on climate and environmental criteria. A third of the score, decided on documents, before anyone opens the commercial envelope.</p>
+    </li>
+  </ol>
   <p class="disq">If your losses are price losses and nothing else, this is the wrong page and I have nothing to sell you.</p>
 </section>
 
