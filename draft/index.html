@@ -6,6 +6,14 @@
 <title>Draft · Nobody told you which page cost you the contract</title>
 <meta name="description" content="Working draft. Document standards for manufacturers of 50 to 250 people bidding into Nordic public tenders.">
 <meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Nobody told you which page cost you the contract">
+<meta property="og:description" content="Public buyers score the documents you hand in. Send one page from a tender you lost and get it scored against the criteria it was judged on.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://arvorealta.com/draft/">
+<meta property="og:image" content="https://arvorealta.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#17352C">
 
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
@@ -42,10 +50,40 @@
     font-family:var(--font-label);font-size:.7rem;font-weight:600;
     letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
 
+  /* The document band. Taupe is the evidence ground, so the one photograph on
+     the page sits on it. Ink caption reads 6.16:1 there. */
+  .docband .doc{margin-top:clamp(2rem,4vw,3rem)}
+  .docband .doccap{color:var(--ink)}
+  .docband .doccap span{color:var(--ink);opacity:.72}
+
+  /* The scope section closes the argument, so it takes paper-2 to separate it
+     from the folds that argue. Not taupe: taupe beside paper is 1.50:1 apart
+     and reads as a printing error rather than a decision. */
+  .scope{background:var(--paper-2)}
+
+  /* Nav anchors sit quiet beside the one gold action. */
+  .bar nav .ln{font-size:.78rem}
+
   /* Hand-written breaks, per the house rule. Below the measure where they
      stop helping they fold back to normal wrapping. */
   .brs{display:none}
   @media(min-width:46rem){.brs{display:inline}}
+
+  /* Print. A commercial director forwards this or puts it in front of someone
+     else, and chrome that cannot be clicked on paper is noise. Every answer
+     opens, because a closed accordion prints as a list of questions. */
+  @media print{
+    header,.heroact,.buttons,.navcta,.bar nav,.foot{display:none}
+    body{background:#fff;color:#000;font-size:10pt;line-height:1.55}
+    .ground2,.scope,.case,.inv{background:#fff!important;color:#000!important}
+    .inv h2,.inv .sub,.inv .eyebrow,.inv .fineprint{color:#000!important}
+    section{padding-block:1.2rem;break-inside:avoid}
+    h1{font-size:26pt}h2{font-size:18pt}
+    .faq details{display:block}
+    .faq .faq-a,.faq details p{display:block!important}
+    .doc img{max-width:60%}
+    a[href^="mailto"]::after{content:" (" attr(href) ")";font-size:8pt}
+  }
 </style>
 </head>
 
@@ -55,6 +93,10 @@
   <div class="bar">
     <a class="mark" href="#top">Arvorealta</a>
     <nav>
+      <a class="ln" href="#case">The case</a>
+      <a class="ln" href="#standard">What it is</a>
+      <a class="ln" href="#price">Price</a>
+      <a class="ln" href="#scope">Scope</a>
       <a class="navcta" href="mailto:page@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost&amp;body=Attach%20the%20page%20before%20sending.%0A%0ACompany%3A%0AWhat%20the%20tender%20was%20for%3A%0ARoughly%20when%20you%20submitted%3A">Get your page scored</a>
     </nav>
   </div>
@@ -83,19 +125,21 @@
 
 <hr class="rule">
 
-<section class="wrap case">
-  <p class="eyebrow">What the file actually said</p>
-  <h2>They were cheapest.<br class="brs"> They were fastest.<br class="brs"> They lost on five days.</h2>
-  <p class="lede">P. Olesen og Sønner bid for a demolition contract in Denmark and lost it on when they said the quality-assurance paperwork would be handed over. Not on the work. On a date inside a document.</p>
-  <div class="figures">
-    <div><b>55%</b><span>Of the score carried by time</span></div>
-    <div><b>45%</b><span>Of the score carried by price</span></div>
-    <div><b>5</b><span>Days between their handover date and the winner's</span></div>
-    <div><b>0</b><span>Lines of the award explaining the criteria, by their own account</span></div>
+<section id="case" class="case">
+  <div class="wrap">
+    <p class="eyebrow">What the file actually said</p>
+    <h2>They were cheapest.<br class="brs"> They were fastest.<br class="brs"> They lost on five days.</h2>
+    <p class="lede">P. Olesen og Sønner bid for a demolition contract in Denmark and lost it on when they said the quality-assurance paperwork would be handed over. Not on the work. On a date inside a document.</p>
+    <div class="figures">
+      <div><b>55%</b><span>Of the score carried by time</span></div>
+      <div><b>45%</b><span>Of the score carried by price</span></div>
+      <div><b>5</b><span>Days between their handover date and the winner's</span></div>
+      <div><b>0</b><span>Lines of the award explaining the criteria, by their own account</span></div>
+    </div>
+    <p class="claim">It makes no sense that so few days have had such great significance.</p>
+    <p class="meta">The complainant's own words, in the published ruling.</p>
+    <p class="src">Klagenævnet for Udbud · J.nr. 25/03606 · 13 October 2025</p>
   </div>
-  <p class="claim">It makes no sense that so few days have had such great significance.</p>
-  <p class="meta">The complainant's own words, in the published ruling.</p>
-  <p class="src">Klagenævnet for Udbud · J.nr. 25/03606 · 13 October 2025</p>
 </section>
 
 <hr class="rule">
@@ -152,7 +196,7 @@
 
 <hr class="rule">
 
-<section class="wrap">
+<section id="standard" class="wrap">
   <p class="eyebrow">What a document standard is</p>
   <h2>Written once, properly,<br class="brs"> in the form an evaluator scores.</h2>
   <p class="lede">The set of things your firm asserts about itself, in the language of the template it will be read against.</p>
@@ -165,6 +209,25 @@
   <p class="reassure">It is not a management system. Nothing changes in the workshop. The standard is a document, it belongs to you, and your own people edit it.</p>
 </section>
 
+
+<section class="ground2 docband">
+  <div class="wrap">
+    <p class="eyebrow">What you get back</p>
+    <figure class="doc">
+      <img src="/assets/Document-redacted.jpeg" width="1426" height="1076" loading="lazy"
+           alt="Two sheets of a reference project annex, photographed at an angle. A
+                record of the work, and the certificate of satisfactory delivery that
+                goes with it, with the client, the contract values and the notice
+                references blacked out.">
+      <figcaption class="doccap">
+        A reference sheet and the certificate that goes with it, from a standard
+        built for another client. Sheet two is the form the recipient signs at
+        handover, while the job is still fresh.
+        <span>Redacted by request. The blanks are empty, not covered.</span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
 <hr class="rule">
 
 <section class="wrap">
@@ -180,7 +243,7 @@
 
 <hr class="rule">
 
-<section class="wrap">
+<section id="price" class="wrap">
   <p class="eyebrow">Price</p>
   <h2>Every tier credits<br class="brs"> into the one above it.</h2>
   <p class="lede">Walk the whole ladder and you pay €8,000 in total, not €11,000. Credits never expire.</p>
@@ -218,41 +281,44 @@
       <div><b>5.7</b><span>Average bidders per procedure in 2011. EU-wide</span></div>
       <div><b>3.2</b><span>Average bidders per procedure in 2021. EU-wide</span></div>
     </div>
-    <p>The field is thinning, and it is thinning for the reason above. Firms are leaving because the paperwork became unreasonable, not because they stopped being able to do the work. Everyone who withdraws hands their share to whoever can still produce the documents.</p>
+    <p>The field is thinning, and it is thinning for the reason above. Firms are leaving because the paperwork became unreasonable, not because they stopped being able to do the work.</p>
+    <p class="kicker">Everyone who withdraws<br class="brs"> hands their share to whoever<br class="brs"> can still produce the documents.</p>
     <p>You bid three times a year, and that does not need to change. Bidding more is not the offer. The offer is that the few you do bid stop being lost on the part nobody explained to you.</p>
   </div>
 </section>
 
 <hr class="rule">
 
-<section class="wrap">
-  <p class="eyebrow">Scope and evidence</p>
-  <h2>Questions you should ask me.</h2>
-  <div class="faq">
-    <details open>
-      <summary>Can I check the numbers on this page?</summary>
-      <p>Most of them, now. The Danish ruling is published under J.nr. 25/03606 and the Norwegian one under KOFA 2023/472, both searchable by case number. The Latvian and Norwegian weighting figures come from published sources. Two are weaker and I would rather say so than let you find out. The 15,000 kr comparison and the fall from 5.7 to 3.2 bidders per procedure are drawn from my own research notes and I have not yet re-verified either against the original source. Treat them as indicative until I have.</p>
-    </details>
-    <details>
-      <summary>Is this a quality management system?</summary>
-      <p>No, and it is the wrong thing to compare it to. A management system changes how you work and then asks you to keep proving that you do. This is a document. Nothing in the workshop changes, nobody is audited, and there is no annual renewal. If a supplier has told you that complicated quality management systems are an unreasonable requirement, they were right, and this is not one.</p>
-    </details>
-    <details>
-      <summary>What happens if my losses really are about price?</summary>
-      <p>Then you have wasted a page and I have wasted an afternoon, which is the whole reason the first step is free. Send a page from a tender you lost. If it comes back scored and the score was fair, you have your answer and it did not cost you anything to get it.</p>
-    </details>
-    <details>
-      <summary>Who actually does the work?</summary>
-      <p>I do. There is no team behind this page and no account manager. That is a real constraint and it is why the engagement is four hours of your time rather than a project, and why there is a limit to how many of these run at once.</p>
-    </details>
-    <details>
-      <summary>Do you have clients I can speak to?</summary>
-      <p>Not yet in this segment, and I am not going to invent one. That is a fair reason to start with the free scored page rather than with €2,400, and it is the honest reason the ladder starts where it does.</p>
-    </details>
-    <details>
-      <summary>Do you work outside the Nordics?</summary>
-      <p>The work is built around Finnish, Swedish, Norwegian and Danish procurement practice, and that is where I can be useful today. Elsewhere in the EU is a direction rather than a readiness claim I will make now.</p>
-    </details>
+<section id="scope" class="scope">
+  <div class="wrap">
+    <p class="eyebrow">Scope and evidence</p>
+    <h2>Questions you should ask me.</h2>
+    <div class="faq">
+      <details open>
+        <summary>Can I check the numbers on this page?</summary>
+        <p>Most of them, now. The Danish ruling is published under J.nr. 25/03606 and the Norwegian one under KOFA 2023/472, both searchable by case number. The Latvian and Norwegian weighting figures come from published sources. Two are weaker and I would rather say so than let you find out. The 15,000 kr comparison and the fall from 5.7 to 3.2 bidders per procedure are drawn from my own research notes and I have not yet re-verified either against the original source. Treat them as indicative until I have.</p>
+      </details>
+      <details>
+        <summary>Is this a quality management system?</summary>
+        <p>No, and it is the wrong thing to compare it to. A management system changes how you work and then asks you to keep proving that you do. This is a document. Nothing in the workshop changes, nobody is audited, and there is no annual renewal. If a supplier has told you that complicated quality management systems are an unreasonable requirement, they were right, and this is not one.</p>
+      </details>
+      <details>
+        <summary>What happens if my losses really are about price?</summary>
+        <p>Then you have wasted a page and I have wasted an afternoon, which is the whole reason the first step is free. Send a page from a tender you lost. If it comes back scored and the score was fair, you have your answer and it did not cost you anything to get it.</p>
+      </details>
+      <details>
+        <summary>Who actually does the work?</summary>
+        <p>I do. There is no team behind this page and no account manager. That is a real constraint and it is why the engagement is four hours of your time rather than a project, and why there is a limit to how many of these run at once.</p>
+      </details>
+      <details>
+        <summary>Do you have clients I can speak to?</summary>
+        <p>Not yet in this segment, and I am not going to invent one. That is a fair reason to start with the free scored page rather than with €2,400, and it is the honest reason the ladder starts where it does.</p>
+      </details>
+      <details>
+        <summary>Do you work outside the Nordics?</summary>
+        <p>The work is built around Finnish, Swedish, Norwegian and Danish procurement practice, and that is where I can be useful today. Elsewhere in the EU is a direction rather than a readiness claim I will make now.</p>
+      </details>
+    </div>
   </div>
 </section>
 
