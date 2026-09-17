@@ -125,6 +125,18 @@ The red cannot carry small text on paper. It measures 3.61:1 there, under the
 and not as a word. The offer page currently spends it nowhere, which the rule
 allows; eight red dashes in the comparison did not.
 
+**The red belongs to the light grounds, and they are the whole list.** Measured
+against every ground in this theme: paper 3.61, paper-2 4.01, paper-3 4.47,
+taupe 2.40, ink 2.56. The three papers clear the 3:1 a graphic mark needs and
+not one of them clears the 4.5:1 a word needs, which is the rule above stated
+across all three rather than only on paper. **Taupe and ink clear neither**, so
+the red does not appear on them at all, as a mark or as anything else.
+
+This file said for a while that the red mark lives on paper or ink. The taupe
+figure was measured and the ink one was not, and the ink half was wrong. A
+statement slide reverses out to full-bleed ink, so there is no point of failure
+to mark there in red. Use `--paper-3` or a light value at low opacity instead.
+
 Muted brick `#8E4A45` is the **mark**. The red says something failed; the mark
 says here is the thing. Its contrast writes its own rules, and all three are
 hard:
@@ -183,7 +195,8 @@ ground cannot be a mid-tone — every clay and umber between paper and ink
 fails both text colours at once (4.4:1 and below). Two rules follow from the
 contrast, and both are hard:
 
-- **Never the accent red on taupe** — 2.40:1. The red mark lives on paper or ink.
+- **Never the accent red on taupe** — 2.40:1. The red mark lives on the light
+  grounds, and neither taupe nor ink is one of them. See the measured set above.
 - **Never taupe as a panel beside paper** — 1.50:1 apart, so they read as a
   printing error rather than a choice. Taupe is a whole-slide ground.
 
