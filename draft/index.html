@@ -82,6 +82,26 @@
   /* Nav anchors sit quiet beside the one gold action. */
   .bar nav .ln{font-size:.78rem}
 
+  /* Anchored sections land clear of the top edge instead of flush against it. */
+  #case,#standard,#price,#scope{scroll-margin-top:2rem}
+
+  /* Keyboard focus has to be visible. system.css gives .ln an underline on
+     focus; the button-shaped action and the FAQ rows need their own. */
+  .navcta:focus-visible,.faq summary:focus-visible,.refs a:focus-visible{
+    outline:2px solid var(--ink);outline-offset:3px}
+  .faq summary:focus-visible{outline-offset:-2px}
+
+  /* PHONE. Measured at a true 375px viewport: scrollWidth equals clientWidth
+     and nothing exceeds it, so there is no overflow to fix here. Two things
+     are still worth doing at this width. Two columns of figures leave a
+     caption in about 160px, which sets four or five characters to the line,
+     so they stack. And a long unbroken token in a headline is the one thing
+     that could push the page sideways later, so it is allowed to break. */
+  @media(max-width:46rem){
+    .figures{grid-template-columns:1fr;gap:2rem}
+    h1,h2,.kicker,.claim{overflow-wrap:break-word}
+  }
+
   /* Hand-written breaks, per the house rule. Below the measure where they
      stop helping they fold back to normal wrapping. */
   .brs{display:none}
@@ -145,7 +165,7 @@
 
 <section id="case" class="case">
   <div class="wrap">
-    <p class="eyebrow">What the file actually said</p>
+    <p class="tag"><b>01</b> the record</p>
     <h2>They were cheapest.<br class="brs"> They were fastest.<br class="brs"> They lost on five days.</h2>
     <p class="lede">P. Olesen og Sønner bid for a demolition contract in Denmark and lost it on when they said the quality-assurance paperwork would be handed over. Not on the work. On a date inside a document.</p>
     <div class="figures">
@@ -163,7 +183,7 @@
 <hr class="rule">
 
 <section class="wrap">
-  <p class="eyebrow">The evaluation scores the document</p>
+  <p class="tag"><b>02</b> the mechanism</p>
   <h2>The paperwork is a separate<br class="brs"> object from the company.</h2>
   <p class="lede">An evaluator sits with a scoring template and your submission. What happens next is not a judgement about your firm.</p>
   <ul class="ticks">
@@ -179,7 +199,7 @@
 <hr class="rule">
 
 <section class="wrap">
-  <p class="eyebrow">Before you say it is all price anyway</p>
+  <p class="tag"><b>03</b> where the score is decided</p>
   <h2>Where price is the whole<br class="brs"> score, stop reading.</h2>
   <p class="lede">Sometimes it really is price, and where it is, nothing here helps you. The tenders you bid sit somewhere on this range, and it is worth knowing where.</p>
   <div class="compare">
@@ -215,7 +235,7 @@
 <hr class="rule">
 
 <section id="standard" class="wrap">
-  <p class="eyebrow">What a document standard is</p>
+  <p class="tag"><b>04</b> the thing itself</p>
   <h2>Written once, properly,<br class="brs"> in the form an evaluator scores.</h2>
   <p class="lede">The set of things your firm asserts about itself, in the language of the template it will be read against.</p>
   <ul class="ticks">
@@ -230,7 +250,7 @@
 
 <section class="ground2 docband">
   <div class="wrap">
-    <p class="eyebrow">What you get back</p>
+    <p class="tag"><b>05</b> what it looks like</p>
     <figure class="doc">
       <img src="/assets/Document-redacted.jpeg" width="1426" height="1076" loading="lazy"
            alt="Two sheets of a reference project annex, photographed at an angle. A
@@ -249,7 +269,7 @@
 <hr class="rule">
 
 <section class="wrap">
-  <p class="eyebrow">What it takes from you</p>
+  <p class="tag"><b>06</b> what it costs you</p>
   <h2>Four hours.</h2>
   <p class="lede">You supply what already exists. I do the rest.</p>
   <div class="relief">
@@ -284,7 +304,7 @@
 <hr class="rule">
 
 <section id="price" class="wrap">
-  <p class="eyebrow">Price</p>
+  <p class="tag"><b>07</b> the ladder</p>
   <h2>Every tier credits<br class="brs"> into the one above it.</h2>
   <p class="lede">Walk the whole ladder and you pay €8,000 in total, not €11,000. Credits never expire.</p>
   <div class="tiers">
@@ -312,7 +332,7 @@
 
 <section class="ground2">
   <div class="wrap">
-    <p class="eyebrow">We manage without them</p>
+    <p class="tag"><b>08</b> doing nothing</p>
     <h2>Plenty of firms have stopped<br class="brs"> bidding. They were right to.</h2>
     <p class="lede">A Swedish firm said it to a trade body survey with pride rather than regret. We manage without them, we get paid in full by private clients, completely without hassle. Public work argues about scope and costs a week of unpaid writing before anyone looks at your price.</p>
     <div class="figures">
@@ -331,7 +351,7 @@
 
 <section id="scope" class="scope">
   <div class="wrap">
-    <p class="eyebrow">Scope and evidence</p>
+    <p class="tag"><b>09</b> questions</p>
     <h2>Questions you should ask me.</h2>
     <div class="faq">
       <details open>
