@@ -88,7 +88,20 @@
      the page sits on it. Ink caption reads 6.16:1 there. */
   /* Grounds. No two folds in sequence share one, and ink carries the two
      featured folds, the mechanism and the ladder, plus the close. */
+  .g-p2{background:var(--paper-2)}
   .g-p3{background:var(--paper-3)}
+  /* .case sets paper-2 and sits later in system.css than .inv, so the record
+     fold needs both classes named to take ink. */
+  .case.inv{background:var(--ink)}
+
+  /* .claim carried its display type only inside .case, so the same element in
+     another fold rendered as body copy. And it sat at margin:0, hard against
+     whatever came before it. Both are fixed here rather than in system.css,
+     which the live offer page shares. */
+  .claim{margin:clamp(2rem,4vw,2.75rem) 0 0;font-family:var(--font-display);
+    font-size:clamp(1.35rem,1rem + 1.5vw,2.2rem);line-height:1.24;
+    letter-spacing:-.005em;max-width:30ch}
+  .case .claim{margin:clamp(2rem,4vw,2.75rem) 0 0}
 
   /* The sheet sits beside its caption rather than at full measure. At full
      width it was the loudest thing on the page and outweighed the argument
@@ -197,7 +210,7 @@
 </section>
 
 
-<section id="case" class="case">
+<section id="case" class="case inv">
   <div class="wrap">
     <p class="tag"><b>01</b> the record</p>
     <h2>They were cheapest.<br class="brs"> They were fastest.<br class="brs"> They lost on five days.</h2>
@@ -215,9 +228,9 @@
 </section>
 
 
-<section class="inv">
-  <p class="tag"><b>02</b> the mechanism</p>
+<section class="g-p3">
   <div class="wrap">
+    <p class="tag"><b>02</b> the mechanism</p>
     <h2>The paperwork is a separate<br class="brs"> object from the company.</h2>
     <p class="lede">An evaluator sits with a scoring template and your submission. What happens next is not a judgement about your firm.</p>
     <ul class="ticks">
@@ -267,7 +280,7 @@
 </section>
 
 
-<section id="standard" class="g-p3">
+<section id="standard" class="g-p2">
   <div class="wrap">
     <p class="tag"><b>04</b> the thing itself</p>
     <h2>Written once, properly,<br class="brs"> in the form an evaluator scores.</h2>
