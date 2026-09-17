@@ -58,6 +58,12 @@
      stay as they are and each card takes an edge instead, so the object is
      defined by a line rather than by a difference nobody can see. */
   .ground2 .offer{outline:1px solid var(--rule);outline-offset:-1px}
+  /* .offer.beyond is transparent in system.css, which reads as a lighter
+     weight on paper and as a hole on taupe. It takes the same ground as the
+     first tier here. It stays secondary by what it says rather than by what
+     it weighs, since .tiers puts all three in one row from 62rem and the
+     card does not span anything at this width. */
+  .ground2 .offer.beyond{background:var(--paper-3)}
 
   /* INK FOLDS. --ink-soft measures 2.35:1 on ink and is unusable there, so
      every class that reads from it needs an .inv counterpart. Anything
@@ -113,6 +119,14 @@
   .weigh figcaption{margin-top:1.1rem;font-size:.9rem;line-height:1.65;
     color:rgba(233,231,228,.75);max-width:52ch}
 
+  /* A two-column fold puts each column's first element at the top of its own
+     grid cell, where system.css zeroes a lede's top margin as a first child
+     and leaves a claim's in place. The columns then start at different
+     heights and the lede sits hard under the headline. The gap belongs to the
+     split as a whole, and nothing inside it opens with a margin. */
+  .split{margin-top:clamp(1.75rem,3.5vw,2.5rem)}
+  .split > div > *:first-child{margin-top:0}
+
   .g-p2{background:var(--paper-2)}
   .g-p3{background:var(--paper-3)}
   /* .case sets paper-2 and sits later in system.css than .inv, so the record
@@ -144,16 +158,17 @@
   /* The range reads down, not across. Three columns set Latvia, the reader and
      Norway as parallel options to choose between, which is not what they are.
      They are three positions on one scale, so they stack and the scale runs
-     top to bottom. Capped well inside the wrap, because a rule that runs on
-     past the last word it separates is pointing at nothing. */
+     top to bottom. Each position is its own band across the full width, the
+     way the reference site sets its three vantage points, rather than a row
+     divided off by a rule that runs on past the last word it separates. */
   .range{list-style:none;margin:clamp(2.5rem,5vw,3.5rem) 0 0;padding:0;
-    max-width:56rem;border-top:1px solid var(--rule)}
+    display:grid;gap:.6rem}
   .rangerow{display:grid;gap:.55rem 0;grid-template-columns:1fr;
-    padding:1.4rem 0 1.4rem 1.1rem;border-bottom:1px solid var(--rule);
-    border-left:2px solid transparent}
+    background:var(--paper-3);outline:1px solid var(--rule);outline-offset:-1px;
+    padding:1.5rem 1.6rem 1.5rem 1.4rem;border-left:2px solid transparent}
   @media(min-width:50rem){
-    .rangerow{grid-template-columns:10.5rem 4.75rem 1fr;gap:0 2.25rem;
-      align-items:start;padding-block:1.7rem}
+    .rangerow{grid-template-columns:13rem 6rem 1fr;gap:0 3rem;
+      align-items:start;padding:1.9rem 2.2rem 1.9rem 2rem}
   }
   .rangek{margin:0;font-family:var(--font-label);font-size:.78rem;font-weight:600;
     letter-spacing:.09em;text-transform:uppercase;line-height:1.5;color:var(--ink)}
@@ -169,7 +184,7 @@
   .rangev.none{font-size:1.5rem;margin-top:-.1em;color:var(--ink-soft)}
   .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);
     clip-path:inset(50%);white-space:nowrap}
-  .ranget{margin:0;font-size:.95rem;line-height:1.65;color:var(--ink);max-width:44ch}
+  .ranget{margin:0;font-size:.95rem;line-height:1.65;color:var(--ink);max-width:58ch}
   /* The reader's own row is marked with a rule, not a fill. Paper-3 on paper is
      about 1.3:1 and would not read as a decision. */
   .rangerow.here{border-left-color:var(--ink)}
@@ -282,15 +297,21 @@
   <div class="wrap">
     <p class="tag"><b>02</b> the mechanism</p>
     <h2>The paperwork is a separate<br class="brs"> object from the company.</h2>
-    <p class="lede">An evaluator sits with a scoring template and your submission. What happens next is not a judgement about your firm.</p>
-    <ul class="ticks">
-      <li>They award points for what is present, findable and specific</li>
-      <li>They cannot award points for what you know and did not write down</li>
-      <li>They are not permitted to</li>
-    </ul>
-    <p class="claim">Scored on the documentation requirements rather than on the award criterion, and marked down for matters no documentation was asked for.</p>
-    <p class="meta">What a Norwegian road contractor complained of, from the other end of the same machine. It is a complaint, not a finding.</p>
-    <p class="src">KOFA 2023/472 · Mesta AS mod Rogaland fylkeskommune</p>
+    <div class="split">
+      <div>
+        <p class="lede">An evaluator sits with a scoring template and your submission. What happens next is not a judgement about your firm.</p>
+        <ul class="ticks">
+          <li>They award points for what is present, findable and specific</li>
+          <li>They cannot award points for what you know and did not write down</li>
+          <li>They are not permitted to</li>
+        </ul>
+      </div>
+      <div>
+        <p class="claim">Scored on the documentation requirements rather than on the award criterion, and marked down for matters no documentation was asked for.</p>
+        <p class="meta">What a Norwegian road contractor complained of, from the other end of the same machine. It is a complaint, not a finding.</p>
+        <p class="src">KOFA 2023/472 · Mesta AS mod Rogaland fylkeskommune</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -324,14 +345,20 @@
   <div class="wrap">
     <p class="tag"><b>04</b> the thing itself</p>
     <h2>Written once, properly,<br class="brs"> in the form an evaluator scores.</h2>
-    <p class="lede">The set of things your firm asserts about itself, in the language of the template it will be read against.</p>
-    <ul class="ticks">
-      <li>Capability, stated as what you have done rather than what you can do</li>
-      <li>Process, in the detail a scoring template asks for</li>
-      <li>Reference projects, with the specifics that make them count</li>
-      <li>Environmental and quality evidence, as figures rather than adjectives</li>
-    </ul>
-    <p class="reassure">It is not a management system. Nothing changes in the workshop. The standard is a document, it belongs to you, and your own people edit it.</p>
+    <div class="split">
+      <div>
+        <p class="lede">The set of things your firm asserts about itself, in the language of the template it will be read against.</p>
+        <ul class="ticks">
+          <li>Capability, stated as what you have done rather than what you can do</li>
+          <li>Process, in the detail a scoring template asks for</li>
+          <li>Reference projects, with the specifics that make them count</li>
+          <li>Environmental and quality evidence, as figures rather than adjectives</li>
+        </ul>
+      </div>
+      <div>
+        <p class="reassure">It is not a management system. Nothing changes in the workshop. The standard is a document, it belongs to you, and your own people edit it.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -397,22 +424,42 @@
     <p class="lede">Walk the whole ladder and you pay €8,000 in total, not €11,000. Credits never expire.</p>
     <div class="tiers">
       <div class="offer">
-        <p class="step">One document</p>
-        <div class="price"><b>€600</b></div>
-        <p class="terms">One document, done properly.</p>
-        <p class="credit">The full €600 comes off the €2,400.</p>
+        <p class="step">Step one</p>
+        <h3>One document</h3>
+        <div class="price"><b>€600</b> <em>3 to 4 days</em></div>
+        <p class="terms">One document, done properly. The whole thing, however many pages it runs to, not a sample page.</p>
+        <ul class="ticks">
+          <li>The full capability statement, reference sheet or tender annex</li>
+          <li>The editable source file</li>
+          <li>Print and screen exports, sized and named for tender portals</li>
+        </ul>
+        <p class="credit">Credited in full into anything you buy after it.</p>
       </div>
       <div class="offer full">
-        <p class="step">The document standard</p>
-        <div class="price"><b>€2,400</b><em>one revision round included</em></div>
-        <p class="terms">Capability, process, references, environmental and quality evidence.</p>
-        <p class="credit">The €2,400 comes off the €8,000.</p>
+        <p class="step">The standard</p>
+        <h3>The document standard</h3>
+        <div class="price"><b>€2,400</b> <em>two weeks</em></div>
+        <p class="terms">Every document that decides a bid, on one system your own people run.</p>
+        <ul class="ticks">
+          <li>Templates for capability statements, reference sheets and tender annexes</li>
+          <li>One document built end to end, plus file structure and naming</li>
+          <li>The index. Every project, by client and year, ready at the next bid</li>
+          <li>One revision round</li>
+        </ul>
+        <p class="credit">All source files, yours to keep. Runs without a designer after handoff. Your €600 credited.</p>
       </div>
       <div class="offer beyond">
-        <p class="step">Identity system</p>
-        <div class="price"><b>€8,000</b></div>
-        <p class="terms">The whole identity system.</p>
-        <p class="credit">The end of the ladder.</p>
+        <p class="step">Beyond documents</p>
+        <h3>Identity system</h3>
+        <div class="price"><b>€8,000</b> <em>six weeks</em></div>
+        <p class="terms">The document standard applied across the company.</p>
+        <ul class="ticks">
+          <li>Colour and typographic system for print, screen and product</li>
+          <li>Signage, vehicles, trade fair stands, product marking</li>
+          <li>Written guidelines your suppliers can work from</li>
+          <li>Wordmark or mark</li>
+        </ul>
+        <p class="bridge">This is the work I have done longest. It is still the last thing you should buy from me. Take it once the document standard has proved itself. Your €2,400 credited.</p>
       </div>
     </div>
     <p class="bridge">A Swedish bid consultancy publishes 15,000 kr excluding VAT for a single draft of a single bid, delivered as a Word file. Roughly what the full standard costs here, and theirs expires the day that tender closes.</p>
