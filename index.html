@@ -179,10 +179,14 @@
     font-size:clamp(1.7rem,1.2rem + 1.4vw,2.25rem);line-height:1;
     letter-spacing:-.015em;font-variant-numeric:tabular-nums;color:var(--ink)}
   /* The middle row has no figure, and that is the fold's argument rather than
-     an omission, so the cell is kept and marked the way a table marks one. */
-  .rangev.none{font-size:1.5rem;margin-top:-.1em;color:var(--ink-soft)}
-  .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);
-    clip-path:inset(50%);white-space:nowrap}
+     an omission. An empty cell in a column of percentages reads as zero,
+     which is the opposite of what the fold says, and a dash reads as no data
+     rather than as no answer. The cell carries the word instead, so the
+     figure column scans as 73% / Unknown / 30% and tells the whole thing on
+     its own. Smaller and quieter than the two figures, because it is a word
+     sitting in a column of numbers and should not pretend to be one. */
+  .rangev.none{font-size:clamp(1.05rem,.95rem + .35vw,1.25rem);
+    margin-top:.1em;color:var(--ink-soft);letter-spacing:-.005em}
   .ranget{margin:0;font-size:.95rem;line-height:1.65;color:var(--ink);max-width:58ch}
   /* The reader's own row is marked with a rule, not a fill. Paper-3 on paper is
      about 1.3:1 and would not read as a decision. */
@@ -327,7 +331,7 @@
     </li>
     <li class="rangerow here">
       <p class="rangek">Most of what you bid<span>Between the two</span></p>
-      <p class="rangev none">&#8211;<span class="vh"> not stated anywhere you have seen</span></p>
+      <p class="rangev none">Unknown</p>
       <p class="ranget">Part of the score is price. Part of it was never about price. You have probably never seen that part written down, which is the whole reason the split above is worth knowing.</p>
     </li>
     <li class="rangerow">
