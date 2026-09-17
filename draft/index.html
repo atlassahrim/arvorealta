@@ -94,6 +94,25 @@
   .figures + p,.figures + .kicker,.figures + .reassure{
     margin-top:clamp(2.5rem,5vw,3.5rem)}
 
+  /* The weighting, drawn rather than listed. Two figures in a row of tiles say
+     55 and 45 without showing that one is larger, which is the whole point. The
+     segments are proportional, so the picture cannot disagree with the numbers.
+     Set in light values, not the accent: red measures 2.56:1 on ink, under the
+     3:1 a graphic mark needs, whatever CLAUDE.md's palette note says. */
+  .weigh{margin:clamp(2.5rem,5vw,3.5rem) 0 0;max-width:52rem}
+  .weighbar{display:flex;border:1px solid var(--rule-inv);min-height:4.5rem}
+  .seg{display:flex;flex-direction:column;justify-content:center;gap:.35rem;
+    padding:1rem 1.15rem}
+  .seg.s55{flex:55;background:rgba(233,231,228,.13);
+    border-right:1px solid var(--rule-inv)}
+  .seg.s45{flex:45;background:rgba(233,231,228,.045)}
+  .seg span{font-family:var(--font-label);font-size:.68rem;font-weight:600;
+    letter-spacing:.14em;text-transform:uppercase;color:rgba(233,231,228,.7)}
+  .seg b{font-family:var(--font-display);font-weight:400;font-size:clamp(1.5rem,1.1rem + 1.2vw,2.1rem);
+    line-height:1;letter-spacing:-.015em;color:var(--paper-3)}
+  .weigh figcaption{margin-top:1.1rem;font-size:.9rem;line-height:1.65;
+    color:rgba(233,231,228,.75);max-width:52ch}
+
   .g-p2{background:var(--paper-2)}
   .g-p3{background:var(--paper-3)}
   /* .case sets paper-2 and sits later in system.css than .inv, so the record
@@ -122,32 +141,38 @@
   /* Nav anchors sit quiet beside the one gold action. */
   .bar nav .ln{font-size:.78rem}
 
-  /* The range reads down, not across. Three columns set Latvia, the reader
-     and Norway as parallel options to choose between, which is not what they
-     are. They are three positions on one scale, so they stack as rows and the
-     scale runs top to bottom, with the reader's own row marked in the middle
-     of it. Rows also give the two figures a column of their own to line up in,
-     and the middle row has no figure because not knowing it is the point. */
+  /* The range reads down, not across. Three columns set Latvia, the reader and
+     Norway as parallel options to choose between, which is not what they are.
+     They are three positions on one scale, so they stack and the scale runs
+     top to bottom. Capped well inside the wrap, because a rule that runs on
+     past the last word it separates is pointing at nothing. */
   .range{list-style:none;margin:clamp(2.5rem,5vw,3.5rem) 0 0;padding:0;
-    border-top:1px solid var(--rule)}
-  .rangerow{display:grid;gap:.5rem 2rem;grid-template-columns:1fr;
-    padding:1.5rem 0 1.5rem 1.25rem;border-bottom:1px solid var(--rule);
+    max-width:56rem;border-top:1px solid var(--rule)}
+  .rangerow{display:grid;gap:.55rem 0;grid-template-columns:1fr;
+    padding:1.4rem 0 1.4rem 1.1rem;border-bottom:1px solid var(--rule);
     border-left:2px solid transparent}
   @media(min-width:50rem){
-    .rangerow{grid-template-columns:13rem 6rem 1fr;align-items:baseline;
-      gap:0 2.5rem;padding-block:1.75rem}
+    .rangerow{grid-template-columns:10.5rem 4.75rem 1fr;gap:0 2.25rem;
+      align-items:start;padding-block:1.7rem}
   }
-  .rangek{margin:0;font-family:var(--font-label);font-size:.82rem;font-weight:600;
-    letter-spacing:.08em;text-transform:uppercase;line-height:1.4;color:var(--ink)}
-  .rangek span{display:block;margin-top:.4rem;font-size:.68rem;letter-spacing:.1em;
+  .rangek{margin:0;font-family:var(--font-label);font-size:.78rem;font-weight:600;
+    letter-spacing:.09em;text-transform:uppercase;line-height:1.5;color:var(--ink)}
+  .rangek span{display:block;margin-top:.3rem;font-size:.66rem;letter-spacing:.1em;
     color:var(--ink-soft)}
-  .rangev{margin:0;font-family:var(--font-display);font-size:clamp(1.8rem,1.2rem + 1.6vw,2.4rem);
-    line-height:1;letter-spacing:-.015em;font-variant-numeric:tabular-nums;color:var(--ink)}
-  .ranget{margin:0;font-size:.95rem;line-height:1.65;color:var(--ink);max-width:52ch}
-  /* The reader's own row is marked with a rule rather than a fill. Paper-3 on
-     paper is about 1.3:1 and would not read as a decision. */
+  /* The figure is display type beside a label set at .78rem, so it needs a
+     nudge to sit on the label's cap height rather than hang below it. */
+  .rangev{margin:-.22em 0 0;font-family:var(--font-display);
+    font-size:clamp(1.7rem,1.2rem + 1.4vw,2.25rem);line-height:1;
+    letter-spacing:-.015em;font-variant-numeric:tabular-nums;color:var(--ink)}
+  /* The middle row has no figure, and that is the fold's argument rather than
+     an omission, so the cell is kept and marked the way a table marks one. */
+  .rangev.none{font-size:1.5rem;margin-top:-.1em;color:var(--ink-soft)}
+  .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);
+    clip-path:inset(50%);white-space:nowrap}
+  .ranget{margin:0;font-size:.95rem;line-height:1.65;color:var(--ink);max-width:44ch}
+  /* The reader's own row is marked with a rule, not a fill. Paper-3 on paper is
+     about 1.3:1 and would not read as a decision. */
   .rangerow.here{border-left-color:var(--ink)}
-  .rangerow.here .rangev{color:var(--ink-soft)}
 
   /* Anchored sections land clear of the top edge instead of flush against it. */
   #case,#standard,#price,#scope{scroll-margin-top:2rem}
@@ -234,9 +259,15 @@
     <p class="tag"><b>01</b> the record</p>
     <h2>They were cheapest.<br class="brs"> They were fastest.<br class="brs"> They lost on five days.</h2>
     <p class="lede">P. Olesen og Sønner bid for a demolition contract in Denmark and lost it on when they said the quality-assurance paperwork would be handed over. Not on the work. On a date inside a document.</p>
+    <figure class="weigh">
+      <div class="weighbar" role="img"
+           aria-label="The award weighting. Time carried 55% of the score, price carried 45%.">
+        <div class="seg s55"><span>Time</span><b>55%</b></div>
+        <div class="seg s45"><span>Price</span><b>45%</b></div>
+      </div>
+      <figcaption>They were the cheapest bid, which won them the right-hand half. They lost inside the left-hand half, on the date they wrote on a document.</figcaption>
+    </figure>
     <div class="figures">
-      <div><b>55%</b><span>Of the score carried by time</span></div>
-      <div><b>45%</b><span>Of the score carried by price</span></div>
       <div><b>5</b><span>Days between their handover date and the winner's</span></div>
       <div><b>0</b><span>Lines of the award explaining the criteria, by their own account</span></div>
     </div>
@@ -276,7 +307,7 @@
     </li>
     <li class="rangerow here">
       <p class="rangek">Most of what you bid<span>Between the two</span></p>
-      <p class="rangev" aria-hidden="true">·</p>
+      <p class="rangev none">&#8211;<span class="vh"> not stated anywhere you have seen</span></p>
       <p class="ranget">Part of the score is price. Part of it was never about price. You have probably never seen that part written down, which is the whole reason the split above is worth knowing.</p>
     </li>
     <li class="rangerow">
