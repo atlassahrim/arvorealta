@@ -84,9 +84,24 @@
 
   /* The reassurance. Its own object, because a line that defuses the reader's
      worst reading of the offer should not be buried in a paragraph. */
+  /* Both of these defuse the reader's worst reading of the offer, and they
+     were the only blocks on the page whose form did not say what they were
+     for. They take the heroqual move CLAUDE.md describes, a small mark
+     eyebrow that is found with a sentence under it that is read, so the job
+     is legible before the sentence is. Light grounds only; the mark never
+     crosses to ink at 2.03:1. */
   .reassure{margin-top:clamp(2.5rem,5vw,3.5rem);padding:1.4rem 1.6rem;
     background:var(--paper-3);border-left:2px solid var(--ink);
     font-size:1rem;line-height:1.7;color:var(--ink);max-width:56ch}
+  .reassure b{display:block;margin-bottom:.55rem;font-family:var(--font-label);
+    font-size:.68rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--mark)}
+
+  /* The turn sets the reasoning against the statement it earns. The kicker is
+     width:max-content in system.css, which in a grid cell would push the
+     column out to the longest hand-broken line. */
+  .split.turn{align-items:start}
+  .split.turn .kicker{margin-top:0;width:auto}
 
   footer{padding-block:clamp(3rem,6vw,4.5rem);border-top:1px solid var(--rule)}
 
@@ -368,7 +383,7 @@
     </li>
   </ol>
   <p class="meta">Where a contract is not awarded on price alone, the buyer has to state that split in the tender documents you were sent. It is not always a single percentage. The article allows a range with a maximum spread, and where weighting is not possible for objective reasons the criteria are listed in decreasing order of importance instead. Any of the three tells you more than you have now.</p>
-  <p class="src">European Union, Konkurrence- og Forbrugerstyrelsen 2020 · Norway, anskaffelsesloven § 5 b, which took the rule over from forskriften § 7-9 on 1 July 2026 · Weighting rule, Directive 2014/24/EU Article 67(5)</p>
+  <p class="src">European Union, Konkurrence- og Forbrugerstyrelsen · Norway, anskaffelsesloven § 5 b · Directive 2014/24/EU Article 67(5)</p>
   <p class="disq">If your losses are price losses and nothing else, this is the wrong page and I have nothing to sell you.</p>
 </section>
 
@@ -388,7 +403,7 @@
         </ul>
       </div>
       <div>
-        <p class="reassure">It is not a management system. Nothing changes in the workshop. The standard is a document, it belongs to you, and your own people edit it.</p>
+        <p class="reassure"><b>What it is not</b>It is not a management system. Nothing changes in the workshop. The standard is a document, it belongs to you, and your own people edit it.</p>
       </div>
     </div>
   </div>
@@ -441,7 +456,7 @@
       </ul>
     </div>
   </div>
-  <p class="reassure">I do not need you to prepare anything, and I am not going to ask you to fill in a questionnaire so that I can sell you the answers. If you have come out of a pre-tender dialogue feeling you gave away a day of free consulting, you know why that sentence is here.</p>
+  <p class="reassure"><b>What I will not ask for</b>I do not need you to prepare anything, and I am not going to ask you to fill in a questionnaire so that I can sell you the answers. If you have come out of a pre-tender dialogue feeling you gave away a day of free consulting, you know why that sentence is here.</p>
 </section>
 
 
@@ -505,8 +520,14 @@
       <div><b>5.7</b><span>Average bidders per procedure in 2011. EU-wide</span></div>
       <div><b>3.2</b><span>Average bidders per procedure in 2021. EU-wide</span></div>
     </div>
-    <p>The field is thinning, and it is thinning for the reason above. Firms are leaving because the paperwork became unreasonable, not because they stopped being able to do the work.</p>
-    <p class="kicker">Everyone who withdraws<br class="brs"> hands their share to whoever<br class="brs"> can still produce the documents.</p>
+    <div class="split turn">
+      <div>
+        <p>The field is thinning, and it is thinning for the reason above. Firms are leaving because the paperwork became unreasonable, not because they stopped being able to do the work.</p>
+      </div>
+      <div>
+        <p class="kicker">Everyone who withdraws<br class="brs"> hands their share to whoever<br class="brs"> can still produce the documents.</p>
+      </div>
+    </div>
     <p>You bid three times a year, and that does not need to change. Bidding more is not the offer. The offer is that the few you do bid stop being lost on the part nobody explained to you.</p>
     <p class="src">Participation, Företagarna · Bidders per procedure, European Court of Auditors, Special Report 28/2023</p>
   </div>
