@@ -105,7 +105,31 @@
      Set in light values, not the accent: red measures 2.56:1 on ink, under the
      3:1 a graphic mark needs, whatever CLAUDE.md's palette note says. */
   .weigh{margin:clamp(2.5rem,5vw,3.5rem) 0 0;max-width:52rem}
-  .weighbar{display:flex;border:1px solid var(--rule-inv);min-height:4.5rem}
+  .weighbar{display:flex;border:1px solid var(--rule-inv);border-bottom:0;min-height:4.5rem}
+
+  /* The two counts were loose tiles under the bar, a bare 5 and a bare 0 with
+     the unit stranded in the caption. A zero read as missing data rather than
+     as a finding. They now carry the unit beside the figure and share the
+     bar's frame, so the weighting and what it cost are one object. The columns
+     take the bar's own 55 and 45, since the five days were scored inside the
+     time half. */
+  .weighfields{display:flex;border:1px solid var(--rule-inv)}
+  .weighfields > div{padding:1.1rem 1.15rem 1.2rem;display:flex;flex-wrap:wrap;
+    align-items:baseline;gap:0 .5rem}
+  .weighfields > div:first-child{flex:55}
+  .weighfields > div:last-child{flex:45;border-left:1px solid var(--rule-inv)}
+  .weighfields b{font-family:var(--font-display);font-weight:400;line-height:1;
+    font-size:clamp(1.9rem,1.3rem + 1.6vw,2.6rem);letter-spacing:-.015em;
+    font-variant-numeric:tabular-nums;color:var(--paper-3)}
+  .weighfields i{font-style:normal;font-family:var(--font-label);font-size:.68rem;
+    font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:rgba(233,231,228,.7)}
+  .weighfields span{flex-basis:100%;margin-top:.55rem;font-size:.85rem;
+    line-height:1.5;color:rgba(233,231,228,.75)}
+  @media(max-width:46rem){
+    .weighfields{flex-direction:column}
+    .weighfields > div:last-child{border-left:0;border-top:1px solid var(--rule-inv)}
+  }
   .seg{display:flex;flex-direction:column;justify-content:center;gap:.35rem;
     padding:1rem 1.15rem}
   .seg.s55{flex:55;background:rgba(233,231,228,.13);
@@ -278,12 +302,12 @@
         <div class="seg s55"><span>Time</span><b>55%</b></div>
         <div class="seg s45"><span>Price</span><b>45%</b></div>
       </div>
+      <div class="weighfields">
+        <div><b>5</b><i>days</i><span>between their handover date and the winner's</span></div>
+        <div><b>0</b><i>lines</i><span>of the award explaining the criteria, by their own account</span></div>
+      </div>
       <figcaption>They were the cheapest bid, which won them the right-hand half. They lost inside the left-hand half, on the date they wrote on a document.</figcaption>
     </figure>
-    <div class="figures">
-      <div><b>5</b><span>Days between their handover date and the winner's</span></div>
-      <div><b>0</b><span>Lines of the award explaining the criteria, by their own account</span></div>
-    </div>
     <p class="claim">It makes no sense that so few days have had such great significance.</p>
     <p class="meta">The complainant's own words, in the published ruling.</p>
     <p class="src">Klagenævnet for Udbud · J.nr. 25/03606 · 13 October 2025</p>
