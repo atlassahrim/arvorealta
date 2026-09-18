@@ -172,25 +172,31 @@
      because passing all three is the point and a reader should see how many
      there are before reading any. The fourth cell is the outcome and takes
      the paper ground to separate it from the conditions. */
-  .gate{list-style:none;margin:clamp(1.75rem,3.5vw,2.5rem) 0 0;padding:0;
+  .gate,.spec{list-style:none;margin:clamp(1.75rem,3.5vw,2.5rem) 0 0;padding:0;
     display:grid;grid-template-columns:1fr;border:1px solid var(--rule);
     counter-reset:gate}
-  @media(min-width:44rem){.gate{grid-template-columns:repeat(4,1fr)}}
-  .gate li{counter-increment:gate;padding:1.1rem 1.2rem 1.25rem;position:relative}
-  .gate li + li{border-top:1px solid var(--rule)}
+  @media(min-width:44rem){.gate,.spec{grid-template-columns:repeat(4,1fr)}}
+  .gate li,.spec li{counter-increment:gate;padding:1.1rem 1.2rem 1.25rem;position:relative}
+  .gate li + li,.spec li + li{border-top:1px solid var(--rule)}
   @media(min-width:44rem){
-    .gate li + li{border-top:0;border-left:1px solid var(--rule)}
+    .gate li + li,.spec li + li{border-top:0;border-left:1px solid var(--rule)}
   }
   .gate li::before{content:counter(gate,decimal-leading-zero);
     display:block;margin-bottom:.7rem;font-family:var(--font-label);
     font-size:.66rem;font-weight:600;letter-spacing:.16em;
     color:var(--ink);opacity:.45;font-variant-numeric:tabular-nums}
   .gate li.out::before{content:"→";font-size:.8rem;letter-spacing:0;opacity:.55}
-  .gate b{display:block;font-family:var(--font-label);font-size:.76rem;
+  .gate b,.spec b{display:block;font-family:var(--font-label);font-size:.76rem;
     font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mark)}
-  .gate span{display:block;margin-top:.45rem;font-size:.9rem;line-height:1.5;
+  .gate span,.spec span{display:block;margin-top:.45rem;font-size:.9rem;line-height:1.5;
     color:var(--ink)}
   .gate li.out{background:var(--paper)}
+  /* The spec takes the gate's frame and not its numbering. A gate is a
+     sequence a line has to pass and the count is the point; these are four
+     contents of one document, and numbering them would claim an order that
+     does not exist. */
+  .spec li::before{content:none}
+  .spec li{padding-top:1.25rem}
 
   .g-p2{background:var(--paper-2)}
   .g-p3{background:var(--paper-3)}
@@ -421,20 +427,14 @@
   <div class="wrap">
     <p class="tag"><b>04</b> the thing itself</p>
     <h2>Written once, properly,<br class="brs"> in the form an evaluator scores.</h2>
-    <div class="split">
-      <div>
-        <p class="lede">The set of things your firm asserts about itself, in the language of the template it will be read against.</p>
-        <ul class="ticks">
-          <li>Capability, stated as what you have done rather than what you can do</li>
-          <li>Process, in the detail a scoring template asks for</li>
-          <li>Reference projects, with the specifics that make them count</li>
-          <li>Environmental and quality evidence, as figures rather than adjectives</li>
-        </ul>
-      </div>
-      <div>
-        <p class="reassure"><b>What it is not</b>It is not a management system. Nothing changes in the workshop. The standard is a document, it belongs to you, and your own people edit it.</p>
-      </div>
-    </div>
+    <p class="lede">The set of things your firm asserts about itself, in the language of the template it will be read against. Four things, in the form the template reads them.</p>
+    <ul class="spec">
+      <li><b>Capability</b><span>What you have done, not what you can do</span></li>
+      <li><b>Process</b><span>In the detail a scoring template asks for</span></li>
+      <li><b>References</b><span>The specifics that make them count</span></li>
+      <li><b>Evidence</b><span>Figures rather than adjectives</span></li>
+    </ul>
+    <p class="reassure"><b>What it is not</b>It is not a management system. Nothing changes in the workshop. The standard is a document, it belongs to you, and your own people edit it.</p>
   </div>
 </section>
 
@@ -470,18 +470,13 @@
         <li>Past submissions, however they are filed</li>
         <li>Certificates and drawings you already hold</li>
         <li>Whatever you sent the last time you bid</li>
-        <li>Two conversations of about ninety minutes</li>
-        <li>One read-through at the end</li>
       </ul>
     </div>
-    <div class="me">
-      <h3>I return</h3>
+    <div class="you">
+      <h3>You spend</h3>
       <ul class="ticks" style="margin-top:0">
-        <li>Capability, stated as what you have done</li>
-        <li>Process, in the detail a scoring template asks for</li>
-        <li>Reference projects with the specifics that make them count</li>
-        <li>Environmental and quality evidence as figures</li>
-        <li>One revision round, included</li>
+        <li>Two conversations of about ninety minutes</li>
+        <li>One read-through at the end</li>
       </ul>
     </div>
   </div>
