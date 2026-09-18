@@ -161,7 +161,7 @@
      width it was the loudest thing on the page and outweighed the argument
      it is evidence for. */
   .docsplit{display:grid;gap:clamp(1.5rem,4vw,2.75rem);grid-template-columns:1fr;
-    align-items:start;margin-top:clamp(2rem,4vw,3rem)}
+    align-items:end;margin-top:clamp(2rem,4vw,3rem)}
   @media(min-width:52rem){.docsplit{grid-template-columns:1.25fr 1fr}}
   .docsplit img{width:100%}
   .docsplit .doccap{margin:0;max-width:40ch}
@@ -213,6 +213,14 @@
 
   /* Anchored sections land clear of the top edge instead of flush against it. */
   #case,#standard,#price,#scope{scroll-margin-top:2rem}
+
+  /* system.css caps a FAQ answer at 52ch for a narrow column. This section
+     runs the full wrap, so an answer sat in the left third with the rest of
+     the row empty, and the source list below needs the room to stay on one
+     line per citation. */
+  .faq p,.faq ul{max-width:70ch}
+  .faq .ticks{margin-top:.2rem;padding-bottom:.4rem}
+  .faq .ticks li{font-size:.92rem;margin-bottom:.5rem}
 
   /* Keyboard focus has to be visible. system.css gives .ln an underline on
      focus; the button-shaped action and the FAQ rows need their own. */
@@ -433,10 +441,6 @@
       </ul>
     </div>
   </div>
-  <div class="figures">
-    <div><b>4</b><span>Hours of your time, in total</span></div>
-    <div><b>2</b><span>Conversations, about ninety minutes each</span></div>
-  </div>
   <p class="reassure">I do not need you to prepare anything, and I am not going to ask you to fill in a questionnaire so that I can sell you the answers. If you have come out of a pre-tender dialogue feeling you gave away a day of free consulting, you know why that sentence is here.</p>
 </section>
 
@@ -501,10 +505,10 @@
       <div><b>5.7</b><span>Average bidders per procedure in 2011. EU-wide</span></div>
       <div><b>3.2</b><span>Average bidders per procedure in 2021. EU-wide</span></div>
     </div>
-    <p class="src">Participation, Företagarna · Bidders per procedure, European Court of Auditors, Special Report 28/2023</p>
     <p>The field is thinning, and it is thinning for the reason above. Firms are leaving because the paperwork became unreasonable, not because they stopped being able to do the work.</p>
     <p class="kicker">Everyone who withdraws<br class="brs"> hands their share to whoever<br class="brs"> can still produce the documents.</p>
     <p>You bid three times a year, and that does not need to change. Bidding more is not the offer. The offer is that the few you do bid stop being lost on the part nobody explained to you.</p>
+    <p class="src">Participation, Företagarna · Bidders per procedure, European Court of Auditors, Special Report 28/2023</p>
   </div>
 </section>
 
@@ -516,7 +520,17 @@
     <div class="faq">
       <details open>
         <summary>Can I check the numbers on this page?</summary>
-        <p>All of them, and here is where. The Danish ruling is published under J.nr. 25/03606 and the Norwegian one under KOFA 2023/472, both searchable by case number. The rule that a buyer must publish the weighting is Article 67(5) of Directive 2014/24/EU. The fall from 5.7 to 3.2 bidders per procedure is the European Court of Auditors, Special Report 28/2023, which puts single bidding at 23.5% of procedures in 2011 against 41.8% in 2021. The 42% is the complement of the figure the Danish competition authority publishes for the rest of the EU, where tenders weighting price alone average 58%. Norway's 30% moved from anskaffelsesforskriften § 7-9 into anskaffelsesloven § 5 b on 1 July 2026 and applies from 500,000 kroner. The 15,000 kr comparison is a published list price from a Swedish bid consultancy, for drafts of the texts and attachments a bid needs, delivered as Word files. Every number on this page is one you can look up, and if you find one that is wrong I would rather hear it from you than not.</p>
+        <p>All of them, and here is where.</p>
+        <ul class="ticks">
+          <li>The Danish ruling, Klagenævnet for Udbud, J.nr. 25/03606</li>
+          <li>The Norwegian one, KOFA 2023/472. Both searchable by case number</li>
+          <li>The rule that a buyer must publish the weighting, Article 67(5) of Directive 2014/24/EU</li>
+          <li>The fall from 5.7 to 3.2 bidders per procedure, European Court of Auditors, Special Report 28/2023, which also puts single bidding at 23.5% of procedures in 2011 against 41.8% in 2021</li>
+          <li>The 42%, the complement of the 58% the Danish competition authority publishes for tenders weighting price alone across the rest of the EU</li>
+          <li>Norway's 30%, which moved from anskaffelsesforskriften § 7-9 into anskaffelsesloven § 5 b on 1 July 2026 and applies from 500,000 kroner</li>
+          <li>The 15,000 kr, a published list price from a Swedish bid consultancy for drafts of the texts and attachments a bid needs, delivered as Word files</li>
+        </ul>
+        <p>Every number on this page is one you can look up, and if you find one that is wrong I would rather hear it from you than not.</p>
       </details>
       <details>
         <summary>Is this a quality management system?</summary>
