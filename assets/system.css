@@ -254,14 +254,28 @@ ul.ticks li::before{content:"";position:absolute;left:0;top:.75em;width:.8rem;he
 
 /* ---------- case ---------- */
 .case{background:var(--paper-2)}
-/* the firm's own statement, not a testimonial — no quotes, no italic.
-   Not scoped to .case. The same element belongs in any fold that has a
-   sourced quotation to set, and scoping it meant it silently rendered as
-   body copy everywhere else. It also carried margin:0, which sat it hard
-   against whatever came before with nothing to separate the two. */
+/* A sourced quotation, set at display size. Not scoped to .case: the same
+   element belongs in any fold that has one, and scoping it meant it silently
+   rendered as body copy everywhere else. It also carried margin:0, which sat
+   it hard against whatever came before with nothing to separate the two.
+
+   It carries a quotation mark, and the rule used to say the opposite. That
+   rule was written when .claim held the firm's own statement, where quotes
+   would have made an assertion look like a testimonial. Here it holds other
+   people's words at the same size as the page's own headlines, and a reader
+   has no way to tell a complainant's sentence from a claim of ours. The mark
+   is set in the display face, hung outside the measure so the text still
+   aligns with everything above it, and kept quiet enough to label rather
+   than decorate. Use <blockquote> for it, so the distinction reaches a
+   screen reader too and not only an eye. */
 .claim{margin:clamp(2rem,4vw,2.75rem) 0 0;font-family:var(--font-display);
-  font-size:clamp(1.35rem,1rem + 1.5vw,2.2rem);line-height:1.24;letter-spacing:-.005em;max-width:30ch}
+  font-size:clamp(1.35rem,1rem + 1.5vw,2.2rem);line-height:1.24;letter-spacing:-.005em;
+  max-width:30ch;position:relative;padding-left:.72em}
+.claim::before{content:"\201C";position:absolute;left:-.06em;top:-.02em;
+  font-family:var(--font-display);font-size:1.5em;line-height:1;
+  color:var(--ink);opacity:.38}
 .inv .claim{color:var(--paper-3)}
+.inv .claim::before{color:var(--paper-3);opacity:.5}
 .meta{margin-top:2rem;color:var(--ink-soft);font-size:.95rem;max-width:46ch}
 
 /* ---------- FAQ ---------- */
