@@ -165,6 +165,33 @@
   .split{margin-top:clamp(1.75rem,3.5vw,2.5rem)}
   .split > div > *:first-child{margin-top:0}
 
+  /* The three tests a line has to pass, set as the template that applies
+     them rather than as three bullets. The list was not three parallel items
+     anyway. It was three conditions and a consequence, with They are not
+     permitted to stranded as a fragment on a bullet of its own. Numbered,
+     because passing all three is the point and a reader should see how many
+     there are before reading any. The fourth cell is the outcome and takes
+     the paper ground to separate it from the conditions. */
+  .gate{list-style:none;margin:clamp(1.75rem,3.5vw,2.5rem) 0 0;padding:0;
+    display:grid;grid-template-columns:1fr;border:1px solid var(--rule);
+    counter-reset:gate}
+  @media(min-width:44rem){.gate{grid-template-columns:repeat(4,1fr)}}
+  .gate li{counter-increment:gate;padding:1.1rem 1.2rem 1.25rem;position:relative}
+  .gate li + li{border-top:1px solid var(--rule)}
+  @media(min-width:44rem){
+    .gate li + li{border-top:0;border-left:1px solid var(--rule)}
+  }
+  .gate li::before{content:counter(gate,decimal-leading-zero);
+    display:block;margin-bottom:.7rem;font-family:var(--font-label);
+    font-size:.66rem;font-weight:600;letter-spacing:.16em;
+    color:var(--ink);opacity:.45;font-variant-numeric:tabular-nums}
+  .gate li.out::before{content:"→";font-size:.8rem;letter-spacing:0;opacity:.55}
+  .gate b{display:block;font-family:var(--font-label);font-size:.76rem;
+    font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mark)}
+  .gate span{display:block;margin-top:.45rem;font-size:.9rem;line-height:1.5;
+    color:var(--ink)}
+  .gate li.out{background:var(--paper)}
+
   .g-p2{background:var(--paper-2)}
   .g-p3{background:var(--paper-3)}
   /* .case sets paper-2 and sits later in system.css than .inv, so the record
@@ -342,14 +369,16 @@
   <div class="wrap">
     <p class="tag"><b>02</b> the mechanism</p>
     <h2>The paperwork is a separate<br class="brs"> object from the company.</h2>
+    <p class="lede">An evaluator sits with a scoring template and your submission. What happens next is not a judgement about your firm. A line on the page scores if it passes three tests.</p>
+    <ol class="gate">
+      <li><b>Present</b><span>It is in the file you sent</span></li>
+      <li><b>Findable</b><span>Without hunting for it</span></li>
+      <li><b>Specific</b><span>Checkable, not an adjective</span></li>
+      <li class="out"><b>Or nothing</b><span>Miss one and the line scores zero</span></li>
+    </ol>
     <div class="split">
       <div>
-        <p class="lede">An evaluator sits with a scoring template and your submission. What happens next is not a judgement about your firm.</p>
-        <ul class="ticks">
-          <li>They award points for what is present, findable and specific</li>
-          <li>They cannot award points for what you know and did not write down</li>
-          <li>They are not permitted to</li>
-        </ul>
+        <p>They cannot award points for what you know and did not write down. They are not permitted to.</p>
       </div>
       <div>
         <blockquote class="claim">Scored on the documentation requirements rather than on the award criterion, and marked down for matters no documentation was asked for.</blockquote>
