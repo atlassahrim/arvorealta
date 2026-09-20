@@ -99,6 +99,26 @@
   .stage.ink .btn-a:hover b,.stage.ink .btn-a.hov b{color:var(--ink)}
   .stage.ink .btn-a:hover span,.stage.ink .btn-a.hov span{color:var(--ink-soft)}
 
+  /* ---------- the shadow looked at directly ---------- */
+  /* .ghost empties the fill so only the cast shadow paints. An outer
+     box-shadow is clipped to outside the border box, so what is left is
+     the halo on its own, with a dashed outline marking where the button
+     would sit. The inset highlight is dropped here because it belongs to
+     the surface, not to the shadow. */
+  .btn-b.ghost{background-image:none;background-color:transparent;
+    box-shadow:0 1px 2px rgba(23,53,44,.20),0 14px 32px rgba(23,53,44,.24);
+    outline:1px dashed rgba(23,53,44,.30)}
+  .btn-b.ghost b,.btn-b.ghost .qual,.btn-b.ghost .arw{visibility:hidden}
+  .stage.ink .btn-b.ghost{outline-color:rgba(233,231,228,.30);
+    box-shadow:0 1px 2px rgba(0,0,0,.30),0 14px 32px rgba(0,0,0,.50)}
+
+  /* Ink is #17352C and not black, so a shadow darker than the ground does
+     register on it. B's own shadow is tinted with ink at .24, which over
+     the ink ground composites back to #17352C exactly, which is why it
+     disappeared. Black at .55 lands on #0A1714. */
+  .btn-b.dark{box-shadow:0 1px 2px rgba(0,0,0,.30),
+    0 16px 36px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.30)}
+
   .pair{display:grid;gap:clamp(1.6rem,3.5vw,2.75rem);grid-template-columns:1fr}
   @media(min-width:48rem){.pair{grid-template-columns:1fr 1fr}}
   .statelabel{font-family:var(--font-label);font-size:.58rem;font-weight:600;
@@ -177,6 +197,36 @@
     the top left as it does in the sample. The shadow is tinted with ink rather than black, which
     is the most this idiom can be made to belong. Note what happens on the ink stage, where a
     shadow has nothing to fall onto and the pill loses its edge.</p>
+  </section>
+
+  <section class="panel">
+    <h2>B2 · the shadow, looked at directly</h2>
+
+    <div class="stage">
+      <p class="stagelabel">On paper</p>
+      <div class="pair">
+        <div><p class="statelabel">The shadow on its own</p>
+          <a class="btn-b ghost" href="#"><span class="lab"><b>Get your page scored</b><span class="qual">No charge · No call</span></span><span class="arw">&rarr;</span></a></div>
+        <div><p class="statelabel">The same shadow, in place</p>
+          <a class="btn-b" href="#"><span class="lab"><b>Get your page scored</b><span class="qual">No charge · No call</span></span><span class="arw">&rarr;</span></a></div>
+      </div>
+    </div>
+    <div class="stage ink">
+      <p class="stagelabel">On ink</p>
+      <div class="pair">
+        <div><p class="statelabel">Ink-tinted · 1.00 against the ground</p>
+          <a class="btn-b" href="#"><span class="lab"><b>Get your page scored</b><span class="qual">No charge · No call</span></span><span class="arw">&rarr;</span></a></div>
+        <div><p class="statelabel">Black · 1.31 against the ground</p>
+          <a class="btn-b dark" href="#"><span class="lab"><b>Get your page scored</b><span class="qual">No charge · No call</span></span><span class="arw">&rarr;</span></a></div>
+      </div>
+    </div>
+
+    <p class="notes"><b>I was wrong about this earlier.</b> I said a shadow on ink has nothing
+    to fall onto. The real reason B's shadow vanished there is that I tinted it with ink,
+    <code>rgba(23,53,44,.24)</code>, and that colour composited over the ink ground returns
+    <code>#17352C</code> exactly, a ratio of 1.00. It was invisible by construction, not by
+    physics. Ink is not black, so a black shadow does register, at 1.31 against the ground
+    where the same shadow reaches 1.56 on paper. Weaker on ink, and not impossible.</p>
   </section>
 
   <section class="panel">
