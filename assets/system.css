@@ -105,7 +105,6 @@ header{padding-block:2rem}
   border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;
   gap:1.25rem 3rem;align-items:baseline;
 }
-.herocta{font-family:var(--font-display);font-size:clamp(1.15rem,1rem + .9vw,1.7rem);letter-spacing:-.01em}
 /* The audience gate, and not fine print — it was wearing the notes' size and
    grey while doing a different job. A small label in the mark over the line
    it names: the annex field move, where the label is found and the line
