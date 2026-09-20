@@ -65,10 +65,14 @@ header{padding-block:2rem}
 .bar{display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:baseline;justify-content:space-between}
 .mark{font-family:var(--font-label);font-size:.95rem;letter-spacing:.2em;text-transform:uppercase}
 .bar nav{display:flex;flex-wrap:wrap;align-items:center;gap:1.6rem;font-family:var(--font-label);font-size:.78rem;font-weight:600;letter-spacing:.12em;color:var(--ink-soft)}
-/* The one featured link on the page. The mark as a fill, carrying --on-mark
-   at 5.90:1, which is the only type allowed on it. */
+/* The one featured link on the page, and the same action as the buttons in
+   the hero and the close, so it takes the same fill rather than a second
+   warm colour. The price gradient at 45deg, carrying --on-mark at 5.67:1 on
+   its lightest stop and 11.54 on its darkest. Hover drops to solid ink, as
+   the page buttons do on a light ground. */
 .navcta{font-family:var(--font-label);font-size:.7rem;font-weight:600;letter-spacing:.14em;line-height:1.5;
-  text-transform:uppercase;color:var(--on-mark);background:var(--mark);padding:.55em 1.1em}
+  text-transform:uppercase;color:var(--on-mark);padding:.55em 1.1em;
+  background-image:linear-gradient(45deg,var(--grad-1) 0%,var(--grad-2) 52%,var(--grad-3) 100%)}
 .navcta:hover,.navcta:focus-visible{background:var(--ink)}
 
 /* ---------- hero ---------- */

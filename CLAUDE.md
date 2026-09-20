@@ -180,8 +180,11 @@ there takes `.6` at 4.91:1. **The mark never crosses** — 2.03:1.
 
 The **price gradient** is sampled off the Turvatikas ground: amber `#954D13`
 running through `#743813` to chocolate `#5A200A`, at 45deg so the light end
-sits at the low corner as it does in the original. Two uses. It fills the
-prices on the two light tiers, and it grounds the recommended tier. It cannot
+sits at the low corner as it does in the original. Three uses. It fills the
+prices on the two light tiers, it grounds the recommended tier, and it fills
+every call to action — the nav one and the buttons in the hero and the close.
+The action is one thing, so it takes one colour, and the mark no longer fills
+the nav. It cannot
 do both on the same card — a gradient numeral on a gradient ground is the same
 colour at the same point — so that tier's price stays `--on-mark`, which
 measures 5.67:1 against the amber stop at its worst and 11.54 at the
