@@ -79,6 +79,33 @@
   .today{font-family:var(--font-display);font-size:clamp(1.15rem,1rem + .9vw,1.7rem);
     letter-spacing:-.01em}
 
+  /* ---------- states shown side by side ---------- */
+  /* A touch device has no hover, so each state is drawn rather than
+     performed. .hov repeats exactly what the :hover rule above does, and
+     nothing else, so what is on screen is what a pointer would produce. */
+  .btn-a.hov{background-image:none;background-color:var(--ink)}
+  .btn-b.hov{transform:translateY(-2px);
+    box-shadow:0 2px 4px rgba(23,53,44,.22),
+               0 20px 42px rgba(23,53,44,.28),
+               inset 0 1px 0 rgba(255,255,255,.34)}
+  .ln.on.hov::after{transform:scaleX(0);transform-origin:right}
+
+  /* A's hover drops to solid ink, which is right on paper and vanishes on
+     ink. The close CTA sits on ink, so the state has to invert there
+     instead. Paper-3 on ink is 11.45:1 and ink on paper-3 is 11.45 the
+     other way, so the swap is legible in both directions. */
+  .stage.ink .btn-a:hover,.stage.ink .btn-a.hov{
+    background-image:none;background-color:var(--paper-3)}
+  .stage.ink .btn-a:hover b,.stage.ink .btn-a.hov b{color:var(--ink)}
+  .stage.ink .btn-a:hover span,.stage.ink .btn-a.hov span{color:var(--ink-soft)}
+
+  .pair{display:grid;gap:clamp(1.6rem,3.5vw,2.75rem);grid-template-columns:1fr}
+  @media(min-width:48rem){.pair{grid-template-columns:1fr 1fr}}
+  .statelabel{font-family:var(--font-label);font-size:.58rem;font-weight:600;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);
+    margin:0 0 .9rem}
+  .stage + .stage .statelabel{color:rgba(233,231,228,.55)}
+
   @media(prefers-reduced-motion:reduce){
     .btn-a,.btn-b{transition:none}
     .btn-b:hover,.btn-b:focus-visible{transform:none}
@@ -91,18 +118,29 @@
   <h1>Two buttons,<br> one gradient.</h1>
   <p class="intro">Both carry the same fill, the price gradient already on the offer page, so the
   only things being judged here are the corner, the shadow and the gloss. Each is shown on paper
-  and on ink, because the hero sits on one and the close sits on the other. Hover them.</p>
+  and on ink, because the hero sits on one and the close sits on the other, and each is drawn
+  twice so the hover state is visible on a device that has no pointer.</p>
 
   <section class="panel">
     <h2>A · square, the house idiom</h2>
 
     <div class="stage">
       <p class="stagelabel">On paper</p>
-      <a class="btn-a" href="#"><b>Get your page scored</b><span>No charge · No call</span></a>
+      <div class="pair">
+        <div><p class="statelabel">Resting</p>
+          <a class="btn-a" href="#"><b>Get your page scored</b><span>No charge · No call</span></a></div>
+        <div><p class="statelabel">Hover</p>
+          <a class="btn-a hov" href="#"><b>Get your page scored</b><span>No charge · No call</span></a></div>
+      </div>
     </div>
-    <div class="stage">
+    <div class="stage ink">
       <p class="stagelabel">On ink</p>
-      <a class="btn-a" href="#"><b>Get your page scored</b><span>No charge · No call</span></a>
+      <div class="pair">
+        <div><p class="statelabel">Resting</p>
+          <a class="btn-a" href="#"><b>Get your page scored</b><span>No charge · No call</span></a></div>
+        <div><p class="statelabel">Hover</p>
+          <a class="btn-a hov" href="#"><b>Get your page scored</b><span>No charge · No call</span></a></div>
+      </div>
     </div>
 
     <p class="notes"><b>Uses nothing new.</b> The gradient is <code>--grad-1/2/3</code> at 45deg,
@@ -117,11 +155,21 @@
 
     <div class="stage">
       <p class="stagelabel">On paper</p>
-      <a class="btn-b" href="#"><span class="lab"><b>Get your page scored</b><span class="qual">No charge · No call</span></span><span class="arw">&rarr;</span></a>
+      <div class="pair">
+        <div><p class="statelabel">Resting</p>
+          <a class="btn-b" href="#"><span class="lab"><b>Get your page scored</b><span class="qual">No charge · No call</span></span><span class="arw">&rarr;</span></a></div>
+        <div><p class="statelabel">Hover</p>
+          <a class="btn-b hov" href="#"><span class="lab"><b>Get your page scored</b><span class="qual">No charge · No call</span></span><span class="arw">&rarr;</span></a></div>
+      </div>
     </div>
-    <div class="stage">
+    <div class="stage ink">
       <p class="stagelabel">On ink</p>
-      <a class="btn-b" href="#"><span class="lab"><b>Get your page scored</b><span class="qual">No charge · No call</span></span><span class="arw">&rarr;</span></a>
+      <div class="pair">
+        <div><p class="statelabel">Resting</p>
+          <a class="btn-b" href="#"><span class="lab"><b>Get your page scored</b><span class="qual">No charge · No call</span></span><span class="arw">&rarr;</span></a></div>
+        <div><p class="statelabel">Hover</p>
+          <a class="btn-b hov" href="#"><span class="lab"><b>Get your page scored</b><span class="qual">No charge · No call</span></span><span class="arw">&rarr;</span></a></div>
+      </div>
     </div>
 
     <p class="notes"><b>Four things the site has never done.</b> A full radius, a cast shadow, an
@@ -135,7 +183,12 @@
     <h2>C · what is on the site right now</h2>
     <div class="stage">
       <p class="stagelabel">On paper</p>
-      <a class="ln on today" href="#">Get your page scored</a>
+      <div class="pair">
+        <div><p class="statelabel">Resting</p>
+          <a class="ln on today" href="#">Get your page scored</a></div>
+        <div><p class="statelabel">Hover</p>
+          <a class="ln on today hov" href="#">Get your page scored</a></div>
+      </div>
       <p class="notes" style="margin-top:1.3rem">Not a button at all. A display-size link with a
       rule under it that wipes away on hover, and the qualifier living in a separate line below
       rather than inside the target.</p>
