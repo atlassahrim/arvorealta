@@ -157,6 +157,26 @@
   .weigh figcaption{margin-top:1.1rem;font-size:.9rem;line-height:1.65;
     color:rgba(233,231,228,.75);max-width:52ch}
 
+  /* What you send and what you spend are one account of the same exchange,
+     and two columns under a rule each read as two unrelated asides. They now
+     share a frame the way fold 01's weighting and its two counts do, so the
+     trade is a single object. Borders take --rule and not --rule-inv, since
+     this fold sits on paper rather than on ink, and the 52rem matches the
+     weigh box so the page's two framed objects are the same width. The
+     halves are equal because nothing here is weighted, unlike the 55 and 45
+     in fold 01 which are the award's own figures. */
+  .costbox{display:flex;margin:clamp(2.5rem,5vw,3.5rem) 0 0;max-width:52rem;
+    border:1px solid var(--rule)}
+  .costbox > div{flex:1;padding:1.4rem 1.5rem 1.5rem}
+  .costbox > div:last-child{border-left:1px solid var(--rule)}
+  .costbox h3{margin:0 0 1.1rem}
+  .costbox ul.ticks{margin-top:0}
+  .costbox ul.ticks li:last-child{margin-bottom:0}
+  @media(max-width:46rem){
+    .costbox{flex-direction:column}
+    .costbox > div:last-child{border-left:0;border-top:1px solid var(--rule)}
+  }
+
   /* A two-column fold puts each column's first element at the top of its own
      grid cell, where system.css zeroes a lede's top margin as a first child
      and leaves a claim's in place. The columns then start at different
@@ -463,18 +483,18 @@
   <p class="tag"><b>06</b> what it costs you</p>
   <h2>Four hours.</h2>
   <p class="lede">A Finnish supplier counted ninety pages of documentation attached to one bid. Almost none of that work needs you in the room. Four hours of it does, and I do the rest.</p>
-  <div class="relief">
-    <div class="you">
+  <div class="costbox">
+    <div>
       <h3>You send</h3>
-      <ul class="ticks" style="margin-top:0">
+      <ul class="ticks">
         <li>Past submissions, however they are filed</li>
         <li>Certificates and drawings you already hold</li>
         <li>Whatever you sent the last time you bid</li>
       </ul>
     </div>
-    <div class="you">
+    <div>
       <h3>You spend</h3>
-      <ul class="ticks" style="margin-top:0">
+      <ul class="ticks">
         <li>Two conversations of about an hour and a half</li>
         <li>One read-through at the end</li>
       </ul>

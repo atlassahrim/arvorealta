@@ -223,12 +223,7 @@ ul.ticks li::before{content:"";position:absolute;left:0;top:.75em;width:.8rem;he
 .vocab li{font-family:var(--font-label);font-size:.68rem;font-weight:600;letter-spacing:.1em;line-height:1.5;
   text-transform:uppercase;color:var(--ink);border:1px solid var(--rule);padding:.45em .8em}
 
-/* ---------- relief ---------- */
-.relief{display:grid;gap:clamp(2.5rem,5vw,4.5rem);grid-template-columns:1fr}
-@media(min-width:50rem){.relief{grid-template-columns:1fr 1.7fr}}
-.relief h3{margin-bottom:1.3rem}
-.relief .you{border-top:2px solid var(--ink);padding-top:1.3rem}
-.relief .me{border-top:1px solid var(--rule);padding-top:1.3rem}
+/* ---------- kicker ---------- */
 /* max-content, like the h1: the breaks are written by hand and a ch cap
    narrower than the line itself would re-wrap them. */
 .kicker{margin-top:4rem;font-family:var(--font-display);font-size:clamp(1.5rem,1rem + 2vw,2.75rem);
