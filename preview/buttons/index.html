@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Button comparison · Arvorealta</title>
+
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" media="all"
+  href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Shippori+Mincho:wght@400;500&display=swap">
+
+<link rel="stylesheet" href="/assets/themes/arvorealta.css">
+<link rel="stylesheet" href="/assets/system.css">
+
+<style>
+  /* Scratch page. Not linked from anywhere, noindex, and deleted once the
+     choice is made. Both buttons hold the SAME gradient on purpose, so the
+     only variables under test are radius, shadow and gloss. Judging shape
+     and hue at once would decide neither. */
+
+  body{background:var(--paper)}
+  .pv{max-width:60rem;margin:0 auto;padding:clamp(2.5rem,6vw,5rem) clamp(1.25rem,5vw,3rem) 6rem}
+  .pv h1{font-family:var(--font-display);font-size:clamp(1.8rem,1.3rem + 2vw,3rem);
+    line-height:1.1;letter-spacing:-.012em;color:var(--ink);margin:0}
+  .pv .intro{color:var(--ink-soft);margin-top:1.5rem;max-width:58ch;line-height:1.75}
+  .panel{margin-top:clamp(3rem,6vw,4.5rem);border-top:1px solid var(--rule);padding-top:1.6rem}
+  .panel h2{font-family:var(--font-label);font-size:.72rem;font-weight:600;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--mark);margin:0 0 1.5rem}
+  .stage{padding:clamp(2rem,4vw,3rem);background:var(--paper-3);border:1px solid var(--rule)}
+  .stage + .stage{margin-top:1px;background:var(--ink);border-color:var(--rule)}
+  .stagelabel{font-family:var(--font-label);font-size:.62rem;font-weight:600;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--ink-soft);margin:0 0 1.4rem}
+  .stage + .stage .stagelabel{color:rgba(233,231,228,.6)}
+  .notes{margin-top:1.5rem;font-size:.92rem;line-height:1.7;color:var(--ink-soft);max-width:60ch}
+  .notes b{color:var(--ink)}
+
+  /* ---------- A. the house button ---------- */
+  /* Square, because border-radius:0 is written out three times in system.css
+     rather than left to the browser. The fill is the price gradient already
+     on the offer page. White label measures 6.27:1 on the light stop and
+     12.76 on the dark; the tracked line sits at 88% for 5.27:1. */
+  .btn-a{display:inline-flex;flex-direction:column;align-items:flex-start;gap:.5rem;
+    padding:1.15rem 2.2rem 1.25rem;text-decoration:none;border:0;border-radius:0;
+    background-image:linear-gradient(45deg,var(--grad-1) 0%,var(--grad-2) 52%,var(--grad-3) 100%);
+    transition:background-image .2s ease, background-color .2s ease}
+  .btn-a b{font-family:var(--font-display);font-weight:400;letter-spacing:-.01em;line-height:1.1;
+    font-size:clamp(1.15rem,1rem + .9vw,1.7rem);color:#fff}
+  .btn-a span{font-family:var(--font-label);font-size:.68rem;font-weight:600;letter-spacing:.16em;
+    text-transform:uppercase;color:rgba(255,255,255,.88)}
+  .btn-a:hover,.btn-a:focus-visible{background-image:none;background-color:var(--ink)}
+
+  /* ---------- B. the reference idiom ---------- */
+  /* Pill, drop shadow, inner top highlight, arrow. Same gradient as A at a
+     steeper angle so the light end sits top-left as it does in the sample.
+     The shadow is tinted with ink rather than black so it belongs to this
+     palette rather than to a generic UI kit. */
+  .btn-b{display:inline-flex;align-items:center;gap:1.8rem;
+    padding:1.2rem 2.5rem 1.3rem;text-decoration:none;border:0;border-radius:999px;
+    background-image:linear-gradient(135deg,var(--grad-1) 0%,var(--grad-2) 55%,var(--grad-3) 100%);
+    box-shadow:0 1px 2px rgba(23,53,44,.20),
+               0 14px 32px rgba(23,53,44,.24),
+               inset 0 1px 0 rgba(255,255,255,.30);
+    transition:transform .18s ease, box-shadow .18s ease}
+  .btn-b .lab{display:flex;flex-direction:column;gap:.45rem;align-items:flex-start}
+  .btn-b b{font-family:var(--font-display);font-weight:400;letter-spacing:-.01em;line-height:1.1;
+    font-size:clamp(1.15rem,1rem + .9vw,1.7rem);color:#fff}
+  .btn-b .qual{font-family:var(--font-label);font-size:.68rem;font-weight:600;letter-spacing:.16em;
+    text-transform:uppercase;color:rgba(255,255,255,.88)}
+  .btn-b .arw{font-family:var(--font-body);font-size:1.5rem;line-height:1;color:#fff}
+  .btn-b:hover,.btn-b:focus-visible{transform:translateY(-2px);
+    box-shadow:0 2px 4px rgba(23,53,44,.22),
+               0 20px 42px rgba(23,53,44,.28),
+               inset 0 1px 0 rgba(255,255,255,.34)}
+
+  /* ---------- what is live today, for reference ---------- */
+  .today{font-family:var(--font-display);font-size:clamp(1.15rem,1rem + .9vw,1.7rem);
+    letter-spacing:-.01em}
+
+  @media(prefers-reduced-motion:reduce){
+    .btn-a,.btn-b{transition:none}
+    .btn-b:hover,.btn-b:focus-visible{transform:none}
+  }
+</style>
+</head>
+<body>
+<main class="pv">
+
+  <h1>Two buttons,<br> one gradient.</h1>
+  <p class="intro">Both carry the same fill, the price gradient already on the offer page, so the
+  only things being judged here are the corner, the shadow and the gloss. Each is shown on paper
+  and on ink, because the hero sits on one and the close sits on the other. Hover them.</p>
+
+  <section class="panel">
+    <h2>A · square, the house idiom</h2>
+
+    <div class="stage">
+      <p class="stagelabel">On paper</p>
+      <a class="btn-a" href="#"><b>Get your page scored</b><span>No charge · No call</span></a>
+    </div>
+    <div class="stage">
+      <p class="stagelabel">On ink</p>
+      <a class="btn-a" href="#"><b>Get your page scored</b><span>No charge · No call</span></a>
+    </div>
+
+    <p class="notes"><b>Uses nothing new.</b> The gradient is <code>--grad-1/2/3</code> at 45deg,
+    the same values and the same angle that fill the prices in fold 07. Square because
+    <code>border-radius:0</code> is written out three times in <code>system.css</code> rather
+    than left to the browser. Hover drops to solid ink, which is what <code>.submit</code>
+    already does. White label is 6.27:1 on the lightest stop, the tracked line 5.27:1.</p>
+  </section>
+
+  <section class="panel">
+    <h2>B · pill, shadow, gloss, arrow</h2>
+
+    <div class="stage">
+      <p class="stagelabel">On paper</p>
+      <a class="btn-b" href="#"><span class="lab"><b>Get your page scored</b><span class="qual">No charge · No call</span></span><span class="arw">&rarr;</span></a>
+    </div>
+    <div class="stage">
+      <p class="stagelabel">On ink</p>
+      <a class="btn-b" href="#"><span class="lab"><b>Get your page scored</b><span class="qual">No charge · No call</span></span><span class="arw">&rarr;</span></a>
+    </div>
+
+    <p class="notes"><b>Four things the site has never done.</b> A full radius, a cast shadow, an
+    inner top highlight and an icon. The gradient runs at 135deg here so the light end sits at
+    the top left as it does in the sample. The shadow is tinted with ink rather than black, which
+    is the most this idiom can be made to belong. Note what happens on the ink stage, where a
+    shadow has nothing to fall onto and the pill loses its edge.</p>
+  </section>
+
+  <section class="panel">
+    <h2>C · what is on the site right now</h2>
+    <div class="stage">
+      <p class="stagelabel">On paper</p>
+      <a class="ln on today" href="#">Get your page scored</a>
+      <p class="notes" style="margin-top:1.3rem">Not a button at all. A display-size link with a
+      rule under it that wipes away on hover, and the qualifier living in a separate line below
+      rather than inside the target.</p>
+    </div>
+  </section>
+
+</main>
+</body>
+</html>
