@@ -52,6 +52,13 @@
     text-transform:uppercase;color:rgba(255,255,255,.88)}
   .btn-a:hover,.btn-a:focus-visible{background-image:none;background-color:var(--ink)}
 
+  /* A at a smaller size, for comparison. Padding, label and tracked line
+     all come down together so the proportions hold rather than the box
+     merely shrinking around type that stayed put. */
+  .btn-a.sm{gap:.38rem;padding:.8rem 1.55rem .85rem}
+  .btn-a.sm b{font-size:clamp(1rem,.93rem + .35vw,1.2rem)}
+  .btn-a.sm span{font-size:.6rem;letter-spacing:.14em}
+
   /* ---------- B. the reference idiom ---------- */
   /* Pill, drop shadow, inner top highlight, arrow. Same gradient as A at a
      steeper angle so the light end sits top-left as it does in the sample.
@@ -147,19 +154,31 @@
     <div class="stage">
       <p class="stagelabel">On paper</p>
       <div class="pair">
-        <div><p class="statelabel">Resting</p>
+        <div><p class="statelabel">Full · resting</p>
           <a class="btn-a" href="#"><b>Get your page scored</b><span>No charge · No call</span></a></div>
-        <div><p class="statelabel">Hover</p>
+        <div><p class="statelabel">Full · hover</p>
           <a class="btn-a hov" href="#"><b>Get your page scored</b><span>No charge · No call</span></a></div>
+      </div>
+      <div class="pair" style="margin-top:clamp(1.6rem,3.5vw,2.75rem)">
+        <div><p class="statelabel">Reduced · resting</p>
+          <a class="btn-a sm" href="#"><b>Get your page scored</b><span>No charge · No call</span></a></div>
+        <div><p class="statelabel">Reduced · hover</p>
+          <a class="btn-a sm hov" href="#"><b>Get your page scored</b><span>No charge · No call</span></a></div>
       </div>
     </div>
     <div class="stage ink">
       <p class="stagelabel">On ink</p>
       <div class="pair">
-        <div><p class="statelabel">Resting</p>
+        <div><p class="statelabel">Full · resting</p>
           <a class="btn-a" href="#"><b>Get your page scored</b><span>No charge · No call</span></a></div>
-        <div><p class="statelabel">Hover</p>
+        <div><p class="statelabel">Full · hover</p>
           <a class="btn-a hov" href="#"><b>Get your page scored</b><span>No charge · No call</span></a></div>
+      </div>
+      <div class="pair" style="margin-top:clamp(1.6rem,3.5vw,2.75rem)">
+        <div><p class="statelabel">Reduced · resting</p>
+          <a class="btn-a sm" href="#"><b>Get your page scored</b><span>No charge · No call</span></a></div>
+        <div><p class="statelabel">Reduced · hover</p>
+          <a class="btn-a sm hov" href="#"><b>Get your page scored</b><span>No charge · No call</span></a></div>
       </div>
     </div>
 
