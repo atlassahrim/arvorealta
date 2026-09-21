@@ -290,45 +290,10 @@
   .faq .ticks{margin-top:.2rem;padding-bottom:.4rem}
   .faq .ticks li{font-size:.92rem;margin-bottom:.5rem}
 
-  /* The call to action. Square, on the price gradient that already fills the
-     tier prices in fold 07, with the qualifier set inside the target instead
-     of floating beside it. Reduced from the first size drawn: 185 by 67 at a
-     390px viewport, which clears the 44px tap minimum with room to spare.
-     The label is literal white and not --on-mark, chosen for the brighter
-     type: 6.27:1 on the lightest stop of the gradient and 12.76 on the
-     darkest, against 5.67 and 11.54 for the token. The tracked line sits at
-     88 per cent for 5.27:1.
-     This is the one place on the page that does not read from a token, so a
-     client theme swaps every colour except the type inside its own call to
-     action. Deliberate, and the only exception. Giving the theme an
-     --on-action token set to white would buy the same brightness back
-     without the exception, if this ever needs revisiting.
-     Hover drops to solid ink, which is what .submit already does. On the ink
-     ground that would paint the button out of existence, so there it inverts
-     to paper-3 with ink type instead, at 11.45:1 and 4.87:1. */
-  .ctabtn{display:inline-flex;flex-direction:column;align-items:flex-start;gap:.38rem;
-    padding:.8rem 1.55rem .85rem;text-decoration:none;border:0;border-radius:0;
-    background-image:linear-gradient(45deg,var(--grad-1) 0%,var(--grad-2) 52%,var(--grad-3) 100%);
-    transition:background-image .2s ease,background-color .2s ease}
-  .ctabtn b{font-family:var(--font-display);font-weight:400;letter-spacing:-.01em;
-    line-height:1.1;font-size:clamp(1rem,.93rem + .35vw,1.2rem);color:#fff}
-  .ctabtn span{font-family:var(--font-label);font-size:.6rem;font-weight:600;
-    letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.88)}
-  .ctabtn:hover{background-image:none;background-color:var(--ink)}
-  .inv .ctabtn:hover{background-image:none;background-color:var(--paper-3)}
-  .inv .ctabtn:hover b{color:var(--ink)}
-  .inv .ctabtn:hover span{color:var(--ink-soft)}
-  @media(prefers-reduced-motion:reduce){.ctabtn{transition:none}}
-
-  /* The row aligned on the baseline, which was right for a text link and is
-     not for a padded box. */
-  .heroact{align-items:center}
-
   /* Keyboard focus has to be visible. system.css gives .ln an underline on
      focus; the button-shaped action and the FAQ rows need their own. */
-  .navcta:focus-visible,.faq summary:focus-visible,.refs a:focus-visible,
-  .ctabtn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
-  .inv .ctabtn:focus-visible{outline-color:var(--paper-3)}
+  .navcta:focus-visible,.faq summary:focus-visible,.refs a:focus-visible{
+    outline:2px solid var(--ink);outline-offset:3px}
   .faq summary:focus-visible{outline-offset:-2px}
 
   /* PHONE. Measured at a true 375px viewport: scrollWidth equals clientWidth
@@ -388,8 +353,8 @@
   <p class="sub">Public buyers score the documents you hand in. Not the plant, not the price list, not the twenty years.</p>
   <p class="heroqual"><b>Who this is for</b> The person writing the bid between tasks.</p>
   <div class="heroact">
-    <a class="ctabtn" href="mailto:atlas@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost&amp;body=Attach%20the%20page%20before%20sending.%0A%0ACompany%3A%0AWhat%20the%20tender%20was%20for%3A%0ARoughly%20when%20you%20submitted%3A"><b>Get your page scored</b><span>No charge · No call</span></a>
-    <p class="sub">Send one page from a tender you lost.</p>
+    <a class="herocta ln on" href="mailto:atlas@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost&amp;body=Attach%20the%20page%20before%20sending.%0A%0ACompany%3A%0AWhat%20the%20tender%20was%20for%3A%0ARoughly%20when%20you%20submitted%3A">Get your page scored</a>
+    <p class="sub">Send one page from a tender you lost. No charge and no call.</p>
   </div>
   <ul class="vocab">
     <li>Method statement</li>
@@ -666,9 +631,9 @@
     <p class="sub">Send one page from a tender you lost. A method statement, a quality section, a capability answer. Whatever you would have to write again next time.</p>
     <p class="sub">It comes back scored against the criteria it was judged on, with the points located and the reasoning written out.</p>
     <div class="buttons">
-      <a class="ctabtn" href="mailto:atlas@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost&amp;body=Attach%20the%20page%20before%20sending.%0A%0ACompany%3A%0AWhat%20the%20tender%20was%20for%3A%0ARoughly%20when%20you%20submitted%3A"><b>Get your page scored</b><span>No charge · No call</span></a>
+      <a class="ln on" href="mailto:atlas@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost&amp;body=Attach%20the%20page%20before%20sending.%0A%0ACompany%3A%0AWhat%20the%20tender%20was%20for%3A%0ARoughly%20when%20you%20submitted%3A">Get your page scored</a>
     </div>
-    <p class="fineprint">Before you spend €2,400 finding out, spend nothing.</p>
+    <p class="fineprint">No charge. No call. Before you spend €2,400 finding out, spend nothing.</p>
   </div>
 </section>
 

@@ -65,11 +65,13 @@ header{padding-block:2rem}
 .bar{display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:baseline;justify-content:space-between}
 .mark{font-family:var(--font-label);font-size:.95rem;letter-spacing:.2em;text-transform:uppercase}
 .bar nav{display:flex;flex-wrap:wrap;align-items:center;gap:1.6rem;font-family:var(--font-label);font-size:.78rem;font-weight:600;letter-spacing:.12em;color:var(--ink-soft)}
-/* The one featured link on the page, and the same action as the buttons in
-   the hero and the close, so it takes the same fill rather than a second
-   warm colour. The price gradient at 45deg, carrying --on-mark at 5.67:1 on
-   its lightest stop and 11.54 on its darkest. Hover drops to solid ink, as
-   the page buttons do on a light ground. */
+/* The one featured link on the page. It took the price gradient when the
+   hero and the close carried gradient buttons, so that one action wore one
+   colour. Those buttons are gone and the gradient stayed, by choice rather
+   than by that argument. The gradient at 45deg, carrying --on-mark at 5.67:1
+   on its lightest stop and 11.54 on its darkest. Hover drops to solid ink.
+   The mark is still what the eyebrows use; this is the only place the two
+   warm values sit on one page, and they never sit in one block. */
 .navcta{font-family:var(--font-label);font-size:.7rem;font-weight:600;letter-spacing:.14em;line-height:1.5;
   text-transform:uppercase;color:var(--on-mark);padding:.55em 1.1em;
   background-image:linear-gradient(45deg,var(--grad-1) 0%,var(--grad-2) 52%,var(--grad-3) 100%)}
@@ -109,6 +111,7 @@ header{padding-block:2rem}
   border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;
   gap:1.25rem 3rem;align-items:baseline;
 }
+.herocta{font-family:var(--font-display);font-size:clamp(1.15rem,1rem + .9vw,1.7rem);letter-spacing:-.01em}
 /* The audience gate, and not fine print — it was wearing the notes' size and
    grey while doing a different job. A small label in the mark over the line
    it names: the annex field move, where the label is found and the line
