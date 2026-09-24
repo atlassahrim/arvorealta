@@ -78,39 +78,15 @@
       </div>
 
       <p class="label label-accent gap-2">Níveis de escopo</p>
-      <table class="facts">
+      <table class="facts facts-tight">
         <thead>
           <tr><th>Nível</th><th>Escopo</th><th>Execução</th><th>Prazo</th><th>Valor</th></tr>
         </thead>
         <tbody>
-          <tr>
-            <td>01</td>
-            <td>Consultoria de partida, com lista de tarefas e lista de materiais</td>
-            <td>Cliente</td>
-            <td>2 horas</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>02</td>
-            <td>Acompanhamento técnico, projeto executivo e itens críticos</td>
-            <td>Cliente</td>
-            <td>16 semanas</td>
-            <td>20.000</td>
-          </tr>
-          <tr>
-            <td>03</td>
-            <td>Acompanhamento com verba de materiais de R$ 105.000</td>
-            <td>Cliente</td>
-            <td>16 semanas</td>
-            <td>130.000</td>
-          </tr>
-          <tr>
-            <td>04</td>
-            <td>Obra completa, entregue pronta para rodar e licenciada</td>
-            <td>Executor</td>
-            <td>6 meses</td>
-            <td>240.000</td>
-          </tr>
+          <tr><td>01</td><td>Consultoria de partida</td><td>Cliente</td><td>2 horas</td><td>200</td></tr>
+          <tr><td>02</td><td>Acompanhamento técnico</td><td>Cliente</td><td>16 semanas</td><td>20.000</td></tr>
+          <tr><td>03</td><td>Acompanhamento com materiais</td><td>Cliente</td><td>16 semanas</td><td>130.000</td></tr>
+          <tr><td>04</td><td>Obra completa, licenciada</td><td>Executor</td><td>6 meses</td><td>240.000</td></tr>
         </tbody>
       </table>
 
@@ -163,11 +139,6 @@
 
       <hr class="rule-heavy">
 
-      <p class="footnote measure">
-        A verba de materiais é gerida com nota fiscal aberta. Saldo não gasto
-        retorna ao cliente. Os valores dos níveis 03 e 04 seguem o preço de
-        material na data desta folha, o que explica a validade de 60 dias.
-      </p>
 
     </div>
 
@@ -216,25 +187,24 @@
         <div class="col-7">
           <p class="label label-accent">O que o cliente recebe</p>
           <p class="measure">
-            Lista de tarefas em ordem de execução para a estrutura base. Lista
-            de materiais com especificação e ponto de compra. O caminho até a
-            vistoria do Detran, com os itens que exigem laudo de engenheiro
-            credenciado. E a relação do que o cliente não deve executar sozinho.
+            Lista de tarefas em ordem de execução. Lista de materiais com
+            especificação e ponto de compra. O caminho até a vistoria do Detran,
+            com os itens que exigem laudo de engenheiro credenciado. E a relação
+            do que não se deve executar sozinho.
           </p>
           <p class="measure">
-            A estrutura base compreende isolamento de piso e teto, garagem com
-            energia solar, estrutura de banheiro com chuveiro, e a documentação
-            da alteração de espécie no CRLV.
+            A estrutura base é isolamento de piso e teto, garagem com energia
+            solar, estrutura de banheiro com chuveiro, e a alteração de espécie
+            no CRLV.
           </p>
         </div>
 
         <div class="col-5 col-divide">
-          <p class="label label-accent">O que não está incluído</p>
+          <p class="label label-accent">Não incluído</p>
           <p class="footnote">
-            Projeto executivo, plano de corte, visitas de acompanhamento,
-            execução de qualquer item, compra de material, emissão de laudo e
-            representação junto ao Detran. Todos esses constam dos níveis 02 em
-            diante.
+            Projeto, plano de corte, visitas, execução de qualquer item, compra
+            de material, emissão de laudo e representação no Detran. Todos
+            constam dos níveis 02 em diante.
           </p>
         </div>
 
@@ -243,63 +213,40 @@
       <div class="grid12 gap-1">
 
         <div class="col-7">
-          <p class="label label-accent">Veículo, já medido pelo cliente</p>
+          <p class="label label-accent">O que cada nível inclui</p>
           <table class="facts facts-tight">
-            <tr><th>Entre-eixos</th><td>3.578 mm</td></tr>
-            <tr><th>Comprimento útil</th><td>3.134 mm</td></tr>
-            <tr><th>Altura útil</th><td>1.912 mm</td></tr>
-            <tr><th>Entre caixas de roda</th><td>1.280 mm</td></tr>
-            <tr><th>Largura do piso</th><td>a conferir</td></tr>
+            <tr><th>02</th><td>Projeto, plano de corte, visita semanal de 2 h e os quatro itens críticos</td></tr>
+            <tr><th>03</th><td>Tudo do 02, mais verba de R$ 105.000 com nota aberta</td></tr>
+            <tr><th>04</th><td>Tudo do 03, mais execução integral, laudo, vistoria, CRLV e garantia</td></tr>
           </table>
         </div>
 
         <div class="col-5 col-divide">
-          <p class="label label-accent">Material já disponível</p>
-          <p class="footnote">
-            Planta baixa e dois cortes em escala, com layout definido. As duas
-            horas não serão gastas levantando medida, e sim decidindo ordem de
-            execução e lista de compra.
-          </p>
+          <p class="label label-accent">Veículo, já medido</p>
+          <table class="facts facts-tight">
+            <tr><th>Entre-eixos</th><td>3.578</td></tr>
+            <tr><th>Compr. útil</th><td>3.134</td></tr>
+            <tr><th>Altura útil</th><td>1.912</td></tr>
+            <tr><th>Entre rodas</th><td>1.280</td></tr>
+          </table>
         </div>
 
       </div>
 
-      <div class="certificate gap-1">
+      <div class="certificate flush">
         <p class="label">Aceite</p>
         <p class="measure">
-          As partes abaixo assinadas acordam a execução do nível indicado, nas
-          condições desta proposta. O valor pago constitui crédito integral em
-          qualquer nível superior, sem prazo de validade.
+          O valor pago é crédito integral em qualquer nível superior.
         </p>
-        <div class="sign">
+        <div class="sign sign-4">
           <div><span class="label">Nível contratado</span></div>
           <div><span class="label">Data de início</span></div>
+          <div><span class="label">Cliente</span></div>
+          <div><span class="label">Executor</span></div>
         </div>
-        <div class="sign sign-wide">
-          <div><span class="label">Assinatura do cliente</span></div>
-          <div><span class="label">Assinatura do executor</span></div>
-        </div>
-      </div>
-
-      <div class="spacer"></div>
-
-      <p class="label label-accent gap-1 flush">Executor</p>
-      <div class="sign sign-4 flush">
-        <div><span class="label">Razão social ou nome</span></div>
-        <div><span class="label">CNPJ ou CPF</span></div>
-        <div><span class="label">Endereço da oficina</span></div>
-        <div><span class="label">Contato</span></div>
       </div>
 
       <hr class="rule-heavy">
-
-      <p class="footnote measure">
-        Folha redigida pelo cliente como modelo de formato comercial. Os campos
-        do executor estão em branco porque a proposta passa a ser dele no
-        momento em que os preencher.
-      </p>
-
-    </div>
 
     <div class="sheet-foot">
       <span>Proposta 001/2026 · <span class="num"></span></span>
