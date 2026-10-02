@@ -349,6 +349,17 @@
 /* a signature row where one label is far longer than the other */
 .sign-wide{grid-template-columns:1fr 2fr}
 
+/* A block with a heading under it has to carry its own space below. The
+   gap tokens are margin-top only, and `.sheet p` sets a margin shorthand
+   that outranks them on a label, so a `.gap-2` on the heading that follows
+   a write-in row or a table does nothing at all. Opening the space from
+   this side is what works, and it changes no existing sheet.
+
+   One baseline, not two: what follows is the next sub-heading inside the
+   same section, and 6 mm is what sets a block off from the one above it.
+   12 mm is for opening a section. */
+.stack{margin-bottom:6mm}
+
 /* ---------- redaction ----------
    A published copy of a real submission. The mark removes the
    content; it does not cover it. A black rectangle drawn over
