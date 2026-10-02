@@ -846,3 +846,288 @@ proposal that is not law.
 Five conversations still beat a third pass. The difference is that the first two
 sections of the profile can now be written from evidence, and the conversations
 can be spent on the parts that were never going to be published by anyone.
+
+---
+---
+
+# Third pass — England, and the geography correction
+
+**Retrieved:** 2026-09-16. **Language searched:** English.
+
+**Why this pass exists.** The brief names six countries: Finland, Sweden, Norway,
+Estonia, Latvia and **England**. The first two passes covered Finland, Sweden,
+Norway, Denmark and Latvia. **England had zero coverage and Denmark, which is not
+in the brief, had five sources.** This pass opens England.
+
+**The folder name is now wrong and the files are staying where they are.**
+`nordic-manufacturers` does not describe a set that includes England. Renaming
+the folder would break every cross-reference in `profile.md` and `profile-v3.md`
+for no research gain. Recorded here so the next reader is not misled by the name.
+
+**England is a different regulatory regime and must not be blended.** It left the
+EU procurement directives and runs the Procurement Act 2023. Nothing in
+`trigger.md` about the EU Public Procurement Act proposal, the CSRD, the ESPR or
+the Construction Products Regulation reaches England on the same timetable, and
+some of it does not reach England at all. **Any copy addressing all six countries
+at once is addressing two regimes as though they were one.**
+
+---
+
+## Voice — Knitster, an English manufacturer on a public tender
+
+**What it is:** Trade-press reporting carrying a named English manufacturer's own
+account of bidding for a public contract, at length and in her own words. **The
+best single piece of manufacturer voice in this entire research pack, in any
+language**, because it is the target population describing the thing the offer is
+about.
+**URL:** https://www.fashionroundtable.co.uk/news/2026/9/9/how-public-procurement-locks-out-britains-small-manufacturers
+**Retrieved:** 2026-09-16. Article dated **9 September 2026** — one week before
+this pass. **Language:** English.
+
+---
+
+### Source material
+
+Emma McClelland, co-founder of Knitster, a knitwear manufacturer of around 14
+staff, on a public tender they were invited to bid for:
+
+> "When we were asked to apply, we thought, maybe this is going to be our golden ticket, but it was a nightmare."
+
+> "It was weeks of paperwork. It was unbelievable. Gantt charts and Excel sheets and all the costings for every single garment – how much they would cost in one to two years, the whole lot."
+
+> "We're in so deep, we might as well just keep going."
+
+> "You get a marking matrix, you get a specification and you get a sample to copy. What they were asking for in the specification did not align with the marking matrix and it did not align with the sock."
+
+> "I don't think that makes any sense to me because it discourages people and companies from making it in the UK."
+
+Figure stated in the article: ISO certifications at approximately **£5,000–6,000
+each**.
+
+---
+
+### Observations
+
+- `[VERIFIED]` **This is an industrial manufacturer, in the brief's geography,
+  describing a public tender in the first person.** Two prior passes searched
+  four languages and found nobody doing this. One English search found it.
+  Same URL, 2026-09-16.
+- `[VERIFIED]` **"It was weeks of paperwork"** and the Gantt-charts-and-Excel
+  inventory is section 5 texture of exactly the kind rung 05 demands — the
+  specific object on the specific desk, not a category. Same URL.
+- `[VERIFIED]` **"We're in so deep, we might as well just keep going"** is the
+  sunk-cost sentence, said out loud, by the reader. It is the single most useful
+  line located in three passes: it describes a person who cannot stop and is not
+  enjoying it, which is a different low position from *we withdrew with pride*.
+- `[VERIFIED]` **The specification, the marking matrix and the physical sample
+  did not agree with each other.** The manufacturer is not describing her own
+  documents failing. She is describing **the authority's** documents
+  contradicting themselves. Same URL.
+- `[INFERRED]` That last point cuts against the offer's premise and should be
+  carried as a live risk, not smoothed over. A document standard fixes what the
+  supplier controls. It does not fix an incoherent tender pack, and a reader
+  whose most recent memory is an incoherent tender pack may hear the offer as
+  answering the wrong problem. **Unverified — one manufacturer, one tender.**
+- `[VERIFIED]` **A second, quieter low position sits in the ISO figure.**
+  £5,000–6,000 per certification is a documentation cost already being paid, per
+  certificate, by a 14-person manufacturer. Same URL.
+- `[VERIFIED, partially non-target]` **Knitster is a knitwear manufacturer of
+  around 14 staff.** That is manufacturing, and it is smaller than the 50–250
+  person band the profile assumes. **The population label travels with every
+  line above.**
+
+---
+
+## Voice — UK Supply Report 2026, the aggregate
+
+**What it is:** A survey of nearly 200 businesses in UK critical sectors,
+produced by the Critical Supply Group with MAP UK & International, Made in
+Britain, the All-Party Parliamentary Manufacturing Group, CIPS, CBI and FSB.
+Aggregate rather than voice, recorded here because it is the population the
+Knitster quote comes from.
+**URL:** https://www.operationsengineer.org.uk/content/news/survey-highlights-untapped-capability-in-supply-chains
+**Retrieved:** 2026-09-16. **Language:** English.
+
+---
+
+### Source material
+
+- **74%** believe they could increase their contribution
+- **67%** identified procurement and tendering complexity as the biggest obstacle
+- **64%** cited limited visibility of opportunities
+- **39%** pointed to insufficient engagement from buyers
+- On trusted supply sources: **62%** Europe, **27%** United States, **18%** China
+
+One quote, and it is an association's, not a supplier's:
+
+> "Businesses are ready to play a bigger role in supporting the UK's critical sectors, but they need procurement processes to give capable suppliers greater visibility of opportunities."
+> — John Foster, CBI Chief Policy and Campaigns Officer
+
+---
+
+### Observations
+
+- `[VERIFIED]` **67% naming procurement and tendering complexity as the biggest
+  obstacle, from a manufacturing-weighted sample of nearly 200.** This is the
+  first aggregate in the research pack that does not carry a
+  non-manufacturer caveat. Same URL, 2026-09-16.
+- `[VERIFIED]` **The report itself carries no supplier verbatims** in the
+  coverage retrieved — the source states the statistics are presented as survey
+  findings rather than testimony. The underlying report was not fetched.
+- `[VERIFIED]` **Not retrieved and worth fetching:** the UK Supply Report 2026
+  itself, via the Critical Supply Group or Made in Britain. A near-200-business
+  survey of this population may carry free-text answers, and free-text answers
+  are what section 10 needs.
+- `[INFERRED]` 67% complexity against 64% visibility puts a **monitoring** problem
+  almost level with a **documentation** problem in the same population. Mercell
+  sells the first and is reviewed at 2.0 of 5. Whether an English manufacturer
+  would spend on the second before the first is unknown.
+
+---
+
+## Voice — third record of searches that returned nothing
+
+**What it is:** The negative results from this pass. Same standing as the two
+earlier null records.
+**Retrieved:** 2026-09-16
+
+| Search intent | Language | Result |
+|---|---|---|
+| A Latvian manufacturer's own words in an IUB complaint decision | Latvian | **Not reached.** The archive was located and its structure confirmed — decisions free for the current year plus three previous, complaint data split between *iepirkuma dokumentācija* and *piedāvājumu vērtēšana* — but the figures sit inside downloadable .xlsx files that were not opened. https://www.iub.gov.lv/lv/sudzibu-dati |
+| An Estonian supplier-side bid consultant | Estonian | One result, https://triinpajo.com/ettevotjale/, **HTTP 404 on fetch 2026-09-16.** Everything else was Rahandusministeerium, Riigi Teataja, Sorainen, QUU Legal and Fondia — regulator, statute and law firms. |
+| Achilles JQS published fee levels | English | **HTTP 400 on fetch 2026-09-16** at the supplier order form. Fee *structure* obtained, fee *amounts* not. |
+| An English manufacturer describing life after fixing its tender documentation | English | Nothing. Same result as four languages in pass two. **Section 6 remains empty across three passes and five languages.** |
+
+---
+
+### What this pass changes, and what it does not
+
+`[VERIFIED]` **Section 5 now has a target-population, first-person account with
+physical detail** — Knitster. Three passes produced exactly one.
+
+`[VERIFIED]` **Section 6 is still empty.** Three passes, five languages, and no
+supplier anywhere has published an account of what it is like after this problem
+is solved. The inference from pass two stands and is now better supported: the
+state has no event in it. Losing generates a complaint with a case number.
+Winning quietly generates nothing.
+
+`[VERIFIED]` **A genuinely new objection surfaced**, and it is not on the pass-two
+list: *the authority's own documents contradicted each other.* That is a
+belief-in-mechanism objection aimed at the whole category — if the tender pack is
+incoherent, better supplier documents do not obviously help. **Nothing in three
+passes answers it.**
+
+---
+---
+
+# Client answers, 2026-09-16
+
+**What this is.** The research skill's closing rule: where the user cannot reach
+a buyer, the five questions go to the user, who sells to this market and has
+heard these answers even if nobody wrote them down. Recorded as `[CLIENT]` —
+**weaker than a source, stronger than a guess.** Atlas Sahrim, awe@arvorealta.com.
+
+`[CLIENT]` **A real buyer could not be reached.** The five questions went to the
+user instead. Two of the five came back answered, one of them with material
+nothing in three passes had produced.
+
+---
+
+## Q2 — do they know why they lose?
+
+> They usually do not know why they lose
+
+`[CLIENT]` **This resolves contradiction 5 in `notes.md` in the profile's
+favour.** Three passes found every Danish, Norwegian and Finnish complainant
+arguing at length that they knew exactly why they lost. The reading recorded as
+the alternative — that complainants are a self-selecting minority who complain
+*because* they know, and the silent majority is the reader — is the one the
+client confirms.
+
+`[CLIENT]` **The complaint archives are therefore the wrong population for
+section 8**, and every objection drawn from them describes a supplier who is
+already unusually informed. They stay in the pack as voice. They do not stand
+for the reader's state of knowledge.
+
+`[INFERRED]` *You are losing points you do not know you are losing* is true of
+this reader. It is also claim 3 in the inventory, heard three or more times
+across sellers, and dead on arrival as an opening. **The fact is available. The
+sentence is not.** Rests on `notes.md`, claim inventory.
+
+---
+
+## Q-new — what they actually want to win
+
+> they usually do not want to win all tenders, just the local ones
+
+`[CLIENT]` **Nothing in three passes and five languages contains this, and it
+changes the shape of the offer.**
+
+`[CLIENT]` The reader is not optimising win rate. They are trying to win a
+**specific, geographically bounded subset** and are indifferent to the rest.
+
+### Why this matters more than anything else in the pack
+
+- `[INFERRED]` **It kills the volume argument.** Every seller located in
+  `competitor.md` sells per-bid help, and the implied promise is *bid more, win
+  more*. A reader who wants the local ones does not want to bid more. They want
+  the few that matter not to be lost on paperwork. Rests on the client answer
+  against the seller field.
+- `[INFERRED]` **It rewrites the high position, which three passes could not
+  fill.** Section 6 was empty because nobody publishes what it is like after. The
+  client answer says what *after* is for: not a bigger pipeline, but the nearby
+  contract that should have been theirs. That is concrete, bounded and
+  checkable. **Still `[CLIENT]`, not `[VERIFIED]` — no manufacturer has said it.**
+- `[INFERRED]` **It makes the falling-competition data an asset rather than a
+  problem.** `notes.md` records bidders per EU procedure falling 5.7 to 3.2, and
+  39% of Swedish service procurements drawing two bids or fewer — recorded there
+  as cutting *against* urgency. For a reader who only wants the local ones, a
+  thin local field is the whole opportunity. **The same number reverses sign once
+  the reader's goal is bounded.**
+- `[INFERRED]` **It reframes the reusable asset.** A document standard pays back
+  over repetition. A reader bidding a handful of local tenders a year repeats
+  rarely, so the payback argument cannot lean on volume. It has to lean on the
+  cost of losing one that was winnable. Rests on the client answer.
+- `[INFERRED]` **It is a disqualification line.** A manufacturer chasing national
+  frameworks at scale is a different reader, and the offer as priced is probably
+  wrong for them.
+
+`[CLIENT]` **"Local" is not defined and was not defined.** Municipality, region,
+county, or simply *near enough to drive to* are materially different
+catchments. **Section 9 cannot be written precisely until this is pinned down**,
+and it is now the single highest-value open question in the pack.
+
+---
+
+## Q1 — geography
+
+`[CLIENT]` **England is out of scope.** The market is Finland, Sweden, Norway,
+Estonia and Latvia.
+
+`[CLIENT]` The England material gathered in the third pass **stays in the files
+and is not deleted.** It is sound research, it is clearly labelled, and the
+Knitster account remains the only first-person manufacturer voice in the pack.
+It is now **out-of-scope reference material**, on the same footing as the Danish
+complaint rulings, which were also outside the brief and were kept.
+
+`[CLIENT]` **Consequence for `trigger.md`:** the Procurement Act 2023 section and
+the further-reforms consultation are **out of scope** and must not be cited as
+triggers for this market. The regime split they record still matters as a
+warning — it is why the remaining five countries have to be checked for regime
+differences rather than assumed to be one unit. **Norway is EEA, not EU**, and
+that distinction is live and already flagged in `trigger.md`.
+
+---
+
+## What the client answers do not fix
+
+`[CLIENT]` **Three of the five questions came back unanswered**: what a
+manufacturer's week actually looks like and who assembles the submission
+(section 1); whether *document standard* reads as the cure or as more of the
+disease (the Företagarna warning); and the decision mechanics of section 9 — who
+signs, who can veto without signing.
+
+`[INFERRED]` Section 6 is now **partially filled from a client answer rather than
+from evidence**, which is better than empty and worse than sourced. Any copy
+drafted on it should be treated as a hypothesis the first real buyer conversation
+will confirm or break. Rests on the tag discipline in this file.

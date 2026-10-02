@@ -361,3 +361,130 @@ Regulation is the event to track. **It starts a one-year clock and creates a rea
 dated obligation for a definable set of manufacturers** — precast concrete,
 structural metallic products and cement first. That is the moment a compliance
 argument becomes available without manufacturing it.
+
+
+
+---
+---
+
+# Housekeeping — `trigger-amendments.md` removed, 2026-09-16
+
+`[VERIFIED]` The separate `trigger-amendments.md` file has been **deleted**. The
+research skill mandates four files in this folder and never more; that file was a
+fifth, created 2026-09-15 as a set of drop-ins because `trigger.md` was then
+outside the repository.
+
+**On checking, all three of its entries had already been applied to this file** —
+the Construction Products Regulation correction (the Article 95(9) and Article 92
+reading, and the `[VERIFIED — AMENDED 2026-09-15]` row above), the September 2026
+instrument as a proposed Regulation rather than an amending Act, and the open
+flag on the contested ESPR dating. Nothing was lost in deleting it, and nothing
+has been duplicated here.
+
+---
+---
+
+# Trigger — England, a separate regime on a separate clock
+
+**Retrieved:** 2026-09-16. **Language:** English.
+
+`[VERIFIED]` **Everything above this heading is EU or EEA and does not describe
+England.** England left the EU procurement directives. The EU Public Procurement
+Act proposal of 9 September 2026, the CSRD, the ESPR and the Construction
+Products Regulation do not reach England on the timetables recorded above, and
+some do not reach it at all. **The six-country geography in the brief is two
+regulatory regimes, not one.**
+
+---
+
+## The Procurement Act 2023
+
+`[VERIFIED]` **Live since 24 February 2025.** The supplier guide states: *"On
+24 February 2025, the rules that shape how public bodies buy goods and services
+changed."*
+https://www.gov.uk/government/publications/procurement-act-2023-short-guides/the-procurement-act-2023-a-short-guide-for-suppliers-html
+· retrieved 2026-09-16
+
+`[VERIFIED]` Suppliers bid through **Find a Tender**, registering once on a
+**Central Digital Platform** that stores core business details for reuse across
+multiple bids. *"Find a Tender is free to use for everyone. There are no charges
+and you should not pay to view opportunities in the public sector."* Same URL.
+
+`[VERIFIED]` The information a supplier registers includes: Companies House
+number, postal address, website, email, **the last two years of accounts**,
+connected persons and persons with significant control, and *"details of any
+convictions held or offences committed by the organisation or any people
+connected to the business."* Same URL.
+
+`[VERIFIED]` A Cabinet Office announcement dated **25 February 2025** records the
+regime as in force alongside a **30-day payment mandate for all public sector
+contracts**, a new National Procurement Policy Statement, a **Procurement Review
+Unit (PRU)** and a **National Security Unit for Procurement (NSUP)**. It states
+yearly public procurement spend at **£400 billion**; a quoted figure within the
+same page gives **£300 billion** — **recorded as a contradiction, unresolved.**
+https://www.gov.uk/government/news/new-public-procurement-rules-to-drive-growth-opportunities-for-small-businesses-and-exclude-suppliers-that-fail-to-deliver
+
+### Observations
+
+- `[INFERRED]` **England has legislated the administrative half of "enter it
+  once", and made it free.** What the platform does not carry is the technical
+  and quality narrative — method statements, evidence, the sentences an evaluator
+  actually scores. That is the half the offer sells, and in England it must be
+  distinguished from a free government service that solves the part a reader
+  thinks of first. Rests on the registration field list above.
+- `[VERIFIED]` **Register-once is a state service in England and a paid annual
+  subscription in Norway** (Achilles JQS, `competitor.md`). The same function,
+  two prices, one of them zero. Do not describe prequalification burden in terms
+  that assume the Nordic arrangement.
+
+---
+
+## The further-reforms consultation
+
+`[VERIFIED]` *Public Procurement: Growing British industry, jobs and skills* —
+consultation on further reforms. **Opened 26 June 2025, closed 5 September
+2025.** It is **closed**; the government response is what is outstanding.
+https://www.gov.uk/government/consultations/public-procurement-growing-british-industry-jobs-and-skills-consultation-on-further-reforms-to-public-procurement/public-procurement-growing-british-industry-jobs-and-skills-html
+· retrieved 2026-09-16
+
+`[VERIFIED]` What it proposes, where figures are stated:
+
+- Contracting authorities spending **over £100m** annually to publish **3-year
+  targets** for direct SME and VCSE spending and report annually
+- Suppliers unable to demonstrate prompt payment — **average 60 days** — excluded
+  from contracts **over £5m**
+- *"removing the current £30,000 threshold"* for payment reporting
+- A public interest test before outsourcing major service contracts **over £5m**
+- On contracts **over £5m**, mandatory award criteria on jobs, opportunities and
+  skills at a **minimum 10% weighting**, and at least one social-value KPI in the
+  contract
+- *"standard social value criteria and metrics selected from a streamlined list"*
+
+`[VERIFIED]` Implementation: *"when parliamentary time allows."* **No date. It is
+a consultation outcome, not law, and nothing downstream may imply otherwise.**
+
+### Observations
+
+- `[VERIFIED]` **A 10% minimum weighting on jobs, opportunities and skills for
+  contracts over £5m is a scored narrative section that does not exist today.**
+  Scored narrative is precisely what a document standard is for.
+- `[VERIFIED]` **But *"standard social value criteria and metrics selected from a
+  streamlined list"* points the other way** — standardised questions reduce the
+  advantage of bespoke documentation. Both effects are in the same consultation.
+  **Recorded together and unresolved.**
+- `[INFERRED]` The English quality-weighting move (10% on >£5m, undated) and the
+  EU proposal (30% general, 50% labour-intensive, also a proposal) are
+  **different numbers on different instruments in different legal systems.**
+  Anyone citing "quality is becoming mandatory" across all six countries is
+  merging them. Rests on reading both instruments.
+- `[VERIFIED]` **Directly contradicted by the recovered Stake (2017) finding** in
+  `notes.md`: a Swedish shift from lowest price to most-economically-advantageous
+  did **not** raise SME participation or success. The assumption that a weighting
+  change opens a window is unsupported in both regimes.
+
+### What to watch, England
+
+- The **government response** to the consultation that closed 5 September 2025 —
+  outstanding as of 2026-09-16, and the event that would turn the 10% weighting
+  into a date.
+- The **UK Supply Report 2026** itself, not yet fetched (`voice.md`).
