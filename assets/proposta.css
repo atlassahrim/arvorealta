@@ -1,0 +1,159 @@
+/* ==========================================================
+   PROPOSTA — structure only. No colours, no typefaces.
+   Everything reads from the tokens themes/technical.css
+   defines. Load the theme, then system.css, then this.
+
+   A commercial proposal is neither a deck nor an annex. A
+   deck is presented and an annex is submitted; this is read
+   once, on a phone, by someone deciding whether to reply.
+   So it takes the technical theme — white stock, near-black
+   ink, IBM Plex, the accent as wayfinding — and gives it a
+   page rhythm instead of a sheet geometry.
+
+   Everything is namespaced under .prop, the way .deck and
+   .deck-t are, so this file can never reach another page.
+   The two tokens the editorial theme owns and this one does
+   not, --gap and --mark, are never referenced here.
+   ========================================================== */
+
+.prop{
+  --pad: clamp(1.15rem, 4vw, 2rem);      /* side gutter */
+  --band: clamp(2.75rem, 6vw, 4.5rem);   /* between bands */
+  --rule-2: 2.2px;                        /* the structural rule */
+}
+
+/* ---------- shell ---------- */
+.prop .sheet{width:min(100% - calc(var(--pad) * 2), 62rem);margin-inline:auto}
+.prop section{padding-block:var(--band)}
+.prop p{max-width:66ch}
+
+/* ---------- type roles ----------
+   system.css sizes h1 and h2 for a display serif at up to
+   6.5rem. IBM Plex Sans at that size is a billboard, not a
+   document, so the scale comes back to something a proposal
+   can carry. Four roles and no more: display, body, label,
+   figure. */
+.prop h1{
+  font-family:var(--font-display);font-weight:600;
+  font-size:clamp(1.75rem,1.1rem + 3.1vw,3.1rem);
+  line-height:1.14;letter-spacing:-.021em;
+}
+.prop h2{
+  font-family:var(--font-display);font-weight:600;
+  font-size:clamp(1.15rem,.95rem + 1.1vw,1.55rem);
+  line-height:1.2;letter-spacing:-.012em;
+}
+.prop h3{
+  font-family:var(--font-display);font-weight:600;text-transform:none;
+  font-size:1rem;line-height:1.35;letter-spacing:-.005em;
+}
+.prop .lab{
+  font-family:var(--font-label);font-size:.66rem;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;line-height:1.5;
+  color:var(--ink-soft);
+}
+.prop .lab-accent{color:var(--accent)}
+.prop .num{font-family:var(--font-data);font-variant-numeric:tabular-nums}
+
+/* ---------- masthead ---------- */
+.prop .masthead{border-bottom:var(--rule-2) solid var(--ink);padding-block:1.9rem .95rem}
+.prop .masthead h1{margin-top:.75rem}
+.prop .stand{
+  margin-top:.9rem;color:var(--ink-soft);max-width:62ch;
+  font-size:clamp(1rem,.95rem + .35vw,1.1rem);line-height:1.65;
+}
+.prop .gate{
+  margin-top:1rem;border-left:3px solid var(--accent);
+  background:var(--paper-3);padding:.65rem .9rem;max-width:62ch;
+  font-size:.9rem;line-height:1.6;
+}
+
+/* ---------- the ladder ----------
+   One row per level. The price sits in its own column so the
+   four of them line up as a column of figures, which is the
+   comparison the reader is actually making. */
+.prop .ladder{margin-top:var(--band);border:1px solid var(--rule)}
+.prop .rung{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--rule)}
+.prop .rung:last-child{border-bottom:0}
+.prop .rung-head{padding:1rem 1.1rem;background:var(--paper-3);border-bottom:1px solid var(--rule)}
+.prop .rung-n{display:block;margin-bottom:.25rem}
+.prop .rung-price{
+  font-family:var(--font-data);font-weight:600;font-variant-numeric:tabular-nums;
+  font-size:1.4rem;line-height:1.1;letter-spacing:-.022em;display:block;
+  white-space:nowrap;
+}
+.prop .rung-unit{font-family:var(--font-data);font-size:.72rem;color:var(--ink-soft);display:block;margin-top:.2rem}
+.prop .rung-body{padding:1.05rem 1.15rem 1.25rem;display:flex;flex-direction:column;gap:.55rem}
+.prop .rung-body .byline{
+  font-family:var(--font-label);font-size:.64rem;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-soft);margin-left:.6rem;
+}
+.prop .rung-body ul{margin:.2rem 0 0;padding-left:1.05rem;display:flex;flex-direction:column;gap:.35rem;
+  font-size:.9rem;line-height:1.55;color:var(--ink-soft)}
+.prop .rung-body ul b{color:var(--ink);font-weight:600}
+
+/* The recommended rung reverses out. The accent stays a rule, not a
+   ground: at document scale a full accent panel reads as a warning. */
+.prop .rung.reco{background:var(--paper-3)}
+.prop .rung.reco .rung-head{background:var(--ink);color:var(--on-ink)}
+.prop .rung.reco .rung-head .lab{color:var(--on-ink);opacity:.72}
+
+/* ---------- panels ---------- */
+.prop .box{border:1px solid var(--rule);background:var(--paper-3);padding:1.1rem 1.25rem 1.3rem;margin-top:var(--band)}
+.prop .box.hot{border-color:var(--accent);background:var(--paper)}
+.prop .box h2{margin-bottom:.5rem}
+.prop .box p{color:var(--ink-soft)}
+.prop .box p + p{margin-top:.6rem}
+.prop .box p b{color:var(--ink)}
+
+/* ---------- the credit table ---------- */
+.prop .tbl{margin-top:.85rem;overflow-x:auto}
+.prop table{border-collapse:collapse;width:100%;min-width:24rem;font-size:.88rem}
+.prop th,.prop td{padding:.4rem .7rem;text-align:left;border-bottom:1px solid var(--rule)}
+.prop thead th{
+  font-family:var(--font-label);font-size:.62rem;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-soft);
+}
+.prop td.n{font-family:var(--font-data);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.prop tbody tr:last-child td{border-bottom:0;font-weight:600}
+.prop tbody tr:last-child td.n{color:var(--accent)}
+
+/* ---------- three notes ---------- */
+.prop .three{display:grid;grid-template-columns:1fr;border:1px solid var(--rule);margin-top:1rem}
+.prop .three > div{padding:1rem 1.15rem;border-bottom:1px solid var(--rule);background:var(--paper-3)}
+.prop .three > div:last-child{border-bottom:0}
+.prop .three .lab{display:block;margin-bottom:.4rem}
+.prop .three p{font-size:.9rem;line-height:1.55;color:var(--ink-soft)}
+
+/* ---------- close ---------- */
+.prop .close{margin-top:var(--band);border-top:var(--rule-2) solid var(--ink);padding-top:1.4rem}
+.prop .act{
+  display:inline-block;margin-top:.9rem;background:var(--accent);color:var(--paper);
+  font-family:var(--font-display);font-weight:600;font-size:1rem;
+  padding:.7rem 1.5rem;letter-spacing:-.008em;
+}
+.prop .act:hover,.prop .act:focus-visible{background:var(--ink)}
+.prop .smallprint{margin-top:1.1rem;font-size:.8rem;line-height:1.6;color:var(--ink-soft);max-width:66ch}
+.prop .sign{display:grid;grid-template-columns:1fr;gap:1.2rem;margin-top:1.6rem}
+.prop .sign div{border-top:1px solid var(--ink);padding-top:.45rem}
+
+/* ---------- wider viewports ---------- */
+@media(min-width:34rem){
+  .prop .rung{grid-template-columns:12.5rem 1fr}
+  .prop .rung-head{border-bottom:0;border-right:1px solid var(--rule)}
+  .prop .sign{grid-template-columns:repeat(3,1fr)}
+}
+@media(min-width:52rem){
+  .prop .three{grid-template-columns:repeat(3,1fr)}
+  .prop .three > div{border-bottom:0;border-right:1px solid var(--rule)}
+  .prop .three > div:last-child{border-right:0}
+  .prop .rung-price{font-size:1.55rem}
+}
+
+/* ---------- print ---------- */
+@media print{
+  .prop{--band:1.4rem}
+  .prop .sheet{width:auto}
+  .prop .act{background:transparent;color:var(--ink);border:1.2pt solid var(--ink)}
+  .prop .box,.prop .ladder,.prop .three{break-inside:avoid}
+}

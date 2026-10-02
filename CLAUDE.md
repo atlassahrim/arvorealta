@@ -18,16 +18,26 @@ them without being asked. Copy changes are fine; layout surgery is not.
 
 ## Not published
 
-`templates/`, every `_`-prefixed folder under `deck/` and `annex/`, and
-`assets/_og/` are working files. They live in the repo, sessions edit them
-normally, and `deck-pdf.yml` prints them from the working tree — but
-`pages.yml` deletes them from the checkout before the artifact is built, so
-they never reach the internet. Pages on a public repo has no access control;
-`noindex` only asks search engines nicely. Not deploying is the only real lock.
+`templates/`, `.claude/`, and **every `_`-prefixed file or folder at any
+depth** are working files. They live in the repo, sessions edit them normally,
+and `deck-pdf.yml` prints them from the working tree — but `pages.yml` deletes
+them from the checkout before the artifact is built, so they never reach the
+internet. Pages on a public repo has no access control; `noindex` only asks
+search engines nicely. Not deploying is the only real lock.
 
-The rule is the leading underscore. `deck/_template` stays private,
-`deck/acme` publishes. Preview a private one with `python3 -m http.server`
-from the repo root, or take the PDF from the Actions run.
+The rule is the leading underscore, and depth does not matter. `deck/_template`
+stays private, `_research/` stays private, and a new `_scratch/` at the repo
+root would stay private too. `deck/acme` publishes. Preview a private one with
+`python3 -m http.server` from the repo root, or take the PDF from the Actions
+run.
+
+**The step sweeps with `find`, not a list of paths.** It used to name
+`deck/_*` and `annex/_*` one at a time, which meant the rule held only where
+someone had remembered to write it down, and an underscore folder anywhere
+else published in full. `.git` and `.github` are pruned from the sweep, and
+the step prints any underscore path still standing afterwards so a miss fails
+loudly instead of quietly shipping. **If you add a private area, give it a
+leading underscore and nothing else is needed.**
 
 ## The pricing ladder
 
@@ -115,6 +125,18 @@ The red cannot carry small text on paper. It measures 3.61:1 there, under the
 and not as a word. The offer page currently spends it nowhere, which the rule
 allows; eight red dashes in the comparison did not.
 
+**The red belongs to the light grounds, and they are the whole list.** Measured
+against every ground in this theme: paper 3.61, paper-2 4.01, paper-3 4.47,
+taupe 2.40, ink 2.56. The three papers clear the 3:1 a graphic mark needs and
+not one of them clears the 4.5:1 a word needs, which is the rule above stated
+across all three rather than only on paper. **Taupe and ink clear neither**, so
+the red does not appear on them at all, as a mark or as anything else.
+
+This file said for a while that the red mark lives on paper or ink. The taupe
+figure was measured and the ink one was not, and the ink half was wrong. A
+statement slide reverses out to full-bleed ink, so there is no point of failure
+to mark there in red. Use `--paper-3` or a light value at low opacity instead.
+
 Muted brick `#8E4A45` is the **mark**. The red says something failed; the mark
 says here is the thing. Its contrast writes its own rules, and all three are
 hard:
@@ -158,8 +180,11 @@ there takes `.6` at 4.91:1. **The mark never crosses** — 2.03:1.
 
 The **price gradient** is sampled off the Turvatikas ground: amber `#954D13`
 running through `#743813` to chocolate `#5A200A`, at 45deg so the light end
-sits at the low corner as it does in the original. Two uses. It fills the
-prices on the two light tiers, and it grounds the recommended tier. It cannot
+sits at the low corner as it does in the original. Three uses. It fills the
+prices on the two light tiers, it grounds the recommended tier, and it fills
+the nav action, which the mark used to fill. The hero and the close carried
+gradient buttons for a day and now carry text links again, so the nav is the
+only action wearing it. It cannot
 do both on the same card — a gradient numeral on a gradient ground is the same
 colour at the same point — so that tier's price stays `--on-mark`, which
 measures 5.67:1 against the amber stop at its worst and 11.54 at the
@@ -173,7 +198,8 @@ ground cannot be a mid-tone — every clay and umber between paper and ink
 fails both text colours at once (4.4:1 and below). Two rules follow from the
 contrast, and both are hard:
 
-- **Never the accent red on taupe** — 2.40:1. The red mark lives on paper or ink.
+- **Never the accent red on taupe** — 2.40:1. The red mark lives on the light
+  grounds, and neither taupe nor ink is one of them. See the measured set above.
 - **Never taupe as a panel beside paper** — 1.50:1 apart, so they read as a
   printing error rather than a choice. Taupe is a whole-slide ground.
 
