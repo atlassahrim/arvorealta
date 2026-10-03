@@ -230,6 +230,16 @@
   gap:6mm 4mm;
   flex:none;
 }
+/* A field block sets itself off from whatever follows by one baseline, and
+   `.flush` still switches that off where a block is meant to close hard.
+   This spacing used to arrive by accident: system.css carried a
+   `.field{margin-bottom:clamp(1.75rem,3.5vw,2.5rem)}` left behind by a web
+   form that no page has any more, and it landed on these sheets because an
+   annex loads system.css before annex.css. It measured 10.58 mm — a
+   viewport-relative value inside a document set in millimetres, off the
+   6 mm baseline and off the grid by 4.58 mm per block. Stated here instead,
+   in the unit the page is measured in. */
+.fields:not(.flush){margin-bottom:6mm}
 .fields.of-2{grid-template-columns:repeat(2,1fr)}
 .fields.of-4{grid-template-columns:repeat(4,1fr)}
 .field .label{display:block}

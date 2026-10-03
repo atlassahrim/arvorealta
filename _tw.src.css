@@ -1,10 +1,19 @@
-/* Tailwind v4 source for the offer page. Compiled once and the output
-   committed as assets/tw.css, the same way the fonts and the JS runtime are,
-   so the published page makes no third-party request and nothing outside this
-   repo can change what it renders.
+/* Tailwind v4 source for the offer page. Compiled and the output committed,
+   the same way the fonts and the JS runtime are, so the published page makes
+   no third-party request and nothing outside this repo can change what it
+   renders.
 
-   Rebuild after editing index.html:
-     npx @tailwindcss/cli@4 -i _tw.src.css -o assets/tw.css -m
+   Rebuild after editing this file or index.html:
+     sh _build-css.sh
+
+   Run that and nothing else. The compiled stylesheet is named after its own
+   content hash — assets/tw-<hash>.css — because Pages serves max-age=600 and
+   a changed CLASS NAME served stale costs the whole rule: the new HTML asks
+   for something the cached stylesheet has never heard of and the element
+   renders with nothing. The script compiles, hashes, renames, repoints
+   index.html and deletes the previous file. Calling the Tailwind CLI by hand
+   writes an unhashed assets/tw.css that no page links to, and leaves the real
+   stylesheet stale.
 
    The underscore keeps this source out of the deploy. lab/strict/ keeps its
    own source and its own output on purpose: a sandbox edit must never force

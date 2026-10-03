@@ -41,12 +41,16 @@
 <body class="font-sans antialiased bg-paper text-ink dark:bg-ink-2 dark:text-bone">
 
 <div id="root">
-  <!-- Static fallback. The page renders through React from a CDN module, and
-       a module that fails to load would otherwise leave an empty document.
-       createRoot clears this the moment React is up; if it never is, the
-       reader still gets the offer, the terms and a working address. -->
+  <!-- Static fallback. The page renders through React, and a module that
+       fails to load would otherwise leave an empty document. The runtime is
+       vendored at /assets/vendor/runtime.js rather than fetched from a CDN,
+       so there is no third party that can fail, but a blocked script, a
+       stripped module or scripting turned off all land here. createRoot
+       clears it the moment React is up; if it never is, the reader still
+       gets the offer, the terms and a working address. Keep the headline
+       and the standfirst in step with the hero above. -->
   <noscript style="display:block;padding:4rem 1.25rem;max-width:46rem;margin:0 auto">
-    <h1 style="font-size:2.5rem;line-height:1.05;margin:0 0 1.5rem">Nobody told you which page cost you the contract.</h1>
+    <h1 style="font-size:2.5rem;line-height:1.05;margin:0 0 1.5rem">Written once.<br>Right every time.</h1>
     <p style="margin:0 0 1.5rem;line-height:1.6">Public buyers score the documents you hand in. Not the plant, not the price list, not the twenty years.</p>
     <p style="margin:0"><a href="mailto:atlas@arvorealta.com">Get your page scored</a>. Send one page from a tender you lost. No charge and no call.</p>
   </noscript>
