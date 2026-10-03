@@ -1,0 +1,44 @@
+/* Tailwind v4 source for lab/strict/. Compiled once and the output committed
+   as tw.css, the same way the fonts and the JS runtime are, so the published
+   page makes no third-party request and nothing outside this repo can change
+   what it renders.
+
+   Rebuild after editing the markup:
+     npx @tailwindcss/cli@4 -i lab/strict/_tw.src.css -o lab/strict/tw.css -m
+
+   The underscore keeps this source out of the deploy. */
+@import "tailwindcss";
+@source "./index.html";
+
+/* The brand's own values. The skill's redesign protocol says extract the
+   brand tokens before applying its palette rules, and its premium-consumer
+   palette ban carries the same override: these are named in the brief rather
+   than reached for. One accent, locked, identical in both modes. */
+@theme {
+  --color-ink:     #17352C;
+  --color-ink-2:   #11261F;
+  --color-bone:    #E9E7E4;
+  --color-paper:   #D9D7D4;
+  --color-paper-2: #E4E2DF;
+  --color-paper-3: #EFEEEC;
+  --color-brick:   #8E4A45;
+  --color-brick-l: #C98C86;
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Tailwind v4's dark variant follows prefers-color-scheme by default. This
+   points it at the attribute instead, which the toggle sets and which is
+   seeded from the system before first paint. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* The photograph's strength, one number per mode. Measured against the worst
+   pixel in the frame: ink on the light wash at .35 is 4.85:1, bone on the ink
+   wash at .30 is 4.19:1. Both clear 4.5:1 and 4:1 respectively at the 98th
+   percentile, and this variant follows the skill, which requires AA. The
+   low-contrast experiment lives on lab/ instead. */
+:root            { --hero-photo: .35 }
+[data-theme="dark"] { --hero-photo: .30 }
+
+html { background: var(--color-paper) }
+html[data-theme="dark"] { background: var(--color-ink-2) }
