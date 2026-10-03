@@ -245,19 +245,35 @@ Darkening it until bone clears takes a 50% black scrim, which drops the
 frame's median luminance from 0.162 to 0.040 and throws away the light that
 was the reason to use the picture.
 
-**So a photograph is lifted, not dropped.** The image sits at **35% opacity
-over `--paper-3`**, a 65% bone wash. At that strength the darkest pixel in
-the whole frame measures L 0.333 and ink on it is **4.84:1**, which clears
-the 4.5:1 small text needs with no box, no scrim and no exception anywhere on
-the picture. 38% gives 4.43 and 40% gives 4.18, so **35% is a floor. Lighten
-it freely; never darken it**, and re-measure if the image changes.
+**So a photograph is lifted, not dropped.** The image sits over `--paper-3`
+at an opacity the page sets in one token, `--hero-photo`, and one minus that
+is the bone wash. Measured on the hero photograph, ink over the result at the
+worst pixel in the frame:
+
+| `--hero-photo` | wash | ink | what still reads |
+|---|---|---|---|
+| 0.35 | 0.65 | 4.85:1 | everything, small text included |
+| 0.45 | 0.55 | 3.59:1 | display type only, 96px and up |
+| 0.55 | 0.45 | 2.58:1 | nothing, by the standard |
+| 0.70 | 0.30 | 1.55:1 | nothing |
+| 0.85 | 0.15 | 1.11:1 | type and picture are the same value |
+
+**0.35 is where every size clears, and it is a reference rather than a gate.**
+Above 0.45 the standfirst and the eyebrow stop being readable on a phone in
+daylight or to anyone with low vision, and a public buyer running an
+accessibility check would find it. That is a real cost and it is the owner's
+to weigh, not the file's to refuse: **the number is here so the trade is made
+with the figure in front of you.** `lab/` runs at 0.70 deliberately.
+
+Re-measure when the image changes. A different photograph is a different
+table, and the only honest way to get it is to sample the file.
 
 Three rules follow, and they are the same shape as the taupe rules above:
 
-- **Only ink crosses onto a washed photograph.** On that wash `--ink-soft`
-  measures 2.58:1 and the mark 2.35:1. Carrying either would need the wash at
-  87%, by which point there is no photograph underneath it. The standfirst
-  and every eyebrow take full ink while they are over the image
+- **Only ink crosses onto a washed photograph.** At 0.35 `--ink-soft`
+  measures 2.58:1 there and the mark 2.35:1, and both fall further as the
+  picture strengthens. Ink is the only value that holds at any setting of the
+  token, so the standfirst and every eyebrow take full ink over the image
 - **The band runs full bleed and fades out, it is never a panel.** A
   photograph inset beside paper is the taupe mistake with more detail in it.
   A radial vignette carries bone at the edges out to the page's own ground at
