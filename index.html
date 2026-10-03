@@ -230,9 +230,9 @@ function Action({ href, children, tone = "solid", class: extra = "", ...rest }) 
    exactly three, a select would hide two of them behind a tap, and the
    current one has to be readable at a glance by someone who cannot read the
    other two. aria-pressed carries the state for anyone not seeing the fill. */
-function LangPick({ lang, setLang, t }) {
+function LangPick({ lang, setLang, t, onPhoto }) {
   return html`
-    <div class="flex items-center rounded-full border border-ink/20 p-[3px] dark:border-bone/25"
+    <div class="flex items-center rounded-full border p-[3px] ${onPhoto ? "border-bone/35" : "border-ink/20 dark:border-bone/25"}"
          role="group" aria-label=${t.langLabel}>
       ${LANGS.map(code => html`
         <button key=${code} type="button" onClick=${() => setLang(code)}
@@ -240,32 +240,44 @@ function LangPick({ lang, setLang, t }) {
           title=${STR[code].label}
           class="rounded-full px-2.5 py-1 font-mono text-[11px] uppercase tracking-[.1em] transition-colors ${
             lang === code
-              ? "bg-ink text-bone dark:bg-bone dark:text-ink"
-              : "text-ink/60 hover:text-ink dark:text-bone/60 dark:hover:text-bone"}">
+              ? (onPhoto ? "bg-bone text-ink" : "bg-ink text-bone dark:bg-bone dark:text-ink")
+              : (onPhoto ? "text-bone/60 hover:text-bone" : "text-ink/60 hover:text-ink dark:text-bone/60 dark:hover:text-bone")}">
           ${STR[code].short}
         </button>`)}
     </div>`;
 }
 
-function Nav({ t, theme, onToggle, lang, setLang }) {
+function Nav({ t, theme, onToggle, lang, setLang, onPhoto }) {
   const links = [[t.nav.open, "#open"], [t.nav.case, "#case"]];
+  const shell = onPhoto
+    ? "border-transparent bg-transparent text-bone"
+    : "border-ink/10 bg-paper/85 backdrop-blur-md dark:border-bone/10 dark:bg-ink-2/85";
   return html`
-    <header class="sticky top-0 z-40 border-b border-ink/10 bg-paper/85 backdrop-blur-md dark:border-bone/10 dark:bg-ink-2/85">
+    <!-- Fixed, not sticky. A sticky header stays in normal flow, so it was
+         holding 68px of its own above the band and showing the page's ground
+         there: the bar read as a solid strip however transparent its own
+         background was. Fixed takes it out of flow and the photograph starts
+         at the top of the screen. -->
+    <header class="fixed inset-x-0 top-0 z-40 border-b transition-colors ${shell}">
       <div class="${WRAP} flex h-[68px] items-center justify-between gap-5">
         <a href="#top" class="font-mono text-[13px] uppercase tracking-[.22em]">Arvorealta</a>
         <nav class="hidden items-center gap-7 lg:flex">
           ${links.map(([l, h]) => html`
             <a key=${h} href=${h}
-               class="text-[14px] text-ink/70 transition-colors hover:text-ink dark:text-bone/70 dark:hover:text-bone">${l}</a>`)}
+               class="text-[14px] transition-colors ${onPhoto
+                 ? "text-bone/75 hover:text-bone"
+                 : "text-ink/70 hover:text-ink dark:text-bone/70 dark:hover:text-bone"}">${l}</a>`)}
         </nav>
         <div class="flex items-center gap-2.5">
-          <${LangPick} lang=${lang} setLang=${setLang} t=${t} />
+          <${LangPick} lang=${lang} setLang=${setLang} t=${t} onPhoto=${onPhoto} />
           <button type="button" onClick=${onToggle}
             aria-label=${theme === "dark" ? t.themeTo.light : t.themeTo.dark}
-            class="grid size-9 shrink-0 place-items-center rounded-full border border-ink/20 transition-colors hover:border-ink/50 dark:border-bone/25 dark:hover:border-bone/60">
+            class="grid size-9 shrink-0 place-items-center rounded-full border transition-colors ${onPhoto
+              ? "border-bone/35 hover:border-bone/70"
+              : "border-ink/20 hover:border-ink/50 dark:border-bone/25 dark:hover:border-bone/60"}">
             <span class="font-mono text-[11px]" aria-hidden="true">${theme === "dark" ? "L" : "D"}</span>
           </button>
-          <${Action} href=${MAILTO} class="hidden sm:inline-flex">${t.cta}<//>
+          <${Action} href=${MAILTO} class="hidden sm:inline-flex ${onPhoto ? "!bg-bone !text-ink hover:!bg-bone/90" : ""}">${t.cta}<//>
         </div>
       </div>
     </header>`;
@@ -286,10 +298,11 @@ function Hero({ t }) {
           width="1141" height="640" alt="" fetchpriority="high" decoding="async"
           class="size-full object-cover object-[62%_46%] [opacity:var(--hero-photo)]" />
       </picture>
-      <div class="pointer-events-none absolute inset-0
-                  bg-[radial-gradient(135%_120%_at_62%_46%,transparent_26%,var(--color-ink)_72%,var(--color-ink-2)_99%)]"></div>
-
-      <div class="${WRAP} relative grid min-h-[clamp(30rem,calc(100dvh-4.5rem),46rem)] content-center py-14">
+      <!-- The band is the screen. The header floats on it rather than sitting
+           above it, so the hero takes the whole viewport rather than the
+           viewport minus a bar. dvh, not vh, so the iOS address bar does not
+           push the action off the bottom. -->
+      <div class="${WRAP} relative grid min-h-[100dvh] content-center pt-24 pb-14">
         <div>
           <${M.div} ...${mo.rise(0)}><${Eyebrow} on="photo">${t.hero.eyebrow}<//><//>
           <${M.h1} ...${mo.rise(1)}
@@ -467,6 +480,22 @@ function App() {
   }, []);
 
   const toggle = useCallback(() => setTheme(x => x === "dark" ? "light" : "dark"), []);
+
+  const [onPhoto, setOnPhoto] = useState(true);
+  useEffect(() => {
+    /* The band itself is the sentinel. A 1px marker at its top sits above
+       the header's own 68px, so with that margin it never intersects and the
+       bar claimed it was past the photograph while sitting on it. Watching
+       the whole band asks the right question: is any part of the picture
+       still under the bar. */
+    const el = document.getElementById("top");
+    if (!el || !("IntersectionObserver" in window)) return;
+    const io = new IntersectionObserver(([e]) => setOnPhoto(e.isIntersecting),
+      { rootMargin: "-68px 0px 0px 0px", threshold: 0 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   const t = STR[lang];
 
   /* Standard and Ladder are written and tested and are not rendered. They are
@@ -477,7 +506,7 @@ function App() {
      them. The components live in git history at commit ff677c8. */
   return html`
     <${React.Fragment}>
-      <${Nav} t=${t} theme=${theme} onToggle=${toggle} lang=${lang} setLang=${setLang} />
+      <${Nav} t=${t} theme=${theme} onToggle=${toggle} lang=${lang} setLang=${setLang} onPhoto=${onPhoto} />
       <main>
         <${Hero} t=${t} />
         <${Gate} t=${t} />
