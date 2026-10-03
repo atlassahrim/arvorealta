@@ -88,9 +88,9 @@ const STR = {
     open: {
       eyebrow: "Open now",
       h2: "If you are bidding on this one, the hard attachment is already written.",
+      title: "Supply of waste containers", official: "Named in the competition documents as",
       buyer: "Valdres Kommunale Renovasjon IKS, Norway. Framework agreement, four years.",
       body: "Two of the three annexes are handed out as finished forms. The third is not, and it is the one where the quality and the environment weight is read.",
-      given: "Given as forms", missing: "Not given", missingNote: "where 65% of the score is read",
       seeEx: "See a filled example", getTpl: "Download the template",
       exMeta: "PDF, 5 sheets, 132 KB", tplMeta: "Word, 14 KB, fill it in",
       fields: [["Tender deadline", "27 Oct 2026, 12:00"], ["Questions close", "19 Oct 2026"], ["Weight that is not price", "65%"]],
@@ -126,9 +126,9 @@ const STR = {
     open: {
       eyebrow: "Åpen nå",
       h2: "Leverer du tilbud i denne, er det vanskeligste vedlegget allerede skrevet.",
+      title: "Leveranse av avfallsbeholdere", official: null,
       buyer: "Valdres Kommunale Renovasjon IKS, Norge. Rammeavtale, fire år.",
       body: "To av de tre vedleggene er utlevert som ferdige skjema. Det tredje er det ikke, og det er der kvalitets- og miljøvekten leses.",
-      given: "Utlevert som skjema", missing: "Ikke utlevert", missingNote: "der 65 % av poengsummen leses",
       seeEx: "Se et utfylt eksempel", getTpl: "Last ned malen",
       exMeta: "PDF, 5 sider, 132 KB", tplMeta: "Word, 14 KB, fyll den ut",
       fields: [["Tilbudsfrist", "27. okt. 2026, 12:00"], ["Frist for spørsmål", "19. okt. 2026"], ["Vekt som ikke er pris", "65 %"]],
@@ -164,9 +164,9 @@ const STR = {
     open: {
       eyebrow: "Avoinna nyt",
       h2: "Jos jätät tarjouksen tähän, vaikein liite on jo kirjoitettu.",
+      title: "Jäteastioiden toimitus", official: "Kilpailuasiakirjoissa nimellä",
       buyer: "Valdres Kommunale Renovasjon IKS, Norja. Puitejärjestely, neljä vuotta.",
       body: "Kaksi kolmesta liitteestä annetaan valmiina lomakkeina. Kolmatta ei anneta, ja juuri siinä luetaan laadun ja ympäristön paino.",
-      given: "Annettu lomakkeina", missing: "Ei annettu", missingNote: "jossa 65 % pisteistä luetaan",
       seeEx: "Katso täytetty esimerkki", getTpl: "Lataa malli",
       exMeta: "PDF, 5 sivua, 132 KB", tplMeta: "Word, 14 KB, täytä se",
       fields: [["Tarjousten määräaika", "27.10.2026, 12:00"], ["Kysymysten määräaika", "19.10.2026"], ["Paino, joka ei ole hinta", "65 %"]],
@@ -334,33 +334,24 @@ function OpenTender({ t }) {
       <${M.div} ...${mo.reveal(1)}
         class="mt-12 grid overflow-hidden rounded-2xl border border-ink/15 bg-paper-3 lg:grid-cols-[1.15fr_1fr] dark:border-bone/15 dark:bg-ink">
         <div class="border-b border-ink/12 p-8 sm:p-10 lg:border-b-0 lg:border-r dark:border-bone/12">
-          <!-- The notice's own title stays in Norwegian in every language: it
-               is the string a bidder matches against the documents in front
-               of them. -->
-          <h3 lang="nb" class="text-[1.5rem] font-medium leading-tight tracking-[-.02em]">Leveranse av avfallsbeholdere</h3>
+          <!-- The heading is in the reader's language. The Norwegian original
+               is still here, because a bidder has to match it against the
+               documents in front of them, but it sits on its own line under a
+               label that says what it is. A quotation from another document
+               reads as deliberate; the same words loose inside an English
+               sentence read as a half-finished translation, which is what
+               this was. -->
+          <h3 class="text-[1.5rem] font-medium leading-tight tracking-[-.02em]">${t.open.title}</h3>
+          ${t.open.official && html`
+            <p class="mt-2 text-[.82rem] leading-snug text-ink/55 dark:text-bone/55">
+              ${t.open.official} <span lang="nb" class="font-mono text-ink/75 dark:text-bone/75">Leveranse av avfallsbeholdere</span>
+            </p>`}
           <p class="mt-3 text-[.95rem] leading-relaxed text-ink/70 dark:text-bone/70">${t.open.buyer}</p>
           <p class="mt-7 max-w-[46ch] leading-[1.7]">${t.open.body}</p>
 
-          <!-- The annex names never translate: they are what a bidder matches
-               against the competition documents in front of them, and an
-               obliging "Appendix 5" would break the page at the moment it is
-               most needed. Setting them in mono states that they are names of
-               files rather than words of the sentence, which is what stops
-               the section reading as half-translated. -->
-          <ul class="mt-6 grid gap-2.5 text-[.9rem]">
-            <li class="flex flex-wrap items-baseline gap-x-3">
-              <span lang="nb" class="font-mono">Bilag 2, Bilag 3</span>
-              <span class="text-ink/60 dark:text-bone/60">${t.open.given}</span>
-            </li>
-            <li class="flex flex-wrap items-baseline gap-x-3">
-              <span lang="nb" class="font-mono text-brick dark:text-brick-l">Vedlegg 5</span>
-              <span class="text-ink/60 dark:text-bone/60">${t.open.missing}, ${t.open.missingNote}</span>
-            </li>
-          </ul>
-
           <div class="mt-8 flex flex-wrap gap-3">
-            <${Action} href="/mal/Vedlegg-5-eksempel.pdf" tone="ghost" target="_blank" rel="noopener">${t.open.seeEx}<//>
-            <${Action} href="/mal/Vedlegg-5-Utfyllende-opplysninger.docx" download>${t.open.getTpl}<//>
+            <${Action} href="/assets/vedlegg-5/Vedlegg-5-eksempel.pdf" tone="ghost" target="_blank" rel="noopener">${t.open.seeEx}<//>
+            <${Action} href="/assets/vedlegg-5/Vedlegg-5-Utfyllende-opplysninger.docx" download>${t.open.getTpl}<//>
           </div>
           <p class="mt-4 font-mono text-[11px] uppercase tracking-[.14em] text-ink/50 dark:text-bone/50">
             ${t.open.exMeta} · ${t.open.tplMeta}

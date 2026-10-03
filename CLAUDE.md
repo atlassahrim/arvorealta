@@ -12,7 +12,6 @@ deploys in about ten seconds.**
 | arvorealta.com/video/ | `video/index.html` — video portfolio |
 | arvorealta.com/deck/`<slug>`/ | decks — 1920 × 1080, for presenting |
 | arvorealta.com/annex/`<slug>`/ | annexes — A4, for submitting |
-| arvorealta.com/mal/ | `mal/index.html` — a tender's free template, `noindex` |
 | arvorealta.com/lab/ | `lab/index.html` — the sandbox, `noindex` |
 
 **`index.html` and `video/index.html` are live and in use.** Do not restructure
@@ -53,8 +52,15 @@ are not obliged to.
 open**, which is research, client material, unredacted annexes and working
 drafts. **Use `noindex` for a page that has to be opened on a real device at a
 real URL and should not compete with the site**, which today is `mal/` and
-`lab/`. `lab/` is a near-copy of the offer page, so without `noindex` it would
-be a second `index.html` bidding against the first for the same terms.
+`lab/` and `reference/`. Each is a near-copy of the offer page, so without
+`noindex` each would be a second `index.html` bidding against the first for
+the same terms.
+
+`mal/` was a third such page, a Norwegian-only landing page for one tender in
+the retired editorial identity. It is deleted. Its two files moved to
+`assets/vedlegg-5/` and the offer page links to them directly, so the page
+had become a click on the way to files the reader already had in front of
+them.
 
 A sandbox lived at `_lab/` for a while and could therefore never be opened on
 a phone, which is the one test it existed to make possible. It is `lab/` now.
@@ -92,13 +98,17 @@ document agreed before the work starts, not listed on the page.
 index.html              offer page
 video/index.html        video portfolio
 lab/index.html          sandbox copy of the offer page — noindex
-mal/index.html          free template landing page for one tender — noindex
+reference/index.html    the first offer page, kept for reference — noindex
 templates/index.html    index of every template
 deck/<slug>/index.html  one deck per folder
 annex/<slug>/index.html one A4 annex per folder
 assets/
   img/                  photography, as webp + jpg at 960/1440/1920/2560
                         the name carries a version: gateway-3-<width>.<ext>
+  vedlegg-5/            the open tender's example PDF and fillable Word file
+  fonts/                Geist and Geist Mono, self-hosted woff2
+  vendor/runtime.js     React, react-dom, Motion and htm, bundled once
+  tw-2.css              the offer page's compiled Tailwind
   themes/arvorealta.css tokens for the editorial system
   themes/technical.css  tokens for the technical system
   system.css            structure only — no colour, no typefaces
@@ -577,14 +587,24 @@ arriving cold gets their own and everyone else gets English. A choice, once
 made, is remembered and outranks the browser from then on. `html lang`
 follows, because a screen reader gets its pronunciation from it.
 
-**What is never translated, and this is not fussiness.** The tender's own
-title, the buyer's registered name, and the names of the annexes — `Bilag 2`,
-`Bilag 3`, `Vedlegg 5`. Those are the strings a bidder matches against the
-competition documents open in front of them. A helpful translation of
-`Vedlegg 5` into `Appendix 5` would make the page useless at the exact moment
-it is most needed. Only the country name moves. The Norwegian title carries
-its own `lang="nb"` so it is still pronounced correctly inside an English
-page.
+**A foreign string is quoted, never left loose in a sentence.** The first
+version kept the tender's title and the annex names in Norwegian inside
+English and Finnish prose, on the reasoning that a bidder has to match them
+against the documents in front of them. The reasoning is right and the
+execution was wrong: `Bilag 2 and Bilag 3 are handed out as finished forms`
+reads as a half-finished translation, and it was reported as a bug twice.
+
+The rule now: **every sentence is in one language.** Where a foreign string
+has to appear, it is pulled out of the prose and set as a quotation, in mono,
+with its own `lang` attribute and a label in the reader's language that says
+what it is. The tender's heading is translated, and the official Norwegian
+title sits under it after `Named in the competition documents as`. The prose
+counts the annexes rather than naming them. The buyer's registered name is
+not translated in any language, which is normal for a company name; only the
+country moves.
+
+A quotation from another document reads as deliberate. The same words loose
+inside an English sentence read as an unfinished job.
 
 **The Nordic text is not a native speaker's.** The procurement vocabulary in
 it is the part worth having checked before the page is used in an approach.
