@@ -304,7 +304,13 @@ function Hero({ t }) {
            above it, so the hero takes the whole viewport rather than the
            viewport minus a bar. dvh, not vh, so the iOS address bar does not
            push the action off the bottom. -->
-      <div class="${WRAP} relative grid min-h-[100dvh] content-center py-24">
+      <!-- 100dvh alone is a trap on a short, wide window. On a 440px-tall
+           viewport the band is 440px and the 192px of padding leaves 248px
+           for four objects, which is the squashed look. The floor keeps the
+           band usable and lets the page scroll instead, and the padding
+           shrinks with the viewport rather than holding 96px a side at every
+           height. Tall screens are unaffected: there the max is 100dvh. -->
+      <div class="${WRAP} relative grid min-h-[max(34rem,100dvh)] content-center py-[clamp(4rem,9vh,6rem)]">
         <div>
           <${M.div} ...${mo.rise(0)}><${Eyebrow} on="photo">${t.hero.eyebrow}<//><//>
           <${M.h1} ...${mo.rise(1)}
