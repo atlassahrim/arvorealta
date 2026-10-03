@@ -77,7 +77,7 @@ const STR = {
     cta: "Get your page scored",
     hero: {
       eyebrow: "Industrial manufacturers bidding in the Nordics",
-      h1a: "Nobody told you which page", h1b: "cost you the contract.",
+      h1a: "Written once.", h1b: "Right every time.",
       sub: "Public buyers score the documents you hand in. Not the plant, not the price list, not the twenty years.",
       second: "See the open tender"
     },
@@ -115,7 +115,7 @@ const STR = {
     cta: "Få siden din vurdert",
     hero: {
       eyebrow: "Industriprodusenter som leverer tilbud i Norden",
-      h1a: "Ingen fortalte deg hvilken side", h1b: "som kostet deg kontrakten.",
+      h1a: "Skrevet én gang.", h1b: "Riktig hver gang.",
       sub: "Offentlige oppdragsgivere gir poeng til dokumentene du leverer. Ikke fabrikken, ikke prislisten, ikke de tjue årene.",
       second: "Se den åpne konkurransen"
     },
@@ -153,7 +153,7 @@ const STR = {
     cta: "Pyydä sivusi pisteytys",
     hero: {
       eyebrow: "Pohjoismaissa tarjouksia jättävät teollisuusvalmistajat",
-      h1a: "Kukaan ei kertonut, mikä sivu", h1b: "vei sinulta sopimuksen.",
+      h1a: "Kirjoitettu kerran.", h1b: "Oikein joka kerta.",
       sub: "Julkiset hankkijat pisteyttävät asiakirjat, jotka jätät. Eivät tehdasta, eivät hinnastoa, eivät kahtakymmentä vuotta.",
       second: "Katso avoin tarjouspyyntö"
     },
@@ -294,7 +294,7 @@ function Hero({ t }) {
           <${M.div} ...${mo.rise(0)}><${Eyebrow} on="photo">${t.hero.eyebrow}<//><//>
           <${M.h1} ...${mo.rise(1)}
             class="mt-7 text-[clamp(2.4rem,.9rem+4.4vw,4.6rem)] font-medium leading-[1.03] tracking-[-.03em]">
-            ${t.hero.h1a}<br class="hidden lg:inline" /> ${t.hero.h1b}
+            ${t.hero.h1a}<br /> ${t.hero.h1b}
           <//>
           <${M.p} ...${mo.rise(2)}
             class="mt-8 max-w-[44ch] text-[clamp(1.05rem,.98rem+.35vw,1.25rem)] leading-[1.6] text-bone/80">
