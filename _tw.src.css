@@ -34,20 +34,17 @@
    seeded from the system before first paint. */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
-/* The site runs a wash and the labs do not, and that is the difference
-   between an experiment and a business. Measured against the worst pixel in
-   the frame: ink on the light wash at .35 is 4.81:1 and bone on the ink wash
-   at .30 is 4.19:1, so every size clears, including the eyebrow and the
-   standfirst, and including where the headline crosses the dark void.
+/* A 10% wash, which is a layer you can see rather than one that does any
+   work. Measured on gateway-3 against the worst pixel in the frame: ink
+   reads 1.29:1 in light and bone 1.02:1 in dark, and at the 2nd and 98th
+   percentiles 1.25:1 and 1.15:1. The floor is 4.5:1 for small text and 3:1
+   for display, so nothing on the photograph clears either, anywhere.
 
-   At 1, which is what both labs run, those figures are 1.56:1 and 1.47:1. A
-   procurement officer reading this on a phone in daylight would not get
-   through the standfirst. The full-strength picture lives at /lab/ and
-   /lab/strict/, which is what they are for.
-
-   One number, here, if that judgement changes. */
-:root            { --hero-photo: .35 }
-[data-theme="dark"] { --hero-photo: .30 }
+   The owner chose this with the figures in front of them. 0.35 and 0.30 are
+   the settings where every size clears and they are one line away. The labs
+   run 1, with no layer at all. */
+:root            { --hero-photo: .90 }
+[data-theme="dark"] { --hero-photo: .90 }
 
 html { background: var(--color-paper) }
 html[data-theme="dark"] { background: var(--color-ink-2) }
