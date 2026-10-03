@@ -13,6 +13,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex">
 <meta name="theme-color" content="#17352C">
 
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
@@ -57,6 +58,79 @@
   /* Hero top padding came to 80px under the header's 95. With the header
      down to 67 the hero does not need the same opening gap. */
   .hero{padding-top:clamp(1.5rem,3.5vw,3.5rem)}
+
+  /* ---------- THE HERO PHOTOGRAPH ---------- */
+  /* Measured, not judged. Every figure below is the relative luminance of
+     the photograph itself, sampled across the file and run through the WCAG
+     formula against this theme's own tokens.
+
+     Untreated the picture is unusable for type. It holds near-white (sun on
+     the water, L 0.99) and near-black (the void inside the arch, L 0.002)
+     inside almost any box that could be drawn on it, so nothing clears
+     anywhere: bone reads 1.01:1 across the right half, ink 1.45:1. Dropping
+     it until bone clears takes a 50% black scrim, which takes the frame's
+     median luminance from 0.162 to 0.040 and throws away the light that is
+     the only reason to use this picture at all.
+
+     So it is lifted instead. The image sits at 35% over --paper-3, which is
+     a 65% bone wash. At that strength the DARKEST PIXEL IN THE WHOLE FRAME
+     measures L 0.333 and ink on it is 4.84:1 — clear of the 4.5:1 small
+     text needs with no box, no scrim and no exception anywhere on the
+     image. At 38% it falls to 4.43 and at 40% to 4.18, so 35% is a floor
+     and not a preference. Lighten the wash freely; do not darken it. */
+  .herofig{position:relative;isolation:isolate;overflow:clip;background:var(--paper-3)}
+  .herofig > picture{position:absolute;inset:0;display:block}
+  .herofig picture img{width:100%;height:100%;object-fit:cover;
+    object-position:50% 45%;opacity:.35}
+
+  /* The vignette. Bone at the edges, running out to the page's own ground at
+     the last stop so the band has no seam against the fold below it. The
+     photograph is 1.79:1 and the band is not, so a hard edge would cut the
+     arch against the section line; fading it means the frame ends where the
+     light runs out rather than where the markup does. */
+  .herofig::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(135% 120% at 52% 44%,
+      transparent 28%, var(--paper-3) 70%, var(--paper) 99%)}
+  .herofig > .hero{position:relative;z-index:1;
+    padding-top:clamp(3rem,7vw,6rem);padding-bottom:clamp(3.5rem,8vw,7rem)}
+
+  /* Only ink crosses onto the picture. On the same wash --ink-soft #4C5B54
+     reads 2.58:1 and the mark #8E4A45 reads 2.35:1, so the standfirst and
+     both eyebrows take full ink while they are over the image. Carrying
+     either would need the wash at 87%, by which point there is no
+     photograph underneath it. */
+  .herofig .sub,.herofig .eyebrow,.herofig .heroqual b{color:var(--ink)}
+
+  /* ---------- OPEN TENDERS ---------- */
+  /* For a reader who arrived holding a specific notice rather than a
+     grievance. It is dated, so it is built to be emptied: one entry today,
+     and the closing line says so rather than implying a list behind it.
+     The dates are set as fields and not as sentences, which is the annex
+     move — a deadline is scanned, not read. The mark measures 5.63:1 on
+     paper-3, so the field labels can carry it here. */
+  .tenders{padding-block:clamp(3.5rem,7vw,5.5rem)}
+  .tenders h2{margin-top:0}
+  .topen{margin-top:clamp(2rem,4vw,2.75rem);padding:1.6rem 1.75rem 1.75rem;
+    background:var(--paper-3);border-left:2px solid var(--ink);max-width:52rem}
+  /* h3 is a label in this system — label face, 600, uppercase. The notice's
+     own name is not a label. It is the one string a reader matches against
+     the tender they are holding, so it is read rather than found, and it
+     takes the display face and the sentence case that go with being read. */
+  .topen h3{margin:0;font-family:var(--font-display);font-weight:400;
+    font-size:clamp(1.35rem,1.1rem + .9vw,1.85rem);line-height:1.2;
+    letter-spacing:-.012em;text-transform:none;color:var(--ink)}
+  .topen .tbuyer{margin:.6rem 0 0;font-size:.95rem;line-height:1.6;color:var(--ink)}
+  .tfields{display:flex;flex-wrap:wrap;gap:1.25rem 2.5rem;margin:1.6rem 0 0}
+  .tfields div{display:flex;flex-direction:column;gap:.4rem}
+  .tfields dt{font-family:var(--font-label);font-size:.68rem;font-weight:600;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--mark)}
+  .tfields dd{margin:0;font-family:var(--font-display);font-weight:400;
+    font-size:1.3rem;line-height:1;letter-spacing:-.012em;color:var(--ink);
+    font-variant-numeric:tabular-nums}
+  .topen .tnote{margin:1.6rem 0 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:54ch}
+  .topen .tact{margin:1.5rem 0 0}
+  .tenders .tfoot{margin:clamp(1.75rem,3vw,2.25rem) 0 0;font-size:.9rem;
+    line-height:1.7;color:var(--ink-soft);max-width:58ch}
 
   /* Taupe is the evidence ground and never a panel beside paper, so it runs
      full bleed. Ink on taupe reads 6.16:1. */
@@ -352,6 +426,7 @@
   <div class="bar">
     <a class="mark" href="/">Arvorealta</a>
     <nav>
+      <a class="ln" href="#open">Open now</a>
       <a class="ln" href="#case">The case</a>
       <a class="ln" href="#standard">What it is</a>
       <a class="ln" href="#price">Price</a>
@@ -363,7 +438,15 @@
 
 <main id="top">
 
-<section class="wrap hero">
+<section class="herofig">
+  <picture>
+    <source type="image/webp" sizes="100vw"
+      srcset="/assets/img/through-960.webp 960w, /assets/img/through-1440.webp 1440w, /assets/img/through-1920.webp 1920w, /assets/img/through-2560.webp 2560w">
+    <img src="/assets/img/through-1920.jpg" sizes="100vw"
+      srcset="/assets/img/through-960.jpg 960w, /assets/img/through-1440.jpg 1440w, /assets/img/through-1920.jpg 1920w, /assets/img/through-2560.jpg 2560w"
+      width="2576" height="1442" alt="" fetchpriority="high" decoding="async">
+  </picture>
+  <div class="wrap hero">
   <p class="eyebrow">Industrial manufacturers bidding in the Nordics</p>
   <h1>Nobody told you<br class="brs"> which page cost you<br class="brs"> the contract.</h1>
   <p class="sub">Public buyers score the documents you hand in. Not the plant, not the price list, not the twenty years.</p>
@@ -371,6 +454,7 @@
   <div class="heroact">
     <a class="herocta ln on" href="mailto:atlas@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost&amp;body=Attach%20the%20page%20before%20sending.%0A%0ACompany%3A%0AWhat%20the%20tender%20was%20for%3A%0ARoughly%20when%20you%20submitted%3A">Get your page scored</a>
     <p class="sub">Send one page from a tender you lost. No charge and no call.</p>
+  </div>
   </div>
 </section>
 
@@ -385,7 +469,24 @@
   </ul>
 </section>
 
-
+<section id="open" class="g-p2 tenders">
+  <div class="wrap">
+    <p class="eyebrow">Open now</p>
+    <h2>If you are bidding on this one,<br class="brs"> the hard attachment<br class="brs"> is already written.</h2>
+    <div class="topen">
+      <h3>Leveranse av avfallsbeholdere</h3>
+      <p class="tbuyer">Valdres Kommunale Renovasjon IKS · Norway · framework agreement, four years</p>
+      <dl class="tfields">
+        <div><dt>Tender deadline</dt><dd>27 Oct 2026, 12:00</dd></div>
+        <div><dt>Questions close</dt><dd>19 Oct 2026</dd></div>
+        <div><dt>Weight that is not price</dt><dd>65%</dd></div>
+      </dl>
+      <p class="tnote">Bilag 2 and bilag 3 are handed out as finished forms. Vedlegg 5 is not, and it is where the quality and the environment weight is read. The template is a Word file. No charge, no registration, nothing asked in return.</p>
+      <p class="tact"><a class="ln on" href="/mal/">Open the template</a></p>
+    </div>
+    <p class="tfoot">One tender today, and that is the whole list rather than the top of it. Another appears here when a notice has been read closely enough to write its attachment.</p>
+  </div>
+</section>
 
 <section id="case" class="case inv">
   <div class="wrap">
