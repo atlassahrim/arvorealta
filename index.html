@@ -212,7 +212,7 @@ const ANCHOR = "scroll-mt-[92px]";
 const MAILTO = "mailto:atlas@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost";
 
 function Eyebrow({ children, on = "flat" }) {
-  const tone = on === "photo" ? "text-ink/75 dark:text-bone/75" : "text-brick dark:text-brick-l";
+  const tone = on === "photo" ? "text-bone/75" : "text-brick dark:text-brick-l";
   return html`<p class="font-mono text-[11px] uppercase tracking-[.18em] ${tone}">${children}</p>`;
 }
 
@@ -274,18 +274,20 @@ function Nav({ t, theme, onToggle, lang, setLang }) {
 function Hero({ t }) {
   const mo = useMo();
   return html`
-    <section id="top" class="relative isolate overflow-clip bg-paper-3 dark:bg-ink">
+    <section id="top" class="relative isolate overflow-clip bg-ink text-bone">
       <picture class="absolute inset-0 block">
+        <!-- The source file is 1141 x 640, so there is no 1920 or 2560 here:
+             a wider file would be upscaled bytes pretending to be detail. The
+             picture is soft above about 1200px and wants regenerating larger. -->
         <source type="image/webp" sizes="100vw"
-          srcset="/assets/img/gateway-3-960.webp 960w, /assets/img/gateway-3-1440.webp 1440w, /assets/img/gateway-3-1920.webp 1920w, /assets/img/gateway-3-2560.webp 2560w" />
-        <img src="/assets/img/gateway-3-1920.jpg" sizes="100vw"
-          srcset="/assets/img/gateway-3-960.jpg 960w, /assets/img/gateway-3-1440.jpg 1440w, /assets/img/gateway-3-1920.jpg 1920w, /assets/img/gateway-3-2560.jpg 2560w"
-          width="2576" height="1399" alt="" fetchpriority="high" decoding="async"
-          class="size-full object-cover object-[50%_45%] [opacity:var(--hero-photo)]" />
+          srcset="/assets/img/after-1-760.webp 760w, /assets/img/after-1-960.webp 960w, /assets/img/after-1-1141.webp 1141w" />
+        <img src="/assets/img/after-1-1141.jpg" sizes="100vw"
+          srcset="/assets/img/after-1-760.jpg 760w, /assets/img/after-1-960.jpg 960w, /assets/img/after-1-1141.jpg 1141w"
+          width="1141" height="640" alt="" fetchpriority="high" decoding="async"
+          class="size-full object-cover object-[62%_46%] [opacity:var(--hero-photo)]" />
       </picture>
       <div class="pointer-events-none absolute inset-0
-                  bg-[radial-gradient(135%_120%_at_52%_44%,transparent_28%,var(--color-paper-3)_70%,var(--color-paper)_99%)]
-                  dark:bg-[radial-gradient(135%_120%_at_52%_44%,transparent_28%,var(--color-ink)_70%,var(--color-ink-2)_99%)]"></div>
+                  bg-[radial-gradient(135%_120%_at_62%_46%,transparent_26%,var(--color-ink)_72%,var(--color-ink-2)_99%)]"></div>
 
       <div class="${WRAP} relative grid min-h-[clamp(30rem,calc(100dvh-4.5rem),46rem)] content-center py-14">
         <div>
@@ -295,12 +297,12 @@ function Hero({ t }) {
             ${t.hero.h1a}<br class="hidden lg:inline" /> ${t.hero.h1b}
           <//>
           <${M.p} ...${mo.rise(2)}
-            class="mt-8 max-w-[44ch] text-[clamp(1.05rem,.98rem+.35vw,1.25rem)] leading-[1.6] text-ink/80 dark:text-bone/80">
+            class="mt-8 max-w-[44ch] text-[clamp(1.05rem,.98rem+.35vw,1.25rem)] leading-[1.6] text-bone/80">
             ${t.hero.sub}
           <//>
           <${M.div} ...${mo.rise(3)} class="mt-10 flex flex-wrap items-center gap-3">
-            <${Action} href=${MAILTO}>${t.cta}<//>
-            <${Action} href="#open" tone="ghost">${t.hero.second}<//>
+            <${Action} href=${MAILTO} class="!bg-bone !text-ink hover:!bg-bone/90">${t.cta}<//>
+            <${Action} href="#open" tone="ghost" class="!border-bone/30 !text-bone hover:!border-bone/70">${t.hero.second}<//>
           <//>
         </div>
       </div>

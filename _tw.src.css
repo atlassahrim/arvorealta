@@ -34,17 +34,19 @@
    seeded from the system before first paint. */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
-/* A 10% wash, which is a layer you can see rather than one that does any
-   work. Measured on gateway-3 against the worst pixel in the frame: ink
-   reads 1.29:1 in light and bone 1.02:1 in dark, and at the 2nd and 98th
-   percentiles 1.25:1 and 1.15:1. The floor is 4.5:1 for small text and 3:1
-   for display, so nothing on the photograph clears either, anywhere.
+/* The hero band carries its own ground now, ink in both modes, because the
+   photograph is dark in every part of the frame: median luminance 0.039
+   against the arch picture's 0.228. Ink type cannot be rescued on it by any
+   wash that still leaves a picture behind, so the type is bone and the wash
+   runs to ink rather than to bone.
 
-   The owner chose this with the figures in front of them. 0.35 and 0.30 are
-   the settings where every size clears and they are one line away. The labs
-   run 1, with no layer at all. */
-:root            { --hero-photo: .90 }
-[data-theme="dark"] { --hero-photo: .90 }
+   Measured, bone over the image across the column the hero's four objects
+   occupy: 4.25:1 at 0.45, 3.48 at 0.55, 2.88 at 0.65, 1.60 at 1. The frame's
+   worst pixel, which is a bokeh highlight nothing sits on, runs 3.00 down to
+   1.07. 0.55 keeps the picture and clears the 3:1 a display line needs while
+   leaving the standfirst short of 4.5. One number if that is the wrong
+   trade. */
+:root, [data-theme="dark"] { --hero-photo: .55 }
 
 html { background: var(--color-paper) }
 html[data-theme="dark"] { background: var(--color-ink-2) }
