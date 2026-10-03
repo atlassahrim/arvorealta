@@ -98,7 +98,7 @@ deck/<slug>/index.html  one deck per folder
 annex/<slug>/index.html one A4 annex per folder
 assets/
   img/                  photography, as webp + jpg at 960/1440/1920/2560
-                        the name carries a version: gateway-2-<width>.<ext>
+                        the name carries a version: gateway-3-<width>.<ext>
   themes/arvorealta.css tokens for the editorial system
   themes/technical.css  tokens for the technical system
   system.css            structure only — no colour, no typefaces
@@ -253,11 +253,14 @@ worst pixel in the frame:
 
 | `--hero-photo` | wash | ink | what still reads |
 |---|---|---|---|
-| 0.35 | 0.65 | 4.81:1 | everything, small text included |
-| 0.45 | 0.55 | 3.55:1 | display type only, 96px and up |
-| 0.55 | 0.45 | 2.55:1 | nothing, by the standard |
-| 0.70 | 0.30 | 1.48:1 | nothing |
-| 1.00 | 0.00 | 1.56:1 | nothing, and this is what both labs run |
+| 0.35 | 0.65 | 4.92:1 | everything, small text included |
+| 0.45 | 0.55 | 3.66:1 | display type only |
+| 0.55 | 0.45 | 2.66:1 | nothing, by the standard |
+| 0.70 | 0.30 | 1.57:1 | nothing |
+| 1.00 | 0.00 | 1.51:1 | nothing, and this is what both labs run |
+
+Dark inverts the wash to `--ink` and the type to bone: 4.20:1 at 0.30, 3.13 at
+0.40, 1.23 at 1. The site runs 0.35 and 0.30; the labs run 1.
 
 The frame is 2576 × 1399, and **the worst pixel is not where the type is.**
 Across the left 56% of the frame, which is the column the hero's four objects
@@ -290,10 +293,11 @@ commit; nothing outside the labs points at it.
 
 Re-measure when the image changes. A different photograph is a different
 table, and the only honest way to get it is to sample the file. The table
-above belongs to the second hero photograph, the one with the deep green void
-set to the right of centre. The first one put that void in the middle, which
-is exactly where the headline's second line ended, and swapping the image was
-worth more to legibility than any wash setting was.
+above belongs to the third hero photograph, `gateway-3`. The first put the
+deep green void in the middle of the frame, which is exactly where the
+headline's second line ended; the second moved it right of centre; the third
+moves it further still and opens the colonnade. Each swap was worth more to
+legibility than any wash setting was.
 
 **With no wash, the picture decides where type can go, not the layout.** The
 band is 1440 × 736 and the photograph is 1.841:1, so at desktop it scales by
