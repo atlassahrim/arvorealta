@@ -343,9 +343,10 @@ function OpenTender({ t }) {
                this was. -->
           <h3 class="text-[1.5rem] font-medium leading-tight tracking-[-.02em]">${t.open.title}</h3>
           ${t.open.official && html`
-            <p class="mt-2 text-[.82rem] leading-snug text-ink/55 dark:text-bone/55">
-              ${t.open.official} <span lang="nb" class="font-mono text-ink/75 dark:text-bone/75">Leveranse av avfallsbeholdere</span>
-            </p>`}
+            <div class="mt-4">
+              <p class="font-mono text-[11px] uppercase tracking-[.18em] text-ink/55 dark:text-bone/55">${t.open.official}</p>
+              <p lang="nb" class="mt-1.5 text-[1.05rem] leading-snug">Leveranse av avfallsbeholdere</p>
+            </div>`}
           <p class="mt-3 text-[.95rem] leading-relaxed text-ink/70 dark:text-bone/70">${t.open.buyer}</p>
           <p class="mt-7 max-w-[46ch] leading-[1.7]">${t.open.body}</p>
 
@@ -353,7 +354,7 @@ function OpenTender({ t }) {
             <${Action} href="/assets/vedlegg-5/Vedlegg-5-eksempel.pdf" tone="ghost" target="_blank" rel="noopener">${t.open.seeEx}<//>
             <${Action} href="/assets/vedlegg-5/Vedlegg-5-Utfyllende-opplysninger.docx" download>${t.open.getTpl}<//>
           </div>
-          <p class="mt-4 font-mono text-[11px] uppercase tracking-[.14em] text-ink/50 dark:text-bone/50">
+          <p class="mt-4 text-[.85rem] leading-relaxed text-ink/60 dark:text-bone/60">
             ${t.open.exMeta} · ${t.open.tplMeta}
           </p>
         </div>
