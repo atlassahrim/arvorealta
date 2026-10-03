@@ -12,7 +12,6 @@ the rules behind every value. This file is the map.
 index.html              the offer page          → arvorealta.com
 video/index.html        video portfolio         → arvorealta.com/video/
 home/index.html         redirect to the root    → arvorealta.com/home
-lab/index.html          sandbox, noindex        → arvorealta.com/lab/
 reference/index.html    the first offer page    → arvorealta.com/reference/
 deck/<slug>/index.html  a deck, 1920 × 1080     → arvorealta.com/deck/<slug>/
 annex/<slug>/index.html an A4 annex             → arvorealta.com/annex/<slug>/
