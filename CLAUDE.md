@@ -108,7 +108,7 @@ assets/
   vedlegg-5/            the open tender's example PDF and fillable Word file
   fonts/                Geist and Geist Mono, self-hosted woff2
   vendor/runtime.js     React, react-dom, Motion and htm, bundled once
-  tw-2.css              the offer page's compiled Tailwind
+  tw-<hash>.css         the offer page's compiled Tailwind, built by _build-css.sh
   themes/arvorealta.css tokens for the editorial system
   themes/technical.css  tokens for the technical system
   system.css            structure only — no colour, no typefaces
@@ -292,13 +292,28 @@ what a sandbox is for. `lab/strict/` runs at 0.35 in light and 0.30 in dark,
 because that variant follows the taste skill and the skill requires AA. The
 two settings are the experiment and the control, and neither is the site.
 
+**The stylesheet's name is its own content hash, and `_build-css.sh` is the
+only thing that should write it.** A changed value served stale costs ten
+minutes. A changed **class name** served stale costs the page: the new HTML
+asks for a rule the cached stylesheet has never heard of, so the rule does
+not exist at all and the element renders with nothing. That is how a hero
+with a corrected `min-height` arrived on the owner's screen with no
+`min-height` whatever, looking worse than the bug it fixed. Twice in one
+session a fix was reported as still broken when the fix was live and the
+stylesheet beside it was not.
+
+Run `sh _build-css.sh` after any change to `index.html` or `_tw.src.css`. It
+compiles, hashes the output, names the file after the hash, repoints the page
+and deletes the previous one. Never hand-edit the compiled CSS and never
+rename it by hand.
+
 **Every file the page links to carries a version in its name, not only the
 photographs.** GitHub Pages serves `max-age=600` with an ETag, so a file whose
 name has not changed is held for ten minutes and, on a phone that has the page
 open, often longer. That is long enough for the owner to look, see the old
 thing, and reasonably conclude the deploy failed. It has now cost three round
 trips: once on the hero image, once on the stylesheet carrying the wash. The
-stylesheet is `assets/tw-2.css` for exactly that reason. `index.html` itself
+stylesheet is `assets/tw-<hash>.css` for exactly that reason. `index.html` itself
 cannot be versioned, since it is the entry point, and its ten minutes are the
 one wait that has to be lived with.
 
