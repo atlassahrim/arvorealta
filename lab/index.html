@@ -78,7 +78,12 @@
      text needs with no box, no scrim and no exception anywhere on the
      image. At 38% it falls to 4.43 and at 40% to 4.18, so 35% is a floor
      and not a preference. Lighten the wash freely; do not darken it. */
-  .herofig{position:relative;isolation:isolate;overflow:clip;background:var(--paper-3)}
+  /* A section on this page carries --gap as its own padding, 128px a side at
+     1280. The band does not want it: its air is set by the hero inside it and
+     by the photograph's own edges, and 256px of section padding is what put
+     the action below the fold at every desktop size measured. */
+  .herofig{position:relative;isolation:isolate;overflow:clip;
+    padding-block:0;background:var(--paper-3)}
   .herofig > picture{position:absolute;inset:0;display:block}
   .herofig picture img{width:100%;height:100%;object-fit:cover;
     object-position:50% 45%;opacity:.35}
@@ -91,8 +96,31 @@
   .herofig::after{content:"";position:absolute;inset:0;pointer-events:none;
     background:radial-gradient(135% 120% at 52% 44%,
       transparent 28%, var(--paper-3) 70%, var(--paper) 99%)}
-  .herofig > .hero{position:relative;z-index:1;
-    padding-top:clamp(3rem,7vw,6rem);padding-bottom:clamp(3.5rem,8vw,7rem)}
+  /* The hero has to end inside the first screen. It did not: at 1440 x 900
+     the band ran 1284px, so the action sat 400px below the fold and the
+     photograph was a thing you scrolled past rather than the thing you
+     arrived in. The band is now bounded by the viewport it is seen in, and
+     the content is centred in what is left after the header. */
+  .herofig > .hero{position:relative;z-index:1;display:flex;
+    flex-direction:column;justify-content:center;
+    min-height:clamp(30rem,calc(100dvh - 4.5rem),46rem);
+    padding-top:clamp(2rem,4vw,3.5rem);padding-bottom:clamp(2rem,4vw,3.5rem)}
+  /* The action is the last thing in the hero now, so the rule above it is
+     the one that was closing the fold. It keeps its air and loses the note
+     that used to hang under it. */
+  .herofig .heroact{margin-top:clamp(1.75rem,3.5vw,2.5rem)}
+
+  /* What left the hero. The audience gate and the terms of the free step are
+     both real and neither is the hero's job: a hero is one moment, and six
+     text objects is a list. They sit directly under the band, where the
+     vocabulary strip already was, so nothing is lost and the fold is won. */
+  .gatestrip{padding-block:clamp(2.25rem,4.5vw,3.25rem) 0;
+    display:grid;gap:1.5rem 3rem;align-items:start}
+  @media(min-width:52rem){.gatestrip{grid-template-columns:1fr 1fr;max-width:62rem}}
+  .gatestrip p{margin:0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:46ch}
+  .gatestrip b{display:block;margin-bottom:.5rem;font-family:var(--font-label);
+    font-weight:600;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--mark)}
 
   /* Only ink crosses onto the picture. On the same wash --ink-soft #4C5B54
      reads 2.58:1 and the mark #8E4A45 reads 2.35:1, so the standfirst and
@@ -401,6 +429,22 @@
      stop helping they fold back to normal wrapping. */
   .brs{display:none}
   @media(min-width:46rem){.brs{display:inline}}
+  /* The counterpart. .brs is this page's wide break and it leaves the narrow
+     widths to wrap on their own, which is the one thing CLAUDE.md says a
+     headline may never do. .brp is the same decision taken for the narrow
+     column, so the display type is hand-broken at both ends and chosen by
+     nobody's line-breaking algorithm in between. */
+  .brp{display:inline}
+  @media(min-width:46rem){.brp{display:none}}
+
+  /* The hero headline is nine words, and the web display clamp was drawn for
+     three to five. At 104px the first line measured 1175px against a 696px
+     column at tablet width, so it broke four ways and took 433px of a 900px
+     screen on its own. The clamp is re-drawn here, scoped to the hero and
+     nowhere else: it lands on 96px at 1440, which is the house display size
+     rather than a new level, and it holds two hand-broken lines from 46rem
+     all the way up. The rest of the page keeps the original scale. */
+  .herofig .hero h1{font-size:clamp(2.4rem,.6rem + 6vw,6.5rem)}
 
   /* Print. A commercial director forwards this or puts it in front of someone
      else, and chrome that cannot be clicked on paper is noise. Every answer
@@ -448,14 +492,17 @@
   </picture>
   <div class="wrap hero">
   <p class="eyebrow">Industrial manufacturers bidding in the Nordics</p>
-  <h1>Nobody told you<br class="brs"> which page cost you<br class="brs"> the contract.</h1>
+  <h1>Nobody told you<br class="brp"> which page<br class="brs"> cost you<br class="brp"> the contract.</h1>
   <p class="sub">Public buyers score the documents you hand in. Not the plant, not the price list, not the twenty years.</p>
-  <p class="heroqual"><b>Who this is for</b> The person writing the bid between tasks.</p>
   <div class="heroact">
     <a class="herocta ln on" href="mailto:atlas@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost&amp;body=Attach%20the%20page%20before%20sending.%0A%0ACompany%3A%0AWhat%20the%20tender%20was%20for%3A%0ARoughly%20when%20you%20submitted%3A">Get your page scored</a>
-    <p class="sub">Send one page from a tender you lost. No charge and no call.</p>
   </div>
   </div>
+</section>
+
+<section class="wrap gatestrip">
+  <p><b>Who this is for</b> The person writing the bid between tasks.</p>
+  <p><b>What the first step costs</b> Send one page from a tender you lost. No charge and no call.</p>
 </section>
 
 <section class="wrap vocabstrip">
