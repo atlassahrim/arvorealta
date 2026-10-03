@@ -53,44 +53,147 @@
 </div>
 
 <script type="module">
-/* React 19, react-dom, Motion and htm, bundled once with esbuild and
-   committed as one file. No CDN at run time: a published page should not
-   depend on a third party staying up, and vendoring is also the only way a
-   no-build repo gets a single React instance. Rebuild with the command in
-   assets/vendor/README.md. */
 import { React, createRoot, motion, useReducedMotion, htm } from "/assets/vendor/runtime.js";
 const { useState, useEffect, useCallback } = React;
+/* ------------------------------------------------------------ language
+   Three languages, one object, no fetch. The page is small enough that
+   shipping all three costs less than a round trip would, and a reader who
+   switches gets the new language in the same frame.
+
+   WHAT IS NEVER TRANSLATED. The tender's own title, and the names of its
+   annexes: Bilag 2, Bilag 3, Vedlegg 5. Those are the strings a bidder
+   matches against the competition documents in front of them, and a helpful
+   translation of "Vedlegg 5" into "Appendix 5" would make the page useless
+   at the exact moment it is most needed. The buyer's registered name is left
+   alone for the same reason. Only the country name moves.
+
+   The Norwegian and Finnish below are mine, not a native speaker's, and the
+   procurement vocabulary in them is the part worth having checked before
+   this is used in an approach. */
+const STR = {
+  en: {
+    label: "English", short: "EN", htmlLang: "en",
+    nav: { open: "Open now", case: "The case" },
+    cta: "Get your page scored",
+    hero: {
+      eyebrow: "Industrial manufacturers bidding in the Nordics",
+      h1a: "Nobody told you which page", h1b: "cost you the contract.",
+      sub: "Public buyers score the documents you hand in. Not the plant, not the price list, not the twenty years.",
+      second: "See the open tender"
+    },
+    gate: [
+      ["Who this is for", "The person writing the bid between tasks."],
+      ["What the first step costs", "Send one page from a tender you lost. No charge and no call."]
+    ],
+    open: {
+      eyebrow: "Open now",
+      h2: "If you are bidding on this one, the hard attachment is already written.",
+      buyer: "Valdres Kommunale Renovasjon IKS, Norway. Framework agreement, four years.",
+      body: "Bilag 2 and Bilag 3 are handed out as finished forms. Vedlegg 5 is not, and it is where the quality and the environment weight is read.",
+      action: "Open the template",
+      fields: [["Tender deadline", "27 Oct 2026, 12:00"], ["Questions close", "19 Oct 2026"], ["Weight that is not price", "65%"]],
+      foot: "One tender today, and that is the whole list rather than the top of it. Another appears here when a notice has been read closely enough to write its attachment."
+    },
+    weigh: {
+      h2: "Most of the score is not the price.",
+      segs: [["Quality and environment", 65], ["Price", 35]],
+      body: "Read from the award criteria in the notice itself. Norwegian authorities have had to weight climate and environment at a minimum of 30% since January 2024, and this tender sits exactly on that floor."
+    },
+    close: {
+      h2: "Find out what it cost you. For nothing.",
+      body: "Send one page from a tender you lost. A method statement, a quality section, a capability answer. It comes back scored against the criteria it was judged on, with the points located and the reasoning written out."
+    },
+    themeTo: { dark: "Switch to dark mode", light: "Switch to light mode" },
+    langLabel: "Language"
+  },
+
+  nb: {
+    label: "Norsk", short: "NO", htmlLang: "nb",
+    nav: { open: "Åpen nå", case: "Saken" },
+    cta: "Få siden din vurdert",
+    hero: {
+      eyebrow: "Industriprodusenter som leverer tilbud i Norden",
+      h1a: "Ingen fortalte deg hvilken side", h1b: "som kostet deg kontrakten.",
+      sub: "Offentlige oppdragsgivere gir poeng til dokumentene du leverer. Ikke fabrikken, ikke prislisten, ikke de tjue årene.",
+      second: "Se den åpne konkurransen"
+    },
+    gate: [
+      ["Hvem den er for", "Den som skriver tilbudet mellom andre oppgaver."],
+      ["Hva første steg koster", "Send én side fra en konkurranse du tapte. Ingen kostnad og ingen samtale."]
+    ],
+    open: {
+      eyebrow: "Åpen nå",
+      h2: "Leverer du tilbud i denne, er det vanskeligste vedlegget allerede skrevet.",
+      buyer: "Valdres Kommunale Renovasjon IKS, Norge. Rammeavtale, fire år.",
+      body: "Bilag 2 og Bilag 3 er utlevert som ferdige skjema. Vedlegg 5 er det ikke, og det er der kvalitets- og miljøvekten leses.",
+      action: "Åpne malen",
+      fields: [["Tilbudsfrist", "27. okt. 2026, 12:00"], ["Frist for spørsmål", "19. okt. 2026"], ["Vekt som ikke er pris", "65 %"]],
+      foot: "Én konkurranse i dag, og det er hele listen, ikke toppen av den. Flere dukker opp her når en kunngjøring er lest nøye nok til å skrive vedlegget."
+    },
+    weigh: {
+      h2: "Mesteparten av poengsummen er ikke prisen.",
+      segs: [["Kvalitet og miljø", 65], ["Pris", 35]],
+      body: "Lest fra tildelingskriteriene i selve kunngjøringen. Norske oppdragsgivere har siden januar 2024 måttet vekte klima og miljø med minst 30 prosent, og denne konkurransen ligger akkurat på den grensen."
+    },
+    close: {
+      h2: "Finn ut hva det kostet deg. Gratis.",
+      body: "Send én side fra en konkurranse du tapte. En metodebeskrivelse, et kvalitetsavsnitt, et svar om kapasitet. Den kommer tilbake vurdert mot kriteriene den ble bedømt etter, med poengene plassert og begrunnelsen skrevet ut."
+    },
+    themeTo: { dark: "Bytt til mørk modus", light: "Bytt til lys modus" },
+    langLabel: "Språk"
+  },
+
+  fi: {
+    label: "Suomi", short: "FI", htmlLang: "fi",
+    nav: { open: "Avoinna nyt", case: "Tapaus" },
+    cta: "Pyydä sivusi pisteytys",
+    hero: {
+      eyebrow: "Pohjoismaissa tarjouksia jättävät teollisuusvalmistajat",
+      h1a: "Kukaan ei kertonut, mikä sivu", h1b: "vei sinulta sopimuksen.",
+      sub: "Julkiset hankkijat pisteyttävät asiakirjat, jotka jätät. Eivät tehdasta, eivät hinnastoa, eivät kahtakymmentä vuotta.",
+      second: "Katso avoin tarjouspyyntö"
+    },
+    gate: [
+      ["Kenelle tämä on", "Sille, joka kirjoittaa tarjouksen muiden töiden lomassa."],
+      ["Mitä ensimmäinen askel maksaa", "Lähetä yksi sivu hävitystä tarjouksesta. Ei maksua eikä puhelua."]
+    ],
+    open: {
+      eyebrow: "Avoinna nyt",
+      h2: "Jos jätät tarjouksen tähän, vaikein liite on jo kirjoitettu.",
+      buyer: "Valdres Kommunale Renovasjon IKS, Norja. Puitejärjestely, neljä vuotta.",
+      body: "Bilag 2 ja Bilag 3 annetaan valmiina lomakkeina. Vedlegg 5 ei ole, ja juuri siinä luetaan laadun ja ympäristön paino.",
+      action: "Avaa malli",
+      fields: [["Tarjousten määräaika", "27.10.2026, 12:00"], ["Kysymysten määräaika", "19.10.2026"], ["Paino, joka ei ole hinta", "65 %"]],
+      foot: "Yksi tarjouspyyntö tänään, ja se on koko lista eikä sen kärki. Lisää ilmestyy tähän, kun ilmoitus on luettu riittävän tarkasti liitteen kirjoittamiseksi."
+    },
+    weigh: {
+      h2: "Suurin osa pisteistä ei ole hinta.",
+      segs: [["Laatu ja ympäristö", 65], ["Hinta", 35]],
+      body: "Luettu itse ilmoituksen vertailuperusteista. Norjalaisten hankintayksiköiden on tammikuusta 2024 lähtien pitänyt painottaa ilmastoa ja ympäristöä vähintään 30 prosentilla, ja tämä tarjouspyyntö on tasan sillä rajalla."
+    },
+    close: {
+      h2: "Selvitä, mitä se maksoi sinulle. Ilmaiseksi.",
+      body: "Lähetä yksi sivu hävitystä tarjouksesta. Menetelmäkuvaus, laatuosio, kyvykkyysvastaus. Se palaa pisteytettynä niitä perusteita vasten, joilla se arvioitiin, pisteet paikannettuina ja perustelut kirjoitettuina."
+    },
+    themeTo: { dark: "Vaihda tummaan tilaan", light: "Vaihda vaaleaan tilaan" },
+    langLabel: "Kieli"
+  }
+};
+const LANGS = ["en", "nb", "fi"];
 
 const html = htm.bind(React.createElement);
 const M = motion;
-
-/* ---------------------------------------------------------------- motion
-   MOTION_INTENSITY is 6, and the skill's rule is that every animation can be
-   justified in one sentence. Three are used and nothing else moves.
-
-   rise      the hero's objects arrive in reading order, which states the
-             hierarchy before a word of it has been read
-   reveal    a section enters once as it is scrolled to, so the page is
-             paced by the reader rather than delivered all at once
-   press     a control that moves under the pointer reads as a thing rather
-             than as text
-
-   Every one collapses to nothing under prefers-reduced-motion, through
-   useReducedMotion rather than through a media query, so the degradation is
-   in the same place as the animation. Nothing loops. Nothing hijacks scroll. */
 const EASE = [0.16, 1, 0.3, 1];
 
 function useMo() {
   const reduce = useReducedMotion();
   return {
     rise: (i = 0) => reduce ? {} : {
-      initial: { opacity: 0, y: 16 },
-      animate: { opacity: 1, y: 0 },
+      initial: { opacity: 0, y: 16 }, animate: { opacity: 1, y: 0 },
       transition: { duration: .85, delay: .06 + i * .11, ease: EASE }
     },
     reveal: (i = 0) => reduce ? {} : {
-      initial: { opacity: 0, y: 22 },
-      whileInView: { opacity: 1, y: 0 },
+      initial: { opacity: 0, y: 22 }, whileInView: { opacity: 1, y: 0 },
       viewport: { once: true, amount: .25 },
       transition: { duration: .7, delay: i * .08, ease: EASE }
     },
@@ -98,23 +201,12 @@ function useMo() {
   };
 }
 
-/* ------------------------------------------------------------------ bits */
 const WRAP = "mx-auto w-full max-w-[82rem] px-5 sm:px-8";
-/* The header is sticky and 68px tall, so a jump to #price parked the heading
-   underneath it. Every section that the nav can address reserves the header's
-   height plus a line of air above itself. */
 const ANCHOR = "scroll-mt-[92px]";
+const MAILTO = "mailto:atlas@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost";
 
-/* The accent is for flat grounds only. Measured over the washed photograph
-   it reads 2.48:1 in light and 2.17:1 in dark, both well under the 4.5:1
-   small text needs, which is the rule the house file already carries: only
-   ink crosses the picture in light, only bone in dark. On paper-3 the brick
-   is 5.63:1 and on ink the light brick is 6.1:1, so it keeps the sections
-   that sit on a flat ground. */
 function Eyebrow({ children, on = "flat" }) {
-  const tone = on === "photo"
-    ? "text-ink/75 dark:text-bone/75"
-    : "text-brick dark:text-brick-l";
+  const tone = on === "photo" ? "text-ink/75 dark:text-bone/75" : "text-brick dark:text-brick-l";
   return html`<p class="font-mono text-[11px] uppercase tracking-[.18em] ${tone}">${children}</p>`;
 }
 
@@ -122,50 +214,58 @@ function Action({ href, children, tone = "solid", class: extra = "", ...rest }) 
   const mo = useMo();
   const base = "inline-flex items-center justify-center whitespace-nowrap rounded-full px-6 py-3 text-[15px] font-medium transition-colors";
   const tones = {
-    /* Button contrast, measured. Bone on ink is 11.9:1 and ink on bone is the
-       same figure inverted, so the primary passes AA in both modes with room
-       to spare. The ghost carries a 1px stroke rather than relying on the
-       ground behind it, which over a photograph is the skill's hard rule. */
     solid: "bg-ink text-bone hover:bg-ink/90 dark:bg-bone dark:text-ink dark:hover:bg-bone/90",
     ghost: "border border-ink/25 text-ink hover:border-ink/60 dark:border-bone/30 dark:text-bone dark:hover:border-bone/70"
   };
-  /* The caller's class joins the button's rather than replacing it. Spread
-     last, a passed class silently wiped the pill and the nav action rendered
-     as plain text. */
   return html`<${M.a} href=${href} class="${base} ${tones[tone]} ${extra}" ...${mo.press} ...${rest}>${children}<//>`;
 }
 
-/* ------------------------------------------------------------------- nav */
-function Nav({ theme, onToggle }) {
-  const links = [["Open now", "#open"], ["The case", "#case"], ["What it is", "#standard"], ["Price", "#price"]];
+/* The language control is three letters rather than a dropdown. There are
+   exactly three, a select would hide two of them behind a tap, and the
+   current one has to be readable at a glance by someone who cannot read the
+   other two. aria-pressed carries the state for anyone not seeing the fill. */
+function LangPick({ lang, setLang, t }) {
+  return html`
+    <div class="flex items-center rounded-full border border-ink/20 p-[3px] dark:border-bone/25"
+         role="group" aria-label=${t.langLabel}>
+      ${LANGS.map(code => html`
+        <button key=${code} type="button" onClick=${() => setLang(code)}
+          aria-pressed=${lang === code} lang=${STR[code].htmlLang}
+          title=${STR[code].label}
+          class="rounded-full px-2.5 py-1 font-mono text-[11px] uppercase tracking-[.1em] transition-colors ${
+            lang === code
+              ? "bg-ink text-bone dark:bg-bone dark:text-ink"
+              : "text-ink/60 hover:text-ink dark:text-bone/60 dark:hover:text-bone"}">
+          ${STR[code].short}
+        </button>`)}
+    </div>`;
+}
+
+function Nav({ t, theme, onToggle, lang, setLang }) {
+  const links = [[t.nav.open, "#open"], [t.nav.case, "#case"]];
   return html`
     <header class="sticky top-0 z-40 border-b border-ink/10 bg-paper/85 backdrop-blur-md dark:border-bone/10 dark:bg-ink-2/85">
-      <div class="${WRAP} flex h-[68px] items-center justify-between gap-6">
+      <div class="${WRAP} flex h-[68px] items-center justify-between gap-5">
         <a href="#top" class="font-mono text-[13px] uppercase tracking-[.22em]">Arvorealta</a>
         <nav class="hidden items-center gap-7 lg:flex">
           ${links.map(([l, h]) => html`
-            <a key=${l} href=${h}
+            <a key=${h} href=${h}
                class="text-[14px] text-ink/70 transition-colors hover:text-ink dark:text-bone/70 dark:hover:text-bone">${l}</a>`)}
         </nav>
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2.5">
+          <${LangPick} lang=${lang} setLang=${setLang} t=${t} />
           <button type="button" onClick=${onToggle}
-            aria-label="${theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}"
-            class="grid size-9 place-items-center rounded-full border border-ink/20 transition-colors hover:border-ink/50 dark:border-bone/25 dark:hover:border-bone/60">
-            <span class="font-mono text-[11px]">${theme === "dark" ? "L" : "D"}</span>
+            aria-label=${theme === "dark" ? t.themeTo.light : t.themeTo.dark}
+            class="grid size-9 shrink-0 place-items-center rounded-full border border-ink/20 transition-colors hover:border-ink/50 dark:border-bone/25 dark:hover:border-bone/60">
+            <span class="font-mono text-[11px]" aria-hidden="true">${theme === "dark" ? "L" : "D"}</span>
           </button>
-          <${Action} href="mailto:atlas@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost"
-            class="hidden sm:inline-flex">Get your page scored<//>
+          <${Action} href=${MAILTO} class="hidden sm:inline-flex">${t.cta}<//>
         </div>
       </div>
     </header>`;
 }
 
-/* ------------------------------------------------------------------ hero
-   Asymmetric split at DESIGN_VARIANCE 7: the type holds seven of twelve
-   columns on the left and the photograph's own subject occupies the right,
-   so the composition is the picture's rather than a box drawn over it.
-   Four text objects and no more, and the action is the last of them. */
-function Hero() {
+function Hero({ t }) {
   const mo = useMo();
   return html`
     <section id="top" class="relative isolate overflow-clip bg-paper-3 dark:bg-ink">
@@ -177,51 +277,36 @@ function Hero() {
           width="2576" height="1399" alt="" fetchpriority="high" decoding="async"
           class="size-full object-cover object-[50%_45%] [opacity:var(--hero-photo)]" />
       </picture>
-
-      <!-- The vignette is back, because the wash is. It carries the ground's
-           own value out to the edges so the band ends where the light runs
-           out rather than where the markup does. One gradient per mode: a
-           bone fade on an ink ground would be a halo. -->
       <div class="pointer-events-none absolute inset-0
                   bg-[radial-gradient(135%_120%_at_52%_44%,transparent_28%,var(--color-paper-3)_70%,var(--color-paper)_99%)]
                   dark:bg-[radial-gradient(135%_120%_at_52%_44%,transparent_28%,var(--color-ink)_70%,var(--color-ink-2)_99%)]"></div>
 
       <div class="${WRAP} relative grid min-h-[clamp(30rem,calc(100dvh-4.5rem),46rem)] content-center py-14">
-        <!-- Asymmetric split, DESIGN_VARIANCE 7. The headline takes the full
-             measure because at this size it needs 995px to hold two lines and
-             a body column cannot give it that; everything under it stays at
-             reading width, so the block narrows as it descends and the
-             photograph's subject keeps the right of the frame. -->
         <div>
-          <${M.div} ...${mo.rise(0)}><${Eyebrow} on="photo">Industrial manufacturers bidding in the Nordics<//><//>
+          <${M.div} ...${mo.rise(0)}><${Eyebrow} on="photo">${t.hero.eyebrow}<//><//>
           <${M.h1} ...${mo.rise(1)}
             class="mt-7 text-[clamp(2.4rem,.9rem+4.4vw,4.6rem)] font-medium leading-[1.03] tracking-[-.03em]">
-            Nobody told you which page<br class="hidden lg:inline" /> cost you the contract.
+            ${t.hero.h1a}<br class="hidden lg:inline" /> ${t.hero.h1b}
           <//>
           <${M.p} ...${mo.rise(2)}
             class="mt-8 max-w-[44ch] text-[clamp(1.05rem,.98rem+.35vw,1.25rem)] leading-[1.6] text-ink/80 dark:text-bone/80">
-            Public buyers score the documents you hand in. Not the plant, not the price list, not the twenty years.
+            ${t.hero.sub}
           <//>
           <${M.div} ...${mo.rise(3)} class="mt-10 flex flex-wrap items-center gap-3">
-            <${Action} href="mailto:atlas@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost">Get your page scored<//>
-            <${Action} href="#open" tone="ghost">See the open tender<//>
+            <${Action} href=${MAILTO}>${t.cta}<//>
+            <${Action} href="#open" tone="ghost">${t.hero.second}<//>
           <//>
         </div>
       </div>
     </section>`;
 }
 
-/* ------------------------------------------------- the terms, as a strip */
-function Gate() {
+function Gate({ t }) {
   const mo = useMo();
-  const rows = [
-    ["Who this is for", "The person writing the bid between tasks."],
-    ["What the first step costs", "Send one page from a tender you lost. No charge and no call."]
-  ];
   return html`
     <section class="${WRAP} border-b border-ink/10 py-14 dark:border-bone/10">
       <div class="grid gap-10 md:grid-cols-2 md:gap-16">
-        ${rows.map(([k, v], i) => html`
+        ${t.gate.map(([k, v], i) => html`
           <${M.div} key=${k} ...${mo.reveal(i)}>
             <p class="font-mono text-[11px] uppercase tracking-[.18em] text-ink/55 dark:text-bone/55">${k}</p>
             <p class="mt-3 max-w-[44ch] text-[1.05rem] leading-[1.65]">${v}</p>
@@ -230,70 +315,53 @@ function Gate() {
     </section>`;
 }
 
-/* --------------------------------------------- the open tender, as fields */
-function OpenTender() {
+function OpenTender({ t }) {
   const mo = useMo();
-  const fields = [
-    ["Tender deadline", "27 Oct 2026, 12:00"],
-    ["Questions close", "19 Oct 2026"],
-    ["Weight that is not price", "65%"]
-  ];
   return html`
     <section id="open" class="${ANCHOR} ${WRAP} py-20 sm:py-28">
       <${M.div} ...${mo.reveal(0)}>
-        <${Eyebrow}>Open now<//>
+        <${Eyebrow}>${t.open.eyebrow}<//>
         <h2 class="mt-6 max-w-[20ch] text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)] font-medium leading-[1.08] tracking-[-.025em]">
-          If you are bidding on this one, the hard attachment is already written.
+          ${t.open.h2}
         </h2>
       <//>
-
       <${M.div} ...${mo.reveal(1)}
         class="mt-12 grid overflow-hidden rounded-2xl border border-ink/15 bg-paper-3 lg:grid-cols-[1.15fr_1fr] dark:border-bone/15 dark:bg-ink">
         <div class="border-b border-ink/12 p-8 sm:p-10 lg:border-b-0 lg:border-r dark:border-bone/12">
-          <h3 class="text-[1.5rem] font-medium leading-tight tracking-[-.02em]">Leveranse av avfallsbeholdere</h3>
-          <p class="mt-3 text-[.95rem] leading-relaxed text-ink/70 dark:text-bone/70">
-            Valdres Kommunale Renovasjon IKS, Norway. Framework agreement, four years.
-          </p>
-          <p class="mt-7 max-w-[46ch] leading-[1.7]">
-            Bilag 2 and bilag 3 are handed out as finished forms. Vedlegg 5 is not, and it is where the quality and the environment weight is read.
-          </p>
-          <div class="mt-8">
-            <${Action} href="/mal/" tone="ghost">Open the template<//>
-          </div>
+          <!-- The notice's own title stays in Norwegian in every language: it
+               is the string a bidder matches against the documents in front
+               of them. -->
+          <h3 lang="nb" class="text-[1.5rem] font-medium leading-tight tracking-[-.02em]">Leveranse av avfallsbeholdere</h3>
+          <p class="mt-3 text-[.95rem] leading-relaxed text-ink/70 dark:text-bone/70">${t.open.buyer}</p>
+          <p class="mt-7 max-w-[46ch] leading-[1.7]">${t.open.body}</p>
+          <div class="mt-8"><${Action} href="/mal/" tone="ghost">${t.open.action}<//></div>
         </div>
-
-        <!-- Fields, not rows. A deadline is scanned rather than read, so the
-             figure sits above its own name at display weight and there is no
-             hairline under anything. -->
         <dl class="grid content-center gap-8 p-8 sm:p-10">
-          ${fields.map(([k, v]) => html`
+          ${t.open.fields.map(([k, v]) => html`
             <div key=${k}>
               <dd class="font-mono text-[1.6rem] leading-none tracking-[-.02em]">${v}</dd>
               <dt class="mt-2 font-mono text-[11px] uppercase tracking-[.18em] text-ink/55 dark:text-bone/55">${k}</dt>
             </div>`)}
         </dl>
       <//>
-
       <${M.p} ...${mo.reveal(2)} class="mt-8 max-w-[58ch] text-[.95rem] leading-[1.7] text-ink/65 dark:text-bone/65">
-        One tender today, and that is the whole list rather than the top of it. Another appears here when a notice has been read closely enough to write its attachment.
+        ${t.open.foot}
       <//>
     </section>`;
 }
 
-/* --------------------------------------- the weighting, drawn to its size */
-function Weighting() {
+function Weighting({ t }) {
   const mo = useMo();
   const reduce = useReducedMotion();
-  const segs = [["Quality and environment", 65], ["Price", 35]];
   return html`
     <section id="case" class="${ANCHOR} bg-ink py-20 text-bone sm:py-28 dark:bg-ink">
       <div class="${WRAP}">
         <${M.h2} ...${mo.reveal(0)}
           class="max-w-[22ch] text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)] font-medium leading-[1.08] tracking-[-.025em]">
-          Most of the score is not the price.
+          ${t.weigh.h2}
         <//>
         <${M.div} ...${mo.reveal(1)} class="mt-12 flex max-w-[56rem] overflow-hidden rounded-xl border border-bone/20">
-          ${segs.map(([label, pct], i) => html`
+          ${t.weigh.segs.map(([label, pct], i) => html`
             <${M.div} key=${label}
               initial=${reduce ? false : { flexGrow: 0 }}
               whileInView=${{ flexGrow: pct }}
@@ -305,135 +373,19 @@ function Weighting() {
               <p class="mt-3 font-mono text-[11px] uppercase tracking-[.18em] text-bone/65">${label}</p>
             <//>`)}
         <//>
-        <${M.p} ...${mo.reveal(2)} class="mt-8 max-w-[56ch] leading-[1.7] text-bone/75">
-          Read from the award criteria in the notice itself. Norwegian authorities have had to weight climate and environment at a minimum of 30% since January 2024, and this tender sits exactly on that floor.
-        <//>
+        <${M.p} ...${mo.reveal(2)} class="mt-8 max-w-[56ch] leading-[1.7] text-bone/75">${t.weigh.body}<//>
       </div>
     </section>`;
 }
 
-/* ------------------------------------------------- what the thing is
-   Four assertions in a 2 x 2. Not the banned three equal feature cards:
-   there are four of them, the grid has exactly four cells, and each one
-   carries a term read at display size over a line that qualifies it. The
-   fold deliberately runs without an eyebrow, which keeps the page at three
-   across seven folds. */
-function Standard() {
-  const mo = useMo();
-  const items = [
-    ["Capability", "What you have done, not what you can do"],
-    ["Process", "In the detail a scoring template asks for"],
-    ["References", "The specifics that make them count"],
-    ["Evidence", "Figures rather than adjectives"]
-  ];
-  return html`
-    <section id="standard" class="${ANCHOR} ${WRAP} py-20 sm:py-28">
-      <${M.div} ...${mo.reveal(0)} class="max-w-[24ch]">
-        <h2 class="text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)] font-medium leading-[1.08] tracking-[-.025em]">
-          Written once, properly, in the form an evaluator scores.
-        </h2>
-        <p class="mt-7 max-w-[52ch] leading-[1.7] text-ink/80 dark:text-bone/80">
-          The set of things your firm asserts about itself, in the language of the template it will be read against.
-        </p>
-      <//>
-      <div class="mt-12 grid gap-px overflow-hidden rounded-2xl border border-ink/15 bg-ink/15 sm:grid-cols-2 dark:border-bone/15 dark:bg-bone/15">
-        ${items.map(([term, line], i) => html`
-          <${M.div} key=${term} ...${mo.reveal(i * .5)}
-            class="bg-paper p-8 sm:p-9 dark:bg-ink-2">
-            <h3 class="text-[1.45rem] font-medium leading-tight tracking-[-.02em]">${term}</h3>
-            <p class="mt-3 max-w-[32ch] leading-[1.65] text-ink/70 dark:text-bone/70">${line}</p>
-          <//>`)}
-      </div>
-      <${M.p} ...${mo.reveal(1)}
-        class="mt-10 max-w-[56ch] border-l-2 border-ink pl-6 leading-[1.7] dark:border-bone">
-        <b class="mb-2 block font-mono text-[11px] font-normal uppercase tracking-[.18em] text-brick dark:text-brick-l">What it is not</b>
-        It is not a management system. Nothing changes in the workshop. The standard is a document, it belongs to you, and your own people edit it.
-      <//>
-    </section>`;
-}
-
-/* ------------------------------------------------------------ the ladder
-   Three tiers, and the middle one is wider rather than merely marked. Equal
-   thirds would be the three identical cards the skill bans and would also
-   misstate the offer, where the recommended rung is the one being argued
-   for. Prices are verbatim from the previous page: the credit mechanic is
-   the design and changing a number is not a copy edit. */
-function Ladder() {
-  const mo = useMo();
-  const tiers = [
-    { step: "Step one", name: "One document", price: "€600", time: "3 to 4 days",
-      terms: "One document, done properly. The whole thing, however many pages it runs to, not a sample page.",
-      points: ["The full capability statement, reference sheet or tender annex",
-               "The editable source file",
-               "Print and screen exports, sized and named for tender portals"],
-      note: "Credited in full into anything you buy after it." },
-    { step: "The standard", name: "The document standard", price: "€2,400", time: "two weeks", lead: true,
-      terms: "Every document that decides a bid, on one system your own people run.",
-      points: ["Templates for capability statements, reference sheets and tender annexes",
-               "One document built end to end, plus file structure and naming",
-               "The index. Every project, by client and year, ready at the next bid",
-               "One revision round"],
-      note: "All source files, yours to keep. Runs without a designer after handoff. Your €600 credited." },
-    { step: "Beyond documents", name: "Identity system", price: "€8,000", time: "six weeks",
-      terms: "The document standard applied across the company.",
-      points: ["Colour and typographic system for print, screen and product",
-               "Signage, vehicles, trade fair stands, product marking",
-               "Written guidelines your suppliers can work from",
-               "Wordmark or mark"],
-      note: "Take it once the document standard has proved itself. Your €2,400 credited." }
-  ];
-  return html`
-    <section id="price" class="${ANCHOR} ${WRAP} py-20 sm:py-28">
-      <${M.div} ...${mo.reveal(0)}>
-        <${Eyebrow}>The ladder<//>
-        <h2 class="mt-6 max-w-[20ch] text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)] font-medium leading-[1.08] tracking-[-.025em]">
-          Every tier credits into the one above it.
-        </h2>
-        <p class="mt-7 max-w-[52ch] leading-[1.7] text-ink/80 dark:text-bone/80">
-          Walk the whole ladder and you pay €8,000 in total, not €11,000. Credits never expire.
-        </p>
-      <//>
-      <div class="mt-12 grid gap-6 lg:grid-cols-[1fr_1.25fr_1fr] lg:items-start">
-        ${tiers.map((t, i) => html`
-          <${M.div} key=${t.name} ...${mo.reveal(i * .6)}
-            class="flex h-full flex-col rounded-2xl border p-8 sm:p-9 ${t.lead
-              ? "border-ink bg-paper-3 lg:-mt-4 lg:pb-11 dark:border-bone dark:bg-ink"
-              : "border-ink/15 dark:border-bone/15"}">
-            <p class="font-mono text-[11px] uppercase tracking-[.18em] text-ink/55 dark:text-bone/55">${t.step}</p>
-            <h3 class="mt-4 text-[1.35rem] font-medium leading-tight tracking-[-.02em]">${t.name}</h3>
-            <p class="mt-5 flex flex-wrap items-baseline gap-x-3">
-              <b class="text-[2.4rem] font-medium leading-none tracking-[-.035em] tabular-nums">${t.price}</b>
-              <em class="font-mono text-[11px] uppercase not-italic tracking-[.18em] text-ink/55 dark:text-bone/55">${t.time}</em>
-            </p>
-            <p class="mt-6 leading-[1.65] text-ink/80 dark:text-bone/80">${t.terms}</p>
-            <ul class="mt-6 grid gap-3 text-[.95rem] leading-[1.6]">
-              ${t.points.map(pt => html`
-                <li key=${pt} class="border-t border-ink/12 pt-3 dark:border-bone/12">${pt}</li>`)}
-            </ul>
-            <p class="mt-auto pt-7 text-[.9rem] leading-[1.6] text-ink/65 dark:text-bone/65">${t.note}</p>
-          <//>`)}
-      </div>
-      <${M.p} ...${mo.reveal(1)} class="mt-10 max-w-[62ch] text-[.95rem] leading-[1.7] text-ink/65 dark:text-bone/65">
-        A Swedish bid consultancy publishes 15,000 kr excluding VAT for a single draft of a single bid, delivered as a Word file. Roughly what the full standard costs here, and theirs expires the day that tender closes.
-      <//>
-    </section>`;
-}
-
-/* ----------------------------------------------------------------- close */
-function Close() {
+function Close({ t }) {
   const mo = useMo();
   return html`
     <section class="${WRAP} py-24 sm:py-32">
       <${M.div} ...${mo.reveal(0)} class="max-w-[52ch]">
-        <h2 class="text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)] font-medium leading-[1.08] tracking-[-.025em]">
-          Before you spend €2,400 finding out, spend nothing.
-        </h2>
-        <p class="mt-7 leading-[1.7] text-ink/80 dark:text-bone/80">
-          Send one page from a tender you lost. A method statement, a quality section, a capability answer. It comes back scored against the criteria it was judged on, with the points located and the reasoning written out.
-        </p>
-        <div class="mt-10">
-          <${Action} href="mailto:atlas@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost">Get your page scored<//>
-        </div>
+        <h2 class="text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)] font-medium leading-[1.08] tracking-[-.025em]">${t.close.h2}</h2>
+        <p class="mt-7 leading-[1.7] text-ink/80 dark:text-bone/80">${t.close.body}</p>
+        <div class="mt-10"><${Action} href=${MAILTO}>${t.cta}<//></div>
       <//>
     </section>
     <footer class="border-t border-ink/10 py-10 dark:border-bone/10">
@@ -444,17 +396,33 @@ function Close() {
     </footer>`;
 }
 
-/* ------------------------------------------------------------------- app */
 function App() {
   const [theme, setTheme] = useState(() => document.documentElement.getAttribute("data-theme") || "light");
+  /* The browser's own preference decides the first language, so a Norwegian
+     or Finnish reader arriving cold gets their own. English is the fallback
+     and the default everywhere else. A choice, once made, is remembered and
+     outranks the browser from then on. */
+  const [lang, setLang] = useState(() => {
+    try { const s = localStorage.getItem("ar-lang"); if (s && STR[s]) return s } catch (e) {}
+    const want = (navigator.languages || [navigator.language || "en"]).map(l => String(l).toLowerCase());
+    for (const l of want) {
+      if (l.startsWith("nb") || l.startsWith("nn") || l.startsWith("no")) return "nb";
+      if (l.startsWith("fi")) return "fi";
+      if (l.startsWith("en")) return "en";
+    }
+    return "en";
+  });
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     try { localStorage.setItem("ar-theme", theme) } catch (e) {}
   }, [theme]);
 
-  /* Follow the system until the reader overrides it, and keep following it
-     for as long as they have not. */
+  useEffect(() => {
+    document.documentElement.lang = STR[lang].htmlLang;
+    try { localStorage.setItem("ar-lang", lang) } catch (e) {}
+  }, [lang]);
+
   useEffect(() => {
     const mq = matchMedia("(prefers-color-scheme: dark)");
     const on = e => { let s = null; try { s = localStorage.getItem("ar-theme") } catch (err) {} if (!s) setTheme(e.matches ? "dark" : "light") };
@@ -462,19 +430,24 @@ function App() {
     return () => mq.removeEventListener("change", on);
   }, []);
 
-  const toggle = useCallback(() => setTheme(t => t === "dark" ? "light" : "dark"), []);
+  const toggle = useCallback(() => setTheme(x => x === "dark" ? "light" : "dark"), []);
+  const t = STR[lang];
 
+  /* Standard and Ladder are written and tested and are not rendered. They are
+     hidden on purpose while the offer is being reconsidered, which is why the
+     nav no longer carries #standard or #price: a link to a fold that is not
+     on the page is a dead anchor, and this page had two of those once already.
+     Put the two lines back in the fragment below and add the links to restore
+     them. The components live in git history at commit ff677c8. */
   return html`
     <${React.Fragment}>
-      <${Nav} theme=${theme} onToggle=${toggle} />
+      <${Nav} t=${t} theme=${theme} onToggle=${toggle} lang=${lang} setLang=${setLang} />
       <main>
-        <${Hero} />
-        <${Gate} />
-        <${OpenTender} />
-        <${Weighting} />
-        <${Standard} />
-        <${Ladder} />
-        <${Close} />
+        <${Hero} t=${t} />
+        <${Gate} t=${t} />
+        <${OpenTender} t=${t} />
+        <${Weighting} t=${t} />
+        <${Close} t=${t} />
       </main>
     <//>`;
 }

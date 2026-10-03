@@ -555,6 +555,30 @@ courtesy.
 **No inline colour or font values.** Everything reads from tokens, so a theme
 swap is total.
 
+## Three languages on the offer page
+
+English, Norwegian Bokmål and Finnish, in one object in `index.html`, with a
+three-letter control in the nav. The page is small enough that shipping all
+three costs less than a round trip would, so a reader who switches gets the
+new language in the same frame.
+
+The first language is the browser's, so a Norwegian or Finnish reader
+arriving cold gets their own and everyone else gets English. A choice, once
+made, is remembered and outranks the browser from then on. `html lang`
+follows, because a screen reader gets its pronunciation from it.
+
+**What is never translated, and this is not fussiness.** The tender's own
+title, the buyer's registered name, and the names of the annexes — `Bilag 2`,
+`Bilag 3`, `Vedlegg 5`. Those are the strings a bidder matches against the
+competition documents open in front of them. A helpful translation of
+`Vedlegg 5` into `Appendix 5` would make the page useless at the exact moment
+it is most needed. Only the country name moves. The Norwegian title carries
+its own `lang="nb"` so it is still pronounced correctly inside an English
+page.
+
+**The Nordic text is not a native speaker's.** The procurement vocabulary in
+it is the part worth having checked before the page is used in an approach.
+
 ## How to report back
 
 **Every reply ends with a plain-language synthesis.** A few short sentences,
