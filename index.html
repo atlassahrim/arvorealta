@@ -277,7 +277,9 @@ function Nav({ t, theme, onToggle, lang, setLang, onPhoto }) {
               : "border-ink/20 hover:border-ink/50 dark:border-bone/25 dark:hover:border-bone/60"}">
             <span class="font-mono text-[11px]" aria-hidden="true">${theme === "dark" ? "L" : "D"}</span>
           </button>
-          <${Action} href=${MAILTO} class="hidden sm:inline-flex ${onPhoto ? "!bg-bone !text-ink hover:!bg-bone/90" : ""}">${t.cta}<//>
+          <span class="hidden sm:block">
+            <${Action} href=${MAILTO} class=${onPhoto ? "!bg-bone !text-ink hover:!bg-bone/90" : ""}>${t.cta}<//>
+          </span>
         </div>
       </div>
     </header>`;
@@ -302,7 +304,13 @@ function Hero({ t }) {
            above it, so the hero takes the whole viewport rather than the
            viewport minus a bar. dvh, not vh, so the iOS address bar does not
            push the action off the bottom. -->
-      <div class="${WRAP} relative grid min-h-[100dvh] content-center pt-24 pb-14">
+      <!-- 100dvh alone is a trap on a short, wide window. On a 440px-tall
+           viewport the band is 440px and the 192px of padding leaves 248px
+           for four objects, which is the squashed look. The floor keeps the
+           band usable and lets the page scroll instead, and the padding
+           shrinks with the viewport rather than holding 96px a side at every
+           height. Tall screens are unaffected: there the max is 100dvh. -->
+      <div class="${WRAP} relative grid min-h-[max(34rem,100dvh)] content-center py-[clamp(4rem,9vh,6rem)]">
         <div>
           <${M.div} ...${mo.rise(0)}><${Eyebrow} on="photo">${t.hero.eyebrow}<//><//>
           <${M.h1} ...${mo.rise(1)}
