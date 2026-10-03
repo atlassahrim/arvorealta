@@ -98,6 +98,7 @@ deck/<slug>/index.html  one deck per folder
 annex/<slug>/index.html one A4 annex per folder
 assets/
   img/                  photography, as webp + jpg at 960/1440/1920/2560
+                        the name carries a version: gateway-2-<width>.<ext>
   themes/arvorealta.css tokens for the editorial system
   themes/technical.css  tokens for the technical system
   system.css            structure only — no colour, no typefaces
@@ -277,6 +278,15 @@ came out of the render and 1.54:1 under the type. That is the sandbox doing
 what a sandbox is for. `lab/strict/` runs at 0.35 in light and 0.30 in dark,
 because that variant follows the taste skill and the skill requires AA. The
 two settings are the experiment and the control, and neither is the site.
+
+**A new photograph gets a new filename.** Overwriting `foo-1920.webp` with
+different bytes leaves every browser that has seen the page serving the old
+picture from cache, and the deploy log will tell you it succeeded while the
+owner, on their own phone, sees the old one and reasonably concludes the work
+did not land. That happened once and cost a round trip. The version sits in
+the name — `gateway-2-<width>.<ext>` — so the URL changes when the content
+does and no cache can hold the wrong file. Delete the old set in the same
+commit; nothing outside the labs points at it.
 
 Re-measure when the image changes. A different photograph is a different
 table, and the only honest way to get it is to sample the file. The table
