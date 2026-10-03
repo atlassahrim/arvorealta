@@ -78,21 +78,99 @@
      text needs with no box, no scrim and no exception anywhere on the
      image. At 38% it falls to 4.43 and at 40% to 4.18, so 35% is a floor
      and not a preference. Lighten the wash freely; do not darken it. */
-  .herofig{position:relative;isolation:isolate;overflow:clip;background:var(--paper-3)}
+  /* A section on this page carries --gap as its own padding, 128px a side at
+     1280. The band does not want it: its air is set by the hero inside it and
+     by the photograph's own edges, and 256px of section padding is what put
+     the action below the fold at every desktop size measured. */
+  /* ONE NUMBER CONTROLS THE PICTURE. --hero-photo is the image's opacity
+     over --paper-3, so 1 minus it is the bone wash. Raise it for a stronger
+     photograph and a quieter page, lower it for the reverse. Measured on
+     this image, ink over the result at the worst pixel in the frame:
+
+       photo  wash | ink     | what still reads
+       0.35   0.65 | 4.85:1  | everything, small text included
+       0.45   0.55 | 3.59:1  | display type only, 96px and up
+       0.55   0.45 | 2.58:1  | nothing, by the standard
+       0.70   0.30 | 1.55:1  | nothing
+       0.85   0.15 | 1.11:1  | type and picture are the same value
+
+     0.35 is where every size clears. Above 0.45 the standfirst and the
+     eyebrow stop being readable on a phone in daylight or to anyone with
+     low vision, and a buyer running an accessibility check would find it.
+     That is a choice to make with the number in front of you rather than a
+     gate, so the token is here to be turned. */
+  /* Running at 1 on purpose: no wash at all, the photograph as it came out
+     of the render. This is the sandbox and the point of it is to see the
+     picture, which no accessibility figure will ever recommend. At this
+     setting ink measures 1.54:1 against the worst pixel in the frame, so
+     parts of the standfirst are genuinely hard to read on a phone in
+     daylight. Turn this one number to walk the ladder above. */
+  .herofig{--hero-photo:1;
+    position:relative;isolation:isolate;overflow:clip;
+    padding-block:0;background:var(--paper-3)}
   .herofig > picture{position:absolute;inset:0;display:block}
   .herofig picture img{width:100%;height:100%;object-fit:cover;
-    object-position:50% 45%;opacity:.35}
+    object-position:50% 45%;opacity:var(--hero-photo)}
 
-  /* The vignette. Bone at the edges, running out to the page's own ground at
-     the last stop so the band has no seam against the fold below it. The
-     photograph is 1.79:1 and the band is not, so a hard edge would cut the
-     arch against the section line; fading it means the frame ends where the
-     light runs out rather than where the markup does. */
-  .herofig::after{content:"";position:absolute;inset:0;pointer-events:none;
-    background:radial-gradient(135% 120% at 52% 44%,
-      transparent 28%, var(--paper-3) 70%, var(--paper) 99%)}
-  .herofig > .hero{position:relative;z-index:1;
-    padding-top:clamp(3rem,7vw,6rem);padding-bottom:clamp(3.5rem,8vw,7rem)}
+  /* The vignette is off. It was a second bone layer on top of the wash, and
+     with the wash gone it would only be a smudge around a picture that is now
+     meant to be seen. The band therefore ends on a hard edge against the fold
+     below it, which is what a full-bleed image band normally does. Restore
+     the gradient here if the wash ever comes back. */
+  /* The hero has to end inside the first screen. It did not: at 1440 x 900
+     the band ran 1284px, so the action sat 400px below the fold and the
+     photograph was a thing you scrolled past rather than the thing you
+     arrived in. The band is now bounded by the viewport it is seen in, and
+     the content is centred in what is left after the header. */
+  .herofig > .hero{position:relative;z-index:1;display:flex;
+    flex-direction:column;justify-content:center;
+    min-height:clamp(30rem,calc(100dvh - 4.5rem),46rem);
+    padding-top:clamp(2rem,4vw,3.5rem);padding-bottom:clamp(2rem,4vw,3.5rem)}
+  /* The action is the last thing in the hero now, so the rule above it is
+     the one that was closing the fold. It keeps its air and loses the note
+     that used to hang under it. */
+  .herofig .heroact{margin-top:clamp(1.75rem,3.5vw,2.5rem)}
+
+  /* What left the hero. The audience gate and the terms of the free step are
+     both real and neither is the hero's job: a hero is one moment, and six
+     text objects is a list. They sit directly under the band, where the
+     vocabulary strip already was, so nothing is lost and the fold is won. */
+  .gatestrip{padding-block:clamp(2.25rem,4.5vw,3.25rem) 0;
+    display:grid;gap:1.5rem 3rem;align-items:start}
+  @media(min-width:52rem){.gatestrip{grid-template-columns:1fr 1fr;max-width:62rem}}
+  .gatestrip p{margin:0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:46ch}
+  .gatestrip b{display:block;margin-bottom:.5rem;font-family:var(--font-label);
+    font-weight:600;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--mark)}
+
+  /* MOTION. Two animations and no more, each with a reason.
+
+     The photograph settles. It is the only moment on the site where the
+     picture is the subject rather than the ground, and 1.8s of a 4% scale
+     gives it that moment before the type takes it back. It runs once on
+     load and never again.
+
+     The hero's four objects arrive in reading order. That is hierarchy,
+     not decoration: the eyebrow says who this is for, the headline makes
+     the claim, the standfirst qualifies it and the action closes it, and
+     a 110ms stagger states that order before anybody has read a word.
+
+     Both are gated on prefers-reduced-motion, so a reader who has asked
+     for stillness gets the page fully composed with no animation at all.
+     Nothing loops, nothing moves on scroll, nothing hijacks it. */
+  @media(prefers-reduced-motion:no-preference){
+    .herofig picture img{animation:photo-settle 1.8s cubic-bezier(.16,1,.3,1) both}
+    @keyframes photo-settle{from{transform:scale(1.04)}to{transform:none}}
+    .herofig .hero > *{animation:hero-in .9s cubic-bezier(.16,1,.3,1) both}
+    .herofig .hero > :nth-child(1){animation-delay:.06s}
+    .herofig .hero > :nth-child(2){animation-delay:.17s}
+    .herofig .hero > :nth-child(3){animation-delay:.28s}
+    .herofig .hero > :nth-child(4){animation-delay:.39s}
+    @keyframes hero-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  }
+  /* Tactile feedback. A link that moves a pixel under the press reads as a
+     thing rather than as text, and it costs one line. */
+  .ln:active,.navcta:active{transform:translateY(1px)}
 
   /* Only ink crosses onto the picture. On the same wash --ink-soft #4C5B54
      reads 2.58:1 and the mark #8E4A45 reads 2.35:1, so the standfirst and
@@ -401,6 +479,22 @@
      stop helping they fold back to normal wrapping. */
   .brs{display:none}
   @media(min-width:46rem){.brs{display:inline}}
+  /* The counterpart. .brs is this page's wide break and it leaves the narrow
+     widths to wrap on their own, which is the one thing CLAUDE.md says a
+     headline may never do. .brp is the same decision taken for the narrow
+     column, so the display type is hand-broken at both ends and chosen by
+     nobody's line-breaking algorithm in between. */
+  .brp{display:inline}
+  @media(min-width:46rem){.brp{display:none}}
+
+  /* The hero headline is nine words, and the web display clamp was drawn for
+     three to five. At 104px the first line measured 1175px against a 696px
+     column at tablet width, so it broke four ways and took 433px of a 900px
+     screen on its own. The clamp is re-drawn here, scoped to the hero and
+     nowhere else: it lands on 96px at 1440, which is the house display size
+     rather than a new level, and it holds two hand-broken lines from 46rem
+     all the way up. The rest of the page keeps the original scale. */
+  .herofig .hero h1{font-size:clamp(2.4rem,.6rem + 6vw,6.5rem)}
 
   /* Print. A commercial director forwards this or puts it in front of someone
      else, and chrome that cannot be clicked on paper is noise. Every answer
@@ -448,14 +542,17 @@
   </picture>
   <div class="wrap hero">
   <p class="eyebrow">Industrial manufacturers bidding in the Nordics</p>
-  <h1>Nobody told you<br class="brs"> which page cost you<br class="brs"> the contract.</h1>
+  <h1>Nobody told you<br class="brp"> which page<br class="brs"> cost you<br class="brp"> the contract.</h1>
   <p class="sub">Public buyers score the documents you hand in. Not the plant, not the price list, not the twenty years.</p>
-  <p class="heroqual"><b>Who this is for</b> The person writing the bid between tasks.</p>
   <div class="heroact">
     <a class="herocta ln on" href="mailto:atlas@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost&amp;body=Attach%20the%20page%20before%20sending.%0A%0ACompany%3A%0AWhat%20the%20tender%20was%20for%3A%0ARoughly%20when%20you%20submitted%3A">Get your page scored</a>
-    <p class="sub">Send one page from a tender you lost. No charge and no call.</p>
   </div>
   </div>
+</section>
+
+<section class="wrap gatestrip">
+  <p><b>Who this is for</b> The person writing the bid between tasks.</p>
+  <p><b>What the first step costs</b> Send one page from a tender you lost. No charge and no call.</p>
 </section>
 
 <section class="wrap vocabstrip">
