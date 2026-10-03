@@ -99,24 +99,24 @@
      low vision, and a buyer running an accessibility check would find it.
      That is a choice to make with the number in front of you rather than a
      gate, so the token is here to be turned. */
-  /* Running at .70 on purpose. This is the sandbox and the point of it is
-     to see the picture at full strength, which no accessibility figure will
-     ever recommend. Turn this one number to walk the ladder above. */
-  .herofig{--hero-photo:.70;
+  /* Running at 1 on purpose: no wash at all, the photograph as it came out
+     of the render. This is the sandbox and the point of it is to see the
+     picture, which no accessibility figure will ever recommend. At this
+     setting ink measures 1.54:1 against the worst pixel in the frame, so
+     parts of the standfirst are genuinely hard to read on a phone in
+     daylight. Turn this one number to walk the ladder above. */
+  .herofig{--hero-photo:1;
     position:relative;isolation:isolate;overflow:clip;
     padding-block:0;background:var(--paper-3)}
   .herofig > picture{position:absolute;inset:0;display:block}
   .herofig picture img{width:100%;height:100%;object-fit:cover;
     object-position:50% 45%;opacity:var(--hero-photo)}
 
-  /* The vignette. Bone at the edges, running out to the page's own ground at
-     the last stop so the band has no seam against the fold below it. The
-     photograph is 1.79:1 and the band is not, so a hard edge would cut the
-     arch against the section line; fading it means the frame ends where the
-     light runs out rather than where the markup does. */
-  .herofig::after{content:"";position:absolute;inset:0;pointer-events:none;
-    background:radial-gradient(135% 120% at 52% 44%,
-      transparent 28%, var(--paper-3) 70%, var(--paper) 99%)}
+  /* The vignette is off. It was a second bone layer on top of the wash, and
+     with the wash gone it would only be a smudge around a picture that is now
+     meant to be seen. The band therefore ends on a hard edge against the fold
+     below it, which is what a full-bleed image band normally does. Restore
+     the gradient here if the wash ever comes back. */
   /* The hero has to end inside the first screen. It did not: at 1440 x 900
      the band ran 1284px, so the action sat 400px below the fold and the
      photograph was a thing you scrolled past rather than the thing you

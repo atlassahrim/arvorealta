@@ -263,7 +263,13 @@ Above 0.45 the standfirst and the eyebrow stop being readable on a phone in
 daylight or to anyone with low vision, and a public buyer running an
 accessibility check would find it. That is a real cost and it is the owner's
 to weigh, not the file's to refuse: **the number is here so the trade is made
-with the figure in front of you.** `lab/` runs at 0.70 deliberately.
+with the figure in front of you.**
+
+**`lab/` runs at 1 with no wash and no vignette**, which is the picture as it
+came out of the render and 1.54:1 under the type. That is the sandbox doing
+what a sandbox is for. `lab/strict/` runs at 0.35 in light and 0.30 in dark,
+because that variant follows the taste skill and the skill requires AA. The
+two settings are the experiment and the control, and neither is the site.
 
 Re-measure when the image changes. A different photograph is a different
 table, and the only honest way to get it is to sample the file.
@@ -518,6 +524,14 @@ courtesy.
 
 **No inline colour or font values.** Everything reads from tokens, so a theme
 swap is total.
+
+## How to report back
+
+**Every reply ends with a plain-language synthesis.** A few short sentences,
+as if explaining to a five-year-old, saying what was done and what it means.
+It goes last, under its own heading, after the detail rather than instead of
+it. The detail is still the work; this is the part that can be read in ten
+seconds on a phone.
 
 ## Adding a client theme
 
