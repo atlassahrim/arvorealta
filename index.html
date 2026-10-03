@@ -277,7 +277,9 @@ function Nav({ t, theme, onToggle, lang, setLang, onPhoto }) {
               : "border-ink/20 hover:border-ink/50 dark:border-bone/25 dark:hover:border-bone/60"}">
             <span class="font-mono text-[11px]" aria-hidden="true">${theme === "dark" ? "L" : "D"}</span>
           </button>
-          <${Action} href=${MAILTO} class="hidden sm:inline-flex ${onPhoto ? "!bg-bone !text-ink hover:!bg-bone/90" : ""}">${t.cta}<//>
+          <span class="hidden sm:block">
+            <${Action} href=${MAILTO} class=${onPhoto ? "!bg-bone !text-ink hover:!bg-bone/90" : ""}>${t.cta}<//>
+          </span>
         </div>
       </div>
     </header>`;
@@ -302,7 +304,7 @@ function Hero({ t }) {
            above it, so the hero takes the whole viewport rather than the
            viewport minus a bar. dvh, not vh, so the iOS address bar does not
            push the action off the bottom. -->
-      <div class="${WRAP} relative grid min-h-[100dvh] content-center pt-24 pb-14">
+      <div class="${WRAP} relative grid min-h-[100dvh] content-center py-24">
         <div>
           <${M.div} ...${mo.rise(0)}><${Eyebrow} on="photo">${t.hero.eyebrow}<//><//>
           <${M.h1} ...${mo.rise(1)}
