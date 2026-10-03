@@ -89,8 +89,10 @@ const STR = {
       eyebrow: "Open now",
       h2: "If you are bidding on this one, the hard attachment is already written.",
       buyer: "Valdres Kommunale Renovasjon IKS, Norway. Framework agreement, four years.",
-      body: "Bilag 2 and Bilag 3 are handed out as finished forms. Vedlegg 5 is not, and it is where the quality and the environment weight is read.",
-      action: "Open the template",
+      body: "Two of the three annexes are handed out as finished forms. The third is not, and it is the one where the quality and the environment weight is read.",
+      given: "Given as forms", missing: "Not given", missingNote: "where 65% of the score is read",
+      seeEx: "See a filled example", getTpl: "Download the template",
+      exMeta: "PDF, 5 sheets, 132 KB", tplMeta: "Word, 14 KB, fill it in",
       fields: [["Tender deadline", "27 Oct 2026, 12:00"], ["Questions close", "19 Oct 2026"], ["Weight that is not price", "65%"]],
       foot: "One tender today, and that is the whole list rather than the top of it. Another appears here when a notice has been read closely enough to write its attachment."
     },
@@ -125,8 +127,10 @@ const STR = {
       eyebrow: "Åpen nå",
       h2: "Leverer du tilbud i denne, er det vanskeligste vedlegget allerede skrevet.",
       buyer: "Valdres Kommunale Renovasjon IKS, Norge. Rammeavtale, fire år.",
-      body: "Bilag 2 og Bilag 3 er utlevert som ferdige skjema. Vedlegg 5 er det ikke, og det er der kvalitets- og miljøvekten leses.",
-      action: "Åpne malen",
+      body: "To av de tre vedleggene er utlevert som ferdige skjema. Det tredje er det ikke, og det er der kvalitets- og miljøvekten leses.",
+      given: "Utlevert som skjema", missing: "Ikke utlevert", missingNote: "der 65 % av poengsummen leses",
+      seeEx: "Se et utfylt eksempel", getTpl: "Last ned malen",
+      exMeta: "PDF, 5 sider, 132 KB", tplMeta: "Word, 14 KB, fyll den ut",
       fields: [["Tilbudsfrist", "27. okt. 2026, 12:00"], ["Frist for spørsmål", "19. okt. 2026"], ["Vekt som ikke er pris", "65 %"]],
       foot: "Én konkurranse i dag, og det er hele listen, ikke toppen av den. Flere dukker opp her når en kunngjøring er lest nøye nok til å skrive vedlegget."
     },
@@ -161,8 +165,10 @@ const STR = {
       eyebrow: "Avoinna nyt",
       h2: "Jos jätät tarjouksen tähän, vaikein liite on jo kirjoitettu.",
       buyer: "Valdres Kommunale Renovasjon IKS, Norja. Puitejärjestely, neljä vuotta.",
-      body: "Bilag 2 ja Bilag 3 annetaan valmiina lomakkeina. Vedlegg 5 ei ole, ja juuri siinä luetaan laadun ja ympäristön paino.",
-      action: "Avaa malli",
+      body: "Kaksi kolmesta liitteestä annetaan valmiina lomakkeina. Kolmatta ei anneta, ja juuri siinä luetaan laadun ja ympäristön paino.",
+      given: "Annettu lomakkeina", missing: "Ei annettu", missingNote: "jossa 65 % pisteistä luetaan",
+      seeEx: "Katso täytetty esimerkki", getTpl: "Lataa malli",
+      exMeta: "PDF, 5 sivua, 132 KB", tplMeta: "Word, 14 KB, täytä se",
       fields: [["Tarjousten määräaika", "27.10.2026, 12:00"], ["Kysymysten määräaika", "19.10.2026"], ["Paino, joka ei ole hinta", "65 %"]],
       foot: "Yksi tarjouspyyntö tänään, ja se on koko lista eikä sen kärki. Lisää ilmestyy tähän, kun ilmoitus on luettu riittävän tarkasti liitteen kirjoittamiseksi."
     },
@@ -334,7 +340,31 @@ function OpenTender({ t }) {
           <h3 lang="nb" class="text-[1.5rem] font-medium leading-tight tracking-[-.02em]">Leveranse av avfallsbeholdere</h3>
           <p class="mt-3 text-[.95rem] leading-relaxed text-ink/70 dark:text-bone/70">${t.open.buyer}</p>
           <p class="mt-7 max-w-[46ch] leading-[1.7]">${t.open.body}</p>
-          <div class="mt-8"><${Action} href="/mal/" tone="ghost">${t.open.action}<//></div>
+
+          <!-- The annex names never translate: they are what a bidder matches
+               against the competition documents in front of them, and an
+               obliging "Appendix 5" would break the page at the moment it is
+               most needed. Setting them in mono states that they are names of
+               files rather than words of the sentence, which is what stops
+               the section reading as half-translated. -->
+          <ul class="mt-6 grid gap-2.5 text-[.9rem]">
+            <li class="flex flex-wrap items-baseline gap-x-3">
+              <span lang="nb" class="font-mono">Bilag 2, Bilag 3</span>
+              <span class="text-ink/60 dark:text-bone/60">${t.open.given}</span>
+            </li>
+            <li class="flex flex-wrap items-baseline gap-x-3">
+              <span lang="nb" class="font-mono text-brick dark:text-brick-l">Vedlegg 5</span>
+              <span class="text-ink/60 dark:text-bone/60">${t.open.missing}, ${t.open.missingNote}</span>
+            </li>
+          </ul>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            <${Action} href="/mal/Vedlegg-5-eksempel.pdf" tone="ghost" target="_blank" rel="noopener">${t.open.seeEx}<//>
+            <${Action} href="/mal/Vedlegg-5-Utfyllende-opplysninger.docx" download>${t.open.getTpl}<//>
+          </div>
+          <p class="mt-4 font-mono text-[11px] uppercase tracking-[.14em] text-ink/50 dark:text-bone/50">
+            ${t.open.exMeta} · ${t.open.tplMeta}
+          </p>
         </div>
         <dl class="grid content-center gap-8 p-8 sm:p-10">
           ${t.open.fields.map(([k, v]) => html`
@@ -360,7 +390,12 @@ function Weighting({ t }) {
           class="max-w-[22ch] text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)] font-medium leading-[1.08] tracking-[-.025em]">
           ${t.weigh.h2}
         <//>
-        <${M.div} ...${mo.reveal(1)} class="mt-12 flex max-w-[56rem] overflow-hidden rounded-xl border border-bone/20">
+        <!-- min-width:auto is the default on a flex item, so the segments
+             could not shrink below their own content and the bar rendered
+             63/37 against the 65/35 it is reporting. min-w-0 lets flex-grow
+             mean what it says. The picture must not disagree with the
+             numbers; that is the whole job of this fold. -->
+        <${M.div} ...${mo.reveal(1)} class="mt-12 flex w-full max-w-[56rem] overflow-hidden rounded-2xl border border-bone/20">
           ${t.weigh.segs.map(([label, pct], i) => html`
             <${M.div} key=${label}
               initial=${reduce ? false : { flexGrow: 0 }}
@@ -368,9 +403,16 @@ function Weighting({ t }) {
               viewport=${{ once: true, amount: .4 }}
               transition=${{ duration: .9, delay: .15 + i * .1, ease: EASE }}
               style=${{ flexGrow: reduce ? pct : undefined, flexBasis: 0 }}
-              class="${i === 0 ? "bg-bone/15 border-r border-bone/20" : "bg-bone/[.05]"} px-6 py-10">
-              <p class="font-mono text-[2rem] leading-none tracking-[-.02em]">${pct}</p>
-              <p class="mt-3 font-mono text-[11px] uppercase tracking-[.18em] text-bone/65">${label}</p>
+              class="${i === 0 ? "bg-bone/15 border-r border-bone/20" : "bg-bone/[.05]"} min-w-0">
+              <!-- The padding lives on an inner element, not on the flex item.
+                   With border-box, padding sits inside flex-basis, so 96px of
+                   it came off the 896px bar before the 65:35 split was taken
+                   and the segments rendered 63.4/36.6. The bar reports the
+                   award's own figures; it cannot be two points out. -->
+              <div class="px-6 py-10">
+                <p class="font-mono text-[2rem] leading-none tracking-[-.02em]">${pct}</p>
+                <p class="mt-3 font-mono text-[11px] uppercase tracking-[.18em] text-bone/65">${label}</p>
+              </div>
             <//>`)}
         <//>
         <${M.p} ...${mo.reveal(2)} class="mt-8 max-w-[56ch] leading-[1.7] text-bone/75">${t.weigh.body}<//>
