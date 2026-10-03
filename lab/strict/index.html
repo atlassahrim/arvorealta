@@ -13,13 +13,14 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex">
 <meta name="theme-color" content="#17352C">
 
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" media="all"
-  href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Shippori+Mincho:wght@400;500&display=swap">
+  href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 
 <script>
 /* Marks scripting as available, then hands the reveal failsafe a deadline,
@@ -41,6 +42,33 @@
      paper-2 and 6.18 on paper-3, so all three clear at once. Scoped here so
      the temperature shift can be judged before the site takes it. */
   :root{--ink-soft:#4C5B54}
+
+  /* STRICT VARIANT. This file follows taste-skill where it conflicts with
+     CLAUDE.md, so the two readings can be compared. Nothing here is a
+     recommendation; it is the other argument, built. */
+  :root{
+    --font-label:"IBM Plex Mono",ui-monospace,monospace;
+    --font-display:"Outfit",system-ui,sans-serif;
+    --font-body:"Outfit",system-ui,sans-serif;
+  }
+  h1,h2,.kicker{letter-spacing:-.025em;font-weight:500}
+  .mark{font-family:var(--font-label);font-weight:500}
+
+  /* The vocabulary strip was inside the hero, carrying up to 96px of its own
+     top margin, which pushed the primary action below the fold at every
+     desktop size measured. It is not part of the hero fold the copy spec
+     defines (eyebrow, headline, standfirst, qualifier, action, one note), so
+     it moves directly below and keeps its chips. */
+  .vocabstrip{padding-block:0 clamp(2rem,4vw,3rem)}
+  .vocabstrip .vocab{margin-top:0}
+
+  /* The header ran 95px around a 31px bar, which is 64px of padding at the
+     one place on the page where vertical space is scarcest. 18px a side puts
+     it at 67px and under the 80px cap, without touching the bar itself. */
+  header.wrap{padding-block:18px}
+  /* Hero top padding came to 80px under the header's 95. With the header
+     down to 67 the hero does not need the same opening gap. */
+  .hero{padding-top:clamp(1.5rem,3.5vw,3.5rem)}
 
   /* Taupe is the evidence ground and never a panel beside paper, so it runs
      full bleed. Ink on taupe reads 6.16:1. */
@@ -351,11 +379,12 @@
   <p class="eyebrow">Industrial manufacturers bidding in the Nordics</p>
   <h1>Nobody told you<br class="brs"> which page cost you<br class="brs"> the contract.</h1>
   <p class="sub">Public buyers score the documents you hand in. Not the plant, not the price list, not the twenty years.</p>
-  <p class="heroqual"><b>Who this is for</b> The person writing the bid between tasks.</p>
   <div class="heroact">
     <a class="herocta ln on" href="mailto:atlas@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost&amp;body=Attach%20the%20page%20before%20sending.%0A%0ACompany%3A%0AWhat%20the%20tender%20was%20for%3A%0ARoughly%20when%20you%20submitted%3A">Get your page scored</a>
-    <p class="sub">Send one page from a tender you lost. No charge and no call.</p>
   </div>
+</section>
+
+<section class="wrap vocabstrip">
   <ul class="vocab">
     <li>Method statement</li>
     <li>Quality plan</li>
@@ -367,9 +396,10 @@
 </section>
 
 
+
 <section id="case" class="case inv">
   <div class="wrap">
-    <p class="tag"><b>01</b> the record</p>
+    <p class="tag">the record</p>
     <h2>They were cheapest.<br>They were fastest.<br>They lost on five days.</h2>
     <p class="lede">P. Olesen og Sønner bid for a demolition contract in Denmark and lost it on when they said the quality-assurance paperwork would be handed over. Not on the work. On a date inside a document.</p>
     <figure class="weigh">
@@ -393,7 +423,7 @@
 
 <section class="g-p3">
   <div class="wrap">
-    <p class="tag"><b>02</b> the mechanism</p>
+    <p class="tag">the mechanism</p>
     <h2>The paperwork is a separate<br class="brs"> object from the company.</h2>
     <p class="lede">An evaluator sits with a scoring template and your submission. What happens next is not a judgement about your firm. A line on the page scores if it passes three tests.</p>
     <ol class="gate">
@@ -417,7 +447,6 @@
 
 
 <section class="wrap">
-  <p class="tag"><b>03</b> where the score is decided</p>
   <h2>Where price is the whole<br class="brs"> score, stop reading.</h2>
   <p class="lede">Sometimes it really is price, and where it is, nothing here helps you. The tenders you bid sit somewhere on this range, and it is worth knowing where.</p>
   <ol class="range">
@@ -445,7 +474,6 @@
 
 <section id="standard" class="g-p2">
   <div class="wrap">
-    <p class="tag"><b>04</b> the thing itself</p>
     <h2>Written once, properly,<br class="brs"> in the form an evaluator scores.</h2>
     <p class="lede">The set of things your firm asserts about itself, in the language of the template it will be read against. Four things, in the form the template reads them.</p>
     <ul class="spec">
@@ -461,7 +489,6 @@
 
 <section class="ground2 docband">
   <div class="wrap">
-    <p class="tag"><b>05</b> a finished sheet</p>
     <h2>This is the object<br class="brs"> being scored.</h2>
     <figure class="doc docsplit">
       <img src="/assets/Document-redacted.jpeg" width="1426" height="1076" loading="lazy"
@@ -480,7 +507,6 @@
 </section>
 
 <section class="wrap">
-  <p class="tag"><b>06</b> what it costs you</p>
   <h2>Four hours.</h2>
   <p class="lede">A Finnish supplier counted ninety pages of documentation attached to one bid. Almost none of that work needs you in the room. Four hours of it does, and I do the rest.</p>
   <div class="costbox">
@@ -509,7 +535,6 @@
 
 <section id="price" class="ground2">
   <div class="wrap">
-    <p class="tag"><b>07</b> the ladder</p>
     <h2>Every tier credits<br class="brs"> into the one above it.</h2>
     <p class="lede">Walk the whole ladder and you pay €8,000 in total, not €11,000. Credits never expire.</p>
     <div class="tiers">
@@ -558,7 +583,6 @@
 
 <section class="inv">
   <div class="wrap">
-    <p class="tag"><b>08</b> doing nothing</p>
     <h2>Plenty of firms have stopped<br class="brs"> bidding. They were right to.</h2>
     <p class="lede">A Swedish firm said it to a trade body survey with pride rather than regret. We manage without them, we get paid in full by private clients, completely without hassle. Public work argues about scope and costs a week of unpaid writing before anyone looks at your price.</p>
     <div class="figures">
@@ -583,7 +607,6 @@
 
 <section id="scope" class="scope">
   <div class="wrap">
-    <p class="tag"><b>09</b> questions</p>
     <h2>Questions you should ask me.</h2>
     <div class="faq">
       <details open>
@@ -606,7 +629,7 @@
       </details>
       <details>
         <summary>What happens if my losses really are about price?</summary>
-        <p>Then you find that out for nothing, which is the whole reason the first step is free. Send a page from a tender you lost. If it comes back scored and the score was fair, you have your answer.</p>
+        <p>Then you have wasted a page and I have wasted an afternoon, which is the whole reason the first step is free. Send a page from a tender you lost. If it comes back scored and the score was fair, you have your answer and it did not cost you anything to get it.</p>
       </details>
       <details>
         <summary>Who actually does the work?</summary>
