@@ -282,12 +282,22 @@ what a sandbox is for. `lab/strict/` runs at 0.35 in light and 0.30 in dark,
 because that variant follows the taste skill and the skill requires AA. The
 two settings are the experiment and the control, and neither is the site.
 
+**Every file the page links to carries a version in its name, not only the
+photographs.** GitHub Pages serves `max-age=600` with an ETag, so a file whose
+name has not changed is held for ten minutes and, on a phone that has the page
+open, often longer. That is long enough for the owner to look, see the old
+thing, and reasonably conclude the deploy failed. It has now cost three round
+trips: once on the hero image, once on the stylesheet carrying the wash. The
+stylesheet is `assets/tw-2.css` for exactly that reason. `index.html` itself
+cannot be versioned, since it is the entry point, and its ten minutes are the
+one wait that has to be lived with.
+
 **A new photograph gets a new filename.** Overwriting `foo-1920.webp` with
 different bytes leaves every browser that has seen the page serving the old
 picture from cache, and the deploy log will tell you it succeeded while the
 owner, on their own phone, sees the old one and reasonably concludes the work
 did not land. That happened once and cost a round trip. The version sits in
-the name — `gateway-2-<width>.<ext>` — so the URL changes when the content
+the name — `gateway-3-<width>.<ext>` — so the URL changes when the content
 does and no cache can hold the wrong file. Delete the old set in the same
 commit; nothing outside the labs points at it.
 
