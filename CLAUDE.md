@@ -469,7 +469,14 @@ readable, so it is the one thing from the reference not copied.
   above, 12 mm opens a new section, and a block with neither belongs to the
   thing above it. A label is one object with what it labels, so nothing at
   all sits between them. Arbitrary 4 mm gaps are what drift a page off the
-  grid, and there are none left
+  grid, and there are none left. **An annex loads `system.css` before
+  `annex.css`, so a loose rule in the shared sheet lands on these pages.**
+  One did: `.field{margin-bottom:clamp(1.75rem,3.5vw,2.5rem)}`, left behind
+  by a web form no page has any more, put 10.58 mm under every field block
+  on every sheet — a viewport-relative value inside a document measured in
+  millimetres, 4.58 mm off the baseline. It is gone, and the one baseline
+  it was accidentally providing is stated in `annex.css` instead. Before
+  adding a rule to `system.css`, check what it does to an A4 sheet
 - A title that runs to two lines takes `.title-2`, which tightens the leading
   to 9 mm so the pair reads as one object and still lands on the grid at 18.
   It is for two lines and only two, and it is what lets a two-line title hold
