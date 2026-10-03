@@ -12,6 +12,8 @@ deploys in about ten seconds.**
 | arvorealta.com/video/ | `video/index.html` — video portfolio |
 | arvorealta.com/deck/`<slug>`/ | decks — 1920 × 1080, for presenting |
 | arvorealta.com/annex/`<slug>`/ | annexes — A4, for submitting |
+| arvorealta.com/mal/ | `mal/index.html` — a tender's free template, `noindex` |
+| arvorealta.com/lab/ | `lab/index.html` — the sandbox, `noindex` |
 
 **`index.html` and `video/index.html` are live and in use.** Do not restructure
 them without being asked. Copy changes are fine; layout surgery is not.
@@ -38,6 +40,27 @@ else published in full. `.git` and `.github` are pruned from the sweep, and
 the step prints any underscore path still standing afterwards so a miss fails
 loudly instead of quietly shipping. **If you add a private area, give it a
 leading underscore and nothing else is needed.**
+
+## Published but unlisted
+
+The underscore is the lock and `noindex` is the label, and they answer two
+different questions. A page behind the underscore cannot be reached at all. A
+page carrying `noindex` can be reached by anyone with the link and is asking
+search engines to leave it out of the index, which they generally honour and
+are not obliged to.
+
+**Use the underscore for anything whose content would be a problem in the
+open**, which is research, client material, unredacted annexes and working
+drafts. **Use `noindex` for a page that has to be opened on a real device at a
+real URL and should not compete with the site**, which today is `mal/` and
+`lab/`. `lab/` is a near-copy of the offer page, so without `noindex` it would
+be a second `index.html` bidding against the first for the same terms.
+
+A sandbox lived at `_lab/` for a while and could therefore never be opened on
+a phone, which is the one test it existed to make possible. It is `lab/` now.
+**Anything moving out from behind the underscore takes `noindex` in the same
+change**, and the move is a decision to make deliberately rather than a
+convenience, because once a path is public a link to it is public forever.
 
 ## The pricing ladder
 
@@ -68,10 +91,13 @@ document agreed before the work starts, not listed on the page.
 ```
 index.html              offer page
 video/index.html        video portfolio
+lab/index.html          sandbox copy of the offer page — noindex
+mal/index.html          free template landing page for one tender — noindex
 templates/index.html    index of every template
 deck/<slug>/index.html  one deck per folder
 annex/<slug>/index.html one A4 annex per folder
 assets/
+  img/                  photography, as webp + jpg at 960/1440/1920/2560
   themes/arvorealta.css tokens for the editorial system
   themes/technical.css  tokens for the technical system
   system.css            structure only — no colour, no typefaces
@@ -205,6 +231,45 @@ contrast, and both are hard:
 
 Its job is evidence — image and case slides — so a deck reads
 **paper** (argument) → **taupe** (evidence) → **ink** (statement).
+
+**A photograph is a fourth ground, and it is the only one that has to be
+measured per image.** The other three are single values with fixed contrast
+figures written above. A photograph is thousands of values, and the figure
+that governs is not its average but its worst pixel under the type.
+
+Measure before you design on one. The hero photograph untreated holds
+near-white (sun on water, L 0.99) and near-black (a shadowed void, L 0.002)
+inside almost any box that could be drawn on it, so **nothing cleared
+anywhere**: bone read 1.01:1 across the right half and ink read 1.45:1.
+Darkening it until bone clears takes a 50% black scrim, which drops the
+frame's median luminance from 0.162 to 0.040 and throws away the light that
+was the reason to use the picture.
+
+**So a photograph is lifted, not dropped.** The image sits at **35% opacity
+over `--paper-3`**, a 65% bone wash. At that strength the darkest pixel in
+the whole frame measures L 0.333 and ink on it is **4.84:1**, which clears
+the 4.5:1 small text needs with no box, no scrim and no exception anywhere on
+the picture. 38% gives 4.43 and 40% gives 4.18, so **35% is a floor. Lighten
+it freely; never darken it**, and re-measure if the image changes.
+
+Three rules follow, and they are the same shape as the taupe rules above:
+
+- **Only ink crosses onto a washed photograph.** On that wash `--ink-soft`
+  measures 2.58:1 and the mark 2.35:1. Carrying either would need the wash at
+  87%, by which point there is no photograph underneath it. The standfirst
+  and every eyebrow take full ink while they are over the image
+- **The band runs full bleed and fades out, it is never a panel.** A
+  photograph inset beside paper is the taupe mistake with more detail in it.
+  A radial vignette carries bone at the edges out to the page's own ground at
+  the last stop, so the band has no seam and the frame ends where the light
+  runs out rather than where the markup does
+- **The picture spends the page's accent.** The hero image already carries one
+  brick line. Under the once-per-page rule the CSS does not spend it again
+  above the fold
+
+**Measure the image, not the layout.** The figures above belong to this
+photograph. A different one is a different set, and the only honest way to
+get them is to sample the file.
 
 Web type scale lives in `system.css` and is fluid (`clamp`). Body line-height
 is 1.75; display is 1.04. That contrast is the system's signature — keep it.
@@ -373,6 +438,16 @@ change.
 **Hand-break headlines** with `<br>`. Never let display type wrap on its own —
 every line ending is a decision.
 
+**A break class needs a counterpart, or the rule only holds at one end.** A
+single conditional break hides at the widths it does not serve and leaves
+those widths wrapping on their own, which is the thing the rule above
+forbids. `.brs` is the wide break and `.brp` is the narrow one, each hidden
+where the other shows, so the line endings are chosen at both ends and by
+nobody's algorithm in between. **Check which way round the page has them.**
+`system.css` shows `.brs` below 33rem and the offer page shows it above
+46rem, so the same class name means the opposite thing in two places. That
+inversion has already cost one session an afternoon.
+
 **Every label carries the same weight.** The label face is set at 600
 wherever it appears at eyebrow size — eyebrows, section tags, card steps, the
 vocabulary chips, the comparison headings, the nav, the footer headings and
@@ -384,6 +459,44 @@ and it keeps 400.
 An intermediate Playfair was tried and retired: giving the headline a wider
 column solved what the extra size was covering for. If a fourth seems
 necessary, widen the column before you add a level.
+
+**On the web those three are the anchors of a fluid scale, not fixed pixels.**
+`system.css` sets display as `clamp(2.6rem, 1.1rem + 6.4vw, 6.5rem)`, which
+is a curve through 96 rather than a value at it. A **scoped** clamp on one
+headline is therefore a re-drawing of the curve and not a fourth size,
+**provided it still lands on 96 at the desktop width the page is designed
+for.** The hero takes one: at nine words its first line measured 1175px
+against a 696px column at tablet width and broke four ways, taking 433px of a
+900px screen on its own. Widening the column was tried first, as the rule
+above requires, and the column was already full. The re-drawn clamp lands on
+96px at 1440. **Scope it to the block that needs it and leave the page's
+scale alone.**
+
+**The hero closes above the fold.** Eyebrow, headline, standfirst, action, and
+the action is the last thing in it. Anything else that is true — the audience
+gate, the terms of the free step, the vocabulary — belongs in the strip
+directly under the band, where it loses nothing. Six objects in a hero is a
+list, and a list is read after the decision rather than before it. Measure
+this rather than judging it: the band ran 1284px at 1440 × 900 and put the
+action 400px below the fold while looking, in a screenshot, entirely fine.
+
+**A full-bleed band zeroes `--gap`.** Every section carries the page's own
+section padding, 128px a side at 1280. A band whose air comes from an image's
+edges and from the block inside it does not want another 256px, and that
+padding is exactly what pushed the hero's action off the screen.
+
+**A repeated label is a system when it is numbered and a tic when it is not.**
+The nine section tags read `01` through `09` in order, so a reader can follow
+them and they are one device used nine times. An unnumbered eyebrow above a
+headline is an independent decision each time, and those multiply until every
+fold opens the same way. The offer page runs three. **Keep the numbered spine
+unbroken and keep the unnumbered ones under about one per three folds.**
+
+**The site is light only, and that is a decision.** It emulates print at every
+output it has — A4 annexes, 1920 × 1080 decks, a paper ground on screen. A
+dark mode would be a second identity for a firm whose whole argument is what
+a document looks like when it is printed and scored. Do not add one as a
+courtesy.
 
 **Snap to the baseline**, including captions and table rows. Display excepted, above.
 
