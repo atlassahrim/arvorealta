@@ -32,13 +32,16 @@
    seeded from the system before first paint. */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
-/* The photograph's strength, one number per mode. Measured against the worst
-   pixel in the frame: ink on the light wash at .35 is 4.85:1, bone on the ink
-   wash at .30 is 4.19:1. Both clear 4.5:1 and 4:1 respectively at the 98th
-   percentile, and this variant follows the skill, which requires AA. The
-   low-contrast experiment lives on lab/ instead. */
-:root            { --hero-photo: .35 }
-[data-theme="dark"] { --hero-photo: .30 }
+/* No wash. Both labs now show the photograph at full strength, which is what
+   was asked for, and it is worth writing down what it costs here rather than
+   only on lab/: at 1 the ink headline measures 1.54:1 against the worst pixel
+   in the light frame and bone 1.47:1 in the dark one, against a 4.5:1 floor.
+   This variant was the control that followed the skill, and on the picture it
+   no longer does. Every other rule the skill sets still holds.
+
+   Put .35 and .30 back to restore it. */
+:root            { --hero-photo: 1 }
+[data-theme="dark"] { --hero-photo: 1 }
 
 html { background: var(--color-paper) }
 html[data-theme="dark"] { background: var(--color-ink-2) }

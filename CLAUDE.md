@@ -252,11 +252,18 @@ worst pixel in the frame:
 
 | `--hero-photo` | wash | ink | what still reads |
 |---|---|---|---|
-| 0.35 | 0.65 | 4.85:1 | everything, small text included |
-| 0.45 | 0.55 | 3.59:1 | display type only, 96px and up |
-| 0.55 | 0.45 | 2.58:1 | nothing, by the standard |
-| 0.70 | 0.30 | 1.55:1 | nothing |
-| 0.85 | 0.15 | 1.11:1 | type and picture are the same value |
+| 0.35 | 0.65 | 4.81:1 | everything, small text included |
+| 0.45 | 0.55 | 3.55:1 | display type only, 96px and up |
+| 0.55 | 0.45 | 2.55:1 | nothing, by the standard |
+| 0.70 | 0.30 | 1.48:1 | nothing |
+| 1.00 | 0.00 | 1.56:1 | nothing, and this is what both labs run |
+
+The frame is 2576 × 1399, and **the worst pixel is not where the type is.**
+Across the left 56% of the frame, which is the column the hero's four objects
+actually occupy, the 2nd percentile is L 0.057 and ink on it is 1.35:1. That
+is the honest figure for this layout, and the 1.56:1 above is the figure for
+the frame as a whole. Both are far under the floor and the difference matters
+only when choosing where to put type, which is the next paragraph's problem.
 
 **0.35 is where every size clears, and it is a reference rather than a gate.**
 Above 0.45 the standfirst and the eyebrow stop being readable on a phone in
@@ -272,7 +279,16 @@ because that variant follows the taste skill and the skill requires AA. The
 two settings are the experiment and the control, and neither is the site.
 
 Re-measure when the image changes. A different photograph is a different
-table, and the only honest way to get it is to sample the file.
+table, and the only honest way to get it is to sample the file. The table
+above belongs to the second hero photograph, the one with the deep green void
+set to the right of centre. The first one put that void in the middle, which
+is exactly where the headline's second line ended, and swapping the image was
+worth more to legibility than any wash setting was.
+
+**With no wash, the picture decides where type can go, not the layout.** The
+band is 1440 × 736 and the photograph is 1.841:1, so at desktop it scales by
+width and crops only vertically: `object-position` has no horizontal lever to
+pull. The only controls left are the headline's break and its size.
 
 Three rules follow, and they are the same shape as the taupe rules above:
 

@@ -161,17 +161,18 @@ function Hero() {
           srcset="/assets/img/through-960.webp 960w, /assets/img/through-1440.webp 1440w, /assets/img/through-1920.webp 1920w, /assets/img/through-2560.webp 2560w" />
         <img src="/assets/img/through-1920.jpg" sizes="100vw"
           srcset="/assets/img/through-960.jpg 960w, /assets/img/through-1440.jpg 1440w, /assets/img/through-1920.jpg 1920w, /assets/img/through-2560.jpg 2560w"
-          width="2576" height="1442" alt="" fetchpriority="high" decoding="async"
+          width="2576" height="1399" alt="" fetchpriority="high" decoding="async"
           class="size-full object-cover object-[50%_45%] [opacity:var(--hero-photo)]" />
       </picture>
 
-      <!-- The vignette carries the ground's own value out to the edges, so the
-           band ends where the light runs out rather than where the markup
-           does. One gradient per mode, because a bone fade on an ink ground
-           would be a halo. -->
-      <div class="pointer-events-none absolute inset-0
-                  bg-[radial-gradient(135%_120%_at_52%_44%,transparent_28%,var(--color-paper-3)_70%,var(--color-paper)_99%)]
-                  dark:bg-[radial-gradient(135%_120%_at_52%_44%,transparent_28%,var(--color-ink)_70%,var(--color-ink-2)_99%)]"></div>
+      <!-- The vignette is off. With the wash gone it would be the only layer
+           left on top of the picture, and a fade to paper around a photograph
+           meant to be seen at full strength reads as a smudge. The band ends
+           on a hard edge against the fold below, which is what a full-bleed
+           image band normally does. The gradient, if it comes back:
+           radial-gradient(135% 120% at 52% 44%, transparent 28%,
+           var(--color-paper-3) 70%, var(--color-paper) 99%) in light, and the
+           same stops in --color-ink and --color-ink-2 in dark. -->
 
       <div class="${WRAP} relative grid min-h-[clamp(30rem,calc(100dvh-4.5rem),46rem)] content-center py-14">
         <!-- Asymmetric split, DESIGN_VARIANCE 7. The headline takes the full
