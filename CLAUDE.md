@@ -618,6 +618,36 @@ checked: the body stays `#D9D7D4` under either setting.
 **No inline colour or font values.** Everything reads from tokens, so a theme
 swap is total.
 
+## The offer page's folds
+
+Six, in order: the photographic hero, a two-item strip, the open tender, the
+award's weights on ink, the template's own ledger, and the close.
+
+**The ledger fold shows the offer instead of describing it.** Five rows, each
+a scored block of the Word template the page hands out, each with the weight
+the template prints on its own heading, and a total of 65 under a heavier
+rule. Every figure is read off the document — 30 for quality and
+functionality, 5 for delivery time and plan, 10 each for service life and
+repairability, the committed minimum PCR share, and the other climate and
+environment measures. **Do not round them, do not add a sixth, and re-read
+the file if the template changes.** They are what makes the fold above's 65
+land as a fact rather than a claim, and inventing one would make the page a
+liar about a live procurement.
+
+**The motion there is the argument, which is the test any animation on this
+site has to pass.** The rows arrive in the order an evaluator works down
+them and the total lands last, so a reader who watches it understands what
+"scored against the criteria it was judged on" means before reading the
+sentence that says so. It runs once on entry, it does not loop, and under
+`prefers-reduced-motion` it collapses to the finished state. A thing that
+keeps replaying is decoration; this is a demonstration.
+
+**The page has no section numbering and two eyebrows**, on the hero and on
+the open tender. That is the whole allowance at six folds. Tracked capitals
+name a section and nothing else — a label that names a value beside it is
+mono at 12px in sentence case, because it is found rather than read and it
+should not look like a section opening.
+
 ## Three languages on the offer page
 
 English, Norwegian Bokmål and Finnish, in one object in `index.html`, with a
