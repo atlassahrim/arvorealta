@@ -70,9 +70,14 @@ sandbox that has done its job is deleted, not left up.
 
 ## The pricing ladder
 
-Three tiers on `index.html`, and the mechanic between them is the design.
-**€600** one document · **€2,400** the full document standard · **€8,000**
-identity system.
+Four rungs on `index.html`, and the mechanic between them is the design.
+**Free** one page scored · **€600** one document · **€2,400** the full
+document standard · **€8,000** identity system.
+
+The free rung is the mouth of the funnel and it is the only one carrying an
+action. That is the ladder's own logic rather than a design compromise: you
+cannot buy the €2,400 first, because the credit only works walking up. It
+also keeps the page to one CTA label for one intent.
 
 Every tier credits in full into the one above. €600 comes off the €2,400,
 €2,400 comes off the €8,000, and €600 credits into €8,000 directly if the
@@ -621,26 +626,43 @@ swap is total.
 ## The offer page's folds
 
 Six, in order: the photographic hero, a two-item strip, the open tender, the
-award's weights on ink, the template's own ledger, and the close.
+award's weights on ink, the pricing ladder, and the close.
 
-**The ledger fold shows the offer instead of describing it.** Five rows, each
-a scored block of the Word template the page hands out, each with the weight
-the template prints on its own heading, and a total of 65 under a heavier
-rule. Every figure is read off the document — 30 for quality and
-functionality, 5 for delivery time and plan, 10 each for service life and
-repairability, the committed minimum PCR share, and the other climate and
-environment measures. **Do not round them, do not add a sixth, and re-read
-the file if the template changes.** They are what makes the fold above's 65
-land as a fact rather than a claim, and inventing one would make the page a
-liar about a live procurement.
+**The ladder fold is the offer, and it is four rungs rather than four
+cards.** Equal columns say "pick one of these four", which is the opposite of
+a ladder, and a carousel on a screen with room hides three rungs behind an
+interaction to show the fourth. The columns grow with the tier instead, left
+to right at `lg`, so the shape of the row carries the argument before a word
+is read. **Below `lg` it becomes a snap scroller**, which is where a carousel
+is genuinely the right component: there is no room for four and swiping is
+the native move. Only the recommended tier is inset on that scroller, because
+only it has a ground to be inset from.
 
-**The motion there is the argument, which is the test any animation on this
-site has to pass.** The rows arrive in the order an evaluator works down
-them and the total lands last, so a reader who watches it understands what
-"scored against the criteria it was judged on" means before reading the
-sentence that says so. It runs once on entry, it does not loop, and under
-`prefers-reduced-motion` it collapses to the finished state. A thing that
-keeps replaying is decoration; this is a demonstration.
+**Every figure and every deliverable comes off `reference/index.html`**, which
+is where the original ladder copy lives. Do not round a price and do not
+invent a deliverable. If a tier's scope changes, change it there and here
+together.
+
+**The motion is the rungs drawing in left to right, one rule per tier,
+staggered, and that is the test any animation on this site has to pass.** It
+says "these are steps in an order" rather than "here are four options", which
+is the same thing the widths say. Once on entry, no loop, and under
+`prefers-reduced-motion` the rules are drawn at full length with no
+transition. A thing that keeps replaying is decoration.
+
+**The rule spans the whole column and the padding lives on the content below
+it.** With the padding on the column, the recommended tier's rule started
+28px inside its own panel and read as a mistake rather than as the heaviest
+rung in the set.
+
+**Prices are set in the sans, not the mono.** Geist Mono gives the comma a
+full advance, so `€2,400` draws as `€2 , 400`. The page's other large figures
+carry no separators and stay mono.
+
+A fold showing the free template's own five scored blocks stood here for a
+day. It was accurate and nobody could tell what it was for from its heading,
+which is the signal that a fold is explaining rather than selling. The offer
+took its place.
 
 **The page has no section numbering and two eyebrows**, on the hero and on
 the open tender. That is the whole allowance at six folds. Tracked capitals
