@@ -35,6 +35,15 @@
   --color-brick:   #8E4A45;
   --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
+  /* The display face. The page set everything in one sans at four sizes for
+     a while, which is why it read as a software landing page rather than as
+     a firm whose product is documents. ui-ux-pro-max returns EB Garamond
+     for "law firms, legal services, contracts, formal documents, government",
+     which is this reader exactly, so the serif here is a match rather than
+     the default reach the taste skill warns about. Self-hosted, OFL, 44 KB.
+     It carries display type only: headlines and prices. Geist keeps the body
+     and the UI, Geist Mono keeps every label and figure. */
+  --font-display: "EB Garamond", ui-serif, Georgia, serif;
 }
 
 /* No overlay and no vignette. The photograph runs at full strength because
@@ -46,3 +55,42 @@
 :root { --hero-photo: 1 }
 
 html { background: var(--color-paper) }
+
+/* ------------------------------------------------------------- the controls
+   Two rules, each written because a measurement on the page found something
+   rather than because a checklist asked for it. Both were proved in the
+   sandbox before they came here.
+
+   1. A focus ring the page owns. Measured: every control used to fall back
+      to the browser's `1px auto`, which is thin, unbranded, and on the ink
+      fold draws in a colour nobody chose. Three pixels of ink with a two
+      pixel offset, so the ring sits outside the shape rather than on it.
+
+   2. `cursor: pointer` on buttons. Tailwind's preflight sets `cursor:
+      default` on `button`, so the three language controls were the only
+      clickable things on the page that did not look clickable. Measured,
+      not assumed: they reported `cursor: default` while every `<a>`
+      reported `pointer`. */
+@layer base {
+  /* Longhand, not the `outline` shorthand. Written as a shorthand the width
+     and style landed and the colour did not: Chrome reported the ring as
+     currentColor, which on the hero over the photograph meant a bone ring at
+     75% rather than the ink one asked for. Measured, both ways, before
+     settling on this. */
+  :focus-visible {
+    outline-width: 3px;
+    outline-style: solid;
+    outline-color: var(--color-ink);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  /* Over the photograph and on the ink fold the ring inverts, or it is three
+     pixels of ink on ink. currentColor is wrong here for the opposite
+     reason: the hero's own links are bone at 75%, and a ring has to be the
+     full value to read as a ring. */
+  .on-ink :focus-visible, .on-ink :focus-visible:is(a, button) {
+    outline-color: var(--color-bone);
+  }
+  button { cursor: pointer }
+  button:disabled { cursor: default }
+}
