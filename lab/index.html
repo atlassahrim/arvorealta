@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab · Arvorealta</title>
+<!-- The sandbox is reachable at a real URL because that is the one test it
+     exists to make possible: opening it on a phone. noindex keeps it from
+     bidding against the offer page for the same terms. Nothing links here. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Public buyers score the documents you hand in. Document standards for industrial manufacturers bidding into Nordic public tenders.">
+<link rel="canonical" href="https://arvorealta.com/">
+<meta property="og:title" content="Arvorealta · Document standards for public tenders">
+<meta property="og:description" content="Public buyers score the documents you hand in. Send one page from a tender you lost and get it scored against the criteria it was judged on.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://arvorealta.com/">
+<meta property="og:image" content="https://arvorealta.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#D9D7D4">
+
+<!-- Self-hosted. The skill bans a Google Fonts <link> in production and this
+     repo has no build step to self-host through, so the four woff2 files were
+     pulled once and committed. 100K in total, no third-party request for type,
+     and nothing outside this repo can change what the page renders in. -->
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/geist-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/geist-mono-latin.woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts/geist.css">
+
+<link rel="stylesheet" href="/lab/tw-40992baa.css">
+
+</head>
+
+<body class="font-sans antialiased bg-paper text-ink">
+
+<div id="root">
+  <!-- Static fallback. The page renders through React, and a module that
+       fails to load would otherwise leave an empty document. The runtime is
+       vendored at /assets/vendor/runtime.js rather than fetched from a CDN,
+       so there is no third party that can fail, but a blocked script, a
+       stripped module or scripting turned off all land here. createRoot
+       clears it the moment React is up; if it never is, the reader still
+       gets the offer, the terms and a working address. Keep the headline
+       and the standfirst in step with the hero above. -->
+  <noscript style="display:block;padding:4rem 1.25rem;max-width:46rem;margin:0 auto">
+    <h1 style="font-size:2.5rem;line-height:1.05;margin:0 0 1.5rem">Written once.<br>Right every time.</h1>
+    <p style="margin:0 0 1.5rem;line-height:1.6">Public buyers score the documents you hand in. Not the plant, not the price list, not the twenty years.</p>
+    <p style="margin:0"><a href="mailto:atlas@arvorealta.com">Get your page scored</a>. Send one page from a tender you lost. No charge and no call.</p>
+  </noscript>
+</div>
+
+<script type="module">
+import { React, createRoot, motion, useReducedMotion, htm } from "/assets/vendor/runtime.js";
+const { useState, useEffect } = React;
+/* ------------------------------------------------------------ language
+   Three languages, one object, no fetch. The page is small enough that
+   shipping all three costs less than a round trip would, and a reader who
+   switches gets the new language in the same frame.
+
+   WHAT IS NEVER TRANSLATED. The tender's own title, and the names of its
+   annexes: Bilag 2, Bilag 3, Vedlegg 5. Those are the strings a bidder
+   matches against the competition documents in front of them, and a helpful
+   translation of "Vedlegg 5" into "Appendix 5" would make the page useless
+   at the exact moment it is most needed. The buyer's registered name is left
+   alone for the same reason. Only the country name moves.
+
+   The Norwegian and Finnish below are mine, not a native speaker's, and the
+   procurement vocabulary in them is the part worth having checked before
+   this is used in an approach. */
+const STR = {
+  en: {
+    label: "English", short: "EN", htmlLang: "en",
+    skip: "Skip to the offer",
+    nav: { open: "Open now", case: "How it is scored", price: "Pricing" },
+    cta: "Get your page scored",
+    hero: {
+      eyebrow: "Industrial manufacturer bids",
+      h1a: "Written once.", h1b: "Right every time.",
+      sub: "Public buyers score the documents you hand in. Not the plant, not the price list, not the twenty years.",
+      second: "See the open tender"
+    },
+    gate: [
+      ["Who this is for", "The person writing the bid between tasks."],
+      ["What the first step costs", "Nothing, and there is no call."]
+    ],
+    proof: {
+      eyebrow: "What you can open",
+      h2: "Read the work before you trust it.",
+      body: "No case studies and no client logos. The work is documents, so the documents are published.",
+      items: [
+        ["A redacted annex", "Two A4 sheets as submitted, with the client, the money and the signatures removed.", "/annex/sample/"],
+        ["A deck", "The same system at 1920 by 1080, for the room rather than the file.", "/deck/reference-pipeline/"],
+        ["The video work", "Where the studio came from, and why the documents look the way they do.", "/video/"]
+      ]
+    },
+    open: {
+      eyebrow: "Open now",
+      h2: "If you are bidding on this one, the hard attachment is already written.",
+      title: "Supply of waste containers", official: "Named in the competition documents as",
+      buyer: "Valdres Kommunale Renovasjon IKS, Norway. Framework agreement, four years.",
+      body: "Two of the three annexes are handed out as finished forms. The third is not, and it is the one where the quality and the environment weight is read.",
+      seeEx: "See a filled example", getTpl: "Download the template",
+      exMeta: "PDF, 5 sheets, 132 KB", tplMeta: "Word, 14 KB, fill it in",
+      fields: [["Tender deadline", "27 Oct 2026, 12:00"], ["Questions close", "19 Oct 2026"]],
+      foot: "One tender today. Another when there is one worth writing for."
+    },
+    weigh: {
+      eyebrow: "How it is scored",
+      h2: "Most of the score is not the price.",
+      segs: [["Climate and environment", 30], ["Quality", 35], ["Price", 35]],
+      body: "Read from the award criteria in the notice itself. Norwegian authorities have had to weight climate and environment at a minimum of 30% since January 2024, and this tender weights it exactly on that floor."
+    },
+    mail: {
+      subject: "One page to be scored.",
+      body: "Hi Atlas,\n\nAttached is one page from a tender we bid on.\nThanks.\n"
+    },
+    ladder: {
+      eyebrow: "What it costs",
+      h2: "Every tier credits into the one above it.",
+      lede: "Walk the whole ladder and you pay €8,000 in total, not €11,000. Credits never expire.",
+      tiers: [
+        { step: "Start", name: "One page scored", price: "Free", when: "",
+          terms: "Send one page from a tender you lost. It comes back scored against the criteria it was judged on, with the points located.",
+          credit: "No charge and no call." },
+        { step: "Step one", name: "One document", price: "€600", when: "3 to 4 days",
+          terms: "One document done properly, however many pages it runs to. The editable source file, and exports sized and named for tender portals.",
+          credit: "Credited in full into anything above it." },
+        { step: "The standard", name: "The document standard", price: "€2,400", when: "two weeks",
+          terms: "Every document that decides a bid, on one system your own people run. Templates, one document built end to end, file structure and naming, one revision round.",
+          credit: "Your €600 credited. All source files yours to keep." },
+        { step: "Beyond documents", name: "Identity system", price: "€8,000", when: "six weeks",
+          terms: "The document standard applied across the company. Colour and type for print, screen and product, signage and vehicles, written guidelines, a wordmark.",
+          credit: "Your €2,400 credited. Take it once the standard has proved itself." }
+      ]
+    },
+    close: {
+      eyebrow: "Where to start",
+      h2: "Find out what it cost you. For nothing.",
+      body: "Send one page from a tender you lost. A method statement, a quality section, a capability answer. It comes back scored against the criteria it was judged on, with the points located, the reasoning written out, and a note on what the next one should carry."
+    },
+    langLabel: "Language"
+  },
+
+  nb: {
+    label: "Norsk", short: "NO", htmlLang: "nb",
+    skip: "Hopp til tilbudet",
+    nav: { open: "Åpen nå", case: "Slik vektes det", price: "Priser" },
+    cta: "Få siden din vurdert",
+    hero: {
+      eyebrow: "Tilbud fra industriprodusenter",
+      h1a: "Skrevet én gang.", h1b: "Riktig hver gang.",
+      sub: "Offentlige oppdragsgivere gir poeng til dokumentene du leverer. Ikke fabrikken, ikke prislisten, ikke de tjue årene.",
+      second: "Se den åpne konkurransen"
+    },
+    gate: [
+      ["Hvem den er for", "Den som skriver tilbudet mellom andre oppgaver."],
+      ["Hva første steg koster", "Ingenting, og det er ingen samtale."]
+    ],
+    proof: {
+      eyebrow: "Hva du kan åpne",
+      h2: "Les arbeidet før du stoler på det.",
+      body: "Ingen referansehistorier og ingen kundelogoer. Arbeidet er dokumenter, så dokumentene er publisert.",
+      items: [
+        ["Et sladdet vedlegg", "To A4-sider slik de ble levert, uten kunde, beløp og signaturer.", "/annex/sample/"],
+        ["En presentasjon", "Samme system i 1920 ganger 1080, for rommet i stedet for filen.", "/deck/reference-pipeline/"],
+        ["Videoarbeidet", "Hvor studioet kommer fra, og hvorfor dokumentene ser slik ut.", "/video/"]
+      ]
+    },
+    open: {
+      eyebrow: "Åpen nå",
+      h2: "Leverer du tilbud i denne, er det vanskeligste vedlegget allerede skrevet.",
+      title: "Leveranse av avfallsbeholdere", official: null,
+      buyer: "Valdres Kommunale Renovasjon IKS, Norge. Rammeavtale, fire år.",
+      body: "To av de tre vedleggene er utlevert som ferdige skjema. Det tredje er det ikke, og det er der kvalitets- og miljøvekten leses.",
+      seeEx: "Se et utfylt eksempel", getTpl: "Last ned malen",
+      exMeta: "PDF, 5 sider, 132 KB", tplMeta: "Word, 14 KB, fyll den ut",
+      fields: [["Tilbudsfrist", "27. okt. 2026, 12:00"], ["Frist for spørsmål", "19. okt. 2026"]],
+      foot: "Én konkurranse i dag. Flere når det finnes en det er verdt å skrive for."
+    },
+    weigh: {
+      eyebrow: "Slik vektes det",
+      h2: "Mesteparten av poengsummen er ikke prisen.",
+      segs: [["Klima og miljø", 30], ["Kvalitet", 35], ["Pris", 35]],
+      body: "Lest fra tildelingskriteriene i selve kunngjøringen. Norske oppdragsgivere har siden januar 2024 måttet vekte klima og miljø med minst 30 prosent, og denne konkurransen ligger akkurat på den grensen."
+    },
+    mail: {
+      subject: "Én side til vurdering.",
+      body: "Hei Atlas,\n\nVedlagt er én side fra en konkurranse vi deltok i.\nTakk.\n"
+    },
+    ladder: {
+      eyebrow: "Hva det koster",
+      h2: "Hvert trinn krediteres inn i det over.",
+      lede: "Går du hele stigen, betaler du €8 000 totalt, ikke €11 000. Krediteringen utløper aldri.",
+      tiers: [
+        { step: "Start", name: "Én side vurdert", price: "Gratis", when: "",
+          terms: "Send én side fra en konkurranse du tapte. Den kommer tilbake vurdert mot kriteriene den ble bedømt etter, med poengene plassert.",
+          credit: "Ingen kostnad og ingen samtale." },
+        { step: "Steg én", name: "Ett dokument", price: "€600", when: "3 til 4 dager",
+          terms: "Ett dokument gjort ordentlig, uansett hvor mange sider det går over. Den redigerbare kildefilen, og eksporter tilpasset og navngitt for tilbudsportaler.",
+          credit: "Krediteres i sin helhet inn i alt over." },
+        { step: "Standarden", name: "Dokumentstandarden", price: "€2 400", when: "to uker",
+          terms: "Hvert dokument som avgjør et tilbud, på ett system dine egne folk kjører. Maler, ett dokument bygget fra ende til ende, filstruktur og navngiving, én revisjonsrunde.",
+          credit: "Dine €600 kreditert. Alle kildefiler er dine." },
+        { step: "Utover dokumenter", name: "Identitetssystem", price: "€8 000", when: "seks uker",
+          terms: "Dokumentstandarden anvendt i hele selskapet. Farge og typografi for trykk, skjerm og produkt, skilt og biler, skriftlige retningslinjer, et ordmerke.",
+          credit: "Dine €2 400 kreditert. Ta det når standarden har bevist seg." }
+      ]
+    },
+    close: {
+      eyebrow: "Hvor du begynner",
+      h2: "Finn ut hva det kostet deg. Gratis.",
+      body: "Send én side fra en konkurranse du tapte. En metodebeskrivelse, et kvalitetsavsnitt, et svar om kapasitet. Den kommer tilbake vurdert mot kriteriene den ble bedømt etter, med poengene plassert, begrunnelsen skrevet ut, og en merknad om hva den neste bør inneholde."
+    },
+    langLabel: "Språk"
+  },
+
+  fi: {
+    label: "Suomi", short: "FI", htmlLang: "fi",
+    skip: "Siirry tarjoukseen",
+    nav: { open: "Avoinna nyt", case: "Näin se pisteytetään", price: "Hinnoittelu" },
+    cta: "Pyydä sivusi pisteytys",
+    hero: {
+      eyebrow: "Teollisuusvalmistajan tarjoukset",
+      h1a: "Kirjoitettu kerran.", h1b: "Oikein joka kerta.",
+      sub: "Julkiset hankkijat pisteyttävät asiakirjat, jotka jätät. Eivät tehdasta, eivät hinnastoa, eivät kahtakymmentä vuotta.",
+      second: "Katso avoin tarjouspyyntö"
+    },
+    gate: [
+      ["Kenelle tämä on", "Sille, joka kirjoittaa tarjouksen muiden töiden lomassa."],
+      ["Mitä ensimmäinen askel maksaa", "Ei mitään, eikä puhelua tule."]
+    ],
+    proof: {
+      eyebrow: "Mitä voit avata",
+      h2: "Lue työ ennen kuin luotat siihen.",
+      body: "Ei referenssitarinoita eikä asiakaslogoja. Työ on asiakirjoja, joten asiakirjat on julkaistu.",
+      items: [
+        ["Peitetty liite", "Kaksi A4-sivua sellaisina kuin ne jätettiin, ilman asiakasta, summia ja allekirjoituksia.", "/annex/sample/"],
+        ["Esitys", "Sama järjestelmä koossa 1920 kertaa 1080, huoneelle eikä tiedostolle.", "/deck/reference-pipeline/"],
+        ["Videotyö", "Mistä studio tulee ja miksi asiakirjat näyttävät tältä.", "/video/"]
+      ]
+    },
+    open: {
+      eyebrow: "Avoinna nyt",
+      h2: "Jos jätät tarjouksen tähän, vaikein liite on jo kirjoitettu.",
+      title: "Jäteastioiden toimitus", official: "Kilpailuasiakirjoissa nimellä",
+      buyer: "Valdres Kommunale Renovasjon IKS, Norja. Puitejärjestely, neljä vuotta.",
+      body: "Kaksi kolmesta liitteestä annetaan valmiina lomakkeina. Kolmatta ei anneta, ja juuri siinä luetaan laadun ja ympäristön paino.",
+      seeEx: "Katso täytetty esimerkki", getTpl: "Lataa malli",
+      exMeta: "PDF, 5 sivua, 132 KB", tplMeta: "Word, 14 KB, täytä se",
+      fields: [["Tarjousten määräaika", "27.10.2026, 12:00"], ["Kysymysten määräaika", "19.10.2026"]],
+      foot: "Yksi tarjouspyyntö tänään. Lisää, kun löytyy sellainen jolle kannattaa kirjoittaa."
+    },
+    weigh: {
+      eyebrow: "Näin se pisteytetään",
+      h2: "Suurin osa pisteistä ei ole hinta.",
+      segs: [["Ilmasto ja ympäristö", 30], ["Laatu", 35], ["Hinta", 35]],
+      body: "Luettu itse ilmoituksen vertailuperusteista. Norjalaisten hankintayksiköiden on tammikuusta 2024 lähtien pitänyt painottaa ilmastoa ja ympäristöä vähintään 30 prosentilla, ja tämä tarjouspyyntö on tasan sillä rajalla."
+    },
+    mail: {
+      subject: "Yksi sivu pisteytettäväksi.",
+      body: "Hei Atlas,\n\nOheisena yksi sivu tarjouskilpailusta, johon osallistuimme.\nKiitos.\n"
+    },
+    ladder: {
+      eyebrow: "Mitä se maksaa",
+      h2: "Jokainen taso hyvitetään ylempään.",
+      lede: "Koko tikkaat kuljettuasi maksat yhteensä 8 000 €, et 11 000 €. Hyvitykset eivät vanhene.",
+      tiers: [
+        { step: "Aloitus", name: "Yksi sivu pisteytettynä", price: "Ilmainen", when: "",
+          terms: "Lähetä yksi sivu hävitystä tarjouksesta. Se palaa pisteytettynä niitä perusteita vasten, joilla se arvioitiin, pisteet paikannettuina.",
+          credit: "Ei maksua eikä puhelua." },
+        { step: "Askel yksi", name: "Yksi asiakirja", price: "600 €", when: "3 tai 4 päivää",
+          terms: "Yksi asiakirja tehtynä kunnolla, olipa sivuja kuinka monta tahansa. Muokattava lähdetiedosto ja viennit mitoitettuina ja nimettyinä tarjousportaaleihin.",
+          credit: "Hyvitetään kokonaan mihin tahansa ylempään." },
+        { step: "Standardi", name: "Asiakirjastandardi", price: "2 400 €", when: "kaksi viikkoa",
+          terms: "Jokainen tarjouksen ratkaiseva asiakirja yhdellä järjestelmällä, jota oma väkesi ajaa. Mallit, yksi asiakirja alusta loppuun, tiedostorakenne ja nimeäminen, yksi korjauskierros.",
+          credit: "600 € hyvitetty. Kaikki lähdetiedostot ovat sinun." },
+        { step: "Asiakirjojen yli", name: "Identiteettijärjestelmä", price: "8 000 €", when: "kuusi viikkoa",
+          terms: "Asiakirjastandardi sovellettuna koko yritykseen. Väri ja typografia painoon, näytölle ja tuotteeseen, opasteet ja ajoneuvot, kirjalliset ohjeet, sanamerkki.",
+          credit: "2 400 € hyvitetty. Ota se, kun standardi on osoittanut arvonsa." }
+      ]
+    },
+    close: {
+      eyebrow: "Mistä aloittaa",
+      h2: "Selvitä, mitä se maksoi sinulle. Ilmaiseksi.",
+      body: "Lähetä yksi sivu hävitystä tarjouksesta. Menetelmäkuvaus, laatuosio, kyvykkyysvastaus. Se palaa pisteytettynä niitä perusteita vasten, joilla se arvioitiin, pisteet paikannettuina, perustelut kirjoitettuina ja merkintä siitä, mitä seuraavan tulisi sisältää."
+    },
+    langLabel: "Kieli"
+  }
+};
+const LANGS = ["en", "nb", "fi"];
+
+const html = htm.bind(React.createElement);
+const M = motion;
+const EASE = [0.16, 1, 0.3, 1];
+
+function useMo() {
+  const reduce = useReducedMotion();
+  return {
+    rise: (i = 0) => reduce ? {} : {
+      initial: { opacity: 0, y: 16 }, animate: { opacity: 1, y: 0 },
+      transition: { duration: .85, delay: .06 + i * .11, ease: EASE }
+    },
+    reveal: (i = 0) => reduce ? {} : {
+      initial: { opacity: 0, y: 22 }, whileInView: { opacity: 1, y: 0 },
+      viewport: { once: true, amount: .25 },
+      transition: { duration: .7, delay: i * .08, ease: EASE }
+    },
+    press: reduce ? {} : { whileHover: { y: -1 }, whileTap: { scale: .985 } }
+  };
+}
+
+const WRAP = "mx-auto w-full max-w-[82rem] px-5 sm:px-8";
+const ANCHOR = "scroll-mt-[92px]";
+/* The address is prewritten. A bare mailto opens an empty window and the
+   reader has to compose the thing we are asking for, which is where most of
+   them stop. Subject and body are filled in the reader's own language, with
+   three blank fields and the one instruction that matters, so sending is
+   attaching a file and pressing send. encodeURIComponent, not escape: the
+   body carries newlines and non-ASCII in two of the three languages. */
+const mailto = t =>
+  `mailto:atlas@arvorealta.com?subject=${encodeURIComponent(t.mail.subject)}&body=${encodeURIComponent(t.mail.body)}`;
+
+/* A rule that draws itself to its share of the largest figure in the set.
+   There is no track behind it: a filled background track is a dashboard
+   control, and what is being shown here is one length against another, not
+   a progress reading. transformOrigin left so it grows from the figure's
+   own edge, and scaleX so the browser animates on the compositor. Reduced
+   motion draws it at full length with no transition. */
+function Bar({ pct, max, on = "ink", cap = 100 }) {
+  const reduce = useReducedMotion();
+  const w = (pct / max) * cap;
+  return html`<div class="mt-5 h-[3px] w-full origin-left" style=${{ maxWidth: `${w}%` }}>
+    <${M.div}
+      class="h-full w-full origin-left ${on === "bone" ? "bg-bone/70" : "bg-ink"}"
+      initial=${reduce ? false : { scaleX: 0 }}
+      whileInView=${{ scaleX: 1 }}
+      viewport=${{ once: true, amount: .6 }}
+      transition=${{ duration: .9, delay: .2, ease: EASE }}
+      style=${{ scaleX: reduce ? 1 : undefined }} />
+  </div>`;
+}
+
+/* Tracked capitals name a SECTION and nothing else. There are two on the
+   page, and that is the whole allowance. A label that names a value next to
+   it — a field, a date, a figure — is mono at 12px in sentence case, because
+   it is found rather than read and it should not look like a section opening.
+   Thirteen strings wore the eyebrow costume for a while and the page had one
+   texture for everything that was not a sentence.
+
+   Both carry --ink at 75%, which measures 4.89:1 on paper and 5.55:1 on the
+   paper-3 cards. They sat at 55% for a while, which is 2.97:1, and every
+   label, caption and file-meta line on the page was under the 4.5:1 small
+   text needs. The muting is the point; failing the floor was not. */
+function Eyebrow({ children, on = "flat" }) {
+  /* Full bone on the photograph, never a muted one. This line sits in the
+     band where the picture's highlights run, measured at 3.49:1 to 5.03:1
+     against its own ground, and taking 25% off the type is the difference
+     between clearing the floor and not. Only the strongest value crosses
+     onto a picture; on the flat grounds the mark can be muted because the
+     ground underneath it is a single known value. */
+  const tone = on === "photo" ? "text-bone"
+             : on === "inv"   ? "text-bone/75"   /* the mark is 2.03:1 on ink and barred; 6.76:1 here */
+             : "text-brick";
+  return html`<p class="font-mono text-[11px] uppercase tracking-[.18em] ${tone}">${children}</p>`;
+}
+
+function Action({ href, children, tone = "solid", class: extra = "", ...rest }) {
+  const mo = useMo();
+  const base = "inline-flex items-center justify-center whitespace-nowrap rounded-full px-6 py-3 text-[15px] font-medium transition-colors";
+  const tones = {
+    solid: "bg-ink text-bone hover:bg-ink/90",
+    ghost: "border border-ink/25 text-ink hover:border-ink/60"
+  };
+  return html`<${M.a} href=${href} class="${base} ${tones[tone]} ${extra}" ...${mo.press} ...${rest}>${children}<//>`;
+}
+
+/* The language control is three letters rather than a dropdown. There are
+   exactly three, a select would hide two of them behind a tap, and the
+   current one has to be readable at a glance by someone who cannot read the
+   other two. aria-pressed carries the state for anyone not seeing the fill. */
+function LangPick({ lang, setLang, t, onPhoto }) {
+  return html`
+    <div class="flex items-center rounded-full border p-[3px] ${onPhoto ? "border-bone/35" : "border-ink/20"}"
+         role="group" aria-label=${t.langLabel}>
+      ${LANGS.map(code => html`
+        <button key=${code} type="button" onClick=${() => setLang(code)}
+          aria-pressed=${lang === code} lang=${STR[code].htmlLang}
+          title=${STR[code].label}
+          class="rounded-full px-2.5 py-1 font-mono text-[11px] uppercase tracking-[.1em] transition-colors ${
+            lang === code
+              ? (onPhoto ? "bg-bone text-ink" : "bg-ink text-bone")
+              : (onPhoto ? "text-bone/70 hover:text-bone" : "text-ink/75 hover:text-ink")}">
+          ${STR[code].short}
+        </button>`)}
+    </div>`;
+}
+
+function Nav({ t, lang, setLang, onPhoto }) {
+  const links = [[t.nav.open, "#open"], [t.nav.case, "#case"], [t.nav.price, "#price"]];
+  const shell = onPhoto
+    ? "on-ink border-transparent bg-transparent text-bone"
+    : "border-ink/10 bg-paper/85 backdrop-blur-md";
+  return html`
+    <!-- Fixed, not sticky. A sticky header stays in normal flow, so it was
+         holding 68px of its own above the band and showing the page's ground
+         there: the bar read as a solid strip however transparent its own
+         background was. Fixed takes it out of flow and the photograph starts
+         at the top of the screen. -->
+    <header class="fixed inset-x-0 top-0 z-40 border-b transition-colors ${shell}">
+      <div class="${WRAP} flex h-[68px] items-center justify-between gap-5">
+        <a href="#top" class="-my-1 py-1 font-mono text-[13px] uppercase tracking-[.22em]">Arvorealta</a>
+        <nav class="hidden items-center gap-7 lg:flex">
+          ${links.map(([l, h]) => html`
+            <a key=${h} href=${h}
+               class="-my-1 py-1 text-[14px] transition-colors ${onPhoto
+                 ? "text-bone/75 hover:text-bone"
+                 : "text-ink/75 hover:text-ink"}">${l}</a>`)}
+        </nav>
+        <div class="flex items-center gap-2.5">
+          <${LangPick} lang=${lang} setLang=${setLang} t=${t} onPhoto=${onPhoto} />
+          <span class="hidden sm:block">
+            <${Action} href=${mailto(t)} class=${onPhoto ? "!bg-bone !text-ink hover:!bg-bone/90" : ""}>${t.cta}<//>
+          </span>
+        </div>
+      </div>
+    </header>`;
+}
+
+/* The photograph holds the frame and the video arrives over it.
+   `preload="metadata"` rather than `auto`, so the 3.1 MB does not compete
+   with the stylesheet and the fonts for the first paint; the picture under it
+   is already decoded by then and the band is never empty. The handoff waits
+   for `canplaythrough` rather than `canplay`, because `canplay` fires with a
+   few frames buffered and a ten second loop that stalls two seconds in looks
+   worse than no video at all. It fades rather than cuts, so a reader who
+   never notices the swap is the success case.
+
+   Under `prefers-reduced-motion` the element is never rendered at all. A
+   `<video autoplay>` cannot be stopped from CSS, so the only honest way to
+   respect the setting is not to mount it, and that reader keeps the
+   photograph. Same for the failure path: `onError` drops it and the picture
+   is already there.
+
+   muted and playsinline are not optional. Without both, iOS refuses to
+   autoplay and shows a play button over the hero. */
+function Hero({ t }) {
+  const mo = useMo();
+  const reduce = useReducedMotion();
+  const [ready, setReady] = useState(false);
+  const [failed, setFailed] = useState(false);
+  return html`
+    <section id="top" class="on-ink relative isolate overflow-clip bg-ink text-bone">
+      <picture class="absolute inset-0 block">
+        <!-- The source file is 1141 x 640, so there is no 1920 or 2560 here:
+             a wider file would be upscaled bytes pretending to be detail. The
+             picture is soft above about 1200px and wants regenerating larger. -->
+        <source type="image/webp" sizes="100vw"
+          srcset="/assets/img/after-1-760.webp 760w, /assets/img/after-1-960.webp 960w, /assets/img/after-1-1141.webp 1141w" />
+        <img src="/assets/img/after-1-1141.jpg" sizes="100vw"
+          srcset="/assets/img/after-1-760.jpg 760w, /assets/img/after-1-960.jpg 960w, /assets/img/after-1-1141.jpg 1141w"
+          width="1141" height="640" alt="" fetchpriority="high" decoding="async"
+          class="size-full object-cover object-[62%_46%] [opacity:var(--hero-photo)]" />
+      </picture>
+      ${!reduce && !failed && html`
+        <video
+          class="absolute inset-0 size-full object-cover object-[62%_46%] transition-opacity duration-700
+                 ${ready ? "opacity-100" : "opacity-0"}"
+          src="/assets/video/hero-1-720.mp4"
+          poster="/assets/img/after-1-1141.jpg"
+          width="1280" height="720"
+          autoPlay muted loop playsInline preload="metadata"
+          aria-hidden="true" tabIndex="-1"
+          ref=${el => {
+            /* React writes `muted` as a property and skips it often enough on
+               first render that the attribute is simply absent, and a video
+               that is not muted is a video no browser will autoplay. The same
+               goes for playsInline, which iOS reads to decide whether to take
+               the hero fullscreen instead. Setting all three on the node is
+               the only way to be sure, and play() is called because autoplay
+               alone does not restart a video React has just re-mounted.
+               The rejection is swallowed: a blocked autoplay leaves the
+               photograph in place, which is the fallback either way. */
+            if (!el) return;
+            el.muted = true; el.defaultMuted = true;
+            el.playsInline = true; el.autoplay = true;
+            const go = el.play();
+            if (go && go.catch) go.catch(() => {});
+          }}
+          onCanPlayThrough=${() => setReady(true)}
+          onError=${() => setFailed(true)} />`}
+      <!-- The band is the screen. The header floats on it rather than sitting
+           above it, so the hero takes the whole viewport rather than the
+           viewport minus a bar. dvh, not vh, so the iOS address bar does not
+           push the action off the bottom. -->
+      <!-- 100dvh alone is a trap on a short, wide window. On a 440px-tall
+           viewport the band is 440px and the 192px of padding leaves 248px
+           for four objects, which is the squashed look. The floor keeps the
+           band usable and lets the page scroll instead, and the padding
+           shrinks with the viewport rather than holding 96px a side at every
+           height. Tall screens are unaffected: there the max is 100dvh. -->
+      <div class="${WRAP} relative grid min-h-[max(34rem,100dvh)] content-center py-[clamp(4rem,9vh,6rem)]">
+        <div>
+          <${M.div} ...${mo.rise(0)}><${Eyebrow} on="photo">${t.hero.eyebrow}<//><//>
+          <${M.h1} ...${mo.rise(1)}
+            class="mt-7 text-[clamp(2.4rem,.9rem+4.4vw,4.6rem)] font-medium leading-[1.03] tracking-[-.03em]">
+            ${t.hero.h1a}<br /> ${t.hero.h1b}
+          <//>
+          <${M.p} ...${mo.rise(2)}
+            class="mt-8 max-w-[44ch] text-[clamp(1.05rem,.98rem+.35vw,1.25rem)] leading-[1.6] text-bone/80">
+            ${t.hero.sub}
+          <//>
+          <${M.div} ...${mo.rise(3)} class="mt-10 flex flex-wrap items-center gap-3">
+            <${Action} href=${mailto(t)} class="!bg-bone !text-ink hover:!bg-bone/90">${t.cta}<//>
+            <${Action} href="#open" tone="ghost" class="!border-bone/30 !text-bone hover:!border-bone/70">${t.hero.second}<//>
+          <//>
+        </div>
+      </div>
+    </section>`;
+}
+
+function Gate({ t }) {
+  const mo = useMo();
+  return html`
+    <section class="${WRAP} border-b border-ink/10 py-14">
+      <div class="grid gap-10 md:grid-cols-2 md:gap-16">
+        ${t.gate.map(([k, v], i) => html`
+          <${M.div} key=${k} ...${mo.reveal(i)}>
+            <p class="font-mono text-[12px] leading-snug text-ink/75">${k}</p>
+            <p class="mt-3 max-w-[44ch] text-[1.05rem] leading-[1.65]">${v}</p>
+          <//>`)}
+      </div>
+    </section>`;
+}
+
+/* The pattern this page is built on puts proof directly under the hero, and
+   the live page has none at all: no logos, no case studies, no quotes. That
+   is not an oversight, there is no tender client yet to name. So the proof
+   here is the only honest kind available, which is the work itself. Three
+   documents, already published, each a different thing the studio makes, and
+   every one of them opens in a new tab rather than describing itself.
+
+   A logo wall would have been faster and would have been a lie. */
+function Proof({ t }) {
+  const mo = useMo();
+  return html`
+    <section id="work" class="${ANCHOR} ${WRAP} py-20 sm:py-28">
+      <${M.div} ...${mo.reveal(0)} class="max-w-[46ch]">
+        <${Eyebrow}>${t.proof.eyebrow}<//>
+        <h2 class="mt-6 text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)] font-medium leading-[1.08] tracking-[-.025em]">${t.proof.h2}</h2>
+        <p class="mt-7 leading-[1.7] text-ink/80">${t.proof.body}</p>
+      <//>
+      <ul class="mt-14 grid gap-x-8 gap-y-10 sm:grid-cols-3">
+        ${t.proof.items.map(([name, line, href], i) => html`
+          <${M.li} key=${name} ...${mo.reveal(1 + i)}>
+            <a href=${href} target="_blank" rel="noopener"
+               class="group block border-t border-ink/25 pt-6 transition-colors hover:border-ink">
+              <h3 class="text-[1.15rem] font-medium leading-tight tracking-[-.02em] underline decoration-ink/25 decoration-1 underline-offset-[6px] transition-colors group-hover:decoration-ink">${name}</h3>
+              <p class="mt-4 text-[.95rem] leading-[1.65] text-ink/80">${line}</p>
+            </a>
+          <//>`)}
+      </ul>
+    </section>`;
+}
+
+function OpenTender({ t }) {
+  const mo = useMo();
+  return html`
+    <section id="open" class="${ANCHOR} ${WRAP} py-20 sm:py-28">
+      <${M.div} ...${mo.reveal(0)}>
+        <${Eyebrow}>${t.open.eyebrow}<//>
+        <h2 class="mt-6 max-w-[20ch] text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)] font-medium leading-[1.08] tracking-[-.025em]">
+          ${t.open.h2}
+        </h2>
+      <//>
+      <${M.div} ...${mo.reveal(1)}
+        class="mt-12 grid overflow-hidden rounded-2xl border border-ink/15 bg-paper-3 lg:grid-cols-[1.15fr_1fr]">
+        <div class="border-b border-ink/12 p-8 sm:p-10 lg:border-b-0 lg:border-r">
+          <!-- The heading is in the reader's language. The Norwegian original
+               is still here, because a bidder has to match it against the
+               documents in front of them, but it sits on its own line under a
+               label that says what it is. A quotation from another document
+               reads as deliberate; the same words loose inside an English
+               sentence read as a half-finished translation, which is what
+               this was. -->
+          <h3 class="text-[1.5rem] font-medium leading-tight tracking-[-.02em]">${t.open.title}</h3>
+          ${t.open.official && html`
+            <div class="mt-4">
+              <p class="font-mono text-[12px] leading-snug text-ink/75">${t.open.official}</p>
+              <p lang="nb" class="mt-1.5 text-[1.05rem] leading-snug">Leveranse av avfallsbeholdere</p>
+            </div>`}
+          <p class="mt-3 text-[.95rem] leading-relaxed text-ink/75">${t.open.buyer}</p>
+          <p class="mt-7 max-w-[46ch] leading-[1.7]">${t.open.body}</p>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            <${Action} href="/assets/vedlegg-5/Vedlegg-5-eksempel.pdf" tone="ghost" target="_blank" rel="noopener">${t.open.seeEx}<//>
+            <${Action} href="/assets/vedlegg-5/Vedlegg-5-Utfyllende-opplysninger.docx" download>${t.open.getTpl}<//>
+          </div>
+          <p class="mt-4 text-[.85rem] leading-relaxed text-ink/75">
+            ${t.open.exMeta} · ${t.open.tplMeta}
+          </p>
+        </div>
+        <dl class="grid content-center gap-8 p-8 sm:p-10">
+          ${t.open.fields.map(([k, v]) => html`
+            <div key=${k}>
+              <dd class="font-mono text-[1.6rem] leading-none tracking-[-.02em]">${v}</dd>
+              <dt class="mt-3 font-mono text-[12px] leading-snug text-ink/75">${k}</dt>
+            </div>`)}
+        </dl>
+      <//>
+      <${M.p} ...${mo.reveal(2)} class="mt-8 max-w-[58ch] text-[.95rem] leading-[1.7] text-ink/75">
+        ${t.open.foot}
+      <//>
+    </section>`;
+}
+
+/* The award as one bar, 100 wide, three segments in the order that makes the
+   argument: climate and environment, quality, then price last. The two that
+   are not price carry the strong fills and price recedes, so the 65 reads as
+   one mass before a figure is read.
+
+   This is a part-to-whole bar and not a progress meter. There is no grey
+   track behind it to fill against; the three segments ARE the whole, they sum
+   to 100, and a 2px gap of the page's own ground separates them. Measured on
+   ink: the fills read 9.86:1, 7.1:1 and 3.43:1, so even the recessive one
+   clears the 3:1 a graphic mark needs. The labels sit under the bar on the
+   ink ground rather than inside the fills, which keeps every word at 6.76:1
+   and off the geometry.
+
+   Identity is never colour alone. Each segment is named and numbered directly
+   beneath its own width, so the three fills are a reading aid rather than the
+   only key.
+
+   The fill is a translate inside a clip, not a scaleX. scaleX on a rounded
+   end stretches the radius while it runs; translating a full-width block
+   behind a fixed clip keeps the geometry exact at every frame, and both are
+   compositor-only properties. Staggered left to right so the bar fills as one
+   sweep. Static under prefers-reduced-motion. */
+function Weighting({ t }) {
+  const mo = useMo();
+  const reduce = useReducedMotion();
+  /* The two that are not price sit close together so they read as one mass,
+     and price drops away. 0.95 and 0.86 measure 9.86:1 and 8.3:1 on ink,
+     0.45 measures 3.43:1, which still clears the 3:1 a graphic mark needs.
+     The two bright steps are deliberately near each other: the 2px gap and
+     the figure under each segment carry identity, the fills carry the
+     argument, and separating them further would break the grouping that is
+     the point of the fold. */
+  const tone = ["bg-bone/95", "bg-bone/[.86]", "bg-bone/45"];
+  return html`
+    <section id="case" class="on-ink ${ANCHOR} bg-ink py-20 text-bone sm:py-28">
+      <div class="${WRAP}">
+        <${M.div} ...${mo.reveal(0)}>
+          <${Eyebrow} on="inv">${t.weigh.eyebrow}<//>
+          <h2 class="mt-6 max-w-[22ch] text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)] font-medium leading-[1.08] tracking-[-.025em]">
+            ${t.weigh.h2}
+          </h2>
+        <//>
+
+        <${M.div} ...${mo.reveal(1)} class="mt-14 w-full">
+          <div class="flex h-[clamp(3.5rem,6vw,5rem)] w-full gap-[2px]">
+            ${t.weigh.segs.map(([label, pct], i) => html`
+              <${M.div} key=${label} style=${{ flexGrow: pct, flexBasis: 0 }}
+                class="min-w-0 overflow-hidden
+                       ${i === 0 ? "rounded-l-full" : ""} ${i === t.weigh.segs.length - 1 ? "rounded-r-full" : ""}"
+                initial=${reduce ? false : "out"} whileInView="in"
+                viewport=${{ once: true, amount: .5 }}>
+                <!-- The state lives on the clip and the fill follows it as a
+                     variant. Put whileInView on the fill itself and it never
+                     fires: the fill starts translated a full width to the
+                     left, which is off the screen, so the observer watching
+                     it never sees it enter and it sits there for good. The
+                     clip never moves, so it is the thing that can be
+                     observed. -->
+                <${M.div} class="h-full w-full ${tone[i]}"
+                  variants=${{
+                    out: { x: "-100%" },
+                    in: { x: "0%", transition: { duration: .85, delay: .15 + i * .18, ease: EASE } }
+                  }} />
+              <//>`)}
+          </div>
+
+          <dl class="mt-5 flex w-full gap-[2px]">
+            ${t.weigh.segs.map(([label, pct], i) => html`
+              <div key=${label} style=${{ flexGrow: pct, flexBasis: 0 }} class="min-w-0">
+                <dd class="font-mono text-[clamp(1.6rem,1.2rem+1.2vw,2.4rem)] leading-none tracking-[-.03em] tabular-nums
+                           ${i === 2 ? "text-bone/75" : ""}">${pct}</dd>
+                <dt class="mt-3 font-mono text-[12px] leading-snug ${i === 2 ? "text-bone/65" : "text-bone/85"}">${label}</dt>
+              </div>`)}
+          </dl>
+        <//>
+
+        <${M.p} ...${mo.reveal(2)} class="mt-12 max-w-[56ch] leading-[1.7] text-bone/75">${t.weigh.body}<//>
+      </div>
+    </section>`;
+}
+
+/* The ladder. Four rungs, and the mechanic between them is the design: every
+   tier credits in full into the one above, so a client who walks the whole
+   thing spends 8,000 rather than 11,000 and never crosses the 10,000 mark
+   where most of these companies need a second approval signature. The credit
+   line under each price is not a footnote, it is the product.
+
+   NOT four equal cards, and not a carousel on a screen with room. Equal
+   columns say "pick one of these four", which is the opposite of a ladder,
+   and a carousel on desktop hides three rungs behind an interaction to show
+   the fourth. The columns grow with the tier instead, left to right, so the
+   shape of the row carries the argument before a word is read. Below md the
+   row becomes a snap scroller, which is where a carousel is genuinely the
+   right component: there is no room for four and swiping is the native move.
+
+   Only the free rung carries an action. That is the ladder's own logic
+   rather than a design compromise, and it keeps the page to one CTA label
+   for one intent.
+
+   The motion is the rungs drawing in left to right, one rule per tier,
+   staggered. It says "these are steps in an order" rather than "here are
+   four options", which is the same thing the widths say. Once on entry, no
+   loop, static under prefers-reduced-motion. */
+function Ladder({ t }) {
+  const mo = useMo();
+  const reduce = useReducedMotion();
+  return html`
+    <section id="price" class="${ANCHOR} ${WRAP} py-20 sm:py-28">
+      <${M.div} ...${mo.reveal(0)} class="max-w-[46ch]">
+        <${Eyebrow}>${t.ladder.eyebrow}<//>
+        <h2 class="mt-6 text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)] font-medium leading-[1.08] tracking-[-.025em]">${t.ladder.h2}</h2>
+        <p class="mt-7 leading-[1.7] text-ink/80">${t.ladder.lede}</p>
+      <//>
+
+      <!-- A grid, never a horizontal scroller. One column on a phone, two
+           from sm, four at lg. 2 by 2 is the shape wherever two columns are
+           still legible: at 390 the measure is 350px, so two of them would be
+           163px each and the recommended tier's paragraph would set about
+           twenty characters to the line. One column there, two the moment
+           there is room. Nothing scrolls sideways at any width. -->
+      <div class="mt-14 grid gap-x-8 gap-y-12 sm:grid-cols-2
+                  lg:grid-cols-[.85fr_1fr_1.2fr_1.2fr] lg:gap-x-0 lg:gap-y-0">
+        ${t.ladder.tiers.map((x, i) => {
+          const lead = i === 2;
+          return html`
+            <${M.div} key=${x.name} ...${mo.reveal(1 + i)}
+              class="${lead ? "bg-paper-3 -mx-5 px-5 sm:-mx-4 sm:px-4 lg:mx-0 lg:px-0" : ""}
+                     ${i > 0 ? "lg:border-l lg:border-ink/12" : ""}">
+              <!-- The rule is the rung and it spans the whole column, so the
+                   padding lives on the content below it rather than on the
+                   column. With the padding on the column the recommended
+                   tier's rule started 28px inside its own panel and read as a
+                   mistake rather than as the heaviest rung in the set. -->
+              <${M.div}
+                class="w-full origin-left ${lead ? "h-[3px] bg-ink" : "h-px bg-ink/25"}"
+                initial=${reduce ? false : { scaleX: 0 }}
+                whileInView=${{ scaleX: 1 }}
+                viewport=${{ once: true, amount: .5 }}
+                transition=${{ duration: .7, delay: .1 + i * .14, ease: EASE }}
+                style=${{ scaleX: reduce ? 1 : undefined }} />
+              <!-- Only the recommended tier is inset, because only it has a
+                   ground to be inset from. The others sit flush with their
+                   column so every rung starts on the same left edge as the
+                   headline above the row. -->
+              <!-- The recommended tier's ground bleeds past its own column and
+                   takes the same amount back as padding, so the ground reads
+                   as a panel while its type still lines up with every other
+                   rung. On a phone that bleed is the full page gutter, so the
+                   panel runs edge to edge. At lg the bleed is dropped and the
+                   ground is exactly the column, which is where the four rungs
+                   sit side by side. -->
+              <div class="pt-7 pb-8 lg:pr-7 ${i === 0 ? "lg:pl-0" : "lg:pl-7"}">
+                <p class="font-mono text-[12px] leading-snug text-ink/75">${x.step}</p>
+                <h3 class="mt-4 text-[1.3rem] font-medium leading-tight tracking-[-.02em]">${x.name}</h3>
+                <p class="mt-6 text-[clamp(2rem,1.6rem+1.1vw,2.7rem)] font-medium leading-none tracking-[-.03em] tabular-nums">${x.price}</p>
+                ${x.when && html`<p class="mt-3 font-mono text-[12px] leading-snug text-ink/75">${x.when}</p>`}
+                <p class="mt-6 text-[.95rem] leading-[1.65] text-ink/80">${x.terms}</p>
+                <p class="mt-6 border-t border-ink/15 pt-4 font-mono text-[12px] leading-[1.5] text-ink/75">${x.credit}</p>
+                ${i === 0 && html`<div class="mt-7"><${Action} href=${mailto(t)}>${t.cta}<//></div>`}
+              </div>
+            <//>`;
+        })}
+      </div>
+    </section>`;
+}
+
+function Close({ t }) {
+  const mo = useMo();
+  return html`
+    <section class="${WRAP} py-24 sm:py-32">
+      <${M.div} ...${mo.reveal(0)} class="max-w-[52ch]">
+        <${Eyebrow}>${t.close.eyebrow}<//>
+        <h2 class="mt-6 text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)] font-medium leading-[1.08] tracking-[-.025em]">${t.close.h2}</h2>
+        <p class="mt-7 leading-[1.7] text-ink/80">${t.close.body}</p>
+        <div class="mt-10"><${Action} href=${mailto(t)}>${t.cta}<//></div>
+      <//>
+    </section>
+    <footer class="border-t border-ink/10 py-10">
+      <div class="${WRAP} flex flex-wrap items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-[.18em] text-ink/75">
+        <span>Arvorealta</span>
+        <a href="mailto:atlas@arvorealta.com" class="-my-1.5 py-1.5 transition-colors hover:text-ink">atlas@arvorealta.com</a>
+      </div>
+    </footer>`;
+}
+
+function App() {
+  /* The browser's own preference decides the first language, so a Norwegian
+     or Finnish reader arriving cold gets their own. English is the fallback
+     and the default everywhere else. A choice, once made, is remembered and
+     outranks the browser from then on. */
+  const [lang, setLang] = useState(() => {
+    try { const s = localStorage.getItem("ar-lang"); if (s && STR[s]) return s } catch (e) {}
+    const want = (navigator.languages || [navigator.language || "en"]).map(l => String(l).toLowerCase());
+    for (const l of want) {
+      if (l.startsWith("nb") || l.startsWith("nn") || l.startsWith("no")) return "nb";
+      if (l.startsWith("fi")) return "fi";
+      if (l.startsWith("en")) return "en";
+    }
+    return "en";
+  });
+
+  useEffect(() => {
+    document.documentElement.lang = STR[lang].htmlLang;
+    try { localStorage.setItem("ar-lang", lang) } catch (e) {}
+  }, [lang]);
+
+  const [onPhoto, setOnPhoto] = useState(true);
+  useEffect(() => {
+    /* The band itself is the sentinel. A 1px marker at its top sits above
+       the header's own 68px, so with that margin it never intersects and the
+       bar claimed it was past the photograph while sitting on it. Watching
+       the whole band asks the right question: is any part of the picture
+       still under the bar. */
+    const el = document.getElementById("top");
+    if (!el || !("IntersectionObserver" in window)) return;
+    const io = new IntersectionObserver(([e]) => setOnPhoto(e.isIntersecting),
+      { rootMargin: "-68px 0px 0px 0px", threshold: 0 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const t = STR[lang];
+
+  /* Standard and Ladder are written and tested and are not rendered. They are
+     hidden on purpose while the offer is being reconsidered, which is why the
+     nav no longer carries #standard or #price: a link to a fold that is not
+     on the page is a dead anchor, and this page had two of those once already.
+     Put the two lines back in the fragment below and add the links to restore
+     them. The components live in git history at commit ff677c8. */
+  return html`
+    <${React.Fragment}>
+      <!-- Measured on the live page: the first Tab lands on the wordmark and
+           it takes eight stops to reach the hero's own action. This is the
+           first focusable thing in the document and it is invisible until it
+           has focus, which is the whole pattern. -->
+      <a href="#main"
+         class="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:left-4 focus-visible:top-4
+                focus-visible:z-50 focus-visible:rounded-full focus-visible:bg-ink focus-visible:px-5
+                focus-visible:py-3 focus-visible:text-[15px] focus-visible:text-bone">
+        ${t.skip}
+      </a>
+      <${Nav} t=${t} lang=${lang} setLang=${setLang} onPhoto=${onPhoto} />
+      <main id="main" tabindex="-1">
+        <${Hero} t=${t} />
+        <${Gate} t=${t} />
+        <${Proof} t=${t} />
+        <${OpenTender} t=${t} />
+        <${Weighting} t=${t} />
+        <${Ladder} t=${t} />
+        <${Close} t=${t} />
+      </main>
+    <//>`;
+}
+
+createRoot(document.getElementById("root")).render(html`<${App} />`);
+</script>
+</body>
+</html>
