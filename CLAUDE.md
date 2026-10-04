@@ -1136,17 +1136,51 @@ conventions rather than the earlier fold's tracked capitals. Everything else
 is that fold. **Every price, every deliverable and the 15,000 kr still come
 off `reference/index.html`.**
 
-**The call to action opens a form, and the form cannot deliver on its own.**
-The reader is asked for an email address and the page itself, which is the
-thing a prewritten mail could never guarantee: a mail that arrives with
-nothing attached is a round trip before the work can start. **But the site
-is static on GitHub Pages — there is no server here, so there is nothing to
-receive a file.** `INTAKE` in `lab/index.html` is the address the file would
-be posted to and it is `null`, because choosing the service is the owner's
-call and it needs a key. Until it is set the dialog validates everything and
-then says plainly that nothing was sent, which is the honest state rather
-than a fake success. The prewritten mail stays in the dialog's footer as the
-path that works today.
+**The call to action opens a form, and it delivers to Basin.** The reader is
+asked for an email address and the page itself, which is the thing a
+prewritten mail could never guarantee: a mail that arrives with nothing
+attached is a round trip before the work can start. The site is static on
+GitHub Pages and has no server of its own, so `INTAKE` in `lab/index.html`
+posts to a Basin form endpoint instead. The prewritten mail stays in the
+dialog's footer as the path that always works.
+
+**The endpoint is not a secret and is not treated as one.** A form action
+lives in the page's own HTML, so anybody reading source has it, and hiding
+it at local scope the way an API key is hidden would be theatre. What stands
+in for secrecy is Basin's own spam protection, switched on at their end.
+This file said otherwise for a turn and that was wrong.
+
+**Basin's free tier is 50 submissions a month, one form, 100MB of storage
+and 30 day retention, and storage is the binding limit rather than the
+count.** 100MB against the dialog's own 10MB cap is ten worst cases, where a
+one page PDF is well under one. Virus scanning is Pro only, so on the free
+tier files arrive from strangers unscanned — which matters, because what
+arrives is tender documents from people nobody has met. Anything worth
+keeping comes off Basin inside thirty days.
+
+**`Accept: application/json` is not optional.** Without it Basin answers a
+form post with a 302 to its own thank-you page; through `fetch` that
+redirect is followed silently and `ok` reads true off Basin's HTML, so the
+dialog could not tell a delivered file from a rejected one. **The
+`Content-Type` is deliberately not set**: `FormData` writes its own with the
+multipart boundary, and naming it by hand drops the boundary and the upload
+arrives empty.
+
+Verified against the live endpoint, not assumed. A real multipart POST
+returns `200` with `{"success":true}` and `access-control-allow-origin: *`,
+so the browser call is not blocked. The browser path itself is verified by
+intercepting the request and replaying that response, because **the sandbox
+Chromium does not trust this environment's proxy CA** and cannot reach
+`usebasin.com` at all — `ERR_CERT_AUTHORITY_INVALID`, the same shape of
+sandbox limit as the missing H.264. The request leaves as `POST`,
+`multipart/form-data` with a browser boundary, `Accept: application/json`,
+carrying `email` and `page`; 200 shows the done panel and a failure shows
+the fallback address in all three languages.
+
+The `INTAKE` null branch is kept on purpose. If the endpoint is ever unset
+the dialog says nothing was sent rather than faking a success, which is the
+state this shipped in and the state it should fall back to rather than
+silently swallowing a file.
 
 **The cap is 10 MB and it is checked before any request.** One page as a PDF
 is well under a megabyte, a scan of one page is a few, and ten is the

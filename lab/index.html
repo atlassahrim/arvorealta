@@ -517,7 +517,14 @@ const MAX_MB = 10;
 const MAX_BYTES = MAX_MB * 1024 * 1024;
 const OK_EXT = ["pdf", "doc", "docx", "odt", "rtf", "png", "jpg", "jpeg", "webp"];
 const ACCEPT = OK_EXT.map(e => "." + e).join(",") + ",application/pdf,image/*";
-const INTAKE = null;
+/* Basin, free tier: 50 submissions a month, 1 form, 100MB of storage, 30 day
+   retention. The endpoint is not a secret and is not treated as one — a form
+   action lives in the page's own HTML, so anybody reading source has it. What
+   stands in for secrecy is Basin's own spam protection, which is why that is
+   switched on at their end rather than guarded here. Storage is the binding
+   limit rather than the submission count: 100MB against our own 10MB cap is
+   ten worst cases, where a one page PDF is well under one. */
+const INTAKE = "https://usebasin.com/f/945efcd39804";
 
 const CtaCtx = createContext(() => {});
 
@@ -579,9 +586,25 @@ function Intake({ t, open, onClose }) {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return setErr(t.form.errEmailBad);
     if (!file) return setErr(t.form.errFile);
     setErr(""); setState("sending");
+    /* Kept deliberately. If the endpoint is ever unset the dialog says so
+       rather than faking a success, which is the state this shipped in and
+       the state it should fall back to rather than silently swallowing a
+       file. */
     if (!INTAKE) { setState("done"); return }
     try {
-      const r = await fetch(INTAKE, { method: "POST", body: fd });
+      /* Accept: application/json or Basin answers a form post with a 302 to
+         its own thank-you page. Through fetch that redirect is followed
+         silently and `ok` reads true off Basin's HTML, so the dialog could
+         not tell a delivered file from a rejected one. The header is what
+         makes the reply a JSON status this can actually branch on. The
+         Content-Type is deliberately not set: FormData writes its own, with
+         the multipart boundary, and naming it by hand drops the boundary and
+         the upload arrives empty. */
+      const r = await fetch(INTAKE, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: fd
+      });
       if (!r.ok) throw new Error(String(r.status));
       setState("done");
     } catch (_) {
