@@ -35,6 +35,15 @@
   --color-brick:   #8E4A45;
   --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
+  /* The display face, lab only. The live page sets everything in one sans at
+     four sizes, which is why it reads as a software landing page rather than
+     as a firm whose product is documents. ui-ux-pro-max returns EB Garamond
+     for "law firms, legal services, contracts, formal documents, government",
+     which is this reader exactly, so the serif here is a match rather than
+     the default reach the taste skill warns about. Self-hosted, OFL, 44 KB.
+     It carries display type only: headlines and prices. Geist keeps the body
+     and the UI, Geist Mono keeps every label and figure. */
+  --font-display: "EB Garamond", ui-serif, Georgia, serif;
 }
 
 /* No overlay and no vignette. The photograph runs at full strength because
