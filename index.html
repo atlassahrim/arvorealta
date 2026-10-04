@@ -25,7 +25,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/geist-mono-latin.woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/geist.css">
 
-<link rel="stylesheet" href="/assets/tw-f477f6a2.css">
+<link rel="stylesheet" href="/assets/tw-2e301aba.css">
 
 </head>
 
@@ -92,6 +92,7 @@ const STR = {
       foot: "One tender today. Another when there is one worth writing for."
     },
     weigh: {
+      eyebrow: "How it is scored",
       h2: "Most of the score is not the price.",
       segs: [["Climate and environment", 30], ["Quality", 35], ["Price", 35]],
       body: "Read from the award criteria in the notice itself. Norwegian authorities have had to weight climate and environment at a minimum of 30% since January 2024, and this tender weights it exactly on that floor."
@@ -101,6 +102,7 @@ const STR = {
       body: "Hello Atlas,\n\nAttached is one page from a tender we did not win.\n\nWhat the page is:\nWhich competition it came from:\nWhat the buyer told us, if anything:\n\nAttach the page before sending. A PDF or a Word file is fine.\n\n"
     },
     ladder: {
+      eyebrow: "What it costs",
       h2: "Every tier credits into the one above it.",
       lede: "Walk the whole ladder and you pay €8,000 in total, not €11,000. Credits never expire.",
       tiers: [
@@ -119,6 +121,7 @@ const STR = {
       ]
     },
     close: {
+      eyebrow: "Where to start",
       h2: "Find out what it cost you. For nothing.",
       body: "Send one page from a tender you lost. A method statement, a quality section, a capability answer. It comes back scored against the criteria it was judged on, with the points located, the reasoning written out, and a note on what the next one should carry."
     },
@@ -151,6 +154,7 @@ const STR = {
       foot: "Én konkurranse i dag. Flere når det finnes en det er verdt å skrive for."
     },
     weigh: {
+      eyebrow: "Slik vektes det",
       h2: "Mesteparten av poengsummen er ikke prisen.",
       segs: [["Klima og miljø", 30], ["Kvalitet", 35], ["Pris", 35]],
       body: "Lest fra tildelingskriteriene i selve kunngjøringen. Norske oppdragsgivere har siden januar 2024 måttet vekte klima og miljø med minst 30 prosent, og denne konkurransen ligger akkurat på den grensen."
@@ -160,6 +164,7 @@ const STR = {
       body: "Hei Atlas,\n\nVedlagt er én side fra en konkurranse vi ikke vant.\n\nHva siden er:\nHvilken konkurranse den kommer fra:\nHva oppdragsgiver sa, hvis noe:\n\nLegg ved siden før du sender. PDF eller Word går fint.\n\n"
     },
     ladder: {
+      eyebrow: "Hva det koster",
       h2: "Hvert trinn krediteres inn i det over.",
       lede: "Går du hele stigen, betaler du €8 000 totalt, ikke €11 000. Krediteringen utløper aldri.",
       tiers: [
@@ -178,6 +183,7 @@ const STR = {
       ]
     },
     close: {
+      eyebrow: "Hvor du begynner",
       h2: "Finn ut hva det kostet deg. Gratis.",
       body: "Send én side fra en konkurranse du tapte. En metodebeskrivelse, et kvalitetsavsnitt, et svar om kapasitet. Den kommer tilbake vurdert mot kriteriene den ble bedømt etter, med poengene plassert, begrunnelsen skrevet ut, og en merknad om hva den neste bør inneholde."
     },
@@ -210,6 +216,7 @@ const STR = {
       foot: "Yksi tarjouspyyntö tänään. Lisää, kun löytyy sellainen jolle kannattaa kirjoittaa."
     },
     weigh: {
+      eyebrow: "Näin se pisteytetään",
       h2: "Suurin osa pisteistä ei ole hinta.",
       segs: [["Ilmasto ja ympäristö", 30], ["Laatu", 35], ["Hinta", 35]],
       body: "Luettu itse ilmoituksen vertailuperusteista. Norjalaisten hankintayksiköiden on tammikuusta 2024 lähtien pitänyt painottaa ilmastoa ja ympäristöä vähintään 30 prosentilla, ja tämä tarjouspyyntö on tasan sillä rajalla."
@@ -219,6 +226,7 @@ const STR = {
       body: "Hei Atlas,\n\nOheisena yksi sivu tarjouksesta, jota emme voittaneet.\n\nMikä sivu on:\nMistä kilpailutuksesta se on:\nMitä hankkija kertoi, jos mitään:\n\nLiitä sivu mukaan ennen lähettämistä. PDF tai Word käy.\n\n"
     },
     ladder: {
+      eyebrow: "Mitä se maksaa",
       h2: "Jokainen taso hyvitetään ylempään.",
       lede: "Koko tikkaat kuljettuasi maksat yhteensä 8 000 €, et 11 000 €. Hyvitykset eivät vanhene.",
       tiers: [
@@ -237,6 +245,7 @@ const STR = {
       ]
     },
     close: {
+      eyebrow: "Mistä aloittaa",
       h2: "Selvitä, mitä se maksoi sinulle. Ilmaiseksi.",
       body: "Lähetä yksi sivu hävitystä tarjouksesta. Menetelmäkuvaus, laatuosio, kyvykkyysvastaus. Se palaa pisteytettynä niitä perusteita vasten, joilla se arvioitiin, pisteet paikannettuina, perustelut kirjoitettuina ja merkintä siitä, mitä seuraavan tulisi sisältää."
     },
@@ -314,7 +323,9 @@ function Eyebrow({ children, on = "flat" }) {
      between clearing the floor and not. Only the strongest value crosses
      onto a picture; on the flat grounds the mark can be muted because the
      ground underneath it is a single known value. */
-  const tone = on === "photo" ? "text-bone" : "text-brick";
+  const tone = on === "photo" ? "text-bone"
+             : on === "inv"   ? "text-bone/75"   /* the mark is 2.03:1 on ink and barred; 6.76:1 here */
+             : "text-brick";
   return html`<p class="font-mono text-[11px] uppercase tracking-[.18em] ${tone}">${children}</p>`;
 }
 
@@ -380,8 +391,28 @@ function Nav({ t, lang, setLang, onPhoto }) {
     </header>`;
 }
 
+/* The photograph holds the frame and the video arrives over it.
+   `preload="metadata"` rather than `auto`, so the 3.1 MB does not compete
+   with the stylesheet and the fonts for the first paint; the picture under it
+   is already decoded by then and the band is never empty. The handoff waits
+   for `canplaythrough` rather than `canplay`, because `canplay` fires with a
+   few frames buffered and a ten second loop that stalls two seconds in looks
+   worse than no video at all. It fades rather than cuts, so a reader who
+   never notices the swap is the success case.
+
+   Under `prefers-reduced-motion` the element is never rendered at all. A
+   `<video autoplay>` cannot be stopped from CSS, so the only honest way to
+   respect the setting is not to mount it, and that reader keeps the
+   photograph. Same for the failure path: `onError` drops it and the picture
+   is already there.
+
+   muted and playsinline are not optional. Without both, iOS refuses to
+   autoplay and shows a play button over the hero. */
 function Hero({ t }) {
   const mo = useMo();
+  const reduce = useReducedMotion();
+  const [ready, setReady] = useState(false);
+  const [failed, setFailed] = useState(false);
   return html`
     <section id="top" class="relative isolate overflow-clip bg-ink text-bone">
       <picture class="absolute inset-0 block">
@@ -395,6 +426,33 @@ function Hero({ t }) {
           width="1141" height="640" alt="" fetchpriority="high" decoding="async"
           class="size-full object-cover object-[62%_46%] [opacity:var(--hero-photo)]" />
       </picture>
+      ${!reduce && !failed && html`
+        <video
+          class="absolute inset-0 size-full object-cover object-[62%_46%] transition-opacity duration-700
+                 ${ready ? "opacity-100" : "opacity-0"}"
+          src="/assets/video/hero-1-720.mp4"
+          poster="/assets/img/after-1-1141.jpg"
+          width="1280" height="720"
+          autoPlay muted loop playsInline preload="metadata"
+          aria-hidden="true" tabIndex="-1"
+          ref=${el => {
+            /* React writes `muted` as a property and skips it often enough on
+               first render that the attribute is simply absent, and a video
+               that is not muted is a video no browser will autoplay. The same
+               goes for playsInline, which iOS reads to decide whether to take
+               the hero fullscreen instead. Setting all three on the node is
+               the only way to be sure, and play() is called because autoplay
+               alone does not restart a video React has just re-mounted.
+               The rejection is swallowed: a blocked autoplay leaves the
+               photograph in place, which is the fallback either way. */
+            if (!el) return;
+            el.muted = true; el.defaultMuted = true;
+            el.playsInline = true; el.autoplay = true;
+            const go = el.play();
+            if (go && go.catch) go.catch(() => {});
+          }}
+          onCanPlayThrough=${() => setReady(true)}
+          onError=${() => setFailed(true)} />`}
       <!-- The band is the screen. The header floats on it rather than sitting
            above it, so the hero takes the whole viewport rather than the
            viewport minus a bar. dvh, not vh, so the iOS address bar does not
@@ -526,9 +584,11 @@ function Weighting({ t }) {
   return html`
     <section id="case" class="${ANCHOR} bg-ink py-20 text-bone sm:py-28">
       <div class="${WRAP}">
-        <${M.h2} ...${mo.reveal(0)}
-          class="max-w-[22ch] text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)] font-medium leading-[1.08] tracking-[-.025em]">
-          ${t.weigh.h2}
+        <${M.div} ...${mo.reveal(0)}>
+          <${Eyebrow} on="inv">${t.weigh.eyebrow}<//>
+          <h2 class="mt-6 max-w-[22ch] text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)] font-medium leading-[1.08] tracking-[-.025em]">
+            ${t.weigh.h2}
+          </h2>
         <//>
 
         <${M.div} ...${mo.reveal(1)} class="mt-14 w-full">
@@ -597,18 +657,23 @@ function Ladder({ t }) {
   return html`
     <section id="price" class="${ANCHOR} ${WRAP} py-20 sm:py-28">
       <${M.div} ...${mo.reveal(0)} class="max-w-[46ch]">
-        <h2 class="text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)] font-medium leading-[1.08] tracking-[-.025em]">${t.ladder.h2}</h2>
+        <${Eyebrow}>${t.ladder.eyebrow}<//>
+        <h2 class="mt-6 text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)] font-medium leading-[1.08] tracking-[-.025em]">${t.ladder.h2}</h2>
         <p class="mt-7 leading-[1.7] text-ink/80">${t.ladder.lede}</p>
       <//>
 
-      <div class="mt-14 -mx-5 flex snap-x snap-mandatory gap-6 overflow-x-auto px-5 pb-2
-                  sm:-mx-8 sm:px-8
+      <!-- scroll-padding has to match the padding or snap-start aligns the
+           first card to the padding edge and the browser scrolls the gutter
+           away: the row opened 32px left of the headline above it, flush to
+           the screen edge, which is what read as broken. -->
+      <div class="mt-14 -mx-5 flex snap-x snap-mandatory gap-6 overflow-x-auto px-5 pb-3 scroll-pl-5
+                  sm:-mx-8 sm:px-8 sm:scroll-pl-8
                   lg:mx-0 lg:grid lg:grid-cols-[.85fr_1fr_1.2fr_1.2fr] lg:gap-0 lg:overflow-visible lg:px-0 lg:pb-0">
         ${t.ladder.tiers.map((x, i) => {
           const lead = i === 2;
           return html`
             <${M.div} key=${x.name} ...${mo.reveal(1 + i)}
-              class="w-[80%] shrink-0 snap-start sm:w-[62%] md:w-[46%] lg:w-auto
+              class="w-[78%] shrink-0 snap-start sm:w-[52%] md:w-[41%] lg:w-auto
                      ${lead ? "bg-paper-3" : ""} ${i > 0 ? "lg:border-l lg:border-ink/12" : ""}">
               <!-- The rule is the rung and it spans the whole column, so the
                    padding lives on the content below it rather than on the
@@ -646,7 +711,8 @@ function Close({ t }) {
   return html`
     <section class="${WRAP} py-24 sm:py-32">
       <${M.div} ...${mo.reveal(0)} class="max-w-[52ch]">
-        <h2 class="text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)] font-medium leading-[1.08] tracking-[-.025em]">${t.close.h2}</h2>
+        <${Eyebrow}>${t.close.eyebrow}<//>
+        <h2 class="mt-6 text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)] font-medium leading-[1.08] tracking-[-.025em]">${t.close.h2}</h2>
         <p class="mt-7 leading-[1.7] text-ink/80">${t.close.body}</p>
         <div class="mt-10"><${Action} href=${mailto(t)}>${t.cta}<//></div>
       <//>

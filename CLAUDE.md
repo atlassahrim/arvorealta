@@ -698,11 +698,51 @@ day. It was accurate and nobody could tell what it was for from its heading,
 which is the signal that a fold is explaining rather than selling. The offer
 took its place.
 
-**The page has no section numbering and two eyebrows**, on the hero and on
-the open tender. That is the whole allowance at six folds. Tracked capitals
-name a section and nothing else — a label that names a value beside it is
-mono at 12px in sentence case, because it is found rather than read and it
-should not look like a section opening.
+**The page has no section numbering and five eyebrows, one per fold, and
+they are a spine rather than a tic.** Read down the page they go
+`Industrial manufacturer bids` · `Open now` · `How it is scored` ·
+`What it costs` · `Where to start`, which is a reader's own route through the
+argument and matches the three nav links. That is more than the one-per-three
+the taste skill allows, and it is the owner's call: an eyebrow that names
+where you are is wayfinding, and an eyebrow that decorates a headline is the
+thing the rule is actually against. **If a sixth fold arrives, it joins the
+spine or it gets none.** Do not let one fold open with a decorative label.
+
+Tracked capitals name a section and nothing else — a label that names a value
+beside it is mono at 12px in sentence case, because it is found rather than
+read and it should not look like a section opening. On the ink fold the
+eyebrow takes `bone/75` at 6.76:1; the mark is 2.03:1 there and barred.
+
+**`scroll-padding` has to match the scroller's padding.** The ladder's snap
+row carries `px-5 sm:px-8` and a negative margin to bleed to the screen edge.
+Without `scroll-pl-5 sm:scroll-pl-8` beside it, `snap-start` aligns the first
+card to the padding edge, the browser scrolls the gutter away on load, and the
+row opens 32px to the left of the headline above it, flush to the screen edge.
+That is what read as "not responsive"; every width was mechanically fine.
+
+**The hero carries a video over the photograph, and the photograph is the
+floor.** `assets/video/hero-1-720.mp4`, 1280 × 720, ten seconds, 3.1 MB,
+versioned in its name like everything else. It is mounted over the `<picture>`
+rather than in place of it, starts at `opacity: 0`, and fades in on
+`canplaythrough` — not `canplay`, which fires with a few frames buffered and
+leaves a ten second loop stalling two seconds in. Three paths fall back to the
+photograph and all three are tested: `prefers-reduced-motion`, where the
+element is never mounted at all because a `<video autoplay>` cannot be stopped
+from CSS; `onError`, which drops it; and a blocked autoplay, whose rejected
+promise is swallowed.
+
+**React does not write `muted`, `autoplay` or `playsinline` for you, and a
+video missing any of them does not autoplay anywhere.** Written as plain
+lowercase attributes, all three were simply absent from the element — measured,
+not assumed. They are camelCase props now AND set on the node through a ref,
+with `play()` called there, because React writes `muted` as a property and
+skips it often enough to matter. Check the live properties, never the JSX,
+when a hero video will not start.
+
+**The sandbox Chromium has no H.264**, so playback cannot be verified here at
+all: `canPlayType('video/mp4; codecs="avc1.42E01E"')` returns empty and the
+hero falls back to the photograph every time. That proved the failure path and
+proves nothing about the video. **Check a real browser after deploying.**
 
 ## Three languages on the offer page
 
@@ -737,6 +777,36 @@ inside an English sentence read as an unfinished job.
 
 **The Nordic text is not a native speaker's.** The procurement vocabulary in
 it is the part worth having checked before the page is used in an approach.
+
+## Skills, and which one wins
+
+`.claude/skills/` holds six of ours and seven vendored from one upstream
+bundle. `.claude/skills/VENDORED.md` carries the source, the commit, the
+licence and what was checked before installing.
+
+Ours: `audit`, `eu-tender-documents`, `plan`, `profile`, `research`,
+`taste-skill`.
+
+Vendored from `ui-ux-pro-max-skill`: `banner-design`, `brand`, `design`,
+`design-system`, `slides`, `ui-styling`, `ui-ux-pro-max`.
+
+**This file outranks every one of them, and `taste-skill` outranks the
+vendored seven.** They are reference material, not a mandate, and several of
+them will suggest things this site has decided against:
+
+- `ui-styling` is built on shadcn/ui and Radix. **This page has no build step
+  and no runtime dependency it does not vendor itself.** Its script
+  `shadcn_add.py` shells out to `npx shadcn add`; read what it is installing
+  before running it here, and prefer not to
+- Several of them treat **dark mode** as a default to implement. The site is
+  light only and the reasoning is above
+- They carry their own palettes, type scales and token architectures. The
+  editorial and technical systems above are the brief; a vendored palette is
+  something to read, never to apply
+
+Use them for what they are good at, which is breadth — font pairings, chart
+forms, platform sizes, stack-specific patterns — and resolve every conflict in
+favour of this file.
 
 ## How to report back
 
