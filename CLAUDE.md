@@ -51,17 +51,25 @@ are not obliged to.
 open**, which is research, client material, unredacted annexes and working
 drafts. **Use `noindex` for a page that has to be opened on a real device at a
 real URL and should not compete with the site**, which today is `reference/`
-and nothing else. It is a near-copy of the offer page, so without `noindex` it
+and `lab/`. Each is a near-copy of the offer page, so without `noindex` each
 would be a second `index.html` bidding against the first for the same terms.
-It is kept for the owner's reference and is not linked from anywhere.
+Neither is linked from anywhere.
 
-Two other such pages existed and both are deleted. `mal/` was a Norwegian-only
-landing page for one tender in the retired editorial identity; its two files
-moved to `assets/vedlegg-5/` and the offer page links to them directly, so the
-page had become a click on the way to files the reader already had in front of
-them. `lab/` was the sandbox the current offer page was prototyped in, with
-`lab/strict/` beside it as the AA control. Once the page shipped they were two
-stale forks of it, published, carrying a photograph the site no longer uses.
+`reference/` is the first offer page, kept for the owner. `lab/` is the
+sandbox, and it is back: the earlier one was deleted because it had become a
+stale fork of a page it was no longer ahead of, which is the right reason to
+delete a sandbox and not a reason never to have one. **A sandbox is deleted
+when it falls behind, and rebuilt from the live page when there is something
+to try.** It carries `noindex, nofollow` and its own compiled stylesheet, for
+the reason under `lab/_build.sh`: `_build-css.sh` runs `rm -f assets/tw-*.css`
+before it writes, so a lab stylesheet kept beside the live one would be
+deleted by the next build of the offer page and the sandbox would silently
+lose every rule it is testing.
+
+`mal/` was a Norwegian-only landing page for one tender in the retired
+editorial identity; its two files moved to `assets/vedlegg-5/` and the offer
+page links to them directly, so the page had become a click on the way to
+files the reader already had in front of them. It is deleted and stays so.
 
 **Anything moving out from behind the underscore takes `noindex` in the same
 change**, and the move is a decision to make deliberately rather than a
@@ -102,6 +110,8 @@ document agreed before the work starts, not listed on the page.
 ```
 index.html              offer page
 video/index.html        video portfolio
+lab/index.html          the sandbox, rebuilt from the offer page — noindex
+                        own source and own build: lab/_tw.src.css, lab/_build.sh
 reference/index.html    the first offer page, kept for reference — noindex
 templates/index.html    index of every template
 deck/<slug>/index.html  one deck per folder
@@ -898,3 +908,50 @@ annexes so a wrong page size cannot ship quietly.
 
 Push to `main`. GitHub Actions (`.github/workflows/pages.yml`) builds and
 deploys. Nothing to run locally.
+
+## What the sandbox is testing
+
+`lab/` is the offer page with four changes, each one made because a
+measurement on the live page found something rather than because a checklist
+asked for it. They are candidates for the live page, not decisions.
+
+**A skip link.** Measured: the first Tab on the live page lands on the
+wordmark and it takes eight stops to reach the hero's own action. The lab
+page's first focusable element is a skip link, invisible until focused.
+
+**A focus ring the page owns.** Measured: every control on the live page
+falls back to the browser's `1px auto`, which on the hero over the photograph
+draws in a colour nobody chose. The lab runs 3px of ink at a 2px offset, and
+inverts to bone inside `.on-ink` — the hero, the header while it is over the
+photograph, and the award fold.
+
+**Write it as longhand, not the `outline` shorthand.** As a shorthand the
+width and the style landed and the colour did not: Chrome reported the ring
+as `currentColor`, so on the hero it drew bone at 75% rather than the ink
+asked for. Both were measured before settling on the longhand.
+
+**`cursor: pointer` on buttons.** Tailwind's preflight sets `cursor: default`
+on `button`, so the three language controls were the only clickable things on
+the page that did not look clickable. Measured: they reported `default` while
+every `<a>` reported `pointer`.
+
+**Targets that clear 24px.** Measured on the live page: the three nav links
+at 21px tall, the wordmark at 20px and the footer address at 17px, against
+the 24px WCAG 2.2 asks for. The lab pads them with negative margins so
+nothing moves.
+
+**A proof fold, directly under the hero.** The pattern this page is built on
+puts proof second and the live page has none: no logos, no case studies, no
+quotes. There is no tender client to name yet, so the proof is the only
+honest kind available — three documents already published, each a different
+thing the studio makes, each opening rather than describing itself. **A logo
+wall would have been faster and would have been a lie.**
+
+The eyebrow spine takes the new fold rather than breaking for it, which is
+what the rule above requires: `Industrial manufacturer bids` ·
+`What you can open` · `Open now` · `How it is scored` · `What it costs` ·
+`Where to start`.
+
+Checked at 375, 768, 1024 and 1440: no horizontal scroll, no console errors,
+and the ring resolves to ink on the light grounds and bone over the
+photograph.

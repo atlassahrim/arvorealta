@@ -1,1 +1,4 @@
 _build/
+
+# the search tool compiles on first run
+__pycache__/
