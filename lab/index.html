@@ -31,7 +31,7 @@
 <link rel="stylesheet" href="/assets/fonts/ebgaramond.css">
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ebgaramond-latin.woff2" crossorigin>
 
-<link rel="stylesheet" href="/lab/tw-06eabd44.css">
+<link rel="stylesheet" href="/lab/tw-205a1d0b.css">
 
 </head>
 
@@ -620,105 +620,202 @@ function OpenTender({ t }) {
     </section>`;
 }
 
-/* The award as 100 cells, because the award is 100 points.
+/* The award as one horizontal bar, measured rather than asserted.
  *
- * A bar shows a ratio and asks to be trusted. This is a unit chart: one cell
- * is one point, 30 for climate and environment, 35 for quality, 35 for
- * price, and a reader who doubts the figure can count it. "Most of the score
- * is not the price" stops being a claim and becomes 65 cells on one side of
- * a gap and 35 on the other.
+ * The waffle that stood here could be counted, which a bar cannot, and that
+ * was its whole advantage. What it cost was the fold: a hundred cells is a
+ * texture, and a texture reads as decoration before it reads as a score. A
+ * bar is one object at full measure and the 65 / 35 split is a single break
+ * in it, which is the argument. So the bar comes back, and the counting is
+ * replaced by three things the first bar did not have.
  *
- * ui-ux-pro-max's chart data offers three forms for a part-to-whole of five
- * categories or fewer and rules two of them out for this page: a pie, whose
- * own "when NOT to use" lists an accessibility-first context and a reader
- * who needs precise values, and a radar, which compares entities across
- * attributes. The waffle is the third, and it is the one that fits a score
- * out of a hundred.
+ * ONE. The 65 is drawn, not inferred. A bracket spans the first two segments
+ * and carries "65 / 100" over it. The headline says most of the score is not
+ * the price; the bracket is that sentence as a graphic, and it needs no
+ * translating, which is why it is a figure and not a phrase.
  *
- * It also lifts a compromise the bar forced. There the two non-price fills
- * had to sit almost on top of each other to read as one mass, which left
- * them nearly indistinguishable; here the grouping is positional, so the
- * three can separate properly. Measured on ink: 9.86:1, 5.60:1 and 3.18:1,
- * so the quietest still clears the 3:1 a graphic mark needs.
+ * TWO. The figures sit inside the segments, so there is no legend to hop to.
+ * Measured on ink the three fills read 9.85:1, 6.12:1 and 3.88:1, all clear
+ * of the 3:1 a graphic mark needs. Ink type on those same fills reads the
+ * same three figures, and the numerals are display size, where the floor is
+ * 3:1 rather than 4.5:1. The names stay outside on the ink ground at 8.19:1
+ * and 5.50:1 — words are small text and small text does not go on the
+ * geometry. That split is the rule the first bar established and it holds.
  *
- * Accessibility. The grid is `aria-hidden` and a sentence carries the same
- * content for a screen reader, because a hundred announced divs is worse
- * than no chart at all. Identity is never colour alone: each block keeps its
- * own figure and name under the grid. The hover is on the block rather than
- * the cell — a tooltip per cell would say "1 point" a hundred times — and it
- * dims the other two so a reader can isolate one without losing the whole.
+ * THREE. The fills separate properly. On the first bar the two non-price
+ * fills had to sit almost on top of each other so the 65 would read as one
+ * mass, which left them nearly indistinguishable from one another. The
+ * bracket does the grouping now, so the three can descend in clear steps and
+ * still group. That is the waffle's one real gain, kept without its cost.
+ *
+ * The motion is a single sweep, and it is a curtain rather than three fills.
+ * Three segments each growing from their own left edge animate as three
+ * events; one block of the page's own ink ground sliding right off the whole
+ * bar is one event at one constant speed, and the segment geometry is never
+ * distorted while it runs. It also sidesteps the trap this file records
+ * twice: an element that starts outside its own box is never seen by the
+ * observer watching it. The curtain starts covering the bar, so it is always
+ * in view, and the state still lives on the container above it. Each name
+ * fades in as the sweep passes its segment, and the bracket draws last,
+ * after the bar it measures is complete.
+ *
+ * Because nothing in the bar is animated by Motion, the hover dim can be a
+ * plain class on the segment. On the waffle it could not: Motion writes
+ * opacity inline while it animates and that beats any class on the same
+ * node, which was measured as a hundred cells sitting at opacity 1 with a
+ * block hovered.
+ *
+ * Accessibility. The bar is aria-hidden and a sentence carries the same
+ * content, because a chart is not reading matter. Identity is never colour
+ * alone: every segment holds its own figure and sits over its own name. The
+ * isolation works by keyboard as well as by mouse.
  */
 function Weighting({ t }) {
   const mo = useMo();
   const reduce = useReducedMotion();
   const [lit, setLit] = useState(null);
-  const tone = ["bg-bone/95", "bg-bone/[.66]", "bg-bone/[.42]"];
 
-  /* one entry per point, carrying the block it belongs to, in reading order */
-  const cells = [];
-  t.weigh.segs.forEach(([, pct], g) => { for (let i = 0; i < pct; i++) cells.push(g); });
+  const segs = t.weigh.segs;
+  const tone = ["bg-bone/95", "bg-bone/70", "bg-bone/50"];
+  const name = ["text-bone/85", "text-bone/85", "text-bone/65"];
+
+  /* The bracket, the bar and the names are three rows of one grid, so the
+     65 boundary lands in the same place in all three to the pixel. Track
+     widths come from the data rather than from a hand-written template, and
+     every one is minmax(0, Nfr) rather than Nfr: an fr track takes its
+     min-content width as a floor, so at 375 the longest name pushed its own
+     column 13px wider than the segment above it and the three rows stopped
+     lining up. Measured, not reasoned about. */
+  const cols = { gridTemplateColumns: segs.map(([, p]) => "minmax(0," + p + "fr)").join(" ") };
+  const total = segs.reduce((n, [, p]) => n + p, 0);
+  const group = segs[0][1] + segs[1][1];
+
+  /* Where the sweep is when it passes each segment's left edge, as a
+     fraction of the sweep's own duration. The names follow it. */
+  const SWEEP = 1.05;
+  let run = 0;
+  const starts = segs.map(([, p]) => { const s = run; run += p; return s / total; });
+
+  const dim = g => lit !== null && lit !== g ? "opacity-25" : "opacity-100";
+  const hold = g => ({
+    onMouseEnter: () => setLit(g), onMouseLeave: () => setLit(null),
+    onFocus: () => setLit(g), onBlur: () => setLit(null)
+  });
 
   return html`
     <section id="case" class="on-ink ${ANCHOR} bg-ink py-20 text-bone sm:py-28">
       <div class="${WRAP}">
-        <${M.div} ...${mo.reveal(0)}>
-          <${Eyebrow} on="inv">${t.weigh.eyebrow}<//>
-          <h2 class="mt-6 max-w-[22ch] font-display text-[clamp(2.1rem,1.3rem+2.6vw,3.6rem)] font-normal leading-[1.06] tracking-[-.015em]">
-            ${t.weigh.h2}
-          </h2>
-        <//>
-
-        <!-- Grid left, legend right. At full measure a 10 by 10 of square
-             cells is 832px tall and swallows the fold, and the fold already
-             had an empty right half. Side by side it is a block a reader
-             takes in at once, and the figures sit beside the thing they
-             count rather than under it. One column below lg. -->
-        <${M.div} ...${mo.reveal(1)}
-          class="mt-14 grid items-start gap-10 lg:grid-cols-[minmax(0,26rem)_1fr] lg:gap-16">
+        <!-- The headline and the sourcing note sit opposite each other rather
+             than stacked above and below the bar. Stacked, the fold ran 745px
+             with a 100px band of chart in the middle of it and an empty right
+             half above — measured. Opposite, the top of the fold is a spread
+             and the bar gets the width to itself. -->
+        <${M.div} ...${mo.reveal(0)} class="grid items-end gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-16">
           <div>
-            <p class="sr-only">${t.weigh.alt}</p>
-            <${M.div} aria-hidden="true"
-                 class="grid grid-cols-10 gap-[2px] sm:gap-[3px]"
-                 initial=${reduce ? false : "out"} whileInView="in"
-                 viewport=${{ once: true, amount: .15 }}
-                 variants=${{ in: { transition: { staggerChildren: .006, delayChildren: .1 } } }}>
-              <!-- Two elements per cell, and the split is not cosmetic. Motion
-                   writes opacity inline while it animates the entry, which beats
-                   any Tailwind opacity class on the same node: the dim was
-                   written as a class first and measured doing nothing at all,
-                   100 cells at opacity 1 with a block hovered. The outer div
-                   owns the dim, the inner motion div owns the entry, and
-                   neither touches the other. Variant propagation reaches the
-                   inner one through context, so the plain div between them
-                   costs nothing. -->
-              ${cells.map((g, i) => html`
-                <div key=${i}
-                  class="aspect-square transition-opacity duration-300
-                         ${lit !== null && lit !== g ? "opacity-20" : "opacity-100"}">
-                  <${M.div} class="h-full w-full ${tone[g]}"
-                    variants=${{
-                      out: { opacity: 0, scale: .4 },
-                      in: { opacity: 1, scale: 1, transition: { duration: .32, ease: EASE } }
-                    }} />
-                </div>`)}
-            <//>
+            <${Eyebrow} on="inv">${t.weigh.eyebrow}<//>
+            <h2 class="mt-6 max-w-[20ch] font-display text-[clamp(2.1rem,1.3rem+2.6vw,3.6rem)] font-normal leading-[1.06] tracking-[-.015em]">
+              ${t.weigh.h2}
+            </h2>
           </div>
-
-          <dl class="grid gap-7 sm:grid-cols-3 lg:max-w-[24rem] lg:grid-cols-1">
-            ${t.weigh.segs.map(([label, pct], g) => html`
-              <div key=${label}
-                   onMouseEnter=${() => setLit(g)} onMouseLeave=${() => setLit(null)}
-                   onFocus=${() => setLit(g)} onBlur=${() => setLit(null)}
-                   tabindex="0"
-                   class="flex items-baseline gap-5 border-t pt-4 transition-colors ${lit === g ? "border-bone" : "border-bone/30"}">
-                <dd class="font-display text-[clamp(1.9rem,1.5rem+1.2vw,2.6rem)] leading-none tracking-[-.01em] tabular-nums
-                           ${g === 2 ? "text-bone/75" : ""}">${pct}</dd>
-                <dt class="font-mono text-[12px] leading-snug ${g === 2 ? "text-bone/65" : "text-bone/85"}">${label}</dt>
-              </div>`)}
-          </dl>
+          <p class="text-[.95rem] leading-[1.7] text-bone/75">${t.weigh.body}</p>
         <//>
 
-        <${M.p} ...${mo.reveal(2)} class="mt-12 max-w-[56ch] leading-[1.7] text-bone/75">${t.weigh.body}<//>
+        <${M.div} class="mt-14 sm:mt-16"
+          initial=${reduce ? false : "out"} whileInView="in"
+          viewport=${{ once: true, amount: .35 }}>
+
+          <p class="sr-only">${t.weigh.alt}</p>
+
+          <div aria-hidden="true">
+            <!-- A dimension line, not a bracket, and the difference is the
+                 whole point. A bracket groups; a dimension line states a
+                 measurement, which is the language a firm whose product is
+                 technical documents already speaks. End ticks, a hairline
+                 broken for the figure, and the figure itself at display size
+                 so the one number a reader carries away is legible rather
+                 than a caption. The first version set it as a 10px bordered
+                 box with an 11px label and read as a stray rule.
+
+                 It spans the first two segments and it is drawn last, because
+                 a measurement that arrives before the thing it measures is a
+                 claim again. -->
+            <${M.div} class="grid gap-[2px]" style=${cols}
+              variants=${{
+                out: { opacity: 0, y: 8 },
+                in: { opacity: 1, y: 0, transition: { duration: .55, delay: SWEEP * (group / total) + .12, ease: EASE } }
+              }}>
+              <div class="col-span-2 flex items-center">
+                <div class="h-3.5 w-px shrink-0 bg-bone/50"></div>
+                <div class="h-px flex-1 bg-bone/50"></div>
+                <div class="flex shrink-0 items-baseline gap-2 px-3 sm:px-6">
+                  <span class="font-display text-[clamp(1.5rem,1.1rem+1.1vw,2rem)] leading-none text-bone tabular-nums">${group}</span>
+                  <span class="font-mono text-[11px] leading-none tracking-[.04em] text-bone/60 tabular-nums">/ ${total}</span>
+                </div>
+                <div class="h-px flex-1 bg-bone/50"></div>
+                <div class="h-3.5 w-px shrink-0 bg-bone/50"></div>
+              </div>
+            <//>
+
+            <!-- The bar. Pill ends on the outside only, a 2px gap of the
+                 page's own ink ground between segments, and the figure inside
+                 each one. The wrapper clips, because the curtain travels a
+                 full bar width to the right and an unclipped one would take
+                 the page with it. -->
+            <div class="relative mt-3.5 overflow-hidden">
+              <div class="grid gap-[2px]" style=${cols}>
+                ${segs.map(([label, pct], g) => html`
+                  <div key=${label} ...${hold(g)}
+                    class="flex h-20 items-center px-5 transition-opacity duration-300 sm:h-24 sm:px-7
+                           ${tone[g]} ${dim(g)}
+                           ${g === 0 ? "rounded-l-full" : ""} ${g === segs.length - 1 ? "rounded-r-full" : ""}">
+                    <span class="font-display text-[clamp(1.7rem,1.15rem+1.7vw,2.5rem)] leading-none tracking-[-.01em] text-ink tabular-nums">
+                      ${pct}
+                    </span>
+                  </div>`)}
+              </div>
+              ${!reduce && html`
+                <${M.div} class="absolute inset-0 bg-ink"
+                  variants=${{
+                    out: { x: "0%" },
+                    in: { x: "101%", transition: { duration: SWEEP, ease: EASE } }
+                  }} />`}
+            </div>
+
+            <!-- The names sit under their own segments on the ink ground,
+                 where a word reads at 8.19:1 and 5.50:1. Each one arrives as
+                 the sweep uncovers the segment it belongs to. They take the
+                 segment's own horizontal padding from sm up, so a name sits
+                 directly under the figure it names rather than under the
+                 segment's edge — the pair is one object and the pill end is
+                 not. On a phone they run near flush instead: the first
+                 segment is 99px wide there, and 28px of matching inset left
+                 59px of measure, which broke "Climate and environment" over
+                 three lines. The 8px of misalignment costs less than that. -->
+            <div class="mt-4 grid gap-[2px]" style=${cols}>
+              <!-- Two elements again, and for the reason this file records:
+                   Motion writes opacity inline while it animates the arrival,
+                   and an inline opacity beats any class on the same node. The
+                   first version of this row carried the dim as a class on the
+                   motion div and was measured doing nothing at all — three
+                   names at opacity 1 with a segment hovered. The outer div
+                   owns the dim and the interaction, the inner one owns the
+                   arrival, and the two multiply. -->
+              ${segs.map(([label], g) => html`
+                <div key=${label} ...${hold(g)} tabindex="0"
+                  class="px-1 transition-opacity duration-300 sm:px-7 ${dim(g)}">
+                  <${M.div} custom=${g}
+                    variants=${{
+                      out: { opacity: 0 },
+                      in: i => ({ opacity: 1, transition: { duration: .45, delay: SWEEP * starts[i] + .18, ease: EASE } })
+                    }}
+                    class="font-mono text-[11px] leading-snug sm:text-[12px] ${name[g]}">
+                    ${label}
+                  <//>
+                </div>`)}
+            </div>
+          </div>
+        <//>
+
       </div>
     </section>`;
 }

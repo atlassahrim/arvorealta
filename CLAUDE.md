@@ -992,53 +992,96 @@ what the rule above requires: `Industrial manufacturer bids` ·
 `What you can open` · `Open now` · `How it is scored` · `What it costs` ·
 `Where to start`.
 
-**The award fold is 100 cells, because the award is 100 points.** A bar shows
-a ratio and asks to be trusted; a unit chart shows the points and can be
-counted. One cell is one point: 30 climate and environment, 35 quality, 35
-price, in reading order, so "most of the score is not the price" becomes 65
-cells on one side of a gap and 35 on the other.
+**The award fold is a horizontal bar again, and it is a measured one.** The
+waffle that stood here could be counted, which a bar cannot, and that was its
+whole advantage. What it cost was the fold: a hundred cells is a texture, and
+a texture reads as decoration before it reads as a score. **The owner asked
+for the bar back and for a better one.** It is one object at full measure,
+three segments, 30 climate and environment, 35 quality, 35 price, with 2px of
+the page's own ink ground between them and pill radii on the outer ends.
+
+Four things the first bar did not have.
+
+**One, the 65 is drawn rather than inferred.** A dimension line spans the
+first two segments — end ticks, a hairline broken for the figure, `65` at
+display size with `/ 100` in mono beside it. A dimension line, not a bracket:
+a bracket groups, a dimension line states a measurement, which is the
+language a firm whose product is technical documents already speaks. It is a
+figure and not a phrase, so it needs no translating and all three languages
+carry the same mark. The first attempt set it as a 10px bordered box with an
+11px label and read on screen as a stray rule.
+
+**Two, the figures sit inside the segments**, so there is no legend to hop
+to. Measured on ink the three fills read **9.85:1, 6.12:1 and 3.88:1**, all
+clear of the 3:1 a graphic mark needs, and ink type on those same fills reads
+the same three figures. The numerals are display size, where the floor is 3:1
+rather than 4.5:1. **The names stay outside on the ink ground** at 8.19:1 and
+5.50:1, because words are small text and small text does not go on the
+geometry. That is the rule the first bar established and it holds.
+
+**Three, the fills separate properly.** On the first bar the two non-price
+fills had to sit almost on top of each other so the 65 would read as one
+mass, which left them nearly indistinguishable from each other. The dimension
+line does the grouping now, so the three descend in clear steps and still
+group. That was the waffle's one real gain and it is kept without its cost.
+
+**Four, the motion is a single sweep, and it is a curtain rather than three
+fills.** Three segments each growing from their own left edge animate as
+three events; one block of the page's own ink ground sliding right off the
+whole bar is one event at one constant speed, and the segment geometry is
+never distorted while it runs. It also sidesteps the trap this file records
+twice — an element that starts outside its own box is never seen by the
+observer watching it — because the curtain starts covering the bar and is
+therefore always in view. Each name fades in as the sweep passes its segment,
+and the dimension line draws last, after the bar it measures is complete. The
+wrapper clips, since the curtain travels a full bar width to the right and an
+unclipped one would take the page with it.
 
 `ui-ux-pro-max`'s chart data offers three forms for a part-to-whole of five
-categories or fewer and rules two out for this page: a **pie**, whose own
+categories or fewer and ruled two out for this page: a **pie**, whose own
 "when NOT to use" lists an accessibility-first context and a reader who needs
 precise values, and a **radar**, which compares entities across attributes.
-The **waffle** is the third and it is the one that fits a score out of a
-hundred. The nearest thing in the 21st.dev catalogue is a Partition Bar,
-which is what the fold already was, and taking it would have meant
+The **waffle** was the third, and it fits a score out of a hundred on the
+figures. It lost on the fold. The nearest thing in the 21st.dev catalogue is
+a Partition Bar, which is what this is, and taking it would have meant
 `npx shadcn add` and a build step on a page that vendors everything.
 
-It also lifted a compromise the bar forced. There the two non-price fills had
-to sit almost on top of each other to read as one mass, which left them
-nearly indistinguishable. Here the grouping is positional, so the three can
-separate properly: measured on ink, 9.86:1, 5.60:1 and 3.18:1, and the
-quietest still clears the 3:1 a graphic mark needs.
+**The headline and the sourcing note sit opposite each other**, not stacked
+above and below the bar. Stacked, the fold ran 745px with a 100px band of
+chart in the middle and an empty right half above it — measured. Opposite,
+the top of the fold is a spread and the bar gets the width to itself.
 
-**Grid left, legend right.** At full measure a 10 by 10 of square cells is
-832px tall and swallows the fold, which also already had an empty right half.
-Side by side the grid is 416px and the fold is 988px.
+**The dimension line, the bar and the names are three rows of one grid**, so
+the 65 boundary lands in the same place in all three to the pixel, and the
+track widths come from the data. Every track is `minmax(0, Nfr)` and not
+`Nfr`: **an `fr` track takes its min-content width as a floor**, so at 375
+the longest name pushed its own column 13px wider than the segment above it
+and the three rows stopped lining up. The names take the segment's own
+padding from `sm` up so each sits under the figure it names; on a phone they
+run near flush instead, because 28px of matching inset left 59px of measure
+and broke "Climate and environment" over three lines.
 
-**Accessibility.** The grid is `aria-hidden` and a sentence carries the same
-content for a screen reader, because a hundred announced divs is worse than
-no chart. Each block keeps its own figure and name, so identity is never
-colour alone. The hover is on the block rather than the cell — a tooltip per
-cell would say "1 point" a hundred times — and it dims the other two, by
-mouse and by keyboard focus alike.
+**Accessibility.** The bar is `aria-hidden` and a sentence carries the same
+content, because a chart is not reading matter. Identity is never colour
+alone: every segment holds its own figure and sits over its own name. The
+isolation dims the other two by mouse and by keyboard focus alike.
 
-**Two traps, both measured rather than reasoned about.**
+**The hover dim can be a plain class on the segment, and on the name it
+cannot.** Nothing in the bar itself is animated by Motion, so a class holds
+there. The names are, and **Motion writes `opacity` inline while it animates,
+which beats any Tailwind opacity class on the same node** — the first version
+of that row was measured doing nothing at all, three names at opacity 1 with
+a segment hovered. The outer div owns the dim and the interaction, the inner
+motion div owns the arrival, and the two multiply. The waffle learned the
+same lesson at a hundred cells; it is the same trap and it is worth keeping
+written down.
 
-The stagger lives on the grid, not on the cells. Given its own `whileInView`
-each cell waits to be seen, and the grid is taller than a phone, so landing
-mid-section left the bottom rows permanently at zero: two opacities on the
-page, 1 and 0. Same shape as the bar fill — an element that hides itself
-cannot be the thing you observe.
-
-Each cell is two elements, and the split is not cosmetic. **Motion writes
-`opacity` inline while it animates, which beats any Tailwind opacity class on
-the same node.** The dim was written as a class first and measured doing
-nothing at all: 100 cells at opacity 1 with a block hovered. The outer div
-owns the dim, the inner motion div owns the entry. Variant propagation
-reaches the inner one through context, so the plain div between them costs
-nothing.
+The waffle's other trap is also worth keeping, because it is the general
+case: **an element that hides itself cannot be the thing you observe.** Given
+its own `whileInView` each cell waited to be seen, and the grid was taller
+than a phone, so landing mid-section left the bottom rows permanently at
+zero. Same shape as the first bar's fill, and the reason the curtain above is
+built the way it is.
 
 **No backticks in a comment inside a markup template.** An HTML comment
 written inside `html\`...\`` is still inside a JavaScript template literal, so
