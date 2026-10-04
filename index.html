@@ -25,7 +25,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/geist-mono-latin.woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/geist.css">
 
-<link rel="stylesheet" href="/assets/tw-35b7d04c.css">
+<link rel="stylesheet" href="/assets/tw-4eaa07d4.css">
 
 </head>
 
@@ -71,7 +71,7 @@ const STR = {
     nav: { open: "Open now", case: "How it is scored" },
     cta: "Get your page scored",
     hero: {
-      eyebrow: "Nordic industrial manufacturers",
+      eyebrow: "Industrial manufacturer bids",
       h1a: "Written once.", h1b: "Right every time.",
       sub: "Public buyers score the documents you hand in. Not the plant, not the price list, not the twenty years.",
       second: "See the open tender"
@@ -96,6 +96,18 @@ const STR = {
       segs: [["Price", 35], ["Quality", 35], ["Climate and environment", 30]],
       body: "Read from the award criteria in the notice itself. Norwegian authorities have had to weight climate and environment at a minimum of 30% since January 2024, and this tender weights it exactly on that floor."
     },
+    score: {
+      h2: "Five sections carry the 65.",
+      body: "The template is those five, in the order the notice scores them, with the weight printed on each heading and every field empty. The words are yours.",
+      rows: [
+        ["Quality and functionality", 30],
+        ["Delivery time and delivery plan", 5],
+        ["Service life and repairability", 10],
+        ["Committed minimum PCR share", 10],
+        ["Other climate and environment measures", 10]
+      ],
+      total: "Scored through this one document"
+    },
     close: {
       h2: "Find out what it cost you. For nothing.",
       body: "Send one page from a tender you lost. A method statement, a quality section, a capability answer. It comes back scored against the criteria it was judged on, with the points located, the reasoning written out, and a note on what the next one should carry."
@@ -108,7 +120,7 @@ const STR = {
     nav: { open: "Åpen nå", case: "Slik vektes det" },
     cta: "Få siden din vurdert",
     hero: {
-      eyebrow: "Nordiske industriprodusenter",
+      eyebrow: "Tilbud fra industriprodusenter",
       h1a: "Skrevet én gang.", h1b: "Riktig hver gang.",
       sub: "Offentlige oppdragsgivere gir poeng til dokumentene du leverer. Ikke fabrikken, ikke prislisten, ikke de tjue årene.",
       second: "Se den åpne konkurransen"
@@ -133,6 +145,18 @@ const STR = {
       segs: [["Pris", 35], ["Kvalitet", 35], ["Klima og miljø", 30]],
       body: "Lest fra tildelingskriteriene i selve kunngjøringen. Norske oppdragsgivere har siden januar 2024 måttet vekte klima og miljø med minst 30 prosent, og denne konkurransen ligger akkurat på den grensen."
     },
+    score: {
+      h2: "Fem seksjoner bærer de 65.",
+      body: "Malen er de fem, i den rekkefølgen kunngjøringen vurderer dem, med vekten trykt på hver overskrift og alle felt tomme. Ordene er dine.",
+      rows: [
+        ["Kvalitet og funksjonalitet", 30],
+        ["Leveringstid og leveringsplan", 5],
+        ["Levetid og reparerbarhet", 10],
+        ["Forpliktende minimumsandel PCR", 10],
+        ["Øvrige klima- og miljøtiltak", 10]
+      ],
+      total: "Vurdert gjennom dette ene dokumentet"
+    },
     close: {
       h2: "Finn ut hva det kostet deg. Gratis.",
       body: "Send én side fra en konkurranse du tapte. En metodebeskrivelse, et kvalitetsavsnitt, et svar om kapasitet. Den kommer tilbake vurdert mot kriteriene den ble bedømt etter, med poengene plassert, begrunnelsen skrevet ut, og en merknad om hva den neste bør inneholde."
@@ -145,7 +169,7 @@ const STR = {
     nav: { open: "Avoinna nyt", case: "Näin se pisteytetään" },
     cta: "Pyydä sivusi pisteytys",
     hero: {
-      eyebrow: "Pohjoismaiset teollisuusvalmistajat",
+      eyebrow: "Teollisuusvalmistajan tarjoukset",
       h1a: "Kirjoitettu kerran.", h1b: "Oikein joka kerta.",
       sub: "Julkiset hankkijat pisteyttävät asiakirjat, jotka jätät. Eivät tehdasta, eivät hinnastoa, eivät kahtakymmentä vuotta.",
       second: "Katso avoin tarjouspyyntö"
@@ -169,6 +193,18 @@ const STR = {
       h2: "Suurin osa pisteistä ei ole hinta.",
       segs: [["Hinta", 35], ["Laatu", 35], ["Ilmasto ja ympäristö", 30]],
       body: "Luettu itse ilmoituksen vertailuperusteista. Norjalaisten hankintayksiköiden on tammikuusta 2024 lähtien pitänyt painottaa ilmastoa ja ympäristöä vähintään 30 prosentilla, ja tämä tarjouspyyntö on tasan sillä rajalla."
+    },
+    score: {
+      h2: "Viisi osiota kantaa 65:tä.",
+      body: "Malli on nämä viisi, siinä järjestyksessä kuin ilmoitus ne pisteyttää, paino jokaisessa otsikossa ja kaikki kentät tyhjinä. Sanat ovat sinun.",
+      rows: [
+        ["Laatu ja toiminnallisuus", 30],
+        ["Toimitusaika ja toimitussuunnitelma", 5],
+        ["Käyttöikä ja korjattavuus", 10],
+        ["Sitova PCR-vähimmäisosuus", 10],
+        ["Muut ilmasto- ja ympäristötoimet", 10]
+      ],
+      total: "Pisteytetään tämän yhden asiakirjan kautta"
     },
     close: {
       h2: "Selvitä, mitä se maksoi sinulle. Ilmaiseksi.",
@@ -425,6 +461,42 @@ function Weighting({ t }) {
     </section>`;
 }
 
+/* The offer, shown rather than described. Every figure here is read off the
+   Word template the page hands out: five scored blocks, their own headings,
+   their own stated weights, adding to the 65 the fold above names. Nothing is
+   invented and there is no total printed in the document that this contradicts.
+
+   The motion is the argument. The rows arrive in the order an evaluator works
+   down them and the total lands last, so a reader who watches it understands
+   what "scored against the criteria it was judged on" means before reading
+   the sentence that says so. It runs once, on entry, and collapses to the
+   finished state under prefers-reduced-motion. There is no loop: a thing that
+   keeps replaying is decoration, and this is the demonstration. */
+function Score({ t }) {
+  const mo = useMo();
+  return html`
+    <section class="${WRAP} py-20 sm:py-28">
+      <${M.div} ...${mo.reveal(0)} class="max-w-[46ch]">
+        <h2 class="text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)] font-medium leading-[1.08] tracking-[-.025em]">${t.score.h2}</h2>
+        <p class="mt-7 leading-[1.7] text-ink/80">${t.score.body}</p>
+      <//>
+
+      <dl class="mt-14 max-w-[52rem]">
+        ${t.score.rows.map(([name, w], i) => html`
+          <${M.div} key=${name} ...${mo.reveal(1 + i)}
+            class="flex items-baseline justify-between gap-8 border-t border-ink/15 py-5">
+            <dt class="text-[1.05rem] leading-snug">${name}</dt>
+            <dd class="font-mono text-[1.75rem] leading-none tracking-[-.02em] tabular-nums">${w}</dd>
+          <//>`)}
+        <${M.div} ...${mo.reveal(6)}
+          class="flex items-baseline justify-between gap-8 border-t-2 border-ink pt-6">
+          <dt class="font-mono text-[12px] leading-snug text-ink/75">${t.score.total}</dt>
+          <dd class="font-mono text-[clamp(2.6rem,2rem+1.8vw,3.6rem)] leading-none tracking-[-.03em] tabular-nums">65</dd>
+        <//>
+      </dl>
+    </section>`;
+}
+
 function Close({ t }) {
   const mo = useMo();
   return html`
@@ -495,6 +567,7 @@ function App() {
         <${Gate} t=${t} />
         <${OpenTender} t=${t} />
         <${Weighting} t=${t} />
+        <${Score} t=${t} />
         <${Close} t=${t} />
       </main>
     <//>`;
