@@ -25,7 +25,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/geist-mono-latin.woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/geist.css">
 
-<link rel="stylesheet" href="/assets/tw-2e301aba.css">
+<link rel="stylesheet" href="/assets/tw-cff8d391.css">
 
 </head>
 
@@ -99,7 +99,7 @@ const STR = {
     },
     mail: {
       subject: "One page to be scored.",
-      body: "Hi Atlas,\n\nAttached is one page from a tender we participated.\nThanks.\n"
+      body: "Hi Atlas,\n\nAttached is one page from a tender we bid on.\nThanks.\n"
     },
     ladder: {
       eyebrow: "What it costs",
@@ -662,19 +662,20 @@ function Ladder({ t }) {
         <p class="mt-7 leading-[1.7] text-ink/80">${t.ladder.lede}</p>
       <//>
 
-      <!-- scroll-padding has to match the padding or snap-start aligns the
-           first card to the padding edge and the browser scrolls the gutter
-           away: the row opened 32px left of the headline above it, flush to
-           the screen edge, which is what read as broken. -->
-      <div class="mt-14 -mx-5 flex snap-x snap-mandatory gap-6 overflow-x-auto px-5 pb-3 scroll-pl-5
-                  sm:-mx-8 sm:px-8 sm:scroll-pl-8
-                  lg:mx-0 lg:grid lg:grid-cols-[.85fr_1fr_1.2fr_1.2fr] lg:gap-0 lg:overflow-visible lg:px-0 lg:pb-0">
+      <!-- A grid, never a horizontal scroller. One column on a phone, two
+           from sm, four at lg. 2 by 2 is the shape wherever two columns are
+           still legible: at 390 the measure is 350px, so two of them would be
+           163px each and the recommended tier's paragraph would set about
+           twenty characters to the line. One column there, two the moment
+           there is room. Nothing scrolls sideways at any width. -->
+      <div class="mt-14 grid gap-x-8 gap-y-12 sm:grid-cols-2
+                  lg:grid-cols-[.85fr_1fr_1.2fr_1.2fr] lg:gap-x-0 lg:gap-y-0">
         ${t.ladder.tiers.map((x, i) => {
           const lead = i === 2;
           return html`
             <${M.div} key=${x.name} ...${mo.reveal(1 + i)}
-              class="w-[78%] shrink-0 snap-start sm:w-[52%] md:w-[41%] lg:w-auto
-                     ${lead ? "bg-paper-3" : ""} ${i > 0 ? "lg:border-l lg:border-ink/12" : ""}">
+              class="${lead ? "bg-paper-3 -mx-5 px-5 sm:-mx-4 sm:px-4 lg:mx-0 lg:px-0" : ""}
+                     ${i > 0 ? "lg:border-l lg:border-ink/12" : ""}">
               <!-- The rule is the rung and it spans the whole column, so the
                    padding lives on the content below it rather than on the
                    column. With the padding on the column the recommended
@@ -687,11 +688,18 @@ function Ladder({ t }) {
                 viewport=${{ once: true, amount: .5 }}
                 transition=${{ duration: .7, delay: .1 + i * .14, ease: EASE }}
                 style=${{ scaleX: reduce ? 1 : undefined }} />
-              <!-- On the scroller only the recommended tier is inset, because only it
-                     has a ground to be inset from. The others sit flush with the
-                     card edge so the first one's type lines up with the headline
-                     above it rather than sitting 24px inside the page gutter. -->
-              <div class="pt-7 pb-8 ${lead ? "px-6" : ""} lg:pr-7 ${i === 0 ? "lg:pl-0" : "lg:pl-7"}">
+              <!-- Only the recommended tier is inset, because only it has a
+                   ground to be inset from. The others sit flush with their
+                   column so every rung starts on the same left edge as the
+                   headline above the row. -->
+              <!-- The recommended tier's ground bleeds past its own column and
+                   takes the same amount back as padding, so the ground reads
+                   as a panel while its type still lines up with every other
+                   rung. On a phone that bleed is the full page gutter, so the
+                   panel runs edge to edge. At lg the bleed is dropped and the
+                   ground is exactly the column, which is where the four rungs
+                   sit side by side. -->
+              <div class="pt-7 pb-8 lg:pr-7 ${i === 0 ? "lg:pl-0" : "lg:pl-7"}">
                 <p class="font-mono text-[12px] leading-snug text-ink/75">${x.step}</p>
                 <h3 class="mt-4 text-[1.3rem] font-medium leading-tight tracking-[-.02em]">${x.name}</h3>
                 <p class="mt-6 text-[clamp(2rem,1.6rem+1.1vw,2.7rem)] font-medium leading-none tracking-[-.03em] tabular-nums">${x.price}</p>

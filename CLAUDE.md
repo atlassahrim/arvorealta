@@ -664,13 +664,27 @@ non-ASCII.
 
 **The ladder fold is the offer, and it is four rungs rather than four
 cards.** Equal columns say "pick one of these four", which is the opposite of
-a ladder, and a carousel on a screen with room hides three rungs behind an
-interaction to show the fourth. The columns grow with the tier instead, left
-to right at `lg`, so the shape of the row carries the argument before a word
-is read. **Below `lg` it becomes a snap scroller**, which is where a carousel
-is genuinely the right component: there is no room for four and swiping is
-the native move. Only the recommended tier is inset on that scroller, because
-only it has a ground to be inset from.
+a ladder. The columns grow with the tier instead, left to right at `lg`, so
+the shape of the row carries the argument before a word is read.
+
+**It is a grid and it never scrolls sideways.** One column on a phone, two
+from `sm`, four at `lg`. 2 by 2 is the shape wherever two columns are still
+legible, and at 390 they are not: the measure is 350px, so two of them would
+be 163px each and the recommended tier's paragraph would set about twenty
+characters to the line.
+
+It was a snap scroller for a day and that was the wrong call. A carousel asks
+a reader to discover that there is more and then work for it, and a price
+list is the one place on a page where every option has to be visible at once:
+the credit mechanic only makes sense when €600, €2,400 and €8,000 can be seen
+together. **Horizontal scrolling is not a layout for anything the reader has
+to compare.**
+
+**The recommended tier's ground bleeds past its own column and takes the same
+amount back as padding**, so the ground reads as a panel while its type still
+lines up with every other rung. On a phone that bleed is the full page
+gutter, so the panel runs edge to edge. At `lg` the bleed is dropped and the
+ground is exactly the column.
 
 **Every figure and every deliverable comes off `reference/index.html`**, which
 is where the original ladder copy lives. Do not round a price and do not
@@ -713,12 +727,13 @@ beside it is mono at 12px in sentence case, because it is found rather than
 read and it should not look like a section opening. On the ink fold the
 eyebrow takes `bone/75` at 6.76:1; the mark is 2.03:1 there and barred.
 
-**`scroll-padding` has to match the scroller's padding.** The ladder's snap
-row carries `px-5 sm:px-8` and a negative margin to bleed to the screen edge.
-Without `scroll-pl-5 sm:scroll-pl-8` beside it, `snap-start` aligns the first
-card to the padding edge, the browser scrolls the gutter away on load, and the
-row opens 32px to the left of the headline above it, flush to the screen edge.
-That is what read as "not responsive"; every width was mechanically fine.
+**If a snap scroller ever comes back, `scroll-padding` has to match its
+padding.** The ladder's row carried `px-5 sm:px-8` and a negative margin to
+bleed to the screen edge. Without `scroll-pl-5 sm:scroll-pl-8` beside it,
+`snap-start` aligned the first card to the padding edge, the browser scrolled
+the gutter away on load, and the row opened 32px to the left of the headline
+above it, flush to the screen edge. Every width was mechanically fine and it
+still looked broken. The scroller is gone, the trap is not.
 
 **The hero carries a video over the photograph, and the photograph is the
 floor.** `assets/video/hero-1-720.mp4`, 1280 × 720, ten seconds, 3.1 MB,
