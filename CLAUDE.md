@@ -322,11 +322,33 @@ photograph and the one the wash ladder was built on; it was light, it failed
 every contrast at every setting, and the whole apparatus of washes and
 vignettes existed to make it usable. It is deleted and so is its table.
 
-**With no wash, the picture decides where type can go, not the layout.** The
-band is 1440 × 736 and `after-1` is 1.783:1, so at desktop it scales by width
-and crops only vertically: `object-position` has no horizontal lever to pull.
-The only controls left are where each object sits vertically, the headline's
-break and its size.
+**With no wash, the picture decides where type can go, not the layout, and
+which lever you have depends on which way the ratios fall.** The band is the
+whole viewport now, so at 1440 × 900 the container is 1.600:1 and `after-1` is
+1.783:1. The picture is the wider of the two, so `object-fit: cover` scales it
+by height and crops horizontally: the **vertical** half of `object-position`
+does nothing at all and the horizontal half is the only lever. That is the
+reverse of what this file said while the band was 1440 × 736, and the reverse
+is worth checking before reaching for the property.
+
+**Measured, the lever does not save the eyebrow.** Swept across the full
+range, bone over the ground under each object:
+
+| `object-position` X | eyebrow | headline | standfirst |
+|---|---|---|---|
+| 0% | 3.16 | 8.74 | 9.56 |
+| 45% | 3.34 | 7.30 | 9.16 |
+| 62% | 3.49 | 7.25 | 9.49 |
+| 100% | 3.16 | 7.85 | 10.00 |
+
+The headline and the standfirst clear comfortably everywhere. **The eyebrow
+clears nowhere**, because it sits in the band where the picture's highlights
+run and that band moves with the crop. 3.49:1 passes the 3:1 a graphic mark
+needs and fails the 4.5:1 a word needs. It takes full bone rather than
+`bone/75` for the quarter-stop that buys, and beyond that there are two
+honest fixes and no third: drop the line, or move it out of the band. The
+audience gate it carries is already stated in the strip one fold down, which
+is where this file says that kind of line belongs.
 
 Three rules follow, and they are the same shape as the taupe rules above:
 
@@ -580,6 +602,16 @@ output it has — A4 annexes, 1920 × 1080 decks, a paper ground on screen. A
 dark mode would be a second identity for a firm whose whole argument is what
 a document looks like when it is printed and scored. Do not add one as a
 courtesy.
+
+The offer page carried one for a while, as a toggle in the nav, and it is
+gone. Two things killed it. The page is three greens — paper ground, ink
+statement fold, ink-2 dark ground — so in dark mode the statement fold, whose
+entire job is to be the one inverted moment on the page, had nothing left to
+invert against and the page flattened to three shades of the same colour. And
+it cost a `dark:` variant on every colour utility, a pre-paint script, a
+listener and a stored preference, for a second identity the file above says
+not to have. `prefers-color-scheme: dark` now changes nothing, which is
+checked: the body stays `#D9D7D4` under either setting.
 
 **Snap to the baseline**, including captions and table rows. Display excepted, above.
 
