@@ -12,7 +12,6 @@ deploys in about ten seconds.**
 | arvorealta.com/video/ | `video/index.html` — video portfolio |
 | arvorealta.com/deck/`<slug>`/ | decks — 1920 × 1080, for presenting |
 | arvorealta.com/annex/`<slug>`/ | annexes — A4, for submitting |
-| arvorealta.com/lab/ | `lab/index.html` — the sandbox, `noindex` |
 
 **`index.html` and `video/index.html` are live and in use.** Do not restructure
 them without being asked. Copy changes are fine; layout surgery is not.
@@ -51,22 +50,23 @@ are not obliged to.
 **Use the underscore for anything whose content would be a problem in the
 open**, which is research, client material, unredacted annexes and working
 drafts. **Use `noindex` for a page that has to be opened on a real device at a
-real URL and should not compete with the site**, which today is `mal/` and
-`lab/` and `reference/`. Each is a near-copy of the offer page, so without
-`noindex` each would be a second `index.html` bidding against the first for
-the same terms.
+real URL and should not compete with the site**, which today is `reference/`
+and nothing else. It is a near-copy of the offer page, so without `noindex` it
+would be a second `index.html` bidding against the first for the same terms.
+It is kept for the owner's reference and is not linked from anywhere.
 
-`mal/` was a third such page, a Norwegian-only landing page for one tender in
-the retired editorial identity. It is deleted. Its two files moved to
-`assets/vedlegg-5/` and the offer page links to them directly, so the page
-had become a click on the way to files the reader already had in front of
-them.
+Two other such pages existed and both are deleted. `mal/` was a Norwegian-only
+landing page for one tender in the retired editorial identity; its two files
+moved to `assets/vedlegg-5/` and the offer page links to them directly, so the
+page had become a click on the way to files the reader already had in front of
+them. `lab/` was the sandbox the current offer page was prototyped in, with
+`lab/strict/` beside it as the AA control. Once the page shipped they were two
+stale forks of it, published, carrying a photograph the site no longer uses.
 
-A sandbox lived at `_lab/` for a while and could therefore never be opened on
-a phone, which is the one test it existed to make possible. It is `lab/` now.
 **Anything moving out from behind the underscore takes `noindex` in the same
 change**, and the move is a decision to make deliberately rather than a
-convenience, because once a path is public a link to it is public forever.
+convenience, because once a path is public a link to it is public forever. A
+sandbox that has done its job is deleted, not left up.
 
 ## The pricing ladder
 
@@ -97,14 +97,14 @@ document agreed before the work starts, not listed on the page.
 ```
 index.html              offer page
 video/index.html        video portfolio
-lab/index.html          sandbox copy of the offer page — noindex
 reference/index.html    the first offer page, kept for reference — noindex
 templates/index.html    index of every template
 deck/<slug>/index.html  one deck per folder
 annex/<slug>/index.html one A4 annex per folder
 assets/
-  img/                  photography, as webp + jpg at 960/1440/1920/2560
-                        the name carries a version: gateway-3-<width>.<ext>
+  img/                  photography, as webp + jpg at the widths the source
+                        actually holds — the name carries a version:
+                        after-1-<width>.<ext>
   vedlegg-5/            the open tender's example PDF and fillable Word file
   fonts/                Geist and Geist Mono, self-hosted woff2
   vendor/runtime.js     React, react-dom, Motion and htm, bundled once
@@ -248,49 +248,39 @@ measured per image.** The other three are single values with fixed contrast
 figures written above. A photograph is thousands of values, and the figure
 that governs is not its average but its worst pixel under the type.
 
-Measure before you design on one. The hero photograph untreated holds
-near-white (sun on water, L 0.99) and near-black (a shadowed void, L 0.002)
-inside almost any box that could be drawn on it, so **nothing cleared
-anywhere**: bone read 1.01:1 across the right half and ink read 1.45:1.
-Darkening it until bone clears takes a 50% black scrim, which drops the
-frame's median luminance from 0.162 to 0.040 and throws away the light that
-was the reason to use the picture.
+Measure before you design on one, and measure **the strip each object sits
+in**, not the frame. A frame average hides the only thing that matters, which
+is what is directly behind a glyph.
 
-**So a photograph is lifted, not dropped.** The image sits over `--paper-3`
-at an opacity the page sets in one token, `--hero-photo`, and one minus that
-is the bone wash. Measured on the hero photograph, ink over the result at the
-worst pixel in the frame:
+**The current photograph is dark and the band carries its own ink ground**, so
+the type is bone and the wash token `--hero-photo` runs at 1. There is no wash
+and no vignette. Measured on `after-1`, bone over the picture across the left
+half of the frame, which is the column the hero's objects occupy:
 
-| `--hero-photo` | wash | ink | what still reads |
-|---|---|---|---|
-| 0.35 | 0.65 | 4.92:1 | everything, small text included |
-| 0.45 | 0.55 | 3.66:1 | display type only |
-| 0.55 | 0.45 | 2.66:1 | nothing, by the standard |
-| 0.70 | 0.30 | 1.57:1 | nothing |
-| 1.00 | 0.00 | 1.51:1 | nothing, and this is what both labs run |
+| | median | brightest 2% |
+|---|---|---|
+| whole type column | 8.76:1 | 1.44:1 |
+| under the eyebrow | **3.28:1** | 1.45:1 |
+| under the headline | 7.25:1 | 1.95:1 |
+| under the standfirst | 9.49:1 | 3.75:1 |
 
-Dark inverts the wash to `--ink` and the type to bone: 4.20:1 at 0.30, 3.13 at
-0.40, 1.23 at 1. The site runs 0.35 and 0.30; the labs run 1.
+**Only one object fails, and it is the eyebrow.** The picture is a dark room
+with bokeh highlights, and the eyebrow is the one line sitting in the band
+where those highlights run. Everything below it is comfortably clear: the
+headline needs 3:1 at display size and has 7.25, the standfirst needs 4.5 and
+has 9.49. The 1.44:1 figures are the highlights themselves, which are small,
+scattered and mostly not under type.
 
-The frame is 2576 × 1399, and **the worst pixel is not where the type is.**
-Across the left 56% of the frame, which is the column the hero's four objects
-actually occupy, the 2nd percentile is L 0.057 and ink on it is 1.35:1. That
-is the honest figure for this layout, and the 1.56:1 above is the figure for
-the frame as a whole. Both are far under the floor and the difference matters
-only when choosing where to put type, which is the next paragraph's problem.
+**So the fix for a dark photograph is vertical, not a wash.** Move the object
+out of the bright band, or drop it. Washing the whole picture to rescue one
+11px line costs the picture and fixes nothing the other three objects needed.
 
-**0.35 is where every size clears, and it is a reference rather than a gate.**
-Above 0.45 the standfirst and the eyebrow stop being readable on a phone in
-daylight or to anyone with low vision, and a public buyer running an
-accessibility check would find it. That is a real cost and it is the owner's
-to weigh, not the file's to refuse: **the number is here so the trade is made
-with the figure in front of you.**
-
-**`lab/` runs at 1 with no wash and no vignette**, which is the picture as it
-came out of the render and 1.54:1 under the type. That is the sandbox doing
-what a sandbox is for. `lab/strict/` runs at 0.35 in light and 0.30 in dark,
-because that variant follows the taste skill and the skill requires AA. The
-two settings are the experiment and the control, and neither is the site.
+That is the opposite of what the previous photograph required, and it is why
+the ladder of wash values that used to live here is gone with it. `gateway-3`
+was light, held near-white and near-black inside any box that could be drawn
+on it, and nothing cleared anywhere at any setting. A picture like that has to
+be lifted over a light ground; a picture like this one has to be left alone and
+designed around.
 
 **The stylesheet's name is its own content hash, and `_build-css.sh` is the
 only thing that should write it.** A changed value served stale costs ten
@@ -322,22 +312,43 @@ different bytes leaves every browser that has seen the page serving the old
 picture from cache, and the deploy log will tell you it succeeded while the
 owner, on their own phone, sees the old one and reasonably concludes the work
 did not land. That happened once and cost a round trip. The version sits in
-the name — `gateway-3-<width>.<ext>` — so the URL changes when the content
-does and no cache can hold the wrong file. Delete the old set in the same
-commit; nothing outside the labs points at it.
+the name — `after-1-<width>.<ext>` — so the URL changes when the content does
+and no cache can hold the wrong file. Delete the old set in the same commit.
 
-Re-measure when the image changes. A different photograph is a different
-table, and the only honest way to get it is to sample the file. The table
-above belongs to the third hero photograph, `gateway-3`. The first put the
-deep green void in the middle of the frame, which is exactly where the
-headline's second line ended; the second moved it right of centre; the third
-moves it further still and opens the colonnade. Each swap was worth more to
-legibility than any wash setting was.
+**Re-measure when the image changes, and delete the old table with the old
+file.** A different photograph is a different set of figures, and a table left
+behind describes a picture nobody can see. `gateway-3` was the third hero
+photograph and the one the wash ladder was built on; it was light, it failed
+every contrast at every setting, and the whole apparatus of washes and
+vignettes existed to make it usable. It is deleted and so is its table.
 
-**With no wash, the picture decides where type can go, not the layout.** The
-band is 1440 × 736 and the photograph is 1.841:1, so at desktop it scales by
-width and crops only vertically: `object-position` has no horizontal lever to
-pull. The only controls left are the headline's break and its size.
+**With no wash, the picture decides where type can go, not the layout, and
+which lever you have depends on which way the ratios fall.** The band is the
+whole viewport now, so at 1440 × 900 the container is 1.600:1 and `after-1` is
+1.783:1. The picture is the wider of the two, so `object-fit: cover` scales it
+by height and crops horizontally: the **vertical** half of `object-position`
+does nothing at all and the horizontal half is the only lever. That is the
+reverse of what this file said while the band was 1440 × 736, and the reverse
+is worth checking before reaching for the property.
+
+**Measured, the lever does not save the eyebrow.** Swept across the full
+range, bone over the ground under each object:
+
+| `object-position` X | eyebrow | headline | standfirst |
+|---|---|---|---|
+| 0% | 3.16 | 8.74 | 9.56 |
+| 45% | 3.34 | 7.30 | 9.16 |
+| 62% | 3.49 | 7.25 | 9.49 |
+| 100% | 3.16 | 7.85 | 10.00 |
+
+The headline and the standfirst clear comfortably everywhere. **The eyebrow
+clears nowhere**, because it sits in the band where the picture's highlights
+run and that band moves with the crop. 3.49:1 passes the 3:1 a graphic mark
+needs and fails the 4.5:1 a word needs. It takes full bone rather than
+`bone/75` for the quarter-stop that buys, and beyond that there are two
+honest fixes and no third: drop the line, or move it out of the band. The
+audience gate it carries is already stated in the strip one fold down, which
+is where this file says that kind of line belongs.
 
 Three rules follow, and they are the same shape as the taupe rules above:
 
@@ -591,6 +602,16 @@ output it has — A4 annexes, 1920 × 1080 decks, a paper ground on screen. A
 dark mode would be a second identity for a firm whose whole argument is what
 a document looks like when it is printed and scored. Do not add one as a
 courtesy.
+
+The offer page carried one for a while, as a toggle in the nav, and it is
+gone. Two things killed it. The page is three greens — paper ground, ink
+statement fold, ink-2 dark ground — so in dark mode the statement fold, whose
+entire job is to be the one inverted moment on the page, had nothing left to
+invert against and the page flattened to three shades of the same colour. And
+it cost a `dark:` variant on every colour utility, a pre-paint script, a
+listener and a stored preference, for a second identity the file above says
+not to have. `prefers-color-scheme: dark` now changes nothing, which is
+checked: the body stays `#D9D7D4` under either setting.
 
 **Snap to the baseline**, including captions and table rows. Display excepted, above.
 

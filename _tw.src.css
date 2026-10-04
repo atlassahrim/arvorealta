@@ -33,23 +33,16 @@
   --color-paper-2: #E4E2DF;
   --color-paper-3: #EFEEEC;
   --color-brick:   #8E4A45;
-  --color-brick-l: #C98C86;
   --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
-/* Tailwind v4's dark variant follows prefers-color-scheme by default. This
-   points it at the attribute instead, which the toggle sets and which is
-   seeded from the system before first paint. */
-@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
-
-/* No overlay. The photograph runs at full strength and the vignette is gone
-   with it. Measured, bone over the image across the column the hero's type
-   occupies: 1.60:1, against the 4.5:1 small text needs and the 3:1 a display
-   line needs. Nothing on the picture clears, and the owner chose that with
-   the figures in view. 0.55 is where the headline cleared; 0.45 is where the
-   standfirst did. */
-:root, [data-theme="dark"] { --hero-photo: 1 }
+/* No overlay and no vignette. The photograph runs at full strength because
+   it can: it is a dark room, the band carries its own ink ground, and the
+   type is bone. Measured across the column the hero's objects occupy, bone
+   over the picture reads 8.76:1 at the median, 7.25 under the headline and
+   9.49 under the standfirst. The token stays for the next photograph, which
+   may be lighter and may need it. CLAUDE.md carries the full table.  */
+:root { --hero-photo: 1 }
 
 html { background: var(--color-paper) }
-html[data-theme="dark"] { background: var(--color-ink-2) }

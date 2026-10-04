@@ -15,8 +15,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-<meta name="theme-color" content="#D9D7D4" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#11261F" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#D9D7D4">
 
 <!-- Self-hosted. The skill bans a Google Fonts <link> in production and this
      repo has no build step to self-host through, so the four woff2 files were
@@ -26,19 +25,11 @@
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/geist-mono-latin.woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/geist.css">
 
-<link rel="stylesheet" href="/assets/tw-4ba1fe43.css">
+<link rel="stylesheet" href="/assets/tw-35b7d04c.css">
 
-<script>
-  (function () {
-    var s = null;
-    try { s = localStorage.getItem("ar-theme") } catch (e) {}
-    var d = s || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-    document.documentElement.setAttribute("data-theme", d);
-  })();
-</script>
 </head>
 
-<body class="font-sans antialiased bg-paper text-ink dark:bg-ink-2 dark:text-bone">
+<body class="font-sans antialiased bg-paper text-ink">
 
 <div id="root">
   <!-- Static fallback. The page renders through React, and a module that
@@ -58,7 +49,7 @@
 
 <script type="module">
 import { React, createRoot, motion, useReducedMotion, htm } from "/assets/vendor/runtime.js";
-const { useState, useEffect, useCallback } = React;
+const { useState, useEffect } = React;
 /* ------------------------------------------------------------ language
    Three languages, one object, no fetch. The page is small enough that
    shipping all three costs less than a round trip would, and a reader who
@@ -77,17 +68,17 @@ const { useState, useEffect, useCallback } = React;
 const STR = {
   en: {
     label: "English", short: "EN", htmlLang: "en",
-    nav: { open: "Open now", case: "The case" },
+    nav: { open: "Open now", case: "How it is scored" },
     cta: "Get your page scored",
     hero: {
-      eyebrow: "Industrial manufacturers bidding in the Nordics",
+      eyebrow: "Nordic industrial manufacturers",
       h1a: "Written once.", h1b: "Right every time.",
       sub: "Public buyers score the documents you hand in. Not the plant, not the price list, not the twenty years.",
       second: "See the open tender"
     },
     gate: [
       ["Who this is for", "The person writing the bid between tasks."],
-      ["What the first step costs", "Send one page from a tender you lost. No charge and no call."]
+      ["What the first step costs", "Nothing, and there is no call."]
     ],
     open: {
       eyebrow: "Open now",
@@ -97,35 +88,34 @@ const STR = {
       body: "Two of the three annexes are handed out as finished forms. The third is not, and it is the one where the quality and the environment weight is read.",
       seeEx: "See a filled example", getTpl: "Download the template",
       exMeta: "PDF, 5 sheets, 132 KB", tplMeta: "Word, 14 KB, fill it in",
-      fields: [["Tender deadline", "27 Oct 2026, 12:00"], ["Questions close", "19 Oct 2026"], ["Weight that is not price", "65%"]],
-      foot: "One tender today, and that is the whole list rather than the top of it. Another appears here when a notice has been read closely enough to write its attachment."
+      fields: [["Tender deadline", "27 Oct 2026, 12:00"], ["Questions close", "19 Oct 2026"]],
+      foot: "One tender today. Another when there is one worth writing for."
     },
     weigh: {
       h2: "Most of the score is not the price.",
-      segs: [["Quality and environment", 65], ["Price", 35]],
+      segs: [["Price", 35], ["Quality", 35], ["Climate and environment", 30]],
       body: "Read from the award criteria in the notice itself. Norwegian authorities have had to weight climate and environment at a minimum of 30% since January 2024, and this tender weights it exactly on that floor."
     },
     close: {
       h2: "Find out what it cost you. For nothing.",
-      body: "Send one page from a tender you lost. A method statement, a quality section, a capability answer. It comes back scored against the criteria it was judged on, with the points located and the reasoning written out."
+      body: "Send one page from a tender you lost. A method statement, a quality section, a capability answer. It comes back scored against the criteria it was judged on, with the points located, the reasoning written out, and a note on what the next one should carry."
     },
-    themeTo: { dark: "Switch to dark mode", light: "Switch to light mode" },
     langLabel: "Language"
   },
 
   nb: {
     label: "Norsk", short: "NO", htmlLang: "nb",
-    nav: { open: "Åpen nå", case: "Saken" },
+    nav: { open: "Åpen nå", case: "Slik vektes det" },
     cta: "Få siden din vurdert",
     hero: {
-      eyebrow: "Industriprodusenter som leverer tilbud i Norden",
+      eyebrow: "Nordiske industriprodusenter",
       h1a: "Skrevet én gang.", h1b: "Riktig hver gang.",
       sub: "Offentlige oppdragsgivere gir poeng til dokumentene du leverer. Ikke fabrikken, ikke prislisten, ikke de tjue årene.",
       second: "Se den åpne konkurransen"
     },
     gate: [
       ["Hvem den er for", "Den som skriver tilbudet mellom andre oppgaver."],
-      ["Hva første steg koster", "Send én side fra en konkurranse du tapte. Ingen kostnad og ingen samtale."]
+      ["Hva første steg koster", "Ingenting, og det er ingen samtale."]
     ],
     open: {
       eyebrow: "Åpen nå",
@@ -135,35 +125,34 @@ const STR = {
       body: "To av de tre vedleggene er utlevert som ferdige skjema. Det tredje er det ikke, og det er der kvalitets- og miljøvekten leses.",
       seeEx: "Se et utfylt eksempel", getTpl: "Last ned malen",
       exMeta: "PDF, 5 sider, 132 KB", tplMeta: "Word, 14 KB, fyll den ut",
-      fields: [["Tilbudsfrist", "27. okt. 2026, 12:00"], ["Frist for spørsmål", "19. okt. 2026"], ["Vekt som ikke er pris", "65 %"]],
-      foot: "Én konkurranse i dag, og det er hele listen, ikke toppen av den. Flere dukker opp her når en kunngjøring er lest nøye nok til å skrive vedlegget."
+      fields: [["Tilbudsfrist", "27. okt. 2026, 12:00"], ["Frist for spørsmål", "19. okt. 2026"]],
+      foot: "Én konkurranse i dag. Flere når det finnes en det er verdt å skrive for."
     },
     weigh: {
       h2: "Mesteparten av poengsummen er ikke prisen.",
-      segs: [["Kvalitet og miljø", 65], ["Pris", 35]],
+      segs: [["Pris", 35], ["Kvalitet", 35], ["Klima og miljø", 30]],
       body: "Lest fra tildelingskriteriene i selve kunngjøringen. Norske oppdragsgivere har siden januar 2024 måttet vekte klima og miljø med minst 30 prosent, og denne konkurransen ligger akkurat på den grensen."
     },
     close: {
       h2: "Finn ut hva det kostet deg. Gratis.",
-      body: "Send én side fra en konkurranse du tapte. En metodebeskrivelse, et kvalitetsavsnitt, et svar om kapasitet. Den kommer tilbake vurdert mot kriteriene den ble bedømt etter, med poengene plassert og begrunnelsen skrevet ut."
+      body: "Send én side fra en konkurranse du tapte. En metodebeskrivelse, et kvalitetsavsnitt, et svar om kapasitet. Den kommer tilbake vurdert mot kriteriene den ble bedømt etter, med poengene plassert, begrunnelsen skrevet ut, og en merknad om hva den neste bør inneholde."
     },
-    themeTo: { dark: "Bytt til mørk modus", light: "Bytt til lys modus" },
     langLabel: "Språk"
   },
 
   fi: {
     label: "Suomi", short: "FI", htmlLang: "fi",
-    nav: { open: "Avoinna nyt", case: "Tapaus" },
+    nav: { open: "Avoinna nyt", case: "Näin se pisteytetään" },
     cta: "Pyydä sivusi pisteytys",
     hero: {
-      eyebrow: "Pohjoismaissa tarjouksia jättävät teollisuusvalmistajat",
+      eyebrow: "Pohjoismaiset teollisuusvalmistajat",
       h1a: "Kirjoitettu kerran.", h1b: "Oikein joka kerta.",
       sub: "Julkiset hankkijat pisteyttävät asiakirjat, jotka jätät. Eivät tehdasta, eivät hinnastoa, eivät kahtakymmentä vuotta.",
       second: "Katso avoin tarjouspyyntö"
     },
     gate: [
       ["Kenelle tämä on", "Sille, joka kirjoittaa tarjouksen muiden töiden lomassa."],
-      ["Mitä ensimmäinen askel maksaa", "Lähetä yksi sivu hävitystä tarjouksesta. Ei maksua eikä puhelua."]
+      ["Mitä ensimmäinen askel maksaa", "Ei mitään, eikä puhelua tule."]
     ],
     open: {
       eyebrow: "Avoinna nyt",
@@ -173,19 +162,18 @@ const STR = {
       body: "Kaksi kolmesta liitteestä annetaan valmiina lomakkeina. Kolmatta ei anneta, ja juuri siinä luetaan laadun ja ympäristön paino.",
       seeEx: "Katso täytetty esimerkki", getTpl: "Lataa malli",
       exMeta: "PDF, 5 sivua, 132 KB", tplMeta: "Word, 14 KB, täytä se",
-      fields: [["Tarjousten määräaika", "27.10.2026, 12:00"], ["Kysymysten määräaika", "19.10.2026"], ["Paino, joka ei ole hinta", "65 %"]],
-      foot: "Yksi tarjouspyyntö tänään, ja se on koko lista eikä sen kärki. Lisää ilmestyy tähän, kun ilmoitus on luettu riittävän tarkasti liitteen kirjoittamiseksi."
+      fields: [["Tarjousten määräaika", "27.10.2026, 12:00"], ["Kysymysten määräaika", "19.10.2026"]],
+      foot: "Yksi tarjouspyyntö tänään. Lisää, kun löytyy sellainen jolle kannattaa kirjoittaa."
     },
     weigh: {
       h2: "Suurin osa pisteistä ei ole hinta.",
-      segs: [["Laatu ja ympäristö", 65], ["Hinta", 35]],
+      segs: [["Hinta", 35], ["Laatu", 35], ["Ilmasto ja ympäristö", 30]],
       body: "Luettu itse ilmoituksen vertailuperusteista. Norjalaisten hankintayksiköiden on tammikuusta 2024 lähtien pitänyt painottaa ilmastoa ja ympäristöä vähintään 30 prosentilla, ja tämä tarjouspyyntö on tasan sillä rajalla."
     },
     close: {
       h2: "Selvitä, mitä se maksoi sinulle. Ilmaiseksi.",
-      body: "Lähetä yksi sivu hävitystä tarjouksesta. Menetelmäkuvaus, laatuosio, kyvykkyysvastaus. Se palaa pisteytettynä niitä perusteita vasten, joilla se arvioitiin, pisteet paikannettuina ja perustelut kirjoitettuina."
+      body: "Lähetä yksi sivu hävitystä tarjouksesta. Menetelmäkuvaus, laatuosio, kyvykkyysvastaus. Se palaa pisteytettynä niitä perusteita vasten, joilla se arvioitiin, pisteet paikannettuina, perustelut kirjoitettuina ja merkintä siitä, mitä seuraavan tulisi sisältää."
     },
-    themeTo: { dark: "Vaihda tummaan tilaan", light: "Vaihda vaaleaan tilaan" },
     langLabel: "Kieli"
   }
 };
@@ -215,8 +203,25 @@ const WRAP = "mx-auto w-full max-w-[82rem] px-5 sm:px-8";
 const ANCHOR = "scroll-mt-[92px]";
 const MAILTO = "mailto:atlas@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost";
 
+/* Tracked capitals name a SECTION and nothing else. There are two on the
+   page, and that is the whole allowance. A label that names a value next to
+   it — a field, a date, a figure — is mono at 12px in sentence case, because
+   it is found rather than read and it should not look like a section opening.
+   Thirteen strings wore the eyebrow costume for a while and the page had one
+   texture for everything that was not a sentence.
+
+   Both carry --ink at 75%, which measures 4.89:1 on paper and 5.55:1 on the
+   paper-3 cards. They sat at 55% for a while, which is 2.97:1, and every
+   label, caption and file-meta line on the page was under the 4.5:1 small
+   text needs. The muting is the point; failing the floor was not. */
 function Eyebrow({ children, on = "flat" }) {
-  const tone = on === "photo" ? "text-bone/75" : "text-brick dark:text-brick-l";
+  /* Full bone on the photograph, never a muted one. This line sits in the
+     band where the picture's highlights run, measured at 3.49:1 to 5.03:1
+     against its own ground, and taking 25% off the type is the difference
+     between clearing the floor and not. Only the strongest value crosses
+     onto a picture; on the flat grounds the mark can be muted because the
+     ground underneath it is a single known value. */
+  const tone = on === "photo" ? "text-bone" : "text-brick";
   return html`<p class="font-mono text-[11px] uppercase tracking-[.18em] ${tone}">${children}</p>`;
 }
 
@@ -224,8 +229,8 @@ function Action({ href, children, tone = "solid", class: extra = "", ...rest }) 
   const mo = useMo();
   const base = "inline-flex items-center justify-center whitespace-nowrap rounded-full px-6 py-3 text-[15px] font-medium transition-colors";
   const tones = {
-    solid: "bg-ink text-bone hover:bg-ink/90 dark:bg-bone dark:text-ink dark:hover:bg-bone/90",
-    ghost: "border border-ink/25 text-ink hover:border-ink/60 dark:border-bone/30 dark:text-bone dark:hover:border-bone/70"
+    solid: "bg-ink text-bone hover:bg-ink/90",
+    ghost: "border border-ink/25 text-ink hover:border-ink/60"
   };
   return html`<${M.a} href=${href} class="${base} ${tones[tone]} ${extra}" ...${mo.press} ...${rest}>${children}<//>`;
 }
@@ -236,7 +241,7 @@ function Action({ href, children, tone = "solid", class: extra = "", ...rest }) 
    other two. aria-pressed carries the state for anyone not seeing the fill. */
 function LangPick({ lang, setLang, t, onPhoto }) {
   return html`
-    <div class="flex items-center rounded-full border p-[3px] ${onPhoto ? "border-bone/35" : "border-ink/20 dark:border-bone/25"}"
+    <div class="flex items-center rounded-full border p-[3px] ${onPhoto ? "border-bone/35" : "border-ink/20"}"
          role="group" aria-label=${t.langLabel}>
       ${LANGS.map(code => html`
         <button key=${code} type="button" onClick=${() => setLang(code)}
@@ -244,18 +249,18 @@ function LangPick({ lang, setLang, t, onPhoto }) {
           title=${STR[code].label}
           class="rounded-full px-2.5 py-1 font-mono text-[11px] uppercase tracking-[.1em] transition-colors ${
             lang === code
-              ? (onPhoto ? "bg-bone text-ink" : "bg-ink text-bone dark:bg-bone dark:text-ink")
-              : (onPhoto ? "text-bone/60 hover:text-bone" : "text-ink/60 hover:text-ink dark:text-bone/60 dark:hover:text-bone")}">
+              ? (onPhoto ? "bg-bone text-ink" : "bg-ink text-bone")
+              : (onPhoto ? "text-bone/70 hover:text-bone" : "text-ink/75 hover:text-ink")}">
           ${STR[code].short}
         </button>`)}
     </div>`;
 }
 
-function Nav({ t, theme, onToggle, lang, setLang, onPhoto }) {
+function Nav({ t, lang, setLang, onPhoto }) {
   const links = [[t.nav.open, "#open"], [t.nav.case, "#case"]];
   const shell = onPhoto
     ? "border-transparent bg-transparent text-bone"
-    : "border-ink/10 bg-paper/85 backdrop-blur-md dark:border-bone/10 dark:bg-ink-2/85";
+    : "border-ink/10 bg-paper/85 backdrop-blur-md";
   return html`
     <!-- Fixed, not sticky. A sticky header stays in normal flow, so it was
          holding 68px of its own above the band and showing the page's ground
@@ -270,17 +275,10 @@ function Nav({ t, theme, onToggle, lang, setLang, onPhoto }) {
             <a key=${h} href=${h}
                class="text-[14px] transition-colors ${onPhoto
                  ? "text-bone/75 hover:text-bone"
-                 : "text-ink/70 hover:text-ink dark:text-bone/70 dark:hover:text-bone"}">${l}</a>`)}
+                 : "text-ink/75 hover:text-ink"}">${l}</a>`)}
         </nav>
         <div class="flex items-center gap-2.5">
           <${LangPick} lang=${lang} setLang=${setLang} t=${t} onPhoto=${onPhoto} />
-          <button type="button" onClick=${onToggle}
-            aria-label=${theme === "dark" ? t.themeTo.light : t.themeTo.dark}
-            class="grid size-9 shrink-0 place-items-center rounded-full border transition-colors ${onPhoto
-              ? "border-bone/35 hover:border-bone/70"
-              : "border-ink/20 hover:border-ink/50 dark:border-bone/25 dark:hover:border-bone/60"}">
-            <span class="font-mono text-[11px]" aria-hidden="true">${theme === "dark" ? "L" : "D"}</span>
-          </button>
           <span class="hidden sm:block">
             <${Action} href=${MAILTO} class=${onPhoto ? "!bg-bone !text-ink hover:!bg-bone/90" : ""}>${t.cta}<//>
           </span>
@@ -337,11 +335,11 @@ function Hero({ t }) {
 function Gate({ t }) {
   const mo = useMo();
   return html`
-    <section class="${WRAP} border-b border-ink/10 py-14 dark:border-bone/10">
+    <section class="${WRAP} border-b border-ink/10 py-14">
       <div class="grid gap-10 md:grid-cols-2 md:gap-16">
         ${t.gate.map(([k, v], i) => html`
           <${M.div} key=${k} ...${mo.reveal(i)}>
-            <p class="font-mono text-[11px] uppercase tracking-[.18em] text-ink/55 dark:text-bone/55">${k}</p>
+            <p class="font-mono text-[12px] leading-snug text-ink/75">${k}</p>
             <p class="mt-3 max-w-[44ch] text-[1.05rem] leading-[1.65]">${v}</p>
           <//>`)}
       </div>
@@ -359,8 +357,8 @@ function OpenTender({ t }) {
         </h2>
       <//>
       <${M.div} ...${mo.reveal(1)}
-        class="mt-12 grid overflow-hidden rounded-2xl border border-ink/15 bg-paper-3 lg:grid-cols-[1.15fr_1fr] dark:border-bone/15 dark:bg-ink">
-        <div class="border-b border-ink/12 p-8 sm:p-10 lg:border-b-0 lg:border-r dark:border-bone/12">
+        class="mt-12 grid overflow-hidden rounded-2xl border border-ink/15 bg-paper-3 lg:grid-cols-[1.15fr_1fr]">
+        <div class="border-b border-ink/12 p-8 sm:p-10 lg:border-b-0 lg:border-r">
           <!-- The heading is in the reader's language. The Norwegian original
                is still here, because a bidder has to match it against the
                documents in front of them, but it sits on its own line under a
@@ -371,17 +369,17 @@ function OpenTender({ t }) {
           <h3 class="text-[1.5rem] font-medium leading-tight tracking-[-.02em]">${t.open.title}</h3>
           ${t.open.official && html`
             <div class="mt-4">
-              <p class="font-mono text-[11px] uppercase tracking-[.18em] text-ink/55 dark:text-bone/55">${t.open.official}</p>
+              <p class="font-mono text-[12px] leading-snug text-ink/75">${t.open.official}</p>
               <p lang="nb" class="mt-1.5 text-[1.05rem] leading-snug">Leveranse av avfallsbeholdere</p>
             </div>`}
-          <p class="mt-3 text-[.95rem] leading-relaxed text-ink/70 dark:text-bone/70">${t.open.buyer}</p>
+          <p class="mt-3 text-[.95rem] leading-relaxed text-ink/75">${t.open.buyer}</p>
           <p class="mt-7 max-w-[46ch] leading-[1.7]">${t.open.body}</p>
 
           <div class="mt-8 flex flex-wrap gap-3">
             <${Action} href="/assets/vedlegg-5/Vedlegg-5-eksempel.pdf" tone="ghost" target="_blank" rel="noopener">${t.open.seeEx}<//>
             <${Action} href="/assets/vedlegg-5/Vedlegg-5-Utfyllende-opplysninger.docx" download>${t.open.getTpl}<//>
           </div>
-          <p class="mt-4 text-[.85rem] leading-relaxed text-ink/60 dark:text-bone/60">
+          <p class="mt-4 text-[.85rem] leading-relaxed text-ink/75">
             ${t.open.exMeta} · ${t.open.tplMeta}
           </p>
         </div>
@@ -389,11 +387,11 @@ function OpenTender({ t }) {
           ${t.open.fields.map(([k, v]) => html`
             <div key=${k}>
               <dd class="font-mono text-[1.6rem] leading-none tracking-[-.02em]">${v}</dd>
-              <dt class="mt-2 font-mono text-[11px] uppercase tracking-[.18em] text-ink/55 dark:text-bone/55">${k}</dt>
+              <dt class="mt-3 font-mono text-[12px] leading-snug text-ink/75">${k}</dt>
             </div>`)}
         </dl>
       <//>
-      <${M.p} ...${mo.reveal(2)} class="mt-8 max-w-[58ch] text-[.95rem] leading-[1.7] text-ink/65 dark:text-bone/65">
+      <${M.p} ...${mo.reveal(2)} class="mt-8 max-w-[58ch] text-[.95rem] leading-[1.7] text-ink/75">
         ${t.open.foot}
       <//>
     </section>`;
@@ -401,40 +399,28 @@ function OpenTender({ t }) {
 
 function Weighting({ t }) {
   const mo = useMo();
-  const reduce = useReducedMotion();
   return html`
-    <section id="case" class="${ANCHOR} bg-ink py-20 text-bone sm:py-28 dark:bg-ink">
+    <section id="case" class="${ANCHOR} bg-ink py-20 text-bone sm:py-28">
       <div class="${WRAP}">
         <${M.h2} ...${mo.reveal(0)}
           class="max-w-[22ch] text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)] font-medium leading-[1.08] tracking-[-.025em]">
           ${t.weigh.h2}
         <//>
-        <!-- min-width:auto is the default on a flex item, so the segments
-             could not shrink below their own content and the bar rendered
-             63/37 against the 65/35 it is reporting. min-w-0 lets flex-grow
-             mean what it says. The picture must not disagree with the
-             numbers; that is the whole job of this fold. -->
-        <${M.div} ...${mo.reveal(1)} class="mt-12 flex w-full max-w-[56rem] overflow-hidden rounded-2xl border border-bone/20">
+        <!-- The award's three figures, stated. This was a filled 65/35 track
+             for a while, which is a dashboard control standing in for two
+             numbers, and the rollup is what made a reader ask whether 30
+             meant 30 on each criterion. Three figures cannot be misread, and
+             they are what the notice actually says. A hairline divides them;
+             nothing is filled, and no bar claims a precision the layout then
+             has to be checked against. -->
+        <dl class="mt-12 grid max-w-[56rem] gap-px overflow-hidden rounded-2xl border border-bone/20 bg-bone/20 sm:grid-cols-3">
           ${t.weigh.segs.map(([label, pct], i) => html`
-            <${M.div} key=${label}
-              initial=${reduce ? false : { flexGrow: 0 }}
-              whileInView=${{ flexGrow: pct }}
-              viewport=${{ once: true, amount: .4 }}
-              transition=${{ duration: .9, delay: .15 + i * .1, ease: EASE }}
-              style=${{ flexGrow: reduce ? pct : undefined, flexBasis: 0 }}
-              class="${i === 0 ? "bg-bone/15 border-r border-bone/20" : "bg-bone/[.05]"} min-w-0">
-              <!-- The padding lives on an inner element, not on the flex item.
-                   With border-box, padding sits inside flex-basis, so 96px of
-                   it came off the 896px bar before the 65:35 split was taken
-                   and the segments rendered 63.4/36.6. The bar reports the
-                   award's own figures; it cannot be two points out. -->
-              <div class="px-6 py-10">
-                <p class="font-mono text-[2rem] leading-none tracking-[-.02em]">${pct}</p>
-                <p class="mt-3 font-mono text-[11px] uppercase tracking-[.18em] text-bone/65">${label}</p>
-              </div>
+            <${M.div} key=${label} ...${mo.reveal(1 + i)} class="bg-ink px-6 py-10 sm:px-8">
+              <dd class="font-mono text-[clamp(2.6rem,2rem+1.8vw,3.6rem)] leading-none tracking-[-.03em]">${pct}</dd>
+              <dt class="mt-4 font-mono text-[12px] leading-snug text-bone/65">${label}</dt>
             <//>`)}
-        <//>
-        <${M.p} ...${mo.reveal(2)} class="mt-8 max-w-[56ch] leading-[1.7] text-bone/75">${t.weigh.body}<//>
+        </dl>
+        <${M.p} ...${mo.reveal(4)} class="mt-10 max-w-[56ch] leading-[1.7] text-bone/75">${t.weigh.body}<//>
       </div>
     </section>`;
 }
@@ -445,20 +431,19 @@ function Close({ t }) {
     <section class="${WRAP} py-24 sm:py-32">
       <${M.div} ...${mo.reveal(0)} class="max-w-[52ch]">
         <h2 class="text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)] font-medium leading-[1.08] tracking-[-.025em]">${t.close.h2}</h2>
-        <p class="mt-7 leading-[1.7] text-ink/80 dark:text-bone/80">${t.close.body}</p>
+        <p class="mt-7 leading-[1.7] text-ink/80">${t.close.body}</p>
         <div class="mt-10"><${Action} href=${MAILTO}>${t.cta}<//></div>
       <//>
     </section>
-    <footer class="border-t border-ink/10 py-10 dark:border-bone/10">
-      <div class="${WRAP} flex flex-wrap items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-[.18em] text-ink/55 dark:text-bone/55">
+    <footer class="border-t border-ink/10 py-10">
+      <div class="${WRAP} flex flex-wrap items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-[.18em] text-ink/75">
         <span>Arvorealta</span>
-        <a href="mailto:atlas@arvorealta.com" class="transition-colors hover:text-ink dark:hover:text-bone">atlas@arvorealta.com</a>
+        <a href="mailto:atlas@arvorealta.com" class="transition-colors hover:text-ink">atlas@arvorealta.com</a>
       </div>
     </footer>`;
 }
 
 function App() {
-  const [theme, setTheme] = useState(() => document.documentElement.getAttribute("data-theme") || "light");
   /* The browser's own preference decides the first language, so a Norwegian
      or Finnish reader arriving cold gets their own. English is the fallback
      and the default everywhere else. A choice, once made, is remembered and
@@ -475,23 +460,9 @@ function App() {
   });
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    try { localStorage.setItem("ar-theme", theme) } catch (e) {}
-  }, [theme]);
-
-  useEffect(() => {
     document.documentElement.lang = STR[lang].htmlLang;
     try { localStorage.setItem("ar-lang", lang) } catch (e) {}
   }, [lang]);
-
-  useEffect(() => {
-    const mq = matchMedia("(prefers-color-scheme: dark)");
-    const on = e => { let s = null; try { s = localStorage.getItem("ar-theme") } catch (err) {} if (!s) setTheme(e.matches ? "dark" : "light") };
-    mq.addEventListener("change", on);
-    return () => mq.removeEventListener("change", on);
-  }, []);
-
-  const toggle = useCallback(() => setTheme(x => x === "dark" ? "light" : "dark"), []);
 
   const [onPhoto, setOnPhoto] = useState(true);
   useEffect(() => {
@@ -518,7 +489,7 @@ function App() {
      them. The components live in git history at commit ff677c8. */
   return html`
     <${React.Fragment}>
-      <${Nav} t=${t} theme=${theme} onToggle=${toggle} lang=${lang} setLang=${setLang} onPhoto=${onPhoto} />
+      <${Nav} t=${t} lang=${lang} setLang=${setLang} onPhoto=${onPhoto} />
       <main>
         <${Hero} t=${t} />
         <${Gate} t=${t} />
