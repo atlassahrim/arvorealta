@@ -778,6 +778,36 @@ inside an English sentence read as an unfinished job.
 **The Nordic text is not a native speaker's.** The procurement vocabulary in
 it is the part worth having checked before the page is used in an approach.
 
+## Skills, and which one wins
+
+`.claude/skills/` holds six of ours and seven vendored from one upstream
+bundle. `.claude/skills/VENDORED.md` carries the source, the commit, the
+licence and what was checked before installing.
+
+Ours: `audit`, `eu-tender-documents`, `plan`, `profile`, `research`,
+`taste-skill`.
+
+Vendored from `ui-ux-pro-max-skill`: `banner-design`, `brand`, `design`,
+`design-system`, `slides`, `ui-styling`, `ui-ux-pro-max`.
+
+**This file outranks every one of them, and `taste-skill` outranks the
+vendored seven.** They are reference material, not a mandate, and several of
+them will suggest things this site has decided against:
+
+- `ui-styling` is built on shadcn/ui and Radix. **This page has no build step
+  and no runtime dependency it does not vendor itself.** Its script
+  `shadcn_add.py` shells out to `npx shadcn add`; read what it is installing
+  before running it here, and prefer not to
+- Several of them treat **dark mode** as a default to implement. The site is
+  light only and the reasoning is above
+- They carry their own palettes, type scales and token architectures. The
+  editorial and technical systems above are the brief; a vendored palette is
+  something to read, never to apply
+
+Use them for what they are good at, which is breadth — font pairings, chart
+forms, platform sizes, stack-specific patterns — and resolve every conflict in
+favour of this file.
+
 ## How to report back
 
 **Every reply ends with a plain-language synthesis.** A few short sentences,
