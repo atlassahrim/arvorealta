@@ -628,6 +628,40 @@ swap is total.
 Six, in order: the photographic hero, a two-item strip, the open tender, the
 award's weights on ink, the pricing ladder, and the close.
 
+**The award fold is one bar at full measure, not three tiles.** 100 wide,
+three segments, in the order that makes the argument: climate and environment
+30, quality 35, price 35 last. The two that are not price carry the strong
+fills and price recedes, so the 65 reads as one mass before a figure is read.
+
+It is a part-to-whole bar and **not a progress meter**. There is no track
+behind it to fill against; the three segments are the whole and they sum to
+100. A 2px gap of the page's own ground separates them, the ends are pill
+radii, and the labels sit under the bar on the ink ground rather than inside
+the fills, which keeps every word at 6.76:1 and off the geometry. Measured on
+ink the fills read 9.86:1, 8.3:1 and 3.43:1, so even the recessive one clears
+the 3:1 a graphic mark needs. The two bright steps sit close together on
+purpose: the gap and the figure under each segment carry identity, the fills
+carry the argument, and separating them further would break the grouping that
+is the point of the fold.
+
+**The fill is a translate inside a clip, and the state lives on the clip.**
+Two things were learned the hard way here. `scaleX` on a rounded end stretches
+the radius while it runs, so translating a full-width block behind a fixed
+clip is the only way to keep the geometry exact at every frame. And
+**`whileInView` on the fill itself never fires**: the fill starts translated a
+full width to the left, which is off the screen, so the observer watching it
+never sees it enter and it sits there for good. The clip never moves, so the
+clip is the thing that can be observed and the fill follows it as a variant.
+Anything that animates in from outside its own box has this problem.
+
+**The call to action is a prewritten mail, not a bare `mailto:`.** An empty
+compose window asks the reader to write the thing we are asking them for,
+which is where most of them stop. Subject and body are filled in the reader's
+own language with three blank fields and the one instruction that matters, so
+sending is attaching a file and pressing send. `encodeURIComponent`, not
+`escape`: the body carries newlines, and two of the three languages carry
+non-ASCII.
+
 **The ladder fold is the offer, and it is four rungs rather than four
 cards.** Equal columns say "pick one of these four", which is the opposite of
 a ladder, and a carousel on a screen with room hides three rungs behind an

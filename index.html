@@ -25,7 +25,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/geist-mono-latin.woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/geist.css">
 
-<link rel="stylesheet" href="/assets/tw-fab7c078.css">
+<link rel="stylesheet" href="/assets/tw-f477f6a2.css">
 
 </head>
 
@@ -68,7 +68,7 @@ const { useState, useEffect } = React;
 const STR = {
   en: {
     label: "English", short: "EN", htmlLang: "en",
-    nav: { open: "Open now", case: "How it is scored", price: "The ladder" },
+    nav: { open: "Open now", case: "How it is scored", price: "Pricing" },
     cta: "Get your page scored",
     hero: {
       eyebrow: "Industrial manufacturer bids",
@@ -93,8 +93,12 @@ const STR = {
     },
     weigh: {
       h2: "Most of the score is not the price.",
-      segs: [["Price", 35], ["Quality", 35], ["Climate and environment", 30]],
+      segs: [["Climate and environment", 30], ["Quality", 35], ["Price", 35]],
       body: "Read from the award criteria in the notice itself. Norwegian authorities have had to weight climate and environment at a minimum of 30% since January 2024, and this tender weights it exactly on that floor."
+    },
+    mail: {
+      subject: "One page from a tender we lost",
+      body: "Hello Atlas,\n\nAttached is one page from a tender we did not win.\n\nWhat the page is:\nWhich competition it came from:\nWhat the buyer told us, if anything:\n\nAttach the page before sending. A PDF or a Word file is fine.\n\n"
     },
     ladder: {
       h2: "Every tier credits into the one above it.",
@@ -123,7 +127,7 @@ const STR = {
 
   nb: {
     label: "Norsk", short: "NO", htmlLang: "nb",
-    nav: { open: "Åpen nå", case: "Slik vektes det", price: "Stigen" },
+    nav: { open: "Åpen nå", case: "Slik vektes det", price: "Priser" },
     cta: "Få siden din vurdert",
     hero: {
       eyebrow: "Tilbud fra industriprodusenter",
@@ -148,8 +152,12 @@ const STR = {
     },
     weigh: {
       h2: "Mesteparten av poengsummen er ikke prisen.",
-      segs: [["Pris", 35], ["Kvalitet", 35], ["Klima og miljø", 30]],
+      segs: [["Klima og miljø", 30], ["Kvalitet", 35], ["Pris", 35]],
       body: "Lest fra tildelingskriteriene i selve kunngjøringen. Norske oppdragsgivere har siden januar 2024 måttet vekte klima og miljø med minst 30 prosent, og denne konkurransen ligger akkurat på den grensen."
+    },
+    mail: {
+      subject: "Én side fra en konkurranse vi tapte",
+      body: "Hei Atlas,\n\nVedlagt er én side fra en konkurranse vi ikke vant.\n\nHva siden er:\nHvilken konkurranse den kommer fra:\nHva oppdragsgiver sa, hvis noe:\n\nLegg ved siden før du sender. PDF eller Word går fint.\n\n"
     },
     ladder: {
       h2: "Hvert trinn krediteres inn i det over.",
@@ -178,7 +186,7 @@ const STR = {
 
   fi: {
     label: "Suomi", short: "FI", htmlLang: "fi",
-    nav: { open: "Avoinna nyt", case: "Näin se pisteytetään", price: "Tikkaat" },
+    nav: { open: "Avoinna nyt", case: "Näin se pisteytetään", price: "Hinnoittelu" },
     cta: "Pyydä sivusi pisteytys",
     hero: {
       eyebrow: "Teollisuusvalmistajan tarjoukset",
@@ -203,8 +211,12 @@ const STR = {
     },
     weigh: {
       h2: "Suurin osa pisteistä ei ole hinta.",
-      segs: [["Hinta", 35], ["Laatu", 35], ["Ilmasto ja ympäristö", 30]],
+      segs: [["Ilmasto ja ympäristö", 30], ["Laatu", 35], ["Hinta", 35]],
       body: "Luettu itse ilmoituksen vertailuperusteista. Norjalaisten hankintayksiköiden on tammikuusta 2024 lähtien pitänyt painottaa ilmastoa ja ympäristöä vähintään 30 prosentilla, ja tämä tarjouspyyntö on tasan sillä rajalla."
+    },
+    mail: {
+      subject: "Yksi sivu hävitystä tarjouksesta",
+      body: "Hei Atlas,\n\nOheisena yksi sivu tarjouksesta, jota emme voittaneet.\n\nMikä sivu on:\nMistä kilpailutuksesta se on:\nMitä hankkija kertoi, jos mitään:\n\nLiitä sivu mukaan ennen lähettämistä. PDF tai Word käy.\n\n"
     },
     ladder: {
       h2: "Jokainen taso hyvitetään ylempään.",
@@ -255,7 +267,14 @@ function useMo() {
 
 const WRAP = "mx-auto w-full max-w-[82rem] px-5 sm:px-8";
 const ANCHOR = "scroll-mt-[92px]";
-const MAILTO = "mailto:atlas@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost";
+/* The address is prewritten. A bare mailto opens an empty window and the
+   reader has to compose the thing we are asking for, which is where most of
+   them stop. Subject and body are filled in the reader's own language, with
+   three blank fields and the one instruction that matters, so sending is
+   attaching a file and pressing send. encodeURIComponent, not escape: the
+   body carries newlines and non-ASCII in two of the three languages. */
+const mailto = t =>
+  `mailto:atlas@arvorealta.com?subject=${encodeURIComponent(t.mail.subject)}&body=${encodeURIComponent(t.mail.body)}`;
 
 /* A rule that draws itself to its share of the largest figure in the set.
    There is no track behind it: a filled background track is a dashboard
@@ -354,7 +373,7 @@ function Nav({ t, lang, setLang, onPhoto }) {
         <div class="flex items-center gap-2.5">
           <${LangPick} lang=${lang} setLang=${setLang} t=${t} onPhoto=${onPhoto} />
           <span class="hidden sm:block">
-            <${Action} href=${MAILTO} class=${onPhoto ? "!bg-bone !text-ink hover:!bg-bone/90" : ""}>${t.cta}<//>
+            <${Action} href=${mailto(t)} class=${onPhoto ? "!bg-bone !text-ink hover:!bg-bone/90" : ""}>${t.cta}<//>
           </span>
         </div>
       </div>
@@ -398,7 +417,7 @@ function Hero({ t }) {
             ${t.hero.sub}
           <//>
           <${M.div} ...${mo.rise(3)} class="mt-10 flex flex-wrap items-center gap-3">
-            <${Action} href=${MAILTO} class="!bg-bone !text-ink hover:!bg-bone/90">${t.cta}<//>
+            <${Action} href=${mailto(t)} class="!bg-bone !text-ink hover:!bg-bone/90">${t.cta}<//>
             <${Action} href="#open" tone="ghost" class="!border-bone/30 !text-bone hover:!border-bone/70">${t.hero.second}<//>
           <//>
         </div>
@@ -471,8 +490,39 @@ function OpenTender({ t }) {
     </section>`;
 }
 
+/* The award as one bar, 100 wide, three segments in the order that makes the
+   argument: climate and environment, quality, then price last. The two that
+   are not price carry the strong fills and price recedes, so the 65 reads as
+   one mass before a figure is read.
+
+   This is a part-to-whole bar and not a progress meter. There is no grey
+   track behind it to fill against; the three segments ARE the whole, they sum
+   to 100, and a 2px gap of the page's own ground separates them. Measured on
+   ink: the fills read 9.86:1, 7.1:1 and 3.43:1, so even the recessive one
+   clears the 3:1 a graphic mark needs. The labels sit under the bar on the
+   ink ground rather than inside the fills, which keeps every word at 6.76:1
+   and off the geometry.
+
+   Identity is never colour alone. Each segment is named and numbered directly
+   beneath its own width, so the three fills are a reading aid rather than the
+   only key.
+
+   The fill is a translate inside a clip, not a scaleX. scaleX on a rounded
+   end stretches the radius while it runs; translating a full-width block
+   behind a fixed clip keeps the geometry exact at every frame, and both are
+   compositor-only properties. Staggered left to right so the bar fills as one
+   sweep. Static under prefers-reduced-motion. */
 function Weighting({ t }) {
   const mo = useMo();
+  const reduce = useReducedMotion();
+  /* The two that are not price sit close together so they read as one mass,
+     and price drops away. 0.95 and 0.86 measure 9.86:1 and 8.3:1 on ink,
+     0.45 measures 3.43:1, which still clears the 3:1 a graphic mark needs.
+     The two bright steps are deliberately near each other: the 2px gap and
+     the figure under each segment carry identity, the fills carry the
+     argument, and separating them further would break the grouping that is
+     the point of the fold. */
+  const tone = ["bg-bone/95", "bg-bone/[.86]", "bg-bone/45"];
   return html`
     <section id="case" class="${ANCHOR} bg-ink py-20 text-bone sm:py-28">
       <div class="${WRAP}">
@@ -480,22 +530,41 @@ function Weighting({ t }) {
           class="max-w-[22ch] text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)] font-medium leading-[1.08] tracking-[-.025em]">
           ${t.weigh.h2}
         <//>
-        <!-- The award's three figures, stated. This was a filled 65/35 track
-             for a while, which is a dashboard control standing in for two
-             numbers, and the rollup is what made a reader ask whether 30
-             meant 30 on each criterion. Three figures cannot be misread, and
-             they are what the notice actually says. A hairline divides them;
-             nothing is filled, and no bar claims a precision the layout then
-             has to be checked against. -->
-        <dl class="mt-12 grid max-w-[56rem] gap-px overflow-hidden rounded-2xl border border-bone/20 bg-bone/20 sm:grid-cols-3">
-          ${t.weigh.segs.map(([label, pct], i) => html`
-            <${M.div} key=${label} ...${mo.reveal(1 + i)} class="bg-ink px-6 py-10 sm:px-8">
-              <dd class="font-mono text-[clamp(2.6rem,2rem+1.8vw,3.6rem)] leading-none tracking-[-.03em]">${pct}</dd>
-              <${Bar} pct=${pct} max=${35} on="bone" />
-              <dt class="mt-4 font-mono text-[12px] leading-snug text-bone/65">${label}</dt>
-            <//>`)}
-        </dl>
-        <${M.p} ...${mo.reveal(4)} class="mt-10 max-w-[56ch] leading-[1.7] text-bone/75">${t.weigh.body}<//>
+
+        <${M.div} ...${mo.reveal(1)} class="mt-14 w-full">
+          <div class="flex h-[clamp(3.5rem,6vw,5rem)] w-full gap-[2px]">
+            ${t.weigh.segs.map(([label, pct], i) => html`
+              <${M.div} key=${label} style=${{ flexGrow: pct, flexBasis: 0 }}
+                class="min-w-0 overflow-hidden
+                       ${i === 0 ? "rounded-l-full" : ""} ${i === t.weigh.segs.length - 1 ? "rounded-r-full" : ""}"
+                initial=${reduce ? false : "out"} whileInView="in"
+                viewport=${{ once: true, amount: .5 }}>
+                <!-- The state lives on the clip and the fill follows it as a
+                     variant. Put whileInView on the fill itself and it never
+                     fires: the fill starts translated a full width to the
+                     left, which is off the screen, so the observer watching
+                     it never sees it enter and it sits there for good. The
+                     clip never moves, so it is the thing that can be
+                     observed. -->
+                <${M.div} class="h-full w-full ${tone[i]}"
+                  variants=${{
+                    out: { x: "-100%" },
+                    in: { x: "0%", transition: { duration: .85, delay: .15 + i * .18, ease: EASE } }
+                  }} />
+              <//>`)}
+          </div>
+
+          <dl class="mt-5 flex w-full gap-[2px]">
+            ${t.weigh.segs.map(([label, pct], i) => html`
+              <div key=${label} style=${{ flexGrow: pct, flexBasis: 0 }} class="min-w-0">
+                <dd class="font-mono text-[clamp(1.6rem,1.2rem+1.2vw,2.4rem)] leading-none tracking-[-.03em] tabular-nums
+                           ${i === 2 ? "text-bone/75" : ""}">${pct}</dd>
+                <dt class="mt-3 font-mono text-[12px] leading-snug ${i === 2 ? "text-bone/65" : "text-bone/85"}">${label}</dt>
+              </div>`)}
+          </dl>
+        <//>
+
+        <${M.p} ...${mo.reveal(2)} class="mt-12 max-w-[56ch] leading-[1.7] text-bone/75">${t.weigh.body}<//>
       </div>
     </section>`;
 }
@@ -564,7 +633,7 @@ function Ladder({ t }) {
                 ${x.when && html`<p class="mt-3 font-mono text-[12px] leading-snug text-ink/75">${x.when}</p>`}
                 <p class="mt-6 text-[.95rem] leading-[1.65] text-ink/80">${x.terms}</p>
                 <p class="mt-6 border-t border-ink/15 pt-4 font-mono text-[12px] leading-[1.5] text-ink/75">${x.credit}</p>
-                ${i === 0 && html`<div class="mt-7"><${Action} href=${MAILTO}>${t.cta}<//></div>`}
+                ${i === 0 && html`<div class="mt-7"><${Action} href=${mailto(t)}>${t.cta}<//></div>`}
               </div>
             <//>`;
         })}
@@ -579,7 +648,7 @@ function Close({ t }) {
       <${M.div} ...${mo.reveal(0)} class="max-w-[52ch]">
         <h2 class="text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)] font-medium leading-[1.08] tracking-[-.025em]">${t.close.h2}</h2>
         <p class="mt-7 leading-[1.7] text-ink/80">${t.close.body}</p>
-        <div class="mt-10"><${Action} href=${MAILTO}>${t.cta}<//></div>
+        <div class="mt-10"><${Action} href=${mailto(t)}>${t.cta}<//></div>
       <//>
     </section>
     <footer class="border-t border-ink/10 py-10">
