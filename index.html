@@ -25,7 +25,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/geist-mono-latin.woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/geist.css">
 
-<link rel="stylesheet" href="/assets/tw-7ec41c04.css">
+<link rel="stylesheet" href="/assets/tw-fab7c078.css">
 
 </head>
 
@@ -68,7 +68,7 @@ const { useState, useEffect } = React;
 const STR = {
   en: {
     label: "English", short: "EN", htmlLang: "en",
-    nav: { open: "Open now", case: "How it is scored" },
+    nav: { open: "Open now", case: "How it is scored", price: "The ladder" },
     cta: "Get your page scored",
     hero: {
       eyebrow: "Industrial manufacturer bids",
@@ -96,17 +96,23 @@ const STR = {
       segs: [["Price", 35], ["Quality", 35], ["Climate and environment", 30]],
       body: "Read from the award criteria in the notice itself. Norwegian authorities have had to weight climate and environment at a minimum of 30% since January 2024, and this tender weights it exactly on that floor."
     },
-    score: {
-      h2: "Five sections carry the 65.",
-      body: "The template is those five, in the order the notice scores them, with the weight printed on each heading and every field empty. The words are yours.",
-      rows: [
-        ["Quality and functionality", 30],
-        ["Delivery time and delivery plan", 5],
-        ["Service life and repairability", 10],
-        ["Committed minimum PCR share", 10],
-        ["Other climate and environment measures", 10]
-      ],
-      total: "Scored through this one document"
+    ladder: {
+      h2: "Every tier credits into the one above it.",
+      lede: "Walk the whole ladder and you pay €8,000 in total, not €11,000. Credits never expire.",
+      tiers: [
+        { step: "Start", name: "One page scored", price: "Free", when: "",
+          terms: "Send one page from a tender you lost. It comes back scored against the criteria it was judged on, with the points located.",
+          credit: "No charge and no call." },
+        { step: "Step one", name: "One document", price: "€600", when: "3 to 4 days",
+          terms: "One document done properly, however many pages it runs to. The editable source file, and exports sized and named for tender portals.",
+          credit: "Credited in full into anything above it." },
+        { step: "The standard", name: "The document standard", price: "€2,400", when: "two weeks",
+          terms: "Every document that decides a bid, on one system your own people run. Templates, one document built end to end, file structure and naming, one revision round.",
+          credit: "Your €600 credited. All source files yours to keep." },
+        { step: "Beyond documents", name: "Identity system", price: "€8,000", when: "six weeks",
+          terms: "The document standard applied across the company. Colour and type for print, screen and product, signage and vehicles, written guidelines, a wordmark.",
+          credit: "Your €2,400 credited. Take it once the standard has proved itself." }
+      ]
     },
     close: {
       h2: "Find out what it cost you. For nothing.",
@@ -117,7 +123,7 @@ const STR = {
 
   nb: {
     label: "Norsk", short: "NO", htmlLang: "nb",
-    nav: { open: "Åpen nå", case: "Slik vektes det" },
+    nav: { open: "Åpen nå", case: "Slik vektes det", price: "Stigen" },
     cta: "Få siden din vurdert",
     hero: {
       eyebrow: "Tilbud fra industriprodusenter",
@@ -145,17 +151,23 @@ const STR = {
       segs: [["Pris", 35], ["Kvalitet", 35], ["Klima og miljø", 30]],
       body: "Lest fra tildelingskriteriene i selve kunngjøringen. Norske oppdragsgivere har siden januar 2024 måttet vekte klima og miljø med minst 30 prosent, og denne konkurransen ligger akkurat på den grensen."
     },
-    score: {
-      h2: "Fem seksjoner bærer de 65.",
-      body: "Malen er de fem, i den rekkefølgen kunngjøringen vurderer dem, med vekten trykt på hver overskrift og alle felt tomme. Ordene er dine.",
-      rows: [
-        ["Kvalitet og funksjonalitet", 30],
-        ["Leveringstid og leveringsplan", 5],
-        ["Levetid og reparerbarhet", 10],
-        ["Forpliktende minimumsandel PCR", 10],
-        ["Øvrige klima- og miljøtiltak", 10]
-      ],
-      total: "Vurdert gjennom dette ene dokumentet"
+    ladder: {
+      h2: "Hvert trinn krediteres inn i det over.",
+      lede: "Går du hele stigen, betaler du €8 000 totalt, ikke €11 000. Krediteringen utløper aldri.",
+      tiers: [
+        { step: "Start", name: "Én side vurdert", price: "Gratis", when: "",
+          terms: "Send én side fra en konkurranse du tapte. Den kommer tilbake vurdert mot kriteriene den ble bedømt etter, med poengene plassert.",
+          credit: "Ingen kostnad og ingen samtale." },
+        { step: "Steg én", name: "Ett dokument", price: "€600", when: "3 til 4 dager",
+          terms: "Ett dokument gjort ordentlig, uansett hvor mange sider det går over. Den redigerbare kildefilen, og eksporter tilpasset og navngitt for tilbudsportaler.",
+          credit: "Krediteres i sin helhet inn i alt over." },
+        { step: "Standarden", name: "Dokumentstandarden", price: "€2 400", when: "to uker",
+          terms: "Hvert dokument som avgjør et tilbud, på ett system dine egne folk kjører. Maler, ett dokument bygget fra ende til ende, filstruktur og navngiving, én revisjonsrunde.",
+          credit: "Dine €600 kreditert. Alle kildefiler er dine." },
+        { step: "Utover dokumenter", name: "Identitetssystem", price: "€8 000", when: "seks uker",
+          terms: "Dokumentstandarden anvendt i hele selskapet. Farge og typografi for trykk, skjerm og produkt, skilt og biler, skriftlige retningslinjer, et ordmerke.",
+          credit: "Dine €2 400 kreditert. Ta det når standarden har bevist seg." }
+      ]
     },
     close: {
       h2: "Finn ut hva det kostet deg. Gratis.",
@@ -166,7 +178,7 @@ const STR = {
 
   fi: {
     label: "Suomi", short: "FI", htmlLang: "fi",
-    nav: { open: "Avoinna nyt", case: "Näin se pisteytetään" },
+    nav: { open: "Avoinna nyt", case: "Näin se pisteytetään", price: "Tikkaat" },
     cta: "Pyydä sivusi pisteytys",
     hero: {
       eyebrow: "Teollisuusvalmistajan tarjoukset",
@@ -194,17 +206,23 @@ const STR = {
       segs: [["Hinta", 35], ["Laatu", 35], ["Ilmasto ja ympäristö", 30]],
       body: "Luettu itse ilmoituksen vertailuperusteista. Norjalaisten hankintayksiköiden on tammikuusta 2024 lähtien pitänyt painottaa ilmastoa ja ympäristöä vähintään 30 prosentilla, ja tämä tarjouspyyntö on tasan sillä rajalla."
     },
-    score: {
-      h2: "Viisi osiota kantaa 65:tä.",
-      body: "Malli on nämä viisi, siinä järjestyksessä kuin ilmoitus ne pisteyttää, paino jokaisessa otsikossa ja kaikki kentät tyhjinä. Sanat ovat sinun.",
-      rows: [
-        ["Laatu ja toiminnallisuus", 30],
-        ["Toimitusaika ja toimitussuunnitelma", 5],
-        ["Käyttöikä ja korjattavuus", 10],
-        ["Sitova PCR-vähimmäisosuus", 10],
-        ["Muut ilmasto- ja ympäristötoimet", 10]
-      ],
-      total: "Pisteytetään tämän yhden asiakirjan kautta"
+    ladder: {
+      h2: "Jokainen taso hyvitetään ylempään.",
+      lede: "Koko tikkaat kuljettuasi maksat yhteensä 8 000 €, et 11 000 €. Hyvitykset eivät vanhene.",
+      tiers: [
+        { step: "Aloitus", name: "Yksi sivu pisteytettynä", price: "Ilmainen", when: "",
+          terms: "Lähetä yksi sivu hävitystä tarjouksesta. Se palaa pisteytettynä niitä perusteita vasten, joilla se arvioitiin, pisteet paikannettuina.",
+          credit: "Ei maksua eikä puhelua." },
+        { step: "Askel yksi", name: "Yksi asiakirja", price: "600 €", when: "3 tai 4 päivää",
+          terms: "Yksi asiakirja tehtynä kunnolla, olipa sivuja kuinka monta tahansa. Muokattava lähdetiedosto ja viennit mitoitettuina ja nimettyinä tarjousportaaleihin.",
+          credit: "Hyvitetään kokonaan mihin tahansa ylempään." },
+        { step: "Standardi", name: "Asiakirjastandardi", price: "2 400 €", when: "kaksi viikkoa",
+          terms: "Jokainen tarjouksen ratkaiseva asiakirja yhdellä järjestelmällä, jota oma väkesi ajaa. Mallit, yksi asiakirja alusta loppuun, tiedostorakenne ja nimeäminen, yksi korjauskierros.",
+          credit: "600 € hyvitetty. Kaikki lähdetiedostot ovat sinun." },
+        { step: "Asiakirjojen yli", name: "Identiteettijärjestelmä", price: "8 000 €", when: "kuusi viikkoa",
+          terms: "Asiakirjastandardi sovellettuna koko yritykseen. Väri ja typografia painoon, näytölle ja tuotteeseen, opasteet ja ajoneuvot, kirjalliset ohjeet, sanamerkki.",
+          credit: "2 400 € hyvitetty. Ota se, kun standardi on osoittanut arvonsa." }
+      ]
     },
     close: {
       h2: "Selvitä, mitä se maksoi sinulle. Ilmaiseksi.",
@@ -313,7 +331,7 @@ function LangPick({ lang, setLang, t, onPhoto }) {
 }
 
 function Nav({ t, lang, setLang, onPhoto }) {
-  const links = [[t.nav.open, "#open"], [t.nav.case, "#case"]];
+  const links = [[t.nav.open, "#open"], [t.nav.case, "#case"], [t.nav.price, "#price"]];
   const shell = onPhoto
     ? "border-transparent bg-transparent text-bone"
     : "border-ink/10 bg-paper/85 backdrop-blur-md";
@@ -482,42 +500,75 @@ function Weighting({ t }) {
     </section>`;
 }
 
-/* The offer, shown rather than described. Every figure here is read off the
-   Word template the page hands out: five scored blocks, their own headings,
-   their own stated weights, adding to the 65 the fold above names. Nothing is
-   invented and there is no total printed in the document that this contradicts.
+/* The ladder. Four rungs, and the mechanic between them is the design: every
+   tier credits in full into the one above, so a client who walks the whole
+   thing spends 8,000 rather than 11,000 and never crosses the 10,000 mark
+   where most of these companies need a second approval signature. The credit
+   line under each price is not a footnote, it is the product.
 
-   The motion is the argument. The rows arrive in the order an evaluator works
-   down them and the total lands last, so a reader who watches it understands
-   what "scored against the criteria it was judged on" means before reading
-   the sentence that says so. It runs once, on entry, and collapses to the
-   finished state under prefers-reduced-motion. There is no loop: a thing that
-   keeps replaying is decoration, and this is the demonstration. */
-function Score({ t }) {
+   NOT four equal cards, and not a carousel on a screen with room. Equal
+   columns say "pick one of these four", which is the opposite of a ladder,
+   and a carousel on desktop hides three rungs behind an interaction to show
+   the fourth. The columns grow with the tier instead, left to right, so the
+   shape of the row carries the argument before a word is read. Below md the
+   row becomes a snap scroller, which is where a carousel is genuinely the
+   right component: there is no room for four and swiping is the native move.
+
+   Only the free rung carries an action. That is the ladder's own logic
+   rather than a design compromise, and it keeps the page to one CTA label
+   for one intent.
+
+   The motion is the rungs drawing in left to right, one rule per tier,
+   staggered. It says "these are steps in an order" rather than "here are
+   four options", which is the same thing the widths say. Once on entry, no
+   loop, static under prefers-reduced-motion. */
+function Ladder({ t }) {
   const mo = useMo();
+  const reduce = useReducedMotion();
   return html`
-    <section class="${WRAP} py-20 sm:py-28">
+    <section id="price" class="${ANCHOR} ${WRAP} py-20 sm:py-28">
       <${M.div} ...${mo.reveal(0)} class="max-w-[46ch]">
-        <h2 class="text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)] font-medium leading-[1.08] tracking-[-.025em]">${t.score.h2}</h2>
-        <p class="mt-7 leading-[1.7] text-ink/80">${t.score.body}</p>
+        <h2 class="text-[clamp(1.9rem,1.2rem+2.2vw,3.1rem)] font-medium leading-[1.08] tracking-[-.025em]">${t.ladder.h2}</h2>
+        <p class="mt-7 leading-[1.7] text-ink/80">${t.ladder.lede}</p>
       <//>
 
-      <dl class="mt-14 max-w-[52rem]">
-        ${t.score.rows.map(([name, w], i) => html`
-          <${M.div} key=${name} ...${mo.reveal(1 + i)}
-            class="border-t border-ink/15 py-5">
-            <div class="flex items-baseline justify-between gap-8">
-              <dt class="text-[1.05rem] leading-snug">${name}</dt>
-              <dd class="font-mono text-[1.75rem] leading-none tracking-[-.02em] tabular-nums">${w}</dd>
-            </div>
-            <${Bar} pct=${w} max=${30} cap=${72} />
-          <//>`)}
-        <${M.div} ...${mo.reveal(6)}
-          class="flex items-baseline justify-between gap-8 border-t-2 border-ink pt-6">
-          <dt class="font-mono text-[12px] leading-snug text-ink/75">${t.score.total}</dt>
-          <dd class="font-mono text-[clamp(2.6rem,2rem+1.8vw,3.6rem)] leading-none tracking-[-.03em] tabular-nums">65</dd>
-        <//>
-      </dl>
+      <div class="mt-14 -mx-5 flex snap-x snap-mandatory gap-6 overflow-x-auto px-5 pb-2
+                  sm:-mx-8 sm:px-8
+                  lg:mx-0 lg:grid lg:grid-cols-[.85fr_1fr_1.2fr_1.2fr] lg:gap-0 lg:overflow-visible lg:px-0 lg:pb-0">
+        ${t.ladder.tiers.map((x, i) => {
+          const lead = i === 2;
+          return html`
+            <${M.div} key=${x.name} ...${mo.reveal(1 + i)}
+              class="w-[80%] shrink-0 snap-start sm:w-[62%] md:w-[46%] lg:w-auto
+                     ${lead ? "bg-paper-3" : ""} ${i > 0 ? "lg:border-l lg:border-ink/12" : ""}">
+              <!-- The rule is the rung and it spans the whole column, so the
+                   padding lives on the content below it rather than on the
+                   column. With the padding on the column the recommended
+                   tier's rule started 28px inside its own panel and read as a
+                   mistake rather than as the heaviest rung in the set. -->
+              <${M.div}
+                class="w-full origin-left ${lead ? "h-[3px] bg-ink" : "h-px bg-ink/25"}"
+                initial=${reduce ? false : { scaleX: 0 }}
+                whileInView=${{ scaleX: 1 }}
+                viewport=${{ once: true, amount: .5 }}
+                transition=${{ duration: .7, delay: .1 + i * .14, ease: EASE }}
+                style=${{ scaleX: reduce ? 1 : undefined }} />
+              <!-- On the scroller only the recommended tier is inset, because only it
+                     has a ground to be inset from. The others sit flush with the
+                     card edge so the first one's type lines up with the headline
+                     above it rather than sitting 24px inside the page gutter. -->
+              <div class="pt-7 pb-8 ${lead ? "px-6" : ""} lg:pr-7 ${i === 0 ? "lg:pl-0" : "lg:pl-7"}">
+                <p class="font-mono text-[12px] leading-snug text-ink/75">${x.step}</p>
+                <h3 class="mt-4 text-[1.3rem] font-medium leading-tight tracking-[-.02em]">${x.name}</h3>
+                <p class="mt-6 text-[clamp(2rem,1.6rem+1.1vw,2.7rem)] font-medium leading-none tracking-[-.03em] tabular-nums">${x.price}</p>
+                ${x.when && html`<p class="mt-3 font-mono text-[12px] leading-snug text-ink/75">${x.when}</p>`}
+                <p class="mt-6 text-[.95rem] leading-[1.65] text-ink/80">${x.terms}</p>
+                <p class="mt-6 border-t border-ink/15 pt-4 font-mono text-[12px] leading-[1.5] text-ink/75">${x.credit}</p>
+                ${i === 0 && html`<div class="mt-7"><${Action} href=${MAILTO}>${t.cta}<//></div>`}
+              </div>
+            <//>`;
+        })}
+      </div>
     </section>`;
 }
 
@@ -591,7 +642,7 @@ function App() {
         <${Gate} t=${t} />
         <${OpenTender} t=${t} />
         <${Weighting} t=${t} />
-        <${Score} t=${t} />
+        <${Ladder} t=${t} />
         <${Close} t=${t} />
       </main>
     <//>`;
