@@ -31,7 +31,7 @@
 <link rel="stylesheet" href="/assets/fonts/ebgaramond.css">
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ebgaramond-latin.woff2" crossorigin>
 
-<link rel="stylesheet" href="/lab/tw-71978e81.css">
+<link rel="stylesheet" href="/lab/tw-a670cd1f.css">
 
 </head>
 
@@ -87,16 +87,6 @@ const STR = {
       ["Who this is for", "The person writing the bid between tasks."],
       ["What the first step costs", "Nothing, and there is no call."]
     ],
-    proof: {
-      eyebrow: "What you can open",
-      h2: "Read the work before you trust it.",
-      body: "No case studies and no client logos. The work is documents, so the documents are published.",
-      items: [
-        ["A redacted annex", "Two A4 sheets as submitted, with the client, the money and the signatures removed.", "/annex/sample/"],
-        ["A deck", "The same system at 1920 by 1080, for the room rather than the file.", "/deck/reference-pipeline/"],
-        ["The video work", "Where the studio came from, and why the documents look the way they do.", "/video/"]
-      ]
-    },
     open: {
       eyebrow: "Open now",
       h2: "If you are bidding on this one, the hard attachment is already written.",
@@ -201,16 +191,6 @@ const STR = {
       ["Hvem den er for", "Den som skriver tilbudet mellom andre oppgaver."],
       ["Hva første steg koster", "Ingenting, og det er ingen samtale."]
     ],
-    proof: {
-      eyebrow: "Hva du kan åpne",
-      h2: "Les arbeidet før du stoler på det.",
-      body: "Ingen referansehistorier og ingen kundelogoer. Arbeidet er dokumenter, så dokumentene er publisert.",
-      items: [
-        ["Et sladdet vedlegg", "To A4-sider slik de ble levert, uten kunde, beløp og signaturer.", "/annex/sample/"],
-        ["En presentasjon", "Samme system i 1920 ganger 1080, for rommet i stedet for filen.", "/deck/reference-pipeline/"],
-        ["Videoarbeidet", "Hvor studioet kommer fra, og hvorfor dokumentene ser slik ut.", "/video/"]
-      ]
-    },
     open: {
       eyebrow: "Åpen nå",
       h2: "Leverer du tilbud i denne, er det vanskeligste vedlegget allerede skrevet.",
@@ -315,16 +295,6 @@ const STR = {
       ["Kenelle tämä on", "Sille, joka kirjoittaa tarjouksen muiden töiden lomassa."],
       ["Mitä ensimmäinen askel maksaa", "Ei mitään, eikä puhelua tule."]
     ],
-    proof: {
-      eyebrow: "Mitä voit avata",
-      h2: "Lue työ ennen kuin luotat siihen.",
-      body: "Ei referenssitarinoita eikä asiakaslogoja. Työ on asiakirjoja, joten asiakirjat on julkaistu.",
-      items: [
-        ["Peitetty liite", "Kaksi A4-sivua sellaisina kuin ne jätettiin, ilman asiakasta, summia ja allekirjoituksia.", "/annex/sample/"],
-        ["Esitys", "Sama järjestelmä koossa 1920 kertaa 1080, huoneelle eikä tiedostolle.", "/deck/reference-pipeline/"],
-        ["Videotyö", "Mistä studio tulee ja miksi asiakirjat näyttävät tältä.", "/video/"]
-      ]
-    },
     open: {
       eyebrow: "Avoinna nyt",
       h2: "Jos jätät tarjouksen tähän, vaikein liite on jo kirjoitettu.",
@@ -547,7 +517,14 @@ const MAX_MB = 10;
 const MAX_BYTES = MAX_MB * 1024 * 1024;
 const OK_EXT = ["pdf", "doc", "docx", "odt", "rtf", "png", "jpg", "jpeg", "webp"];
 const ACCEPT = OK_EXT.map(e => "." + e).join(",") + ",application/pdf,image/*";
-const INTAKE = null;
+/* Basin, free tier: 50 submissions a month, 1 form, 100MB of storage, 30 day
+   retention. The endpoint is not a secret and is not treated as one — a form
+   action lives in the page's own HTML, so anybody reading source has it. What
+   stands in for secrecy is Basin's own spam protection, which is why that is
+   switched on at their end rather than guarded here. Storage is the binding
+   limit rather than the submission count: 100MB against our own 10MB cap is
+   ten worst cases, where a one page PDF is well under one. */
+const INTAKE = "https://usebasin.com/f/945efcd39804";
 
 const CtaCtx = createContext(() => {});
 
@@ -609,9 +586,25 @@ function Intake({ t, open, onClose }) {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return setErr(t.form.errEmailBad);
     if (!file) return setErr(t.form.errFile);
     setErr(""); setState("sending");
+    /* Kept deliberately. If the endpoint is ever unset the dialog says so
+       rather than faking a success, which is the state this shipped in and
+       the state it should fall back to rather than silently swallowing a
+       file. */
     if (!INTAKE) { setState("done"); return }
     try {
-      const r = await fetch(INTAKE, { method: "POST", body: fd });
+      /* Accept: application/json or Basin answers a form post with a 302 to
+         its own thank-you page. Through fetch that redirect is followed
+         silently and `ok` reads true off Basin's HTML, so the dialog could
+         not tell a delivered file from a rejected one. The header is what
+         makes the reply a JSON status this can actually branch on. The
+         Content-Type is deliberately not set: FormData writes its own, with
+         the multipart boundary, and naming it by hand drops the boundary and
+         the upload arrives empty. */
+      const r = await fetch(INTAKE, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: fd
+      });
       if (!r.ok) throw new Error(String(r.status));
       setState("done");
     } catch (_) {
@@ -853,36 +846,6 @@ function Gate({ t }) {
     </section>`;
 }
 
-/* The pattern this page is built on puts proof directly under the hero, and
-   the live page has none at all: no logos, no case studies, no quotes. That
-   is not an oversight, there is no tender client yet to name. So the proof
-   here is the only honest kind available, which is the work itself. Three
-   documents, already published, each a different thing the studio makes, and
-   every one of them opens in a new tab rather than describing itself.
-
-   A logo wall would have been faster and would have been a lie. */
-function Proof({ t }) {
-  const mo = useMo();
-  return html`
-    <section id="work" class="${ANCHOR} ${WRAP} py-20 sm:py-28">
-      <${M.div} ...${mo.reveal(0)} class="max-w-[46ch]">
-        <${Eyebrow}>${t.proof.eyebrow}<//>
-        <h2 class="mt-6 font-display text-[clamp(2.1rem,1.3rem+2.6vw,3.6rem)] font-normal leading-[1.06] tracking-[-.015em]">${t.proof.h2}</h2>
-        <p class="mt-7 leading-[1.7] text-ink/80">${t.proof.body}</p>
-      <//>
-      <ul class="mt-14 grid gap-x-8 gap-y-10 sm:grid-cols-3">
-        ${t.proof.items.map(([name, line, href], i) => html`
-          <${M.li} key=${name} ...${mo.reveal(1 + i)}>
-            <a href=${href} target="_blank" rel="noopener"
-               class="group block border-t border-ink/25 pt-6 transition-colors hover:border-ink">
-              <h3 class="text-[1.15rem] font-medium leading-tight tracking-[-.02em] underline decoration-ink/25 decoration-1 underline-offset-[6px] transition-colors group-hover:decoration-ink">${name}</h3>
-              <p class="mt-4 text-[.95rem] leading-[1.65] text-ink/80">${line}</p>
-            </a>
-          <//>`)}
-      </ul>
-    </section>`;
-}
-
 function OpenTender({ t }) {
   const mo = useMo();
   return html`
@@ -1019,19 +982,11 @@ function Weighting({ t }) {
   return html`
     <section id="case" class="on-ink ${ANCHOR} bg-ink py-20 text-bone sm:py-28">
       <div class="${WRAP}">
-        <!-- The headline and the sourcing note sit opposite each other rather
-             than stacked above and below the bar. Stacked, the fold ran 745px
-             with a 100px band of chart in the middle of it and an empty right
-             half above — measured. Opposite, the top of the fold is a spread
-             and the bar gets the width to itself. -->
-        <${M.div} ...${mo.reveal(0)} class="grid items-end gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-16">
-          <div>
-            <${Eyebrow} on="inv">${t.weigh.eyebrow}<//>
-            <h2 class="mt-6 max-w-[20ch] font-display text-[clamp(2.1rem,1.3rem+2.6vw,3.6rem)] font-normal leading-[1.06] tracking-[-.015em]">
-              ${t.weigh.h2}
-            </h2>
-          </div>
-          <p class="text-[.95rem] leading-[1.7] text-bone/75">${t.weigh.body}</p>
+        <${M.div} ...${mo.reveal(0)}>
+          <${Eyebrow} on="inv">${t.weigh.eyebrow}<//>
+          <h2 class="mt-6 max-w-[20ch] font-display text-[clamp(2.1rem,1.3rem+2.6vw,3.6rem)] font-normal leading-[1.06] tracking-[-.015em]">
+            ${t.weigh.h2}
+          </h2>
         <//>
 
         <${M.div} class="mt-14 sm:mt-16"
@@ -1070,14 +1025,21 @@ function Weighting({ t }) {
               </div>
             <//>
 
-            <!-- The bar. Square ends, a 2px gap of the page's own ink ground
-                 between segments, and the figure inside each one. It carried
-                 pill ends for a day and the owner called it: nothing else in
-                 this fold is round, and a lozenge is a dashboard control
-                 where this is a measured quantity. The wrapper clips, because
-                 the curtain travels a full bar width to the right and an
-                 unclipped one would take the page with it. -->
-            <div class="relative mt-3.5 overflow-hidden">
+            <!-- The bar takes the open-tender card's corner, rounded-2xl,
+                 and so do the price cards. It went from pill ends to square
+                 ends to this: the pill was a dashboard control and the square
+                 was the only hard corner on a page whose every other surface
+                 is a 16px card, which made it read as unfinished rather than
+                 as precise. One radius across the page is a system; three are
+                 three decisions.
+
+                 The radius lives on the wrapper, not on the segments, so the
+                 bar is one rounded surface with 2px of the page's own ink
+                 ground cut through it rather than three rounded tiles. The
+                 wrapper was already clipping, because the curtain travels a
+                 full bar width to the right and an unclipped one would take
+                 the page with it, so the rounding costs nothing. -->
+            <div class="relative mt-3.5 overflow-hidden rounded-2xl">
               <div class="grid gap-[2px]" style=${cols}>
                 ${segs.map(([label, pct], g) => html`
                   <div key=${label} ...${hold(g)}
@@ -1101,7 +1063,7 @@ function Weighting({ t }) {
                  the sweep uncovers the segment it belongs to. They take the
                  segment's own horizontal padding from sm up, so a name sits
                  directly under the figure it names rather than under the
-                 segment's edge — the pair is one object and the pill end is
+                 segment's edge — the pair is one object and the corner is
                  not. On a phone they run near flush instead: the first
                  segment is 99px wide there, and 28px of matching inset left
                  59px of measure, which broke "Climate and environment" over
@@ -1131,6 +1093,14 @@ function Weighting({ t }) {
           </div>
         <//>
 
+        <!-- The sourcing note sits under the bar, on the same left edge as
+             the headline and the first segment. It spent a version opposite
+             the headline as a spread, which read as a standfirst; it is not
+             one. It says where the three figures come from, so it belongs
+             under the three figures, where a caption goes. -->
+        <${M.p} ...${mo.reveal(2)} class="mt-12 max-w-[62ch] text-[.95rem] leading-[1.7] text-bone/75">
+          ${t.weigh.body}
+        <//>
       </div>
     </section>`;
 }
@@ -1157,10 +1127,14 @@ function Weighting({ t }) {
  * close, and the line under the row carries it here with the page's one
  * action beside it.
  *
- * Square corners, not the original's 16px radius, and the page's own label
- * conventions rather than the original's tracked capitals. Everything else
- * is the earlier fold: the widths, the lift, the lists, and the comparison
- * under the row.
+ * The earlier fold's 16px radius is back, because it is the open-tender
+ * card's radius and that card is the page's surface. All three cards take
+ * the same ground as well — paper-3, a hairline at ink/15 — so the
+ * recommended rung is argued by the wider column, the 16px lift and a solid
+ * ink border rather than by being the only card with a ground. The page's
+ * own label conventions rather than the original's tracked capitals.
+ * Everything else is the earlier fold: the widths, the lift, the lists, and
+ * the comparison under the row.
  *
  * Every price, every deliverable and the 15,000 kr come off
  * reference/index.html. Do not round one and do not invent one. */
@@ -1181,8 +1155,8 @@ function Ladder({ t }) {
       <div class="mt-14 grid gap-6 lg:grid-cols-[1fr_1.25fr_1fr] lg:items-start">
         ${t.ladder.tiers.map((x, i) => html`
           <${M.div} key=${x.name} ...${mo.reveal(i * .6)}
-            class="flex h-full flex-col border p-7 sm:p-9 ${x.lead
-              ? "border-ink bg-paper-3 lg:-mt-4 lg:pb-11"
+            class="flex h-full flex-col rounded-2xl border bg-paper-3 p-7 sm:p-9 ${x.lead
+              ? "border-ink lg:-mt-4 lg:pb-11"
               : "border-ink/15"}">
             <p class="font-mono text-[12px] leading-snug text-ink/75">${x.step}</p>
             <h3 class="mt-4 text-[1.3rem] font-medium leading-tight tracking-[-.02em]">${x.name}</h3>
@@ -1302,7 +1276,6 @@ function App() {
       <main id="main" tabindex="-1">
         <${Hero} t=${t} />
         <${Gate} t=${t} />
-        <${Proof} t=${t} />
         <${OpenTender} t=${t} />
         <${Weighting} t=${t} />
         <${Ladder} t=${t} />

@@ -980,17 +980,19 @@ at 21px tall, the wordmark at 20px and the footer address at 17px, against
 the 24px WCAG 2.2 asks for. The lab pads them with negative margins so
 nothing moves.
 
-**A proof fold, directly under the hero.** The pattern this page is built on
-puts proof second and the live page has none: no logos, no case studies, no
-quotes. There is no tender client to name yet, so the proof is the only
-honest kind available — three documents already published, each a different
-thing the studio makes, each opening rather than describing itself. **A logo
-wall would have been faster and would have been a lie.**
+**The proof fold is deleted, and it was tried here first.** The pattern this
+page is built on puts proof second and the live page has none — no logos, no
+case studies, no quotes — so the sandbox carried three published documents
+under the hero, headed "Read the work before you trust it." The owner removed
+it. The reasoning it was built on still stands and is worth keeping: there is
+no tender client to name yet, so the only honest proof available was the work
+itself, and **a logo wall would have been faster and would have been a lie.**
+What it could not answer is whether proof belongs above the offer at all on a
+page whose first step is free. If it comes back it joins the eyebrow spine or
+it gets no eyebrow.
 
-The eyebrow spine takes the new fold rather than breaking for it, which is
-what the rule above requires: `Industrial manufacturer bids` ·
-`What you can open` · `Open now` · `How it is scored` · `What it costs` ·
-`Where to start`.
+The spine is back to the five the live page runs: `Industrial manufacturer
+bids` · `Open now` · `How it is scored` · `What it costs` · `Where to start`.
 
 **The award fold is a horizontal bar again, and it is a measured one.** The
 waffle that stood here could be counted, which a bar cannot, and that was its
@@ -1000,13 +1002,19 @@ for the bar back and for a better one.** It is one object at full measure,
 three segments, 30 climate and environment, 35 quality, 35 price, with 2px of
 the page's own ink ground between them and square ends.
 
-**The ends are square, and they carried pill radii for a day.** The owner
-called it: nothing else in that fold is round, and a lozenge reads as a
-dashboard control where this is a measured quantity with a dimension line
-over it. The live page's bar still has the pill ends described above, which
-is now a difference between the two and a decision to make rather than a
-copy. Note that the pill is not unique to the bar — every button on the page
-is `rounded-full`, and so is the language control.
+**The corner is 16px, and it is the open-tender card's.** The bar went pill,
+then square, then here. The pill was a dashboard control. The square was the
+only hard corner on a page whose every other surface — the open-tender card,
+the dialog, and now the price cards — is a 16px card, which made it read as
+unfinished rather than as precise. **One radius across the page is a system;
+three are three decisions.** The live page's bar still has the pill ends
+described above, which is now a difference between the two and a decision to
+make rather than a copy.
+
+The radius lives on the bar's wrapper rather than on the segments, so the bar
+is one rounded surface with 2px of the page's own ink ground cut through it,
+not three rounded tiles. The wrapper was already clipping for the curtain, so
+the rounding costs nothing.
 
 Four things the first bar did not have.
 
@@ -1054,10 +1062,14 @@ figures. It lost on the fold. The nearest thing in the 21st.dev catalogue is
 a Partition Bar, which is what this is, and taking it would have meant
 `npx shadcn add` and a build step on a page that vendors everything.
 
-**The headline and the sourcing note sit opposite each other**, not stacked
-above and below the bar. Stacked, the fold ran 745px with a 100px band of
-chart in the middle and an empty right half above it — measured. Opposite,
-the top of the fold is a spread and the bar gets the width to itself.
+**The sourcing note sits under the bar, on the same left edge as the headline
+and the first segment.** It spent a version opposite the headline as a
+spread, which was a fix for a different problem — the fold then ran 745px
+with a 100px band of chart in the middle and an empty right half above it —
+and the spread made the note read as a standfirst. It is not one. It says
+where the three figures come from, so it belongs under the three figures,
+where a caption goes. Measured at 1440: note and headline both at x=96, the
+note 80px under the names row.
 
 **The dimension line, the bar and the names are three rows of one grid**, so
 the 65 boundary lands in the same place in all three to the pixel, and the
@@ -1114,22 +1126,61 @@ reader who came straight to the price fold still has somewhere to go. The
 comparison that closed the earlier fold is back too, the 15,000 kr a Swedish
 bid consultancy publishes for one draft of one bid.
 
-Square corners rather than the earlier fold's 16px radius, and the page's
-own label conventions rather than its tracked capitals. Everything else is
-that fold. **Every price, every deliverable and the 15,000 kr still come off
-`reference/index.html`.**
+**The earlier fold's 16px radius is back, and all three cards take the same
+ground.** `rounded-2xl`, a hairline at `ink/15`, `paper-3` — the open-tender
+card exactly, because that card is the page's surface. The recommended rung
+is therefore argued by the wider column, the 16px lift and a solid ink
+border rather than by being the only card with a ground, which is a stronger
+set of signals than the ground was on its own. The page's own label
+conventions rather than the earlier fold's tracked capitals. Everything else
+is that fold. **Every price, every deliverable and the 15,000 kr still come
+off `reference/index.html`.**
 
-**The call to action opens a form, and the form cannot deliver on its own.**
-The reader is asked for an email address and the page itself, which is the
-thing a prewritten mail could never guarantee: a mail that arrives with
-nothing attached is a round trip before the work can start. **But the site
-is static on GitHub Pages — there is no server here, so there is nothing to
-receive a file.** `INTAKE` in `lab/index.html` is the address the file would
-be posted to and it is `null`, because choosing the service is the owner's
-call and it needs a key. Until it is set the dialog validates everything and
-then says plainly that nothing was sent, which is the honest state rather
-than a fake success. The prewritten mail stays in the dialog's footer as the
-path that works today.
+**The call to action opens a form, and it delivers to Basin.** The reader is
+asked for an email address and the page itself, which is the thing a
+prewritten mail could never guarantee: a mail that arrives with nothing
+attached is a round trip before the work can start. The site is static on
+GitHub Pages and has no server of its own, so `INTAKE` in `lab/index.html`
+posts to a Basin form endpoint instead. The prewritten mail stays in the
+dialog's footer as the path that always works.
+
+**The endpoint is not a secret and is not treated as one.** A form action
+lives in the page's own HTML, so anybody reading source has it, and hiding
+it at local scope the way an API key is hidden would be theatre. What stands
+in for secrecy is Basin's own spam protection, switched on at their end.
+This file said otherwise for a turn and that was wrong.
+
+**Basin's free tier is 50 submissions a month, one form, 100MB of storage
+and 30 day retention, and storage is the binding limit rather than the
+count.** 100MB against the dialog's own 10MB cap is ten worst cases, where a
+one page PDF is well under one. Virus scanning is Pro only, so on the free
+tier files arrive from strangers unscanned — which matters, because what
+arrives is tender documents from people nobody has met. Anything worth
+keeping comes off Basin inside thirty days.
+
+**`Accept: application/json` is not optional.** Without it Basin answers a
+form post with a 302 to its own thank-you page; through `fetch` that
+redirect is followed silently and `ok` reads true off Basin's HTML, so the
+dialog could not tell a delivered file from a rejected one. **The
+`Content-Type` is deliberately not set**: `FormData` writes its own with the
+multipart boundary, and naming it by hand drops the boundary and the upload
+arrives empty.
+
+Verified against the live endpoint, not assumed. A real multipart POST
+returns `200` with `{"success":true}` and `access-control-allow-origin: *`,
+so the browser call is not blocked. The browser path itself is verified by
+intercepting the request and replaying that response, because **the sandbox
+Chromium does not trust this environment's proxy CA** and cannot reach
+`usebasin.com` at all — `ERR_CERT_AUTHORITY_INVALID`, the same shape of
+sandbox limit as the missing H.264. The request leaves as `POST`,
+`multipart/form-data` with a browser boundary, `Accept: application/json`,
+carrying `email` and `page`; 200 shows the done panel and a failure shows
+the fallback address in all three languages.
+
+The `INTAKE` null branch is kept on purpose. If the endpoint is ever unset
+the dialog says nothing was sent rather than faking a success, which is the
+state this shipped in and the state it should fall back to rather than
+silently swallowing a file.
 
 **The cap is 10 MB and it is checked before any request.** One page as a PDF
 is well under a megabyte, a scan of one page is a few, and ten is the
@@ -1192,4 +1243,4 @@ it again before trusting it anywhere else.
 Checked at 375, 768, 1024 and 1440: no horizontal scroll, no console errors,
 no interactive target under 24px except the skip link while it is
 `sr-only`, and the ring resolving to ink on the light grounds and bone over
-the photograph. All three languages carry the proof fold.
+the photograph. All three languages carry every fold, the dialog included.
