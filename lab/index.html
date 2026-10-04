@@ -31,7 +31,7 @@
 <link rel="stylesheet" href="/assets/fonts/ebgaramond.css">
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ebgaramond-latin.woff2" crossorigin>
 
-<link rel="stylesheet" href="/lab/tw-d785dc92.css">
+<link rel="stylesheet" href="/lab/tw-06eabd44.css">
 
 </head>
 
@@ -110,6 +110,7 @@ const STR = {
     },
     weigh: {
       eyebrow: "How it is scored",
+      alt: "The award is scored out of 100 points. Climate and environment carries 30, quality 35 and price 35, so 65 of the 100 are not the price.",
       h2: "Most of the score is not the price.",
       segs: [["Climate and environment", 30], ["Quality", 35], ["Price", 35]],
       body: "Read from the award criteria in the notice itself. Norwegian authorities have had to weight climate and environment at a minimum of 30% since January 2024, and this tender weights it exactly on that floor."
@@ -183,6 +184,7 @@ const STR = {
     },
     weigh: {
       eyebrow: "Slik vektes det",
+      alt: "Konkurransen gir 100 poeng. Klima og miljø teller 30, kvalitet 35 og pris 35, så 65 av de 100 er ikke prisen.",
       h2: "Mesteparten av poengsummen er ikke prisen.",
       segs: [["Klima og miljø", 30], ["Kvalitet", 35], ["Pris", 35]],
       body: "Lest fra tildelingskriteriene i selve kunngjøringen. Norske oppdragsgivere har siden januar 2024 måttet vekte klima og miljø med minst 30 prosent, og denne konkurransen ligger akkurat på den grensen."
@@ -256,6 +258,7 @@ const STR = {
     },
     weigh: {
       eyebrow: "Näin se pisteytetään",
+      alt: "Kilpailussa on 100 pistettä. Ilmasto ja ympäristö painaa 30, laatu 35 ja hinta 35, joten 65 pistettä sadasta ei ole hinta.",
       h2: "Suurin osa pisteistä ei ole hinta.",
       segs: [["Ilmasto ja ympäristö", 30], ["Laatu", 35], ["Hinta", 35]],
       body: "Luettu itse ilmoituksen vertailuperusteista. Norjalaisten hankintayksiköiden on tammikuusta 2024 lähtien pitänyt painottaa ilmastoa ja ympäristöä vähintään 30 prosentilla, ja tämä tarjouspyyntö on tasan sillä rajalla."
@@ -617,39 +620,44 @@ function OpenTender({ t }) {
     </section>`;
 }
 
-/* The award as one bar, 100 wide, three segments in the order that makes the
-   argument: climate and environment, quality, then price last. The two that
-   are not price carry the strong fills and price recedes, so the 65 reads as
-   one mass before a figure is read.
-
-   This is a part-to-whole bar and not a progress meter. There is no grey
-   track behind it to fill against; the three segments ARE the whole, they sum
-   to 100, and a 2px gap of the page's own ground separates them. Measured on
-   ink: the fills read 9.86:1, 7.1:1 and 3.43:1, so even the recessive one
-   clears the 3:1 a graphic mark needs. The labels sit under the bar on the
-   ink ground rather than inside the fills, which keeps every word at 6.76:1
-   and off the geometry.
-
-   Identity is never colour alone. Each segment is named and numbered directly
-   beneath its own width, so the three fills are a reading aid rather than the
-   only key.
-
-   The fill is a translate inside a clip, not a scaleX. scaleX on a rounded
-   end stretches the radius while it runs; translating a full-width block
-   behind a fixed clip keeps the geometry exact at every frame, and both are
-   compositor-only properties. Staggered left to right so the bar fills as one
-   sweep. Static under prefers-reduced-motion. */
+/* The award as 100 cells, because the award is 100 points.
+ *
+ * A bar shows a ratio and asks to be trusted. This is a unit chart: one cell
+ * is one point, 30 for climate and environment, 35 for quality, 35 for
+ * price, and a reader who doubts the figure can count it. "Most of the score
+ * is not the price" stops being a claim and becomes 65 cells on one side of
+ * a gap and 35 on the other.
+ *
+ * ui-ux-pro-max's chart data offers three forms for a part-to-whole of five
+ * categories or fewer and rules two of them out for this page: a pie, whose
+ * own "when NOT to use" lists an accessibility-first context and a reader
+ * who needs precise values, and a radar, which compares entities across
+ * attributes. The waffle is the third, and it is the one that fits a score
+ * out of a hundred.
+ *
+ * It also lifts a compromise the bar forced. There the two non-price fills
+ * had to sit almost on top of each other to read as one mass, which left
+ * them nearly indistinguishable; here the grouping is positional, so the
+ * three can separate properly. Measured on ink: 9.86:1, 5.60:1 and 3.18:1,
+ * so the quietest still clears the 3:1 a graphic mark needs.
+ *
+ * Accessibility. The grid is `aria-hidden` and a sentence carries the same
+ * content for a screen reader, because a hundred announced divs is worse
+ * than no chart at all. Identity is never colour alone: each block keeps its
+ * own figure and name under the grid. The hover is on the block rather than
+ * the cell — a tooltip per cell would say "1 point" a hundred times — and it
+ * dims the other two so a reader can isolate one without losing the whole.
+ */
 function Weighting({ t }) {
   const mo = useMo();
   const reduce = useReducedMotion();
-  /* The two that are not price sit close together so they read as one mass,
-     and price drops away. 0.95 and 0.86 measure 9.86:1 and 8.3:1 on ink,
-     0.45 measures 3.43:1, which still clears the 3:1 a graphic mark needs.
-     The two bright steps are deliberately near each other: the 2px gap and
-     the figure under each segment carry identity, the fills carry the
-     argument, and separating them further would break the grouping that is
-     the point of the fold. */
-  const tone = ["bg-bone/95", "bg-bone/[.86]", "bg-bone/45"];
+  const [lit, setLit] = useState(null);
+  const tone = ["bg-bone/95", "bg-bone/[.66]", "bg-bone/[.42]"];
+
+  /* one entry per point, carrying the block it belongs to, in reading order */
+  const cells = [];
+  t.weigh.segs.forEach(([, pct], g) => { for (let i = 0; i < pct; i++) cells.push(g); });
+
   return html`
     <section id="case" class="on-ink ${ANCHOR} bg-ink py-20 text-bone sm:py-28">
       <div class="${WRAP}">
@@ -660,35 +668,52 @@ function Weighting({ t }) {
           </h2>
         <//>
 
-        <${M.div} ...${mo.reveal(1)} class="mt-14 w-full">
-          <div class="flex h-[clamp(3.5rem,6vw,5rem)] w-full gap-[2px]">
-            ${t.weigh.segs.map(([label, pct], i) => html`
-              <${M.div} key=${label} style=${{ flexGrow: pct, flexBasis: 0 }}
-                class="min-w-0 overflow-hidden
-                       ${i === 0 ? "rounded-l-full" : ""} ${i === t.weigh.segs.length - 1 ? "rounded-r-full" : ""}"
-                initial=${reduce ? false : "out"} whileInView="in"
-                viewport=${{ once: true, amount: .5 }}>
-                <!-- The state lives on the clip and the fill follows it as a
-                     variant. Put whileInView on the fill itself and it never
-                     fires: the fill starts translated a full width to the
-                     left, which is off the screen, so the observer watching
-                     it never sees it enter and it sits there for good. The
-                     clip never moves, so it is the thing that can be
-                     observed. -->
-                <${M.div} class="h-full w-full ${tone[i]}"
-                  variants=${{
-                    out: { x: "-100%" },
-                    in: { x: "0%", transition: { duration: .85, delay: .15 + i * .18, ease: EASE } }
-                  }} />
-              <//>`)}
+        <!-- Grid left, legend right. At full measure a 10 by 10 of square
+             cells is 832px tall and swallows the fold, and the fold already
+             had an empty right half. Side by side it is a block a reader
+             takes in at once, and the figures sit beside the thing they
+             count rather than under it. One column below lg. -->
+        <${M.div} ...${mo.reveal(1)}
+          class="mt-14 grid items-start gap-10 lg:grid-cols-[minmax(0,26rem)_1fr] lg:gap-16">
+          <div>
+            <p class="sr-only">${t.weigh.alt}</p>
+            <${M.div} aria-hidden="true"
+                 class="grid grid-cols-10 gap-[2px] sm:gap-[3px]"
+                 initial=${reduce ? false : "out"} whileInView="in"
+                 viewport=${{ once: true, amount: .15 }}
+                 variants=${{ in: { transition: { staggerChildren: .006, delayChildren: .1 } } }}>
+              <!-- Two elements per cell, and the split is not cosmetic. Motion
+                   writes opacity inline while it animates the entry, which beats
+                   any Tailwind opacity class on the same node: the dim was
+                   written as a class first and measured doing nothing at all,
+                   100 cells at opacity 1 with a block hovered. The outer div
+                   owns the dim, the inner motion div owns the entry, and
+                   neither touches the other. Variant propagation reaches the
+                   inner one through context, so the plain div between them
+                   costs nothing. -->
+              ${cells.map((g, i) => html`
+                <div key=${i}
+                  class="aspect-square transition-opacity duration-300
+                         ${lit !== null && lit !== g ? "opacity-20" : "opacity-100"}">
+                  <${M.div} class="h-full w-full ${tone[g]}"
+                    variants=${{
+                      out: { opacity: 0, scale: .4 },
+                      in: { opacity: 1, scale: 1, transition: { duration: .32, ease: EASE } }
+                    }} />
+                </div>`)}
+            <//>
           </div>
 
-          <dl class="mt-5 flex w-full gap-[2px]">
-            ${t.weigh.segs.map(([label, pct], i) => html`
-              <div key=${label} style=${{ flexGrow: pct, flexBasis: 0 }} class="min-w-0">
-                <dd class="font-mono text-[clamp(1.6rem,1.2rem+1.2vw,2.4rem)] leading-none tracking-[-.03em] tabular-nums
-                           ${i === 2 ? "text-bone/75" : ""}">${pct}</dd>
-                <dt class="mt-3 font-mono text-[12px] leading-snug ${i === 2 ? "text-bone/65" : "text-bone/85"}">${label}</dt>
+          <dl class="grid gap-7 sm:grid-cols-3 lg:max-w-[24rem] lg:grid-cols-1">
+            ${t.weigh.segs.map(([label, pct], g) => html`
+              <div key=${label}
+                   onMouseEnter=${() => setLit(g)} onMouseLeave=${() => setLit(null)}
+                   onFocus=${() => setLit(g)} onBlur=${() => setLit(null)}
+                   tabindex="0"
+                   class="flex items-baseline gap-5 border-t pt-4 transition-colors ${lit === g ? "border-bone" : "border-bone/30"}">
+                <dd class="font-display text-[clamp(1.9rem,1.5rem+1.2vw,2.6rem)] leading-none tracking-[-.01em] tabular-nums
+                           ${g === 2 ? "text-bone/75" : ""}">${pct}</dd>
+                <dt class="font-mono text-[12px] leading-snug ${g === 2 ? "text-bone/65" : "text-bone/85"}">${label}</dt>
               </div>`)}
           </dl>
         <//>

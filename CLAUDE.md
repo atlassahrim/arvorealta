@@ -992,6 +992,60 @@ what the rule above requires: `Industrial manufacturer bids` ·
 `What you can open` · `Open now` · `How it is scored` · `What it costs` ·
 `Where to start`.
 
+**The award fold is 100 cells, because the award is 100 points.** A bar shows
+a ratio and asks to be trusted; a unit chart shows the points and can be
+counted. One cell is one point: 30 climate and environment, 35 quality, 35
+price, in reading order, so "most of the score is not the price" becomes 65
+cells on one side of a gap and 35 on the other.
+
+`ui-ux-pro-max`'s chart data offers three forms for a part-to-whole of five
+categories or fewer and rules two out for this page: a **pie**, whose own
+"when NOT to use" lists an accessibility-first context and a reader who needs
+precise values, and a **radar**, which compares entities across attributes.
+The **waffle** is the third and it is the one that fits a score out of a
+hundred. The nearest thing in the 21st.dev catalogue is a Partition Bar,
+which is what the fold already was, and taking it would have meant
+`npx shadcn add` and a build step on a page that vendors everything.
+
+It also lifted a compromise the bar forced. There the two non-price fills had
+to sit almost on top of each other to read as one mass, which left them
+nearly indistinguishable. Here the grouping is positional, so the three can
+separate properly: measured on ink, 9.86:1, 5.60:1 and 3.18:1, and the
+quietest still clears the 3:1 a graphic mark needs.
+
+**Grid left, legend right.** At full measure a 10 by 10 of square cells is
+832px tall and swallows the fold, which also already had an empty right half.
+Side by side the grid is 416px and the fold is 988px.
+
+**Accessibility.** The grid is `aria-hidden` and a sentence carries the same
+content for a screen reader, because a hundred announced divs is worse than
+no chart. Each block keeps its own figure and name, so identity is never
+colour alone. The hover is on the block rather than the cell — a tooltip per
+cell would say "1 point" a hundred times — and it dims the other two, by
+mouse and by keyboard focus alike.
+
+**Two traps, both measured rather than reasoned about.**
+
+The stagger lives on the grid, not on the cells. Given its own `whileInView`
+each cell waits to be seen, and the grid is taller than a phone, so landing
+mid-section left the bottom rows permanently at zero: two opacities on the
+page, 1 and 0. Same shape as the bar fill — an element that hides itself
+cannot be the thing you observe.
+
+Each cell is two elements, and the split is not cosmetic. **Motion writes
+`opacity` inline while it animates, which beats any Tailwind opacity class on
+the same node.** The dim was written as a class first and measured doing
+nothing at all: 100 cells at opacity 1 with a block hovered. The outer div
+owns the dim, the inner motion div owns the entry. Variant propagation
+reaches the inner one through context, so the plain div between them costs
+nothing.
+
+**No backticks in a comment inside a markup template.** An HTML comment
+written inside `html\`...\`` is still inside a JavaScript template literal, so
+one backtick closes the string and the whole module stops parsing. It
+happened twice in this fold, the second time in the sentence warning about
+the first.
+
 **A display face, and the live page's one contrast failure solved sideways.**
 The live page sets everything in one sans at four sizes, which is why it
 reads as a software landing page rather than as a firm whose product is
