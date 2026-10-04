@@ -25,7 +25,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/geist-mono-latin.woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/geist.css">
 
-<link rel="stylesheet" href="/assets/tw-4eaa07d4.css">
+<link rel="stylesheet" href="/assets/tw-7ec41c04.css">
 
 </head>
 
@@ -238,6 +238,26 @@ function useMo() {
 const WRAP = "mx-auto w-full max-w-[82rem] px-5 sm:px-8";
 const ANCHOR = "scroll-mt-[92px]";
 const MAILTO = "mailto:atlas@arvorealta.com?subject=One%20page%20from%20a%20tender%20we%20lost";
+
+/* A rule that draws itself to its share of the largest figure in the set.
+   There is no track behind it: a filled background track is a dashboard
+   control, and what is being shown here is one length against another, not
+   a progress reading. transformOrigin left so it grows from the figure's
+   own edge, and scaleX so the browser animates on the compositor. Reduced
+   motion draws it at full length with no transition. */
+function Bar({ pct, max, on = "ink", cap = 100 }) {
+  const reduce = useReducedMotion();
+  const w = (pct / max) * cap;
+  return html`<div class="mt-5 h-[3px] w-full origin-left" style=${{ maxWidth: `${w}%` }}>
+    <${M.div}
+      class="h-full w-full origin-left ${on === "bone" ? "bg-bone/70" : "bg-ink"}"
+      initial=${reduce ? false : { scaleX: 0 }}
+      whileInView=${{ scaleX: 1 }}
+      viewport=${{ once: true, amount: .6 }}
+      transition=${{ duration: .9, delay: .2, ease: EASE }}
+      style=${{ scaleX: reduce ? 1 : undefined }} />
+  </div>`;
+}
 
 /* Tracked capitals name a SECTION and nothing else. There are two on the
    page, and that is the whole allowance. A label that names a value next to
@@ -453,6 +473,7 @@ function Weighting({ t }) {
           ${t.weigh.segs.map(([label, pct], i) => html`
             <${M.div} key=${label} ...${mo.reveal(1 + i)} class="bg-ink px-6 py-10 sm:px-8">
               <dd class="font-mono text-[clamp(2.6rem,2rem+1.8vw,3.6rem)] leading-none tracking-[-.03em]">${pct}</dd>
+              <${Bar} pct=${pct} max=${35} on="bone" />
               <dt class="mt-4 font-mono text-[12px] leading-snug text-bone/65">${label}</dt>
             <//>`)}
         </dl>
@@ -484,9 +505,12 @@ function Score({ t }) {
       <dl class="mt-14 max-w-[52rem]">
         ${t.score.rows.map(([name, w], i) => html`
           <${M.div} key=${name} ...${mo.reveal(1 + i)}
-            class="flex items-baseline justify-between gap-8 border-t border-ink/15 py-5">
-            <dt class="text-[1.05rem] leading-snug">${name}</dt>
-            <dd class="font-mono text-[1.75rem] leading-none tracking-[-.02em] tabular-nums">${w}</dd>
+            class="border-t border-ink/15 py-5">
+            <div class="flex items-baseline justify-between gap-8">
+              <dt class="text-[1.05rem] leading-snug">${name}</dt>
+              <dd class="font-mono text-[1.75rem] leading-none tracking-[-.02em] tabular-nums">${w}</dd>
+            </div>
+            <${Bar} pct=${w} max=${30} cap=${72} />
           <//>`)}
         <${M.div} ...${mo.reveal(6)}
           class="flex items-baseline justify-between gap-8 border-t-2 border-ink pt-6">
