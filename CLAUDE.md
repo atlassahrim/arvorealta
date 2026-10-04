@@ -4,6 +4,46 @@ Atlas Sahrim's site and document system. Static HTML, no build step, no
 framework, no dependencies. Hosted on GitHub Pages; **every push to `main`
 deploys in about ten seconds.**
 
+## What this file is
+
+Every rule below is a decision that was made once, with the reasoning and
+usually the measurement kept beside it. That is what makes them useful: a
+session can see *why* before it changes anything, and the cost of a bad
+change is paid once rather than every time.
+
+**None of them outrank the owner.** Atlas can change anything here, including
+the prices, the credit mechanic, the two systems, the light-only decision,
+the underscore rule and this paragraph. A rule written as **never** means
+*never on your own initiative* — it is a standing instruction to the session,
+not a limit on the person the site belongs to.
+
+So when a change would cross something written here:
+
+1. **Say which rule, and say the reasoning in a sentence or two.** Not to
+   argue, but because the reasoning is usually the part nobody remembers, and
+   it is the only thing that lets the owner decide rather than guess. Where
+   there is a figure, give the figure.
+2. **If the owner says do it anyway, do it in full.** Once is enough; do not
+   re-raise it on the next turn or build a hedged half-version. A reaffirmed
+   instruction is a decision, not an objection to work around.
+3. **Then change this file in the same commit**, so the rule now reads the
+   way the site actually works, with the old reasoning kept as history where
+   it still explains something. A rule the code no longer follows is worse
+   than no rule, because the next session will trust it.
+
+Three things stay worth a second sentence even after approval, because the
+damage is not undoable by editing a file: **publishing something that was
+behind the underscore**, since a public path stays public and a client's
+unredacted material cannot be recalled; **a redaction that covers rather than
+removes**, since the text is still in the PDF; and **a factual claim about a
+live procurement**, since the page is read by the people running it. Flag
+those, then proceed on a clear answer like anything else.
+
+**`lab/` is exempt from all of it.** It is the sandbox and it exists to try
+what the rules forbid. Nothing in it needs permission, and nothing in it is
+evidence that the live page should change — that is still a decision, made
+here, in front of the figures.
+
 ## Live
 
 | URL | File |
@@ -952,6 +992,32 @@ what the rule above requires: `Industrial manufacturer bids` ·
 `What you can open` · `Open now` · `How it is scored` · `What it costs` ·
 `Where to start`.
 
+**A display face, and the live page's one contrast failure solved sideways.**
+The live page sets everything in one sans at four sizes, which is why it
+reads as a software landing page rather than as a firm whose product is
+documents. `ui-ux-pro-max` returns EB Garamond for "law firms, legal
+services, contracts, formal documents, government", which is this reader
+exactly, so the serif is a match rather than the default reach the taste
+skill warns about. It carries display type only — headlines and prices. Geist
+keeps the body and the UI, Geist Mono keeps every label and figure.
+
+Self-hosted at `assets/fonts/ebgaramond*.woff2`, OFL, 44 KB latin and 114 KB
+latin-ext, so the no-third-party-request rule still holds.
+
+The serif is set larger than the sans it replaced, and that moved the hero's
+whole stack 9px up, from an eyebrow at 260 to one at 251. **Measured there,
+the eyebrow reads 5.36:1 against 3.49 on the live page**, because the strip
+under it at that height is darker. The headline reads 8.04 and the standfirst
+10.20.
+
+That is worth taking seriously for the live page. The file above says the
+eyebrow clears nowhere and that the only two honest fixes are to drop the
+line or move it out of the band. This is the second one, reached by changing
+the type rather than by moving the object, and **nine pixels was the whole
+difference.** It is a sandbox result on one photograph at one width; measure
+it again before trusting it anywhere else.
+
 Checked at 375, 768, 1024 and 1440: no horizontal scroll, no console errors,
-and the ring resolves to ink on the light grounds and bone over the
-photograph.
+no interactive target under 24px except the skip link while it is
+`sr-only`, and the ring resolving to ink on the light grounds and bone over
+the photograph. All three languages carry the proof fold.
