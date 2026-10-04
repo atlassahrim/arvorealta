@@ -39,10 +39,12 @@ removes**, since the text is still in the PDF; and **a factual claim about a
 live procurement**, since the page is read by the people running it. Flag
 those, then proceed on a clear answer like anything else.
 
-**`lab/` is exempt from all of it.** It is the sandbox and it exists to try
-what the rules forbid. Nothing in it needs permission, and nothing in it is
-evidence that the live page should change — that is still a decision, made
-here, in front of the figures.
+**A sandbox is exempt from all of it.** `lab/` is deleted because it won and
+its whole contents are the offer page now, but the exemption is the standing
+rule rather than a fact about that folder: a sandbox exists to try what the
+rules forbid, nothing in it needs permission, and nothing in it is evidence
+that the live page should change — that is still a decision, made here, in
+front of the figures. Promoting one is that decision, and the owner makes it.
 
 ## Live
 
@@ -91,20 +93,29 @@ are not obliged to.
 open**, which is research, client material, unredacted annexes and working
 drafts. **Use `noindex` for a page that has to be opened on a real device at a
 real URL and should not compete with the site**, which today is `reference/`
-and `lab/`. Each is a near-copy of the offer page, so without `noindex` each
-would be a second `index.html` bidding against the first for the same terms.
-Neither is linked from anywhere.
+alone. It is a near-copy of the offer page, so without `noindex` it would be
+a second `index.html` bidding against the first for the same terms. It is not
+linked from anywhere. A rebuilt sandbox takes the same label for the same
+reason.
 
-`reference/` is the first offer page, kept for the owner. `lab/` is the
-sandbox, and it is back: the earlier one was deleted because it had become a
-stale fork of a page it was no longer ahead of, which is the right reason to
-delete a sandbox and not a reason never to have one. **A sandbox is deleted
-when it falls behind, and rebuilt from the live page when there is something
-to try.** It carries `noindex, nofollow` and its own compiled stylesheet, for
-the reason under `lab/_build.sh`: `_build-css.sh` runs `rm -f assets/tw-*.css`
-before it writes, so a lab stylesheet kept beside the live one would be
-deleted by the next build of the offer page and the sandbox would silently
-lose every rule it is testing.
+`reference/` is the first offer page, kept for the owner.
+
+**`lab/` is deleted, and it is deleted because it won.** Everything it was
+testing — the skip link, the page's own focus ring, `cursor: pointer` on
+buttons, the 24px targets, EB Garamond, the measured bar, the restored
+ladder and the intake form — is the offer page now. A sandbox that has been
+promoted is not a sandbox any more, it is a second copy of the live page
+that will drift, and the one before this was deleted for exactly that. **A
+sandbox is deleted when it falls behind or when it wins, and rebuilt from
+the live page when there is something new to try.**
+
+When it is rebuilt, two rules come with it. It carries `noindex, nofollow`,
+or it is a second `index.html` bidding against the first for the same terms.
+And **it needs its own compiled stylesheet, built by its own script**:
+`_build-css.sh` runs `rm -f assets/tw-*.css` before it writes, so a lab
+stylesheet kept beside the live one would be deleted by the next build of
+the offer page and the sandbox would silently lose every rule it is testing.
+`lab/_build.sh` is in git history at `dffcb11` and is the thing to copy.
 
 `mal/` was a Norwegian-only landing page for one tender in the retired
 editorial identity; its two files moved to `assets/vedlegg-5/` and the offer
@@ -118,14 +129,20 @@ sandbox that has done its job is deleted, not left up.
 
 ## The pricing ladder
 
-Four rungs on `index.html`, and the mechanic between them is the design.
+Three tiers on `index.html` and a free step that is not one.
 **Free** one page scored · **€600** one document · **€2,400** the full
 document standard · **€8,000** identity system.
 
-The free rung is the mouth of the funnel and it is the only one carrying an
-action. That is the ladder's own logic rather than a design compromise: you
-cannot buy the €2,400 first, because the credit only works walking up. It
-also keeps the page to one CTA label for one intent.
+**The free step is the mouth of the funnel and it is not a rung.** It is not
+bought, nothing credits into it, and it carries the page's only action —
+which is why it lives in the hero, the nav and the close, with one line and
+the same action under the ladder row rather than inside it. The ladder fold
+itself shows the three things that have a price. It stood as four rungs for
+a while, with Free as the first; the owner asked for the earlier three-tier
+fold back and that is the shape now.
+
+The credit only works walking up — you cannot buy the €2,400 first — and the
+page keeps one CTA label for one intent.
 
 Every tier credits in full into the one above. €600 comes off the €2,400,
 €2,400 comes off the €8,000, and €600 credits into €8,000 directly if the
@@ -150,9 +167,9 @@ document agreed before the work starts, not listed on the page.
 ```
 index.html              offer page
 video/index.html        video portfolio
-lab/index.html          the sandbox, rebuilt from the offer page — noindex
-                        own source and own build: lab/_tw.src.css, lab/_build.sh
 reference/index.html    the first offer page, kept for reference — noindex
+_tw.src.css             the offer page's Tailwind source, compiled by
+                        _build-css.sh into assets/tw-<hash>.css
 templates/index.html    index of every template
 deck/<slug>/index.html  one deck per folder
 annex/<slug>/index.html one A4 annex per folder
@@ -161,7 +178,7 @@ assets/
                         actually holds — the name carries a version:
                         after-1-<width>.<ext>
   vedlegg-5/            the open tender's example PDF and fillable Word file
-  fonts/                Geist and Geist Mono, self-hosted woff2
+  fonts/                Geist, Geist Mono and EB Garamond, self-hosted woff2
   vendor/runtime.js     React, react-dom, Motion and htm, bundled once
   tw-<hash>.css         the offer page's compiled Tailwind, built by _build-css.sh
   themes/arvorealta.css tokens for the editorial system
@@ -678,112 +695,324 @@ swap is total.
 Six, in order: the photographic hero, a two-item strip, the open tender, the
 award's weights on ink, the pricing ladder, and the close.
 
-**The award fold is one bar at full measure, not three tiles.** 100 wide,
-three segments, in the order that makes the argument: climate and environment
-30, quality 35, price 35 last. The two that are not price carry the strong
-fills and price recedes, so the 65 reads as one mass before a figure is read.
+**This page was the sandbox until it was promoted.** Everything below was
+measured in `lab/` first and then moved here whole. The figures are that
+sandbox's figures and they still hold, because the page is the same file.
 
-It is a part-to-whole bar and **not a progress meter**. There is no track
-behind it to fill against; the three segments are the whole and they sum to
-100. A 2px gap of the page's own ground separates them, the ends are pill
-radii, and the labels sit under the bar on the ink ground rather than inside
-the fills, which keeps every word at 6.76:1 and off the geometry. Measured on
-ink the fills read 9.86:1, 8.3:1 and 3.43:1, so even the recessive one clears
-the 3:1 a graphic mark needs. The two bright steps sit close together on
-purpose: the gap and the figure under each segment carry identity, the fills
-carry the argument, and separating them further would break the grouping that
-is the point of the fold.
+### Type, and the one failure the serif solved sideways
 
-**The fill is a translate inside a clip, and the state lives on the clip.**
-Two things were learned the hard way here. `scaleX` on a rounded end stretches
-the radius while it runs, so translating a full-width block behind a fixed
-clip is the only way to keep the geometry exact at every frame. And
-**`whileInView` on the fill itself never fires**: the fill starts translated a
-full width to the left, which is off the screen, so the observer watching it
-never sees it enter and it sits there for good. The clip never moves, so the
-clip is the thing that can be observed and the fill follows it as a variant.
-Anything that animates in from outside its own box has this problem.
+The page sets **EB Garamond** for display type — headlines and prices only —
+with **Geist** for body and UI and **Geist Mono** for every label and figure.
+Self-hosted at `assets/fonts/ebgaramond*.woff2`, OFL, 44 KB latin and 114 KB
+latin-ext, so the no-third-party-request rule still holds.
 
-**The call to action is a prewritten mail, not a bare `mailto:`.** An empty
-compose window asks the reader to write the thing we are asking them for,
-which is where most of them stop. Subject and body are filled in the reader's
-own language with three blank fields and the one instruction that matters, so
-sending is attaching a file and pressing send. `encodeURIComponent`, not
-`escape`: the body carries newlines, and two of the three languages carry
-non-ASCII.
+It is not a decorative reach. The page set everything in one sans at four
+sizes for a while, which is why it read as a software landing page rather
+than as a firm whose product is documents. `ui-ux-pro-max` returns EB
+Garamond for "law firms, legal services, contracts, formal documents,
+government", which is this reader exactly.
 
-**The ladder fold is the offer, and it is four rungs rather than four
-cards.** Equal columns say "pick one of these four", which is the opposite of
-a ladder. The columns grow with the tier instead, left to right at `lg`, so
-the shape of the row carries the argument before a word is read.
+**It also fixed the hero's one contrast failure, by accident.** The serif
+sets larger than the sans it replaced, which moved the hero's whole stack 9px
+up — an eyebrow at 260 became one at 251. **Measured there the eyebrow reads
+5.36:1 against 3.49 before**, because the strip under it at that height is
+darker. The headline reads 8.04 and the standfirst 10.20. The photograph
+section above says the eyebrow clears nowhere and that the only two honest
+fixes are to drop the line or move it out of the band; this was the second
+one, reached by changing the type rather than by moving the object, and
+**nine pixels was the whole difference.** It is one photograph at one width.
+Re-measure before trusting it anywhere else.
 
-**It is a grid and it never scrolls sideways.** One column on a phone, two
-from `sm`, four at `lg`. 2 by 2 is the shape wherever two columns are still
-legible, and at 390 they are not: the measure is 350px, so two of them would
-be 163px each and the recommended tier's paragraph would set about twenty
-characters to the line.
+### The controls
 
-It was a snap scroller for a day and that was the wrong call. A carousel asks
-a reader to discover that there is more and then work for it, and a price
-list is the one place on a page where every option has to be visible at once:
+**A skip link, first in the document.** Measured before it existed: the first
+Tab landed on the wordmark and it took eight stops to reach the hero's own
+action. It is invisible until focused, which is the whole pattern.
+
+**A focus ring the page owns**, 3px of ink at a 2px offset, inverting to bone
+inside `.on-ink` — the hero, the header while it is over the photograph, and
+the award fold. Before it, every control fell back to the browser's `1px
+auto`, which on the hero drew in a colour nobody chose.
+
+**Write it as longhand, not the `outline` shorthand.** As a shorthand the
+width and the style landed and the colour did not: Chrome reported the ring
+as `currentColor`, so on the hero it drew bone at 75% rather than the ink
+asked for. Both were measured before settling on the longhand.
+
+**`cursor: pointer` on buttons.** Tailwind's preflight sets `cursor: default`
+on `button`, so the three language controls were the only clickable things on
+the page that did not look clickable. Measured: they reported `default` while
+every `<a>` reported `pointer`.
+
+**Targets that clear 24px.** Measured before the fix: the three nav links at
+21px tall, the wordmark at 20px and the footer address at 17px, against the
+24px WCAG 2.2 asks for. They are padded with negative margins so nothing
+moves.
+
+### The award fold
+
+**One horizontal bar at full measure, and it is a measured one.** Three
+segments, 30 climate and environment, 35 quality, 35 price, with 2px of the
+page's own ink ground between them. It is a part-to-whole bar and **not a
+progress meter**: there is no track behind it to fill against, the three
+segments are the whole and they sum to 100.
+
+It was a hundred-cell waffle for a day. A waffle can be counted, which a bar
+cannot, and that was its whole advantage — but a hundred cells is a texture,
+and a texture reads as decoration before it reads as a score. The bar came
+back with four things the first bar did not have.
+
+**One, the 65 is drawn rather than inferred.** A dimension line spans the
+first two segments — end ticks, a hairline broken for the figure, `65` at
+display size with `/ 100` in mono beside it. A dimension line, not a bracket:
+a bracket groups, a dimension line states a measurement, which is the
+language a firm whose product is technical documents already speaks. It is a
+figure and not a phrase, so it needs no translating and all three languages
+carry the same mark. The first attempt set it as a 10px bordered box with an
+11px label and read on screen as a stray rule.
+
+**Two, the figures sit inside the segments**, so there is no legend to hop
+to. Measured on ink the three fills read **9.85:1, 6.12:1 and 3.88:1**, all
+clear of the 3:1 a graphic mark needs, and ink type on those same fills reads
+the same three figures. The numerals are display size, where the floor is 3:1
+rather than 4.5:1. **The names stay outside on the ink ground** at 8.19:1 and
+5.50:1, because words are small text and small text does not go on the
+geometry.
+
+**Three, the fills separate properly.** The first bar had to sit the two
+non-price fills almost on top of each other so the 65 would read as one mass,
+which left them nearly indistinguishable. The dimension line does the
+grouping now, so the three descend in clear steps and still group. That was
+the waffle's one real gain and it is kept without its cost.
+
+**Four, the motion is a single sweep, and it is a curtain rather than three
+fills.** Three segments each growing from their own left edge animate as
+three events; one block of the page's own ink ground sliding right off the
+whole bar is one event at one constant speed, and the segment geometry is
+never distorted while it runs. It also sidesteps the trap this file records
+twice — an element that starts outside its own box is never seen by the
+observer watching it — because the curtain starts covering the bar and is
+therefore always in view. Each name fades in as the sweep passes its segment,
+and the dimension line draws last. The wrapper clips, since the curtain
+travels a full bar width to the right and an unclipped one would take the
+page with it.
+
+**The corner is 16px and it is the open-tender card's.** The bar went pill,
+then square, then here. The pill was a dashboard control. The square was the
+only hard corner on a page whose every other surface — the open-tender card,
+the dialog, the price cards — is a 16px card, which made it read as
+unfinished rather than as precise. **One radius across the page is a system;
+three are three decisions.** The radius lives on the bar's wrapper rather
+than on the segments, so the bar is one rounded surface with 2px of ink cut
+through it, not three rounded tiles.
+
+**The sourcing note sits under the bar, on the same left edge as the headline
+and the first segment.** It spent a version opposite the headline as a
+spread, which was a fix for a different problem — the fold then ran 745px
+with a 100px band of chart in the middle and an empty right half above it —
+and the spread made the note read as a standfirst. It is not one. It says
+where the three figures come from, so it belongs under the three figures,
+where a caption goes. Measured at 1440: note and headline both at x=96.
+
+**The dimension line, the bar and the names are three rows of one grid**, so
+the 65 boundary lands in the same place in all three to the pixel, and the
+track widths come from the data. Every track is `minmax(0, Nfr)` and not
+`Nfr`: **an `fr` track takes its min-content width as a floor**, so at 375
+the longest name pushed its own column 13px wider than the segment above it
+and the three rows stopped lining up. The names take the segment's own
+padding from `sm` up so each sits under the figure it names; on a phone they
+run near flush instead, because 28px of matching inset left 59px of measure
+and broke "Climate and environment" over three lines.
+
+**Accessibility.** The bar is `aria-hidden` and a sentence carries the same
+content, because a chart is not reading matter. Identity is never colour
+alone: every segment holds its own figure and sits over its own name. The
+isolation dims the other two by mouse and by keyboard focus alike.
+
+**The hover dim can be a plain class on the segment, and on the name it
+cannot.** Nothing in the bar itself is animated by Motion, so a class holds
+there. The names are, and **Motion writes `opacity` inline while it animates,
+which beats any Tailwind opacity class on the same node** — the first version
+of that row was measured doing nothing at all, three names at opacity 1 with
+a segment hovered. The outer div owns the dim and the interaction, the inner
+motion div owns the arrival, and the two multiply. The waffle learned the
+same lesson at a hundred cells.
+
+The waffle's other trap is the general case and worth keeping: **an element
+that hides itself cannot be the thing you observe.** Given its own
+`whileInView` each cell waited to be seen, and the grid was taller than a
+phone, so landing mid-section left the bottom rows permanently at zero. Same
+shape as the first bar's fill, and the reason the curtain is built the way it
+is.
+
+`ui-ux-pro-max`'s chart data offers three forms for a part-to-whole of five
+categories or fewer and ruled two out for this page: a **pie**, whose own
+"when NOT to use" lists an accessibility-first context and a reader who needs
+precise values, and a **radar**, which compares entities across attributes.
+The **waffle** was the third and it lost on the fold. The nearest thing in
+the 21st.dev catalogue is a Partition Bar, which is what this is, and taking
+it would have meant `npx shadcn add` and a build step on a page that vendors
+everything.
+
+### The ladder fold
+
+**Three tiers as cards, the middle one wider and lifted.** Each carries its
+deliverables as a list under the price, which is the thing a reader comparing
+three tiers actually scans for. The fold stood as four hairline-separated
+rungs for a while, each tier compressed to a sentence, and **one deliverable
+went missing in that compression** — "The index. Every project, by client and
+year, ready at the next bid." It is back.
+
+**The objection to cards is about equal columns**, which say "pick one of
+these four" and are the opposite of a ladder. These are not equal: the middle
+runs `1.25fr` against `1fr`, lifts 16px out of the row and carries the only
+solid border. Measured at 1440: 369 / 462 / 369, equal heights at 621, the
+middle starting 16px higher. The shape carries the argument before a word is
+read, which is what the rule was protecting.
+
+**All three cards take the open-tender card exactly** — `rounded-2xl`, a
+hairline at `ink/15`, `paper-3`. So the recommended rung is argued by the
+wider column, the lift and the solid ink border rather than by being the only
+card with a ground.
+
+**Three tiers, not four.** The free step was never in this ladder. A line
+under the row carries it with the page's one action beside it, so a reader
+who came straight to the price fold still has somewhere to go. The comparison
+that closes the fold is the 15,000 kr a Swedish bid consultancy publishes for
+one draft of one bid.
+
+**It is a grid and it never scrolls sideways.** One column on a phone, three
+from `lg`. It was a snap scroller for a day and that was the wrong call: a
+carousel asks a reader to discover there is more and then work for it, and a
+price list is the one place where every option has to be visible at once —
 the credit mechanic only makes sense when €600, €2,400 and €8,000 can be seen
 together. **Horizontal scrolling is not a layout for anything the reader has
 to compare.**
 
-**The recommended tier's ground bleeds past its own column and takes the same
-amount back as padding**, so the ground reads as a panel while its type still
-lines up with every other rung. On a phone that bleed is the full page
-gutter, so the panel runs edge to edge. At `lg` the bleed is dropped and the
-ground is exactly the column.
+**If a snap scroller ever comes back, `scroll-padding` has to match its
+padding.** The row carried `px-5 sm:px-8` and a negative margin to bleed to
+the screen edge. Without `scroll-pl-5 sm:scroll-pl-8` beside it, `snap-start`
+aligned the first card to the padding edge, the browser scrolled the gutter
+away on load, and the row opened 32px to the left of the headline above it.
+Every width was mechanically fine and it still looked broken. The scroller is
+gone, the trap is not.
 
 **Every figure and every deliverable comes off `reference/index.html`**, which
 is where the original ladder copy lives. Do not round a price and do not
 invent a deliverable. If a tier's scope changes, change it there and here
 together.
 
-**The motion is the rungs drawing in left to right, one rule per tier,
-staggered, and that is the test any animation on this site has to pass.** It
-says "these are steps in an order" rather than "here are four options", which
-is the same thing the widths say. Once on entry, no loop, and under
-`prefers-reduced-motion` the rules are drawn at full length with no
-transition. A thing that keeps replaying is decoration.
-
-**The rule spans the whole column and the padding lives on the content below
-it.** With the padding on the column, the recommended tier's rule started
-28px inside its own panel and read as a mistake rather than as the heaviest
-rung in the set.
-
-**Prices are set in the sans, not the mono.** Geist Mono gives the comma a
-full advance, so `€2,400` draws as `€2 , 400`. The page's other large figures
-carry no separators and stay mono.
+**Prices are set in the sans and the serif, never the mono.** Geist Mono
+gives the comma a full advance, so `€2,400` draws as `€2 , 400`. The page's
+other large figures carry no separators and stay mono.
 
 A fold showing the free template's own five scored blocks stood here for a
 day. It was accurate and nobody could tell what it was for from its heading,
 which is the signal that a fold is explaining rather than selling. The offer
 took its place.
 
-**The page has no section numbering and five eyebrows, one per fold, and
-they are a spine rather than a tic.** Read down the page they go
+### The call to action, and the intake
+
+**The call to action opens a form, and it delivers to Basin.** The reader is
+asked for an email address and the page itself, which is the thing a
+prewritten mail could never guarantee: a mail that arrives with nothing
+attached is a round trip before the work can start. The site is static on
+GitHub Pages and has no server of its own, so `INTAKE` in `index.html` posts
+to a Basin form endpoint instead.
+
+**The prewritten mail is still there, in the dialog's footer**, as the path
+that always works. The reasoning for it holds and is worth keeping: an empty
+compose window asks the reader to write the thing we are asking them for,
+which is where most of them stop. Subject and body are filled in the reader's
+own language. `encodeURIComponent`, not `escape`: the body carries newlines,
+and two of the three languages carry non-ASCII.
+
+**The endpoint is not a secret and is not treated as one.** A form action
+lives in the page's own HTML, so anybody reading source has it, and hiding it
+at local scope the way an API key is hidden would be theatre. What stands in
+for secrecy is Basin's own spam protection, switched on at their end. This
+file said otherwise for a turn and that was wrong.
+
+**Basin's free tier is 50 submissions a month, one form, 100MB of storage and
+30 day retention, and storage is the binding limit rather than the count.**
+100MB against the dialog's own 10MB cap is ten worst cases, where a one page
+PDF is well under one. Virus scanning is Pro only, so on the free tier files
+arrive from strangers unscanned — which matters, because what arrives is
+tender documents from people nobody has met. Anything worth keeping comes off
+Basin inside thirty days. **The form is now on a public, indexed page rather
+than an unlisted sandbox, so the 50 is exposed to whatever finds it. If the
+quota starts emptying without real submissions behind it, that is the cause.**
+
+**`Accept: application/json` is not optional.** Without it Basin answers a
+form post with a 302 to its own thank-you page; through `fetch` that redirect
+is followed silently and `ok` reads true off Basin's HTML, so the dialog
+could not tell a delivered file from a rejected one. **The `Content-Type` is
+deliberately not set**: `FormData` writes its own with the multipart
+boundary, and naming it by hand drops the boundary and the upload arrives
+empty.
+
+Verified against the live endpoint, not assumed. A real multipart POST
+returns `200` with `{"success":true}` and `access-control-allow-origin: *`,
+so the browser call is not blocked. The browser path itself is verified by
+intercepting the request and replaying that response, because **the sandbox
+Chromium does not trust this environment's proxy CA** and cannot reach
+`usebasin.com` at all — `ERR_CERT_AUTHORITY_INVALID`, the same shape of
+sandbox limit as the missing H.264.
+
+The `INTAKE` null branch is kept on purpose. If the endpoint is ever unset
+the dialog says nothing was sent rather than faking a success, which is
+better than silently swallowing a file.
+
+**The cap is 10 MB and it is checked before any request**, along with the
+extension: `pdf, doc, docx, odt, rtf, png, jpg, jpeg, webp`. A reader who
+finds out from a server that their file was too large has already waited for
+the upload.
+
+**A native `<dialog>`, not a div.** `showModal()` gives the focus trap, the
+inert background, Escape to close, `::backdrop` and focus returning to the
+control that opened it, and all five are things a hand-rolled modal gets
+wrong. One dialog is mounted at the root and the opener travels down as
+context: four copies would be four copies of the reader's half-filled form,
+and whichever one they opened second would be empty.
+
+**Focus is moved by hand, and that is the video bug again.** Written as
+lowercase `autofocus` in the template, React did not put the attribute on the
+element at all — measured — so `showModal` fell back to the first focusable
+thing in the dialog, which is the close button. It is set on the node through
+a ref now, exactly as `muted` had to be. **Check the live property, never the
+JSX.**
+
+**The file input is hidden and a real button clicks it.** A file input styled
+`sr-only` is still focusable, so the focus ring lands on something nobody can
+see; a button that forwards the click puts the ring where the reader is
+looking.
+
+### The rest of the page
+
+**The page has no section numbering and five eyebrows, one per fold, and they
+are a spine rather than a tic.** Read down the page they go
 `Industrial manufacturer bids` · `Open now` · `How it is scored` ·
 `What it costs` · `Where to start`, which is a reader's own route through the
 argument and matches the three nav links. That is more than the one-per-three
 the taste skill allows, and it is the owner's call: an eyebrow that names
 where you are is wayfinding, and an eyebrow that decorates a headline is the
 thing the rule is actually against. **If a sixth fold arrives, it joins the
-spine or it gets none.** Do not let one fold open with a decorative label.
+spine or it gets none.**
+
+**A proof fold was tried and removed.** The pattern this page is built on
+puts proof second and this page has none — no logos, no case studies, no
+quotes — so the sandbox carried three published documents under the hero,
+headed "Read the work before you trust it." The reasoning still stands and is
+worth keeping: with no tender client to name, the work itself was the only
+honest proof available, and **a logo wall would have been faster and would
+have been a lie.** What it could not answer is whether proof belongs above
+the offer at all on a page whose first step is free. If it comes back it
+joins the spine or it gets no eyebrow.
 
 Tracked capitals name a section and nothing else — a label that names a value
 beside it is mono at 12px in sentence case, because it is found rather than
 read and it should not look like a section opening. On the ink fold the
 eyebrow takes `bone/75` at 6.76:1; the mark is 2.03:1 there and barred.
-
-**If a snap scroller ever comes back, `scroll-padding` has to match its
-padding.** The ladder's row carried `px-5 sm:px-8` and a negative margin to
-bleed to the screen edge. Without `scroll-pl-5 sm:scroll-pl-8` beside it,
-`snap-start` aligned the first card to the padding edge, the browser scrolled
-the gutter away on load, and the row opened 32px to the left of the headline
-above it, flush to the screen edge. Every width was mechanically fine and it
-still looked broken. The scroller is gone, the trap is not.
 
 **The hero carries a video over the photograph, and the photograph is the
 floor.** `assets/video/hero-1-720.mp4`, 1280 × 720, ten seconds, 3.1 MB,
@@ -798,16 +1027,22 @@ promise is swallowed.
 
 **React does not write `muted`, `autoplay` or `playsinline` for you, and a
 video missing any of them does not autoplay anywhere.** Written as plain
-lowercase attributes, all three were simply absent from the element — measured,
-not assumed. They are camelCase props now AND set on the node through a ref,
-with `play()` called there, because React writes `muted` as a property and
-skips it often enough to matter. Check the live properties, never the JSX,
-when a hero video will not start.
+lowercase attributes, all three were simply absent from the element —
+measured, not assumed. They are camelCase props now AND set on the node
+through a ref, with `play()` called there, because React writes `muted` as a
+property and skips it often enough to matter. Check the live properties,
+never the JSX, when a hero video will not start.
 
 **The sandbox Chromium has no H.264**, so playback cannot be verified here at
 all: `canPlayType('video/mp4; codecs="avc1.42E01E"')` returns empty and the
 hero falls back to the photograph every time. That proved the failure path and
 proves nothing about the video. **Check a real browser after deploying.**
+
+**No backticks in a comment inside a markup template.** An HTML comment
+written inside `html\`...\`` is still inside a JavaScript template literal, so
+one backtick closes the string and the whole module stops parsing. It
+happened twice in the award fold, the second time in the sentence warning
+about the first.
 
 ## Three languages on the offer page
 
@@ -948,299 +1183,3 @@ annexes so a wrong page size cannot ship quietly.
 
 Push to `main`. GitHub Actions (`.github/workflows/pages.yml`) builds and
 deploys. Nothing to run locally.
-
-## What the sandbox is testing
-
-`lab/` is the offer page with four changes, each one made because a
-measurement on the live page found something rather than because a checklist
-asked for it. They are candidates for the live page, not decisions.
-
-**A skip link.** Measured: the first Tab on the live page lands on the
-wordmark and it takes eight stops to reach the hero's own action. The lab
-page's first focusable element is a skip link, invisible until focused.
-
-**A focus ring the page owns.** Measured: every control on the live page
-falls back to the browser's `1px auto`, which on the hero over the photograph
-draws in a colour nobody chose. The lab runs 3px of ink at a 2px offset, and
-inverts to bone inside `.on-ink` — the hero, the header while it is over the
-photograph, and the award fold.
-
-**Write it as longhand, not the `outline` shorthand.** As a shorthand the
-width and the style landed and the colour did not: Chrome reported the ring
-as `currentColor`, so on the hero it drew bone at 75% rather than the ink
-asked for. Both were measured before settling on the longhand.
-
-**`cursor: pointer` on buttons.** Tailwind's preflight sets `cursor: default`
-on `button`, so the three language controls were the only clickable things on
-the page that did not look clickable. Measured: they reported `default` while
-every `<a>` reported `pointer`.
-
-**Targets that clear 24px.** Measured on the live page: the three nav links
-at 21px tall, the wordmark at 20px and the footer address at 17px, against
-the 24px WCAG 2.2 asks for. The lab pads them with negative margins so
-nothing moves.
-
-**The proof fold is deleted, and it was tried here first.** The pattern this
-page is built on puts proof second and the live page has none — no logos, no
-case studies, no quotes — so the sandbox carried three published documents
-under the hero, headed "Read the work before you trust it." The owner removed
-it. The reasoning it was built on still stands and is worth keeping: there is
-no tender client to name yet, so the only honest proof available was the work
-itself, and **a logo wall would have been faster and would have been a lie.**
-What it could not answer is whether proof belongs above the offer at all on a
-page whose first step is free. If it comes back it joins the eyebrow spine or
-it gets no eyebrow.
-
-The spine is back to the five the live page runs: `Industrial manufacturer
-bids` · `Open now` · `How it is scored` · `What it costs` · `Where to start`.
-
-**The award fold is a horizontal bar again, and it is a measured one.** The
-waffle that stood here could be counted, which a bar cannot, and that was its
-whole advantage. What it cost was the fold: a hundred cells is a texture, and
-a texture reads as decoration before it reads as a score. **The owner asked
-for the bar back and for a better one.** It is one object at full measure,
-three segments, 30 climate and environment, 35 quality, 35 price, with 2px of
-the page's own ink ground between them and square ends.
-
-**The corner is 16px, and it is the open-tender card's.** The bar went pill,
-then square, then here. The pill was a dashboard control. The square was the
-only hard corner on a page whose every other surface — the open-tender card,
-the dialog, and now the price cards — is a 16px card, which made it read as
-unfinished rather than as precise. **One radius across the page is a system;
-three are three decisions.** The live page's bar still has the pill ends
-described above, which is now a difference between the two and a decision to
-make rather than a copy.
-
-The radius lives on the bar's wrapper rather than on the segments, so the bar
-is one rounded surface with 2px of the page's own ink ground cut through it,
-not three rounded tiles. The wrapper was already clipping for the curtain, so
-the rounding costs nothing.
-
-Four things the first bar did not have.
-
-**One, the 65 is drawn rather than inferred.** A dimension line spans the
-first two segments — end ticks, a hairline broken for the figure, `65` at
-display size with `/ 100` in mono beside it. A dimension line, not a bracket:
-a bracket groups, a dimension line states a measurement, which is the
-language a firm whose product is technical documents already speaks. It is a
-figure and not a phrase, so it needs no translating and all three languages
-carry the same mark. The first attempt set it as a 10px bordered box with an
-11px label and read on screen as a stray rule.
-
-**Two, the figures sit inside the segments**, so there is no legend to hop
-to. Measured on ink the three fills read **9.85:1, 6.12:1 and 3.88:1**, all
-clear of the 3:1 a graphic mark needs, and ink type on those same fills reads
-the same three figures. The numerals are display size, where the floor is 3:1
-rather than 4.5:1. **The names stay outside on the ink ground** at 8.19:1 and
-5.50:1, because words are small text and small text does not go on the
-geometry. That is the rule the first bar established and it holds.
-
-**Three, the fills separate properly.** On the first bar the two non-price
-fills had to sit almost on top of each other so the 65 would read as one
-mass, which left them nearly indistinguishable from each other. The dimension
-line does the grouping now, so the three descend in clear steps and still
-group. That was the waffle's one real gain and it is kept without its cost.
-
-**Four, the motion is a single sweep, and it is a curtain rather than three
-fills.** Three segments each growing from their own left edge animate as
-three events; one block of the page's own ink ground sliding right off the
-whole bar is one event at one constant speed, and the segment geometry is
-never distorted while it runs. It also sidesteps the trap this file records
-twice — an element that starts outside its own box is never seen by the
-observer watching it — because the curtain starts covering the bar and is
-therefore always in view. Each name fades in as the sweep passes its segment,
-and the dimension line draws last, after the bar it measures is complete. The
-wrapper clips, since the curtain travels a full bar width to the right and an
-unclipped one would take the page with it.
-
-`ui-ux-pro-max`'s chart data offers three forms for a part-to-whole of five
-categories or fewer and ruled two out for this page: a **pie**, whose own
-"when NOT to use" lists an accessibility-first context and a reader who needs
-precise values, and a **radar**, which compares entities across attributes.
-The **waffle** was the third, and it fits a score out of a hundred on the
-figures. It lost on the fold. The nearest thing in the 21st.dev catalogue is
-a Partition Bar, which is what this is, and taking it would have meant
-`npx shadcn add` and a build step on a page that vendors everything.
-
-**The sourcing note sits under the bar, on the same left edge as the headline
-and the first segment.** It spent a version opposite the headline as a
-spread, which was a fix for a different problem — the fold then ran 745px
-with a 100px band of chart in the middle and an empty right half above it —
-and the spread made the note read as a standfirst. It is not one. It says
-where the three figures come from, so it belongs under the three figures,
-where a caption goes. Measured at 1440: note and headline both at x=96, the
-note 80px under the names row.
-
-**The dimension line, the bar and the names are three rows of one grid**, so
-the 65 boundary lands in the same place in all three to the pixel, and the
-track widths come from the data. Every track is `minmax(0, Nfr)` and not
-`Nfr`: **an `fr` track takes its min-content width as a floor**, so at 375
-the longest name pushed its own column 13px wider than the segment above it
-and the three rows stopped lining up. The names take the segment's own
-padding from `sm` up so each sits under the figure it names; on a phone they
-run near flush instead, because 28px of matching inset left 59px of measure
-and broke "Climate and environment" over three lines.
-
-**Accessibility.** The bar is `aria-hidden` and a sentence carries the same
-content, because a chart is not reading matter. Identity is never colour
-alone: every segment holds its own figure and sits over its own name. The
-isolation dims the other two by mouse and by keyboard focus alike.
-
-**The hover dim can be a plain class on the segment, and on the name it
-cannot.** Nothing in the bar itself is animated by Motion, so a class holds
-there. The names are, and **Motion writes `opacity` inline while it animates,
-which beats any Tailwind opacity class on the same node** — the first version
-of that row was measured doing nothing at all, three names at opacity 1 with
-a segment hovered. The outer div owns the dim and the interaction, the inner
-motion div owns the arrival, and the two multiply. The waffle learned the
-same lesson at a hundred cells; it is the same trap and it is worth keeping
-written down.
-
-The waffle's other trap is also worth keeping, because it is the general
-case: **an element that hides itself cannot be the thing you observe.** Given
-its own `whileInView` each cell waited to be seen, and the grid was taller
-than a phone, so landing mid-section left the bottom rows permanently at
-zero. Same shape as the first bar's fill, and the reason the curtain above is
-built the way it is.
-
-**The ladder is the earlier one, restored.** This fold stood as four rungs
-separated by hairlines — Free, €600, €2,400, €8,000, each tier a sentence —
-and the owner asked for the version hidden at commit `ff677c8` back, on the
-grounds that it was better. It is: that one carried the deliverables as a
-list under each price, and a reader comparing three tiers scans for what
-they get rather than reading a paragraph about it. **One deliverable had
-gone missing in the compression and is back with it** — "The index. Every
-project, by client and year, ready at the next bid."
-
-**The house file's objection to cards is about equal columns**, which say
-"pick one of these four" and are the opposite of a ladder. These are not
-equal: the middle runs `1.25fr` against `1fr`, lifts 16px out of the row and
-carries the only solid border, so the recommended rung is argued for rather
-than badged. Measured at 1440: 369 / 462 / 369, equal heights at 621, the
-middle starting 16px higher.
-
-**Three tiers, not four.** The free step is the mouth of the funnel and was
-never in this ladder — it lives in the hero, the nav and the close. A line
-under the row carries it here with the page's one action beside it, so a
-reader who came straight to the price fold still has somewhere to go. The
-comparison that closed the earlier fold is back too, the 15,000 kr a Swedish
-bid consultancy publishes for one draft of one bid.
-
-**The earlier fold's 16px radius is back, and all three cards take the same
-ground.** `rounded-2xl`, a hairline at `ink/15`, `paper-3` — the open-tender
-card exactly, because that card is the page's surface. The recommended rung
-is therefore argued by the wider column, the 16px lift and a solid ink
-border rather than by being the only card with a ground, which is a stronger
-set of signals than the ground was on its own. The page's own label
-conventions rather than the earlier fold's tracked capitals. Everything else
-is that fold. **Every price, every deliverable and the 15,000 kr still come
-off `reference/index.html`.**
-
-**The call to action opens a form, and it delivers to Basin.** The reader is
-asked for an email address and the page itself, which is the thing a
-prewritten mail could never guarantee: a mail that arrives with nothing
-attached is a round trip before the work can start. The site is static on
-GitHub Pages and has no server of its own, so `INTAKE` in `lab/index.html`
-posts to a Basin form endpoint instead. The prewritten mail stays in the
-dialog's footer as the path that always works.
-
-**The endpoint is not a secret and is not treated as one.** A form action
-lives in the page's own HTML, so anybody reading source has it, and hiding
-it at local scope the way an API key is hidden would be theatre. What stands
-in for secrecy is Basin's own spam protection, switched on at their end.
-This file said otherwise for a turn and that was wrong.
-
-**Basin's free tier is 50 submissions a month, one form, 100MB of storage
-and 30 day retention, and storage is the binding limit rather than the
-count.** 100MB against the dialog's own 10MB cap is ten worst cases, where a
-one page PDF is well under one. Virus scanning is Pro only, so on the free
-tier files arrive from strangers unscanned — which matters, because what
-arrives is tender documents from people nobody has met. Anything worth
-keeping comes off Basin inside thirty days.
-
-**`Accept: application/json` is not optional.** Without it Basin answers a
-form post with a 302 to its own thank-you page; through `fetch` that
-redirect is followed silently and `ok` reads true off Basin's HTML, so the
-dialog could not tell a delivered file from a rejected one. **The
-`Content-Type` is deliberately not set**: `FormData` writes its own with the
-multipart boundary, and naming it by hand drops the boundary and the upload
-arrives empty.
-
-Verified against the live endpoint, not assumed. A real multipart POST
-returns `200` with `{"success":true}` and `access-control-allow-origin: *`,
-so the browser call is not blocked. The browser path itself is verified by
-intercepting the request and replaying that response, because **the sandbox
-Chromium does not trust this environment's proxy CA** and cannot reach
-`usebasin.com` at all — `ERR_CERT_AUTHORITY_INVALID`, the same shape of
-sandbox limit as the missing H.264. The request leaves as `POST`,
-`multipart/form-data` with a browser boundary, `Accept: application/json`,
-carrying `email` and `page`; 200 shows the done panel and a failure shows
-the fallback address in all three languages.
-
-The `INTAKE` null branch is kept on purpose. If the endpoint is ever unset
-the dialog says nothing was sent rather than faking a success, which is the
-state this shipped in and the state it should fall back to rather than
-silently swallowing a file.
-
-**The cap is 10 MB and it is checked before any request.** One page as a PDF
-is well under a megabyte, a scan of one page is a few, and ten is the
-headroom where a phone photograph of a printed page still fits — at or under
-what the common form services accept on their free tiers. A reader who finds
-out from a server that their file was too large has already waited for the
-upload. Extensions are checked too: `pdf, doc, docx, odt, rtf, png, jpg,
-jpeg, webp`.
-
-**A native `<dialog>`, not a div.** `showModal()` gives the focus trap, the
-inert background, Escape to close, `::backdrop` and focus returning to the
-control that opened it, and all five are things a hand-rolled modal gets
-wrong. One dialog is mounted at the root and the opener travels down as
-context: four copies would be four copies of the reader's half-filled form,
-and whichever one they opened second would be empty.
-
-**Focus is moved by hand, and that is the video bug again.** Written as
-lowercase `autofocus` in the template, React did not put the attribute on the
-element at all — measured — so `showModal` fell back to the first focusable
-thing in the dialog, which is the close button. It is set on the node through
-a ref now, exactly as `muted` had to be. **Check the live property, never the
-JSX.**
-
-**The file input is hidden and a real button clicks it.** A file input styled
-`sr-only` is still focusable, so the focus ring lands on something nobody can
-see; a button that forwards the click puts the ring where the reader is
-looking.
-
-**No backticks in a comment inside a markup template.** An HTML comment
-written inside `html\`...\`` is still inside a JavaScript template literal, so
-one backtick closes the string and the whole module stops parsing. It
-happened twice in this fold, the second time in the sentence warning about
-the first.
-
-**A display face, and the live page's one contrast failure solved sideways.**
-The live page sets everything in one sans at four sizes, which is why it
-reads as a software landing page rather than as a firm whose product is
-documents. `ui-ux-pro-max` returns EB Garamond for "law firms, legal
-services, contracts, formal documents, government", which is this reader
-exactly, so the serif is a match rather than the default reach the taste
-skill warns about. It carries display type only — headlines and prices. Geist
-keeps the body and the UI, Geist Mono keeps every label and figure.
-
-Self-hosted at `assets/fonts/ebgaramond*.woff2`, OFL, 44 KB latin and 114 KB
-latin-ext, so the no-third-party-request rule still holds.
-
-The serif is set larger than the sans it replaced, and that moved the hero's
-whole stack 9px up, from an eyebrow at 260 to one at 251. **Measured there,
-the eyebrow reads 5.36:1 against 3.49 on the live page**, because the strip
-under it at that height is darker. The headline reads 8.04 and the standfirst
-10.20.
-
-That is worth taking seriously for the live page. The file above says the
-eyebrow clears nowhere and that the only two honest fixes are to drop the
-line or move it out of the band. This is the second one, reached by changing
-the type rather than by moving the object, and **nine pixels was the whole
-difference.** It is a sandbox result on one photograph at one width; measure
-it again before trusting it anywhere else.
-
-Checked at 375, 768, 1024 and 1440: no horizontal scroll, no console errors,
-no interactive target under 24px except the skip link while it is
-`sr-only`, and the ring resolving to ink on the light grounds and bone over
-the photograph. All three languages carry every fold, the dialog included.
