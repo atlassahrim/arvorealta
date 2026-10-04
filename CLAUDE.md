@@ -998,7 +998,15 @@ whole advantage. What it cost was the fold: a hundred cells is a texture, and
 a texture reads as decoration before it reads as a score. **The owner asked
 for the bar back and for a better one.** It is one object at full measure,
 three segments, 30 climate and environment, 35 quality, 35 price, with 2px of
-the page's own ink ground between them and pill radii on the outer ends.
+the page's own ink ground between them and square ends.
+
+**The ends are square, and they carried pill radii for a day.** The owner
+called it: nothing else in that fold is round, and a lozenge reads as a
+dashboard control where this is a measured quantity with a dimension line
+over it. The live page's bar still has the pill ends described above, which
+is now a difference between the two and a decision to make rather than a
+copy. Note that the pill is not unique to the bar — every button on the page
+is `rounded-full`, and so is the language control.
 
 Four things the first bar did not have.
 
@@ -1082,6 +1090,73 @@ its own `whileInView` each cell waited to be seen, and the grid was taller
 than a phone, so landing mid-section left the bottom rows permanently at
 zero. Same shape as the first bar's fill, and the reason the curtain above is
 built the way it is.
+
+**The ladder is the earlier one, restored.** This fold stood as four rungs
+separated by hairlines — Free, €600, €2,400, €8,000, each tier a sentence —
+and the owner asked for the version hidden at commit `ff677c8` back, on the
+grounds that it was better. It is: that one carried the deliverables as a
+list under each price, and a reader comparing three tiers scans for what
+they get rather than reading a paragraph about it. **One deliverable had
+gone missing in the compression and is back with it** — "The index. Every
+project, by client and year, ready at the next bid."
+
+**The house file's objection to cards is about equal columns**, which say
+"pick one of these four" and are the opposite of a ladder. These are not
+equal: the middle runs `1.25fr` against `1fr`, lifts 16px out of the row and
+carries the only solid border, so the recommended rung is argued for rather
+than badged. Measured at 1440: 369 / 462 / 369, equal heights at 621, the
+middle starting 16px higher.
+
+**Three tiers, not four.** The free step is the mouth of the funnel and was
+never in this ladder — it lives in the hero, the nav and the close. A line
+under the row carries it here with the page's one action beside it, so a
+reader who came straight to the price fold still has somewhere to go. The
+comparison that closed the earlier fold is back too, the 15,000 kr a Swedish
+bid consultancy publishes for one draft of one bid.
+
+Square corners rather than the earlier fold's 16px radius, and the page's
+own label conventions rather than its tracked capitals. Everything else is
+that fold. **Every price, every deliverable and the 15,000 kr still come off
+`reference/index.html`.**
+
+**The call to action opens a form, and the form cannot deliver on its own.**
+The reader is asked for an email address and the page itself, which is the
+thing a prewritten mail could never guarantee: a mail that arrives with
+nothing attached is a round trip before the work can start. **But the site
+is static on GitHub Pages — there is no server here, so there is nothing to
+receive a file.** `INTAKE` in `lab/index.html` is the address the file would
+be posted to and it is `null`, because choosing the service is the owner's
+call and it needs a key. Until it is set the dialog validates everything and
+then says plainly that nothing was sent, which is the honest state rather
+than a fake success. The prewritten mail stays in the dialog's footer as the
+path that works today.
+
+**The cap is 10 MB and it is checked before any request.** One page as a PDF
+is well under a megabyte, a scan of one page is a few, and ten is the
+headroom where a phone photograph of a printed page still fits — at or under
+what the common form services accept on their free tiers. A reader who finds
+out from a server that their file was too large has already waited for the
+upload. Extensions are checked too: `pdf, doc, docx, odt, rtf, png, jpg,
+jpeg, webp`.
+
+**A native `<dialog>`, not a div.** `showModal()` gives the focus trap, the
+inert background, Escape to close, `::backdrop` and focus returning to the
+control that opened it, and all five are things a hand-rolled modal gets
+wrong. One dialog is mounted at the root and the opener travels down as
+context: four copies would be four copies of the reader's half-filled form,
+and whichever one they opened second would be empty.
+
+**Focus is moved by hand, and that is the video bug again.** Written as
+lowercase `autofocus` in the template, React did not put the attribute on the
+element at all — measured — so `showModal` fell back to the first focusable
+thing in the dialog, which is the close button. It is set on the node through
+a ref now, exactly as `muted` had to be. **Check the live property, never the
+JSX.**
+
+**The file input is hidden and a real button clicks it.** A file input styled
+`sr-only` is still focusable, so the focus ring lands on something nobody can
+see; a button that forwards the click puts the ring where the reader is
+looking.
 
 **No backticks in a comment inside a markup template.** An HTML comment
 written inside `html\`...\`` is still inside a JavaScript template literal, so

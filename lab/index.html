@@ -31,7 +31,7 @@
 <link rel="stylesheet" href="/assets/fonts/ebgaramond.css">
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ebgaramond-latin.woff2" crossorigin>
 
-<link rel="stylesheet" href="/lab/tw-205a1d0b.css">
+<link rel="stylesheet" href="/lab/tw-71978e81.css">
 
 </head>
 
@@ -55,7 +55,7 @@
 
 <script type="module">
 import { React, createRoot, motion, useReducedMotion, htm } from "/assets/vendor/runtime.js";
-const { useState, useEffect } = React;
+const { useState, useEffect, useRef, useContext, createContext } = React;
 /* ------------------------------------------------------------ language
    Three languages, one object, no fetch. The page is small enough that
    shipping all three costs less than a round trip would, and a reader who
@@ -119,25 +119,65 @@ const STR = {
       subject: "One page to be scored.",
       body: "Hi Atlas,\n\nAttached is one page from a tender we bid on.\nThanks.\n"
     },
+    form: {
+      title: "Send one page",
+      intro: "One page from a tender you lost. A method statement, a quality section, a capability answer. It comes back scored against the criteria it was judged on, with the points located.",
+      email: "Your email",
+      emailHint: "Where the scored page goes back to. Nothing else is sent there.",
+      file: "The page",
+      fileHint: "PDF, Word or an image of the page. Up to 10 MB.",
+      choose: "Choose a file",
+      change: "Choose another",
+      remove: "Remove",
+      send: "Send it",
+      sending: "Sending",
+      cancel: "Close",
+      errEmail: "An email address is needed, or there is nowhere to send the scored page.",
+      errEmailBad: "That address does not look complete.",
+      errFile: "Attach the page you want scored.",
+      errType: "That file cannot be read. Send a PDF, a Word file or an image.",
+      errSize: "That file is over 10 MB. Export the single page on its own and try again.",
+      errSend: "It did not send. Mail the page to atlas@arvorealta.com instead.",
+      doneTitle: "It is on its way",
+      doneBody: "The scored page comes back to the address you gave. No charge and no call.",
+      dry: "Sandbox only. Nothing was sent, because this form has no intake address yet."
+    },
     ladder: {
       eyebrow: "What it costs",
       h2: "Every tier credits into the one above it.",
       lede: "Walk the whole ladder and you pay €8,000 in total, not €11,000. Credits never expire.",
       tiers: [
-        { step: "Start", name: "One page scored", price: "Free", when: "",
-          terms: "Send one page from a tender you lost. It comes back scored against the criteria it was judged on, with the points located.",
-          credit: "No charge and no call." },
-        { step: "Step one", name: "One document", price: "€600", when: "3 to 4 days",
-          terms: "One document done properly, however many pages it runs to. The editable source file, and exports sized and named for tender portals.",
-          credit: "Credited in full into anything above it." },
-        { step: "The standard", name: "The document standard", price: "€2,400", when: "two weeks",
-          terms: "Every document that decides a bid, on one system your own people run. Templates, one document built end to end, file structure and naming, one revision round.",
-          credit: "Your €600 credited. All source files yours to keep." },
-        { step: "Beyond documents", name: "Identity system", price: "€8,000", when: "six weeks",
-          terms: "The document standard applied across the company. Colour and type for print, screen and product, signage and vehicles, written guidelines, a wordmark.",
-          credit: "Your €2,400 credited. Take it once the standard has proved itself." }
-      ]
+        { step: "Step one", name: "One document", price: "€600", time: "3 to 4 days",
+          terms: "One document, done properly. The whole thing, however many pages it runs to, not a sample page.",
+          points: [
+            "The full capability statement, reference sheet or tender annex",
+            "The editable source file",
+            "Print and screen exports, sized and named for tender portals"
+          ],
+          note: "Credited in full into anything you buy after it." },
+        { step: "The standard", name: "The document standard", price: "€2,400", time: "two weeks", lead: true,
+          terms: "Every document that decides a bid, on one system your own people run.",
+          points: [
+            "Templates for capability statements, reference sheets and tender annexes",
+            "One document built end to end, plus file structure and naming",
+            "The index. Every project, by client and year, ready at the next bid",
+            "One revision round"
+          ],
+          note: "All source files, yours to keep. Runs without a designer after handoff. Your €600 credited." },
+        { step: "Beyond documents", name: "Identity system", price: "€8,000", time: "six weeks",
+          terms: "The document standard applied across the company.",
+          points: [
+            "Colour and typographic system for print, screen and product",
+            "Signage, vehicles, trade fair stands, product marking",
+            "Written guidelines your suppliers can work from",
+            "Wordmark or mark"
+          ],
+          note: "Take it once the document standard has proved itself. Your €2,400 credited." }
+      ],
+      foot: "A Swedish bid consultancy publishes 15,000 kr excluding VAT for a single draft of a single bid, delivered as a Word file. Roughly what the full standard costs here, and theirs expires the day that tender closes.",
+      free: "The first step is free, and it is the one the whole page is asking for."
     },
+
     close: {
       eyebrow: "Where to start",
       h2: "Find out what it cost you. For nothing.",
@@ -193,25 +233,65 @@ const STR = {
       subject: "Én side til vurdering.",
       body: "Hei Atlas,\n\nVedlagt er én side fra en konkurranse vi deltok i.\nTakk.\n"
     },
+    form: {
+      title: "Send én side",
+      intro: "Én side fra en konkurranse du tapte. En metodebeskrivelse, et kvalitetsavsnitt, et kapasitetssvar. Den kommer tilbake vurdert mot kriteriene den ble bedømt etter, med poengene plassert.",
+      email: "E-posten din",
+      emailHint: "Hit kommer den vurderte siden tilbake. Ingenting annet sendes dit.",
+      file: "Siden",
+      fileHint: "PDF, Word eller et bilde av siden. Opptil 10 MB.",
+      choose: "Velg en fil",
+      change: "Velg en annen",
+      remove: "Fjern",
+      send: "Send den",
+      sending: "Sender",
+      cancel: "Lukk",
+      errEmail: "Det trengs en e-postadresse, ellers er det ingen steder å sende den vurderte siden.",
+      errEmailBad: "Den adressen ser ikke komplett ut.",
+      errFile: "Legg ved siden du vil ha vurdert.",
+      errType: "Den filen kan ikke leses. Send en PDF, en Word-fil eller et bilde.",
+      errSize: "Den filen er over 10 MB. Eksporter den ene siden for seg og prøv igjen.",
+      errSend: "Den ble ikke sendt. Send siden til atlas@arvorealta.com i stedet.",
+      doneTitle: "Den er på vei",
+      doneBody: "Den vurderte siden kommer tilbake til adressen du oppga. Ingen kostnad og ingen samtale.",
+      dry: "Kun sandkasse. Ingenting ble sendt, fordi dette skjemaet ennå ikke har en mottaksadresse."
+    },
     ladder: {
       eyebrow: "Hva det koster",
       h2: "Hvert trinn krediteres inn i det over.",
       lede: "Går du hele stigen, betaler du €8 000 totalt, ikke €11 000. Krediteringen utløper aldri.",
       tiers: [
-        { step: "Start", name: "Én side vurdert", price: "Gratis", when: "",
-          terms: "Send én side fra en konkurranse du tapte. Den kommer tilbake vurdert mot kriteriene den ble bedømt etter, med poengene plassert.",
-          credit: "Ingen kostnad og ingen samtale." },
-        { step: "Steg én", name: "Ett dokument", price: "€600", when: "3 til 4 dager",
-          terms: "Ett dokument gjort ordentlig, uansett hvor mange sider det går over. Den redigerbare kildefilen, og eksporter tilpasset og navngitt for tilbudsportaler.",
-          credit: "Krediteres i sin helhet inn i alt over." },
-        { step: "Standarden", name: "Dokumentstandarden", price: "€2 400", when: "to uker",
-          terms: "Hvert dokument som avgjør et tilbud, på ett system dine egne folk kjører. Maler, ett dokument bygget fra ende til ende, filstruktur og navngiving, én revisjonsrunde.",
-          credit: "Dine €600 kreditert. Alle kildefiler er dine." },
-        { step: "Utover dokumenter", name: "Identitetssystem", price: "€8 000", when: "seks uker",
-          terms: "Dokumentstandarden anvendt i hele selskapet. Farge og typografi for trykk, skjerm og produkt, skilt og biler, skriftlige retningslinjer, et ordmerke.",
-          credit: "Dine €2 400 kreditert. Ta det når standarden har bevist seg." }
-      ]
+        { step: "Steg én", name: "Ett dokument", price: "€600", time: "3 til 4 dager",
+          terms: "Ett dokument gjort ordentlig. Hele dokumentet, uansett hvor mange sider det går over, ikke en prøveside.",
+          points: [
+            "Hele kapasitetsbeskrivelsen, referansearket eller tilbudsvedlegget",
+            "Den redigerbare kildefilen",
+            "Eksporter for trykk og skjerm, tilpasset og navngitt for tilbudsportaler"
+          ],
+          note: "Krediteres i sin helhet inn i alt du kjøper etterpå." },
+        { step: "Standarden", name: "Dokumentstandarden", price: "€2 400", time: "to uker", lead: true,
+          terms: "Hvert dokument som avgjør et tilbud, på ett system dine egne folk kjører.",
+          points: [
+            "Maler for kapasitetsbeskrivelser, referanseark og tilbudsvedlegg",
+            "Ett dokument bygget fra ende til ende, pluss filstruktur og navngiving",
+            "Registeret. Hvert prosjekt, etter kunde og år, klart til neste tilbud",
+            "Én revisjonsrunde"
+          ],
+          note: "Alle kildefiler er dine. Går uten designer etter overlevering. Dine €600 kreditert." },
+        { step: "Utover dokumenter", name: "Identitetssystem", price: "€8 000", time: "seks uker",
+          terms: "Dokumentstandarden anvendt i hele selskapet.",
+          points: [
+            "Farge- og typografisystem for trykk, skjerm og produkt",
+            "Skilt, biler, messestands, produktmerking",
+            "Skriftlige retningslinjer leverandørene dine kan arbeide etter",
+            "Ordmerke eller symbol"
+          ],
+          note: "Ta det når dokumentstandarden har bevist seg. Dine €2 400 kreditert." }
+      ],
+      foot: "Et svensk tilbudskonsulentselskap oppgir 15 000 kr eksklusive mva for ett utkast til ett tilbud, levert som Word-fil. Omtrent det hele standarden koster her, og deres utløper den dagen konkurransen stenger.",
+      free: "Første steg er gratis, og det er det hele siden ber om."
     },
+
     close: {
       eyebrow: "Hvor du begynner",
       h2: "Finn ut hva det kostet deg. Gratis.",
@@ -267,25 +347,65 @@ const STR = {
       subject: "Yksi sivu pisteytettäväksi.",
       body: "Hei Atlas,\n\nOheisena yksi sivu tarjouskilpailusta, johon osallistuimme.\nKiitos.\n"
     },
+    form: {
+      title: "Lähetä yksi sivu",
+      intro: "Yksi sivu hävitysta tarjouksesta. Menetelmäkuvaus, laatuosio tai kapasiteettivastaus. Se palaa pisteytettynä niitä perusteita vasten, joilla se arvioitiin, pisteet paikannettuina.",
+      email: "Sähköpostisi",
+      emailHint: "Tänne pisteytetty sivu palaa. Mitään muuta ei lähetetä sinne.",
+      file: "Sivu",
+      fileHint: "PDF, Word tai kuva sivusta. Enintään 10 Mt.",
+      choose: "Valitse tiedosto",
+      change: "Valitse toinen",
+      remove: "Poista",
+      send: "Lähetä",
+      sending: "Lähetetään",
+      cancel: "Sulje",
+      errEmail: "Sähköpostiosoite tarvitaan, muuten pisteytetyllä sivulla ei ole osoitetta.",
+      errEmailBad: "Osoite ei näytä kokonaiselta.",
+      errFile: "Liitä sivu, jonka haluat pisteytettävän.",
+      errType: "Tuota tiedostoa ei voi lukea. Lähetä PDF, Word-tiedosto tai kuva.",
+      errSize: "Tiedosto on yli 10 Mt. Vie yksittäinen sivu omaksi tiedostokseen ja yritä uudelleen.",
+      errSend: "Lähetys ei onnistunut. Lähetä sivu osoitteeseen atlas@arvorealta.com.",
+      doneTitle: "Se on matkalla",
+      doneBody: "Pisteytetty sivu palaa antamaasi osoitteeseen. Ei maksua eikä puhelua.",
+      dry: "Vain hiekkalaatikko. Mitään ei lähetetty, koska tällä lomakkeella ei vielä ole vastaanotto-osoitetta."
+    },
     ladder: {
       eyebrow: "Mitä se maksaa",
       h2: "Jokainen taso hyvitetään ylempään.",
       lede: "Koko tikkaat kuljettuasi maksat yhteensä 8 000 €, et 11 000 €. Hyvitykset eivät vanhene.",
       tiers: [
-        { step: "Aloitus", name: "Yksi sivu pisteytettynä", price: "Ilmainen", when: "",
-          terms: "Lähetä yksi sivu hävitystä tarjouksesta. Se palaa pisteytettynä niitä perusteita vasten, joilla se arvioitiin, pisteet paikannettuina.",
-          credit: "Ei maksua eikä puhelua." },
-        { step: "Askel yksi", name: "Yksi asiakirja", price: "600 €", when: "3 tai 4 päivää",
-          terms: "Yksi asiakirja tehtynä kunnolla, olipa sivuja kuinka monta tahansa. Muokattava lähdetiedosto ja viennit mitoitettuina ja nimettyinä tarjousportaaleihin.",
-          credit: "Hyvitetään kokonaan mihin tahansa ylempään." },
-        { step: "Standardi", name: "Asiakirjastandardi", price: "2 400 €", when: "kaksi viikkoa",
-          terms: "Jokainen tarjouksen ratkaiseva asiakirja yhdellä järjestelmällä, jota oma väkesi ajaa. Mallit, yksi asiakirja alusta loppuun, tiedostorakenne ja nimeäminen, yksi korjauskierros.",
-          credit: "600 € hyvitetty. Kaikki lähdetiedostot ovat sinun." },
-        { step: "Asiakirjojen yli", name: "Identiteettijärjestelmä", price: "8 000 €", when: "kuusi viikkoa",
-          terms: "Asiakirjastandardi sovellettuna koko yritykseen. Väri ja typografia painoon, näytölle ja tuotteeseen, opasteet ja ajoneuvot, kirjalliset ohjeet, sanamerkki.",
-          credit: "2 400 € hyvitetty. Ota se, kun standardi on osoittanut arvonsa." }
-      ]
+        { step: "Askel yksi", name: "Yksi asiakirja", price: "600 €", time: "3 tai 4 päivää",
+          terms: "Yksi asiakirja tehtynä kunnolla. Koko asiakirja, olipa sivuja kuinka monta tahansa, ei näytesivua.",
+          points: [
+            "Koko kapasiteettikuvaus, referenssisivu tai tarjouksen liite",
+            "Muokattava lähdetiedosto",
+            "Painoon ja näytölle viennit, mitoitettuina ja nimettyinä tarjousportaaleihin"
+          ],
+          note: "Hyvitetään kokonaan mihin tahansa myöhempään ostoon." },
+        { step: "Standardi", name: "Asiakirjastandardi", price: "2 400 €", time: "kaksi viikkoa", lead: true,
+          terms: "Jokainen tarjouksen ratkaiseva asiakirja yhdellä järjestelmällä, jota oma väkesi ajaa.",
+          points: [
+            "Mallit kapasiteettikuvauksiin, referenssisivuihin ja tarjouksen liitteisiin",
+            "Yksi asiakirja alusta loppuun, lisäksi tiedostorakenne ja nimeäminen",
+            "Hakemisto. Jokainen projekti asiakkaittain ja vuosittain, valmiina seuraavaan tarjoukseen",
+            "Yksi korjauskierros"
+          ],
+          note: "Kaikki lähdetiedostot ovat sinun. Toimii ilman suunnittelijaa luovutuksen jälkeen. 600 € hyvitetty." },
+        { step: "Asiakirjojen yli", name: "Identiteettijärjestelmä", price: "8 000 €", time: "kuusi viikkoa",
+          terms: "Asiakirjastandardi sovellettuna koko yritykseen.",
+          points: [
+            "Väri- ja typografiajärjestelmä painoon, näytölle ja tuotteeseen",
+            "Opasteet, ajoneuvot, messuosastot, tuotemerkinnät",
+            "Kirjalliset ohjeet, joiden mukaan toimittajasi voivat työskennellä",
+            "Sanamerkki tai tunnus"
+          ],
+          note: "Ota se, kun asiakirjastandardi on osoittanut arvonsa. 2 400 € hyvitetty." }
+      ],
+      foot: "Ruotsalainen tarjouskonsultti ilmoittaa hinnaksi 15 000 kr ilman arvonlisäveroa yhdestä luonnoksesta yhteen tarjoukseen, Word-tiedostona toimitettuna. Suunnilleen saman kuin koko standardi täällä, ja heidän versionsa vanhenee sinä päivänä kun kilpailu sulkeutuu.",
+      free: "Ensimmäinen askel on ilmainen, ja sitä koko sivu pyytää."
     },
+
     close: {
       eyebrow: "Mistä aloittaa",
       h2: "Selvitä, mitä se maksoi sinulle. Ilmaiseksi.",
@@ -378,7 +498,201 @@ function Action({ href, children, tone = "solid", class: extra = "", ...rest }) 
     solid: "bg-ink text-bone hover:bg-ink/90",
     ghost: "border border-ink/25 text-ink hover:border-ink/60"
   };
-  return html`<${M.a} href=${href} class="${base} ${tones[tone]} ${extra}" ...${mo.press} ...${rest}>${children}<//>`;
+  const cls = `${base} ${tones[tone]} ${extra}`;
+  /* A link when it goes somewhere and a button when it does something. The
+     three language controls were the only clickable things on this page
+     reporting cursor: default, measured, and an <a> with no href would be
+     the same mistake with a worse name attached. */
+  return href
+    ? html`<${M.a} href=${href} class=${cls} ...${mo.press} ...${rest}>${children}<//>`
+    : html`<${M.button} type="button" class=${cls} ...${mo.press} ...${rest}>${children}<//>`;
+}
+
+/* ------------------------------------------------------------- the intake
+ *
+ * The call to action used to open a prewritten mail. That is still the right
+ * answer when there is nowhere to post to — an empty compose window asks the
+ * reader to write the thing we are asking them for, which is where most of
+ * them stop — but it has one hole the owner named: the reader has to
+ * remember to attach the page, and a mail that arrives with nothing attached
+ * is a round trip before the work can start. A form asks for the file while
+ * the reader is still in the frame of mind to hand it over.
+ *
+ * WHAT THIS CANNOT DO ON ITS OWN. The site is static on GitHub Pages. There
+ * is no server here, so there is nothing to receive a file: a form on this
+ * page can validate, but it cannot deliver. INTAKE below is the address the
+ * file would be posted to and it is null, because picking the service that
+ * receives it is the owner's call and it needs a key. Until it is set the
+ * dialog validates everything and then says plainly that nothing was sent,
+ * which is the honest state rather than a fake success. The prewritten mail
+ * stays in the footer of the dialog as the path that works today.
+ *
+ * THE CAP IS 10 MB AND IT IS CHECKED HERE. One page as a PDF is well under
+ * a megabyte; a scan of one page is a few; ten is the headroom where a
+ * phone photograph of a printed page still fits, and it is at or under what
+ * the common form services accept on their free tiers. The check runs on the
+ * file before any request, because a reader who finds out from a server that
+ * their file was too large has already waited for the upload.
+ *
+ * A NATIVE <dialog>, NOT A DIV. showModal gives the focus trap, the inert
+ * background, Escape to close and the ::backdrop for nothing, and all four
+ * are things a hand-rolled modal gets wrong. Focus returns to the control
+ * that opened it because the browser does that too.
+ *
+ * The file input is hidden and a real button clicks it. A file input styled
+ * with sr-only is still focusable, so the focus ring lands on something
+ * nobody can see; a button that forwards the click puts the ring where the
+ * reader is looking. */
+const MAX_MB = 10;
+const MAX_BYTES = MAX_MB * 1024 * 1024;
+const OK_EXT = ["pdf", "doc", "docx", "odt", "rtf", "png", "jpg", "jpeg", "webp"];
+const ACCEPT = OK_EXT.map(e => "." + e).join(",") + ",application/pdf,image/*";
+const INTAKE = null;
+
+const CtaCtx = createContext(() => {});
+
+/* Every call to action on the page is this one control, so the label and the
+   intent cannot drift apart between the nav, the hero, the ladder and the
+   close. */
+function CTA({ t, class: extra = "" }) {
+  const open = useContext(CtaCtx);
+  return html`<${Action} onClick=${open} class=${extra}>${t.cta}<//>`;
+}
+
+const sizeOf = n => n < 1048576
+  ? Math.max(1, Math.round(n / 1024)) + " KB"
+  : (n / 1048576).toFixed(1) + " MB";
+
+function Intake({ t, open, onClose }) {
+  const dlg = useRef(null);
+  const picker = useRef(null);
+  const mail = useRef(null);
+  const [file, setFile] = useState(null);
+  const [err, setErr] = useState("");
+  const [state, setState] = useState("idle");
+
+  useEffect(() => {
+    const d = dlg.current;
+    if (!d) return;
+    if (open) {
+      setFile(null); setErr(""); setState("idle");
+      if (!d.open) d.showModal();
+      /* Focus is moved by hand, not by an autofocus attribute. Measured:
+         written as lowercase `autofocus` in the template React simply did not
+         put it on the element, and showModal fell back to the first focusable
+         thing in the dialog, which is the close button. Same class of bug as
+         the hero video's missing `muted`, and the same fix: set it on the
+         node. */
+      if (mail.current) mail.current.focus();
+    } else if (d.open) {
+      d.close();
+    }
+  }, [open]);
+
+  const pick = e => {
+    const f = e.target.files && e.target.files[0];
+    if (!f) return;
+    const ext = (f.name.split(".").pop() || "").toLowerCase();
+    if (!OK_EXT.includes(ext)) { setFile(null); setErr(t.form.errType); return }
+    if (f.size > MAX_BYTES) { setFile(null); setErr(t.form.errSize); return }
+    setErr(""); setFile(f);
+  };
+
+  const submit = async e => {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    const email = String(fd.get("email") || "").trim();
+    if (!email) return setErr(t.form.errEmail);
+    /* Deliberately loose. The only thing worth rejecting here is an address
+       that cannot be one; anything stricter turns away real addresses, and
+       the real check is whether the reply arrives. */
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return setErr(t.form.errEmailBad);
+    if (!file) return setErr(t.form.errFile);
+    setErr(""); setState("sending");
+    if (!INTAKE) { setState("done"); return }
+    try {
+      const r = await fetch(INTAKE, { method: "POST", body: fd });
+      if (!r.ok) throw new Error(String(r.status));
+      setState("done");
+    } catch (_) {
+      setState("idle"); setErr(t.form.errSend);
+    }
+  };
+
+  const field = "mt-2 w-full border border-ink/25 bg-paper px-4 py-3 text-[15px] text-ink placeholder:text-ink/40";
+  const label = "font-mono text-[12px] leading-snug text-ink/75";
+
+  return html`
+    <dialog ref=${dlg} onClose=${onClose}
+      onClick=${e => { if (e.target === dlg.current) onClose() }}
+      aria-labelledby="intake-title"
+      class="m-auto w-[min(34rem,calc(100vw-1.5rem))] border border-ink/20 bg-paper-3 p-0 text-ink backdrop:bg-ink/70">
+      <div class="p-6 sm:p-9">
+        <div class="flex items-start justify-between gap-6">
+          <h2 id="intake-title" class="font-display text-[1.9rem] font-normal leading-tight tracking-[-.015em]">
+            ${state === "done" ? t.form.doneTitle : t.form.title}
+          </h2>
+          <button type="button" onClick=${onClose} aria-label=${t.form.cancel}
+            class="-m-2 shrink-0 p-2 font-mono text-[12px] text-ink/75 hover:text-ink">${t.form.cancel}</button>
+        </div>
+
+        ${state === "done" ? html`
+          <p class="mt-6 leading-[1.7] text-ink/80">${t.form.doneBody}</p>
+          ${!INTAKE && html`
+            <p class="mt-5 border-l-2 border-ink/30 pl-4 font-mono text-[12px] leading-[1.6] text-ink/75">
+              ${t.form.dry}
+            </p>`}
+        ` : html`
+          <p class="mt-5 text-[.95rem] leading-[1.7] text-ink/80">${t.form.intro}</p>
+
+          <form onSubmit=${submit} noValidate class="mt-7">
+            <div>
+              <label class="${label}" for="intake-email">${t.form.email}</label>
+              <input ref=${mail} id="intake-email" name="email" type="email" autocomplete="email"
+                inputmode="email" placeholder="name@company.com" class="${field}" />
+              <p class="mt-2 font-mono text-[11px] leading-snug text-ink/75">${t.form.emailHint}</p>
+            </div>
+
+            <div class="mt-7">
+              <p class="${label}">${t.form.file}</p>
+              <input ref=${picker} name="page" type="file" accept=${ACCEPT} hidden onChange=${pick} />
+              ${file ? html`
+                <div class="mt-2 flex flex-wrap items-center justify-between gap-x-5 gap-y-3 border border-ink/25 bg-paper px-4 py-3">
+                  <span class="min-w-0 break-all text-[15px]">${file.name}</span>
+                  <span class="flex shrink-0 items-center gap-4 font-mono text-[12px] text-ink/75">
+                    <span class="tabular-nums">${sizeOf(file.size)}</span>
+                    <button type="button" class="underline underline-offset-4 hover:text-ink"
+                      onClick=${() => { setFile(null); if (picker.current) picker.current.value = "" }}>${t.form.remove}</button>
+                  </span>
+                </div>`
+              : html`
+                <button type="button" onClick=${() => picker.current && picker.current.click()}
+                  class="mt-2 w-full border border-dashed border-ink/35 bg-paper px-4 py-5 text-[15px] text-ink/80 hover:border-ink/60 hover:text-ink">
+                  ${t.form.choose}
+                </button>`}
+              <p class="mt-2 font-mono text-[11px] leading-snug text-ink/75">${t.form.fileHint}</p>
+            </div>
+
+            <!-- One error line, under the fields and above the action, so it
+                 is between the thing that is wrong and the button that was
+                 just pressed. aria-live, because a reader who cannot see it
+                 appear is otherwise told nothing at all. -->
+            <p aria-live="polite" class="min-h-[1.5rem] pt-5 text-[.9rem] leading-snug text-brick">${err}</p>
+
+            <div class="mt-2 flex flex-wrap items-center gap-x-6 gap-y-4">
+              <${Action} type="submit" disabled=${state === "sending"}>
+                ${state === "sending" ? t.form.sending : t.form.send}
+              <//>
+              <!-- The prewritten mail stays, as the path that works with no
+                   server behind the form. -->
+              <a href=${mailto(t)} class="font-mono text-[12px] text-ink/75 underline underline-offset-4 hover:text-ink">
+                atlas@arvorealta.com
+              </a>
+            </div>
+          </form>
+        `}
+      </div>
+    </dialog>`;
 }
 
 /* The language control is three letters rather than a dropdown. There are
@@ -426,7 +740,7 @@ function Nav({ t, lang, setLang, onPhoto }) {
         <div class="flex items-center gap-2.5">
           <${LangPick} lang=${lang} setLang=${setLang} t=${t} onPhoto=${onPhoto} />
           <span class="hidden sm:block">
-            <${Action} href=${mailto(t)} class=${onPhoto ? "!bg-bone !text-ink hover:!bg-bone/90" : ""}>${t.cta}<//>
+            <${CTA} t=${t} class=${onPhoto ? "!bg-bone !text-ink hover:!bg-bone/90" : ""} />
           </span>
         </div>
       </div>
@@ -517,7 +831,7 @@ function Hero({ t }) {
             ${t.hero.sub}
           <//>
           <${M.div} ...${mo.rise(3)} class="mt-10 flex flex-wrap items-center gap-3">
-            <${Action} href=${mailto(t)} class="!bg-bone !text-ink hover:!bg-bone/90">${t.cta}<//>
+            <${CTA} t=${t} class="!bg-bone !text-ink hover:!bg-bone/90" />
             <${Action} href="#open" tone="ghost" class="!border-bone/30 !text-bone hover:!border-bone/70">${t.hero.second}<//>
           <//>
         </div>
@@ -756,18 +1070,19 @@ function Weighting({ t }) {
               </div>
             <//>
 
-            <!-- The bar. Pill ends on the outside only, a 2px gap of the
-                 page's own ink ground between segments, and the figure inside
-                 each one. The wrapper clips, because the curtain travels a
-                 full bar width to the right and an unclipped one would take
-                 the page with it. -->
+            <!-- The bar. Square ends, a 2px gap of the page's own ink ground
+                 between segments, and the figure inside each one. It carried
+                 pill ends for a day and the owner called it: nothing else in
+                 this fold is round, and a lozenge is a dashboard control
+                 where this is a measured quantity. The wrapper clips, because
+                 the curtain travels a full bar width to the right and an
+                 unclipped one would take the page with it. -->
             <div class="relative mt-3.5 overflow-hidden">
               <div class="grid gap-[2px]" style=${cols}>
                 ${segs.map(([label, pct], g) => html`
                   <div key=${label} ...${hold(g)}
                     class="flex h-20 items-center px-5 transition-opacity duration-300 sm:h-24 sm:px-7
-                           ${tone[g]} ${dim(g)}
-                           ${g === 0 ? "rounded-l-full" : ""} ${g === segs.length - 1 ? "rounded-r-full" : ""}">
+                           ${tone[g]} ${dim(g)}">
                     <span class="font-display text-[clamp(1.7rem,1.15rem+1.7vw,2.5rem)] leading-none tracking-[-.01em] text-ink tabular-nums">
                       ${pct}
                     </span>
@@ -820,31 +1135,37 @@ function Weighting({ t }) {
     </section>`;
 }
 
-/* The ladder. Four rungs, and the mechanic between them is the design: every
-   tier credits in full into the one above, so a client who walks the whole
-   thing spends 8,000 rather than 11,000 and never crosses the 10,000 mark
-   where most of these companies need a second approval signature. The credit
-   line under each price is not a footnote, it is the product.
-
-   NOT four equal cards, and not a carousel on a screen with room. Equal
-   columns say "pick one of these four", which is the opposite of a ladder,
-   and a carousel on desktop hides three rungs behind an interaction to show
-   the fourth. The columns grow with the tier instead, left to right, so the
-   shape of the row carries the argument before a word is read. Below md the
-   row becomes a snap scroller, which is where a carousel is genuinely the
-   right component: there is no room for four and swiping is the native move.
-
-   Only the free rung carries an action. That is the ladder's own logic
-   rather than a design compromise, and it keeps the page to one CTA label
-   for one intent.
-
-   The motion is the rungs drawing in left to right, one rule per tier,
-   staggered. It says "these are steps in an order" rather than "here are
-   four options", which is the same thing the widths say. Once on entry, no
-   loop, static under prefers-reduced-motion. */
+/* The ladder, restored.
+ *
+ * This fold stood as four rungs separated by hairlines — Free, 600, 2,400,
+ * 8,000 — each tier a sentence. The owner asked for the earlier one back and
+ * said it was better, and it is: that version carried the deliverables as a
+ * list under each price, and a reader comparing three tiers is scanning for
+ * what they get rather than reading a paragraph about it. One line had gone
+ * missing in the compression and is back with it — "The index. Every
+ * project, by client and year, ready at the next bid."
+ *
+ * The house file's objection to cards is that equal columns say "pick one of
+ * these four", which is the opposite of a ladder. These are not equal: the
+ * middle column runs 1.25 against 1, and it lifts four pixels out of the row
+ * and carries the only solid border, so the recommended rung is argued for
+ * rather than merely marked. The shape still carries the argument before a
+ * word is read, which is the thing the rule was protecting.
+ *
+ * Three tiers, not four. The free step is the mouth of the funnel and it is
+ * not a tier — it was never in this ladder, it lives in the hero and the
+ * close, and the line under the row carries it here with the page's one
+ * action beside it.
+ *
+ * Square corners, not the original's 16px radius, and the page's own label
+ * conventions rather than the original's tracked capitals. Everything else
+ * is the earlier fold: the widths, the lift, the lists, and the comparison
+ * under the row.
+ *
+ * Every price, every deliverable and the 15,000 kr come off
+ * reference/index.html. Do not round one and do not invent one. */
 function Ladder({ t }) {
   const mo = useMo();
-  const reduce = useReducedMotion();
   return html`
     <section id="price" class="${ANCHOR} ${WRAP} py-20 sm:py-28">
       <${M.div} ...${mo.reveal(0)} class="max-w-[46ch]">
@@ -853,55 +1174,50 @@ function Ladder({ t }) {
         <p class="mt-7 leading-[1.7] text-ink/80">${t.ladder.lede}</p>
       <//>
 
-      <!-- A grid, never a horizontal scroller. One column on a phone, two
-           from sm, four at lg. 2 by 2 is the shape wherever two columns are
-           still legible: at 390 the measure is 350px, so two of them would be
-           163px each and the recommended tier's paragraph would set about
-           twenty characters to the line. One column there, two the moment
-           there is room. Nothing scrolls sideways at any width. -->
-      <div class="mt-14 grid gap-x-8 gap-y-12 sm:grid-cols-2
-                  lg:grid-cols-[.85fr_1fr_1.2fr_1.2fr] lg:gap-x-0 lg:gap-y-0">
-        ${t.ladder.tiers.map((x, i) => {
-          const lead = i === 2;
-          return html`
-            <${M.div} key=${x.name} ...${mo.reveal(1 + i)}
-              class="${lead ? "bg-paper-3 -mx-5 px-5 sm:-mx-4 sm:px-4 lg:mx-0 lg:px-0" : ""}
-                     ${i > 0 ? "lg:border-l lg:border-ink/12" : ""}">
-              <!-- The rule is the rung and it spans the whole column, so the
-                   padding lives on the content below it rather than on the
-                   column. With the padding on the column the recommended
-                   tier's rule started 28px inside its own panel and read as a
-                   mistake rather than as the heaviest rung in the set. -->
-              <${M.div}
-                class="w-full origin-left ${lead ? "h-[3px] bg-ink" : "h-px bg-ink/25"}"
-                initial=${reduce ? false : { scaleX: 0 }}
-                whileInView=${{ scaleX: 1 }}
-                viewport=${{ once: true, amount: .5 }}
-                transition=${{ duration: .7, delay: .1 + i * .14, ease: EASE }}
-                style=${{ scaleX: reduce ? 1 : undefined }} />
-              <!-- Only the recommended tier is inset, because only it has a
-                   ground to be inset from. The others sit flush with their
-                   column so every rung starts on the same left edge as the
-                   headline above the row. -->
-              <!-- The recommended tier's ground bleeds past its own column and
-                   takes the same amount back as padding, so the ground reads
-                   as a panel while its type still lines up with every other
-                   rung. On a phone that bleed is the full page gutter, so the
-                   panel runs edge to edge. At lg the bleed is dropped and the
-                   ground is exactly the column, which is where the four rungs
-                   sit side by side. -->
-              <div class="pt-7 pb-8 lg:pr-7 ${i === 0 ? "lg:pl-0" : "lg:pl-7"}">
-                <p class="font-mono text-[12px] leading-snug text-ink/75">${x.step}</p>
-                <h3 class="mt-4 text-[1.3rem] font-medium leading-tight tracking-[-.02em]">${x.name}</h3>
-                <p class="mt-6 font-display text-[clamp(2.3rem,1.8rem+1.4vw,3.2rem)] font-normal leading-none tracking-[-.01em] tabular-nums">${x.price}</p>
-                ${x.when && html`<p class="mt-3 font-mono text-[12px] leading-snug text-ink/75">${x.when}</p>`}
-                <p class="mt-6 text-[.95rem] leading-[1.65] text-ink/80">${x.terms}</p>
-                <p class="mt-6 border-t border-ink/15 pt-4 font-mono text-[12px] leading-[1.5] text-ink/75">${x.credit}</p>
-                ${i === 0 && html`<div class="mt-7"><${Action} href=${mailto(t)}>${t.cta}<//></div>`}
-              </div>
-            <//>`;
-        })}
+      <!-- One column on a phone, three from lg, and nothing scrolls sideways
+           at any width. The middle column is the wider one and it lifts out
+           of the row, so the recommended tier is the shape of the row rather
+           than a badge stuck on a card. -->
+      <div class="mt-14 grid gap-6 lg:grid-cols-[1fr_1.25fr_1fr] lg:items-start">
+        ${t.ladder.tiers.map((x, i) => html`
+          <${M.div} key=${x.name} ...${mo.reveal(i * .6)}
+            class="flex h-full flex-col border p-7 sm:p-9 ${x.lead
+              ? "border-ink bg-paper-3 lg:-mt-4 lg:pb-11"
+              : "border-ink/15"}">
+            <p class="font-mono text-[12px] leading-snug text-ink/75">${x.step}</p>
+            <h3 class="mt-4 text-[1.3rem] font-medium leading-tight tracking-[-.02em]">${x.name}</h3>
+            <p class="mt-6 flex flex-wrap items-baseline gap-x-4">
+              <b class="font-display text-[clamp(2.3rem,1.8rem+1.4vw,3.2rem)] font-normal leading-none tracking-[-.01em] tabular-nums">${x.price}</b>
+              <em class="font-mono text-[12px] not-italic leading-snug text-ink/75">${x.time}</em>
+            </p>
+            <p class="mt-6 text-[.95rem] leading-[1.65] text-ink/80">${x.terms}</p>
+            <!-- The deliverables, one to a row with a hairline above each, so
+                 the list is countable at a glance. This is the part the
+                 compressed version lost and the reason the owner wanted the
+                 earlier fold back. -->
+            <ul class="mt-6 grid gap-3 text-[.95rem] leading-[1.55]">
+              ${x.points.map(pt => html`
+                <li key=${pt} class="border-t border-ink/15 pt-3">${pt}</li>`)}
+            </ul>
+            <!-- mt-auto pins the credit line to the foot of every card, so
+                 the three read across at the same height however many
+                 deliverables each one carries. The credit is not a footnote,
+                 it is the mechanic. -->
+            <p class="mt-auto pt-7 font-mono text-[12px] leading-[1.5] text-ink/75">${x.note}</p>
+          <//>`)}
       </div>
+
+      <!-- The free step is not a tier and never was one in this fold. It gets
+           the line and the action under the row instead, so the page's one
+           CTA is still in front of a reader who came here for the price. -->
+      <${M.div} ...${mo.reveal(1)} class="mt-12 flex flex-wrap items-center gap-x-8 gap-y-5">
+        <p class="text-[.95rem] leading-[1.7] text-ink/80">${t.ladder.free}</p>
+        <${CTA} t=${t} />
+      <//>
+
+      <${M.p} ...${mo.reveal(2)} class="mt-10 max-w-[62ch] text-[.95rem] leading-[1.7] text-ink/75">
+        ${t.ladder.foot}
+      <//>
     </section>`;
 }
 
@@ -913,7 +1229,7 @@ function Close({ t }) {
         <${Eyebrow}>${t.close.eyebrow}<//>
         <h2 class="mt-6 font-display text-[clamp(2.1rem,1.3rem+2.6vw,3.6rem)] font-normal leading-[1.06] tracking-[-.015em]">${t.close.h2}</h2>
         <p class="mt-7 leading-[1.7] text-ink/80">${t.close.body}</p>
-        <div class="mt-10"><${Action} href=${mailto(t)}>${t.cta}<//></div>
+        <div class="mt-10"><${CTA} t=${t} /></div>
       <//>
     </section>
     <footer class="border-t border-ink/10 py-10">
@@ -962,14 +1278,16 @@ function App() {
 
   const t = STR[lang];
 
-  /* Standard and Ladder are written and tested and are not rendered. They are
-     hidden on purpose while the offer is being reconsidered, which is why the
-     nav no longer carries #standard or #price: a link to a fold that is not
-     on the page is a dead anchor, and this page had two of those once already.
-     Put the two lines back in the fragment below and add the links to restore
-     them. The components live in git history at commit ff677c8. */
+  /* The intake dialog is mounted once, at the root, and every call to action
+     on the page opens this one. Four copies of a <dialog> would be four
+     copies of the reader's half-filled form, and whichever one they opened
+     second would be empty. The opener travels down as context rather than as
+     a prop through five components that have no other reason to know about
+     it. */
+  const [intake, setIntake] = useState(false);
+
   return html`
-    <${React.Fragment}>
+    <${CtaCtx.Provider} value=${() => setIntake(true)}>
       <!-- Measured on the live page: the first Tab lands on the wordmark and
            it takes eight stops to reach the hero's own action. This is the
            first focusable thing in the document and it is invisible until it
@@ -990,6 +1308,7 @@ function App() {
         <${Ladder} t=${t} />
         <${Close} t=${t} />
       </main>
+      <${Intake} t=${t} open=${intake} onClose=${() => setIntake(false)} />
     <//>`;
 }
 
