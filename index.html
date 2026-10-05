@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <title>Arvorealta · Document standards for public tenders</title>
 <meta name="description" content="Public buyers score the documents you hand in. Document standards for industrial manufacturers bidding into Nordic public tenders.">
 <link rel="canonical" href="https://arvorealta.com/">
@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="/assets/fonts/ebgaramond.css">
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ebgaramond-latin.woff2" crossorigin>
 
-<link rel="stylesheet" href="/assets/tw-a670cd1f.css">
+<link rel="stylesheet" href="/assets/tw-b333abd7.css">
 
 </head>
 
@@ -608,6 +608,24 @@ function Intake({ t, open, onClose }) {
     }
   };
 
+  /* On a phone or an iPad in landscape the software keyboard takes most of the
+     screen. A native <dialog> is laid out against the layout viewport, not the
+     visual one, so iOS scrolls the page to keep the caret visible and the
+     dialog travels off the top with no way to scroll it back — position:fixed
+     does not scroll. Measured on an iPad in landscape: the email field was
+     above the visible area while being typed into.
+
+     Three things together fix it and none alone does. The dialog is capped at
+     100svh and scrolls inside itself, so there is always somewhere to scroll
+     to. interactive-widget=resizes-content asks the browser to shrink the
+     viewport rather than slide the page under the keyboard. And a focused
+     field pulls itself back into the dialog's own scroller, which covers the
+     browsers that honour neither. */
+  const keepInView = e => {
+    const el = e.currentTarget;
+    setTimeout(() => { try { el.scrollIntoView({ block: "center", behavior: "smooth" }) } catch (_) {} }, 250);
+  };
+
   const field = "mt-2 w-full border border-ink/25 bg-paper px-4 py-3 text-[15px] text-ink placeholder:text-ink/40";
   const label = "font-mono text-[12px] leading-snug text-ink/75";
 
@@ -615,7 +633,8 @@ function Intake({ t, open, onClose }) {
     <dialog ref=${dlg} onClose=${onClose}
       onClick=${e => { if (e.target === dlg.current) onClose() }}
       aria-labelledby="intake-title"
-      class="m-auto w-[min(34rem,calc(100vw-1.5rem))] border border-ink/20 bg-paper-3 p-0 text-ink backdrop:bg-ink/70">
+      class="m-auto max-h-[100svh] w-[min(34rem,calc(100vw-1.5rem))] overflow-y-auto overscroll-contain
+             border border-ink/20 bg-paper-3 p-0 text-ink backdrop:bg-ink/70">
       <div class="p-6 sm:p-9">
         <div class="flex items-start justify-between gap-6">
           <h2 id="intake-title" class="font-display text-[1.9rem] font-normal leading-tight tracking-[-.015em]">
@@ -638,6 +657,7 @@ function Intake({ t, open, onClose }) {
             <div>
               <label class="${label}" for="intake-email">${t.form.email}</label>
               <input ref=${mail} id="intake-email" name="email" type="email" autocomplete="email"
+                onFocus=${keepInView}
                 inputmode="email" placeholder="name@company.com" class="${field}" />
               <p class="mt-2 font-mono text-[11px] leading-snug text-ink/75">${t.form.emailHint}</p>
             </div>
