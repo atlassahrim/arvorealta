@@ -813,6 +813,38 @@ function Hero({ t }) {
   const reduce = useReducedMotion();
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
+  const vid = useRef(null);
+
+  /* Autoplay is refused until the reader touches something, and the owner's
+     own report is the diagnosis: "the video is paused and rolls out only
+     after I push the button". A user gesture lifts the restriction for the
+     whole document, so the first touch anywhere — not only on the video —
+     is enough. iOS refuses a muted autoplay in Low Power Mode and Safari
+     lets a reader turn auto-play off entirely; in both cases play() is
+     rejected on load and there is nothing the page can do about it except
+     ask again the moment it is allowed to.
+
+     Once only, passive, and removed as soon as it has run or the video is
+     already going, so this never becomes a listener that fires for the life
+     of the page. */
+  useEffect(() => {
+    if (reduce || failed) return;
+    const kick = () => {
+      const v = vid.current;
+      if (v && v.paused) { const go = v.play(); if (go && go.catch) go.catch(() => {}) }
+      off();
+    };
+    const off = () => {
+      document.removeEventListener("pointerdown", kick);
+      document.removeEventListener("touchstart", kick);
+      document.removeEventListener("keydown", kick);
+    };
+    document.addEventListener("pointerdown", kick, { passive: true, once: true });
+    document.addEventListener("touchstart", kick, { passive: true, once: true });
+    document.addEventListener("keydown", kick, { once: true });
+    return off;
+  }, [reduce, failed]);
+
   return html`
     <section id="top" class="on-ink relative isolate overflow-clip bg-ink text-bone">
       <picture class="absolute inset-0 block">
@@ -850,6 +882,7 @@ function Hero({ t }) {
                nothing here changes that. The photograph is the right answer
                there and this is not a bug to chase. */
             if (!el) return;
+            vid.current = el;
             el.muted = true; el.defaultMuted = true;
             el.playsInline = true; el.autoplay = true;
             const go = el.play();
