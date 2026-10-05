@@ -562,6 +562,41 @@ function Intake({ t, open, onClose }) {
     }
   }, [open]);
 
+  /* The software keyboard, and why the first fix did not work.
+     Reported on an iPad in landscape: the keyboard pushed the dialog off the
+     top with nothing to scroll back to. The first attempt capped the dialog
+     at 100svh and added interactive-widget=resizes-content to the viewport
+     meta. Neither reaches iOS. interactive-widget is Chromium only, and on
+     iOS Safari svh and dvh do not shrink for the keyboard at all — the layout
+     viewport keeps its full height and the keyboard simply covers it.
+     window.visualViewport is the one API that reports what is actually
+     visible, so it is the only thing that can drive this.
+     offsetTop matters as much as height: iOS scrolls the visual viewport
+     inside the layout viewport, and a position:fixed dialog does not move
+     with it, which is exactly how the dialog ended up off screen. */
+  useEffect(() => {
+    const d = dlg.current, vv = window.visualViewport;
+    if (!d || !open || !vv) return;
+    const apply = () => {
+      d.style.position = "fixed";
+      d.style.bottom = "auto";
+      d.style.top = vv.offsetTop + "px";
+      d.style.marginBottom = "0";
+      d.style.maxHeight = vv.height + "px";
+      /* Centred while there is room, pinned to the top once there is not. */
+      d.style.marginTop = Math.max(0, (vv.height - d.offsetHeight) / 2) + "px";
+    };
+    apply();
+    vv.addEventListener("resize", apply);
+    vv.addEventListener("scroll", apply);
+    return () => {
+      vv.removeEventListener("resize", apply);
+      vv.removeEventListener("scroll", apply);
+      d.style.position = d.style.top = d.style.bottom = "";
+      d.style.marginTop = d.style.marginBottom = d.style.maxHeight = "";
+    };
+  }, [open]);
+
   const pick = e => {
     const f = e.target.files && e.target.files[0];
     if (!f) return;
@@ -798,7 +833,7 @@ function Hero({ t }) {
           src="/assets/video/hero-1-720.mp4"
           poster="/assets/img/after-1-1141.jpg"
           width="1280" height="720"
-          autoPlay muted loop playsInline preload="metadata"
+          autoPlay muted loop playsInline preload="auto"
           aria-hidden="true" tabIndex="-1"
           ref=${el => {
             /* React writes `muted` as a property and skips it often enough on
@@ -809,13 +844,19 @@ function Hero({ t }) {
                the only way to be sure, and play() is called because autoplay
                alone does not restart a video React has just re-mounted.
                The rejection is swallowed: a blocked autoplay leaves the
-               photograph in place, which is the fallback either way. */
+               photograph in place, which is the fallback either way.
+
+               iOS Low Power Mode blocks autoplay of muted video outright and
+               nothing here changes that. The photograph is the right answer
+               there and this is not a bug to chase. */
             if (!el) return;
             el.muted = true; el.defaultMuted = true;
             el.playsInline = true; el.autoplay = true;
             const go = el.play();
             if (go && go.catch) go.catch(() => {});
           }}
+          onPlaying=${() => setReady(true)}
+          onTimeUpdate=${e => { if (e.currentTarget.currentTime > 0) setReady(true) }}
           onCanPlayThrough=${() => setReady(true)}
           onError=${() => setFailed(true)} />`}
       <!-- The band is the screen. The header floats on it rather than sitting
