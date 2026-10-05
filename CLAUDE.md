@@ -148,6 +148,18 @@ Every tier credits in full into the one above. €600 comes off the €2,400,
 €2,400 comes off the €8,000, and €600 credits into €8,000 directly if the
 middle rung is skipped. Credits never expire.
 
+**The ladder fold's headline is `Then make it a system.`** It is the bridge
+from the open tender above it to the top rung, and it states the ladder's own
+mechanic rather than a claim: one document, then the document standard, then
+the identity system, which are the tiers' own names. The credit line sits
+under it as the lede.
+
+**That lede no longer carries the €8,000-against-€11,000 figure**, which it
+did until the owner replaced it. The mechanic survives in each card's credit
+line, and the reasoning below is unchanged, but the single sentence that made
+the whole ladder legible at a glance is off the page. If the credit ever
+stops landing with readers, that figure is the first thing to put back.
+
 **€8,000 is chosen, not rounded.** High enough that €2,400 reads as reasonable
 rather than suspiciously cheap, close enough that the step does not look like
 it is missing a rung, and under the €10,000 mark where most of these companies
