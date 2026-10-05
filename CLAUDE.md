@@ -1065,9 +1065,20 @@ that skips `playing`, and `canplaythrough` is kept as a third path. `preload`
 is `auto` rather than `metadata`, because metadata plus a throttled connection
 is the state where none of the three fire.
 
-**iOS Low Power Mode blocks autoplay of muted video outright.** Nothing in
-the page changes that and it is not a bug to chase: the photograph is the
-right answer there. If the video is missing on an iPhone, check that first.
+**iOS Low Power Mode blocks autoplay of muted video outright**, and Safari
+lets a reader turn auto-play off entirely. In both cases `play()` is rejected
+on load and the page cannot override it.
+
+**What the page can do is ask again at the first user gesture, and that is
+what it does.** The owner's own report was the diagnosis: *"the video is
+paused and rolls out only after I push the button."* A gesture lifts the
+restriction for the whole document, so the first touch anywhere — not only on
+the video — is enough. One passive listener each on `pointerdown`,
+`touchstart` and `keydown`, `once`, removed as soon as one has run, so it
+never becomes a listener that lives for the life of the page.
+
+If the video is still missing after a touch, the photograph is the right
+answer and it is not a bug to chase.
 
 **React does not write `muted`, `autoplay` or `playsinline` for you, and a
 video missing any of them does not autoplay anywhere.** Written as plain
@@ -1076,6 +1087,14 @@ measured, not assumed. They are camelCase props now AND set on the node
 through a ref, with `play()` called there, because React writes `muted` as a
 property and skips it often enough to matter. Check the live properties,
 never the JSX, when a hero video will not start.
+
+**`index.html` cannot be versioned and that is how a live fix gets reported as
+broken.** It is the entry point, it carries `max-age=600`, and a phone or
+tablet with the tab open holds it far longer than ten minutes. This has now
+cost four round trips. **Before debugging a reported bug, check what the live
+page is actually serving** — `curl https://arvorealta.com/ | grep <the new
+string>` settles it in one command — and have the owner open a private tab,
+which is the only reliable cache bypass on iOS.
 
 **The sandbox Chromium has no H.264**, so playback cannot be verified here at
 all: `canPlayType('video/mp4; codecs="avc1.42E01E"')` returns empty and the
