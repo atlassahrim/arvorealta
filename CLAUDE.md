@@ -994,6 +994,24 @@ thing in the dialog, which is the close button. It is set on the node through
 a ref now, exactly as `muted` had to be. **Check the live property, never the
 JSX.**
 
+**The software keyboard is driven by `visualViewport` and nothing else.**
+Reported on an iPad in landscape: the keyboard pushed the dialog off the top
+of the screen with nothing to scroll back to. **The first fix was wrong and
+is worth recording as wrong**, because it looks right: the dialog was capped
+at `100svh` and the viewport meta took `interactive-widget=resizes-content`.
+Neither reaches iOS. `interactive-widget` is Chromium only, and **on iOS
+Safari `svh` and `dvh` do not shrink for the keyboard at all** — the layout
+viewport keeps its full height and the keyboard simply covers it.
+`window.visualViewport` is the one API that reports what is actually visible.
+
+**`offsetTop` matters as much as `height`.** iOS scrolls the visual viewport
+inside the layout viewport, and a `position: fixed` dialog does not move with
+it, which is exactly how it ended up off screen. The dialog's `top`,
+`max-height` and `margin-top` are all written from `visualViewport` on its
+`resize` and `scroll` events, centred while there is room and pinned to the
+top once there is not. `interactive-widget` is kept because it genuinely
+helps Chromium; it is simply not the iOS fix.
+
 **The file input is hidden and a real button clicks it.** A file input styled
 `sr-only` is still focusable, so the focus ring lands on something nobody can
 see; a button that forwards the click puts the ring where the reader is
@@ -1036,6 +1054,20 @@ photograph and all three are tested: `prefers-reduced-motion`, where the
 element is never mounted at all because a `<video autoplay>` cannot be stopped
 from CSS; `onError`, which drops it; and a blocked autoplay, whose rejected
 promise is swallowed.
+
+**The fade is gated on `playing`, not on `canplaythrough`, and that was a
+reported bug.** The video did not appear on mobile. `canplaythrough` promises
+the whole file can run without stalling, and **iOS throttles preloading hard
+enough that it frequently never fires** — so the video was playing behind
+`opacity: 0`. `playing` fires when playback has actually started, which is
+the literal condition the fade wants. `timeupdate` backs it up for anything
+that skips `playing`, and `canplaythrough` is kept as a third path. `preload`
+is `auto` rather than `metadata`, because metadata plus a throttled connection
+is the state where none of the three fire.
+
+**iOS Low Power Mode blocks autoplay of muted video outright.** Nothing in
+the page changes that and it is not a bug to chase: the photograph is the
+right answer there. If the video is missing on an iPhone, check that first.
 
 **React does not write `muted`, `autoplay` or `playsinline` for you, and a
 video missing any of them does not autoplay anywhere.** Written as plain
