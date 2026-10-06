@@ -716,17 +716,30 @@ is display type carrying a sentence, which is read. Same figure, two jobs,
 two treatments. **The attachment also gets its own line**, so a reader
 skimming on a phone sees it without parsing a sentence.
 
-**The close offers the fixed version and its price, never an easier future.**
-The owner proposed ending on *how easy bidding can be with a clean document
-standard*, and the trade was argued rather than taken. The two pages the
-reader has just finished are specific and checkable, so an unevidenced
-promise about ease breaks the register the document established, and a sales
-manager for public tenders already knows bidding is not easy — `gradient-copy`
-carries the same rule as **never invent proof**. `what the fixed version
-looks like, and what it costs` keeps the owner's outcome and makes it a
-thing: it is the €600 tier's own promise, *one document, done properly*. The
-price stays in, because most cold approaches hide it and saying it is what
-disarms.
+**The close offers a conversation about the improved version and its price,
+never an easier future.** The owner first proposed ending on *how easy
+bidding can be with a clean document standard*, and the trade was argued
+rather than taken. The two pages the reader has just finished are specific
+and checkable, so an unevidenced promise about ease breaks the register the
+document established, and a sales manager for public tenders already knows
+bidding is not easy — `gradient-copy` carries the same rule as **never invent
+proof**.
+
+**The owner's final wording is better than the draft that answered it**, and
+the correction is worth keeping because it is the kind a session will make
+again. The draft read *I will show you what the fixed version looks like*,
+which promises a built thing: a reply would have obliged the corrected
+datasheet before any money moved. The line that shipped — `we can talk about
+a full improvement version for your document, and what it costs` — keeps the
+outcome and the price and commits only to a conversation, which is all a
+first reply should be. **A free tier's close offers the next conversation,
+not the next deliverable.** The price stays in either way, because most cold
+approaches hide it and saying it is what disarms.
+
+**`Have a nice day.` is the owner's sign-off and stays as written.** It is a
+voice choice rather than a rule, and `gradient-copy`'s own line is that a
+writer's voice is protected rather than sanded down to whatever reads as
+standard.
 
 **A review that makes a claim about a live website carries a date.** Sheet
 1's masthead reads `Document review · 6 October 2026`, because finding 01

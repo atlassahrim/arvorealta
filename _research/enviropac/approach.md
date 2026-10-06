@@ -94,8 +94,10 @@ speaker first or the preference is to send in Norwegian anyway.
 > 19 October, when written questions to the buyer close.
 >
 > I build document standards for manufacturers who bid. If it is useful,
-> reply and I will show you what the fixed version looks like, and what it
-> costs. If not, no reply needed.
+> reply and we can talk about a full improvement version for your document,
+> and what it costs. If not, no reply needed.
+>
+> Have a nice day.
 >
 > Atlas Sahrim
 > arvorealta.com
@@ -127,8 +129,10 @@ nobody wants to make.
 > 19. oktober, når fristen for skriftlige spørsmål til oppdragsgiver går ut.
 >
 > Jeg lager dokumentstandarder for produsenter som leverer tilbud. Er den
-> nyttig, svar så viser jeg deg hvordan den rettede versjonen ser ut, og hva
-> den koster. Er den ikke det, trenger du ikke svare.
+> nyttig, svar så kan vi snakke om en komplett forbedret versjon av
+> dokumentet ditt, og hva det koster. Er den ikke det, trenger du ikke svare.
+>
+> Ha en fin dag.
 >
 > Atlas Sahrim
 > arvorealta.com
@@ -147,15 +151,27 @@ rather than reads — which is the same reason the sheets set every fact as a
 field. The statement block on sheet 1 keeps `Nine of thirty-four`, because
 that is display type carrying a sentence. Different job, different treatment.
 
-**The close offers the fixed version and its price, not an easier future.**
-The owner proposed *how easy bidding can be with a clean document standard*
-and the trade was argued rather than taken: the two pages the reader has just
-finished are specific and checkable, so an unevidenced promise about ease
-breaks the register the document established, and a sales manager for public
-tenders already knows bidding is not easy. `what the fixed version looks
-like, and what it costs` keeps the owner's outcome and makes it a thing — it
-is the €600 tier's own promise, *one document, done properly* — while keeping
-the price, which is the disarming part, since most cold approaches hide it.
+**The close offers a conversation about the improved version and its
+price, not an easier future.** The owner first proposed *how easy bidding can
+be with a clean document standard* and the trade was argued rather than
+taken: the two pages the reader has just finished are specific and checkable,
+so an unevidenced promise about ease breaks the register the document
+established, and a sales manager for public tenders already knows bidding is
+not easy.
+
+The owner's final wording — **`we can talk about a full improvement version
+for your document, and what it costs`** — is better than the draft it
+replaced. The draft said *I will show you what the fixed version looks like*,
+which promises a built thing: a reply would have obliged the corrected
+datasheet before any money moved. *We can talk about* keeps the outcome and
+the price and commits only to a conversation, which is what a first reply
+should be. The price stays in, because most cold approaches hide it and
+saying it is what disarms.
+
+**`Have a nice day.` is the owner's sign-off and stays as written.** It is a
+voice choice rather than a rule, and the copy skill's own line is that a
+writer's voice is protected rather than sanded down to whatever reads as
+standard.
 
 ---
 
