@@ -671,10 +671,38 @@ appended to it, and **a change to one belongs in the other in the same
 commit.** The quotations stay Norwegian in both, because a quotation is the
 one thing that must not be translated.
 
-**The Norwegian edition is not a native speaker's and that is unresolved.**
-This file already records it for the offer page and it matters more here,
-because this document is read by one company that was approached on purpose.
-The procurement vocabulary is the part to have checked before it is sent.
+**The Norwegian edition's vocabulary is the buyer's own, and that was
+measured rather than hoped.** Every substantive word in the Norwegian sheets
+was checked against a corpus of the competition document, Bilag 1 and
+Bilag 2: **83 of 107 distinct terms five characters or longer appear in the
+buyer's own files.** That is what reading the procurement buys, and it is why
+the caveat this file carried — that the Nordic text is not a native
+speaker's — is narrower here than on the offer page. A quoted term cannot be
+the wrong term.
+
+**What is left is idiom, not vocabulary, and it is about ten sentences.** The
+twenty-four unattested words are proper nouns, plain Norwegian, and three
+compounds written here rather than found. One of those, `hjulmotsigelsen`,
+was a literal translation of an English metaphor and is gone; the line now
+uses the buyer's own `kravet til hjuldiameter er oppfylt`. The residue is the
+connective prose between the quotations, and **a native speaker reading ten
+sentences is a far smaller favour to ask than reading a document.** Re-run
+the check after any rewrite — it is a corpus and a regex, not an afternoon.
+
+**The approach email goes in English even though the document is Norwegian**,
+and the reasoning is the inverse of the document's. An email is pure
+connective prose with no quotations to lean on, and it is the first thing a
+stranger reads: Norwegian that is slightly off register reads as machine
+translation, which reads as spam. The document quotes the tender and has to
+be Norwegian. `_research/enviropac/approach.md` holds both drafts, the named
+contact and the deadlines.
+
+**A review that makes a claim about a live website carries a date.** Sheet
+1's masthead reads `Document review · 6 October 2026`, because finding 01
+says the 2020 datasheet is still served and that is a fact about somebody
+else's server on a particular day. Both files were re-checked at HTTP 200 the
+morning it was sent. An undated claim of that shape goes stale silently,
+which is the worst way for a claim to fail.
 
 **Check the supplier's whole published set before scoring one sheet of it.**
 The first build scored a two-page datasheet dated 2020 and opened on the
