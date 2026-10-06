@@ -608,7 +608,7 @@ readable, so it is the one thing from the reference not copied.
   one kind: a document review, which is a report *about* somebody else's
   document rather than a document submitted as theirs. It is read by the
   company whose sheet was scored, and a report with no author is a report
-  nobody can reply to, so its last foot carries `Arvorealta · arvorealta.com`.
+  nobody can reply to, so its last foot carries `Arvorealta.com`.
   The rule above is unchanged for everything an evaluator sees
 - Narrative sits in seven columns — 97 mm, about 55 characters. The full
   170 mm measure runs past 85 characters and stops being readable
@@ -743,17 +743,31 @@ standard.
 
 **A review that makes a claim about a live website carries a date.** Sheet
 1's masthead reads `Document review · 6 October 2026`, because finding 01
-says the 2020 datasheet is still served and that is a fact about somebody
+says the older datasheet is still served and that is a fact about somebody
 else's server on a particular day. Both files were re-checked at HTTP 200 the
 morning it was sent. An undated claim of that shape goes stale silently,
 which is the worst way for a claim to fail.
+
+**Date somebody else's document from `pdfinfo`, never from its URL.** The
+first build dated both sheets by their upload folder — the MGB one 2020 and
+the Citybac one 2025 — and **both were wrong by years.** The MGB PDF was
+created 25 June 2015 and the whole Citybac family on two days in August 2022;
+`/2025/02/` is a re-upload of files that already existed. The gap the review
+describes is seven years, not five, which makes the finding stronger, but it
+was stated wrongly first and the reader is the one company that can check it
+in two clicks. The field is labelled `File dated` rather than `Published`,
+because what the file says about itself is checkable and when it went online
+is not. **The error surfaced only because the owner sent the source PDF back
+and asked whether it was the one reviewed** — the answer was yes, by
+sha256 — so verifying identity caught a mistake that verifying content had
+not. Check the metadata of anything being scored.
 
 **Check the supplier's whole published set before scoring one sheet of it.**
 The first build scored a two-page datasheet dated 2020 and opened on the
 finding that only one container size of six was documented. **Both halves of
 that were wrong.** EnviroPac publish a current eight-page sheet for every
 size the framework buys, under a different product name, at a different path,
-and the 2020 file is still served beside it. The count went from eight of
+and the older file is still served beside it. The count went from eight of
 thirty-four to nine, the findings changed completely, and the one thing that
 survived was the shape of the document. `_research/enviropac/datasheets.md`
 holds the full map and the method. **A review built on a superseded document
@@ -800,7 +814,9 @@ plate is a composite of two covers scaled to one height, which is how a
 figure says *these are two documents* without a caption.
 
 **Sheet 2's foot carries the maker's mark and says what the document is:**
-`Arvorealta · Tier zero, free review`. The context is there on purpose — the
+`Arvorealta.com · Tier zero, free review`. The mark is the domain rather than
+the bare name, at the owner's instruction, so the one line that says who wrote
+the document is also the one line that says where to find them. The context is there on purpose — the
 signature appears on this kind of sheet and on no other, and naming the tier
 is what makes that legible rather than inconsistent. Sheet 1's foot stays
 document identification. See the carve-out in the annex spec above.
