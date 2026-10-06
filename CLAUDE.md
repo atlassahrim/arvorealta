@@ -697,6 +697,18 @@ translation, which reads as spam. The document quotes the tender and has to
 be Norwegian. `_research/enviropac/approach.md` holds both drafts, the named
 contact and the deadlines.
 
+**The email contextualises the document, it never summarises it.** The first
+draft carried the two missing standards and the PCR wording in the body, and
+the owner cut them: a summary that good leaves the attachment nothing to
+deliver, and a reader who already has the answer has no reason to look at the
+evidence. What the email says is what the document is, what is on each page
+and what it costs — about 125 words against 250. **The count is the one
+figure that crosses**, because nine of thirty-four is a question rather than
+an answer and it cannot be acted on without opening the file. The deadline
+crosses too, since it changes whether the file is opened today or next week,
+and it is not a finding. Everything else stays in the PDF, which is the thing
+being sold.
+
 **A review that makes a claim about a live website carries a date.** Sheet
 1's masthead reads `Document review · 6 October 2026`, because finding 01
 says the 2020 datasheet is still served and that is a fact about somebody

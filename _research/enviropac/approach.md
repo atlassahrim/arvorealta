@@ -80,28 +80,19 @@ speaker first or the preference is to send in Norwegian anyway.
 
 > Hei Erlend,
 >
-> I read the requirement specification for the Valdres container framework
-> and scored your published Citybac 240 L datasheet against it, requirement
-> by requirement. The two sheets are attached. They cost nothing and I am not
-> asking for anything back.
+> I scored your published Citybac 240 L datasheet against the requirement
+> specification for the Valdres container framework. Two A4 pages attached.
 >
-> One finding is worth a minute even if you bin the rest. NS-EN 1501-5 and
-> RAL-GZ 951/1 are absolute requirements, krav 5 and 6. Both are named in the
-> older MGB datasheet from 2020. Neither appears in any of the six current
-> Citybac sheets, and both files are still live on your site.
+> Page one is the map. Of the thirty-four requirements a product datasheet is
+> the natural home for, nine can be answered from the sheet as it stands.
+> Page two is the four an evaluator meets first, each with the requirement
+> quoted beside the part of your sheet it refers to.
 >
-> The second concerns climate and environment, which carries 30 of 100. Krav
-> 57 asks for a committed minimum share of PCR by weight, stated separately
-> for body, lid and wheels, documented with a third-party certificate. The
-> sheet says up to 100 per cent, which is a ceiling rather than a floor.
+> It costs nothing and I am not asking for anything back. Worth a look before
+> 19 October, when written questions to the buyer close.
 >
-> If you want the buyer to confirm what evidence satisfies krav 57, written
-> questions close on 19 October.
->
-> I build document standards for manufacturers who bid. This review is what I
-> do for nothing, so the work can be seen before anyone decides whether any
-> of it is worth paying for. If it is useful, reply and I will tell you what
-> the next step costs. If it is not, no reply needed.
+> I build document standards for manufacturers who bid. If it is useful,
+> reply and I will tell you what the next step costs. If not, no reply needed.
 >
 > Atlas Sahrim
 > arvorealta.com
@@ -118,28 +109,21 @@ nobody wants to make.
 
 > Hei Erlend,
 >
-> Jeg har lest kravspesifikasjonen til rammeavtalen for beholdere hos Valdres
-> Kommunale Renovasjon og vurdert det publiserte databladet for Citybac 240 L
-> mot den, krav for krav. De to arkene ligger vedlagt. Det koster ingenting,
-> og jeg ber ikke om noe tilbake.
+> Jeg har vurdert det publiserte databladet for Citybac 240 L mot
+> kravspesifikasjonen til rammeavtalen for beholdere hos Valdres Kommunale
+> Renovasjon. To A4-sider ligger vedlagt.
 >
-> Ett funn er verdt et minutt selv om du kaster resten. NS-EN 1501-5 og
-> RAL-GZ 951/1 er absolutte krav, krav 5 og 6. Begge står i det eldre
-> MGB-databladet fra 2020. Ingen av dem står i noen av de seks gjeldende
-> Citybac-databladene, og begge filene ligger fortsatt ute hos dere.
+> Side én er kartet. Av de trettifire kravene et produktdatablad er det
+> naturlige stedet for, kan ni besvares med databladet slik det står. Side to
+> er de fire en evaluator ser først, hver med kravet sitert ved siden av den
+> delen av databladet det gjelder.
 >
-> Det andre gjelder klima og miljø, som vektes 30 prosent. Krav 57 ber om en
-> forpliktende minimumsandel PCR i vekt-%, oppgitt separat for beholderkropp,
-> lokk og hjul, dokumentert med tredjeparts sertifikat. Databladet sier
-> inntil 100 prosent, som er et tak og ikke et gulv.
+> Det koster ingenting, og jeg ber ikke om noe tilbake. Verdt et blikk før
+> 19. oktober, når fristen for skriftlige spørsmål til oppdragsgiver går ut.
 >
-> Fristen for skriftlige spørsmål til oppdragsgiver er 19. oktober, hvis dere
-> vil ha bekreftet hva som godtas som dokumentasjon på krav 57.
->
-> Jeg lager dokumentstandarder for produsenter som leverer tilbud. Denne
-> gjennomgangen er gratis, slik at arbeidet kan ses før noen vurderer om det
-> er verdt å betale for. Er den nyttig, svar så sier jeg hva neste steg
-> koster. Er den ikke det, trenger du ikke svare.
+> Jeg lager dokumentstandarder for produsenter som leverer tilbud. Er den
+> nyttig, svar så sier jeg hva neste steg koster. Er den ikke det, trenger du
+> ikke svare.
 >
 > Atlas Sahrim
 > arvorealta.com
@@ -148,6 +132,15 @@ nobody wants to make.
 
 ## What the email deliberately does not do
 
+- **It does not carry the findings.** The first draft put NS-EN 1501-5,
+  RAL-GZ 951/1 and the PCR wording in the body, which made the email a
+  summary of the document rather than a reason to open it. The owner cut it.
+  A summary that good leaves the attachment nothing to deliver, and a reader
+  who has already had the answer has no reason to look at the evidence. The
+  email now says what the document is, what is on each page and what it
+  costs. **The count is the one number that crosses**, because nine of
+  thirty-four is a question rather than an answer and it cannot be acted on
+  without opening the file
 - **It does not say EnviroPac are bidding.** Nothing confirms that they are.
   Every sentence works whether they bid or not
 - **It does not predict a score.** The review says the buyer scores and the
