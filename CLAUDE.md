@@ -186,7 +186,9 @@ templates/index.html    index of every template
 deck/<slug>/index.html  one deck per folder
 annex/<slug>/index.html one A4 annex per folder
 annex/_enviropac-review/
-                        a scored document review — two sheets, private
+annex/_enviropac-review-nb/
+                        a scored document review, English and Norwegian —
+                        two sheets each, private
 assets/
   img/                  photography, as webp + jpg at the widths the source
                         actually holds — the name carries a version:
@@ -636,13 +638,13 @@ readable, so it is the one thing from the reference not copied.
 
 ### The document review — what the free step delivers
 
-`annex/_enviropac-review/` is the first one, and it is the free tier's
-deliverable built as two A4 sheets on the technical system. It scores a
-supplier's own published product datasheet against the requirement
-specification of a live tender. Sheet 1 is the map — what the document can
-and cannot answer, and the count. Sheet 2 is four findings, each with the
-requirement quoted in Norwegian, a crop of their page beside it, and one
-line saying what the gap is.
+`annex/_enviropac-review/` and `annex/_enviropac-review-nb/` are the first
+one: the free tier's deliverable, built as two A4 sheets on the technical
+system. It scores a supplier's own published product datasheet against the
+requirement specification of a live tender. Sheet 1 is the map — what the
+document can and cannot answer, and the count. Sheet 2 is four findings, each
+with the requirement quoted beside a crop of their page and one line saying
+what the gap is.
 
 **It is a report with cutouts, and the two alternatives were both rejected.**
 Marks drawn on their own PDF would mean our typography never appears, which
@@ -650,32 +652,56 @@ is the entire thing being sold. A corrected version of their sheet is the
 €600 tier given away. A separate document that quotes theirs is the only
 form where the work is visible and the paid rung is still intact.
 
-**There is no numeric score anywhere on it.** The count — eight answered,
-eight partial, eighteen absent, of thirty-four — is a count of what is in the
+**There is no numeric score anywhere on it.** The count — nine answered,
+seven partial, eighteen absent, of thirty-four — is a count of what is in the
 document, which is checkable. A score is an evaluator's judgement on a live
 procurement, and inventing one is the claim this file says to flag before
 making. The sheet says so in its own standfirst: *the buyer scores.*
+
+**Two documents, one in each language, and never one document in two.** The
+first build set the prose in English with the Norwegian `krav` quoted inside
+it, on the offer page's own rule that a foreign string is quoted rather than
+left loose. The owner's correction is that the rule solves a different
+problem: a page that has to serve three readers at one URL mixes languages
+because it cannot do anything else, and a document that is sent to one
+company can simply be the right language all the way through. A review that
+is half English on a Norwegian evaluator's desk is useless at both ends. So
+the edition is the unit: `-nb` is the same document, not a translation
+appended to it, and **a change to one belongs in the other in the same
+commit.** The quotations stay Norwegian in both, because a quotation is the
+one thing that must not be translated.
+
+**The Norwegian edition is not a native speaker's and that is unresolved.**
+This file already records it for the offer page and it matters more here,
+because this document is read by one company that was approached on purpose.
+The procurement vocabulary is the part to have checked before it is sent.
+
+**Check the supplier's whole published set before scoring one sheet of it.**
+The first build scored a two-page datasheet dated 2020 and opened on the
+finding that only one container size of six was documented. **Both halves of
+that were wrong.** EnviroPac publish a current eight-page sheet for every
+size the framework buys, under a different product name, at a different path,
+and the 2020 file is still served beside it. The count went from eight of
+thirty-four to nine, the findings changed completely, and the one thing that
+survived was the shape of the document. `_research/enviropac/datasheets.md`
+holds the full map and the method. **A review built on a superseded document
+is worse than no review, because it is wrong in a way the reader can see at a
+glance and we cannot.**
+
+**What it cost to find was a loop over URLs, not an afternoon.** The product
+pages each link their own current sheet, which is the sure route; probing the
+upload folders for a size list is the fast one. Do one of them before scoring
+anything.
 
 **The scope is stated on the page, not assumed.** Of the sixty requirements
 in Bilag 2, twenty-six ask for a delivery plan, an option price or a
 complaints procedure, and no datasheet answers those; the thirty-four that
 remain are what a datasheet is the natural home for. The closing footnote
-says the sheet was assessed as a single attachment and that the count moves
-if datasheets exist for the other five container sizes. **Check whether they
-do before sending.** One document is what the free step promises, so there is
-no reason to gather the rest first — but a count stated without that caveat
-would be wrong rather than incomplete.
+names all six sizes and says the absences hold across the family, which is
+only sayable because the family was checked.
 
-**Every sentence is in one language and the requirements are quoted, not
-translated.** The sheets are set in English with each `krav` in Norwegian,
-in mono, with its own `lang` attribute — the same rule the offer page runs.
-A Norwegian edition is the better document for this reader and it is not
-safe to produce yet: this file already records that the Nordic procurement
-vocabulary here is not a native speaker's and is worth having checked. That
-check is what a Norwegian edition waits on.
-
-**Three classes were added to `annex.css` for it**, and all three are
-structure rather than taste:
+**Four classes were added to `annex.css` for it**, and all four are structure
+rather than taste:
 
 - `.fields.of-3`, which is the row of three counts
 - `.plate-doc`, a crop of somebody else's page quoted as evidence. It sits
@@ -690,13 +716,22 @@ structure rather than taste:
   bottom margin: the line under a quotation is what the quoted document does
   about the thing quoted, so it belongs to it, exactly as a label belongs to
   its value
+- `--annex-of`, the running foot's joining word. It defaults to `" of "`, so
+  every existing annex is unchanged, and the Norwegian edition sets
+  `" av "` beside `--annex-total`. The foot is the one piece of chrome that
+  has to speak the sheet's own language
 
 **The crops are generated, not screenshotted by hand.** `pdftoppm -r 200`
-renders the source PDF and the four boxes are cut with Pillow, so re-cutting
-them after a source change is a script run rather than an afternoon.
+renders the source PDF and the boxes are cut with Pillow, so re-cutting them
+after a source change is a script run rather than an afternoon. Finding 01's
+plate is a composite of two covers scaled to one height, which is how a
+figure says *these are two documents* without a caption.
 
-**The maker's mark is on sheet 2's foot and nowhere else.** See the carve-out
-in the annex spec above.
+**Sheet 2's foot carries the maker's mark and says what the document is:**
+`Arvorealta · Tier zero, free review`. The context is there on purpose — the
+signature appears on this kind of sheet and on no other, and naming the tier
+is what makes that legible rather than inconsistent. Sheet 1's foot stays
+document identification. See the carve-out in the annex spec above.
 
 **The close is the hero again, on ink.** Same eyebrow, headline, standfirst,
 qualifier, call to action and both notes, word for word. Every class the hero
@@ -1166,13 +1201,31 @@ back to `auto`, measure first.**
 lets a reader turn auto-play off entirely. In both cases `play()` is rejected
 on load and the page cannot override it.
 
-**What the page can do is ask again at the first user gesture, and that is
-what it does.** The owner's own report was the diagnosis: *"the video is
-paused and rolls out only after I push the button."* A gesture lifts the
-restriction for the whole document, so the first touch anywhere — not only on
-the video — is enough. One passive listener each on `pointerdown`,
-`touchstart` and `keydown`, `once`, removed as soon as one has run, so it
-never becomes a listener that lives for the life of the page.
+**What the page can do is keep asking, and that is what it does.** The
+owner's own report was the first diagnosis: *"the video is paused and rolls
+out only after I push the button."* A gesture lifts the restriction for the
+whole document, so the first touch anywhere — not only on the video — is
+enough.
+
+**`once: true` was the first version of that and it had a hole.** A gesture
+that lands before the element exists, or while the restriction is still in
+force — Low Power Mode is not lifted by a tap — spends the only attempt there
+was and nothing asks again. Reported as a phone that played and a tablet that
+did not. The listeners now stay until `ready` flips, which is the frame
+playback actually starts, and the effect tears them all down at that point —
+so nothing lives for the life of the page, which was the whole point of
+`once`. Six events: `pointerdown`, `touchstart`, `touchend`, `click`,
+`keydown` and `visibilitychange`, the last because iOS pauses a backgrounded
+video and does not always resume it.
+
+**There is no per-size setting for this, and there cannot be.** Asked whether
+two viewports need two settings: autoplay permission belongs to the device
+and its owner — Low Power Mode, and Safari's own per-site Auto-Play toggle
+under the `aA` menu — and **no media query can grant it**, because the policy
+is not a function of the layout. A phone and a tablet showing the same page
+differently is two devices with two settings, not two widths. The only
+difference the page is allowed to make by size is `prefers-reduced-motion`,
+which is not a size at all.
 
 If the video is still missing after a touch, the photograph is the right
 answer and it is not a bug to chase.

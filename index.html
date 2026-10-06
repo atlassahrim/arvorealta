@@ -827,23 +827,29 @@ function Hero({ t }) {
      Once only, passive, and removed as soon as it has run or the video is
      already going, so this never becomes a listener that fires for the life
      of the page. */
+  /* The retry runs until the video is actually playing, not once.
+     `once: true` was the first version and it has one hole: a gesture that
+     lands before the element exists, or while the restriction is still in
+     force — Low Power Mode is not lifted by a tap — spends the only attempt
+     there was, and nothing asks again. Reported as a phone that plays and a
+     tablet that does not, which is not a viewport difference: **no media
+     query can grant autoplay permission**, because the policy is the
+     device's and not the layout's. What differs between two iOS devices is
+     Low Power Mode and Safari's own per-site Auto-Play setting, and the only
+     thing the page can do about either is keep asking.
+     `ready` is the exit. The effect tears the listeners down the moment
+     playback has actually started, so nothing lives for the life of the
+     page, which was the whole point of `once` in the first place. */
   useEffect(() => {
-    if (reduce || failed) return;
+    if (reduce || failed || ready) return;
     const kick = () => {
       const v = vid.current;
       if (v && v.paused) { const go = v.play(); if (go && go.catch) go.catch(() => {}) }
-      off();
     };
-    const off = () => {
-      document.removeEventListener("pointerdown", kick);
-      document.removeEventListener("touchstart", kick);
-      document.removeEventListener("keydown", kick);
-    };
-    document.addEventListener("pointerdown", kick, { passive: true, once: true });
-    document.addEventListener("touchstart", kick, { passive: true, once: true });
-    document.addEventListener("keydown", kick, { once: true });
-    return off;
-  }, [reduce, failed]);
+    const evs = ["pointerdown", "touchstart", "touchend", "click", "keydown", "visibilitychange"];
+    evs.forEach(e => document.addEventListener(e, kick, { passive: true }));
+    return () => evs.forEach(e => document.removeEventListener(e, kick));
+  }, [reduce, failed, ready]);
 
   return html`
     <section id="top" class="on-ink relative isolate overflow-clip bg-ink text-bone">

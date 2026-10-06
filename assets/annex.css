@@ -462,7 +462,11 @@
   text-transform:uppercase;
   color:var(--ink-soft);
 }
-.sheet-foot .num::before{content:counter(sheet) " of " var(--annex-total)}
+/* The joining word is a token because the running foot is the one piece of
+   chrome that has to speak the sheet's own language. The default is English
+   and every existing annex keeps it; a Norwegian edition sets
+   `--annex-of:" av "` on `.annex` beside `--annex-total`. */
+.sheet-foot .num::before{content:counter(sheet) var(--annex-of," of ") var(--annex-total)}
 
 /* a footnote is running text, not a label — tracked capitals past
    about forty characters stop being readable */
