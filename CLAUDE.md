@@ -185,6 +185,8 @@ _tw.src.css             the offer page's Tailwind source, compiled by
 templates/index.html    index of every template
 deck/<slug>/index.html  one deck per folder
 annex/<slug>/index.html one A4 annex per folder
+annex/_enviropac-review/
+                        a scored document review — two sheets, private
 assets/
   img/                  photography, as webp + jpg at the widths the source
                         actually holds — the name carries a version:
@@ -599,7 +601,13 @@ readable, so it is the one thing from the reference not copied.
   credit line, nothing that tells an evaluator who set the document. What
   goes out under a client's name is theirs. The foot identifies the document
   and nothing else — reference number, sheet, and the framework reference an
-  evaluator matches against their own file
+  evaluator matches against their own file.
+  **A sheet that goes out under our own name is the exception**, and there is
+  one kind: a document review, which is a report *about* somebody else's
+  document rather than a document submitted as theirs. It is read by the
+  company whose sheet was scored, and a report with no author is a report
+  nobody can reply to, so its last foot carries `Arvorealta · arvorealta.com`.
+  The rule above is unchanged for everything an evaluator sees
 - Narrative sits in seven columns — 97 mm, about 55 characters. The full
   170 mm measure runs past 85 characters and stops being readable
 - **On screen a sheet scales, it never reflows.** A published annex is a
@@ -608,7 +616,87 @@ readable, so it is the one thing from the reference not copied.
   the shape and pinches in to read. Screen only; print never sees it
 - **Page budget is the design constraint.** A tender that caps pages discards
   the overflow unread, so air costs content. Measure every block against the
-  246 mm before adding to a sheet
+  246 mm before adding to a sheet. **Measure it, do not estimate it**:
+  `.sheet-body` is 930 px at a desktop width, so `scrollHeight - clientHeight`
+  on it is the overflow in pixels and 3.78 px is one baseline. Both sheets of
+  the review below came in 91 mm and 18 mm over on the first pass and read as
+  though they fitted
+- **`.gap-1`, `.gap-2` and `.measure` do nothing on a `p`, a `.title` or a
+  `.heading`, and that is a specificity bug, not a rule.** `.sheet p` sets a
+  `margin` shorthand and `max-width:none` at (0,1,1), and `.sheet .title` sets
+  `margin:0` at (0,2,0); the tokens are single classes at (0,1,0) and lose.
+  Measured: `.gap-2` on the template's own `h1` computes to `0px`, which is
+  why the title sits tight under the masthead although this file says it has
+  two baselines of air. **The fix is to raise the tokens' specificity, and it
+  is not free** — `annex/_template/` and `annex/sample/` both fit at exactly
+  zero overflow today, so switching the tokens on adds 12 mm to four sheets
+  that have no room for it and all four need re-tuning in the same change.
+  Until that is done, anything that is not a `div` carries its air in a
+  wrapper `div`, which is what `annex/_enviropac-review/` does
+
+### The document review — what the free step delivers
+
+`annex/_enviropac-review/` is the first one, and it is the free tier's
+deliverable built as two A4 sheets on the technical system. It scores a
+supplier's own published product datasheet against the requirement
+specification of a live tender. Sheet 1 is the map — what the document can
+and cannot answer, and the count. Sheet 2 is four findings, each with the
+requirement quoted in Norwegian, a crop of their page beside it, and one
+line saying what the gap is.
+
+**It is a report with cutouts, and the two alternatives were both rejected.**
+Marks drawn on their own PDF would mean our typography never appears, which
+is the entire thing being sold. A corrected version of their sheet is the
+€600 tier given away. A separate document that quotes theirs is the only
+form where the work is visible and the paid rung is still intact.
+
+**There is no numeric score anywhere on it.** The count — eight answered,
+eight partial, eighteen absent, of thirty-four — is a count of what is in the
+document, which is checkable. A score is an evaluator's judgement on a live
+procurement, and inventing one is the claim this file says to flag before
+making. The sheet says so in its own standfirst: *the buyer scores.*
+
+**The scope is stated on the page, not assumed.** Of the sixty requirements
+in Bilag 2, twenty-six ask for a delivery plan, an option price or a
+complaints procedure, and no datasheet answers those; the thirty-four that
+remain are what a datasheet is the natural home for. The closing footnote
+says the sheet was assessed as a single attachment and that the count moves
+if datasheets exist for the other five container sizes. **Check whether they
+do before sending.** One document is what the free step promises, so there is
+no reason to gather the rest first — but a count stated without that caveat
+would be wrong rather than incomplete.
+
+**Every sentence is in one language and the requirements are quoted, not
+translated.** The sheets are set in English with each `krav` in Norwegian,
+in mono, with its own `lang` attribute — the same rule the offer page runs.
+A Norwegian edition is the better document for this reader and it is not
+safe to produce yet: this file already records that the Nordic procurement
+vocabulary here is not a native speaker's and is worth having checked. That
+check is what a Norwegian edition waits on.
+
+**Three classes were added to `annex.css` for it**, and all three are
+structure rather than taste:
+
+- `.fields.of-3`, which is the row of three counts
+- `.plate-doc`, a crop of somebody else's page quoted as evidence. It sits
+  in a hairline frame on the sheet's own stock, holds its own proportions
+  with `contain` rather than being cropped again with `cover`, and takes its
+  natural height so a figure hangs from the top of its cell. It must not
+  read as our photograph, because it is not one
+- `.quote`, a sentence quoted verbatim in the language it was written in.
+  Mono, 9 pt, sentence case — mono because that is what says the words are
+  somebody else's, sentence case and 9 pt because it is read rather than
+  found, which is what keeps it clear of the one label size. It carries no
+  bottom margin: the line under a quotation is what the quoted document does
+  about the thing quoted, so it belongs to it, exactly as a label belongs to
+  its value
+
+**The crops are generated, not screenshotted by hand.** `pdftoppm -r 200`
+renders the source PDF and the four boxes are cut with Pillow, so re-cutting
+them after a source change is a script run rather than an afternoon.
+
+**The maker's mark is on sheet 2's foot and nowhere else.** See the carve-out
+in the annex spec above.
 
 **The close is the hero again, on ink.** Same eyebrow, headline, standfirst,
 qualifier, call to action and both notes, word for word. Every class the hero
@@ -1061,9 +1149,18 @@ the whole file can run without stalling, and **iOS throttles preloading hard
 enough that it frequently never fires** — so the video was playing behind
 `opacity: 0`. `playing` fires when playback has actually started, which is
 the literal condition the fade wants. `timeupdate` backs it up for anything
-that skips `playing`, and `canplaythrough` is kept as a third path. `preload`
-is `auto` rather than `metadata`, because metadata plus a throttled connection
-is the state where none of the three fire.
+that skips `playing`, and `canplaythrough` is kept as a third path.
+
+**`preload` is back at `metadata`, and the change to `auto` is recorded as a
+guess that was not measured.** It went to `auto` in the same commit as the
+`playing` gate, on the reasoning that metadata plus a throttled connection is
+the state where none of the three events fire. The owner then reported that
+the hero had autoplayed on mobile before that session, and the one byte that
+had changed in the element itself was this. `preload` does not grant or
+withhold permission to autoplay — the block is the autoplay policy, and the
+gesture retry below is the actual fix — but a value nobody measured is not
+worth keeping over a behaviour the owner watched change. **If it is ever put
+back to `auto`, measure first.**
 
 **iOS Low Power Mode blocks autoplay of muted video outright**, and Safari
 lets a reader turn auto-play off entirely. In both cases `play()` is rejected

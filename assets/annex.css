@@ -241,6 +241,7 @@
    in the unit the page is measured in. */
 .fields:not(.flush){margin-bottom:6mm}
 .fields.of-2{grid-template-columns:repeat(2,1fr)}
+.fields.of-3{grid-template-columns:repeat(3,1fr)}
 .fields.of-4{grid-template-columns:repeat(4,1fr)}
 .field .label{display:block}
 /* Small label, large value. That inversion is the whole point of
@@ -335,6 +336,37 @@
 .plate-pair .plate img{object-position:center}
 .plate-ink{background:var(--ink)}
 .plate-caption{margin-top:2mm;color:var(--ink-soft)}
+
+/* A crop of somebody else's page, quoted as evidence.
+   It is not our photograph and it must not read as one, so it sits
+   inside a hairline frame on the sheet's own stock, is held to its
+   own proportions with `contain` rather than cropped again with
+   `cover`, and hangs from the left edge of its column so a row of
+   them lines up with the type beside it. Four baselines, so a row
+   of findings keeps the grid whatever the crop's aspect. */
+.plate-doc{
+  height:auto;
+  padding:1mm;
+  background:var(--paper);
+  border:.25mm solid var(--rule);
+}
+.plate-doc img{height:auto;object-fit:contain}
+
+/* A sentence quoted verbatim from another document, in the language
+   that document is written in. Mono, because that is what says the
+   words are somebody else's and have not been touched; sentence case
+   and 9 pt, because it is read rather than found, which is what keeps
+   it clear of the one label size above. The line that follows a quotation
+   is what the quoted document does about the thing quoted, so it belongs to
+   it and nothing sits between them — the same rule a label and its value
+   already follow. */
+.sheet .quote{
+  margin-bottom:0;
+  font-family:var(--font-data);
+  font-size:9pt;
+  line-height:6mm;
+  color:var(--ink-soft);
+}
 
 /* ---------- certificate block — the thing an evaluator looks for ---------- */
 .certificate{
