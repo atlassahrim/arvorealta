@@ -81,18 +81,21 @@ speaker first or the preference is to send in Norwegian anyway.
 > Hei Erlend,
 >
 > I scored your published Citybac 240 L datasheet against the requirement
-> specification for the Valdres container framework. Two A4 pages attached.
+> specification for the Valdres container framework.
 >
-> Page one is the map. Of the thirty-four requirements a product datasheet is
-> the natural home for, nine can be answered from the sheet as it stands.
-> Page two is the four an evaluator meets first, each with the requirement
+> Two A4 pages attached.
+>
+> Page one is the map. Of the 34 requirements a product datasheet is the
+> natural home for, 9 can be answered from the sheet as it stands. Page two
+> is the 4 findings an evaluator meets first, each with the requirement
 > quoted beside the part of your sheet it refers to.
 >
 > It costs nothing and I am not asking for anything back. Worth a look before
 > 19 October, when written questions to the buyer close.
 >
 > I build document standards for manufacturers who bid. If it is useful,
-> reply and I will tell you what the next step costs. If not, no reply needed.
+> reply and I will show you what the fixed version looks like, and what it
+> costs. If not, no reply needed.
 >
 > Atlas Sahrim
 > arvorealta.com
@@ -111,22 +114,48 @@ nobody wants to make.
 >
 > Jeg har vurdert det publiserte databladet for Citybac 240 L mot
 > kravspesifikasjonen til rammeavtalen for beholdere hos Valdres Kommunale
-> Renovasjon. To A4-sider ligger vedlagt.
+> Renovasjon.
 >
-> Side én er kartet. Av de trettifire kravene et produktdatablad er det
-> naturlige stedet for, kan ni besvares med databladet slik det står. Side to
-> er de fire en evaluator ser først, hver med kravet sitert ved siden av den
+> To A4-sider ligger vedlagt.
+>
+> Side én er kartet. Av de 34 kravene et produktdatablad er det naturlige
+> stedet for, kan 9 besvares med databladet slik det står. Side to er de 4
+> funnene en evaluator ser først, hvert med kravet sitert ved siden av den
 > delen av databladet det gjelder.
 >
 > Det koster ingenting, og jeg ber ikke om noe tilbake. Verdt et blikk før
 > 19. oktober, når fristen for skriftlige spørsmål til oppdragsgiver går ut.
 >
 > Jeg lager dokumentstandarder for produsenter som leverer tilbud. Er den
-> nyttig, svar så sier jeg hva neste steg koster. Er den ikke det, trenger du
-> ikke svare.
+> nyttig, svar så viser jeg deg hvordan den rettede versjonen ser ut, og hva
+> den koster. Er den ikke det, trenger du ikke svare.
 >
 > Atlas Sahrim
 > arvorealta.com
+
+---
+
+## Three decisions inside the last two paragraphs
+
+**The attachment gets its own line.** A reader skimming on a phone sees
+`attached` without parsing a sentence, and it separates what was done from
+what they now have.
+
+**Figures are numerals here and words in the document.** `9 of the 34` stops
+the eye where `nine of the thirty-four` slides past, and this reader scans
+rather than reads — which is the same reason the sheets set every fact as a
+field. The statement block on sheet 1 keeps `Nine of thirty-four`, because
+that is display type carrying a sentence. Different job, different treatment.
+
+**The close offers the fixed version and its price, not an easier future.**
+The owner proposed *how easy bidding can be with a clean document standard*
+and the trade was argued rather than taken: the two pages the reader has just
+finished are specific and checkable, so an unevidenced promise about ease
+breaks the register the document established, and a sales manager for public
+tenders already knows bidding is not easy. `what the fixed version looks
+like, and what it costs` keeps the owner's outcome and makes it a thing — it
+is the €600 tier's own promise, *one document, done properly* — while keeping
+the price, which is the disarming part, since most cold approaches hide it.
 
 ---
 

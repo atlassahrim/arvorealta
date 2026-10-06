@@ -702,12 +702,31 @@ draft carried the two missing standards and the PCR wording in the body, and
 the owner cut them: a summary that good leaves the attachment nothing to
 deliver, and a reader who already has the answer has no reason to look at the
 evidence. What the email says is what the document is, what is on each page
-and what it costs — about 125 words against 250. **The count is the one
-figure that crosses**, because nine of thirty-four is a question rather than
-an answer and it cannot be acted on without opening the file. The deadline
-crosses too, since it changes whether the file is opened today or next week,
-and it is not a finding. Everything else stays in the PDF, which is the thing
-being sold.
+and what it costs — about 130 words against 250. **The count is the one
+figure that crosses**, because 9 of 34 is a question rather than an answer
+and it cannot be acted on without opening the file. The deadline crosses too,
+since it changes whether the file is opened today or next week, and it is not
+a finding. Everything else stays in the PDF, which is the thing being sold.
+
+**Figures are numerals in the email and words in the document.** `9 of the
+34` stops the eye where `nine of the thirty-four` slides past, and this
+reader scans rather than reads — the same reason the sheets set every fact as
+a field. Sheet 1's statement block keeps `Nine of thirty-four` because that
+is display type carrying a sentence, which is read. Same figure, two jobs,
+two treatments. **The attachment also gets its own line**, so a reader
+skimming on a phone sees it without parsing a sentence.
+
+**The close offers the fixed version and its price, never an easier future.**
+The owner proposed ending on *how easy bidding can be with a clean document
+standard*, and the trade was argued rather than taken. The two pages the
+reader has just finished are specific and checkable, so an unevidenced
+promise about ease breaks the register the document established, and a sales
+manager for public tenders already knows bidding is not easy — `gradient-copy`
+carries the same rule as **never invent proof**. `what the fixed version
+looks like, and what it costs` keeps the owner's outcome and makes it a
+thing: it is the €600 tier's own promise, *one document, done properly*. The
+price stays in, because most cold approaches hide it and saying it is what
+disarms.
 
 **A review that makes a claim about a live website carries a date.** Sheet
 1's masthead reads `Document review · 6 October 2026`, because finding 01
