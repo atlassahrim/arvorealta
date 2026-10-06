@@ -197,9 +197,12 @@ standard.
 
 ## What to re-check if this sits for more than a few days
 
-1. **Both PDFs still live.** Verified HTTP 200 today, 6 October — the 2020
-   MGB sheet at 1.82 MB and the 2025 Citybac sheet at 543 KB. Finding 01 and
-   the email's third sentence both rest on it. One `curl -I` settles it
+1. **Both PDFs still live.** Verified HTTP 200 today, 6 October — the MGB
+   sheet at 1.82 MB under `/2020/04/` and the Citybac sheet at 543 KB under
+   `/2025/02/`. Finding 01 rests on it. One `curl -I` settles it. **Those
+   folder years are upload dates, not document dates**: `pdfinfo` puts the
+   MGB file at 25 June 2015 and the Citybac one at 15 August 2022, which is
+   what the review states
 2. **The question deadline.** After 19 October that paragraph is wrong and
    has to come out
 3. **The date in the masthead.** Both sheets read `6 October 2026` /
