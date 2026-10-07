@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Document review DR-0NN — [[PRODUCT]] datasheet against Bilag 2</title>
+<meta name="robots" content="noindex">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" media="all"
+  href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600&display=swap">
+
+<link rel="stylesheet" href="/assets/themes/technical.css">
+<link rel="stylesheet" href="/assets/system.css">
+<link rel="stylesheet" href="/assets/annex.css">
+</head>
+
+<body>
+
+<!-- TEMPLATE. Copy this folder and `-nb` together to `annex/_<supplier>-review/`
+     and `-nb`, then swap every [[...]] placeholder. Both editions change in
+     the same commit — they are the same document, not a translation appended
+     to one.
+
+     Line budget, measured: a finding's quote runs 2 lines at 80 characters
+     and its note 2 lines at 90. A third line of either puts the sheet over.
+     The closing line is 2 lines at 110 characters.
+
+     Before writing a word of it, run the pre-flight in `_tools/review/README.md`.
+     The two expensive errors on DR-001 were both source verification: a
+     superseded datasheet scored, and two files dated from their URL folder
+     rather than from `pdfinfo`.
+
+     The scope split for this tender is `_research/valdres-663737/krav-scope.md`.
+     34 of the 60 requirements are a datasheet's to answer. Do not re-derive it.
+
+     Budget: 246 mm a sheet, zero overflow. `python3 _tools/review/measure.py`
+     after every content change — this template measures clean as it stands, so
+     anything over came from what was just typed. A quote is two lines and a
+     note is two lines; a third line of either pushes the sheet over.
+
+     The gap tokens are margin-top only, and inside `.sheet` a higher
+     specificity rule sets a margin shorthand on every `p`, `.title` and
+     `.heading`. So anything that is not a div carries its air in a wrapper div. -->
+
+<main class="annex">
+
+  <!-- ============ sheet 1 — the map ============ -->
+  <section class="sheet">
+    <div class="sheet-body">
+
+      <div class="masthead">
+        <hr class="rule-heavy">
+        <div class="masthead-row">
+          <p class="ref">DR-0NN</p>
+          <p class="label">Document review · [[REVIEW DATE]]</p>
+        </div>
+        <hr class="rule-hair">
+      </div>
+
+      <div class="gap-2">
+        <h1 class="title title-2">
+          Product datasheet [[PRODUCT]],<br>read as a tender attachment.
+        </h1>
+      </div>
+
+      <div class="gap-1 measure">
+        <p class="standfirst">
+          The current published datasheet for the [[PRODUCT]] was read
+          against the requirement specification in Bilag 2, requirement by
+          requirement. Nothing here is a score. The buyer scores.
+        </p>
+      </div>
+
+      <div class="fields of-4 gap-1">
+        <div class="field field-ruled">
+          <span class="label">Document</span>
+          <span class="value">[[PRODUCT]]</span>
+        </div>
+        <div class="field field-ruled">
+          <span class="label">Pages</span>
+          <span class="value">[[N]]</span>
+        </div>
+        <div class="field field-ruled">
+          <span class="label">File dated</span>
+          <span class="value">[[YYYY from pdfinfo]]</span>
+        </div>
+        <div class="field field-ruled">
+          <span class="label">In scope</span>
+          <span class="value">34 of 60</span>
+        </div>
+      </div>
+
+      <div class="grid12 gap-1">
+
+        <div class="col-7">
+          <p class="label label-accent">Method</p>
+          <p>
+            Bilag 2 sets sixty numbered requirements. Twenty-six ask for a
+            delivery plan, an option price or a complaints procedure, which no
+            product datasheet answers. Thirty-four remain.
+          </p>
+          <p>
+            <strong>Answered</strong> means the document states the thing the
+            buyer asks for. <strong>Partial</strong> means close but off the
+            point. <strong>Absent</strong> means there is nothing to point at.
+          </p>
+        </div>
+
+        <div class="col-5 col-divide">
+          <p class="label label-accent">The count</p>
+          <div class="statement">
+            <p>[[Word]] of<br>thirty-four<br>can be<br>answered.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="fields of-3 gap-2 flush">
+        <div class="field field-ruled">
+          <span class="label">Answered</span>
+          <span class="value">[[n]]</span>
+        </div>
+        <div class="field field-ruled">
+          <span class="label">Partial</span>
+          <span class="value">[[n]]</span>
+        </div>
+        <div class="field field-ruled">
+          <span class="label">Absent</span>
+          <span class="value">[[n]]</span>
+        </div>
+      </div>
+
+      <div class="grid12 gap-1">
+        <div class="col-4">
+          <p class="footnote">
+            Krav [[list]]. [[what they cover, one phrase]].
+          </p>
+        </div>
+        <div class="col-4">
+          <p class="footnote">
+            Krav [[list]]. [[why each is only partial]].
+          </p>
+        </div>
+        <div class="col-4">
+          <p class="footnote">
+            Krav [[list]]. [[the one thing worth saying about them]].
+          </p>
+        </div>
+      </div>
+
+      <div class="spacer"></div>
+
+      <hr class="rule-heavy">
+
+      <div class="gap-1 measure">
+        <p class="footnote">
+          Scored as one document. [[What the rest of the published set is,
+          and whether the absences hold across it. Only sayable because the
+          family was checked — see the pre-flight.]]
+        </p>
+      </div>
+
+    </div>
+
+    <div class="sheet-foot">
+      <span>DR-0NN · <span class="num"></span></span>
+      <span>Bilag 2 / Doffin [[notice]]</span>
+    </div>
+  </section>
+
+  <!-- ============ sheet 2 — the findings ============ -->
+  <section class="sheet">
+    <div class="sheet-body">
+
+      <div class="masthead">
+        <hr class="rule-heavy">
+        <div class="masthead-row">
+          <p class="label">Findings / Sheet 2</p>
+          <p class="label">DR-0NN</p>
+        </div>
+        <hr class="rule-hair">
+      </div>
+
+      <div class="gap-1">
+        <h2 class="title">Four things an evaluator meets first.</h2>
+      </div>
+
+      <!-- finding 01 -->
+      <div class="grid12 gap-1">
+        <div class="col-5">
+          <div class="plate plate-doc">
+            <img src="fig-01.png"
+                 alt="[[What the crop shows, for a reader who cannot see it.]]">
+          </div>
+        </div>
+        <div class="col-7">
+          <p class="label label-accent">Finding 01 / Krav [[n]][[ · weight of 100]]</p>
+          <p class="heading">[[Claim, max 38 characters.]]</p>
+          <p class="quote" lang="nb">
+            «[[The requirement, verbatim. Max 80 characters.]]»
+          </p>
+          <p>
+            [[What the document does about it. Max 90 characters.]]
+          </p>
+        </div>
+      </div>
+
+      <!-- finding 02 -->
+      <div class="grid12 gap-1">
+        <div class="col-5">
+          <div class="plate plate-doc">
+            <img src="fig-02.png"
+                 alt="[[What the crop shows, for a reader who cannot see it.]]">
+          </div>
+        </div>
+        <div class="col-7">
+          <p class="label label-accent">Finding 02 / Krav [[n]][[ · weight of 100]]</p>
+          <p class="heading">[[Claim, max 38 characters.]]</p>
+          <p class="quote" lang="nb">
+            «[[The requirement, verbatim. Max 80 characters.]]»
+          </p>
+          <p>
+            [[What the document does about it. Max 90 characters.]]
+          </p>
+        </div>
+      </div>
+
+      <!-- finding 03 -->
+      <div class="grid12 gap-1">
+        <div class="col-5">
+          <div class="plate plate-doc">
+            <img src="fig-03.png"
+                 alt="[[What the crop shows, for a reader who cannot see it.]]">
+          </div>
+        </div>
+        <div class="col-7">
+          <p class="label label-accent">Finding 03 / Krav [[n]][[ · weight of 100]]</p>
+          <p class="heading">[[Claim, max 38 characters.]]</p>
+          <p class="quote" lang="nb">
+            «[[The requirement, verbatim. Max 80 characters.]]»
+          </p>
+          <p>
+            [[What the document does about it. Max 90 characters.]]
+          </p>
+        </div>
+      </div>
+
+      <!-- finding 04 -->
+      <div class="grid12 gap-1">
+        <div class="col-5">
+          <div class="plate plate-doc">
+            <img src="fig-04.png"
+                 alt="[[What the crop shows, for a reader who cannot see it.]]">
+          </div>
+        </div>
+        <div class="col-7">
+          <p class="label label-accent">Finding 04 / Krav [[n]][[ · weight of 100]]</p>
+          <p class="heading">[[Claim, max 38 characters.]]</p>
+          <p class="quote" lang="nb">
+            «[[The requirement, verbatim. Max 80 characters.]]»
+          </p>
+          <p>
+            [[What the document does about it. Max 90 characters.]]
+          </p>
+        </div>
+      </div>
+
+      <div class="spacer"></div>
+
+      <hr class="rule-heavy">
+
+      <div class="gap-1 measure">
+        <p>
+          [[One closing line. Something true that is not a finding.]]
+        </p>
+      </div>
+
+    </div>
+
+    <div class="sheet-foot">
+      <span>DR-0NN · <span class="num"></span></span>
+      <span>Arvorealta.com · Tier zero, free review</span>
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>

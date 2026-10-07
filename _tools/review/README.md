@@ -74,12 +74,34 @@ it was the one reviewed.
 the repo root. Run `krav.py` with `python3 -I`: the spreadsheet came from a
 stranger and `-I` stops Python importing anything from beside it.
 
-## What is still done by hand, and should not be
+## Starting a review
 
-**There is no template.** `annex/_enviropac-review/` is a bespoke pair of
-files, so the second review starts by copying HTML and editing it, which is
-where errors enter. A placeholder `annex/_review-template/` plus `-nb` is the
-next thing to build.
+    cp -r annex/_review-template    annex/_<supplier>-review
+    cp -r annex/_review-template-nb annex/_<supplier>-review-nb
 
-**The in-scope requirement split is not a file.** For a second supplier
-against the same tender the 34 are identical and the work is pure repetition.
+Then swap every `[[...]]`. There are 45 of them and the template measures at
+**zero overflow as it stands**, so anything the budget rejects afterwards came
+from what was just typed rather than from the layout.
+
+The placeholders carry their own line budget, which is measured rather than
+guessed: a finding's quote runs two lines at 80 characters and its note two at
+90; a third line of either puts the sheet over. The four plates are grey
+placeholders at the aspect ratios the real crops ran, so the rows measure
+correctly before any evidence exists.
+
+**The scope split is `_research/valdres-663737/krav-scope.md`** — 34 of the 60
+requirements are a datasheet's to answer, with each one's category and DR-001's
+result beside it. It is the same for every supplier bidding this tender, so
+read it rather than re-deriving it. Re-deriving risks a different denominator,
+and a different denominator makes two reviews incomparable.
+
+## What is still done by hand
+
+**The approach note.** Contact, deadlines, award weights and both email drafts
+are written per supplier. The deadlines and weights are the same for one
+tender, so the second one is mostly a copy of `_research/enviropac/approach.md`
+with a new name and inbox.
+
+**There is no log.** `DR-001` implies a series that nothing tracks. One file
+saying who was approached, when, with which reference and what came back is
+worth having before the third.
