@@ -209,7 +209,7 @@ know that too.
    Finding 01 rests on the last one. `pdfinfo` puts it at 10 April 2024.
 2. **The question deadline.** After 19 October that clause is wrong and the
    close needs a new date, which on this tender is only the 27th.
-3. **The date in the masthead.** Both sheets read `9 October 2026`.
+3. **The date in the masthead.** Both sheets read `13 October 2026`.
 4. **EnviroPac follow-up.** The natural moment is 17 or 18 October, one or two
    days before questions close, and it is one line rather than a resend. Not
    before: three days is not a non-answer and a chaser that early reads as one.
