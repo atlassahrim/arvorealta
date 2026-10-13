@@ -195,6 +195,95 @@ standard.
   silence, which is a real option stated out loud
 - **It does not attach both languages.** One file, one decision
 
+---
+
+## The second approach, 13 October — Adrian Fjell
+
+**The first contact has not retired.** `enviropac.no/om-oss/ansatte/`, checked
+13 October: **Erlend Værdal is still listed as Salgssjef offentlig marked**,
+same address, same number. So the premise for writing to somebody else is
+wrong, and the three live explanations are a spam filter, a holiday, or a
+cold email that was read and not answered, which is what most of them are.
+
+That does not make a second approach wrong. It changes what it is: **a second
+channel, not a replacement**, and the email has to say so or EnviroPac will
+see two strangers rather than one person following up.
+
+**Adrian Fjell · Regionsansvarlig Oslo/Akershus/Buskerud/Innlandet**
+`adrian.fjell@enviropac.no` · +47 970 79 565
+
+Confirmed in role on 13 October. **Valdres Kommunale Renovasjon is in
+Innlandet, so this is his region** — which is the one thing he has that Erlend
+does not, and it is the reason the second mail is addressed rather than
+forwarded.
+
+Third, if both go quiet: **André Dybvig, `andre.dybvig@enviropac.no`,
++47 403 37 790, Salg offentlig marked** — the public-market desk under Erlend.
+
+### The email
+
+**Subject:** One bidder, Valdres containers, 27 October
+
+> Hei Adrian,
+>
+> I wrote to Erlend Værdal about this last week and it may have landed in a
+> filter, so I am trying you as well since Valdres is your region.
+>
+> I build document standards for manufacturers who bid, and on the Valdres
+> container framework closing 27 October I will support only one company. Two
+> in the same competition would be no help to either.
+>
+> You will write your own response to Bilag 2. The evaluator will also have
+> what you publish on your website in front of them, and the attached two
+> pages read your Citybac datasheet the way they will. Of the 34 requirements
+> a product document is the natural home for, 9 can be answered from it as it
+> stands.
+>
+> This review costs nothing and I am not asking for anything back. If you
+> would like it to be you, reply before 19 October, when written questions to
+> the buyer close.
+>
+> Have a nice day.
+>
+> Atlas Sahrim
+> arvorealta.com
+
+**Attach:** `document-review-NOR.pdf`.
+
+**The first line is the whole difference and it is not an apology.** Naming
+Erlend does three things a chaser normally cannot: it explains why a second
+person at the same company is getting the same approach, it gives Adrian a
+colleague to check with rather than a stranger to evaluate, and **it is
+simply true**, which is the only reason it reads as a person rather than as a
+sequence. *May have landed in a filter* is offered as the likeliest innocent
+explanation rather than as a complaint about being ignored.
+
+**It does not say the review has been updated**, because that invites a
+question about what changed and the answer is a date.
+
+### The document
+
+**Both editions are re-dated `13 October 2026` and nothing else changed.**
+Sheet 1's masthead carries a date because finding 01 is a claim about what
+EnviroPac's own server is serving today, and it was re-verified before the
+date moved: both files returned **HTTP 200, `application/pdf`** on 13 October
+— `/app/uploads/2020/04/Sulo-MGB240-NO.pdf` and
+`/app/uploads/2025/02/SULO-Datasheet-Citybac-240-L-LA-NO.pdf`. The finding
+still holds.
+
+**The export is renamed** to `document-review-NOR.pdf` under the rule in
+`CLAUDE.md`. Erlend received `DR-001-NO.pdf`.
+
+**A source block was built for DR-001 and then reverted**, which is worth
+recording so the next session does not redo it. It cost four baselines on a
+sheet sitting at exactly zero overflow, and the rule it was serving says the
+sheet names a publisher **where the document states one** — the Citybac sheet
+states none, carrying only `www.enviropac.no`. DR-001 scores one document and
+already identifies it in the fields row, and finding 01's plate shows both
+sheets side by side. The block exists on DR-002 because that one scores two
+catalogues of two other manufacturers' brands and needs the disambiguation.
+**One document does not.**
+
 ## What to re-check if this sits for more than a few days
 
 1. **Both PDFs still live.** Verified HTTP 200 today, 6 October — the MGB
