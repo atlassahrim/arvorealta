@@ -86,9 +86,9 @@ or gets a native check first.
 >
 > You will write your own response to Bilag 2. The evaluator will also have
 > what you publish on your website in front of them, and the attached two
-> pages read it the way they will. Of the 34 requirements a product document
-> is the natural home for, 5 can be answered from your catalogues as they
-> stand.
+> pages read your Schäfer and Craemer catalogues the way they will. Of the 34
+> requirements a product document is the natural home for, 5 can be answered
+> from those as they stand.
 >
 > This review costs nothing and I am not asking for anything back. If you
 > would like it to be you, reply before 19 October, when written questions to
@@ -118,9 +118,10 @@ DR-001 went out as `DR-001-NO.pdf`, which was the owner's own objection.
 > bare ett selskap. To i samme konkurranse ville ikke hjelpe noen av dem.
 >
 > Dere skriver deres eget svar på Bilag 2. Evaluatoren har også det dere
-> publiserer på nettsidene foran seg, og de to vedlagte sidene leser det slik
-> evaluatoren vil lese det. Av de 34 kravene et produktdokument er det
-> naturlige stedet for, kan 5 besvares med katalogene slik de står.
+> publiserer på nettsidene foran seg, og de to vedlagte sidene leser
+> Schäfer- og Craemer-katalogene deres slik evaluatoren vil lese dem. Av de
+> 34 kravene et produktdokument er det naturlige stedet for, kan 5 besvares
+> med dem slik de står.
 >
 > Denne gjennomgangen koster ingenting, og jeg ber ikke om noe tilbake. Vil
 > dere at det skal bli dere, svar før 19. oktober, når fristen for
@@ -171,6 +172,20 @@ old email and was not the ask; now it is the ask.**
 *I am backing one bidder* is true however many it goes to, and first-come is
 how a single slot works. *I have chosen you* would not be true and is not
 written. Keep the line as it stands.
+
+**The two catalogues are named, and the attachment's filename is not.** The
+email said *your catalogues*, which is vague enough to read as a mail merge;
+naming Schäfer and Craemer proves the documents were opened and cannot be
+faked by a template. It also helps the register — **the problems are in the
+manufacturers' documents and not in Namdal's work**, and saying the names out
+loud makes that clear before a reader can feel accused.
+
+Two things stay out. **The page counts** — 102 and four — are findings, and
+findings belong on sheet 1. **The filename** is plumbing: the email already
+says *the attached two pages*, which is what actually defuses the worry about
+opening a stranger's file, and a filename repeated in the body reads as
+machine-written. **`Fritz Schäfer GmbH` stays on the sheet too**, where it is
+a source citation; in an email to a man who buys from them it would be stiff.
 
 **What is unchanged, and deliberately.** The count is the one figure that
 crosses, because 5 of 34 is a question rather than an answer and cannot be
