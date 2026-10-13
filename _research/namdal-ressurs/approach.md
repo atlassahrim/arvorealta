@@ -1,6 +1,6 @@
 # The Namdal Ressurs approach — contact, timing and the email
 
-Everything here was checked on 9 October 2026.
+Everything here was checked on 9 October 2026 and re-checked on the 13th.
 
 ## Who to write to
 
@@ -46,7 +46,9 @@ Same tender, same two dates as DR-001.
 | Bid deadline | **27 October 2026, 12.00** |
 | Delivery starts | mid-March 2027 |
 
-Today is 9 October. **Ten days to the question deadline, eighteen to the bid.**
+Today is 13 October. **Six days to the question deadline, fourteen to the
+bid.** Both Issuu documents and the Craemer German brochure returned HTTP 200
+on the 13th, and both sheets are dated `13 October 2026` accordingly.
 
 The question deadline is the part that goes in the email. If Namdal want the
 buyer to confirm what evidence satisfies krav 57, or whether a 1,000 litre
@@ -79,20 +81,29 @@ or gets a native check first.
 > Hei Pål,
 >
 > I build document standards for manufacturers who bid, and on the Valdres
-> container framework I am backing one bidder. Only one. I will not work both
-> sides of a live procurement. Attached are two pages scoring your published
-> catalogues against Bilag 2. Of the 34 requirements a product document is
-> the natural home for, 5 can be answered as things stand. It costs nothing
-> and I am not asking for anything back. If you want it to be you, reply
-> before 19 October, when written questions to the buyer close.
+> container framework closing 27 October I will support only one company.
+> Two in the same competition would be no help to either.
+>
+> You will write your own response to Bilag 2. The evaluator will also have
+> what you publish on your website in front of them, and the attached two
+> pages read it the way they will. Of the 34 requirements a product document
+> is the natural home for, 5 can be answered from your catalogues as they
+> stand.
+>
+> This review costs nothing and I am not asking for anything back. If you
+> would like it to be you, reply before 19 October, when written questions to
+> the buyer close.
 >
 > Have a nice day.
 >
 > Atlas Sahrim
 > arvorealta.com
 
-**Attach:** `DR-002-NO.pdf` — the Norwegian edition. One file, two pages.
-Do not attach both languages.
+**Attach:** `document-review-NOR.pdf` — the Norwegian edition. One file, two
+pages. Do not attach both languages. **The filename is plain words rather
+than the reference number**, because this is an attachment from a stranger
+and a name that reads as a code is a name a cautious reader does not open.
+DR-001 went out as `DR-001-NO.pdf`, which was the owner's own objection.
 
 ---
 
@@ -103,13 +114,17 @@ Do not attach both languages.
 > Hei Pål,
 >
 > Jeg lager dokumentstandarder for produsenter som leverer tilbud, og på
-> rammeavtalen for beholdere hos Valdres støtter jeg én tilbyder. Bare én.
-> Jeg jobber ikke for to parter i samme konkurranse. Vedlagt ligger to sider
-> som vurderer de publiserte katalogene deres mot Bilag 2. Av de 34 kravene
-> et produktdokument er det naturlige stedet for, kan 5 besvares slik det
-> står. Det koster ingenting, og jeg ber ikke om noe tilbake. Vil du at det
-> skal bli dere, svar før 19. oktober, når fristen for skriftlige spørsmål
-> til oppdragsgiver går ut.
+> rammeavtalen for beholdere hos Valdres med frist 27. oktober støtter jeg
+> bare ett selskap. To i samme konkurranse ville ikke hjelpe noen av dem.
+>
+> Dere skriver deres eget svar på Bilag 2. Evaluatoren har også det dere
+> publiserer på nettsidene foran seg, og de to vedlagte sidene leser det slik
+> evaluatoren vil lese det. Av de 34 kravene et produktdokument er det
+> naturlige stedet for, kan 5 besvares med katalogene slik de står.
+>
+> Denne gjennomgangen koster ingenting, og jeg ber ikke om noe tilbake. Vil
+> dere at det skal bli dere, svar før 19. oktober, når fristen for
+> skriftlige spørsmål til oppdragsgiver går ut.
 >
 > Ha en fin dag.
 >
@@ -122,12 +137,30 @@ Do not attach both languages.
 
 Three things. The first was the owner's, and the other two follow from it.
 
-**One paragraph instead of five, and an exclusivity frame.** The owner's
+**Three paragraphs instead of five, and an exclusivity frame.** The owner's
 proposal: *I am actively looking for a company to back in this tender, and I
 can support only one.* It is taken because **it is a constraint rather than a
-device** — working two bidders on the same live procurement is a real
-conflict, and saying so is both true and more credible than scarcity would
-be. Ninety-six words against a hundred and twenty-five.
+device** — supporting two bidders in the same competition is a real conflict,
+and saying so is both true and more credible than scarcity would be.
+
+**It is stated as care and not as refusal, and that was a correction.** The
+draft read *Only one. I will not work both sides of a live procurement.* The
+owner's objection is that it sounds like a threat, and he is right: it is a
+refusal, it implies somebody might ask, and it puts the writer on guard rather
+than alongside. `I will support only one company. Two in the same competition
+would be no help to either.` is the same constraint said as a reason to trust
+him. **`backing` went with it** — backing is what you do to a horse, supporting
+is what you do with a company.
+
+**The second paragraph is about the evaluator, not about the reader's
+judgement.** It first read *An evaluator can also open what you already
+publish and check it against what you wrote.* The owner tried *let's say you
+only send what you have published*, which has the right instinct and the
+wrong subject: it imagines the reader doing something naive, which is the
+thing the paragraph exists to avoid. Naming what the evaluator will have in
+front of them puts writer and reader on the same side of the desk and assumes
+the reader is competent, which they are — Namdal employ two people whose job
+title is tenders.
 
 **`If not, no reply needed.` is gone.** It was there to disarm, and it did,
 but it also handed the reader written permission to do nothing. The close now

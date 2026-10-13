@@ -741,6 +741,31 @@ voice choice rather than a rule, and `gradient-copy`'s own line is that a
 writer's voice is protected rather than sanded down to whatever reads as
 standard.
 
+**The exported file is named in plain words, never by its reference number.**
+`document-review-NOR.pdf` and `document-review-ENG.pdf`. DR-001 went out as
+`DR-001-NO.pdf` and the owner's objection is the right one: **this is an
+attachment from a stranger**, and a filename that reads as a code is a
+filename a cautious reader does not open. The reference number lives inside
+the document — in the masthead and in both feet — which is where it is useful
+and where it cannot look like malware. Add the recipient's name to the
+filename only if a reason appears; it has not yet.
+
+**The sheet names the publisher of every document it scores, as a legal
+entity where the document states one.** DR-002 carries `Fritz Schäfer GmbH`
+and `Craemer GmbH`, each taken from the document's own cover or imprint, in a
+source block of three `col-4` footnotes under the fields row. Three reasons,
+and the third is the one that was not obvious. It is what a technical annex
+does. It puts the findings where they belong, which is on the manufacturers'
+documents rather than on the distributor reading the sheet. And **it is the
+cheapest signal that a person read the file** — a colophon is at the back, in
+small type, and naming it is the kind of thing a generated summary does not
+do.
+
+**Name only what the document states.** The Norwegian Craemer four-pager
+carries no imprint at all, so it is cited as `Craemer` and not as
+`Craemer GmbH`; the German brochure carries the full entity and is cited with
+it. A legal entity inferred from a brand name is invented proof.
+
 **A review that makes a claim about a live website carries a date.** Sheet
 1's masthead reads `Document review · 6 October 2026`, because finding 01
 says the older datasheet is still served and that is a fact about somebody

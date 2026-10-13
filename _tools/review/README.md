@@ -35,6 +35,13 @@ it was the one reviewed.
 - [ ] `pdftoppm -r 200 -png source.pdf page`, then `crop.py boxes.json out/`.
       Keep `boxes.json` beside the research note — a crop is a quotation and a
       quotation has to be re-cuttable.
+- [ ] **Name the export `document-review-NOR.pdf` / `-ENG.pdf`**, never after
+      the reference number. It is an attachment from a stranger and the
+      filename decides whether it is opened. The reference lives inside.
+- [ ] **Put a source block on sheet 1** naming each scored document's
+      publisher, page count and date, taken from its own cover or imprint —
+      `pdfinfo` for the date, never the URL. Cite only the entity the
+      document states; a brand is not a legal entity.
 - [ ] Copy the two editions together. **A change to one belongs in the other
       in the same commit.** They are the same document, not a translation
       appended to it.
