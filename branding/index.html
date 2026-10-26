@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Branding and design — Atlas Sahrim</title>
+<meta name="description" content="Visual identity, document systems, decks and proposals. Selected work by Atlas Sahrim, published in full rather than cropped.">
+<meta property="og:title" content="Branding and design — Atlas Sahrim">
+<meta property="og:description" content="Visual identity, document systems, decks and proposals. Published in full, not cropped.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://arvorealta.com/branding/">
+<meta property="og:image" content="https://arvorealta.com/assets/og-branding.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Made to be looked at. Built to be read. Identity, documents and decks.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#17352C">
+
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" media="all"
+  href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Shippori+Mincho:wght@400;500&display=swap">
+<script>
+/* Marks scripting as available, then hands the reveal failsafe a deadline.
+   If site.js has not loaded within 4s, show everything rather than nothing. */
+(function(h){h.className+=" js";setTimeout(function(){
+  if(!h.classList.contains("rv-ready"))h.className+=" rv-off";},4000)})(document.documentElement);
+</script>
+<link rel="stylesheet" href="/assets/themes/arvorealta.css">
+<link rel="stylesheet" href="/assets/system.css">
+
+<style>
+/* page-specific: the work sequence, and the two-system strip.
+
+   A plate is a whole published page, not a crop of one. Every image here is a
+   render of something on this domain at the size it is actually read at, so
+   the frame is a hairline on the page's own ground rather than a card — the
+   same device annex.css uses for a quoted document, for the same reason: it
+   must read as a sheet, not as our photograph. */
+/* A scoped clamp, not a fourth size. The page scale sets display at
+   clamp(2.6rem,1.1rem+6.4vw,6.5rem), which at 390 is 42.6px, and the first
+   line — twenty-one characters — then runs 402px against a 350px column and
+   breaks on its own, which is the one thing hand-breaking exists to prevent.
+   The curve is redrawn through a lower start and lands on 102.9px at 1440
+   against the page scale's 104, so the width the page is designed for is
+   unchanged. Measured: two lines at every width from 320 to 1920. */
+.hero h1{font-size:clamp(1.8rem,.4rem + 6.7vw,6.5rem)}
+
+.work{margin-top:clamp(3.5rem,7vw,5.5rem)}
+.work:first-of-type{margin-top:3rem}
+.plate{display:block;width:100%;height:auto;border:1px solid var(--rule);background:var(--paper-3)}
+.work-cap{margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid var(--rule)}
+.work-cap h3{margin:0 0 .55rem}
+.work-role{
+  font-family:var(--font-label);font-size:.62rem;letter-spacing:.14em;line-height:1.9;
+  font-weight:600;text-transform:uppercase;color:var(--mark);margin:0 0 .9rem;
+}
+.work-cap p{font-size:.95rem;line-height:1.7;color:var(--ink-soft);margin:0;max-width:62ch}
+.work-open{margin-top:1.1rem;font-family:var(--font-label);font-size:.72rem;
+  font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+
+/* a portrait sheet cannot run to the full measure — it would stand taller than
+   the screen it is being shown on, so it takes a column and the caption the rest */
+.work.aside{display:grid;gap:clamp(1.5rem,4vw,3rem);align-items:start}
+.work.aside .work-cap{margin-top:0;border-top:none;padding-top:0}
+
+/* the two identities, side by side, each over its own measured palette */
+.systems{display:grid;gap:clamp(2rem,5vw,3.5rem);margin-top:3rem}
+.systems h3{margin:0 0 .9rem}
+.systems p{font-size:.95rem;line-height:1.7;color:var(--ink-soft);max-width:46ch}
+.swatch{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;padding:0;margin:1.4rem 0 0}
+.swatch li{width:2.75rem;height:2.75rem;border:1px solid var(--rule)}
+.shared{margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--rule);
+  font-size:.95rem;line-height:1.7;color:var(--ink);max-width:58ch}
+
+.elsewhere{display:grid;gap:2.25rem;margin-top:3rem}
+.elsewhere h3{margin:0 0 .5rem;font-size:1.15rem}
+.elsewhere p{font-size:.95rem;line-height:1.7;color:var(--ink-soft);margin:0 0 .8rem;max-width:40ch}
+
+.backlink{margin-top:4rem}
+
+@media (min-width:52rem){
+  .work.aside{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+  .systems{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .elsewhere{grid-template-columns:repeat(3,minmax(0,1fr));gap:3rem}
+}
+</style>
+</head>
+
+<body>
+
+<header class="wrap">
+  <div class="bar">
+    <a class="mark" href="/">Arvorealta</a>
+    <nav>
+      <a class="ln" href="/">the offer</a>
+      <a class="ln on" href="/branding/">branding</a>
+      <a class="ln" href="/video/">video</a>
+      <a class="ln" href="mailto:atlas@arvorealta.com">contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero wrap">
+  <p class="eyebrow rv">Branding and design</p>
+  <h1 class="rv">Made to be looked at.<br>Built to be read.</h1>
+  <p class="sub rv">
+    Identity, document systems, decks and proposals. Everything below is
+    published in full on this domain — open it and read the real thing
+    rather than a crop.
+  </p>
+</section>
+
+<hr class="rule">
+
+<section class="wrap">
+  <p class="tag rv"><b>01</b> selected work</p>
+
+  <div class="work rv">
+    <picture>
+      <source type="image/webp" srcset="/assets/work/deck-1-760.webp 760w, /assets/work/deck-1-1280.webp 1280w"
+              sizes="(min-width: 80rem) 1280px, 100vw">
+      <img class="plate" src="/assets/work/deck-1-1280.jpg" width="1280" height="720" loading="lazy" decoding="async"
+           alt="Title slide of the Reference Pipeline deck: the words The work was done. The points went to someone else., set large in a serif on a warm greige ground.">
+    </picture>
+    <div class="work-cap">
+      <h3>Reference Pipeline</h3>
+      <p class="work-role">Concept · Art direction · Editorial system · Copywriting</p>
+      <p>
+        A five-slide opportunity map, built on a 1920 × 1080 canvas with a
+        twelve column grid and a 40 px baseline. Cinzel for labels, Playfair
+        Display at 96/100 for the statement, Shippori Mincho for body. The
+        accent red is spent once in the whole deck, on the point of failure.
+      </p>
+      <p class="work-open"><a class="ln" href="/deck/reference-pipeline/">Open the deck →</a></p>
+    </div>
+  </div>
+
+  <div class="work rv">
+    <picture>
+      <source type="image/webp" srcset="/assets/work/annex-1-760.webp 760w, /assets/work/annex-1-1280.webp 1280w"
+              sizes="(min-width: 80rem) 1280px, 100vw">
+      <img class="plate" src="/assets/work/annex-1-1280.jpg" width="1280" height="906" loading="lazy" decoding="async"
+           alt="Two A4 sheets side by side: a reference project record and a certificate of satisfactory delivery, set in IBM Plex with the client name and the contract values struck out in solid black.">
+    </picture>
+    <div class="work-cap">
+      <h3>Reference project annex</h3>
+      <p class="work-role">Document system · Typography · Information design</p>
+      <p>
+        Two A4 sheets for a public tender: the reference record an evaluator
+        scores, and the certificate the buyer signs at handover. Set on a 6 mm
+        baseline with two rule weights and one label size, in millimetres and
+        points rather than pixels, because it is printed. Published as a
+        redacted sample — the client, the values and the notice numbers are
+        removed from the file, not covered over in it.
+      </p>
+      <p class="work-open"><a class="ln" href="/annex/sample/">Open the annex →</a></p>
+    </div>
+  </div>
+
+  <div class="work aside rv">
+    <picture>
+      <source type="image/webp" srcset="/assets/work/proposta-1-520.webp 520w, /assets/work/proposta-1-760.webp 760w"
+              sizes="(min-width: 52rem) 40vw, 100vw">
+      <img class="plate" src="/assets/work/proposta-1-760.jpg" width="760" height="1036" loading="lazy" decoding="async"
+           alt="An A4 commercial proposal in Portuguese, reference 001/2026, with four scope levels set as a mono table and four figures as fields along the foot.">
+    </picture>
+    <div class="work-cap">
+      <h3>Proposta 001/2026</h3>
+      <p class="work-role">Document system · Pricing structure · Copywriting · Portuguese</p>
+      <p>
+        A commercial proposal in Brazilian Portuguese for a van conversion,
+        written as two A4 sheets rather than an email. Four levels of scope,
+        each crediting in full into the one above, so a client who climbs the
+        whole ladder pays the price of the top rung and not the sum of four.
+      </p>
+      <p>
+        The same system as the annex above, carrying a different language and
+        a different trade. That is the test of a document standard: it has to
+        work when the words change.
+      </p>
+      <p class="work-open"><a class="ln" href="/annex/proposta-motorhome/">Open the proposal →</a></p>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="wrap">
+  <p class="tag rv"><b>02</b> two systems, kept apart</p>
+
+  <div class="systems">
+    <div class="rv">
+      <h3>Editorial</h3>
+      <p>
+        Cinzel, Playfair Display and Shippori Mincho on warm greige, ink green
+        and taupe. Three grounds, read in order: paper argues, taupe carries
+        the evidence, ink makes the statement. It is for presenting a concept.
+      </p>
+      <ul class="swatch" aria-hidden="true">
+        <li style="background:#D9D7D4"></li>
+        <li style="background:#BEAE9E"></li>
+        <li style="background:#17352C"></li>
+        <li style="background:#8E4A45"></li>
+      </ul>
+    </div>
+
+    <div class="rv">
+      <h3>Technical</h3>
+      <p>
+        IBM Plex Sans and IBM Plex Mono on white stock. Facts are set as fields
+        — a mono label with the value under it — so an evaluator scanning for a
+        sum or a date finds it without reading. It is for documents that get
+        scored.
+      </p>
+      <ul class="swatch" aria-hidden="true">
+        <li style="background:#FFFFFF"></li>
+        <li style="background:#E8E8E8"></li>
+        <li style="background:#111111"></li>
+        <li style="background:#C7392F"></li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="shared rv">
+    The two share exactly one value, the accent red. That is what keeps them
+    recognisably the same hand while letting each do a job the other cannot.
+  </p>
+</section>
+
+<hr class="rule">
+
+<section class="wrap">
+  <p class="tag rv"><b>03</b> elsewhere</p>
+
+  <div class="elsewhere">
+    <div class="rv">
+      <h3>Behance</h3>
+      <p>Client identity, campaign and art direction work.</p>
+      <a class="ln" href="https://www.behance.net/arvorealta">behance.net/arvorealta</a>
+    </div>
+    <div class="rv">
+      <h3>Video</h3>
+      <p>Vertical edits for social: pacing, type, sound and colour.</p>
+      <a class="ln" href="/video/">arvorealta.com/video</a>
+    </div>
+    <div class="rv">
+      <h3>Talk to me</h3>
+      <p>Brazil, working with clients across Europe.</p>
+      <a class="ln" href="mailto:atlas@arvorealta.com">atlas@arvorealta.com</a>
+    </div>
+  </div>
+
+  <p class="backlink rv">
+    <a class="ln on" href="/">← Back to the offer</a>
+  </p>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <h4>Arvorealta</h4>
+        <p style="font-size:.85rem;line-height:1.7">
+          Atlas Sahrim<br>
+          Espírito Santo, Brazil<br>
+          Working with clients across Europe
+        </p>
+      </div>
+
+      <div>
+        <h4>Elsewhere</h4>
+        <nav>
+          <a class="ln" href="mailto:atlas@arvorealta.com">Email</a>
+          <a class="ln" href="https://wa.me/5561999845147">WhatsApp</a>
+          <a class="ln" href="https://www.behance.net/arvorealta">Behance</a>
+          <a class="ln" href="https://www.linkedin.com/in/atlassahrim">LinkedIn</a>
+        </nav>
+      </div>
+
+      <div>
+        <h4>Overlap</h4>
+        <div class="clocks">
+          <div class="clock"><b id="cl-br">--:--</b><span>brt · here</span></div>
+          <div class="clock"><b id="cl-eu">--:--</b><span>cet · you</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="legal">
+      <span>© 2026 Arvorealta</span>
+      <span>Built and maintained in-house</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/site.js" defer></script>
+</body>
+</html>

@@ -31,6 +31,14 @@
 <link rel="stylesheet" href="/assets/system.css">
 
 <style>
+/* A scoped clamp on this one headline, not a fourth size. The page scale
+   sets display at clamp(2.6rem,1.1rem+6.4vw,6.5rem), whose floor is 41.6px,
+   and at 320 both hand-broken lines then wrap on their own — measured at
+   four lines where two were written. The curve is redrawn through a lower
+   start and lands within a pixel of the same 104px at 1440, so the width
+   the page is designed for is unchanged. */
+.hero h1{font-size:clamp(1.8rem,.4rem + 6.7vw,6.5rem)}
+
 /* page-specific: vertical video grid */
 .reels{
   display:grid;gap:clamp(1.75rem,4vw,3rem);
@@ -63,8 +71,8 @@
     <a class="mark" href="/">Arvorealta</a>
     <nav>
       <a class="ln" href="/">the offer</a>
+      <a class="ln" href="/branding/">branding</a>
       <a class="ln on" href="/video/">video</a>
-      <a class="ln" href="https://www.behance.net/arvorealta">behance</a>
       <a class="ln" href="mailto:atlas@arvorealta.com">contact</a>
     </nav>
   </div>
@@ -143,7 +151,8 @@
   </div>
 
   <p class="backlink rv">
-    <a class="ln on" href="/">← Back to the offer</a>
+    <a class="ln" href="/branding/">Branding and design →</a>
+    <a class="ln on" href="/" style="margin-left:2rem">← Back to the offer</a>
   </p>
 </section>
 

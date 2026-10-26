@@ -51,6 +51,7 @@ front of the figures. Promoting one is that decision, and the owner makes it.
 | URL | File |
 |---|---|
 | arvorealta.com | `index.html` — the offer page |
+| arvorealta.com/branding/ | `branding/index.html` — branding portfolio |
 | arvorealta.com/video/ | `video/index.html` — video portfolio |
 | arvorealta.com/deck/`<slug>`/ | decks — 1920 × 1080, for presenting |
 | arvorealta.com/annex/`<slug>`/ | annexes — A4, for submitting |
@@ -127,6 +128,71 @@ change**, and the move is a decision to make deliberately rather than a
 convenience, because once a path is public a link to it is public forever. A
 sandbox that has done its job is deleted, not left up.
 
+## The two portfolio pages
+
+`/branding/` and `/video/` exist for referrals rather than for search. A
+client or a friend about to point somebody at Atlas wants one link that shows
+the work, and the offer page is not that link — it sells one service to one
+buyer. Both pages carry the editorial theme, the same header bar and the same
+footer, so they read as one site with each other rather than with the offer
+page, which is on the promoted lab stylesheet.
+
+**Both are linked from the offer page's footer and from each other's nav**,
+and nowhere else. The footer labels are translated in all three languages
+(`t.foot`), because the footer is part of a page that serves three readers;
+the portfolio pages themselves are English only, which is what a referral
+link is for. The offer page's three nav links are the argument's spine and
+are deliberately left alone — the rule above says a sixth fold joins the
+spine or gets nothing, and the same logic keeps the portfolios out of the nav.
+
+**Every plate is a render of a page published on this domain, and that is the
+whole design of the page.** A portfolio normally asks to be believed; this one
+puts `Open the deck →` under each plate, so a reader can open the real thing
+and find it identical. That only works while the link resolves, so **a plate
+whose source page is deleted or restructured is a broken claim, not a stale
+image.** Re-render it in the same change.
+
+The plates are generated, not screenshotted by hand — Playwright against
+`python3 -m http.server`, then composited with Pillow — so re-cutting them
+after a source change is a script run. The deck plate is the `.slide` element
+rather than the viewport, because the deck page's body carries a 40px gradient
+above the slide that reads as a grey band inside a frame. The annex plate is
+two A4 sheets pasted side by side on the page's own greige, which turns a
+portrait document into a landscape plate; the proposal keeps one sheet
+portrait and takes a column with its caption beside it. Each sits in a 1px
+hairline on the page's own ground, which is the device `annex.css` uses for a
+quoted document and for the same reason: it must read as a sheet, not as our
+photograph. Version in the name as everywhere else — `assets/work/
+<name>-1-<width>.<ext>`.
+
+**No client is named on either page, and none can be.** There are no client
+brand assets in this repo, so `/branding/` shows what the studio publishes
+itself — a concept deck, a redacted submission annex and a commercial
+proposal — and Behance carries the client identity and campaign work. The
+deck's own footer names the audience it was written for; the page describes
+the artefact and does not claim it as a delivered engagement, because
+**never invent proof** applies hardest on the page whose job is proof. If real
+client work is to appear here, the assets and the permission have to be
+supplied.
+
+**Two of the three links point at `noindex` pages** — `/annex/proposta-motorhome/`
+and, through it, `/proposta-motorhome/`. They were unlisted rather than
+private, and linking them from a published page is a decision rather than a
+convenience: they stay out of the index and are now reachable from the open
+web by anyone who follows the link. Nothing in them names a client; the sheet
+says in its own words that it is a model with proposed figures.
+
+**Both heroes take a scoped clamp, and the one on `/video/` is a bug fix.**
+The page scale's display floor is 41.6px, and at 320 both pages' hand-broken
+headlines wrapped on their own — `/video/` measured four lines where two were
+written, which is exactly what hand-breaking exists to prevent. Both now run
+`clamp(1.8rem,.4rem + 6.7vw,6.5rem)`, measured at two lines from 320 to 1920
+and landing on 102.9px at 1440 against the scale's 104. Per the rule above
+this is a re-drawn curve, not a fourth size.
+
+The social card is `assets/_og/branding.html`, rendered by the same
+`assets/_og/render.sh` as the other two.
+
 ## The pricing ladder
 
 Three tiers on `index.html` and a free step that is not one.
@@ -178,6 +244,7 @@ document agreed before the work starts, not listed on the page.
 
 ```
 index.html              offer page
+branding/index.html     branding portfolio
 video/index.html        video portfolio
 reference/index.html    the first offer page, kept for reference — noindex
 _tw.src.css             the offer page's Tailwind source, compiled by
@@ -193,6 +260,8 @@ assets/
   img/                  photography, as webp + jpg at the widths the source
                         actually holds — the name carries a version:
                         after-1-<width>.<ext>
+  work/                 the portfolio plates — renders of published pages on
+                        this domain, same version-in-the-name rule
   vedlegg-5/            the open tender's example PDF and fillable Word file
   fonts/                Geist, Geist Mono and EB Garamond, self-hosted woff2
   vendor/runtime.js     React, react-dom, Motion and htm, bundled once
