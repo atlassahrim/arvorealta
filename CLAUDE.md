@@ -51,7 +51,7 @@ front of the figures. Promoting one is that decision, and the owner makes it.
 | URL | File |
 |---|---|
 | arvorealta.com | `index.html` — the offer page |
-| arvorealta.com/branding/ | `branding/index.html` — branding portfolio |
+| arvorealta.com/brand/ | `brand/index.html` — brand portfolio |
 | arvorealta.com/video/ | `video/index.html` — video portfolio |
 | arvorealta.com/deck/`<slug>`/ | decks — 1920 × 1080, for presenting |
 | arvorealta.com/annex/`<slug>`/ | annexes — A4, for submitting |
@@ -130,68 +130,109 @@ sandbox that has done its job is deleted, not left up.
 
 ## The two portfolio pages
 
-`/branding/` and `/video/` exist for referrals rather than for search. A
-client or a friend about to point somebody at Atlas wants one link that shows
-the work, and the offer page is not that link — it sells one service to one
-buyer. Both pages carry the editorial theme, the same header bar and the same
-footer, so they read as one site with each other rather than with the offer
-page, which is on the promoted lab stylesheet.
+`/brand/` and `/video/` exist for referrals rather than for search. A client
+or a friend about to point somebody at Atlas wants one link that shows the
+work, and the offer page is not that link — it sells one service to one buyer.
 
-**Both are linked from the offer page's footer and from each other's nav**,
-and nowhere else. The footer labels are translated in all three languages
-(`t.foot`), because the footer is part of a page that serves three readers;
-the portfolio pages themselves are English only, which is what a referral
-link is for. The offer page's three nav links are the argument's spine and
-are deliberately left alone — the rule above says a sixth fold joins the
-spine or gets nothing, and the same logic keeps the portfolios out of the nav.
+**They are built from the offer page, not beside it.** Same self-hosted EB
+Garamond, Geist and Geist Mono, same compiled Tailwind, same ink and paper
+grounds, same numbered section eyebrows, same card corner. The first version
+of `/brand/` was built on the editorial theme to match the old `/video/`, and
+the owner's correction is the right one: the homepage is the template, and a
+portfolio in a second identity makes the site look like two firms.
 
-**Every plate is a render of a page published on this domain, and that is the
-whole design of the page.** A portfolio normally asks to be believed; this one
-puts `Open the deck →` under each plate, so a reader can open the real thing
-and find it identical. That only works while the link resolves, so **a plate
-whose source page is deleted or restructured is a broken claim, not a stale
-image.** Re-render it in the same change.
+`/brand/` was `/branding/` for part of one day. **That path keeps a stub** —
+`noindex, follow`, canonical to `/brand/`, a meta refresh and a real link
+under it — because a public path stays public and the link may already have
+been sent. Delete it only when something says nobody is holding it.
 
-The plates are generated, not screenshotted by hand — Playwright against
-`python3 -m http.server`, then composited with Pillow — so re-cutting them
-after a source change is a script run. The deck plate is the `.slide` element
-rather than the viewport, because the deck page's body carries a 40px gradient
-above the slide that reads as a grey band inside a frame. The annex plate is
-two A4 sheets pasted side by side on the page's own greige, which turns a
-portrait document into a landscape plate; the proposal keeps one sheet
-portrait and takes a column with its caption beside it. Each sits in a 1px
-hairline on the page's own ground, which is the device `annex.css` uses for a
-quoted document and for the same reason: it must read as a sheet, not as our
-photograph. Version in the name as everywhere else — `assets/work/
-<name>-1-<width>.<ext>`.
+### One stylesheet, three pages
 
-**No client is named on either page, and none can be.** There are no client
-brand assets in this repo, so `/branding/` shows what the studio publishes
-itself — a concept deck, a redacted submission annex and a commercial
-proposal — and Behance carries the client identity and campaign work. The
-deck's own footer names the audience it was written for; the page describes
-the artefact and does not claim it as a delivered engagement, because
-**never invent proof** applies hardest on the page whose job is proof. If real
-client work is to appear here, the assets and the permission have to be
-supplied.
+All three link the same `assets/tw-<hash>.css`. **That is the point rather
+than a saving:** a token changed once changes all three in the same frame and
+they cannot drift into three dialects. `_tw.src.css` carries an `@source` per
+page and `_build-css.sh` carries `PAGES`, and **a page missing from either
+list renders bare** — out of `@source` its classes compile to nothing, out of
+`PAGES` its `<link>` keeps pointing at a hash that no longer exists. Add a
+page to both, in the same change.
 
-**Two of the three links point at `noindex` pages** — `/annex/proposta-motorhome/`
-and, through it, `/proposta-motorhome/`. They were unlisted rather than
-private, and linking them from a published page is a decision rather than a
-convenience: they stay out of the index and are now reachable from the open
-web by anyone who follows the link. Nothing in them names a client; the sheet
-says in its own words that it is a model with proposed figures.
+### No runtime on either page
 
-**Both heroes take a scoped clamp, and the one on `/video/` is a bug fix.**
-The page scale's display floor is 41.6px, and at 320 both pages' hand-broken
-headlines wrapped on their own — `/video/` measured four lines where two were
-written, which is exactly what hand-breaking exists to prevent. Both now run
-`clamp(1.8rem,.4rem + 6.7vw,6.5rem)`, measured at two lines from 320 to 1920
-and landing on 102.9px at 1440 against the scale's 104. Per the rule above
-this is a re-drawn curve, not a fourth size.
+The offer page needs React for the language switcher and the intake dialog.
+These need neither, so they carry no runtime at all — the reveal is about
+thirty lines of vanilla JS and the header state is one sentinel.
 
-The social card is `assets/_og/branding.html`, rendered by the same
-`assets/_og/render.sh` as the other two.
+**The reveal is a sweep, and an IntersectionObserver is the wrong tool for
+it.** An observer reports a *change* in intersection, so a jump that crosses
+a block without painting it takes that block from below the fold to above it
+with ratio 0 at both ends, fires nothing, and leaves it at `opacity: 0` for
+the life of the page. Measured: scrolling straight to 1600px left the whole
+first row of work permanently invisible, and the hero's own `See the work`
+anchor does exactly that jump. This is the trap recorded twice in the award
+fold wearing another coat — **an element that hides itself cannot be the
+thing you observe.**
+
+The page measures instead, on a rAF-throttled passive scroll, revealing
+anything whose top has reached the lower eighth of the screen *or is already
+above it*. Verified at 31 of 31 after a jump to the end, and the first tile
+opaque on a cold load at `#work`. Three failsafes, because a block stuck at
+zero is worse than no animation: `.no-js` on the root, an `.rv-off` deadline
+of four seconds set in the head, and `prefers-reduced-motion`.
+
+The stagger is **per batch, not per document**. Indexed globally, everything
+after the fourth element shares one delay, which is no stagger at all.
+
+### The source frames, and the grid's own structure
+
+The owner's imagery is 46 frames at 1215 × 2160, three to a project, one on
+each of the presentation's three grounds — **dark water, warm light, pale
+paper, in that order**, so a frame's ground is `n mod 3`: 1 water, 2 light,
+0 paper. `_tools/portfolio/marks.py` cuts each to 4:5 about a centre at 47%
+of the height, which is where every mark and its wordmark sit; measured on
+all twelve, nothing is clipped there.
+
+**The grid's three columns hold one ground each** — water, light, paper, left
+to right. That is a system rather than a mood, and it is why the picks are
+not simply the best frame of each set. On a phone it is one column and the
+grounds alternate down the page.
+
+**The three-grounds fold uses an unnamed mark on purpose.** The fold is about
+how a mark is presented, and an unnamed one cannot be read as a claim about a
+client.
+
+### Naming somebody else's brand
+
+**Twelve real clients are named on a public page**, which is a category this
+repo had not carried before. Two rules follow.
+
+**Read every name at full resolution before it ships.** The crest was read as
+`Benediks` off a contact sheet and is `Ilha dos Remédios`; `40.jpg` is
+`Advogadas Associadas`, feminine, not `Advogados`. A client's name spelled
+wrong on a portfolio is the one error that client is certain to see.
+
+**Each tile's second line is what the lockup itself states** — `Landscapes`,
+`Advogados`, `Safety ladder` — and where the lockup states nothing it names
+the craft instead, `Mark and wordmark`. A sector inferred from a company name
+is invented proof. `Autotrack` is not called automotive here for that reason.
+If a client ever objects to being listed, the tile comes down; nothing on the
+page depends on any single one.
+
+### What this replaced
+
+The first `/brand/` showed three renders of pages published on this domain —
+the Reference Pipeline deck, the redacted annex and the Portuguese proposal —
+because no client brand assets were in the repo. They are, now, so
+`assets/work/` and `_tools/portfolio/plates.py` are deleted and the document
+work is reached from the `Documents` card instead. The offer page still
+carries the annex photograph in `.doc`, which is where that argument belongs.
+
+**Vimeo cannot be verified from this container.** The sandbox proxy's
+certificate is refused by the embed and all three players render the
+browser's own interstitial, the same shape of limit as `usebasin.com` and the
+missing H.264. **Check a real browser after deploying.**
+
+The social cards are `assets/_og/brand.html` and `video.html`, rendered by
+`assets/_og/render.sh`.
 
 ## The pricing ladder
 
@@ -244,7 +285,8 @@ document agreed before the work starts, not listed on the page.
 
 ```
 index.html              offer page
-branding/index.html     branding portfolio
+brand/index.html        brand portfolio
+branding/index.html     a noindex stub redirecting to /brand/
 video/index.html        video portfolio
 reference/index.html    the first offer page, kept for reference — noindex
 _tw.src.css             the offer page's Tailwind source, compiled by
@@ -260,8 +302,8 @@ assets/
   img/                  photography, as webp + jpg at the widths the source
                         actually holds — the name carries a version:
                         after-1-<width>.<ext>
-  work/                 the portfolio plates — renders of published pages on
-                        this domain, same version-in-the-name rule
+  marks/                the brand portfolio's tiles, cut from the owner's
+                        source frames — <slug>-<ver>-<width>.{webp,jpg}
   vedlegg-5/            the open tender's example PDF and fillable Word file
   fonts/                Geist, Geist Mono and EB Garamond, self-hosted woff2
   vendor/runtime.js     React, react-dom, Motion and htm, bundled once
