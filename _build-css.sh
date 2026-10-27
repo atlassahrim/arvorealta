@@ -21,7 +21,11 @@ if [ ! -d "$B/node_modules" ]; then
   mkdir -p "$B"
   (cd "$B" && npm init -y >/dev/null 2>&1 && npm i --silent --no-audit --no-fund tailwindcss@4 @tailwindcss/cli@4)
 fi
-sed 's#@source "./index.html";#@source "'"$ROOT"'/index.html";#' _tw.src.css > "$B/in.css"
+# Every page that shares the stylesheet. Each is scanned for class names and
+# each has its <link> repointed at the new hash, so a page left out of this
+# list keeps a dead stylesheet URL and renders with no rules at all.
+PAGES="index.html brand/index.html video/index.html"
+sed 's#@source "\./#@source "'"$ROOT"'/#' _tw.src.css > "$B/in.css"
 (cd "$B" && ./node_modules/.bin/tailwindcss -i in.css -o out.css -m >/dev/null 2>&1)
 HASH=$(sha256sum "$B/out.css" | cut -c1-8)
 NEW="assets/tw-$HASH.css"
@@ -29,6 +33,10 @@ if [ ! -f "$NEW" ]; then
   rm -f assets/tw-*.css
   cp "$B/out.css" "$NEW"
 fi
-sed -i "s#/assets/tw-[a-z0-9]*\.css#/$NEW#" index.html
+for p in $PAGES; do
+  sed -i "s#/assets/tw-[a-z0-9]*\.css#/$NEW#" "$p"
+done
 echo "stylesheet: $NEW"
-grep -o '/assets/tw-[a-z0-9]*\.css' index.html | head -1
+for p in $PAGES; do
+  printf '  %-22s %s\n' "$p" "$(grep -o '/assets/tw-[a-z0-9]*\.css' "$p" | head -1)"
+done

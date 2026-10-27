@@ -1,199 +1,263 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Video work — Atlas Sahrim</title>
-<meta name="description" content="Vertical video editing for social — cuts, pacing, type and sound. Selected reels by Atlas Sahrim.">
+<meta name="description" content="Vertical video editing for social by Atlas Sahrim — cuts, pacing, type and sound. Selected reels.">
+<link rel="canonical" href="https://arvorealta.com/video/">
 <meta property="og:title" content="Video work — Atlas Sahrim">
-<meta property="og:description" content="Vertical video editing for social: cuts, pacing, type and sound.">
+<meta property="og:description" content="Vertical edits for social: pacing, type, sound and colour.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://arvorealta.com/video/">
 <meta property="og:image" content="https://arvorealta.com/assets/og-video.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Cut for the scroll. Built to survive it. Vertical edits for social.">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#17352C">
 
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" media="all"
-  href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Shippori+Mincho:wght@400;500&display=swap">
-<script>
-/* Marks scripting as available, then hands the reveal failsafe a deadline.
-   If site.js has not loaded within 4s, show everything rather than nothing. */
-(function(h){h.className+=" js";setTimeout(function(){
-  if(!h.classList.contains("rv-ready"))h.className+=" rv-off";},4000)})(document.documentElement);
-</script>
-<link rel="stylesheet" href="/assets/themes/arvorealta.css">
-<link rel="stylesheet" href="/assets/system.css">
+<!-- Self-hosted, exactly as the offer page does it: no third-party request
+     for type, and nothing outside this repo can change what renders. -->
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/geist-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/geist-mono-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ebgaramond-latin.woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts/geist.css">
+<link rel="stylesheet" href="/assets/fonts/ebgaramond.css">
+
+<link rel="stylesheet" href="/assets/tw-ad6ad844.css">
 
 <style>
-/* A scoped clamp on this one headline, not a fourth size. The page scale
-   sets display at clamp(2.6rem,1.1rem+6.4vw,6.5rem), whose floor is 41.6px,
-   and at 320 both hand-broken lines then wrap on their own — measured at
-   four lines where two were written. The curve is redrawn through a lower
-   start and lands within a pixel of the same 104px at 1440, so the width
-   the page is designed for is unchanged. */
-.hero h1{font-size:clamp(1.8rem,.4rem + 6.7vw,6.5rem)}
+/* The reveal, without the runtime. The offer page animates with Motion
+   because it needs React anyway for the language switcher and the intake
+   dialog; these pages need neither, so they carry no runtime at all.
 
-/* page-specific: vertical video grid */
-.reels{
-  display:grid;gap:clamp(1.75rem,4vw,3rem);
-  grid-template-columns:repeat(auto-fill,minmax(min(100%,17rem),1fr));
-  margin-top:3rem;
-}
-.reel figure{margin:0}
-.reel .frame{
-  position:relative;padding-top:var(--ar,177.78%);   /* 9:16 default; --ar:100% = square */
-  background:var(--ink);overflow:hidden;
-}
-.reel .frame iframe{
-  position:absolute;top:0;left:0;width:100%;height:100%;border:0;
-}
-.reel figcaption{padding-top:1rem;border-top:1px solid var(--rule);margin-top:1rem}
-.reel h3{margin:0 0 .5rem}
-.reel .role{
-  font-family:var(--font-label);font-size:.62rem;letter-spacing:.14em;line-height:1.9;
-  text-transform:uppercase;color:var(--ink-soft);margin:0;
-}
-.reel p{font-size:.9rem;line-height:1.6;color:var(--ink-soft);margin:0;max-width:none}
-.backlink{margin-top:3.5rem}
+   Three failsafes, because a block stuck at opacity 0 is worse than no
+   animation at all. `.no-js` covers scripting off. `.rv-off` is a four
+   second deadline set in the head: if the script at the foot of the page
+   never runs, everything shows. And reduced motion opts out entirely. */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+.no-js .rv,.rv-off .rv{opacity:1;transform:none;transition:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
 </style>
+<script>
+/* Marks scripting as available, then hands the reveal a deadline. The offer
+   page carries the same four seconds for the same reason: show everything
+   rather than nothing if the script never arrives. */
+(function(h){h.className=h.className.replace(/\bno-js\b/,"").trim()+" js";
+setTimeout(function(){if(!h.classList.contains("rv-ready"))h.classList.add("rv-off")},4000)})(document.documentElement);
+</script>
 </head>
 
-<body>
+<body class="font-sans antialiased bg-paper text-ink">
 
-<header class="wrap">
-  <div class="bar">
-    <a class="mark" href="/">Arvorealta</a>
-    <nav>
-      <a class="ln" href="/">the offer</a>
-      <a class="ln" href="/branding/">branding</a>
-      <a class="ln on" href="/video/">video</a>
-      <a class="ln" href="mailto:atlas@arvorealta.com">contact</a>
+<a href="#work" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-[14px] focus:text-bone">Skip to the work</a>
+
+<!-- Fixed, and bone while it is over the ink band, exactly as the offer
+     page's header is bone while it is over the photograph. A sentinel at the
+     foot of the hero flips it rather than a scroll handler, so nothing runs
+     on every frame. -->
+<header id="bar" class="on-ink fixed inset-x-0 top-0 z-40 border-b border-transparent text-bone transition-colors">
+  <div class="mx-auto flex h-[68px] w-full max-w-[82rem] items-center justify-between gap-5 px-5 sm:px-8">
+    <a href="/" class="-my-1 py-1 font-mono text-[13px] uppercase tracking-[.22em]">Arvorealta</a>
+    <nav class="flex items-center gap-5 sm:gap-7">
+      <a href="/" class="-my-1 py-1 text-[14px] opacity-75 transition-opacity hover:opacity-100">the offer</a>
+      <a href="/brand/" class="-my-1 py-1 text-[14px] opacity-75 transition-opacity hover:opacity-100">brand</a>
+      <a href="/video/" aria-current="page" class="-my-1 border-b border-current py-1 text-[14px]">video</a>
     </nav>
+    <a href="mailto:atlas@arvorealta.com"
+       class="hidden rounded-full bg-bone px-5 py-2.5 text-[14px] font-medium text-ink transition-colors hover:bg-bone/90 sm:inline-flex">Start a project</a>
   </div>
 </header>
 
-<section class="hero wrap">
-  <p class="eyebrow rv">Video work</p>
-  <h1 class="rv">Cut for the scroll.<br>Built to survive it.</h1>
-  <p class="sub rv">
-    Vertical edits for social: pacing, type, sound and colour. The same
-    discipline as the print work — decide what matters, then remove
-    everything competing with it.
-  </p>
-</section>
+<main>
 
-<hr class="rule">
-
-<section class="wrap">
-  <p class="tag rv"><b>01</b> selected video work</p>
-
-  <div class="reels">
-
-    <div class="reel rv">
-      <figure>
-        <div class="frame">
-          <iframe
-            src="https://player.vimeo.com/video/1218554775?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1"
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            title="VSL — Magna Cúrcuma"
-            loading="lazy"></iframe>
-        </div>
-        <figcaption>
-          <h3>VSL — Magna Cúrcuma</h3>
-          <p class="role">Creative Direction · Concept · Copywriting · Video Editing</p>
-        </figcaption>
-      </figure>
+<section class="on-ink bg-ink text-bone">
+  <div class="mx-auto w-full max-w-[82rem] px-5 pb-20 pt-[8.5rem] sm:px-8 sm:pb-28 sm:pt-[10rem]">
+    <p class="rv font-mono text-[11px] uppercase tracking-[.18em] text-bone/75">Video work</p>
+    <h1 class="rv mt-7 max-w-[16ch] font-display text-[clamp(2.6rem,1rem+5vw,5.2rem)] font-normal leading-[1.02] tracking-[-.02em]">
+      Cut for the scroll.<br>Built to survive it.
+    </h1>
+    <p class="rv mt-8 max-w-[46ch] text-[clamp(1.05rem,.98rem+.35vw,1.25rem)] leading-[1.6] text-bone/80">
+      Vertical edits for social: pacing, type, sound and colour. The same
+      discipline as the print work — decide what matters, then remove
+      everything competing with it.
+    </p>
+    <div class="rv mt-10 flex flex-wrap items-center gap-3">
+      <a href="#work" class="inline-flex items-center justify-center rounded-full bg-bone px-6 py-3 text-[15px] font-medium text-ink transition-colors hover:bg-bone/90">See the reels</a>
+      <a href="/brand/" class="inline-flex items-center justify-center rounded-full border border-bone/30 px-6 py-3 text-[15px] font-medium transition-colors hover:border-bone/70">Brand and identity</a>
     </div>
-
-    <div class="reel rv">
-      <figure>
-        <div class="frame">
-          <iframe
-            src="https://player.vimeo.com/video/1218441540?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1"
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            title="Reel — Brand"
-            loading="lazy"></iframe>
-        </div>
-        <figcaption>
-          <h3>Reel — Brand</h3>
-          <p class="role">Creative Direction · Concept · Art Direction · Graphic Design ·
-            Copywriting · Video Editing · Motion Design · Retouching · Post-Production</p>
-        </figcaption>
-      </figure>
-    </div>
-
-    <div class="reel rv">
-      <figure>
-        <div class="frame">
-          <iframe
-            src="https://player.vimeo.com/video/1218349876?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1"
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            title="Reel — Fashion Industry"
-            loading="lazy"></iframe>
-        </div>
-        <figcaption>
-          <h3>Reel — Fashion Industry</h3>
-          <p class="role">Creative Direction · Concept · Art Direction · Copywriting ·
-            Video Editing · Motion Design · Retouching · Post-Production</p>
-        </figcaption>
-      </figure>
-    </div>
-
   </div>
-
-  <p class="backlink rv">
-    <a class="ln" href="/branding/">Branding and design →</a>
-    <a class="ln on" href="/" style="margin-left:2rem">← Back to the offer</a>
-  </p>
+  <div id="sentinel" aria-hidden="true" class="h-px"></div>
 </section>
 
-<footer>
-  <div class="wrap">
-    <div class="foot">
-      <div>
-        <h4>Arvorealta</h4>
-        <p style="font-size:.85rem;line-height:1.7">
-          Atlas Sahrim<br>
-          Espírito Santo, Brazil<br>
-          Working with clients across Europe
-        </p>
-      </div>
+<!-- The reels keep their 9:16 frame rather than being cropped to the grid.
+     A vertical edit cut to a landscape tile is a different piece of work,
+     and the shape is half of what is being shown. -->
+<section id="work" class="mx-auto w-full max-w-[82rem] scroll-mt-[92px] px-5 py-20 sm:px-8 sm:py-28">
+  <p class="rv font-mono text-[11px] uppercase tracking-[.18em] text-brick"><b class="font-semibold tabular-nums">01</b> &nbsp;Selected video work</p>
 
-      <div>
-        <h4>Elsewhere</h4>
-        <nav>
-          <a class="ln" href="mailto:atlas@arvorealta.com">Email</a>
-          <a class="ln" href="https://wa.me/5561999845147">WhatsApp</a>
-          <a class="ln" href="https://www.behance.net/arvorealta">Behance</a>
-          <a class="ln" href="https://www.linkedin.com/in/atlassahrim">LinkedIn</a>
-        </nav>
+  <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
+    <figure class="rv">
+      <div class="relative overflow-hidden rounded-2xl border border-ink/15 bg-ink pt-[177.78%]">
+        <iframe class="absolute inset-0 h-full w-full border-0"
+          src="https://player.vimeo.com/video/1218554775?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1"
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          title="VSL — Magna Cúrcuma" loading="lazy"></iframe>
       </div>
+      <figcaption class="mt-4 border-t border-ink/15 pt-3.5">
+        <h3 class="font-display text-[1.45rem] leading-tight">VSL — Magna Cúrcuma</h3>
+        <p class="mt-1 font-mono text-[11px] uppercase tracking-[.14em] text-ink/75">Creative direction · Concept · Copywriting · Video editing</p>
+      </figcaption>
+    </figure>
+    <figure class="rv">
+      <div class="relative overflow-hidden rounded-2xl border border-ink/15 bg-ink pt-[177.78%]">
+        <iframe class="absolute inset-0 h-full w-full border-0"
+          src="https://player.vimeo.com/video/1218441540?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1"
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          title="Reel — Brand" loading="lazy"></iframe>
+      </div>
+      <figcaption class="mt-4 border-t border-ink/15 pt-3.5">
+        <h3 class="font-display text-[1.45rem] leading-tight">Reel — Brand</h3>
+        <p class="mt-1 font-mono text-[11px] uppercase tracking-[.14em] text-ink/75">Creative direction · Concept · Art direction · Graphic design · Copywriting · Video editing · Motion design · Retouching · Post-production</p>
+      </figcaption>
+    </figure>
+    <figure class="rv">
+      <div class="relative overflow-hidden rounded-2xl border border-ink/15 bg-ink pt-[177.78%]">
+        <iframe class="absolute inset-0 h-full w-full border-0"
+          src="https://player.vimeo.com/video/1218349876?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1"
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          title="Reel — Fashion Industry" loading="lazy"></iframe>
+      </div>
+      <figcaption class="mt-4 border-t border-ink/15 pt-3.5">
+        <h3 class="font-display text-[1.45rem] leading-tight">Reel — Fashion Industry</h3>
+        <p class="mt-1 font-mono text-[11px] uppercase tracking-[.14em] text-ink/75">Creative direction · Concept · Art direction · Copywriting · Video editing · Motion design · Retouching · Post-production</p>
+      </figcaption>
+    </figure>
+  </div>
+</section>
 
-      <div>
-        <h4>Overlap</h4>
-        <div class="clocks">
-          <div class="clock"><b id="cl-br">--:--</b><span>brt · here</span></div>
-          <div class="clock"><b id="cl-eu">--:--</b><span>cet · you</span></div>
-        </div>
-      </div>
+<section class="mx-auto w-full max-w-[82rem] border-t border-ink/10 px-5 py-20 sm:px-8 sm:py-28">
+  <p class="rv font-mono text-[11px] uppercase tracking-[.18em] text-brick"><b class="font-semibold tabular-nums">02</b> &nbsp;Elsewhere</p>
+
+  <div class="mt-10 grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-3">
+    <div class="rv border-t border-ink/15 pt-6">
+      <h3 class="font-display text-[1.6rem] leading-tight">Brand</h3>
+      <p class="mt-3 max-w-[32ch] text-[.95rem] leading-[1.65] text-ink/75">Twelve marks, each on the three grounds it has to survive.</p>
+      <a href="/brand/" class="mt-4 inline-block font-mono text-[12px] uppercase tracking-[.14em] underline decoration-ink/30 underline-offset-4 transition-colors hover:decoration-ink">arvorealta.com/brand</a>
     </div>
-
-    <div class="legal">
-      <span>© 2026 Arvorealta</span>
-      <span>Built and maintained in-house</span>
+    <div class="rv border-t border-ink/15 pt-6">
+      <h3 class="font-display text-[1.6rem] leading-tight">Behance</h3>
+      <p class="mt-3 max-w-[32ch] text-[.95rem] leading-[1.65] text-ink/75">The full case studies behind each piece.</p>
+      <a href="https://www.behance.net/arvorealta" class="mt-4 inline-block font-mono text-[12px] uppercase tracking-[.14em] underline decoration-ink/30 underline-offset-4 transition-colors hover:decoration-ink">behance.net/arvorealta</a>
     </div>
+    <div class="rv border-t border-ink/15 pt-6">
+      <h3 class="font-display text-[1.6rem] leading-tight">Documents</h3>
+      <p class="mt-3 max-w-[32ch] text-[.95rem] leading-[1.65] text-ink/75">The other half of the practice: document standards for public tenders.</p>
+      <a href="/" class="mt-4 inline-block font-mono text-[12px] uppercase tracking-[.14em] underline decoration-ink/30 underline-offset-4 transition-colors hover:decoration-ink">arvorealta.com</a>
+    </div>
+  </div>
+</section>
+
+<section class="on-ink bg-ink text-bone">
+  <div class="mx-auto w-full max-w-[82rem] px-5 py-20 sm:px-8 sm:py-28">
+    <p class="rv font-mono text-[11px] uppercase tracking-[.18em] text-bone/75">Start a project</p>
+    <h2 class="rv mt-7 max-w-[22ch] font-display text-[clamp(2rem,1.2rem+2.4vw,3.4rem)] font-normal leading-[1.06] tracking-[-.015em]">
+      Tell me where it<br>has to play.
+    </h2>
+    <p class="rv mt-7 max-w-[48ch] leading-[1.7] text-bone/80">
+      A feed, a paid placement and a screen above a trade stand are three
+      different cuts of the same footage. Knowing which one it is decides the
+      pacing, the type size and whether the sound matters at all.
+    </p>
+    <div class="rv mt-10">
+      <a href="mailto:atlas@arvorealta.com" class="inline-flex items-center justify-center rounded-full bg-bone px-6 py-3 text-[15px] font-medium text-ink transition-colors hover:bg-bone/90">atlas@arvorealta.com</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="border-t border-ink/10 py-10">
+  <div class="mx-auto flex w-full max-w-[82rem] flex-wrap items-center justify-between gap-x-8 gap-y-4 px-5 font-mono text-[11px] uppercase tracking-[.18em] text-ink/75 sm:px-8">
+    <span>Arvorealta</span>
+    <nav class="flex flex-wrap items-center gap-x-7 gap-y-2">
+      <a href="/" class="-my-1.5 py-1.5 transition-colors hover:text-ink">The offer</a>
+      <a href="/brand/" class="-my-1.5 py-1.5 transition-colors hover:text-ink">Brand</a>
+      <a href="/video/" class="-my-1.5 py-1.5 transition-colors hover:text-ink">Video</a>
+      <a href="https://www.behance.net/arvorealta" class="-my-1.5 py-1.5 transition-colors hover:text-ink">Behance</a>
+      <a href="https://www.linkedin.com/in/atlassahrim" class="-my-1.5 py-1.5 transition-colors hover:text-ink">LinkedIn</a>
+    </nav>
+    <a href="mailto:atlas@arvorealta.com" class="-my-1.5 py-1.5 transition-colors hover:text-ink">atlas@arvorealta.com</a>
   </div>
 </footer>
 
-<script src="/assets/site.js" defer></script>
+<script>
+/* The reveal is a sweep, and an IntersectionObserver is the wrong tool for
+   it. An observer only reports a CHANGE in intersection, so a jump that
+   crosses a block without ever painting it — the hero's own "See the work"
+   anchor, a restored scroll position, Cmd+End — takes the block from "below
+   the fold" to "above the fold" with ratio 0 at both ends, fires nothing,
+   and leaves it at opacity 0 for the life of the page. Measured: jumping
+   straight to 1600px left the first row of work permanently invisible.
+
+   This is the trap CLAUDE.md records twice in the award fold, in its other
+   form: an element that hides itself cannot be the thing you observe.
+
+   So the page measures instead, on a rAF-throttled passive scroll, and
+   reveals anything whose top has reached the lower eighth of the screen OR
+   is already above it. The list only shrinks, and the listeners take
+   themselves off once it is empty, so nothing survives the arrival. */
+(function () {
+  document.documentElement.classList.add("rv-ready");
+  var left = [].slice.call(document.querySelectorAll(".rv")), tick = 0;
+
+  function sweep() {
+    tick = 0;
+    var vh = innerHeight, shown = 0, rest = [];
+    for (var i = 0; i < left.length; i++) {
+      var el = left[i];
+      if (el.getBoundingClientRect().top < vh * 0.92) {
+        /* The stagger is per batch, not per document. Indexing globally
+           means everything below the fourth element arrives with the same
+           delay, which is no stagger at all. */
+        el.style.transitionDelay = Math.min(shown++, 4) * 60 + "ms";
+        el.classList.add("in");
+      } else rest.push(el);
+    }
+    left = rest;
+    if (!left.length) {
+      removeEventListener("scroll", onScroll);
+      removeEventListener("resize", sweep);
+    }
+  }
+  function onScroll() { if (!tick) tick = requestAnimationFrame(sweep) }
+
+  addEventListener("scroll", onScroll, { passive: true });
+  addEventListener("resize", sweep);
+  /* One frame late, so the opacity:0 start state is painted and the first
+     blocks animate in rather than appearing already arrived. */
+  requestAnimationFrame(sweep);
+
+  /* The header is a sentinel rather than a measurement: its state changes
+     once, at a known place, and an observer reports that crossing in both
+     directions including on a jump, because the sentinel's own intersection
+     genuinely changes. */
+
+  var bar = document.getElementById("bar"), s = document.getElementById("sentinel");
+  if (!bar || !s) return;
+  var OVER = ["on-ink", "text-bone", "border-transparent"];
+  var PAST = ["border-ink/10", "bg-paper/85", "backdrop-blur-md"];
+  new IntersectionObserver(function (es) {
+    var over = es[0].isIntersecting;
+    OVER.forEach(function (c) { bar.classList.toggle(c, over) });
+    PAST.forEach(function (c) { bar.classList.toggle(c, !over) });
+  }, { threshold: 0 }).observe(s);
+})();
+</script>
 </body>
 </html>

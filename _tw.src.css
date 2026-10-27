@@ -19,7 +19,18 @@
    own source and its own output on purpose: a sandbox edit must never force
    a rebuild of the live page's stylesheet, and must never change it. */
 @import "tailwindcss";
+
+/* Three pages share one compiled stylesheet, and that is the point rather
+   than a saving. /brand/ and /video/ are built from the offer page's own
+   utilities, so a token changed here changes all three in the same frame and
+   they cannot drift into three dialects of the same system. It also means
+   one hashed file in the cache instead of three.
+
+   Add a page here and in PAGES in _build-css.sh, or its classes compile to
+   nothing and the page renders bare. */
 @source "./index.html";
+@source "./brand/index.html";
+@source "./video/index.html";
 
 /* The brand's own values. The skill's redesign protocol says extract the
    brand tokens before applying its palette rules, and its premium-consumer
