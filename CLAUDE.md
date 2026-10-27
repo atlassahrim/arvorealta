@@ -110,14 +110,14 @@ page that will drift, and the one before that was deleted for exactly that.
 **A sandbox is deleted when it falls behind or when it wins, and rebuilt
 from the live page when there is something new to try.**
 
-**`lab/brand/` is the current one: a cinematic cut of the brand page.** The
-live `/brand/` is a contact sheet — twelve equal tiles on a light ground,
-nothing leading — and the sandbox argues the opposite: near-black ground,
-one project per screen, scroll-snapped, the frame shown whole beside its
-name in display type. **It is not promoted and it crosses the light-only
-rule**, so promoting it is a decision made in front of the figures, not a
-merge. Section *The two portfolio pages* carries the reasoning and the
-measurements.
+**`lab/brand/` is the current one: the mosaic.** The live `/brand/` is a
+contact sheet — twelve equal tiles on a light ground, nothing leading — and
+the sandbox argues the opposite, on the iPhone Photos model: a near-black
+library you pinch to change density, a tap that expands one frame into the
+whole screen, and a film strip that keeps the rest reachable. **It is not
+promoted and it crosses the light-only rule**, so promoting it is a decision
+made in front of the figures, not a merge. Section *The two portfolio pages*
+carries the reasoning and the measurements.
 
 Two rules come with a rebuilt sandbox. It carries `noindex, nofollow`, or it
 is a second `index.html` bidding against the first for the same terms. And
@@ -247,39 +247,86 @@ missing H.264. **Check a real browser after deploying.**
 The social cards are `assets/_og/brand.html` and `video.html`, rendered by
 `assets/_og/render.sh`.
 
-### The cinematic cut — what the sandbox is testing
+### The mosaic — what the sandbox is testing
 
 `lab/brand/` is the standing objection to the grid above: **a catalogue
-shows twelve things, and nothing in it is held.** Every tile the same size
-on a light ground reads as a contact sheet, which is the wrong register for
-work whose whole argument is craft.
+shows twelve things, and nothing in it is held.** It answers that with the
+iPhone Photos model rather than with a better grid — a library you pinch,
+a frame you open, and a panel that keeps the other fifty reachable.
 
-**The design problem is the source, and it rules out the obvious answer.**
-The frames are 9:16. A vertical frame cannot fill a landscape screen — at
-1440 × 900 a full-height one is 506 px wide. Cover-cropping it to 16:9
-throws away two thirds of the composition and upscales what is left, and
-cropping to a 2.39:1 band loses the wordmark, which sits *below* the mark in
-most of them. So the frame is shown whole at its own proportions and the
-screen is filled by pairing it with the name in display type. **Scale is
-relative:** 415 px alone in the dark is monumental where 410 px in a grid of
-twelve is a thumbnail.
+**The landscape source is what made it possible.** The first sandbox was
+built on the 9:16 portrait frames and had to work around them: a vertical
+frame cannot fill a landscape screen, cover-cropping one to 16:9 throws away
+two thirds of the composition, and a 2.39:1 band loses the wordmark, which
+sits below the mark in most of them. The owner then supplied **54 landscape
+frames at 1920 × 1080** — the same marks, the same three grounds, 16:9 — and
+every one of those constraints disappeared. A tile, a mosaic cell and a
+full-bleed view are now the same shape and nothing is cropped.
 
-The three grounds become a colour score rather than three columns — water,
-light, paper, repeating — so the sequence cuts dark, warm, pale as it runs
-instead of holding one temperature.
+**Seventeen projects, not twelve.** The landscape set carries five the
+portrait set did not: Figueiredo & Velloso, Noleto, Wright Minussi, Leonardo
+Lobo and Offrire. Every name was read at full resolution before it shipped,
+which is the rule the crest earned the hard way. `assets/land/` holds 51
+frames — the three `base` frames carry no mark and are dropped — cut by
+`_tools/portfolio/landscape.py` at 1400 and 480 wide.
 
-**Two CSS traps were measured here and both are general.**
+**webp only here, and that is a departure.** The repo's photography carries
+a jpg beside every webp; at 51 frames that is a third file each to support
+browsers older than Safari 14 (2020), and it would roughly double the
+directory. The whole set is 2.0 MB as it stands.
 
-`clamp(1.9rem,1.1rem+2.4vw,3.6rem)` is invalid. **CSS math needs whitespace
-on both sides of `+` and `-`**, so the whole declaration is dropped and the
-element falls back to the inherited size — every name rendered at 16px and
-it looked like a judgement rather than a bug.
+**This page uses React, and it is the first page besides the offer page to
+earn it.** The state is real — which frame is open, at what density, with
+keyboard, swipe, hash and history all pointed at the same index — and the
+two portfolio pages' thirty lines of vanilla JS would have become three
+hundred of hand-rolled store. It imports the same vendored
+`/assets/vendor/runtime.js`, so there is still no build step and no
+third-party request.
 
-**`max-width` in `ch` resolves against the element's own `font-size`,** not
-its children's. A `20ch` cap on a 16px caption is 160 px wide, so every name
-inside it wrapped on its own — the one thing hand-breaking exists to
-prevent. Measured after the fix: all twelve hold a single line at 1440, 1280
-and 390, and the three hand-broken blocks render exactly their two lines.
+**`layoutId` works in the vendored Motion build, and that was measured
+rather than assumed.** The bundle mentions `layoutId` and `MeasureLayout`
+but exports no `AnimatePresence` and no `projectionNodeConstructor`, which
+is exactly the shape of a build that carries the prop names and not the
+engine. A probe toggling one box between two sizes reported widths of
+100 → 177 → 302 → 357 → 379 → 394 → 399 across seven frames: it
+interpolates, so the shared-element expand from tile to full screen is free.
+**`AnimatePresence` is genuinely absent**, so nothing here depends on an
+exit animation; the open tile renders a `.ghost` placeholder instead, which
+leaves exactly one element holding each `layoutId` and lets Motion hand the
+position over.
+
+**Three CSS traps were measured here. All three are general and all three
+look like judgement calls when they land.**
+
+**htm does not HTML-parse text content.** `&larr;`, `&middot;` and
+`&#10005;` rendered as those literal strings, in tracked capitals, in the
+header and on every button. Write the character, not the entity.
+
+**A Tailwind arbitrary value cannot contain spaces, and CSS math requires
+them.** `text-[clamp(1.4rem, 1rem + 1.4vw, 2.4rem)]` is not a class at all,
+so the headline fell back to the inherited 16px — the same symptom as the
+unspaced `clamp()` the first sandbox hit, from the opposite cause. The
+escape is an underscore: `text-[clamp(1.4rem,1rem_+_1.4vw,2.4rem)]`.
+
+**A percentage `max-height` resolves to `none` against an indefinite
+containing block, and an `fr` row counts as indefinite.** The open picture
+kept its intrinsic 762 px and ran 66 px into the film strip. Measured on the
+same element: `max-height:500px` bound and `max-height:100%` did not.
+`minmax(0,1fr)` on the row — the trap the award bar already records — was
+necessary and not sufficient. The fix is `position:absolute` with `inset:0`
+and `margin:auto` inside a `position:relative` stage, which gives a definite
+containing block. **It also has to be the picture's own box rather than a
+full-size box with `object-fit:contain`**, or the tile expands into the
+wrong shape on a tall screen. Verified at 1440 × 900, 1280 × 720,
+1024 × 1366 and 390 × 844: true 16:9, equal air above and below, never
+touching the strip.
+
+**The navigation aids are the point, not decoration.** Three densities on a
+segmented control, pinch (a `ctrlKey` wheel on a trackpad, two-touch
+distance on iOS, which has no such wheel), `+`/`-`, arrow keys, swipe,
+Escape, a film strip that scrolls the current frame to its own centre, a
+counter, and **one frame to one URL** — `#venner-paper` is sendable, and the
+device's own Back gesture closes the view instead of leaving the page.
 
 **Promoting it crosses the light-only rule** above, which is written against
 *dark mode* — a second identity toggled by preference — rather than against
@@ -357,8 +404,10 @@ assets/
   img/                  photography, as webp + jpg at the widths the source
                         actually holds — the name carries a version:
                         after-1-<width>.<ext>
-  marks/                the brand portfolio's tiles, cut from the owner's
-                        source frames — <slug>-<ver>-<width>.{webp,jpg}
+  marks/                the live brand page's tiles, cut 4:5 from the
+                        portrait frames — <slug>-<ver>-<width>.{webp,jpg}
+  land/                 the sandbox's 51 landscape frames, 17 marks on three
+                        grounds — <slug>-<ground>-<ver>-<width>.webp
   vedlegg-5/            the open tender's example PDF and fillable Word file
   fonts/                Geist, Geist Mono and EB Garamond, self-hosted woff2
   vendor/runtime.js     React, react-dom, Motion and htm, bundled once
