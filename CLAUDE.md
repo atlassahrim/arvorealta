@@ -101,22 +101,35 @@ reason.
 
 `reference/` is the first offer page, kept for the owner.
 
-**`lab/` is deleted, and it is deleted because it won.** Everything it was
-testing — the skip link, the page's own focus ring, `cursor: pointer` on
-buttons, the 24px targets, EB Garamond, the measured bar, the restored
-ladder and the intake form — is the offer page now. A sandbox that has been
-promoted is not a sandbox any more, it is a second copy of the live page
-that will drift, and the one before this was deleted for exactly that. **A
-sandbox is deleted when it falls behind or when it wins, and rebuilt from
-the live page when there is something new to try.**
+**`lab/` was deleted once because it won**, and it is rebuilt. Everything the
+first one tested — the skip link, the page's own focus ring, `cursor:
+pointer` on buttons, the 24px targets, EB Garamond, the measured bar, the
+restored ladder and the intake form — is the offer page now. A sandbox that
+has been promoted is not a sandbox any more, it is a second copy of the live
+page that will drift, and the one before that was deleted for exactly that.
+**A sandbox is deleted when it falls behind or when it wins, and rebuilt
+from the live page when there is something new to try.**
 
-When it is rebuilt, two rules come with it. It carries `noindex, nofollow`,
-or it is a second `index.html` bidding against the first for the same terms.
-And **it needs its own compiled stylesheet, built by its own script**:
+**`lab/brand/` is the current one: a cinematic cut of the brand page.** The
+live `/brand/` is a contact sheet — twelve equal tiles on a light ground,
+nothing leading — and the sandbox argues the opposite: near-black ground,
+one project per screen, scroll-snapped, the frame shown whole beside its
+name in display type. **It is not promoted and it crosses the light-only
+rule**, so promoting it is a decision made in front of the figures, not a
+merge. Section *The two portfolio pages* carries the reasoning and the
+measurements.
+
+Two rules come with a rebuilt sandbox. It carries `noindex, nofollow`, or it
+is a second `index.html` bidding against the first for the same terms. And
+**it needs its own compiled stylesheet, built by its own script**:
 `_build-css.sh` runs `rm -f assets/tw-*.css` before it writes, so a lab
 stylesheet kept beside the live one would be deleted by the next build of
 the offer page and the sandbox would silently lose every rule it is testing.
-`lab/_build.sh` is in git history at `dffcb11` and is the thing to copy.
+`lab/_build.sh` writes `lab/tw-<hash>.css`, which that pattern does not
+match, and `lab/_tw.src.css` copies the live tokens rather than importing
+them — **a token changed in `_tw.src.css` has to be changed there too**,
+which is a cost the separation buys and a reason not to leave a sandbox
+standing.
 
 `mal/` was a Norwegian-only landing page for one tender in the retired
 editorial identity; its two files moved to `assets/vedlegg-5/` and the offer
@@ -234,6 +247,47 @@ missing H.264. **Check a real browser after deploying.**
 The social cards are `assets/_og/brand.html` and `video.html`, rendered by
 `assets/_og/render.sh`.
 
+### The cinematic cut — what the sandbox is testing
+
+`lab/brand/` is the standing objection to the grid above: **a catalogue
+shows twelve things, and nothing in it is held.** Every tile the same size
+on a light ground reads as a contact sheet, which is the wrong register for
+work whose whole argument is craft.
+
+**The design problem is the source, and it rules out the obvious answer.**
+The frames are 9:16. A vertical frame cannot fill a landscape screen — at
+1440 × 900 a full-height one is 506 px wide. Cover-cropping it to 16:9
+throws away two thirds of the composition and upscales what is left, and
+cropping to a 2.39:1 band loses the wordmark, which sits *below* the mark in
+most of them. So the frame is shown whole at its own proportions and the
+screen is filled by pairing it with the name in display type. **Scale is
+relative:** 415 px alone in the dark is monumental where 410 px in a grid of
+twelve is a thumbnail.
+
+The three grounds become a colour score rather than three columns — water,
+light, paper, repeating — so the sequence cuts dark, warm, pale as it runs
+instead of holding one temperature.
+
+**Two CSS traps were measured here and both are general.**
+
+`clamp(1.9rem,1.1rem+2.4vw,3.6rem)` is invalid. **CSS math needs whitespace
+on both sides of `+` and `-`**, so the whole declaration is dropped and the
+element falls back to the inherited size — every name rendered at 16px and
+it looked like a judgement rather than a bug.
+
+**`max-width` in `ch` resolves against the element's own `font-size`,** not
+its children's. A `20ch` cap on a 16px caption is 160 px wide, so every name
+inside it wrapped on its own — the one thing hand-breaking exists to
+prevent. Measured after the fix: all twelve hold a single line at 1440, 1280
+and 390, and the three hand-broken blocks render exactly their two lines.
+
+**Promoting it crosses the light-only rule** above, which is written against
+*dark mode* — a second identity toggled by preference — rather than against
+a dark page. The offer page already reverses out to full-bleed ink twice. A
+portfolio on near-black is the statement fold extended rather than a second
+identity, and that is the argument; it is still the owner's call, and the
+rule gets rewritten in the same commit if the answer is yes.
+
 ## The pricing ladder
 
 Three tiers on `index.html` and a free step that is not one.
@@ -286,6 +340,7 @@ document agreed before the work starts, not listed on the page.
 ```
 index.html              offer page
 brand/index.html        brand portfolio
+lab/brand/index.html    the sandbox — a cinematic cut of it, noindex
 branding/index.html     a noindex stub redirecting to /brand/
 video/index.html        video portfolio
 reference/index.html    the first offer page, kept for reference — noindex
