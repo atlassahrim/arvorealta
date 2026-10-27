@@ -111,13 +111,15 @@ page that will drift, and the one before that was deleted for exactly that.
 from the live page when there is something new to try.**
 
 **`lab/brand/` is the current one: a full portfolio page, not a viewer.**
-It opens on a hero that says what the page is, features one project across
-its three grounds, then gives the Photos-style mosaic its own section, then
-closes on the ladder's three rungs. The mosaic alone was the version before
-this, and the owner's objection is the right one: a photo library is not a
-portfolio, because it introduces nothing and demonstrates no craft beyond
-the pictures. **It is not promoted and it crosses the light-only rule**, so
-promoting it is a decision made in front of the figures, not a merge.
+It opens on a hero over a moving ground, takes three projects apart as
+systems, gives the remaining fourteen a gallery of one frame and one
+paragraph each, and closes on the ladder's three rungs. The mosaic alone was
+two versions ago, and the owner's objection is the right one: a photo library
+is not a portfolio, because it introduces nothing and demonstrates no craft
+beyond the pictures. A single featured project was the version after that,
+and three is what shows a system rather than a lucky mark. **It is not
+promoted and it crosses the light-only rule**, so promoting it is a decision
+made in front of the figures, not a merge.
 
 Two rules come with a rebuilt sandbox. It carries `noindex, nofollow`, or it
 is a second `index.html` bidding against the first for the same terms. And
@@ -249,10 +251,27 @@ The social cards are `assets/_og/brand.html` and `video.html`, rendered by
 
 ### The sandbox — what it is testing now
 
-`lab/brand/` was a mosaic and is now a page. The mosaic answered *what else
-is there*; it did not answer *what is this*. **A photo library is not a
-portfolio.** The structure is hero, featured project, mosaic, the three
-rungs, close: five sections, five different layout families.
+`lab/brand/` was a mosaic, then a page with one featured project, and is now
+a page with three. The mosaic answered *what else is there*; it did not
+answer *what is this*. **A photo library is not a portfolio.** The structure
+is hero, three cases, gallery, the three rungs, close: seven sections.
+
+**The three cases carry the same parts and never the same arrangement.** Mark,
+brief, what was made, palette, type, applications, every time. Case one is a
+full-bleed 21:9 plate over copy beside the specimens; case two is a split with
+the plate right, on its own darker ground, and the applications under the
+copy; case three is the triptych of all three grounds, then copy, palette and
+type in three columns. **Three identical case layouts in a row is one layout
+family used three times**, which is what a template looks like, and the point
+of the page is that the work is systematic and the presentation is not
+mechanical.
+
+**The copy and the application shots are placeholders and say so.** The
+paragraphs read `Placeholder.` in their first word and the applications row
+carries a `placeholder` label beside its own eyebrow, because an unlabelled
+stand-in is how invented proof gets shipped by accident. The owner supplies
+the real text and the real application photographs; the structure is what is
+being evaluated.
 
 **Built under `taste-skill`, with this file winning every conflict.** The
 skill's dials were read as `DESIGN_VARIANCE 8 · MOTION_INTENSITY 7 ·
@@ -273,8 +292,9 @@ file disagree:
 **What the skill caught that would otherwise have shipped.** The featured
 section opened as a big left headline with a small explainer floating in the
 right column, which it names as a banned split-header; it is stacked now.
-The eyebrow count is mechanical, two against a ceiling of two for five
-sections. One label per CTA intent: `Start a project` everywhere, with
+The eyebrow count is mechanical: `Case one`, `Case two` and `Case three` are
+a numbered spine and count as one device, leaving two unnumbered eyebrows
+against a ceiling of two for seven sections. One label per CTA intent: `Start a project` everywhere, with
 `See the work` used once for the other intent. Zero em-dashes, which the
 page is grepped for.
 
@@ -290,11 +310,36 @@ rung a reader of a brand portfolio is actually buying. The credit lines are
 intact and no figure moved. Changing which rung leads is a presentation
 decision; changing a price would not be.
 
-**The hero's rest state is the introduction.** One mark crossfading through
-deep water, warm light and bare paper states the page's premise before the
-standfirst is read. It is the only perpetual animation on the page, it is
-opacity only, and it is static under reduced motion. Every other movement is
-a reveal, a hover or the shared-element expand.
+**The hero's rest state is the introduction.** A twelve second loop of the
+deep-water ground moves under the type, which states the page's premise before
+the standfirst is read. It is the only perpetual animation on the page and it
+is never mounted under `prefers-reduced-motion`, because a `<video autoplay>`
+cannot be stopped from CSS. The photograph is the floor and the loop fades in
+over it on `playing`, which is the offer page's own pattern and for the same
+reason: `canplaythrough` frequently never fires on iOS.
+
+**Measured on that ground, with the type hidden so the strips sample the
+picture.** Bone over the hero's own column at 1440 x 900, against a scrim
+running `rgba(11,26,21,.92)` at the left edge to `.30` at the right:
+
+| | median | brightest 2% |
+|---|---|---|
+| eyebrow, bone at 70% | 7.53:1 | **6.16:1** |
+| headline, full bone | 14.57:1 | 12.20:1 |
+| standfirst, bone at 80% | 9.63:1 | 8.40:1 |
+
+Everything clears, the eyebrow included, which is the opposite of the offer
+page's photograph and is the scrim's doing rather than the picture's. **The
+loop was measured too, not only the poster**: across its twelve seconds the
+left column's brightest 2% moves from 0.0885 to 0.0961 in relative luminance
+against the poster's 0.0916, so the worst case above holds for every frame.
+
+**There is no shared-element expand on this page and the `layoutId` that
+claimed one was inert.** A frame appears in more than one place here, the
+case plate and the applications row both, so no single tile can hold a
+`layoutId` for it; the viewer crossfades instead, 450ms of opacity and a
+1.5 percent scale. The `layoutId` finding below still stands for a page where
+exactly one element holds each id.
 
 **Reveals gate headings and never pictures.** An IntersectionObserver reports
 a *change* in intersection, so a jump that crosses a block without painting
@@ -309,7 +354,22 @@ between two sizes reported 100, 177, 302, 357, 379, 394, 399 across seven
 frames, so it interpolates. `AnimatePresence` really is absent: the open
 tile renders a placeholder so exactly one element holds each `layoutId`.
 
-**Three CSS traps measured here, all general.**
+**Five CSS traps measured here, all general.**
+
+**A two-row `grid gap-5` inside a stretched column distributes its free space
+between the rows.** A grid container's default `align-content` is `normal`,
+which behaves as `stretch`, so two auto rows in a column that is taller than
+its content drift apart: the case's two paragraphs sat about 100px from each
+other with a 20px gap written on them. `content-start` is the fix, and the
+symptom reads as a layout opinion rather than as a bug.
+
+**A landscape frame cropped into a portrait cell loses the wordmark.** The
+triptych ran at `aspect-[3/4]` with `object-fit: cover` over a 16:9 source,
+which cut 56 percent of the width and clipped `IMOBILIÁRIO` off the third
+panel. The source set's own ratio is the only safe cell for it. **Crop a
+frame only about a centre that was measured**, which is what
+`_tools/portfolio/marks.py` does for the portrait tiles and what nothing in
+the layout can do for you.
 
 `clamp(1.9rem,1.1rem+2.4vw,3.6rem)` is invalid, because **CSS math needs
 whitespace on both sides of `+` and `-`**. And **a Tailwind arbitrary value
@@ -326,6 +386,27 @@ same element: `max-height:500px` bound and `max-height:100%` did not.
 `position:relative` stage. **It has to be the picture's own box** rather than
 a full-size box with `object-fit:contain`, or the tile expands into the wrong
 shape on a tall screen.
+
+**The grounds move, and nothing generated them.** The three loops under
+`assets/video/ground-*` are the owner's own base frames with a camera move
+written over them by `_tools/portfolio/ground-loop.py` — a slow zoom of 7
+percent and a drift of 120 by 46 pixels, cut from the 2400 × 1350 originals,
+which is exactly the 25 percent margin a move of that size needs. Twelve
+seconds, 1920 × 1080 at 25fps, 0.8 to 1.5 MB each, poster is frame 0.
+
+**The loop is seamless by construction rather than by crossfade.** The move
+is driven by `u(t) = (1 - cos(2πt)) / 2`, whose derivative is zero at t = 0,
+0.5 and 1, so the camera arrives at the wrap already stopped and the first
+frame is the last. Measured: mean absolute difference across the wrap is
+1.55 of 255 against 20.67 for two frames five seconds apart, which is
+thirteen times closer. **A crossfade would have cost the whole trick**, since
+it doubles the file and shows a ghost of the far end of the move.
+
+**No model touched any of it, and that is the rule rather than the method.**
+A generated application shot of a real client's mark is invented proof and
+cannot be recalled once it is public. Generation is available for an abstract
+ground where nothing is claimed; it is not available for anything that would
+read as a client's delivered work.
 
 **The source is the landscape set.** 54 frames at 1920 × 1080, seventeen
 projects on three grounds, plus three `base` frames with no mark that are
@@ -413,6 +494,9 @@ assets/
                         portrait frames — <slug>-<ver>-<width>.{webp,jpg}
   land/                 the sandbox's 51 landscape frames, 17 marks on three
                         grounds — <slug>-<ground>-<ver>-<width>.webp
+  video/                the hero clip, and the sandbox's three ground loops —
+                        ground-<ground>-1-1080.{mp4,jpg}, built by
+                        _tools/portfolio/ground-loop.py
   vedlegg-5/            the open tender's example PDF and fillable Word file
   fonts/                Geist, Geist Mono and EB Garamond, self-hosted woff2
   vendor/runtime.js     React, react-dom, Motion and htm, bundled once
