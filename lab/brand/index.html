@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Brand — the mosaic (sandbox)</title>
-<meta name="description" content="Sandbox. Seventeen marks, three grounds each, as a mosaic you can zoom and open.">
+<title>Brand and identity, Atlas Sahrim</title>
+<meta name="description" content="Seventeen identities, each shown on the three grounds it has to survive. Selected brand work by Atlas Sahrim.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#11261F">
@@ -14,166 +14,395 @@
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ebgaramond-latin.woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/geist.css">
 <link rel="stylesheet" href="/assets/fonts/ebgaramond.css">
-<link rel="stylesheet" href="/lab/tw-051e8707.css">
+<link rel="preload" as="image" href="/assets/land/remedios-w-1-1400.webp" fetchpriority="high">
+<link rel="stylesheet" href="/lab/tw-0d54198f.css">
 
 <style>
-/* ────────────────────────────────────────────────── the room
-
-   The reference is the iPhone Photos library: a mosaic you pinch to change
-   density, a tap that expands one picture into the whole screen, and a way
-   to keep moving once you are in there. Everything here serves that and
-   nothing else.
-
-   The landscape source is what makes it possible. The portrait set was 9:16
-   and could never fill a screen; these are 16:9, so a tile, a mosaic cell
-   and a full-bleed view are all the same shape and nothing is cropped. */
-html{background:var(--color-ink-2)}
+/* ─── page contract ──────────────────────────────────────────────────────
+   THEME LOCK: one theme, dark, for every section. No section inverts.
+   COLOUR LOCK: one accent, bone, used for every action on the page. The
+     photography carries all the colour there is. The brick mark measures
+     2.03:1 on ink and is barred there, so it does not appear.
+   SHAPE LOCK: actions are full pill, surfaces are 16px, media is 3px.
+     That is the documented rule and it holds everywhere.               */
+html{background:var(--color-ink-2);scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{overscroll-behavior-y:none}
 body.locked{overflow:hidden}
 
 .tile{display:block;width:100%;aspect-ratio:16/9;border:0;padding:0;background:#0d1d18;
-  border-radius:3px;overflow:hidden;cursor:zoom-in;position:relative;
-  /* a tile is a button, so it needs a visible focus state of its own */
-  outline-offset:3px}
-.tile img{display:block;width:100%;height:100%;object-fit:cover}
+  border-radius:3px;overflow:hidden;cursor:zoom-in;position:relative;outline-offset:3px}
+.tile img{display:block;width:100%;height:100%;object-fit:cover;
+  transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.tile:hover img,.tile:focus-visible img{transform:scale(1.045)}
 .tile::after{content:"";position:absolute;inset:0;background:var(--color-bone);opacity:0;
-  transition:opacity .35s ease;pointer-events:none}
-.tile:hover::after{opacity:.07}
-@media (prefers-reduced-motion:reduce){.tile::after{transition:none}}
+  transition:opacity .4s ease;pointer-events:none}
+.tile:hover::after{opacity:.06}
+@media (prefers-reduced-motion:reduce){
+  .tile img{transition:none}.tile:hover img,.tile:focus-visible img{transform:none}
+  .tile::after{transition:none}
+}
+.ghost{width:100%;aspect-ratio:16/9;border-radius:3px;background:rgba(233,231,228,.06)}
 
 .shade{position:fixed;inset:0;z-index:60;background:#070f0c;opacity:0;visibility:hidden;
   transition:opacity .45s ease,visibility .45s}
 .shade.on{opacity:1;visibility:visible}
 
+/* minmax(0,1fr), never 1fr. An `fr` track is minmax(auto,1fr), and `auto`
+   will not shrink below the picture's own min-content height, so the stage
+   grew past its row and ran into the film strip. */
 .view{position:fixed;inset:0;z-index:61;display:grid;
-  /* minmax(0,1fr), never 1fr. An `fr` track is minmax(auto,1fr), and `auto`
-     will not shrink below the content's min-content height — the picture's
-     own 788px — so the stage grew past its row and ran 66px into the film
-     strip. Same trap as the award bar's tracks on the offer page. */
-  grid-template-rows:auto minmax(0,1fr) auto;
-  visibility:hidden;pointer-events:none}
+  grid-template-rows:auto minmax(0,1fr) auto;visibility:hidden;pointer-events:none}
 .view.on{visibility:visible;pointer-events:auto}
-/* The picture is absolutely positioned, and that is a fix rather than a
-   style. As a grid item its `max-height:100%` computed to `none` — a
-   percentage max-height resolves against an indefinite containing block,
-   and an `fr` row counts as indefinite — so the picture kept its intrinsic
-   762px and ran into the film strip. Measured: max-height:500px bound and
-   max-height:100% did not, on the same element.
 
-   Absolute inside a position:relative stage gives a definite containing
-   block, so the percentages resolve; `inset:0` with `margin:auto` and auto
-   width and height is the old reliable way to centre a replaced element
-   inside one. The element's box stays the picture's own box, which is what
-   the shared-element animation needs — object-fit:contain on a full-size
-   box would letterbox, and the tile would then expand into the wrong shape
-   on a tall screen. */
+/* The picture is absolutely positioned inside a relative stage, and that is
+   a fix rather than a style: a percentage max-height resolves to `none`
+   against an indefinite containing block, and an `fr` row counts as
+   indefinite. Measured on the same element, max-height:500px bound and
+   max-height:100% did not. The element box stays the picture's own box,
+   which is what the shared-element expand needs. */
 .view-stage{position:relative;min-height:0;overflow:hidden}
-.view-img{position:absolute;top:0;right:0;bottom:0;left:0;margin:auto;
-  width:auto;height:auto;
+.view-img{position:absolute;top:0;right:0;bottom:0;left:0;margin:auto;width:auto;height:auto;
   max-width:calc(100% - 2 * clamp(.5rem,3vw,3rem));
-  max-height:calc(100% - 2 * clamp(.75rem,2vh,1.5rem));
-  border-radius:3px}
+  max-height:calc(100% - 2 * clamp(.75rem,2vh,1.5rem));border-radius:3px}
 
-/* The film strip is the panel the brief asked for: the rest of the library,
-   always reachable without going back. It scrolls the current frame into the
-   middle of itself rather than making the reader find it. */
 .strip{display:flex;gap:6px;overflow-x:auto;padding:.75rem clamp(.75rem,3vw,2rem) 1rem;
   scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .strip::-webkit-scrollbar{display:none}
-.strip button{flex:0 0 auto;width:92px;aspect-ratio:16/9;border:0;padding:0;border-radius:2px;
+.strip button{flex:0 0 auto;width:92px;aspect-ratio:16/9;border:0;padding:0;border-radius:3px;
   overflow:hidden;cursor:pointer;background:#0d1d18;opacity:.4;transition:opacity .25s ease}
 .strip button img{display:block;width:100%;height:100%;object-fit:cover}
 .strip button[aria-current="true"]{opacity:1;outline:1.5px solid var(--color-bone);outline-offset:1px}
-.strip button:hover{opacity:.8}
-
-.ghost{width:100%;aspect-ratio:16/9;border-radius:3px;background:rgba(233,231,228,.06)}
+.strip button:hover{opacity:.85}
 
 .arrow{position:absolute;top:50%;translate:0 -50%;z-index:62;width:46px;height:46px;border:0;
   border-radius:999px;background:rgba(233,231,228,.1);color:var(--color-bone);cursor:pointer;
   display:grid;place-items:center;font-size:20px;line-height:1;backdrop-filter:blur(6px);
-  transition:background .2s ease}
+  transition:background .2s ease,transform .2s ease}
 .arrow:hover{background:rgba(233,231,228,.22)}
+.arrow:active{transform:translateY(-50%) scale(.94)}
 .arrow[disabled]{opacity:.25;cursor:default}
 .arrow.prev{left:clamp(.4rem,2vw,1.5rem)} .arrow.next{right:clamp(.4rem,2vw,1.5rem)}
 @media (max-width:40rem){.arrow{display:none}}
+
+/* Actions: full pill, and they push back on press. */
+.act{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;
+  border-radius:999px;padding:.85rem 1.6rem;font-size:15px;font-weight:500;
+  transition:background-color .25s ease,border-color .25s ease,transform .12s ease}
+.act:active{transform:scale(.975)}
+.act-solid{background:var(--color-bone);color:var(--color-ink-2)}
+.act-solid:hover{background:#fff}
+.act-ghost{border:1px solid rgba(233,231,228,.3);color:var(--color-bone)}
+.act-ghost:hover{border-color:rgba(233,231,228,.7)}
+@media (prefers-reduced-motion:reduce){.act,.arrow{transition:none}.act:active{transform:none}}
 </style>
 </head>
 
 <body class="bg-ink-2 font-sans text-bone antialiased">
 <div id="root"></div>
-<noscript style="display:block;padding:4rem 1.25rem;max-width:40rem;margin:0 auto">
-  <h1 style="font-family:'EB Garamond',serif;font-size:2.5rem;line-height:1.05;margin:0 0 1.5rem">Brand and identity</h1>
-  <p style="line-height:1.6">Seventeen marks, each shown on three grounds. This sandbox needs scripting;
-  the live page at <a href="/brand/" style="color:inherit">arvorealta.com/brand</a> does not.</p>
+<noscript style="display:block;padding:5rem 1.5rem;max-width:40rem;margin:0 auto">
+  <h1 style="font-family:'EB Garamond',serif;font-size:2.6rem;line-height:1.05;margin:0 0 1.5rem">One mark. Every light it meets.</h1>
+  <p style="line-height:1.7">Seventeen identities, each shown on the three grounds it has to survive.
+  This page needs scripting. <a href="/brand/" style="color:inherit">The live brand page</a> does not.</p>
 </noscript>
 
 <script type="module">
 import { React, createRoot, motion, useReducedMotion, htm } from "/assets/vendor/runtime.js";
-const { useState, useEffect, useRef, useCallback, useMemo } = React;
+const { useState, useEffect, useRef, useCallback } = React;
 const html = htm.bind(React.createElement);
 const M = motion;
 
 /* ── the library ─────────────────────────────────────────────────────────
-   Seventeen projects, three grounds each, in the order the source frames
-   come in. Every name was read at full resolution before it was written
-   here, and every second line is what the lockup itself states — a sector
-   inferred from a company name would be invented proof. */
+   Every name was read at full resolution before it was written here, and
+   every second line is what the lockup itself states. A sector inferred
+   from a company name would be invented proof. */
 const GROUNDS = [["w", "Deep water"], ["l", "Warm light"], ["p", "Bare paper"]];
 const PROJECTS = [
-  ["remedios",   "Ilha dos Remédios",             "Crest and seal"],
-  ["demillion",  "Demillion",                     "Landscapes"],
-  ["venner",     "Venner",                        "Advice"],
-  ["lobo",       "Leonardo Lobo",                 "Negócios imobiliários"],
+  ["remedios", "Ilha dos Remédios", "Crest and seal"],
+  ["demillion", "Demillion", "Landscapes"],
+  ["venner", "Venner", "Advice"],
+  ["lobo", "Leonardo Lobo", "Negócios imobiliários"],
   ["boaventura", "Boaventura Noleto Sousa Souto", "Advogados"],
-  ["figueiredo", "Figueiredo & Velloso",          "Advogados associados"],
-  ["dantas",     "Dantas & Martins",              "Advogadas associadas"],
-  ["wright",     "Wright Minussi",                "Advogados"],
-  ["machado",    "Machado Gobbo",                 "Advogados"],
-  ["offrire",    "Offrire",                       "Hospitais"],
-  ["soledad",    "Soledad Molina",                "Monogram and wordmark"],
-  ["archy",      "Archy",                         "Mark and wordmark"],
-  ["noleto",     "Noleto",                        "Mark and wordmark"],
-  ["turvatikas", "Turvatikas",                    "Safety ladder"],
-  ["amazonia",   "Amazônia Store",                "Store"],
-  ["autotrack",  "Autotrack",                     "Mark and wordmark"],
-  ["arvorealta", "Arvorealta",                    "Our own"],
+  ["figueiredo", "Figueiredo & Velloso", "Advogados associados"],
+  ["dantas", "Dantas & Martins", "Advogadas associadas"],
+  ["wright", "Wright Minussi", "Advogados"],
+  ["machado", "Machado Gobbo", "Advogados"],
+  ["offrire", "Offrire", "Hospitais"],
+  ["soledad", "Soledad Molina", "Monogram and wordmark"],
+  ["archy", "Archy", "Mark and wordmark"],
+  ["noleto", "Noleto", "Mark and wordmark"],
+  ["turvatikas", "Turvatikas", "Safety ladder"],
+  ["amazonia", "Amazônia Store", "Store"],
+  ["autotrack", "Autotrack", "Mark and wordmark"],
+  ["arvorealta", "Arvorealta", "Our own"]
 ];
+const src = (slug, g, w) => `/assets/land/${slug}-${g}-1-${w}.webp`;
 const FRAMES = [];
 PROJECTS.forEach(([slug, name, role]) => GROUNDS.forEach(([g, gname]) => FRAMES.push({
   id: `${slug}-${g}`, slug, name, role, gname,
-  thumb: `/assets/land/${slug}-${g}-1-480.webp`,
-  full:  `/assets/land/${slug}-${g}-1-1400.webp`,
-  alt: `${name} — the mark on ${gname.toLowerCase()}`,
+  thumb: src(slug, g, 480), full: src(slug, g, 1400),
+  alt: `${name}, the mark on ${gname.toLowerCase()}`,
 })));
+const FEATURED = PROJECTS[0];
 
-/* Three densities, which is what pinching changes. Photos goes further in
-   both directions; three is the whole useful range for 51 frames on a page
-   this wide, and more steps would be a slider nobody moves twice. */
+const EASE = [0.16, 1, 0.3, 1];
+const SPRING = { type: "spring", stiffness: 260, damping: 32, mass: .9 };
+
+/* Reveal on scroll. Motion's whileInView rather than a scroll listener, and
+   deliberately NOT applied to any picture: an IntersectionObserver reports a
+   CHANGE in intersection, so a jump that crosses a block without painting it
+   can strand it. Gating only headings keeps that failure cosmetic instead of
+   losing the work. */
+function Rise({ children, i = 0, as = "div", class: cls = "" }) {
+  const reduce = useReducedMotion();
+  const C = M[as] || M.div;
+  return html`<${C} class=${cls}
+    initial=${reduce ? false : { opacity: 0, y: 22 }}
+    whileInView=${{ opacity: 1, y: 0 }}
+    viewport=${{ once: true, amount: 0.15 }}
+    transition=${{ duration: .75, delay: Math.min(i, 4) * .08, ease: EASE }}>${children}<//>`;
+}
+
+/* ── hero rest state ─────────────────────────────────────────────────────
+   The one perpetual animation on the page, and it is the introduction: the
+   same mark crossfading through deep water, warm light and bare paper says
+   what this page is about before the subtext is read. Opacity only, so it
+   stays on the compositor. Static under reduced motion. */
+function GroundCycle({ slug }) {
+  const reduce = useReducedMotion();
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    if (reduce) return;
+    const t = setInterval(() => setI(n => (n + 1) % GROUNDS.length), 3600);
+    return () => clearInterval(t);
+  }, [reduce]);
+  return html`
+    <div class="relative aspect-[16/9] w-full overflow-hidden rounded-[3px] bg-[#0d1d18]">
+      ${GROUNDS.map(([g, gname], n) => html`
+        <img key=${g} src=${src(slug, g, 1400)} alt=${n === 0 ? `${FEATURED[1]}, the mark on ${gname.toLowerCase()}` : ""}
+          aria-hidden=${n !== 0} width="1400" height="788"
+          fetchpriority=${n === 0 ? "high" : "low"} decoding="async"
+          class="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1200ms] ease-out"
+          style=${{ opacity: reduce ? (n === 0 ? 1 : 0) : (n === i ? 1 : 0) }} />`)}
+    </div>`;
+}
+
+function Nav() {
+  return html`
+    <header class="sticky top-0 z-40 border-b border-bone/10 bg-ink-2/85 backdrop-blur-md">
+      <div class="mx-auto flex h-[68px] w-full max-w-[100rem] items-center justify-between gap-5 px-5 sm:px-8">
+        <a href="/brand/" class="font-mono text-[12px] uppercase tracking-[.22em] text-bone/70 transition-colors hover:text-bone">Arvorealta</a>
+        <nav class="hidden items-center gap-7 text-[14px] text-bone/70 md:flex">
+          <a href="#featured" class="transition-colors hover:text-bone">Featured</a>
+          <a href="#work" class="transition-colors hover:text-bone">The work</a>
+          <a href="#start" class="transition-colors hover:text-bone">Ways in</a>
+        </nav>
+        <a href="mailto:atlas@arvorealta.com" class="act act-solid !px-5 !py-2 !text-[14px]">Start a project</a>
+      </div>
+    </header>`;
+}
+
+/* ── 01 hero · asymmetric split ─────────────────────────────────────────
+   Not centred: DESIGN_VARIANCE 8 rules the centred hero out. Four text
+   elements at most, and this has exactly four. */
+function Hero() {
+  return html`
+    <section class="mx-auto grid w-full max-w-[100rem] items-center gap-10 px-5 pb-16 pt-14 sm:px-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16 lg:pb-24 lg:pt-20">
+      <div>
+        <${Rise} i=${0}>
+          <p class="font-mono text-[11px] uppercase tracking-[.2em] text-bone/55">Brand and identity</p>
+        <//>
+        <${Rise} i=${1}>
+          <h1 class="mt-6 font-display text-[clamp(2.7rem,1.4rem_+_4.4vw,4.8rem)] font-normal leading-[1.02] tracking-[-.02em]">
+            One mark.<br />Every light it meets.
+          </h1>
+        <//>
+        <${Rise} i=${2}>
+          <p class="mt-7 max-w-[42ch] text-[clamp(1.02rem,.95rem_+_.3vw,1.2rem)] leading-[1.65] text-bone/75">
+            Seventeen identities, each shown on the three grounds it has to survive. Open any one.
+          </p>
+        <//>
+        <${Rise} i=${3}>
+          <div class="mt-9 flex flex-wrap items-center gap-3">
+            <a href="mailto:atlas@arvorealta.com" class="act act-solid">Start a project</a>
+            <a href="#work" class="act act-ghost">See the work</a>
+          </div>
+        <//>
+      </div>
+      <${Rise} i=${2}><${GroundCycle} slug=${FEATURED[0]} /><//>
+    </section>`;
+}
+
+/* ── 02 featured · full-bleed triptych ──────────────────────────────────
+   A different layout family from the hero and from the mosaic: three panels
+   edge to edge, which is the only place on the page that shows one project
+   across all three grounds at once. */
+function Featured({ onOpen }) {
+  const reduce = useReducedMotion();
+  const [slug, name, role] = FEATURED;
+  return html`
+    <section id="featured" class="scroll-mt-[76px] border-y border-bone/10 py-16 sm:py-24">
+      <div class="mx-auto w-full max-w-[100rem] px-5 sm:px-8">
+        <${Rise}>
+          <h2 class="font-display text-[clamp(2rem,1.3rem_+_2.2vw,3.4rem)] leading-[1.05] tracking-[-.018em]">${name}</h2>
+          <p class="mt-4 max-w-[52ch] text-[1.05rem] leading-[1.7] text-bone/70">
+            The most detailed mark in the set. Shown on the three grounds every mark here has to hold.
+          </p>
+        <//>
+      </div>
+      <div class="mt-10 grid grid-cols-1 gap-2 px-2 sm:grid-cols-3">
+        ${GROUNDS.map(([g, gname], n) => {
+          const i = FRAMES.findIndex(f => f.id === `${slug}-${g}`);
+          return html`
+            <${M.button} key=${g} onClick=${() => onOpen(i)}
+              class="tile !aspect-[4/5] sm:!aspect-[3/4]"
+              aria-label=${`Open ${name}, ${gname}`}
+              initial=${reduce ? false : { opacity: 0, scale: .98 }}
+              whileInView=${{ opacity: 1, scale: 1 }}
+              viewport=${{ once: true, amount: .2 }}
+              transition=${{ duration: .9, delay: n * .12, ease: EASE }}>
+              <img src=${src(slug, g, 1400)} alt=${`${name}, the mark on ${gname.toLowerCase()}`}
+                   width="1400" height="788" loading="lazy" decoding="async" />
+            <//>`;
+        })}
+      </div>
+    </section>`;
+}
+
+/* ── 03 the work · mosaic ───────────────────────────────────────────────
+   Three densities, which is what pinching changes. Three is the whole
+   useful range for 51 frames; more steps would be a slider nobody moves
+   twice. */
 const ZOOMS = [
   { label: "S", cols: "repeat(auto-fill,minmax(min(100%,11rem),1fr))", gap: "6px" },
   { label: "M", cols: "repeat(auto-fill,minmax(min(100%,19rem),1fr))", gap: "10px" },
   { label: "L", cols: "repeat(auto-fill,minmax(min(100%,34rem),1fr))", gap: "16px" },
 ];
-const SPRING = { type: "spring", stiffness: 260, damping: 32, mass: .9 };
 
-function Tile({ f, i, hidden, onOpen, reduce }) {
-  if (hidden) return html`<div class="ghost" key=${f.id} />`;
+function Gallery({ zoom, setZoom, open, onOpen }) {
+  const reduce = useReducedMotion();
+  const z = ZOOMS[zoom];
   return html`
-    <button class="tile" key=${f.id} onClick=${() => onOpen(i)}
-            aria-label=${`Open ${f.name}, ${f.gname}`}>
-      <${M.img} layoutId=${f.id} src=${f.thumb} alt=${f.alt}
-        width="480" height="270" loading="lazy" decoding="async"
-        transition=${reduce ? { duration: 0 } : SPRING} />
-    </button>`;
+    <section id="work" class="mx-auto w-full max-w-[100rem] scroll-mt-[76px] px-5 py-16 sm:px-8 sm:py-24">
+      <div class="flex flex-wrap items-end justify-between gap-5">
+        <${Rise}>
+          <h2 class="font-display text-[clamp(2rem,1.3rem_+_2.2vw,3.4rem)] leading-[1.05] tracking-[-.018em]">
+            Seventeen marks.<br />Fifty-one frames.
+          </h2>
+        <//>
+        <${Rise} i=${1}>
+          <div class="flex items-center gap-3">
+            <span class="hidden font-mono text-[11px] uppercase tracking-[.16em] text-bone/40 sm:inline">Pinch to resize</span>
+            <div class="flex items-center gap-1 rounded-full border border-bone/15 p-1" role="group" aria-label="Thumbnail size">
+              ${ZOOMS.map((o, i) => html`
+                <button key=${o.label} onClick=${() => setZoom(i)} aria-pressed=${i === zoom}
+                  class=${"h-7 w-7 rounded-full font-mono text-[11px] transition-colors " +
+                    (i === zoom ? "bg-bone text-ink-2" : "text-bone/60 hover:text-bone")}>${o.label}</button>`)}
+            </div>
+          </div>
+        <//>
+      </div>
+
+      <div class="mt-9" style=${{ display: "grid", gridTemplateColumns: z.cols, gap: z.gap }}>
+        ${FRAMES.map((f, i) => open === i
+          ? html`<div class="ghost" key=${f.id} />`
+          : html`
+            <button class="tile" key=${f.id} onClick=${() => onOpen(i)}
+                    aria-label=${`Open ${f.name}, ${f.gname}`}>
+              <${M.img} layoutId=${f.id} src=${f.thumb} alt=${f.alt}
+                width="480" height="270" loading="lazy" decoding="async"
+                transition=${reduce ? { duration: 0 } : SPRING} />
+            </button>`)}
+      </div>
+    </section>`;
 }
 
+/* ── 04 ways in · asymmetric ladder ─────────────────────────────────────
+   Not three equal cards. The rung this page's reader is actually buying is
+   the identity system, so it takes the wide column and the solid border;
+   the other two are narrower. Prices, names and terms come off index.html
+   unchanged. */
+const TIERS = [
+  { name: "One document", price: "€600", time: "3 to 4 days",
+    line: "One document, done properly. The whole thing, however many pages it runs to.",
+    note: "Credited in full into anything you buy after it." },
+  { name: "The document standard", price: "€2,400", time: "two weeks",
+    line: "Every document that decides a bid, on one system your own people run.",
+    note: "All source files, yours to keep. Your €600 credited." },
+  { name: "Identity system", price: "€8,000", time: "six weeks", lead: true,
+    line: "Colour, type, signage, product marking and the mark itself, written down so suppliers can work from it.",
+    note: "Your €2,400 credited. Credits never expire." },
+];
+
+function Ways() {
+  return html`
+    <section id="start" class="scroll-mt-[76px] border-t border-bone/10 bg-[#0e211b] py-16 sm:py-24">
+      <div class="mx-auto w-full max-w-[100rem] px-5 sm:px-8">
+        <${Rise}>
+          <p class="font-mono text-[11px] uppercase tracking-[.2em] text-bone/55">Ways in</p>
+          <h2 class="mt-6 max-w-[26ch] font-display text-[clamp(2rem,1.3rem_+_2.2vw,3.4rem)] leading-[1.05] tracking-[-.018em]">
+            One document, the standard,<br />or the whole system.
+          </h2>
+        <//>
+        <div class="mt-12 grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.3fr)] lg:items-end">
+          ${TIERS.map((t, i) => html`
+            <${Rise} key=${t.name} i=${i}
+              class=${"flex h-full flex-col rounded-2xl p-7 sm:p-8 " + (t.lead
+                ? "border border-bone bg-bone/[.07] lg:-mb-4 lg:pb-12"
+                : "border border-bone/15 bg-bone/[.03]")}>
+              <p class="font-mono text-[11px] uppercase tracking-[.16em] text-bone/50">${t.time}</p>
+              <h3 class="mt-4 font-display text-[1.7rem] leading-tight">${t.name}</h3>
+              <p class="mt-2 font-display text-[clamp(2.2rem,1.6rem_+_1.6vw,3rem)] leading-none tracking-[-.015em]">${t.price}</p>
+              <p class="mt-5 text-[.97rem] leading-[1.65] text-bone/75">${t.line}</p>
+              <p class="mt-auto pt-6 text-[.85rem] leading-[1.6] text-bone/45">${t.note}</p>
+            <//>`)}
+        </div>
+      </div>
+    </section>`;
+}
+
+function Close() {
+  return html`
+    <section class="mx-auto w-full max-w-[100rem] px-5 py-20 sm:px-8 sm:py-28">
+      <${Rise}>
+        <h2 class="max-w-[18ch] font-display text-[clamp(2.2rem,1.4rem_+_2.6vw,3.8rem)] leading-[1.04] tracking-[-.02em]">
+          Tell me what it<br />has to survive.
+        </h2>
+      <//>
+      <${Rise} i=${1}>
+        <p class="mt-7 max-w-[46ch] text-[1.05rem] leading-[1.7] text-bone/75">
+          Signage, embroidery, an engraved plate and a favicon are four different briefs. The cheapest time to know which one you have is before the first sketch.
+        </p>
+      <//>
+      <${Rise} i=${2}>
+        <div class="mt-10"><a href="mailto:atlas@arvorealta.com" class="act act-solid">Start a project</a></div>
+      <//>
+    </section>`;
+}
+
+function Foot() {
+  return html`
+    <footer class="border-t border-bone/10 py-9">
+      <div class="mx-auto flex w-full max-w-[100rem] flex-wrap items-center justify-between gap-x-8 gap-y-3 px-5 font-mono text-[11px] uppercase tracking-[.18em] text-bone/50 sm:px-8">
+        <span>Arvorealta</span>
+        <nav class="flex flex-wrap items-center gap-x-6 gap-y-2">
+          <a href="/" class="transition-colors hover:text-bone">The offer</a>
+          <a href="/video/" class="transition-colors hover:text-bone">Video</a>
+          <a href="https://www.behance.net/arvorealta" class="transition-colors hover:text-bone">Behance</a>
+        </nav>
+        <a href="mailto:atlas@arvorealta.com" class="transition-colors hover:text-bone">atlas@arvorealta.com</a>
+      </div>
+    </footer>`;
+}
+
+/* ── the viewer ─────────────────────────────────────────────────────────
+   One index, driven by click, keyboard, swipe, the film strip, the URL hash
+   and the device's own Back gesture. That is why this page has React. */
 function App() {
   const reduce = useReducedMotion();
   const [zoom, setZoom] = useState(1);
   const [open, setOpen] = useState(null);
-  const stripRef = useRef(null);
-  const closeRef = useRef(null);
-  const lastFocus = useRef(null);
+  const stripRef = useRef(null), closeRef = useRef(null), lastFocus = useRef(null);
   const isOpen = open !== null;
   const cur = isOpen ? FRAMES[open] : null;
 
@@ -182,21 +411,13 @@ function App() {
     const n = o + d;
     return n < 0 || n >= FRAMES.length ? o : n;
   }), []);
-
-  const openAt = useCallback(i => {
-    lastFocus.current = document.activeElement;
-    setOpen(i);
-  }, []);
-
+  const openAt = useCallback(i => { lastFocus.current = document.activeElement; setOpen(i) }, []);
   const close = useCallback(() => setOpen(null), []);
 
-  /* The address bar is a navigation aid, not decoration: one frame is one
-     URL, so a mark can be sent to somebody, and the device's own Back
-     gesture closes the view instead of leaving the page. */
   useEffect(() => {
     if (isOpen) {
       if (location.hash !== `#${cur.id}`) history.pushState({ f: cur.id }, "", `#${cur.id}`);
-    } else if (location.hash) {
+    } else if (location.hash && FRAMES.some(f => `#${f.id}` === location.hash)) {
       history.replaceState(null, "", location.pathname);
     }
   }, [isOpen, cur]);
@@ -217,9 +438,9 @@ function App() {
 
   useEffect(() => {
     const onKey = e => {
-      if (e.key === "Escape" && isOpen) { e.preventDefault(); close(); }
-      else if (e.key === "ArrowRight" && isOpen) go(1);
-      else if (e.key === "ArrowLeft" && isOpen) go(-1);
+      if (isOpen && e.key === "Escape") { e.preventDefault(); close() }
+      else if (isOpen && e.key === "ArrowRight") go(1);
+      else if (isOpen && e.key === "ArrowLeft") go(-1);
       else if (!isOpen && (e.key === "+" || e.key === "=")) setZoom(z => Math.min(2, z + 1));
       else if (!isOpen && e.key === "-") setZoom(z => Math.max(0, z - 1));
     };
@@ -227,9 +448,8 @@ function App() {
     return () => removeEventListener("keydown", onKey);
   }, [isOpen, go, close]);
 
-  /* Pinch. On a trackpad the browser reports it as a wheel event with
-     ctrlKey set; on iOS Safari there is no such wheel, so two touches are
-     measured directly. Both land on the same three steps. */
+  /* Pinch. A trackpad reports it as a wheel event with ctrlKey set; iOS has
+     no such wheel, so two touches are measured directly. */
   useEffect(() => {
     if (isOpen) return;
     const onWheel = e => {
@@ -239,12 +459,12 @@ function App() {
     };
     let d0 = null;
     const dist = t => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
-    const onStart = e => { if (e.touches.length === 2) d0 = dist(e.touches); };
+    const onStart = e => { if (e.touches.length === 2) d0 = dist(e.touches) };
     const onMove = e => {
       if (e.touches.length !== 2 || d0 === null) return;
-      const d = dist(e.touches), r = d / d0;
-      if (r > 1.35) { setZoom(z => Math.min(2, z + 1)); d0 = d; }
-      else if (r < 0.74) { setZoom(z => Math.max(0, z - 1)); d0 = d; }
+      const r = dist(e.touches) / d0;
+      if (r > 1.35) { setZoom(z => Math.min(2, z + 1)); d0 = dist(e.touches) }
+      else if (r < .74) { setZoom(z => Math.max(0, z - 1)); d0 = dist(e.touches) }
     };
     const onEnd = () => { d0 = null };
     addEventListener("wheel", onWheel, { passive: false });
@@ -259,7 +479,6 @@ function App() {
     };
   }, [isOpen]);
 
-  /* Swipe inside the view. */
   const touch = useRef(null);
   const onTouchStart = e => { touch.current = e.touches[0].clientX };
   const onTouchEnd = e => {
@@ -275,64 +494,42 @@ function App() {
     if (el && el.scrollIntoView) el.scrollIntoView({ inline: "center", block: "nearest", behavior: reduce ? "auto" : "smooth" });
   }, [open, isOpen, reduce]);
 
-  const z = ZOOMS[zoom];
-
   return html`
-    <header class="sticky top-0 z-40 border-b border-bone/10 bg-ink-2/85 backdrop-blur-md">
-      <div class="mx-auto flex w-full max-w-[110rem] items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <a href="/brand/" class="font-mono text-[11px] uppercase tracking-[.2em] text-bone/70 transition-colors hover:text-bone">←  the live page</a>
-        <div class="flex items-center gap-4">
-          <span class="hidden font-mono text-[11px] uppercase tracking-[.2em] text-bone/40 sm:inline">${FRAMES.length} frames · ${PROJECTS.length} marks</span>
-          <div class="flex items-center gap-1 rounded-full border border-bone/15 p-1" role="group" aria-label="Thumbnail size">
-            ${ZOOMS.map((o, i) => html`
-              <button key=${o.label} onClick=${() => setZoom(i)} aria-pressed=${i === zoom}
-                class=${"h-7 w-7 rounded-full font-mono text-[11px] transition-colors " +
-                  (i === zoom ? "bg-bone text-ink-2" : "text-bone/60 hover:text-bone")}>${o.label}</button>`)}
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <main class="mx-auto w-full max-w-[110rem] px-4 pb-24 pt-6 sm:px-6">
-      <h1 class="sr-only">Brand and identity — seventeen marks</h1>
-      <div style=${{ display: "grid", gridTemplateColumns: z.cols, gap: z.gap }}>
-        ${FRAMES.map((f, i) => html`<${Tile} key=${f.id} f=${f} i=${i}
-            hidden=${open === i} onOpen=${openAt} reduce=${reduce} />`)}
-      </div>
-      <p class="mt-10 font-mono text-[11px] uppercase tracking-[.16em] text-bone/35">
-        Pinch, or S · M · L, to change the size. Tap a frame to open it.
-      </p>
+    <${Nav} />
+    <main>
+      <${Hero} />
+      <${Featured} onOpen=${openAt} />
+      <${Gallery} zoom=${zoom} setZoom=${setZoom} open=${open} onOpen=${openAt} />
+      <${Ways} />
+      <${Close} />
     </main>
+    <${Foot} />
 
     <div class=${"shade" + (isOpen ? " on" : "")} onClick=${close} aria-hidden="true"></div>
-
     <div class=${"view" + (isOpen ? " on" : "")} role="dialog" aria-modal=${isOpen}
          aria-label=${cur ? `${cur.name}, ${cur.gname}` : "Frame"}
          onTouchStart=${onTouchStart} onTouchEnd=${onTouchEnd}>
-      <div class="flex items-start justify-between gap-4 px-4 pt-4 sm:px-6">
+      <div class="flex items-start justify-between gap-4 px-5 pt-5 sm:px-7">
         <div>
-          <p class="font-mono text-[11px] uppercase tracking-[.18em] text-bone/50">
-            ${isOpen ? String(open + 1).padStart(2, "0") : "00"} <span class="text-bone/30">/ ${FRAMES.length}</span>
+          <p class="font-mono text-[11px] uppercase tracking-[.18em] text-bone/45">
+            ${isOpen ? open + 1 : 0} of ${FRAMES.length}
           </p>
           <h2 class="mt-2 font-display text-[clamp(1.4rem,1rem_+_1.4vw,2.4rem)] leading-tight">${cur ? cur.name : ""}</h2>
           <p class="mt-1 font-mono text-[11px] uppercase tracking-[.16em] text-bone/55">
-            ${cur ? cur.role : ""} <span class="text-bone/30">· ${cur ? cur.gname : ""}</span>
+            ${cur ? cur.role : ""} <span class="text-bone/30">${cur ? cur.gname : ""}</span>
           </p>
         </div>
         <button ref=${closeRef} onClick=${close} aria-label="Close"
           class="h-11 w-11 shrink-0 rounded-full border border-bone/20 text-bone/80 transition-colors hover:border-bone/60 hover:text-bone">✕</button>
       </div>
-
       <div class="view-stage">
         ${cur ? html`<${M.img} key=${cur.id} layoutId=${cur.id} class="view-img"
             src=${cur.full} alt=${cur.alt} width="1400" height="788"
             transition=${reduce ? { duration: 0 } : SPRING} />` : null}
       </div>
-
       <button class="arrow prev" onClick=${() => go(-1)} disabled=${open === 0} aria-label="Previous">‹</button>
       <button class="arrow next" onClick=${() => go(1)} disabled=${open === FRAMES.length - 1} aria-label="Next">›</button>
-
-      <div class="strip" ref=${stripRef} role="tablist" aria-label="All frames">
+      <div class="strip" ref=${stripRef} aria-label="All frames">
         ${FRAMES.map((f, i) => html`
           <button key=${f.id} onClick=${() => setOpen(i)} aria-current=${i === open}
                   aria-label=${`${f.name}, ${f.gname}`}>
