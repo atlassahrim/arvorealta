@@ -110,14 +110,14 @@ page that will drift, and the one before that was deleted for exactly that.
 **A sandbox is deleted when it falls behind or when it wins, and rebuilt
 from the live page when there is something new to try.**
 
-**`lab/brand/` is the current one: the mosaic.** The live `/brand/` is a
-contact sheet — twelve equal tiles on a light ground, nothing leading — and
-the sandbox argues the opposite, on the iPhone Photos model: a near-black
-library you pinch to change density, a tap that expands one frame into the
-whole screen, and a film strip that keeps the rest reachable. **It is not
-promoted and it crosses the light-only rule**, so promoting it is a decision
-made in front of the figures, not a merge. Section *The two portfolio pages*
-carries the reasoning and the measurements.
+**`lab/brand/` is the current one: a full portfolio page, not a viewer.**
+It opens on a hero that says what the page is, features one project across
+its three grounds, then gives the Photos-style mosaic its own section, then
+closes on the ladder's three rungs. The mosaic alone was the version before
+this, and the owner's objection is the right one: a photo library is not a
+portfolio, because it introduces nothing and demonstrates no craft beyond
+the pictures. **It is not promoted and it crosses the light-only rule**, so
+promoting it is a decision made in front of the figures, not a merge.
 
 Two rules come with a rebuilt sandbox. It carries `noindex, nofollow`, or it
 is a second `index.html` bidding against the first for the same terms. And
@@ -247,93 +247,98 @@ missing H.264. **Check a real browser after deploying.**
 The social cards are `assets/_og/brand.html` and `video.html`, rendered by
 `assets/_og/render.sh`.
 
-### The mosaic — what the sandbox is testing
+### The sandbox — what it is testing now
 
-`lab/brand/` is the standing objection to the grid above: **a catalogue
-shows twelve things, and nothing in it is held.** It answers that with the
-iPhone Photos model rather than with a better grid — a library you pinch,
-a frame you open, and a panel that keeps the other fifty reachable.
+`lab/brand/` was a mosaic and is now a page. The mosaic answered *what else
+is there*; it did not answer *what is this*. **A photo library is not a
+portfolio.** The structure is hero, featured project, mosaic, the three
+rungs, close: five sections, five different layout families.
 
-**The landscape source is what made it possible.** The first sandbox was
-built on the 9:16 portrait frames and had to work around them: a vertical
-frame cannot fill a landscape screen, cover-cropping one to 16:9 throws away
-two thirds of the composition, and a 2.39:1 band loses the wordmark, which
-sits below the mark in most of them. The owner then supplied **54 landscape
-frames at 1920 × 1080** — the same marks, the same three grounds, 16:9 — and
-every one of those constraints disappeared. A tile, a mosaic cell and a
-full-bleed view are now the same shape and nothing is cropped.
+**Built under `taste-skill`, with this file winning every conflict.** The
+skill's dials were read as `DESIGN_VARIANCE 8 · MOTION_INTENSITY 7 ·
+VISUAL_DENSITY 3`, the portfolio preset nudged on motion. Where it and this
+file disagree:
 
-**Seventeen projects, not twelve.** The landscape set carries five the
-portrait set did not: Figueiredo & Velloso, Noleto, Wright Minussi, Leonardo
-Lobo and Offrire. Every name was read at full resolution before it shipped,
-which is the rule the crest earned the hard way. `assets/land/` holds 51
-frames — the three `base` frames carry no mark and are dropped — cut by
-`_tools/portfolio/landscape.py` at 1400 and 480 wide.
+- It calls serif **very discouraged as a default**. EB Garamond is this
+  site's display face by decision and sits in the skill's own allowed pool,
+  so it stays. The skill's actual bans, Fraunces and Instrument Serif, are
+  not in play
+- It makes **dual light and dark mandatory**. This file says light only. The
+  sandbox is dark and locked dark, one theme for every section, which is the
+  skill's other rule and the one that matters here
+- It says **never hand-roll an icon** and **always use a library**. This site
+  vendors everything and has no build step, so the page carries no icons at
+  all: the three controls that would need one use type instead
 
-**webp only here, and that is a departure.** The repo's photography carries
-a jpg beside every webp; at 51 frames that is a third file each to support
-browsers older than Safari 14 (2020), and it would roughly double the
-directory. The whole set is 2.0 MB as it stands.
+**What the skill caught that would otherwise have shipped.** The featured
+section opened as a big left headline with a small explainer floating in the
+right column, which it names as a banned split-header; it is stacked now.
+The eyebrow count is mechanical, two against a ceiling of two for five
+sections. One label per CTA intent: `Start a project` everywhere, with
+`See the work` used once for the other intent. Zero em-dashes, which the
+page is grepped for.
 
-**This page uses React, and it is the first page besides the offer page to
-earn it.** The state is real — which frame is open, at what density, with
-keyboard, swipe, hash and history all pointed at the same index — and the
-two portfolio pages' thirty lines of vanilla JS would have become three
-hundred of hand-rolled store. It imports the same vendored
-`/assets/vendor/runtime.js`, so there is still no build step and no
-third-party request.
+**One accent, and it is bone.** The brick mark measures 2.03:1 on ink and is
+barred there, so the photography carries every colour on the page. Shape
+lock is documented rather than uniform: actions are full pill, surfaces are
+16px, media is 3px.
 
-**`layoutId` works in the vendored Motion build, and that was measured
-rather than assumed.** The bundle mentions `layoutId` and `MeasureLayout`
-but exports no `AnimatePresence` and no `projectionNodeConstructor`, which
-is exactly the shape of a build that carries the prop names and not the
-engine. A probe toggling one box between two sizes reported widths of
-100 → 177 → 302 → 357 → 379 → 394 → 399 across seven frames: it
-interpolates, so the shared-element expand from tile to full screen is free.
-**`AnimatePresence` is genuinely absent**, so nothing here depends on an
-exit animation; the open tile renders a `.ghost` placeholder instead, which
-leaves exactly one element holding each `layoutId` and lets Motion hand the
-position over.
+**The ladder is the offer page's, unchanged.** Names, prices and terms come
+off `index.html`. One difference: the offer page leads on the document
+standard and this page leads on the **identity system**, because that is the
+rung a reader of a brand portfolio is actually buying. The credit lines are
+intact and no figure moved. Changing which rung leads is a presentation
+decision; changing a price would not be.
 
-**Three CSS traps were measured here. All three are general and all three
-look like judgement calls when they land.**
+**The hero's rest state is the introduction.** One mark crossfading through
+deep water, warm light and bare paper states the page's premise before the
+standfirst is read. It is the only perpetual animation on the page, it is
+opacity only, and it is static under reduced motion. Every other movement is
+a reveal, a hover or the shared-element expand.
 
-**htm does not HTML-parse text content.** `&larr;`, `&middot;` and
-`&#10005;` rendered as those literal strings, in tracked capitals, in the
-header and on every button. Write the character, not the entity.
+**Reveals gate headings and never pictures.** An IntersectionObserver reports
+a *change* in intersection, so a jump that crosses a block without painting
+it can strand it at zero. Gating only headings makes that failure cosmetic
+instead of losing the work, which is what the first sandbox got wrong.
 
-**A Tailwind arbitrary value cannot contain spaces, and CSS math requires
-them.** `text-[clamp(1.4rem, 1rem + 1.4vw, 2.4rem)]` is not a class at all,
-so the headline fell back to the inherited 16px — the same symptom as the
-unspaced `clamp()` the first sandbox hit, from the opposite cause. The
-escape is an underscore: `text-[clamp(1.4rem,1rem_+_1.4vw,2.4rem)]`.
+**`layoutId` works in the vendored Motion build, measured rather than
+assumed.** The bundle names `layoutId` and `MeasureLayout` but exports no
+`AnimatePresence` and no projection node constructor, which is the shape of
+a build carrying the prop names and not the engine. A probe toggling one box
+between two sizes reported 100, 177, 302, 357, 379, 394, 399 across seven
+frames, so it interpolates. `AnimatePresence` really is absent: the open
+tile renders a placeholder so exactly one element holds each `layoutId`.
+
+**Three CSS traps measured here, all general.**
+
+`clamp(1.9rem,1.1rem+2.4vw,3.6rem)` is invalid, because **CSS math needs
+whitespace on both sides of `+` and `-`**. And **a Tailwind arbitrary value
+cannot contain spaces**, so `text-[clamp(1.4rem, 1rem + 1.4vw, 2.4rem)]` is
+not a class at all. Both produce the same symptom from opposite causes, and
+the escape is an underscore: `text-[clamp(1.4rem,1rem_+_1.4vw,2.4rem)]`.
 
 **A percentage `max-height` resolves to `none` against an indefinite
 containing block, and an `fr` row counts as indefinite.** The open picture
-kept its intrinsic 762 px and ran 66 px into the film strip. Measured on the
+kept its intrinsic 762px and ran 66px into the film strip. Measured on the
 same element: `max-height:500px` bound and `max-height:100%` did not.
-`minmax(0,1fr)` on the row — the trap the award bar already records — was
-necessary and not sufficient. The fix is `position:absolute` with `inset:0`
-and `margin:auto` inside a `position:relative` stage, which gives a definite
-containing block. **It also has to be the picture's own box rather than a
-full-size box with `object-fit:contain`**, or the tile expands into the
-wrong shape on a tall screen. Verified at 1440 × 900, 1280 × 720,
-1024 × 1366 and 390 × 844: true 16:9, equal air above and below, never
-touching the strip.
+`minmax(0,1fr)` on the row was necessary and not sufficient; the fix is
+`position:absolute` with `inset:0` and `margin:auto` inside a
+`position:relative` stage. **It has to be the picture's own box** rather than
+a full-size box with `object-fit:contain`, or the tile expands into the wrong
+shape on a tall screen.
 
-**The navigation aids are the point, not decoration.** Three densities on a
-segmented control, pinch (a `ctrlKey` wheel on a trackpad, two-touch
-distance on iOS, which has no such wheel), `+`/`-`, arrow keys, swipe,
-Escape, a film strip that scrolls the current frame to its own centre, a
-counter, and **one frame to one URL** — `#venner-paper` is sendable, and the
-device's own Back gesture closes the view instead of leaving the page.
+**The source is the landscape set.** 54 frames at 1920 × 1080, seventeen
+projects on three grounds, plus three `base` frames with no mark that are
+dropped. `assets/land/` holds the 51 that remain, webp only, 2.0 MB, cut by
+`_tools/portfolio/landscape.py`. Five projects here are not in the portrait
+set: Figueiredo & Velloso, Noleto, Wright Minussi, Leonardo Lobo and Offrire.
+Every name was read at full resolution first.
 
 **Promoting it crosses the light-only rule** above, which is written against
-*dark mode* — a second identity toggled by preference — rather than against
-a dark page. The offer page already reverses out to full-bleed ink twice. A
-portfolio on near-black is the statement fold extended rather than a second
-identity, and that is the argument; it is still the owner's call, and the
-rule gets rewritten in the same commit if the answer is yes.
+*dark mode* as a second identity toggled by preference rather than against a
+dark page. The offer page already reverses out to full-bleed ink twice. It is
+still the owner's call, and the rule gets rewritten in the same commit if the
+answer is yes.
 
 ## The pricing ladder
 
@@ -387,7 +392,7 @@ document agreed before the work starts, not listed on the page.
 ```
 index.html              offer page
 brand/index.html        brand portfolio
-lab/brand/index.html    the sandbox — a cinematic cut of it, noindex
+lab/brand/index.html    the sandbox — a full portfolio page, noindex
 branding/index.html     a noindex stub redirecting to /brand/
 video/index.html        video portfolio
 reference/index.html    the first offer page, kept for reference — noindex
@@ -1578,6 +1583,21 @@ which is the only reliable cache bypass on iOS.
 all: `canPlayType('video/mp4; codecs="avc1.42E01E"')` returns empty and the
 hero falls back to the photograph every time. That proved the failure path and
 proves nothing about the video. **Check a real browser after deploying.**
+
+**A void element inside `html\`...\`` must be self-closed.** A bare `<br>`
+makes htm treat everything after it as that element's children, and React is
+handed the props object as a child: *Minified React error #31, object with
+keys {class}*. The whole page renders nothing. It is invisible in review
+because `<br>` is correct HTML everywhere else on the site, including the
+`<noscript>` block three lines above. Bisected to it by rendering each
+section alone: every component containing a bare `<br>` threw, every
+component without one mounted. The offer page already writes `<br />` and
+that is why. The same applies to `<img>`, `<hr>` and `<input>`.
+
+**A prop name has to match what the component destructures, and htm will not
+warn you.** `Rise` took `class` at every call site and destructured
+`className`, so every tier card in the sandbox shipped with no border, no
+ground and no padding, and it read as a layout opinion rather than a bug.
 
 **No backticks in a comment inside a markup template.** An HTML comment
 written inside `html\`...\`` is still inside a JavaScript template literal, so
