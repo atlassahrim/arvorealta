@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Brand — the cinematic cut (sandbox)</title>
+<meta name="description" content="Sandbox. A dark-room cut of the brand portfolio: one mark per screen.">
+<!-- A sandbox is a near-copy of a live page. Without this it is a second
+     /brand/ bidding against the first for the same terms. -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#11261F">
+
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/geist-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/geist-mono-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ebgaramond-latin.woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts/geist.css">
+<link rel="stylesheet" href="/assets/fonts/ebgaramond.css">
+
+<link rel="stylesheet" href="/lab/tw-4728f921.css">
+
+<style>
+/* ─────────────────────────────────────────────── the room
+
+   The live /brand/ is a contact sheet: twelve equal tiles on a light ground,
+   every one the same size, nothing leading. This is the opposite argument —
+   a dark room, one lit frame at a time, and the scroll is the cut.
+
+   The source frames are 9:16. That is the whole design problem: a vertical
+   frame CANNOT fill a landscape screen. Cover-cropping one to 16:9 throws
+   away two thirds of the composition and upscales what is left, so the frame
+   is shown whole, at its own proportions, and the screen is filled by pairing
+   it with display type rather than by stretching the picture. A tall lit
+   rectangle beside a name, on near-black, reads as projection. */
+html{scroll-snap-type:y mandatory;background:var(--color-ink-2)}
+@media (prefers-reduced-motion:reduce){html{scroll-snap-type:none}}
+
+.reel{height:100svh;scroll-snap-align:center;display:grid;place-items:center;padding:0 1.25rem}
+.reel-in{display:grid;gap:1.5rem;justify-items:center;width:100%;max-width:76rem}
+
+/* The frame's height is capped by the viewport AND by the width available,
+   so a 9:16 plate can never push the caption off a short screen or overflow
+   a narrow one. 1.7778 is 16/9 — the height a given width implies. */
+.plate{display:block;width:auto;aspect-ratio:9/16;
+  height:min(74svh, calc((100vw - 2.5rem) * 1.7778));
+  border-radius:2px}
+.fig{margin:0;line-height:0;order:-1}
+
+.idx{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:color-mix(in srgb, var(--color-bone) 55%, transparent);margin:0}
+.idx span{color:color-mix(in srgb, var(--color-bone) 32%, transparent)}
+.name{font-family:var(--font-display);font-weight:400;letter-spacing:-.02em;line-height:1.02;
+  font-size:clamp(1.9rem, 1.1rem + 2.4vw, 3.6rem);margin:.6rem 0 0;color:var(--color-bone);text-wrap:balance}
+.role{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:color-mix(in srgb, var(--color-bone) 60%, transparent);margin:.9rem 0 0}
+.cap{text-align:center;max-width:min(100%,30rem)}
+
+/* From lg the frame moves off-centre and the name takes the space beside it.
+   Centred, a 9:16 plate leaves two empty halves; paired, the two objects
+   read as one composition and the screen is full. */
+@media (min-width:64rem){
+  .reel-in{grid-template-columns:auto auto;justify-content:center;align-items:center;
+    gap:clamp(2.5rem,5vw,5.5rem);justify-items:start}
+  .fig{order:0}
+  .cap{text-align:left;max-width:30rem}
+  .plate{height:min(82svh, calc((46vw - 4rem) * 1.7778))}
+}
+
+/* Arrival. Transform and opacity only, so it stays on the compositor. */
+.rv{opacity:0;transform:translateY(12px) scale(.985);
+  transition:opacity .9s cubic-bezier(.22,1,.36,1),transform 1.1s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+.no-js .rv,.rv-off .rv{opacity:1;transform:none;transition:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* The one piece of chrome. A hairline that fills as the page runs, so the
+   reader knows how long the sequence is without a counter in the corner. */
+#prog{position:fixed;inset:0 auto auto 0;height:2px;width:100%;transform:scaleX(0);transform-origin:left;
+  background:var(--color-bone);opacity:.5;z-index:50;will-change:transform}
+
+.bar{position:fixed;inset:0 0 auto 0;z-index:40;display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;padding:1.1rem 1.25rem;font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:color-mix(in srgb, var(--color-bone) 70%, transparent);
+  background:linear-gradient(to bottom, color-mix(in srgb, var(--color-ink-2) 92%, transparent), transparent)}
+.bar a{color:inherit;text-decoration:none}
+.bar a:hover{color:var(--color-bone)}
+.lbl{display:none}
+@media (min-width:40rem){.bar{padding:1.4rem 2rem}.lbl{display:inline}}
+
+.hint{position:absolute;bottom:clamp(1.5rem,5svh,3rem);left:50%;transform:translateX(-50%);
+  font-family:var(--font-mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:color-mix(in srgb, var(--color-bone) 45%, transparent)}
+</style>
+<script>
+(function(h){h.className=h.className.replace(/\bno-js\b/,"").trim()+" js";
+setTimeout(function(){if(!h.classList.contains("rv-ready"))h.classList.add("rv-off")},4000)})(document.documentElement);
+</script>
+</head>
+
+<body class="bg-ink-2 font-sans text-bone antialiased">
+
+<div id="prog" aria-hidden="true"></div>
+
+<header class="bar">
+  <a href="/brand/">&larr;&nbsp; the live page</a>
+  <span class="lbl">Sandbox &middot; cinematic cut</span>
+</header>
+
+<main>
+
+  <section class="reel">
+    <div class="reel-in" style="grid-template-columns:1fr;justify-items:center">
+      <div class="cap rv" style="text-align:center;max-width:min(100%,54rem)">
+        <p class="idx">Brand and identity</p>
+        <h1 class="name" style="font-size:clamp(2.6rem, 1rem + 5vw, 5.6rem);margin-top:1.2rem">Drawn once.<br>Stamped everywhere.</h1>
+        <p class="role" style="letter-spacing:.14em;margin-top:2rem">Twelve marks &middot; three grounds</p>
+      </div>
+    </div>
+    <p class="hint">Scroll</p>
+  </section>
+
+  <section class="reel" aria-labelledby="n1">
+    <div class="reel-in">
+      <div class="cap rv">
+        <p class="idx">01 <span>/ 12</span></p>
+        <h2 id="n1" class="name">Ilha dos Remédios</h2>
+        <p class="role">Crest and seal</p>
+      </div>
+      <figure class="fig rv">
+        <picture>
+            <source type="image/webp" srcset="/assets/marks/remedios-f1-620.webp 620w, /assets/marks/remedios-f1-1215.webp 1215w" sizes="(min-width:64rem) 44vh, 92vw">
+            <img src="/assets/marks/remedios-f1-1215.jpg" width="1215" height="2160" loading="lazy" decoding="async"
+                 alt="The Ilha dos Remédios crest in gold and deep green, two birds flanking a carved cartouche, over dark water." class="plate">
+          </picture>
+      </figure>
+    </div>
+  </section>
+
+  <section class="reel" aria-labelledby="n2">
+    <div class="reel-in">
+      <div class="cap rv">
+        <p class="idx">02 <span>/ 12</span></p>
+        <h2 id="n2" class="name">Demillion</h2>
+        <p class="role">Landscapes</p>
+      </div>
+      <figure class="fig rv">
+        <picture>
+            <source type="image/webp" srcset="/assets/marks/demillion-f1-620.webp 620w, /assets/marks/demillion-f1-1215.webp 1215w" sizes="(min-width:64rem) 44vh, 92vw">
+            <img src="/assets/marks/demillion-f1-1215.jpg" width="1215" height="2160" loading="lazy" decoding="async"
+                 alt="The Demillion Landscapes mark, a gold leaf folded into a seed form, over warm backlit grasses." class="plate">
+          </picture>
+      </figure>
+    </div>
+  </section>
+
+  <section class="reel" aria-labelledby="n3">
+    <div class="reel-in">
+      <div class="cap rv">
+        <p class="idx">03 <span>/ 12</span></p>
+        <h2 id="n3" class="name">Soledad Molina</h2>
+        <p class="role">Monogram and wordmark</p>
+      </div>
+      <figure class="fig rv">
+        <picture>
+            <source type="image/webp" srcset="/assets/marks/soledad-f1-620.webp 620w, /assets/marks/soledad-f1-1215.webp 1215w" sizes="(min-width:64rem) 44vh, 92vw">
+            <img src="/assets/marks/soledad-f1-1215.jpg" width="1215" height="2160" loading="lazy" decoding="async"
+                 alt="The Soledad Molina monogram, an S cut into a tall gold panel, on pale paper under blurred leaf shadows." class="plate">
+          </picture>
+      </figure>
+    </div>
+  </section>
+
+  <section class="reel" aria-labelledby="n4">
+    <div class="reel-in">
+      <div class="cap rv">
+        <p class="idx">04 <span>/ 12</span></p>
+        <h2 id="n4" class="name">Venner</h2>
+        <p class="role">Advice</p>
+      </div>
+      <figure class="fig rv">
+        <picture>
+            <source type="image/webp" srcset="/assets/marks/venner-f1-620.webp 620w, /assets/marks/venner-f1-1215.webp 1215w" sizes="(min-width:64rem) 44vh, 92vw">
+            <img src="/assets/marks/venner-f1-1215.jpg" width="1215" height="2160" loading="lazy" decoding="async"
+                 alt="The Venner Advice mark, a fluted gold crescent, over dark water." class="plate">
+          </picture>
+      </figure>
+    </div>
+  </section>
+
+  <section class="reel" aria-labelledby="n5">
+    <div class="reel-in">
+      <div class="cap rv">
+        <p class="idx">05 <span>/ 12</span></p>
+        <h2 id="n5" class="name">Archy</h2>
+        <p class="role">Mark and wordmark</p>
+      </div>
+      <figure class="fig rv">
+        <picture>
+            <source type="image/webp" srcset="/assets/marks/archy-f1-620.webp 620w, /assets/marks/archy-f1-1215.webp 1215w" sizes="(min-width:64rem) 44vh, 92vw">
+            <img src="/assets/marks/archy-f1-1215.jpg" width="1215" height="2160" loading="lazy" decoding="async"
+                 alt="The Archy mark, a ruled gold wing resolving into a leaf, over warm backlit grasses." class="plate">
+          </picture>
+      </figure>
+    </div>
+  </section>
+
+  <section class="reel" aria-labelledby="n6">
+    <div class="reel-in">
+      <div class="cap rv">
+        <p class="idx">06 <span>/ 12</span></p>
+        <h2 id="n6" class="name">Boaventura Noleto<br>Sousa Souto</h2>
+        <p class="role">Advogados</p>
+      </div>
+      <figure class="fig rv">
+        <picture>
+            <source type="image/webp" srcset="/assets/marks/boaventura-f1-620.webp 620w, /assets/marks/boaventura-f1-1215.webp 1215w" sizes="(min-width:64rem) 44vh, 92vw">
+            <img src="/assets/marks/boaventura-f1-1215.jpg" width="1215" height="2160" loading="lazy" decoding="async"
+                 alt="The Boaventura Noleto Sousa Souto mark, a fluted gold vessel, on pale paper under blurred leaf shadows." class="plate">
+          </picture>
+      </figure>
+    </div>
+  </section>
+
+  <section class="reel" aria-labelledby="n7">
+    <div class="reel-in">
+      <div class="cap rv">
+        <p class="idx">07 <span>/ 12</span></p>
+        <h2 id="n7" class="name">Dantas &amp; Martins</h2>
+        <p class="role">Advogadas associadas</p>
+      </div>
+      <figure class="fig rv">
+        <picture>
+            <source type="image/webp" srcset="/assets/marks/dantas-f1-620.webp 620w, /assets/marks/dantas-f1-1215.webp 1215w" sizes="(min-width:64rem) 44vh, 92vw">
+            <img src="/assets/marks/dantas-f1-1215.jpg" width="1215" height="2160" loading="lazy" decoding="async"
+                 alt="The Dantas and Martins mark, a gold wing of ruled feathers, over dark water." class="plate">
+          </picture>
+      </figure>
+    </div>
+  </section>
+
+  <section class="reel" aria-labelledby="n8">
+    <div class="reel-in">
+      <div class="cap rv">
+        <p class="idx">08 <span>/ 12</span></p>
+        <h2 id="n8" class="name">Amazônia Store</h2>
+        <p class="role">Retail mark</p>
+      </div>
+      <figure class="fig rv">
+        <picture>
+            <source type="image/webp" srcset="/assets/marks/amazonia-f1-620.webp 620w, /assets/marks/amazonia-f1-1215.webp 1215w" sizes="(min-width:64rem) 44vh, 92vw">
+            <img src="/assets/marks/amazonia-f1-1215.jpg" width="1215" height="2160" loading="lazy" decoding="async"
+                 alt="The Amazônia Store mark, a gold Y drawn as a canopy, over warm backlit grasses." class="plate">
+          </picture>
+      </figure>
+    </div>
+  </section>
+
+  <section class="reel" aria-labelledby="n9">
+    <div class="reel-in">
+      <div class="cap rv">
+        <p class="idx">09 <span>/ 12</span></p>
+        <h2 id="n9" class="name">Turvatikas</h2>
+        <p class="role">Safety ladder</p>
+      </div>
+      <figure class="fig rv">
+        <picture>
+            <source type="image/webp" srcset="/assets/marks/turvatikas-f1-620.webp 620w, /assets/marks/turvatikas-f1-1215.webp 1215w" sizes="(min-width:64rem) 44vh, 92vw">
+            <img src="/assets/marks/turvatikas-f1-1215.jpg" width="1215" height="2160" loading="lazy" decoding="async"
+                 alt="The Turvatikas Safety Ladder mark on a terracotta card, three gold rungs beside the name, on pale paper." class="plate">
+          </picture>
+      </figure>
+    </div>
+  </section>
+
+  <section class="reel" aria-labelledby="n10">
+    <div class="reel-in">
+      <div class="cap rv">
+        <p class="idx">10 <span>/ 12</span></p>
+        <h2 id="n10" class="name">Autotrack</h2>
+        <p class="role">Mark and wordmark</p>
+      </div>
+      <figure class="fig rv">
+        <picture>
+            <source type="image/webp" srcset="/assets/marks/autotrack-f1-620.webp 620w, /assets/marks/autotrack-f1-1215.webp 1215w" sizes="(min-width:64rem) 44vh, 92vw">
+            <img src="/assets/marks/autotrack-f1-1215.jpg" width="1215" height="2160" loading="lazy" decoding="async"
+                 alt="The Autotrack mark, a gold chevron drawn in one stroke, over dark water." class="plate">
+          </picture>
+      </figure>
+    </div>
+  </section>
+
+  <section class="reel" aria-labelledby="n11">
+    <div class="reel-in">
+      <div class="cap rv">
+        <p class="idx">11 <span>/ 12</span></p>
+        <h2 id="n11" class="name">Arvorealta</h2>
+        <p class="role">Our own</p>
+      </div>
+      <figure class="fig rv">
+        <picture>
+            <source type="image/webp" srcset="/assets/marks/arvorealta-f1-620.webp 620w, /assets/marks/arvorealta-f1-1215.webp 1215w" sizes="(min-width:64rem) 44vh, 92vw">
+            <img src="/assets/marks/arvorealta-f1-1215.jpg" width="1215" height="2160" loading="lazy" decoding="async"
+                 alt="The Arvorealta mark, a fluted gold fan, over warm backlit grasses." class="plate">
+          </picture>
+      </figure>
+    </div>
+  </section>
+
+  <section class="reel" aria-labelledby="n12">
+    <div class="reel-in">
+      <div class="cap rv">
+        <p class="idx">12 <span>/ 12</span></p>
+        <h2 id="n12" class="name">Machado Gobbo</h2>
+        <p class="role">Advogados</p>
+      </div>
+      <figure class="fig rv">
+        <picture>
+            <source type="image/webp" srcset="/assets/marks/machado-f1-620.webp 620w, /assets/marks/machado-f1-1215.webp 1215w" sizes="(min-width:64rem) 44vh, 92vw">
+            <img src="/assets/marks/machado-f1-1215.jpg" width="1215" height="2160" loading="lazy" decoding="async"
+                 alt="The Machado Gobbo wordmark reversed out of a deep blue plate, on pale paper under blurred leaf shadows." class="plate">
+          </picture>
+      </figure>
+    </div>
+  </section>
+
+  <section class="reel">
+    <div class="reel-in" style="grid-template-columns:1fr;justify-items:center">
+      <div class="cap rv" style="text-align:center;max-width:min(100%,34rem)">
+        <p class="idx">Start a project</p>
+        <h2 class="name" style="margin-top:1.2rem">Tell me what it<br>has to survive.</h2>
+        <p class="role" style="letter-spacing:.14em">
+          <a href="mailto:atlas@arvorealta.com" style="color:var(--color-bone)">atlas@arvorealta.com</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+/* The reveal is a sweep, not an IntersectionObserver, for the reason
+   CLAUDE.md records: an observer reports a CHANGE in intersection, so a jump
+   that crosses a block without painting it fires nothing and strands it at
+   opacity 0. Snap scrolling makes exactly those jumps. */
+(function () {
+  document.documentElement.classList.add("rv-ready");
+  var left = [].slice.call(document.querySelectorAll(".rv")), tick = 0;
+  var prog = document.getElementById("prog");
+
+  function sweep() {
+    tick = 0;
+    var vh = innerHeight, shown = 0, rest = [];
+    for (var i = 0; i < left.length; i++) {
+      var el = left[i];
+      if (el.getBoundingClientRect().top < vh * 0.88) {
+        el.style.transitionDelay = Math.min(shown++, 3) * 110 + "ms";
+        el.classList.add("in");
+      } else rest.push(el);
+    }
+    left = rest;
+  }
+  function frame() {
+    tick = 0;
+    sweep();
+    var max = document.documentElement.scrollHeight - innerHeight;
+    prog.style.transform = "scaleX(" + (max > 0 ? scrollY / max : 0) + ")";
+  }
+  function onScroll() { if (!tick) tick = requestAnimationFrame(frame) }
+  addEventListener("scroll", onScroll, { passive: true });
+  addEventListener("resize", frame);
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

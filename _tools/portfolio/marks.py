@@ -64,9 +64,33 @@ def write(im: Image.Image, slug: str):
     print(f"  {slug:14s} <- {src_of[slug]}.jpg")
 
 
+# The cinematic cut shows the frame WHOLE, not cropped. A 9:16 frame cannot
+# fill a landscape screen: at 1440 x 900 a full-height one is 506 px wide, so
+# cover-cropping it to the viewport would throw away two thirds of the
+# composition and upscale what is left. It is shown at its own proportions on
+# a dark ground instead — a lit frame in a dark room — and 1215 px native is
+# therefore the widest size worth writing. At 1440 x 900 that is 506 CSS px,
+# 1012 at 2x, still inside the source.
+FULL_WIDTHS = (1215, 620)
+
+
+def write_full(src: Path, slug: str):
+    OUT.mkdir(parents=True, exist_ok=True)
+    for i, w in enumerate(FULL_WIDTHS):
+        subprocess.run(["convert", str(src), "-resize", f"{w}x", "-strip",
+                        "-quality", "82", str(OUT / f"{slug}-f{VER}-{w}.webp")], check=True)
+        if i == 0:
+            subprocess.run(["convert", str(src), "-resize", f"{w}x", "-strip",
+                            "-quality", "84", str(OUT / f"{slug}-f{VER}-{w}.jpg")], check=True)
+    print(f"  {slug:14s} full frame")
+
+
 if __name__ == "__main__":
     src_dir = Path(sys.argv[1])
     src_of = {s: n for s, n in GRID + GROUNDS}
     for slug, n in GRID + GROUNDS:
         write(cut(src_dir / f"{n}.jpg"), slug)
-    print(f"\n{len(GRID) + len(GROUNDS)} tiles -> {OUT}")
+    print()
+    for slug, n in GRID:
+        write_full(src_dir / f"{n}.jpg", slug)
+    print(f"\n{len(GRID) + len(GROUNDS)} tiles and {len(GRID)} full frames -> {OUT}")
