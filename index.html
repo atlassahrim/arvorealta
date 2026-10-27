@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="/assets/fonts/ebgaramond.css">
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ebgaramond-latin.woff2" crossorigin>
 
-<link rel="stylesheet" href="/assets/tw-b333abd7.css">
+<link rel="stylesheet" href="/assets/tw-b5aaa5cc.css">
 
 </head>
 
@@ -72,6 +72,7 @@ const STR = {
     label: "English", short: "EN", htmlLang: "en",
     skip: "Skip to the offer",
     nav: { open: "Open now", case: "How it is scored", price: "Pricing" },
+    foot: { branding: "Branding and design", video: "Video" },
     cta: "Get your page scored",
     hero: {
       eyebrow: "Industrial manufacturer bids",
@@ -176,6 +177,7 @@ const STR = {
     label: "Norsk", short: "NO", htmlLang: "nb",
     skip: "Hopp til tilbudet",
     nav: { open: "Åpen nå", case: "Slik vektes det", price: "Priser" },
+    foot: { branding: "Merkevare og design", video: "Video" },
     cta: "Få siden din vurdert",
     hero: {
       eyebrow: "Tilbud fra industriprodusenter",
@@ -280,6 +282,7 @@ const STR = {
     label: "Suomi", short: "FI", htmlLang: "fi",
     skip: "Siirry tarjoukseen",
     nav: { open: "Avoinna nyt", case: "Näin se pisteytetään", price: "Hinnoittelu" },
+    foot: { branding: "Brändi ja muotoilu", video: "Video" },
     cta: "Pyydä sivusi pisteytys",
     hero: {
       eyebrow: "Teollisuusvalmistajan tarjoukset",
@@ -827,23 +830,29 @@ function Hero({ t }) {
      Once only, passive, and removed as soon as it has run or the video is
      already going, so this never becomes a listener that fires for the life
      of the page. */
+  /* The retry runs until the video is actually playing, not once.
+     `once: true` was the first version and it has one hole: a gesture that
+     lands before the element exists, or while the restriction is still in
+     force — Low Power Mode is not lifted by a tap — spends the only attempt
+     there was, and nothing asks again. Reported as a phone that plays and a
+     tablet that does not, which is not a viewport difference: **no media
+     query can grant autoplay permission**, because the policy is the
+     device's and not the layout's. What differs between two iOS devices is
+     Low Power Mode and Safari's own per-site Auto-Play setting, and the only
+     thing the page can do about either is keep asking.
+     `ready` is the exit. The effect tears the listeners down the moment
+     playback has actually started, so nothing lives for the life of the
+     page, which was the whole point of `once` in the first place. */
   useEffect(() => {
-    if (reduce || failed) return;
+    if (reduce || failed || ready) return;
     const kick = () => {
       const v = vid.current;
       if (v && v.paused) { const go = v.play(); if (go && go.catch) go.catch(() => {}) }
-      off();
     };
-    const off = () => {
-      document.removeEventListener("pointerdown", kick);
-      document.removeEventListener("touchstart", kick);
-      document.removeEventListener("keydown", kick);
-    };
-    document.addEventListener("pointerdown", kick, { passive: true, once: true });
-    document.addEventListener("touchstart", kick, { passive: true, once: true });
-    document.addEventListener("keydown", kick, { once: true });
-    return off;
-  }, [reduce, failed]);
+    const evs = ["pointerdown", "touchstart", "touchend", "click", "keydown", "visibilitychange"];
+    evs.forEach(e => document.addEventListener(e, kick, { passive: true }));
+    return () => evs.forEach(e => document.removeEventListener(e, kick));
+  }, [reduce, failed, ready]);
 
   return html`
     <section id="top" class="on-ink relative isolate overflow-clip bg-ink text-bone">
@@ -865,7 +874,7 @@ function Hero({ t }) {
           src="/assets/video/hero-1-720.mp4"
           poster="/assets/img/after-1-1141.jpg"
           width="1280" height="720"
-          autoPlay muted loop playsInline preload="auto"
+          autoPlay muted loop playsInline preload="metadata"
           aria-hidden="true" tabIndex="-1"
           ref=${el => {
             /* React writes `muted` as a property and skips it often enough on
@@ -1297,8 +1306,12 @@ function Close({ t }) {
       <//>
     </section>
     <footer class="border-t border-ink/10 py-10">
-      <div class="${WRAP} flex flex-wrap items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-[.18em] text-ink/75">
+      <div class="${WRAP} flex flex-wrap items-center justify-between gap-x-8 gap-y-4 font-mono text-[11px] uppercase tracking-[.18em] text-ink/75">
         <span>Arvorealta</span>
+        <nav class="flex flex-wrap items-center gap-x-7 gap-y-2">
+          <a href="/branding/" class="-my-1.5 py-1.5 transition-colors hover:text-ink">${t.foot.branding}</a>
+          <a href="/video/" class="-my-1.5 py-1.5 transition-colors hover:text-ink">${t.foot.video}</a>
+        </nav>
         <a href="mailto:atlas@arvorealta.com" class="-my-1.5 py-1.5 transition-colors hover:text-ink">atlas@arvorealta.com</a>
       </div>
     </footer>`;

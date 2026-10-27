@@ -13,7 +13,7 @@ python3 -m http.server 8123 >/dev/null 2>&1 &
 SERVER=$!
 trap 'kill $SERVER 2>/dev/null || true' EXIT
 sleep 1
-for pair in "index.html:og.png" "video.html:og-video.png"; do
+for pair in "index.html:og.png" "video.html:og-video.png" "branding.html:og-branding.png"; do
   src=${pair%%:*}; out=${pair##*:}
   "$CHROME" --headless --disable-gpu --no-sandbox --hide-scrollbars \
     --virtual-time-budget=20000 --window-size=1200,630 \

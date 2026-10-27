@@ -51,6 +51,7 @@ front of the figures. Promoting one is that decision, and the owner makes it.
 | URL | File |
 |---|---|
 | arvorealta.com | `index.html` — the offer page |
+| arvorealta.com/branding/ | `branding/index.html` — branding portfolio |
 | arvorealta.com/video/ | `video/index.html` — video portfolio |
 | arvorealta.com/deck/`<slug>`/ | decks — 1920 × 1080, for presenting |
 | arvorealta.com/annex/`<slug>`/ | annexes — A4, for submitting |
@@ -127,6 +128,71 @@ change**, and the move is a decision to make deliberately rather than a
 convenience, because once a path is public a link to it is public forever. A
 sandbox that has done its job is deleted, not left up.
 
+## The two portfolio pages
+
+`/branding/` and `/video/` exist for referrals rather than for search. A
+client or a friend about to point somebody at Atlas wants one link that shows
+the work, and the offer page is not that link — it sells one service to one
+buyer. Both pages carry the editorial theme, the same header bar and the same
+footer, so they read as one site with each other rather than with the offer
+page, which is on the promoted lab stylesheet.
+
+**Both are linked from the offer page's footer and from each other's nav**,
+and nowhere else. The footer labels are translated in all three languages
+(`t.foot`), because the footer is part of a page that serves three readers;
+the portfolio pages themselves are English only, which is what a referral
+link is for. The offer page's three nav links are the argument's spine and
+are deliberately left alone — the rule above says a sixth fold joins the
+spine or gets nothing, and the same logic keeps the portfolios out of the nav.
+
+**Every plate is a render of a page published on this domain, and that is the
+whole design of the page.** A portfolio normally asks to be believed; this one
+puts `Open the deck →` under each plate, so a reader can open the real thing
+and find it identical. That only works while the link resolves, so **a plate
+whose source page is deleted or restructured is a broken claim, not a stale
+image.** Re-render it in the same change.
+
+The plates are generated, not screenshotted by hand — Playwright against
+`python3 -m http.server`, then composited with Pillow — so re-cutting them
+after a source change is a script run. The deck plate is the `.slide` element
+rather than the viewport, because the deck page's body carries a 40px gradient
+above the slide that reads as a grey band inside a frame. The annex plate is
+two A4 sheets pasted side by side on the page's own greige, which turns a
+portrait document into a landscape plate; the proposal keeps one sheet
+portrait and takes a column with its caption beside it. Each sits in a 1px
+hairline on the page's own ground, which is the device `annex.css` uses for a
+quoted document and for the same reason: it must read as a sheet, not as our
+photograph. Version in the name as everywhere else — `assets/work/
+<name>-1-<width>.<ext>`.
+
+**No client is named on either page, and none can be.** There are no client
+brand assets in this repo, so `/branding/` shows what the studio publishes
+itself — a concept deck, a redacted submission annex and a commercial
+proposal — and Behance carries the client identity and campaign work. The
+deck's own footer names the audience it was written for; the page describes
+the artefact and does not claim it as a delivered engagement, because
+**never invent proof** applies hardest on the page whose job is proof. If real
+client work is to appear here, the assets and the permission have to be
+supplied.
+
+**Two of the three links point at `noindex` pages** — `/annex/proposta-motorhome/`
+and, through it, `/proposta-motorhome/`. They were unlisted rather than
+private, and linking them from a published page is a decision rather than a
+convenience: they stay out of the index and are now reachable from the open
+web by anyone who follows the link. Nothing in them names a client; the sheet
+says in its own words that it is a model with proposed figures.
+
+**Both heroes take a scoped clamp, and the one on `/video/` is a bug fix.**
+The page scale's display floor is 41.6px, and at 320 both pages' hand-broken
+headlines wrapped on their own — `/video/` measured four lines where two were
+written, which is exactly what hand-breaking exists to prevent. Both now run
+`clamp(1.8rem,.4rem + 6.7vw,6.5rem)`, measured at two lines from 320 to 1920
+and landing on 102.9px at 1440 against the scale's 104. Per the rule above
+this is a re-drawn curve, not a fourth size.
+
+The social card is `assets/_og/branding.html`, rendered by the same
+`assets/_og/render.sh` as the other two.
+
 ## The pricing ladder
 
 Three tiers on `index.html` and a free step that is not one.
@@ -178,6 +244,7 @@ document agreed before the work starts, not listed on the page.
 
 ```
 index.html              offer page
+branding/index.html     branding portfolio
 video/index.html        video portfolio
 reference/index.html    the first offer page, kept for reference — noindex
 _tw.src.css             the offer page's Tailwind source, compiled by
@@ -185,10 +252,16 @@ _tw.src.css             the offer page's Tailwind source, compiled by
 templates/index.html    index of every template
 deck/<slug>/index.html  one deck per folder
 annex/<slug>/index.html one A4 annex per folder
+annex/_enviropac-review/
+annex/_enviropac-review-nb/
+                        a scored document review, English and Norwegian —
+                        two sheets each, private
 assets/
   img/                  photography, as webp + jpg at the widths the source
                         actually holds — the name carries a version:
                         after-1-<width>.<ext>
+  work/                 the portfolio plates — renders of published pages on
+                        this domain, same version-in-the-name rule
   vedlegg-5/            the open tender's example PDF and fillable Word file
   fonts/                Geist, Geist Mono and EB Garamond, self-hosted woff2
   vendor/runtime.js     React, react-dom, Motion and htm, bundled once
@@ -599,7 +672,13 @@ readable, so it is the one thing from the reference not copied.
   credit line, nothing that tells an evaluator who set the document. What
   goes out under a client's name is theirs. The foot identifies the document
   and nothing else — reference number, sheet, and the framework reference an
-  evaluator matches against their own file
+  evaluator matches against their own file.
+  **A sheet that goes out under our own name is the exception**, and there is
+  one kind: a document review, which is a report *about* somebody else's
+  document rather than a document submitted as theirs. It is read by the
+  company whose sheet was scored, and a report with no author is a report
+  nobody can reply to, so its last foot carries `Arvorealta.com`.
+  The rule above is unchanged for everything an evaluator sees
 - Narrative sits in seven columns — 97 mm, about 55 characters. The full
   170 mm measure runs past 85 characters and stops being readable
 - **On screen a sheet scales, it never reflows.** A published annex is a
@@ -608,7 +687,233 @@ readable, so it is the one thing from the reference not copied.
   the shape and pinches in to read. Screen only; print never sees it
 - **Page budget is the design constraint.** A tender that caps pages discards
   the overflow unread, so air costs content. Measure every block against the
-  246 mm before adding to a sheet
+  246 mm before adding to a sheet. **Measure it, do not estimate it**:
+  `.sheet-body` is 930 px at a desktop width, so `scrollHeight - clientHeight`
+  on it is the overflow in pixels and 3.78 px is one baseline. Both sheets of
+  the review below came in 91 mm and 18 mm over on the first pass and read as
+  though they fitted
+- **`.gap-1`, `.gap-2` and `.measure` do nothing on a `p`, a `.title` or a
+  `.heading`, and that is a specificity bug, not a rule.** `.sheet p` sets a
+  `margin` shorthand and `max-width:none` at (0,1,1), and `.sheet .title` sets
+  `margin:0` at (0,2,0); the tokens are single classes at (0,1,0) and lose.
+  Measured: `.gap-2` on the template's own `h1` computes to `0px`, which is
+  why the title sits tight under the masthead although this file says it has
+  two baselines of air. **The fix is to raise the tokens' specificity, and it
+  is not free** — `annex/_template/` and `annex/sample/` both fit at exactly
+  zero overflow today, so switching the tokens on adds 12 mm to four sheets
+  that have no room for it and all four need re-tuning in the same change.
+  Until that is done, anything that is not a `div` carries its air in a
+  wrapper `div`, which is what `annex/_enviropac-review/` does
+
+### The document review — what the free step delivers
+
+`annex/_enviropac-review/` and `annex/_enviropac-review-nb/` are the first
+one: the free tier's deliverable, built as two A4 sheets on the technical
+system. It scores a supplier's own published product datasheet against the
+requirement specification of a live tender. Sheet 1 is the map — what the
+document can and cannot answer, and the count. Sheet 2 is four findings, each
+with the requirement quoted beside a crop of their page and one line saying
+what the gap is.
+
+**It is a report with cutouts, and the two alternatives were both rejected.**
+Marks drawn on their own PDF would mean our typography never appears, which
+is the entire thing being sold. A corrected version of their sheet is the
+€600 tier given away. A separate document that quotes theirs is the only
+form where the work is visible and the paid rung is still intact.
+
+**There is no numeric score anywhere on it.** The count — nine answered,
+seven partial, eighteen absent, of thirty-four — is a count of what is in the
+document, which is checkable. A score is an evaluator's judgement on a live
+procurement, and inventing one is the claim this file says to flag before
+making. The sheet says so in its own standfirst: *the buyer scores.*
+
+**Two documents, one in each language, and never one document in two.** The
+first build set the prose in English with the Norwegian `krav` quoted inside
+it, on the offer page's own rule that a foreign string is quoted rather than
+left loose. The owner's correction is that the rule solves a different
+problem: a page that has to serve three readers at one URL mixes languages
+because it cannot do anything else, and a document that is sent to one
+company can simply be the right language all the way through. A review that
+is half English on a Norwegian evaluator's desk is useless at both ends. So
+the edition is the unit: `-nb` is the same document, not a translation
+appended to it, and **a change to one belongs in the other in the same
+commit.** The quotations stay Norwegian in both, because a quotation is the
+one thing that must not be translated.
+
+**The Norwegian edition's vocabulary is the buyer's own, and that was
+measured rather than hoped.** Every substantive word in the Norwegian sheets
+was checked against a corpus of the competition document, Bilag 1 and
+Bilag 2: **83 of 107 distinct terms five characters or longer appear in the
+buyer's own files.** That is what reading the procurement buys, and it is why
+the caveat this file carried — that the Nordic text is not a native
+speaker's — is narrower here than on the offer page. A quoted term cannot be
+the wrong term.
+
+**What is left is idiom, not vocabulary, and it is about ten sentences.** The
+twenty-four unattested words are proper nouns, plain Norwegian, and three
+compounds written here rather than found. One of those, `hjulmotsigelsen`,
+was a literal translation of an English metaphor and is gone; the line now
+uses the buyer's own `kravet til hjuldiameter er oppfylt`. The residue is the
+connective prose between the quotations, and **a native speaker reading ten
+sentences is a far smaller favour to ask than reading a document.** Re-run
+the check after any rewrite — it is a corpus and a regex, not an afternoon.
+
+**The approach email goes in English even though the document is Norwegian**,
+and the reasoning is the inverse of the document's. An email is pure
+connective prose with no quotations to lean on, and it is the first thing a
+stranger reads: Norwegian that is slightly off register reads as machine
+translation, which reads as spam. The document quotes the tender and has to
+be Norwegian. `_research/enviropac/approach.md` holds both drafts, the named
+contact and the deadlines.
+
+**The email contextualises the document, it never summarises it.** The first
+draft carried the two missing standards and the PCR wording in the body, and
+the owner cut them: a summary that good leaves the attachment nothing to
+deliver, and a reader who already has the answer has no reason to look at the
+evidence. What the email says is what the document is, what is on each page
+and what it costs — about 130 words against 250. **The count is the one
+figure that crosses**, because 9 of 34 is a question rather than an answer
+and it cannot be acted on without opening the file. The deadline crosses too,
+since it changes whether the file is opened today or next week, and it is not
+a finding. Everything else stays in the PDF, which is the thing being sold.
+
+**Figures are numerals in the email and words in the document.** `9 of the
+34` stops the eye where `nine of the thirty-four` slides past, and this
+reader scans rather than reads — the same reason the sheets set every fact as
+a field. Sheet 1's statement block keeps `Nine of thirty-four` because that
+is display type carrying a sentence, which is read. Same figure, two jobs,
+two treatments. **The attachment also gets its own line**, so a reader
+skimming on a phone sees it without parsing a sentence.
+
+**The close offers a conversation about the improved version and its price,
+never an easier future.** The owner first proposed ending on *how easy
+bidding can be with a clean document standard*, and the trade was argued
+rather than taken. The two pages the reader has just finished are specific
+and checkable, so an unevidenced promise about ease breaks the register the
+document established, and a sales manager for public tenders already knows
+bidding is not easy — `gradient-copy` carries the same rule as **never invent
+proof**.
+
+**The owner's final wording is better than the draft that answered it**, and
+the correction is worth keeping because it is the kind a session will make
+again. The draft read *I will show you what the fixed version looks like*,
+which promises a built thing: a reply would have obliged the corrected
+datasheet before any money moved. The line that shipped — `we can talk about
+a full improvement version for your document, and what it costs` — keeps the
+outcome and the price and commits only to a conversation, which is all a
+first reply should be. **A free tier's close offers the next conversation,
+not the next deliverable.** The price stays in either way, because most cold
+approaches hide it and saying it is what disarms.
+
+**`Have a nice day.` is the owner's sign-off and stays as written.** It is a
+voice choice rather than a rule, and `gradient-copy`'s own line is that a
+writer's voice is protected rather than sanded down to whatever reads as
+standard.
+
+**The exported file is named in plain words, never by its reference number.**
+`document-review-NOR.pdf` and `document-review-ENG.pdf`. DR-001 went out as
+`DR-001-NO.pdf` and the owner's objection is the right one: **this is an
+attachment from a stranger**, and a filename that reads as a code is a
+filename a cautious reader does not open. The reference number lives inside
+the document — in the masthead and in both feet — which is where it is useful
+and where it cannot look like malware. Add the recipient's name to the
+filename only if a reason appears; it has not yet.
+
+**The sheet names the publisher of every document it scores, as a legal
+entity where the document states one.** DR-002 carries `Fritz Schäfer GmbH`
+and `Craemer GmbH`, each taken from the document's own cover or imprint, in a
+source block of three `col-4` footnotes under the fields row. Three reasons,
+and the third is the one that was not obvious. It is what a technical annex
+does. It puts the findings where they belong, which is on the manufacturers'
+documents rather than on the distributor reading the sheet. And **it is the
+cheapest signal that a person read the file** — a colophon is at the back, in
+small type, and naming it is the kind of thing a generated summary does not
+do.
+
+**Name only what the document states.** The Norwegian Craemer four-pager
+carries no imprint at all, so it is cited as `Craemer` and not as
+`Craemer GmbH`; the German brochure carries the full entity and is cited with
+it. A legal entity inferred from a brand name is invented proof.
+
+**A review that makes a claim about a live website carries a date.** Sheet
+1's masthead reads `Document review · 6 October 2026`, because finding 01
+says the older datasheet is still served and that is a fact about somebody
+else's server on a particular day. Both files were re-checked at HTTP 200 the
+morning it was sent. An undated claim of that shape goes stale silently,
+which is the worst way for a claim to fail.
+
+**Date somebody else's document from `pdfinfo`, never from its URL.** The
+first build dated both sheets by their upload folder — the MGB one 2020 and
+the Citybac one 2025 — and **both were wrong by years.** The MGB PDF was
+created 25 June 2015 and the whole Citybac family on two days in August 2022;
+`/2025/02/` is a re-upload of files that already existed. The gap the review
+describes is seven years, not five, which makes the finding stronger, but it
+was stated wrongly first and the reader is the one company that can check it
+in two clicks. The field is labelled `File dated` rather than `Published`,
+because what the file says about itself is checkable and when it went online
+is not. **The error surfaced only because the owner sent the source PDF back
+and asked whether it was the one reviewed** — the answer was yes, by
+sha256 — so verifying identity caught a mistake that verifying content had
+not. Check the metadata of anything being scored.
+
+**Check the supplier's whole published set before scoring one sheet of it.**
+The first build scored a two-page datasheet dated 2020 and opened on the
+finding that only one container size of six was documented. **Both halves of
+that were wrong.** EnviroPac publish a current eight-page sheet for every
+size the framework buys, under a different product name, at a different path,
+and the older file is still served beside it. The count went from eight of
+thirty-four to nine, the findings changed completely, and the one thing that
+survived was the shape of the document. `_research/enviropac/datasheets.md`
+holds the full map and the method. **A review built on a superseded document
+is worse than no review, because it is wrong in a way the reader can see at a
+glance and we cannot.**
+
+**What it cost to find was a loop over URLs, not an afternoon.** The product
+pages each link their own current sheet, which is the sure route; probing the
+upload folders for a size list is the fast one. Do one of them before scoring
+anything.
+
+**The scope is stated on the page, not assumed.** Of the sixty requirements
+in Bilag 2, twenty-six ask for a delivery plan, an option price or a
+complaints procedure, and no datasheet answers those; the thirty-four that
+remain are what a datasheet is the natural home for. The closing footnote
+names all six sizes and says the absences hold across the family, which is
+only sayable because the family was checked.
+
+**Four classes were added to `annex.css` for it**, and all four are structure
+rather than taste:
+
+- `.fields.of-3`, which is the row of three counts
+- `.plate-doc`, a crop of somebody else's page quoted as evidence. It sits
+  in a hairline frame on the sheet's own stock, holds its own proportions
+  with `contain` rather than being cropped again with `cover`, and takes its
+  natural height so a figure hangs from the top of its cell. It must not
+  read as our photograph, because it is not one
+- `.quote`, a sentence quoted verbatim in the language it was written in.
+  Mono, 9 pt, sentence case — mono because that is what says the words are
+  somebody else's, sentence case and 9 pt because it is read rather than
+  found, which is what keeps it clear of the one label size. It carries no
+  bottom margin: the line under a quotation is what the quoted document does
+  about the thing quoted, so it belongs to it, exactly as a label belongs to
+  its value
+- `--annex-of`, the running foot's joining word. It defaults to `" of "`, so
+  every existing annex is unchanged, and the Norwegian edition sets
+  `" av "` beside `--annex-total`. The foot is the one piece of chrome that
+  has to speak the sheet's own language
+
+**The crops are generated, not screenshotted by hand.** `pdftoppm -r 200`
+renders the source PDF and the boxes are cut with Pillow, so re-cutting them
+after a source change is a script run rather than an afternoon. Finding 01's
+plate is a composite of two covers scaled to one height, which is how a
+figure says *these are two documents* without a caption.
+
+**Sheet 2's foot carries the maker's mark and says what the document is:**
+`Arvorealta.com · Tier zero, free review`. The mark is the domain rather than
+the bare name, at the owner's instruction, so the one line that says who wrote
+the document is also the one line that says where to find them. The context is there on purpose — the
+signature appears on this kind of sheet and on no other, and naming the tier
+is what makes that legible rather than inconsistent. Sheet 1's foot stays
+document identification. See the carve-out in the annex spec above.
 
 **The close is the hero again, on ink.** Same eyebrow, headline, standfirst,
 qualifier, call to action and both notes, word for word. Every class the hero
@@ -1061,21 +1366,48 @@ the whole file can run without stalling, and **iOS throttles preloading hard
 enough that it frequently never fires** — so the video was playing behind
 `opacity: 0`. `playing` fires when playback has actually started, which is
 the literal condition the fade wants. `timeupdate` backs it up for anything
-that skips `playing`, and `canplaythrough` is kept as a third path. `preload`
-is `auto` rather than `metadata`, because metadata plus a throttled connection
-is the state where none of the three fire.
+that skips `playing`, and `canplaythrough` is kept as a third path.
+
+**`preload` is back at `metadata`, and the change to `auto` is recorded as a
+guess that was not measured.** It went to `auto` in the same commit as the
+`playing` gate, on the reasoning that metadata plus a throttled connection is
+the state where none of the three events fire. The owner then reported that
+the hero had autoplayed on mobile before that session, and the one byte that
+had changed in the element itself was this. `preload` does not grant or
+withhold permission to autoplay — the block is the autoplay policy, and the
+gesture retry below is the actual fix — but a value nobody measured is not
+worth keeping over a behaviour the owner watched change. **If it is ever put
+back to `auto`, measure first.**
 
 **iOS Low Power Mode blocks autoplay of muted video outright**, and Safari
 lets a reader turn auto-play off entirely. In both cases `play()` is rejected
 on load and the page cannot override it.
 
-**What the page can do is ask again at the first user gesture, and that is
-what it does.** The owner's own report was the diagnosis: *"the video is
-paused and rolls out only after I push the button."* A gesture lifts the
-restriction for the whole document, so the first touch anywhere — not only on
-the video — is enough. One passive listener each on `pointerdown`,
-`touchstart` and `keydown`, `once`, removed as soon as one has run, so it
-never becomes a listener that lives for the life of the page.
+**What the page can do is keep asking, and that is what it does.** The
+owner's own report was the first diagnosis: *"the video is paused and rolls
+out only after I push the button."* A gesture lifts the restriction for the
+whole document, so the first touch anywhere — not only on the video — is
+enough.
+
+**`once: true` was the first version of that and it had a hole.** A gesture
+that lands before the element exists, or while the restriction is still in
+force — Low Power Mode is not lifted by a tap — spends the only attempt there
+was and nothing asks again. Reported as a phone that played and a tablet that
+did not. The listeners now stay until `ready` flips, which is the frame
+playback actually starts, and the effect tears them all down at that point —
+so nothing lives for the life of the page, which was the whole point of
+`once`. Six events: `pointerdown`, `touchstart`, `touchend`, `click`,
+`keydown` and `visibilitychange`, the last because iOS pauses a backgrounded
+video and does not always resume it.
+
+**There is no per-size setting for this, and there cannot be.** Asked whether
+two viewports need two settings: autoplay permission belongs to the device
+and its owner — Low Power Mode, and Safari's own per-site Auto-Play toggle
+under the `aA` menu — and **no media query can grant it**, because the policy
+is not a function of the layout. A phone and a tablet showing the same page
+differently is two devices with two settings, not two widths. The only
+difference the page is allowed to make by size is `prefers-reduced-motion`,
+which is not a size at all.
 
 If the video is still missing after a touch, the photograph is the right
 answer and it is not a bug to chase.

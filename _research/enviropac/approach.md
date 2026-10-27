@@ -1,0 +1,299 @@
+# The EnviroPac approach — contact, timing and the email
+
+Everything here was checked on 6 October 2026.
+
+## Who to write to
+
+**Erlend Værdal · Salgssjef offentlig marked**
+`erlend.vaerdal@enviropac.no` · +47 924 23 497
+
+That title is *sales manager, public sector*. He is the person at EnviroPac
+whose job is public tenders, which is this tender. There is no better match
+on their staff page and no need to guess.
+
+**Second choice, or a CC:** Adrian Fjell, Regionsansvarlig
+Oslo/Akershus/Buskerud/Innlandet, `adrian.fjell@enviropac.no`, +47 970 79 565.
+Valdres is in Innlandet, so he owns the geography. Send to Erlend first; he
+is the role, Adrian is the region.
+
+**Do not write to `info@`, `kundeservice@` or `post@`.** A general inbox
+routes a cold approach to nobody.
+
+**Do not write to the buyer.** Hans Solbrekken Ruud at `post@vkr.no` and
+Reidar Seim at `r.seim@d-consult.no` run the procurement, and the competition
+document says all communication goes through the consultant and is logged. We
+have no business in that channel and appearing in it would be a mistake.
+
+## The timing, and why it is good
+
+From the competition document:
+
+| | |
+|---|---|
+| Written questions close | **19 October 2026** |
+| Bid deadline | **27 October 2026, 12.00** |
+| Delivery starts | mid-March 2027 |
+
+Today is 6 October. **Thirteen days to the question deadline, twenty-one to
+the bid.** That is the window where a supplier already knows their
+documentation matters and still has time to do something about it. A month
+earlier it is noise; a week later it is too late to be worth anything.
+
+The question deadline is the part to put in the email. If EnviroPac want the
+buyer to confirm what evidence satisfies krav 57, they have until 19 October
+to ask, and that is a concrete favour rather than a pitch.
+
+## The award criteria, confirmed
+
+Read from the competition document, section 4.1, not from memory:
+
+- **35 %** weighted tender sum, Bilag 3
+- **35 %** quality
+- **30 %** climate and environment, which is where krav 57 is scored
+
+The review's own `klima 30 av 100` is correct.
+
+## Which language to send
+
+**Send the English email with the Norwegian PDF attached.** That is the
+recommendation and it is not the obvious answer, so here is the reasoning.
+
+The email is pure connective prose. It has no quotations to lean on, and it
+is the first thing a stranger reads. Norwegian that is slightly off register
+in a cold email reads as machine translation, which in 2026 reads as spam.
+English from a sender named Atlas Sahrim reads as a foreign professional
+writing in the language foreign professionals write in, which is what is
+actually happening. Norwegian B2B reads English without friction.
+
+The **document** is the opposite case. It quotes the tender, so it has to be
+Norwegian, and it is — with 83 of its 107 substantive terms taken from the
+buyer's own files.
+
+The Norwegian email is below as well, in case it gets checked by a native
+speaker first or the preference is to send in Norwegian anyway.
+
+---
+
+## Email, English — recommended
+
+**Subject:** Citybac datasheet against Bilag 2, Valdres, deadline 27 October
+
+> Hei Erlend,
+>
+> I scored your published Citybac 240 L datasheet against the requirement
+> specification for the Valdres container framework.
+>
+> Two A4 pages attached.
+>
+> Page one is the map. Of the 34 requirements a product datasheet is the
+> natural home for, 9 can be answered from the sheet as it stands. Page two
+> is the 4 findings an evaluator meets first, each with the requirement
+> quoted beside the part of your sheet it refers to.
+>
+> It costs nothing and I am not asking for anything back. Worth a look before
+> 19 October, when written questions to the buyer close.
+>
+> I build document standards for manufacturers who bid. If it is useful,
+> reply and we can talk about a full improvement version for your document,
+> and what it costs. If not, no reply needed.
+>
+> Have a nice day.
+>
+> Atlas Sahrim
+> arvorealta.com
+
+**Attach:** `DR-001-NO.pdf` — the Norwegian edition. One file, two pages.
+Do not attach both languages; two versions of one document invites a choice
+nobody wants to make.
+
+---
+
+## Email, Norwegian — needs a native check before it goes
+
+**Emne:** Citybac-databladet mot Bilag 2, Valdres, frist 27. oktober
+
+> Hei Erlend,
+>
+> Jeg har vurdert det publiserte databladet for Citybac 240 L mot
+> kravspesifikasjonen til rammeavtalen for beholdere hos Valdres Kommunale
+> Renovasjon.
+>
+> To A4-sider ligger vedlagt.
+>
+> Side én er kartet. Av de 34 kravene et produktdatablad er det naturlige
+> stedet for, kan 9 besvares med databladet slik det står. Side to er de 4
+> funnene en evaluator ser først, hvert med kravet sitert ved siden av den
+> delen av databladet det gjelder.
+>
+> Det koster ingenting, og jeg ber ikke om noe tilbake. Verdt et blikk før
+> 19. oktober, når fristen for skriftlige spørsmål til oppdragsgiver går ut.
+>
+> Jeg lager dokumentstandarder for produsenter som leverer tilbud. Er den
+> nyttig, svar så kan vi snakke om en komplett forbedret versjon av
+> dokumentet ditt, og hva det koster. Er den ikke det, trenger du ikke svare.
+>
+> Ha en fin dag.
+>
+> Atlas Sahrim
+> arvorealta.com
+
+---
+
+## Three decisions inside the last two paragraphs
+
+**The attachment gets its own line.** A reader skimming on a phone sees
+`attached` without parsing a sentence, and it separates what was done from
+what they now have.
+
+**Figures are numerals here and words in the document.** `9 of the 34` stops
+the eye where `nine of the thirty-four` slides past, and this reader scans
+rather than reads — which is the same reason the sheets set every fact as a
+field. The statement block on sheet 1 keeps `Nine of thirty-four`, because
+that is display type carrying a sentence. Different job, different treatment.
+
+**The close offers a conversation about the improved version and its
+price, not an easier future.** The owner first proposed *how easy bidding can
+be with a clean document standard* and the trade was argued rather than
+taken: the two pages the reader has just finished are specific and checkable,
+so an unevidenced promise about ease breaks the register the document
+established, and a sales manager for public tenders already knows bidding is
+not easy.
+
+The owner's final wording — **`we can talk about a full improvement version
+for your document, and what it costs`** — is better than the draft it
+replaced. The draft said *I will show you what the fixed version looks like*,
+which promises a built thing: a reply would have obliged the corrected
+datasheet before any money moved. *We can talk about* keeps the outcome and
+the price and commits only to a conversation, which is what a first reply
+should be. The price stays in, because most cold approaches hide it and
+saying it is what disarms.
+
+**`Have a nice day.` is the owner's sign-off and stays as written.** It is a
+voice choice rather than a rule, and the copy skill's own line is that a
+writer's voice is protected rather than sanded down to whatever reads as
+standard.
+
+---
+
+## What the email deliberately does not do
+
+- **It does not carry the findings.** The first draft put NS-EN 1501-5,
+  RAL-GZ 951/1 and the PCR wording in the body, which made the email a
+  summary of the document rather than a reason to open it. The owner cut it.
+  A summary that good leaves the attachment nothing to deliver, and a reader
+  who has already had the answer has no reason to look at the evidence. The
+  email now says what the document is, what is on each page and what it
+  costs. **The count is the one number that crosses**, because nine of
+  thirty-four is a question rather than an answer and it cannot be acted on
+  without opening the file
+- **It does not say EnviroPac are bidding.** Nothing confirms that they are.
+  Every sentence works whether they bid or not
+- **It does not predict a score.** The review says the buyer scores and the
+  email keeps that line. Telling a supplier how an evaluator will judge them
+  on a live procurement is the one claim this project does not make
+- **It does not ask for a meeting.** The ask is a reply, and the fallback is
+  silence, which is a real option stated out loud
+- **It does not attach both languages.** One file, one decision
+
+---
+
+## The second approach, 13 October — Adrian Fjell
+
+**The first contact has not retired.** `enviropac.no/om-oss/ansatte/`, checked
+13 October: **Erlend Værdal is still listed as Salgssjef offentlig marked**,
+same address, same number. So the premise for writing to somebody else is
+wrong, and the three live explanations are a spam filter, a holiday, or a
+cold email that was read and not answered, which is what most of them are.
+
+That does not make a second approach wrong. It changes what it is: **a second
+channel, not a replacement**, and the email has to say so or EnviroPac will
+see two strangers rather than one person following up.
+
+**Adrian Fjell · Regionsansvarlig Oslo/Akershus/Buskerud/Innlandet**
+`adrian.fjell@enviropac.no` · +47 970 79 565
+
+Confirmed in role on 13 October. **Valdres Kommunale Renovasjon is in
+Innlandet, so this is his region** — which is the one thing he has that Erlend
+does not, and it is the reason the second mail is addressed rather than
+forwarded.
+
+Third, if both go quiet: **André Dybvig, `andre.dybvig@enviropac.no`,
++47 403 37 790, Salg offentlig marked** — the public-market desk under Erlend.
+
+### The email
+
+**Subject:** One bidder, Valdres containers, 27 October
+
+> Hei Adrian,
+>
+> I wrote to Erlend Værdal about this last week and it may have landed in a
+> filter, so I am trying you as well since Valdres is your region.
+>
+> I build document standards for manufacturers who bid, and on the Valdres
+> container framework closing 27 October I will support only one company. Two
+> in the same competition would be no help to either.
+>
+> You will write your own response to Bilag 2. The evaluator will also have
+> what you publish on your website in front of them, and the attached two
+> pages read your Citybac datasheet the way they will. Of the 34 requirements
+> a product document is the natural home for, 9 can be answered from it as it
+> stands.
+>
+> This review costs nothing and I am not asking for anything back. If you
+> would like it to be you, reply before 19 October, when written questions to
+> the buyer close.
+>
+> Have a nice day.
+>
+> Atlas Sahrim
+> arvorealta.com
+
+**Attach:** `document-review-NOR.pdf`.
+
+**The first line is the whole difference and it is not an apology.** Naming
+Erlend does three things a chaser normally cannot: it explains why a second
+person at the same company is getting the same approach, it gives Adrian a
+colleague to check with rather than a stranger to evaluate, and **it is
+simply true**, which is the only reason it reads as a person rather than as a
+sequence. *May have landed in a filter* is offered as the likeliest innocent
+explanation rather than as a complaint about being ignored.
+
+**It does not say the review has been updated**, because that invites a
+question about what changed and the answer is a date.
+
+### The document
+
+**Both editions are re-dated `13 October 2026` and nothing else changed.**
+Sheet 1's masthead carries a date because finding 01 is a claim about what
+EnviroPac's own server is serving today, and it was re-verified before the
+date moved: both files returned **HTTP 200, `application/pdf`** on 13 October
+— `/app/uploads/2020/04/Sulo-MGB240-NO.pdf` and
+`/app/uploads/2025/02/SULO-Datasheet-Citybac-240-L-LA-NO.pdf`. The finding
+still holds.
+
+**The export is renamed** to `document-review-NOR.pdf` under the rule in
+`CLAUDE.md`. Erlend received `DR-001-NO.pdf`.
+
+**A source block was built for DR-001 and then reverted**, which is worth
+recording so the next session does not redo it. It cost four baselines on a
+sheet sitting at exactly zero overflow, and the rule it was serving says the
+sheet names a publisher **where the document states one** — the Citybac sheet
+states none, carrying only `www.enviropac.no`. DR-001 scores one document and
+already identifies it in the fields row, and finding 01's plate shows both
+sheets side by side. The block exists on DR-002 because that one scores two
+catalogues of two other manufacturers' brands and needs the disambiguation.
+**One document does not.**
+
+## What to re-check if this sits for more than a few days
+
+1. **Both PDFs still live.** Verified HTTP 200 today, 6 October — the MGB
+   sheet at 1.82 MB under `/2020/04/` and the Citybac sheet at 543 KB under
+   `/2025/02/`. Finding 01 rests on it. One `curl -I` settles it. **Those
+   folder years are upload dates, not document dates**: `pdfinfo` puts the
+   MGB file at 25 June 2015 and the Citybac one at 15 August 2022, which is
+   what the review states
+2. **The question deadline.** After 19 October that paragraph is wrong and
+   has to come out
+3. **The date in the masthead.** Both sheets read `6 October 2026` /
+   `6. oktober 2026`, which anchors the claim about their site. Change it if
+   the document is rebuilt
