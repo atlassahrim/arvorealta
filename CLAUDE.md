@@ -595,6 +595,57 @@ that is read rather than a label that is found, so it is set in the sans.
 **The rule is in this file and it was still broken**, which is the argument for
 grepping the prices rather than trusting the eye.
 
+**The homepage sold documents and showed none, and that was the ceiling.**
+Asked what was blocking the page, the honest answer was the material: it owns
+exactly one photograph, `after-1`, against the brand sandbox's 51 frames and
+two films. Everything strong on `lab/max/` is a picture doing work.
+
+**Three real documents fixed most of it, and they were already on the domain.**
+`annex/sample/`, `annex/proposta-motorhome/` and `deck/reference-pipeline/`
+are published, ours, and rendered by Playwright into `assets/img/doc-*`, 520px
+webp, 81 KB for all three. **Each plate links to the page it was rendered
+from**, so the proof is checkable rather than asserted, and the note under the
+fold says in the reader's own language that the annex is the redacted sample
+and that its client, sums and notice numbers are removed from the file rather
+than covered over. The first `/brand/` showed these same three for the same
+reason and gave them up when client brand assets arrived; **on the home page
+they were never the wrong answer**, because the home page sells documents.
+
+**The fold performs the page's thesis.** One pile of paper fans into three
+documents as the reader scrolls, which is `written once, right every time`
+stated as a movement rather than a claim, and it is the same move as the brand
+page's one mark through three grounds. The eyebrow joins the spine rather than
+decorating: the route now reads `Industrial manufacturer bids` · `Open now` ·
+`What it looks like` · `How it is scored` · `What it costs` · `Where to start`.
+
+**`translate(X%)` is a percentage of the element, not of its container.** The
+fan was written with the offsets as percentages and a 200px plate moved 60px
+instead of 390, so the pile barely opened and read as three documents stacked
+badly. The offsets are fractions of the stage now and the pixels are computed
+in the loop. **A percentage in a transform resolves against the transformed
+box**, which is the opposite of how every other percentage on the page behaves.
+
+**The deck's title slide was invisible on paper and the statement slide was
+not.** Slide 0 is near-white on the page's own near-white ground. Slide 1
+reverses to full-bleed ink, reads at thumbnail size, and its own line is
+`Reference projects are scored. An install nobody documented scores zero.`
+**Pick the plate that survives being 250px wide**, not the first page.
+
+**Captions under a fanned pile collide and a legend cannot.** Three labels
+positioned under three overlapping plates landed on top of each other and on
+the note below. One row under the stage, each name lighting as its own plate
+arrives, says the same thing and has no geometry to get wrong. On a phone the
+pin is off and the plates stack, so there the legend is hidden and each plate
+carries its own caption instead.
+
+**What is still blocking, and it is not code.** There are no photographs of a
+document in use, of a plant, or of a tender pack on a desk; there is no
+before and after; and the one real demonstration, a scored page, is
+`annex/_enviropac-review/` and lives behind the underscore. The copy is also
+locked: every string is `STR` verbatim, which keeps the prices and the Nordic
+text right and means the structure cannot be re-cut without new headlines in
+three languages.
+
 **The intake is ported whole, not reimplemented.** Native `<dialog>` with
 `showModal`, focus moved by hand to the email field, `visualViewport` driving
 `top` and `max-height` on both its events, the 10 MB cap and the extension
