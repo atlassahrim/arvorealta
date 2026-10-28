@@ -646,6 +646,59 @@ locked: every string is `STR` verbatim, which keeps the prices and the Nordic
 text right and means the structure cannot be re-cut without new headlines in
 three languages.
 
+### The tender fold is a clock now, and the live page is wrong today
+
+**On 28 October 2026 `index.html` carried `27 Oct 2026, 12:00` under an
+eyebrow reading `Open now`, and the deadline had passed the day before.**
+That is the third of the three things this file says to flag, because the page
+is read by the people running the procurement. **A date typed into copy goes
+stale in silence.** It is flagged rather than fixed on the live page, which is
+the owner's call, and the sandbox carries the mechanism that prevents it
+happening again.
+
+**`lab/max-home/` derives the whole fold from two timestamps.** `TENDER` holds
+the question deadline at `+02:00` and the tender deadline at `+01:00`, because
+Norway leaves CEST on 25 October and the two dates fall either side of it.
+From that one comparison come three things that can never disagree: the
+eyebrow, which reads `Open now` or `Closed`; the clock, which counts days,
+hours and minutes down or states `Closed.` with the date it passed; and the
+rail, which draws the bidding window from the question deadline to the tender
+deadline with a marker at now. **Nothing about the timing is typed into copy.**
+
+**The headline turns with it.** `open.h2` reads `If you are bidding on this
+one…`, which is false once the tender shuts, so a closed state carries its own
+line in all three languages: the two attachments are still there and still
+useful, which is what remains true. The rail is `aria-hidden` and the same
+content is carried as a sentence, the way the award bar already is.
+
+**`.rung` takes `lab/max`'s treatment and the whole row inverts.** On hover or
+focus the row fills with ink and every value in it flips: the brick step to
+`bone/60`, the terms and the time to `bone/75`, the bullets' dashes to
+`bone/55`, and the price gradient off entirely to flat bone. **The gradient's
+amber stop is barred on ink for the same reason the brick is** — this is the
+`-webkit-text-fill-color` override, because `background-clip:text` keeps
+painting through a plain `color`.
+
+**The section links left the top bar for a rail.** Same as `lab/max`: the bar
+keeps the three things that are not wayfinding, which are the wordmark, the
+languages and the action, and the six sections sit in a fixed right-hand rail
+that takes the chrome's two states and marks where the reader is. It is hidden
+below 980px, where the bar's own action is the only control that matters.
+
+**Two dead-zone bugs in one page is a pattern worth naming.** `revs` was the
+first and the tender clock was the second: a `function` declaration hoists and
+a `const` beside it does not, so a hoisted function called from the bootstrap
+reaches into a window where its own module-level lookups do not exist yet. The
+element lookups moved inside the function. **Nothing module-level should be
+read by anything that can run before the module finishes.**
+
+**Removing a node without removing what writes to it takes the page down.**
+The fields row became the timeline and `renderLists` still held
+`$("#openFields").innerHTML`, which threw `Cannot set properties of null` and
+left the ladder, the files and the clock unrendered while the rest of the page
+looked perfectly normal. Every write in that function goes through one guarded
+helper now.
+
 **The intake is ported whole, not reimplemented.** Native `<dialog>` with
 `showModal`, focus moved by hand to the email field, `visualViewport` driving
 `top` and `max-height` on both its events, the 10 MB cap and the extension
