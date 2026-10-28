@@ -87,6 +87,14 @@ h1,h2,h3,p{margin:0}
   justify-content:space-between;padding:22px max(18px,2vw);pointer-events:none}
 .brandbar>*{pointer-events:auto;color:var(--chrome,var(--bone));transition:color .45s var(--ease)}
 .brandbar .wm{font-family:"Geist Mono",monospace;font-size:10.5px;letter-spacing:.3em;text-transform:uppercase}
+.langs{display:flex;align-items:center;gap:2px;margin-right:auto;margin-left:clamp(14px,3vw,40px)}
+.langs button{font-family:"Geist Mono",monospace;font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;padding:9px 10px;border-radius:999px;opacity:.42;
+  transition:opacity .3s var(--ease),background .3s var(--ease)}
+.langs button:hover{opacity:.8}
+.langs button[aria-pressed="true"]{opacity:1;background:color-mix(in srgb,var(--chrome,var(--bone)) 13%,transparent)}
+@media (max-width:560px){.langs{margin-left:12px}.langs button{padding:9px 7px;letter-spacing:.1em}}
+
 .mag{position:relative;display:inline-flex;align-items:center;gap:10px;
   font-family:"Geist Mono",monospace;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
   padding:11px 20px;border:1px solid currentColor;border-radius:999px;
@@ -334,16 +342,17 @@ h1,h2,h3,p{margin:0}
 
 <header class="brandbar">
   <a class="wm" href="/brand/" data-c>Arvorealta</a>
-  <a class="mag" href="mailto:atlas@arvorealta.com" data-c data-mag>Start a project</a>
+  <div class="langs" id="langs" role="group" aria-label="Language"></div>
+  <a class="mag" href="mailto:atlas@arvorealta.com" data-c data-mag data-t="cta">Start a project</a>
 </header>
 
 <nav class="rail" aria-label="Sections">
-  <a href="#open"   data-rail><span>Open</span><i></i></a>
-  <a href="#light"  data-rail><span>Light</span><i></i></a>
-  <a href="#cases"  data-rail><span>Cases</span><i></i></a>
-  <a href="#marks"  data-rail><span>Marks</span><i></i></a>
-  <a href="#ways"   data-rail><span>Ways</span><i></i></a>
-  <a href="#start"  data-rail><span>Start</span><i></i></a>
+  <a href="#open"   data-rail><span data-t="r0">Open</span><i></i></a>
+  <a href="#light"  data-rail><span data-t="r1">Light</span><i></i></a>
+  <a href="#cases"  data-rail><span data-t="r2">Cases</span><i></i></a>
+  <a href="#marks"  data-rail><span data-t="r3">Marks</span><i></i></a>
+  <a href="#ways"   data-rail><span data-t="r4">Ways</span><i></i></a>
+  <a href="#start"  data-rail><span data-t="r5">Start</span><i></i></a>
 </nav>
 
 <main>
@@ -358,15 +367,14 @@ h1,h2,h3,p{margin:0}
   </div>
 
   <div class="inner">
-    <p class="kicker">Brand and identity &nbsp;/&nbsp; Seventeen marks</p>
+    <p class="kicker" data-t="kicker">Brand and identity &nbsp;/&nbsp; Seventeen marks</p>
     <h1 id="h1">
-      <span class="ln"><span>One mark.</span></span>
-      <span class="ln"><span>Every <em>light</em> it meets.</span></span>
+      <span class="ln"><span data-t="h1a">One mark.</span></span>
+      <span class="ln"><span data-t="h1b">Every <em>light</em> it meets.</span></span>
     </h1>
     <div class="herofoot">
-      <p>A mark that only works in the light it was drawn in is a drawing. Every identity here
-         was built and then carried through three grounds to find out which it was.</p>
-      <div class="cue"><i></i><span>Scroll</span></div>
+      <p data-t="sub">A mark that only works in the light it was drawn in is a drawing. Every identity here was built and then carried through three grounds to find out which it was.</p>
+      <div class="cue"><i></i><span data-t="scroll">Scroll</span></div>
     </div>
   </div>
 </section>
@@ -375,7 +383,7 @@ h1,h2,h3,p{margin:0}
 <section class="thesis" id="light" aria-label="One mark, three grounds">
   <div class="stick">
     <div class="head">
-      <h2>The same mark,<br>three times over.</h2>
+      <h2 data-t="thesis">The same mark,<br>three times over.</h2>
       <p class="mono" style="font-size:10px;color:var(--bone-faint)">Venner &nbsp;/&nbsp; Advice</p>
     </div>
 
@@ -389,9 +397,9 @@ h1,h2,h3,p{margin:0}
     </div>
 
     <div class="grounds">
-      <div class="gname" data-g="0"><span>01</span><b>Deep water</b></div>
-      <div class="gname" data-g="1"><span>02</span><b>Warm light</b></div>
-      <div class="gname" data-g="2"><span>03</span><b>Bare paper</b></div>
+      <div class="gname" data-g="0"><span>01</span><b data-t="g0">Deep water</b></div>
+      <div class="gname" data-g="1"><span>02</span><b data-t="g1">Warm light</b></div>
+      <div class="gname" data-g="2"><span>03</span><b data-t="g2">Bare paper</b></div>
     </div>
   </div>
 </section>
@@ -445,44 +453,43 @@ h1,h2,h3,p{margin:0}
 <!-- ACT IV ──────────────────────────────────────────────────────────── -->
 <section class="marks" id="marks">
   <header>
-    <h2>Fourteen more.</h2>
-    <p class="mono" style="font-size:10px;color:var(--bone-faint)">Click any one &nbsp;/&nbsp; 51 frames behind it</p>
+    <h2 data-t="more">Fourteen more.</h2>
+    <p class="mono" style="font-size:10px;color:var(--bone-faint)" data-t="moreMeta">Click any one &nbsp;/&nbsp; 51 frames behind it</p>
   </header>
   <div class="grid" id="grid"></div>
 </section>
 
 <!-- ACT V ───────────────────────────────────────────────────────────── -->
 <section class="ways" id="ways">
-  <h2>One document, the standard, or the whole system.</h2>
+  <h2 data-t="waysH">One document, the standard, or the whole system.</h2>
 
   <div class="rung" tabindex="0">
-    <p class="when">3 to 4 days</p>
-    <p class="nm">One document</p>
-    <p class="pr">&euro;600</p>
-    <p class="say">One document, done properly. The whole thing, however many pages it runs to.</p>
-    <p class="credit">Credited in full into anything you buy after it</p>
+    <p class="when" data-t="t0w">3 to 4 days</p>
+    <p class="nm" data-t="t0n">One document</p>
+    <p class="pr" data-t="t0p">&euro;600</p>
+    <p class="say" data-t="t0s">One document, done properly. The whole thing, however many pages it runs to.</p>
+    <p class="credit" data-t="t0c">Credited in full into anything you buy after it</p>
   </div>
 
   <div class="rung" tabindex="0">
-    <p class="when">Two weeks</p>
-    <p class="nm">The document standard</p>
-    <p class="pr">&euro;2,400</p>
-    <p class="say">Every document that decides a bid, on one system your own people run.</p>
-    <p class="credit">All source files, yours to keep &nbsp;/&nbsp; your &euro;600 credited</p>
+    <p class="when" data-t="t1w">Two weeks</p>
+    <p class="nm" data-t="t1n">The document standard</p>
+    <p class="pr" data-t="t1p">&euro;2,400</p>
+    <p class="say" data-t="t1s">Every document that decides a bid, on one system your own people run.</p>
+    <p class="credit" data-t="t1c">All source files, yours to keep &nbsp;/&nbsp; your &euro;600 credited</p>
   </div>
 
   <div class="rung" tabindex="0">
-    <p class="when">Six weeks</p>
-    <p class="nm">Identity system</p>
-    <p class="pr">&euro;8,000</p>
-    <p class="say">Colour, type, signage, product marking and the mark itself, written down so
-       suppliers can work from it.</p>
-    <p class="credit">Your &euro;2,400 credited &nbsp;/&nbsp; credits never expire</p>
+    <p class="when" data-t="t2w">Six weeks</p>
+    <p class="nm" data-t="t2n">Identity system</p>
+    <p class="pr" data-t="t2p">&euro;8,000</p>
+    <p class="say" data-t="t2s">Colour, type, signage, product marking and the mark itself, written down so suppliers can work from it.</p>
+    <p class="credit" data-t="t2c">Your &euro;2,400 credited &nbsp;/&nbsp; credits never expire</p>
   </div>
 
   <div class="freeline">
-    <p>Before any of them, one page of your own scored against the tender that is open now. Free.</p>
-    <a class="mag" href="mailto:atlas@arvorealta.com" data-c data-mag>Start a project</a>
+    <p data-t="free">Before any of them, one page of your own scored against the tender that is open now. Free.</p>
+    <a class="mag" href="mailto:atlas@arvorealta.com" data-c data-mag data-t="cta">Start a project</a>
   </div>
 </section>
 
@@ -495,10 +502,9 @@ h1,h2,h3,p{margin:0}
     </video>
   </div>
   <div class="inner">
-    <h2>Tell me what it has to survive.</h2>
-    <p>Signage, embroidery, an engraved plate and a favicon are four different briefs.
-       The cheapest time to know which one you have is before the mark is drawn.</p>
-    <div><a class="mag" href="mailto:atlas@arvorealta.com" data-c data-mag>Start a project</a></div>
+    <h2 data-t="closeH">Tell me what it has to survive.</h2>
+    <p data-t="closeB">Signage, embroidery, an engraved plate and a favicon are four different briefs. The cheapest time to know which one you have is before the mark is drawn.</p>
+    <div><a class="mag" href="mailto:atlas@arvorealta.com" data-c data-mag data-t="cta">Start a project</a></div>
     <footer>
       <span>Arvorealta &nbsp;/&nbsp; Atlas Sahrim</span>
       <span>atlas@arvorealta.com</span>
@@ -767,6 +773,122 @@ view.addEventListener("touchend", e => {
   if (tx0 === null) return; const d = e.changedTouches[0].clientX - tx0; tx0 = null;
   if (Math.abs(d) > 46) show(at + (d < 0 ? 1 : -1));
 }, { passive:true });
+
+/* ══ three languages ═══════════════════════════════════════════════════
+   The tier names, prices, times and credit lines are copied verbatim from
+   index.html's own STR object rather than retyped, so the figures and the
+   procurement vocabulary are the ones the offer page already ships. The
+   connective prose around them is written here and is NOT a native
+   speaker's; it is the part worth having checked before this page is used
+   in an approach. A project's role line is never translated: it is what the
+   lockup itself states, and a quotation does not move language.           */
+const LANG = {
+  en: { _n:"English", _s:"EN", _l:"en",
+    cta:"Start a project",
+    r0:"Open", r1:"Light", r2:"Cases", r3:"Marks", r4:"Ways", r5:"Start",
+    kicker:"Brand and identity &nbsp;/&nbsp; Seventeen marks",
+    h1a:"One mark.", h1b:"Every <em>light</em> it meets.",
+    sub:"A mark that only works in the light it was drawn in is a drawing. Every identity here was built and then carried through three grounds to find out which it was.",
+    scroll:"Scroll",
+    thesis:"The same mark,<br>three times over.",
+    g0:"Deep water", g1:"Warm light", g2:"Bare paper",
+    more:"Fourteen more.", moreMeta:"Click any one &nbsp;/&nbsp; 51 frames behind it",
+    waysH:"One document, the standard, or the whole system.",
+    t0w:"3 to 4 days", t0n:"One document", t0p:"&euro;600",
+    t0s:"One document, done properly. The whole thing, however many pages it runs to.",
+    t0c:"Credited in full into anything you buy after it",
+    t1w:"Two weeks", t1n:"The document standard", t1p:"&euro;2,400",
+    t1s:"Every document that decides a bid, on one system your own people run.",
+    t1c:"All source files, yours to keep &nbsp;/&nbsp; your &euro;600 credited",
+    t2w:"Six weeks", t2n:"Identity system", t2p:"&euro;8,000",
+    t2s:"Colour, type, signage, product marking and the mark itself, written down so suppliers can work from it.",
+    t2c:"Your &euro;2,400 credited &nbsp;/&nbsp; credits never expire",
+    closeH:"Tell me what it has to survive.",
+    closeB:"Signage, embroidery, an engraved plate and a favicon are four different briefs. The cheapest time to know which one you have is before the mark is drawn.",
+    free:"Before any of them, one page of your own scored against the tender that is open now. Free."
+  },
+  nb: { _n:"Norsk", _s:"NO", _l:"nb",
+    cta:"Start et prosjekt",
+    r0:"Åpning", r1:"Lys", r2:"Prosjekter", r3:"Merker", r4:"Trinn", r5:"Start",
+    kicker:"Merkevare og design &nbsp;/&nbsp; Sytten merker",
+    h1a:"Ett merke.", h1b:"Hvert <em>lys</em> det møter.",
+    sub:"Et merke som bare virker i lyset det ble tegnet i, er en tegning. Hver identitet her ble bygget og så båret gjennom tre underlag for å finne ut hvilket det var.",
+    scroll:"Rull",
+    thesis:"Det samme merket,<br>tre ganger.",
+    g0:"Dypt vann", g1:"Varmt lys", g2:"Bart papir",
+    more:"Fjorten til.", moreMeta:"Klikk på én &nbsp;/&nbsp; 51 bilder bak",
+    waysH:"Ett dokument, standarden, eller hele systemet.",
+    t0w:"3 til 4 dager", t0n:"Ett dokument", t0p:"&euro;600",
+    t0s:"Ett dokument gjort ordentlig. Hele dokumentet, uansett hvor mange sider det går over.",
+    t0c:"Krediteres i sin helhet inn i alt du kjøper etterpå",
+    t1w:"To uker", t1n:"Dokumentstandarden", t1p:"&euro;2 400",
+    t1s:"Hvert dokument som avgjør et tilbud, på ett system dine egne folk kjører.",
+    t1c:"Alle kildefiler er dine &nbsp;/&nbsp; dine &euro;600 kreditert",
+    t2w:"Seks uker", t2n:"Identitetssystem", t2p:"&euro;8 000",
+    t2s:"Farge, typografi, skilting, produktmerking og selve merket, skrevet ned så leverandørene dine kan arbeide etter det.",
+    t2c:"Dine &euro;2 400 kreditert &nbsp;/&nbsp; krediteringen utløper aldri",
+    closeH:"Si hva det må tåle.",
+    closeB:"Skilting, broderi, en gravert plate og et favicon er fire ulike oppdrag. Det billigste tidspunktet å vite hvilket du har, er før merket tegnes.",
+    free:"Før noe av dette: én av dine egne sider vurdert mot konkurransen som er åpen nå. Gratis."
+  },
+  fi: { _n:"Suomi", _s:"FI", _l:"fi",
+    cta:"Aloita projekti",
+    r0:"Avaus", r1:"Valo", r2:"Projektit", r3:"Merkit", r4:"Tasot", r5:"Aloita",
+    kicker:"Brändi ja muotoilu &nbsp;/&nbsp; Seitsemäntoista merkkiä",
+    h1a:"Yksi merkki.", h1b:"Jokainen <em>valo</em>, jonka se kohtaa.",
+    sub:"Merkki, joka toimii vain siinä valossa jossa se piirrettiin, on piirros. Jokainen identiteetti täällä rakennettiin ja kannettiin kolmen pohjan läpi, jotta selvisi mikä se oli.",
+    scroll:"Vieritä",
+    thesis:"Sama merkki,<br>kolme kertaa.",
+    g0:"Syvä vesi", g1:"Lämmin valo", g2:"Paljas paperi",
+    more:"Neljätoista lisää.", moreMeta:"Klikkaa mitä tahansa &nbsp;/&nbsp; 51 kuvaa takana",
+    waysH:"Yksi asiakirja, standardi, tai koko järjestelmä.",
+    t0w:"3 tai 4 päivää", t0n:"Yksi asiakirja", t0p:"600 &euro;",
+    t0s:"Yksi asiakirja tehtynä kunnolla. Koko asiakirja, olipa sivuja kuinka monta tahansa.",
+    t0c:"Hyvitetään kokonaan mihin tahansa myöhempään ostoon",
+    t1w:"Kaksi viikkoa", t1n:"Asiakirjastandardi", t1p:"2 400 &euro;",
+    t1s:"Jokainen tarjouksen ratkaiseva asiakirja yhdellä järjestelmällä, jota oma väkesi ajaa.",
+    t1c:"Kaikki lähdetiedostot ovat sinun &nbsp;/&nbsp; 600 &euro; hyvitetty",
+    t2w:"Kuusi viikkoa", t2n:"Identiteettijärjestelmä", t2p:"8 000 &euro;",
+    t2s:"Väri, typografia, opasteet, tuotemerkinnät ja itse merkki, kirjattuina niin että toimittajasi voivat työskennellä niiden mukaan.",
+    t2c:"2 400 &euro; hyvitetty &nbsp;/&nbsp; hyvitykset eivät vanhene",
+    closeH:"Kerro mitä sen on kestettävä.",
+    closeB:"Opasteet, brodeeraus, kaiverrettu laatta ja favicon ovat neljä eri tehtävää. Halvin hetki tietää mikä sinulla on, on ennen kuin merkki piirretään.",
+    free:"Ennen mitään näistä: yksi oma sivusi pisteytettynä nyt avoinna olevaa tarjouspyyntöä vasten. Ilmaiseksi."
+  }
+};
+const LCODES = ["en","nb","fi"];
+const langBox = $("#langs");
+
+function setLang(code, remember){
+  const t = LANG[code] || LANG.en;
+  document.documentElement.lang = t._l;
+  for (const el of document.querySelectorAll("[data-t]")) {
+    const v = t[el.dataset.t];
+    if (v != null) el.innerHTML = v;
+  }
+  for (const b of langBox.children) b.setAttribute("aria-pressed", b.dataset.l === code ? "true" : "false");
+  if (remember) { try { localStorage.setItem("arvo-lang", code) } catch (e) {} }
+}
+
+langBox.innerHTML = LCODES.map(c =>
+  `<button type="button" data-l="${c}" data-c lang="${LANG[c]._l}" aria-pressed="false"
+     title="${LANG[c]._n}">${LANG[c]._s}</button>`).join("");
+langBox.addEventListener("click", e => {
+  const b = e.target.closest("button[data-l]"); if (b) setLang(b.dataset.l, true);
+});
+
+/* the browser's language first, a remembered choice over it from then on */
+(() => {
+  let pick = "en";
+  for (const n of (navigator.languages || [navigator.language || "en"])) {
+    const two = String(n).slice(0,2).toLowerCase();
+    if (two === "nb" || two === "no" || two === "nn") { pick = "nb"; break; }
+    if (two === "fi") { pick = "fi"; break; }
+    if (two === "en") { pick = "en"; break; }
+  }
+  let saved = null; try { saved = localStorage.getItem("arvo-lang") } catch (e) {}
+  setLang(LANG[saved] ? saved : pick, false);
+})();
 
 /* ══ the cursor, and the buttons that reach for it ═════════════════════ */
 const cur = $("#cur");

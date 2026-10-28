@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<title>Written once. Right every time.</title>
+<meta name="description" content="Public buyers score the documents you hand in. One page from a tender you lost, scored for nothing.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#D9D7D4">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ebgaramond-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ebgaramond-latin-ext.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/geist-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/geist-mono-latin.woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts/ebgaramond.css">
+<link rel="stylesheet" href="/assets/fonts/geist.css">
+<link rel="preload" as="image" href="/assets/img/after-1-1141.webp" fetchpriority="high">
+
+<style>
+/* ──────────────────────────────────────────────────────────────────────
+   lab/max-home — the offer page at the sandbox standard.
+   One file, hand-written CSS, vanilla JS, no build step, no Tailwind.
+
+   LIGHT FIRST, and that is the whole argument. lab/max is dark because a
+   brand portfolio is a dark room with pictures in it. This page emulates
+   print, so it keeps the offer page's own paper ground and its own two ink
+   folds. Taking the sandbox's palette as well as its standard would make
+   the site look like two firms, which is the mistake this repo has already
+   made once with the editorial theme on /brand/.
+   ────────────────────────────────────────────────────────────────────── */
+
+:root{
+  --ink:#17352C; --ink-2:#11261F; --bone:#E9E7E4;
+  --paper:#D9D7D4; --paper-2:#E4E2DF; --paper-3:#EFEEEC;
+  --brick:#8E4A45;
+  /* CLAUDE.md records --ink-soft at #5A6B63 measuring 3.93:1 on paper, under
+     the 4.5:1 small text needs, and says darkening it to about #4C5B54 fixes
+     every one of them at once. The live page has not taken it because it
+     shifts the whole page's temperature. A sandbox is where that gets tried
+     and measured rather than argued about. */
+  --ink-soft:#4C5B54;
+  --g1:#954D13; --g2:#743813; --g3:#5A200A;
+  --rule:rgba(23,53,44,.16);
+  --rule-inv:rgba(233,231,228,.16);
+  --ease:cubic-bezier(.16,1,.3,1);
+  --chrome:#17352C;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--paper);scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:Geist,system-ui,sans-serif;font-weight:380;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden}
+body.locked{overflow:hidden}
+img,video,canvas{display:block;max-width:100%}
+[hidden]{display:none!important}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+h1,h2,h3,p,ul{margin:0}
+ul{padding:0;list-style:none}
+
+.serif{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.02em}
+.mono{font-family:"Geist Mono",ui-monospace,monospace;text-transform:uppercase;letter-spacing:.2em;
+  font-weight:600}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* the page owns its focus ring, written longhand: as a shorthand Chrome
+   reported the colour as currentColor and drew bone where ink was asked for */
+:focus-visible{outline-width:3px;outline-style:solid;outline-color:var(--ink);outline-offset:2px;
+  border-radius:3px}
+.on-ink{color:var(--bone)}
+.on-ink :focus-visible,.on-ink:focus-visible{outline-color:var(--bone)}
+
+.skip{position:absolute;left:12px;top:12px;z-index:120;transform:translateY(-200%);
+  background:var(--ink);color:var(--bone);padding:12px 18px;border-radius:999px;
+  font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase}
+.skip:focus{transform:none}
+
+.wrap{margin:0 auto;width:100%;max-width:82rem;padding:0 max(20px,2vw)}
+.eyebrow{font-family:"Geist Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--brick)}
+.on-ink .eyebrow{color:rgba(233,231,228,.6)}
+
+/* ── grain, borrowed from the sandbox and halved: on paper it is a texture,
+      not a filter ───────────────────────────────────────────────────────── */
+.grain{position:fixed;inset:-150%;z-index:90;pointer-events:none;opacity:.028;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");
+  animation:grainShift 1.1s steps(5) infinite}
+@keyframes grainShift{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}
+  40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-2%)}80%{transform:translate(3%,1%)}
+  100%{transform:translate(0,0)}}
+
+/* ── the bar. Two states, decided per frame by whatever is under it. ─────
+      mix-blend-mode: difference was tried on the other sandbox and rejected
+      there: it depends on what the backdrop happens to be inside which
+      stacking context. State the two colours. ─────────────────────────── */
+.bar{position:fixed;top:0;left:0;right:0;z-index:72;display:flex;align-items:center;gap:14px;
+  padding:18px max(20px,2vw);pointer-events:none;color:var(--chrome);
+  transition:color .45s var(--ease)}
+.bar>*{pointer-events:auto}
+.bar .wm{font-family:"EB Garamond",Georgia,serif;font-size:19px;letter-spacing:.01em}
+.bar nav{display:none;gap:24px;margin-left:clamp(14px,4vw,56px)}
+@media (min-width:900px){.bar nav{display:flex}}
+.bar nav a{font-family:"Geist Mono",monospace;font-size:10.5px;font-weight:600;letter-spacing:.17em;
+  text-transform:uppercase;opacity:.62;transition:opacity .3s var(--ease);
+  padding:6px 2px;min-height:24px;display:inline-flex;align-items:center}
+.bar nav a:hover{opacity:1}
+.langs{display:flex;align-items:center;gap:2px;margin-left:auto}
+.langs button{font-family:"Geist Mono",monospace;font-size:10px;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;padding:9px 10px;border-radius:999px;opacity:.45;min-height:24px;
+  transition:opacity .3s var(--ease),background .3s var(--ease)}
+.langs button:hover{opacity:.85}
+.langs button[aria-pressed="true"]{opacity:1;background:color-mix(in srgb,currentColor 12%,transparent)}
+@media (max-width:560px){.langs button{padding:9px 6px;letter-spacing:.08em}}
+
+/* ── actions ────────────────────────────────────────────────────────── */
+.act{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;
+  border-radius:999px;padding:.9rem 1.7rem;font-size:15px;font-weight:500;min-height:24px;
+  transition:background-color .25s ease,border-color .25s ease,color .25s ease,transform .12s ease}
+.act:active{transform:scale(.975)}
+.act-grad{color:var(--bone);background:linear-gradient(45deg,var(--g1),var(--g2) 55%,var(--g3))}
+.act-grad:hover{filter:brightness(1.08)}
+.act-line{border:1px solid var(--rule);color:var(--ink)}
+.act-line:hover{border-color:var(--ink)}
+.on-ink .act-line{border-color:var(--rule-inv);color:var(--bone)}
+.on-ink .act-line:hover{border-color:var(--bone)}
+.act-bone{background:var(--bone);color:var(--ink)}
+.act-bone:hover{background:#fff}
+@media (prefers-reduced-motion:reduce){.act{transition:none}.act:active{transform:none}}
+
+/* ── reveal: a lift out of an overflow box, per line ─────────────────── */
+.ln{display:block;overflow:hidden}
+.ln>span{display:block;transform:translate3d(0,112%,0) skewY(3.5deg);
+  transition:transform 1.1s var(--ease)}
+.ready .ln>span{transform:none}
+.ln:nth-child(2)>span{transition-delay:.08s}
+.ln:nth-child(3)>span{transition-delay:.16s}
+.rv{opacity:0;transform:translate3d(0,22px,0);
+  transition:opacity .85s var(--ease),transform .85s var(--ease)}
+.rv.on{opacity:1;transform:none}
+.no-js .rv,.no-js .ln>span{opacity:1;transform:none}
+
+/* ══ ACT I — the hero ═══════════════════════════════════════════════════
+   The photograph is a dark room and the band carries its own ink ground, so
+   the type is bone and there is no wash. CLAUDE.md's table for after-1 is
+   for the live page's layout; this one sets the stack lower and is measured
+   again in that file.                                                    */
+.hero{position:relative;min-height:100svh;overflow:hidden;isolation:isolate;display:grid;
+  align-items:end;background:var(--ink-2)}
+.hero .bed{position:absolute;inset:-7% 0;z-index:0;overflow:hidden;will-change:transform}
+.hero .bed img,.hero .bed video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:62% 50%}
+.hero .bed video{opacity:0;transition:opacity 1.4s ease}
+.hero .bed video.on{opacity:1}
+.hero .bed::after{content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(96deg,rgba(17,38,31,.88) 0%,rgba(17,38,31,.70) 34%,rgba(17,38,31,.34) 58%,rgba(17,38,31,.02) 82%),
+    linear-gradient(180deg,rgba(17,38,31,.52) 0%,rgba(17,38,31,0) 24%,rgba(17,38,31,0) 50%,rgba(17,38,31,.86) 100%)}
+.hero .inner{position:relative;z-index:2;padding:0 max(20px,2vw) clamp(34px,8vh,96px);display:grid;
+  gap:clamp(16px,2.6vh,30px)}
+.hero .inner>*{max-width:min(100%,56ch)}
+@media (min-width:1100px){.hero .inner>*{max-width:54%}}
+.hero h1{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.032em;
+  font-size:clamp(2.6rem,1.3rem + 4.4vw,5.6rem);line-height:.98;max-width:13ch}
+.hero .sub{max-width:44ch;font-size:clamp(1rem,.94rem + .3vw,1.22rem);line-height:1.62;
+  color:rgba(233,231,228,.80)}
+.hero .acts{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.cue{display:flex;align-items:center;gap:11px;font-family:"Geist Mono",monospace;font-size:9.5px;
+  font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:rgba(233,231,228,.72);
+  margin-top:6px}
+.cue i{display:block;width:1px;height:42px;background:linear-gradient(var(--bone),transparent);
+  animation:drip 2.4s var(--ease) infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}
+  55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ══ ACT II — the gate strip ════════════════════════════════════════════
+   A small mark eyebrow that is found, and under it a sentence in ink that
+   is read. Everything true that is not the decision lives here rather than
+   in the hero, because six objects in a hero is a list.                  */
+.gate{background:var(--paper);padding:clamp(40px,7vh,78px) 0}
+.gate .row{display:grid;gap:clamp(22px,4vw,64px);border-top:1px solid var(--rule);padding-top:26px}
+@media (min-width:760px){.gate .row{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.gate h3{font-family:"Geist Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--brick);margin-bottom:9px}
+.gate p{font-size:clamp(1.02rem,.95rem + .3vw,1.2rem);line-height:1.6;max-width:34ch}
+
+/* ══ ACT III — the open tender ══════════════════════════════════════════ */
+.open{background:var(--paper);padding:clamp(60px,10vh,130px) 0 clamp(70px,11vh,140px)}
+.open h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.028em;
+  font-size:clamp(1.9rem,1.2rem + 3vw,4.2rem);line-height:1.02;max-width:21ch;
+  margin:18px 0 clamp(26px,4vh,46px)}
+.card{background:var(--paper-3);border:1px solid var(--rule);border-radius:16px;
+  padding:clamp(22px,3.4vw,44px);display:grid;gap:22px}
+.card .tt{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.02em;
+  font-size:clamp(1.4rem,1.1rem + 1.2vw,2.3rem);line-height:1.1}
+.quote{font-family:"Geist Mono",monospace;font-size:12.5px;line-height:1.55;color:var(--ink-soft);
+  border-left:2px solid var(--rule);padding-left:14px}
+.quote b{display:block;font-weight:600;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--brick);margin-bottom:6px}
+.card .body{max-width:56ch;line-height:1.7;color:var(--ink-soft)}
+.fields{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  border-top:1px solid var(--rule);padding-top:20px}
+.fields .lab{font-family:"Geist Mono",monospace;font-size:9.5px;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ink-soft)}
+.fields .val{font-family:"EB Garamond",Georgia,serif;font-size:clamp(1.2rem,1rem + .7vw,1.7rem);
+  margin-top:3px}
+.files{display:flex;flex-wrap:wrap;gap:10px}
+.file{display:grid;gap:2px;border:1px solid var(--rule);border-radius:12px;padding:13px 18px;
+  transition:border-color .25s ease,background .25s ease}
+.file:hover{border-color:var(--ink);background:var(--paper-2)}
+.file b{font-weight:500;font-size:15px}
+.file i{font-style:normal;font-family:"Geist Mono",monospace;font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-soft)}
+.open .foot{font-size:14px;color:var(--ink-soft);margin-top:18px}
+
+/* ══ ACT IV — the weights, pinned and scrubbed ══════════════════════════
+   The part-to-whole bar from the offer page, driven by the scroll instead
+   of by an observer. It is not a progress meter: there is no track behind
+   it, the three segments are the whole and they sum to 100.              */
+.weigh{position:relative;height:270vh;background:var(--ink)}
+.weigh .stick{position:sticky;top:0;min-height:100svh;display:grid;align-content:center;
+  gap:clamp(20px,4vh,44px);padding:clamp(80px,12vh,130px) 0 clamp(40px,7vh,80px);color:var(--bone)}
+.weigh h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.03em;
+  font-size:clamp(2rem,1.2rem + 3.4vw,4.8rem);line-height:1;max-width:17ch;margin-top:16px}
+.chart{display:grid;gap:10px}
+.dim{display:grid;align-items:end;height:54px}
+.dim .span{grid-row:1;display:flex;align-items:center;gap:10px;position:relative;padding-bottom:7px;
+  opacity:0;transition:opacity .5s var(--ease)}
+.dim.on .span{opacity:1}
+.dim .span::before,.dim .span::after{content:"";position:absolute;bottom:0;width:1px;height:12px;
+  background:rgba(233,231,228,.5)}
+.dim .span::before{left:0}.dim .span::after{right:0}
+.dim .ruleL,.dim .ruleR{flex:1;height:1px;background:rgba(233,231,228,.5)}
+.dim .fig{font-family:"EB Garamond",Georgia,serif;font-size:clamp(1.6rem,1.1rem + 1.8vw,3rem);
+  line-height:1;letter-spacing:-.02em}
+.dim .of{font-family:"Geist Mono",monospace;font-size:10.5px;letter-spacing:.16em;
+  color:rgba(233,231,228,.6)}
+.segs{display:grid;gap:2px;border-radius:16px;overflow:hidden;position:relative}
+.segs .s{position:relative;min-height:clamp(78px,11vh,122px);display:flex;align-items:center;
+  padding:0 clamp(12px,1.6vw,28px);transition:opacity .35s var(--ease)}
+.segs .s b{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.02em;
+  font-size:clamp(1.7rem,1.1rem + 2.4vw,3.6rem);line-height:1;color:var(--ink)}
+.segs .s:nth-child(1){background:rgba(233,231,228,.95)}
+.segs .s:nth-child(2){background:rgba(233,231,228,.70)}
+.segs .s:nth-child(3){background:rgba(233,231,228,.50)}
+.segs.dim1 .s:not(.lit){opacity:.34}
+/* one curtain of the page's own ink sliding right off the whole bar is one
+   event at one speed, and the segment geometry is never distorted while it
+   runs. Three segments each growing from their own edge is three events. */
+.curtain{position:absolute;inset:-1px -2px;z-index:2;background:var(--ink);transform-origin:right center;
+  will-change:transform}
+.names{display:grid;gap:2px}
+.names span{font-family:"Geist Mono",monospace;font-size:clamp(9px,8px + .3vw,11px);font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;padding-top:12px;opacity:0;
+  transition:opacity .5s var(--ease)}
+.names span.on{opacity:1}
+.names span:nth-child(1),.names span:nth-child(2){color:rgba(233,231,228,.85)}
+.names span:nth-child(3){color:rgba(233,231,228,.65)}
+@media (min-width:640px){.names span{padding-left:clamp(12px,1.6vw,28px)}}
+.weigh .note{font-size:14.5px;line-height:1.68;color:rgba(233,231,228,.7);max-width:62ch}
+
+/* ══ ACT V — the ladder ═════════════════════════════════════════════════ */
+.ladder{background:var(--paper);padding:clamp(70px,12vh,150px) 0}
+.ladder h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.03em;
+  font-size:clamp(2rem,1.2rem + 3.4vw,4.8rem);line-height:1;max-width:16ch;margin:18px 0 12px}
+.ladder .lede{font-size:clamp(1.02rem,.95rem + .3vw,1.2rem);line-height:1.6;color:var(--ink-soft);
+  max-width:46ch;margin-bottom:clamp(30px,5vh,60px)}
+.rung{position:relative;display:grid;gap:14px;padding:clamp(26px,4vh,44px) 0;
+  border-top:1px solid var(--rule)}
+.rung:last-of-type{border-bottom:1px solid var(--rule)}
+.rung>*{position:relative;z-index:1}
+.rung::before{content:"";position:absolute;left:0;right:0;top:0;bottom:0;z-index:0;
+  background:var(--paper-3);transform:scaleY(0);transform-origin:bottom;
+  transition:transform .55s var(--ease)}
+.rung:hover::before,.rung:focus-within::before{transform:scaleY(1)}
+.rung .step{font-family:"Geist Mono",monospace;font-size:9.5px;font-weight:600;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--brick)}
+.rung .nm{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.022em;
+  font-size:clamp(1.7rem,1.1rem + 2.1vw,3.1rem);line-height:1.02}
+.rung .pr{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.03em;
+  font-size:clamp(2.6rem,1.4rem + 5vw,7.2rem);line-height:.9;color:var(--ink)}
+@supports (background-clip:text) or (-webkit-background-clip:text){
+  /* guarded: a browser without background-clip would otherwise show nothing
+     at all where the price is */
+  .rung .pr{background:linear-gradient(45deg,var(--g1),var(--g2) 55%,var(--g3));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+}
+.rung .when{font-family:"Geist Mono",monospace;font-size:9.5px;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ink-soft)}
+.rung .terms{line-height:1.64;color:var(--ink-soft);max-width:42ch}
+.rung ul{display:grid;gap:9px;margin-top:4px}
+.rung li{position:relative;padding-left:20px;font-size:15px;line-height:1.55;max-width:44ch}
+.rung li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:1px;background:var(--brick)}
+.rung .note{font-size:13px;line-height:1.6;color:var(--ink-soft);max-width:42ch}
+.rung[data-lead]{padding-left:clamp(14px,2vw,26px);margin-left:calc(-1 * clamp(14px,2vw,26px))}
+.rung[data-lead]::after{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:linear-gradient(var(--g1),var(--g3));z-index:1}
+.rung .col{display:grid;align-content:start;gap:12px}
+@media (min-width:980px){
+  .rung{grid-template-columns:minmax(0,5fr) minmax(0,4fr) minmax(0,6fr);
+    gap:clamp(20px,3vw,56px);align-items:start}
+}
+.ladder .cmp{margin-top:clamp(28px,5vh,56px);display:grid;gap:18px}
+.ladder .cmp p{font-size:14.5px;line-height:1.7;color:var(--ink-soft);max-width:66ch}
+.freeline{display:flex;flex-wrap:wrap;gap:16px 26px;align-items:center;justify-content:space-between;
+  border-top:1px solid var(--rule);padding-top:24px}
+.freeline p{max-width:46ch;line-height:1.6;font-size:clamp(1rem,.95rem + .25vw,1.14rem)}
+
+/* ══ ACT VI — the close ═════════════════════════════════════════════════ */
+.close{position:relative;min-height:88svh;display:grid;align-items:center;background:var(--ink);
+  color:var(--bone);padding:clamp(70px,12vh,150px) 0}
+.close h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.034em;
+  font-size:clamp(2.4rem,1.2rem + 5.4vw,7.4rem);line-height:.96;max-width:14ch;margin:18px 0 24px}
+.close p{max-width:52ch;font-size:clamp(1rem,.95rem + .3vw,1.2rem);line-height:1.66;
+  color:rgba(233,231,228,.78);margin-bottom:30px}
+.close .ft{display:flex;flex-wrap:wrap;gap:14px 30px;justify-content:space-between;align-items:center;
+  border-top:1px solid var(--rule-inv);padding-top:20px;margin-top:clamp(40px,8vh,90px);
+  font-family:"Geist Mono",monospace;font-size:9.5px;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:rgba(233,231,228,.6)}
+.close .ft a{transition:color .25s ease}
+.close .ft a:hover{color:var(--bone)}
+
+/* ══ the intake ═════════════════════════════════════════════════════════ */
+dialog{border:0;padding:0;background:transparent;max-width:none;max-height:none;width:100%}
+dialog::backdrop{background:rgba(11,24,20,.72);backdrop-filter:blur(4px)}
+.sheet{position:fixed;left:50%;translate:-50% 0;width:min(560px,calc(100vw - 28px));
+  background:var(--paper-3);color:var(--ink);border-radius:18px;border:1px solid var(--rule);
+  padding:clamp(20px,3.4vw,34px);overflow-y:auto;display:grid;gap:18px}
+.sheet h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.02em;
+  font-size:clamp(1.5rem,1.2rem + 1.1vw,2.2rem);line-height:1.05}
+.sheet .intro{font-size:15px;line-height:1.62;color:var(--ink-soft)}
+.sheet label{display:block;font-family:"Geist Mono",monospace;font-size:9.5px;font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:7px}
+.sheet input[type=email]{width:100%;padding:13px 15px;border-radius:11px;border:1px solid var(--rule);
+  background:#fff;font:inherit;font-size:16px;color:var(--ink)}
+.sheet input[type=email]:focus{border-color:var(--ink)}
+.sheet .hint{font-size:12.5px;color:var(--ink-soft);margin-top:7px;line-height:1.5}
+/* a file input styled sr-only is still focusable, so the ring lands on
+   something nobody can see. A real button forwards the click instead. */
+.sheet input[type=file]{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.pick{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.pick .name{font-size:14px;color:var(--ink-soft);overflow-wrap:anywhere}
+.sheet .err{font-size:13.5px;line-height:1.5;color:#8E2B22}
+.sheet .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.sheet .alt{font-size:12.5px;line-height:1.6;color:var(--ink-soft);border-top:1px solid var(--rule);
+  padding-top:14px}
+.sheet .alt a{text-decoration:underline;text-underline-offset:3px}
+.xbtn{width:40px;height:40px;border-radius:999px;border:1px solid var(--rule);display:grid;
+  place-items:center;font-size:16px}
+.xbtn:hover{border-color:var(--ink)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important}
+  .ln>span{transform:none}
+  .rv{opacity:1;transform:none}
+  .grain{animation:none}
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.remove('no-js')</script>
+<div class="grain" aria-hidden="true"></div>
+
+<a class="skip" href="#open" data-t="skip">Skip to the offer</a>
+
+<header class="bar" id="bar">
+  <a class="wm" href="/">Arvorealta</a>
+  <nav aria-label="Sections">
+    <a href="#open"  data-t="nav.open">Open now</a>
+    <a href="#weigh" data-t="nav.case">How it is scored</a>
+    <a href="#price" data-t="nav.price">Pricing</a>
+  </nav>
+  <div class="langs" id="langs" role="group" aria-label="Language"></div>
+</header>
+
+<main id="top">
+
+<!-- ACT I ───────────────────────────────────────────────────────────── -->
+<section class="hero on-ink" data-tone="dark">
+  <div class="bed" aria-hidden="true">
+    <picture>
+      <source type="image/webp" sizes="100vw"
+        srcset="/assets/img/after-1-760.webp 760w, /assets/img/after-1-960.webp 960w, /assets/img/after-1-1141.webp 1141w">
+      <img src="/assets/img/after-1-1141.jpg" sizes="100vw" alt="" width="1141" height="640"
+        srcset="/assets/img/after-1-760.jpg 760w, /assets/img/after-1-960.jpg 960w, /assets/img/after-1-1141.jpg 1141w"
+        fetchpriority="high">
+    </picture>
+    <video id="herov" muted playsinline loop preload="metadata" poster="/assets/img/after-1-1141.jpg">
+      <source src="/assets/video/hero-1-720.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="inner wrap">
+    <p class="eyebrow" data-t="hero.eyebrow">Industrial manufacturer bids</p>
+    <h1>
+      <span class="ln"><span data-t="hero.h1a">Written once.</span></span>
+      <span class="ln"><span data-t="hero.h1b">Right every time.</span></span>
+    </h1>
+    <p class="sub" data-t="hero.sub">Public buyers score the documents you hand in. Not the plant, not the price list, not the twenty years.</p>
+    <div class="acts">
+      <button class="act act-grad" data-cta data-t="cta">Get your page scored</button>
+      <a class="act act-line" href="#open" data-t="hero.second">See the open tender</a>
+    </div>
+    <div class="cue"><i></i><span data-t="_scroll">Scroll</span></div>
+  </div>
+</section>
+
+<!-- ACT II ──────────────────────────────────────────────────────────── -->
+<section class="gate" data-tone="light">
+  <div class="wrap"><div class="row" id="gate" data-render="gate"></div></div>
+</section>
+
+<!-- ACT III ─────────────────────────────────────────────────────────── -->
+<section class="open" id="open" data-tone="light" style="scroll-margin-top:76px">
+  <div class="wrap">
+    <p class="eyebrow rv" data-t="open.eyebrow">Open now</p>
+    <h2 class="rv" data-t="open.h2">If you are bidding on this one, the hard attachment is already written.</h2>
+
+    <div class="card rv">
+      <div>
+        <p class="tt" data-t="open.title">Supply of waste containers</p>
+        <p class="quote" style="margin-top:14px">
+          <b data-t="open.official">Named in the competition documents as</b>
+          <span lang="nb">Anskaffelse av avfallsbeholdere</span>
+        </p>
+      </div>
+      <p class="body" data-t="open.buyer">Valdres Kommunale Renovasjon IKS, Norway. Framework agreement, four years.</p>
+      <p class="body" data-t="open.body">Two of the three annexes are handed out as finished forms. The third is not, and it is the one where the quality and the environment weight is read.</p>
+      <div class="fields" id="openFields" data-render="fields"></div>
+      <div class="files" id="openFiles" data-render="files"></div>
+    </div>
+    <p class="foot rv" data-t="open.foot">One tender today. Another when there is one worth writing for.</p>
+  </div>
+</section>
+
+<!-- ACT IV ──────────────────────────────────────────────────────────── -->
+<section class="weigh on-ink" id="weigh" data-tone="dark" style="scroll-margin-top:0">
+  <div class="stick">
+    <div class="wrap">
+      <p class="eyebrow" data-t="weigh.eyebrow">How it is scored</p>
+      <h2 data-t="weigh.h2">Most of the score is not the price.</h2>
+    </div>
+    <div class="wrap">
+      <p class="sr" data-t="weigh.alt">The award is scored out of 100 points.</p>
+      <div class="chart" aria-hidden="true">
+        <div class="dim" id="dim">
+          <div class="span" id="dimSpan">
+            <i class="ruleL"></i>
+            <span class="fig">65</span><span class="of">/ 100</span>
+            <i class="ruleR"></i>
+          </div>
+        </div>
+        <div class="segs" id="segs"></div>
+        <div class="names" id="names"></div>
+      </div>
+    </div>
+    <div class="wrap"><p class="note" data-t="weigh.body">Read from the award criteria in the notice itself.</p></div>
+  </div>
+</section>
+
+<!-- ACT V ───────────────────────────────────────────────────────────── -->
+<section class="ladder" id="price" data-tone="light" style="scroll-margin-top:76px">
+  <div class="wrap">
+    <p class="eyebrow rv" data-t="ladder.eyebrow">What it costs</p>
+    <h2 class="rv" data-t="ladder.h2">Then make it a system.</h2>
+    <p class="lede rv" data-t="ladder.lede">Every tier credits into the one above it. Credits never expire.</p>
+    <div id="rungs" data-render="tiers"></div>
+    <div class="cmp">
+      <p class="rv" data-t="ladder.foot">A Swedish bid consultancy publishes 15,000 kr excluding VAT for a single draft of a single bid.</p>
+      <div class="freeline rv">
+        <p data-t="ladder.free">The first step is free, and it is the one the whole page is asking for.</p>
+        <button class="act act-grad" data-cta data-t="cta">Get your page scored</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACT VI ──────────────────────────────────────────────────────────── -->
+<section class="close on-ink" id="start" data-tone="dark">
+  <div class="wrap">
+    <p class="eyebrow rv" data-t="close.eyebrow">Where to start</p>
+    <h2 class="rv" data-t="close.h2">Find out what it cost you. For nothing.</h2>
+    <p class="rv" data-t="close.body">Send one page from a tender you lost.</p>
+    <div class="rv"><button class="act act-bone" data-cta data-t="cta">Get your page scored</button></div>
+    <div class="ft">
+      <span>Arvorealta &nbsp;/&nbsp; Atlas Sahrim</span>
+      <span><a href="/brand/" data-t="foot.brand">Brand and identity</a> &nbsp;/&nbsp; <a href="/video/" data-t="foot.video">Video</a></span>
+      <span><a href="mailto:atlas@arvorealta.com">atlas@arvorealta.com</a></span>
+    </div>
+  </div>
+</section>
+</main>
+
+<dialog id="dlg" aria-labelledby="dlgTitle">
+  <form method="dialog" class="sheet" id="sheet">
+    <div class="row">
+      <h2 id="dlgTitle" data-t="form.title">Send one page</h2>
+      <button type="button" class="xbtn" id="dlgX" aria-label="Close">&#10005;</button>
+    </div>
+    <p class="intro" data-t="form.intro">One page from a tender you lost.</p>
+
+    <div id="dlgBody">
+      <div style="margin-bottom:18px">
+        <label for="em" data-t="form.email">Your email</label>
+        <input type="email" id="em" name="email" autocomplete="email" inputmode="email" required>
+        <p class="hint" data-t="form.emailHint">Where the scored page goes back to.</p>
+      </div>
+      <div>
+        <label data-t="form.file">The page</label>
+        <div class="pick">
+          <input type="file" id="fl" name="file">
+          <button type="button" class="act act-line" id="flBtn" data-t="form.choose">Choose a file</button>
+          <span class="name" id="flName"></span>
+          <button type="button" class="act act-line" id="flClear" hidden data-t="form.remove">Remove</button>
+        </div>
+        <p class="hint" data-t="form.fileHint">PDF, Word or an image of the page. Up to 10 MB.</p>
+      </div>
+      <p class="err" id="dlgErr" role="alert" hidden></p>
+    </div>
+
+    <div class="row" id="dlgActs">
+      <button type="button" class="act act-grad" id="dlgSend" data-t="form.send">Send it</button>
+      <button type="button" class="act act-line" id="dlgCancel" data-t="form.cancel">Close</button>
+    </div>
+
+    <p class="alt" id="dlgAlt"></p>
+  </form>
+</dialog>
+
+<noscript style="display:block;padding:6rem 1.5rem;max-width:42rem;margin:0 auto">
+  <p style="line-height:1.7;color:#4C5B54">The page above reads without scripting. The language control,
+  the pricing rungs and the intake form do not; mail
+  <a href="mailto:atlas@arvorealta.com">atlas@arvorealta.com</a> with one page attached and it comes back scored.</p>
+</noscript>
+
+<script>
+(() => {
+"use strict";
+
+/* ══ copy ══════════════════════════════════════════════════════════════
+   STR below is copied verbatim out of index.html's own object by
+   _tools/copy-str.py rather than retyped, so every price, every deadline
+   and every word of the Norwegian and Finnish is the one the live page
+   already ships. That is a snapshot and it will drift: re-run the tool
+   after any copy change on the offer page. The same trade as
+   lab/_tw.src.css copying the live tokens rather than importing them.    */
+const STR = {
+  en: {
+    label: "English", short: "EN", htmlLang: "en",
+    skip: "Skip to the offer",
+    nav: { open: "Open now", case: "How it is scored", price: "Pricing" },
+    foot: { brand: "Brand and identity", video: "Video" },
+    cta: "Get your page scored",
+    hero: {
+      eyebrow: "Industrial manufacturer bids",
+      h1a: "Written once.", h1b: "Right every time.",
+      sub: "Public buyers score the documents you hand in. Not the plant, not the price list, not the twenty years.",
+      second: "See the open tender"
+    },
+    gate: [
+      ["Who this is for", "The person writing the bid between tasks."],
+      ["What the first step costs", "Nothing, and there is no call."]
+    ],
+    open: {
+      eyebrow: "Open now",
+      h2: "If you are bidding on this one, the hard attachment is already written.",
+      title: "Supply of waste containers", official: "Named in the competition documents as",
+      buyer: "Valdres Kommunale Renovasjon IKS, Norway. Framework agreement, four years.",
+      body: "Two of the three annexes are handed out as finished forms. The third is not, and it is the one where the quality and the environment weight is read.",
+      seeEx: "See a filled example", getTpl: "Download the template",
+      exMeta: "PDF, 5 sheets, 132 KB", tplMeta: "Word, 14 KB, fill it in",
+      fields: [["Tender deadline", "27 Oct 2026, 12:00"], ["Questions close", "19 Oct 2026"]],
+      foot: "One tender today. Another when there is one worth writing for."
+    },
+    weigh: {
+      eyebrow: "How it is scored",
+      alt: "The award is scored out of 100 points. Climate and environment carries 30, quality 35 and price 35, so 65 of the 100 are not the price.",
+      h2: "Most of the score is not the price.",
+      segs: [["Climate and environment", 30], ["Quality", 35], ["Price", 35]],
+      body: "Read from the award criteria in the notice itself. Norwegian authorities have had to weight climate and environment at a minimum of 30% since January 2024, and this tender weights it exactly on that floor."
+    },
+    mail: {
+      subject: "One page to be scored.",
+      body: "Hi Atlas,\n\nAttached is one page from a tender we bid on.\nThanks.\n"
+    },
+    form: {
+      title: "Send one page",
+      intro: "One page from a tender you lost. A method statement, a quality section, a capability answer. It comes back scored against the criteria it was judged on, with the points located.",
+      email: "Your email",
+      emailHint: "Where the scored page goes back to. Nothing else is sent there.",
+      file: "The page",
+      fileHint: "PDF, Word or an image of the page. Up to 10 MB.",
+      choose: "Choose a file",
+      change: "Choose another",
+      remove: "Remove",
+      send: "Send it",
+      sending: "Sending",
+      cancel: "Close",
+      errEmail: "An email address is needed, or there is nowhere to send the scored page.",
+      errEmailBad: "That address does not look complete.",
+      errFile: "Attach the page you want scored.",
+      errType: "That file cannot be read. Send a PDF, a Word file or an image.",
+      errSize: "That file is over 10 MB. Export the single page on its own and try again.",
+      errSend: "It did not send. Mail the page to atlas@arvorealta.com instead.",
+      doneTitle: "It is on its way",
+      doneBody: "The scored page comes back to the address you gave. No charge and no call.",
+      dry: "Sandbox only. Nothing was sent, because this form has no intake address yet."
+    },
+    ladder: {
+      eyebrow: "What it costs",
+      h2: "Then make it a system.",
+      lede: "Every tier credits into the one above it. Credits never expire.",
+      tiers: [
+        { step: "Step one", name: "One document", price: "€600", time: "3 to 4 days",
+          terms: "One document, done properly. The whole thing, however many pages it runs to, not a sample page.",
+          points: [
+            "The full capability statement, reference sheet or tender annex",
+            "The editable source file",
+            "Print and screen exports, sized and named for tender portals"
+          ],
+          note: "Credited in full into anything you buy after it." },
+        { step: "The standard", name: "The document standard", price: "€2,400", time: "two weeks", lead: true,
+          terms: "Every document that decides a bid, on one system your own people run.",
+          points: [
+            "Templates for capability statements, reference sheets and tender annexes",
+            "One document built end to end, plus file structure and naming",
+            "The index. Every project, by client and year, ready at the next bid",
+            "One revision round"
+          ],
+          note: "All source files, yours to keep. Runs without a designer after handoff. Your €600 credited." },
+        { step: "Beyond documents", name: "Identity system", price: "€8,000", time: "six weeks",
+          terms: "The document standard applied across the company.",
+          points: [
+            "Colour and typographic system for print, screen and product",
+            "Signage, vehicles, trade fair stands, product marking",
+            "Written guidelines your suppliers can work from",
+            "Wordmark or mark"
+          ],
+          note: "Take it once the document standard has proved itself. Your €2,400 credited." }
+      ],
+      foot: "A Swedish bid consultancy publishes 15,000 kr excluding VAT for a single draft of a single bid, delivered as a Word file. Roughly what the full standard costs here, and theirs expires the day that tender closes.",
+      free: "The first step is free, and it is the one the whole page is asking for."
+    },
+
+    close: {
+      eyebrow: "Where to start",
+      h2: "Find out what it cost you. For nothing.",
+      body: "Send one page from a tender you lost. A method statement, a quality section, a capability answer. It comes back scored against the criteria it was judged on, with the points located, the reasoning written out, and a note on what the next one should carry."
+    },
+    langLabel: "Language"
+  },
+
+  nb: {
+    label: "Norsk", short: "NO", htmlLang: "nb",
+    skip: "Hopp til tilbudet",
+    nav: { open: "Åpen nå", case: "Slik vektes det", price: "Priser" },
+    foot: { brand: "Merkevare og design", video: "Video" },
+    cta: "Få siden din vurdert",
+    hero: {
+      eyebrow: "Tilbud fra industriprodusenter",
+      h1a: "Skrevet én gang.", h1b: "Riktig hver gang.",
+      sub: "Offentlige oppdragsgivere gir poeng til dokumentene du leverer. Ikke fabrikken, ikke prislisten, ikke de tjue årene.",
+      second: "Se den åpne konkurransen"
+    },
+    gate: [
+      ["Hvem den er for", "Den som skriver tilbudet mellom andre oppgaver."],
+      ["Hva første steg koster", "Ingenting, og det er ingen samtale."]
+    ],
+    open: {
+      eyebrow: "Åpen nå",
+      h2: "Leverer du tilbud i denne, er det vanskeligste vedlegget allerede skrevet.",
+      title: "Leveranse av avfallsbeholdere", official: null,
+      buyer: "Valdres Kommunale Renovasjon IKS, Norge. Rammeavtale, fire år.",
+      body: "To av de tre vedleggene er utlevert som ferdige skjema. Det tredje er det ikke, og det er der kvalitets- og miljøvekten leses.",
+      seeEx: "Se et utfylt eksempel", getTpl: "Last ned malen",
+      exMeta: "PDF, 5 sider, 132 KB", tplMeta: "Word, 14 KB, fyll den ut",
+      fields: [["Tilbudsfrist", "27. okt. 2026, 12:00"], ["Frist for spørsmål", "19. okt. 2026"]],
+      foot: "Én konkurranse i dag. Flere når det finnes en det er verdt å skrive for."
+    },
+    weigh: {
+      eyebrow: "Slik vektes det",
+      alt: "Konkurransen gir 100 poeng. Klima og miljø teller 30, kvalitet 35 og pris 35, så 65 av de 100 er ikke prisen.",
+      h2: "Mesteparten av poengsummen er ikke prisen.",
+      segs: [["Klima og miljø", 30], ["Kvalitet", 35], ["Pris", 35]],
+      body: "Lest fra tildelingskriteriene i selve kunngjøringen. Norske oppdragsgivere har siden januar 2024 måttet vekte klima og miljø med minst 30 prosent, og denne konkurransen ligger akkurat på den grensen."
+    },
+    mail: {
+      subject: "Én side til vurdering.",
+      body: "Hei Atlas,\n\nVedlagt er én side fra en konkurranse vi deltok i.\nTakk.\n"
+    },
+    form: {
+      title: "Send én side",
+      intro: "Én side fra en konkurranse du tapte. En metodebeskrivelse, et kvalitetsavsnitt, et kapasitetssvar. Den kommer tilbake vurdert mot kriteriene den ble bedømt etter, med poengene plassert.",
+      email: "E-posten din",
+      emailHint: "Hit kommer den vurderte siden tilbake. Ingenting annet sendes dit.",
+      file: "Siden",
+      fileHint: "PDF, Word eller et bilde av siden. Opptil 10 MB.",
+      choose: "Velg en fil",
+      change: "Velg en annen",
+      remove: "Fjern",
+      send: "Send den",
+      sending: "Sender",
+      cancel: "Lukk",
+      errEmail: "Det trengs en e-postadresse, ellers er det ingen steder å sende den vurderte siden.",
+      errEmailBad: "Den adressen ser ikke komplett ut.",
+      errFile: "Legg ved siden du vil ha vurdert.",
+      errType: "Den filen kan ikke leses. Send en PDF, en Word-fil eller et bilde.",
+      errSize: "Den filen er over 10 MB. Eksporter den ene siden for seg og prøv igjen.",
+      errSend: "Den ble ikke sendt. Send siden til atlas@arvorealta.com i stedet.",
+      doneTitle: "Den er på vei",
+      doneBody: "Den vurderte siden kommer tilbake til adressen du oppga. Ingen kostnad og ingen samtale.",
+      dry: "Kun sandkasse. Ingenting ble sendt, fordi dette skjemaet ennå ikke har en mottaksadresse."
+    },
+    ladder: {
+      eyebrow: "Hva det koster",
+      h2: "Så gjør du det til et system.",
+      lede: "Hvert trinn krediteres inn i det over. Krediteringen utløper aldri.",
+      tiers: [
+        { step: "Steg én", name: "Ett dokument", price: "€600", time: "3 til 4 dager",
+          terms: "Ett dokument gjort ordentlig. Hele dokumentet, uansett hvor mange sider det går over, ikke en prøveside.",
+          points: [
+            "Hele kapasitetsbeskrivelsen, referansearket eller tilbudsvedlegget",
+            "Den redigerbare kildefilen",
+            "Eksporter for trykk og skjerm, tilpasset og navngitt for tilbudsportaler"
+          ],
+          note: "Krediteres i sin helhet inn i alt du kjøper etterpå." },
+        { step: "Standarden", name: "Dokumentstandarden", price: "€2 400", time: "to uker", lead: true,
+          terms: "Hvert dokument som avgjør et tilbud, på ett system dine egne folk kjører.",
+          points: [
+            "Maler for kapasitetsbeskrivelser, referanseark og tilbudsvedlegg",
+            "Ett dokument bygget fra ende til ende, pluss filstruktur og navngiving",
+            "Registeret. Hvert prosjekt, etter kunde og år, klart til neste tilbud",
+            "Én revisjonsrunde"
+          ],
+          note: "Alle kildefiler er dine. Går uten designer etter overlevering. Dine €600 kreditert." },
+        { step: "Utover dokumenter", name: "Identitetssystem", price: "€8 000", time: "seks uker",
+          terms: "Dokumentstandarden anvendt i hele selskapet.",
+          points: [
+            "Farge- og typografisystem for trykk, skjerm og produkt",
+            "Skilt, biler, messestands, produktmerking",
+            "Skriftlige retningslinjer leverandørene dine kan arbeide etter",
+            "Ordmerke eller symbol"
+          ],
+          note: "Ta det når dokumentstandarden har bevist seg. Dine €2 400 kreditert." }
+      ],
+      foot: "Et svensk tilbudskonsulentselskap oppgir 15 000 kr eksklusive mva for ett utkast til ett tilbud, levert som Word-fil. Omtrent det hele standarden koster her, og deres utløper den dagen konkurransen stenger.",
+      free: "Første steg er gratis, og det er det hele siden ber om."
+    },
+
+    close: {
+      eyebrow: "Hvor du begynner",
+      h2: "Finn ut hva det kostet deg. Gratis.",
+      body: "Send én side fra en konkurranse du tapte. En metodebeskrivelse, et kvalitetsavsnitt, et svar om kapasitet. Den kommer tilbake vurdert mot kriteriene den ble bedømt etter, med poengene plassert, begrunnelsen skrevet ut, og en merknad om hva den neste bør inneholde."
+    },
+    langLabel: "Språk"
+  },
+
+  fi: {
+    label: "Suomi", short: "FI", htmlLang: "fi",
+    skip: "Siirry tarjoukseen",
+    nav: { open: "Avoinna nyt", case: "Näin se pisteytetään", price: "Hinnoittelu" },
+    foot: { brand: "Brändi ja muotoilu", video: "Video" },
+    cta: "Pyydä sivusi pisteytys",
+    hero: {
+      eyebrow: "Teollisuusvalmistajan tarjoukset",
+      h1a: "Kirjoitettu kerran.", h1b: "Oikein joka kerta.",
+      sub: "Julkiset hankkijat pisteyttävät asiakirjat, jotka jätät. Eivät tehdasta, eivät hinnastoa, eivät kahtakymmentä vuotta.",
+      second: "Katso avoin tarjouspyyntö"
+    },
+    gate: [
+      ["Kenelle tämä on", "Sille, joka kirjoittaa tarjouksen muiden töiden lomassa."],
+      ["Mitä ensimmäinen askel maksaa", "Ei mitään, eikä puhelua tule."]
+    ],
+    open: {
+      eyebrow: "Avoinna nyt",
+      h2: "Jos jätät tarjouksen tähän, vaikein liite on jo kirjoitettu.",
+      title: "Jäteastioiden toimitus", official: "Kilpailuasiakirjoissa nimellä",
+      buyer: "Valdres Kommunale Renovasjon IKS, Norja. Puitejärjestely, neljä vuotta.",
+      body: "Kaksi kolmesta liitteestä annetaan valmiina lomakkeina. Kolmatta ei anneta, ja juuri siinä luetaan laadun ja ympäristön paino.",
+      seeEx: "Katso täytetty esimerkki", getTpl: "Lataa malli",
+      exMeta: "PDF, 5 sivua, 132 KB", tplMeta: "Word, 14 KB, täytä se",
+      fields: [["Tarjousten määräaika", "27.10.2026, 12:00"], ["Kysymysten määräaika", "19.10.2026"]],
+      foot: "Yksi tarjouspyyntö tänään. Lisää, kun löytyy sellainen jolle kannattaa kirjoittaa."
+    },
+    weigh: {
+      eyebrow: "Näin se pisteytetään",
+      alt: "Kilpailussa on 100 pistettä. Ilmasto ja ympäristö painaa 30, laatu 35 ja hinta 35, joten 65 pistettä sadasta ei ole hinta.",
+      h2: "Suurin osa pisteistä ei ole hinta.",
+      segs: [["Ilmasto ja ympäristö", 30], ["Laatu", 35], ["Hinta", 35]],
+      body: "Luettu itse ilmoituksen vertailuperusteista. Norjalaisten hankintayksiköiden on tammikuusta 2024 lähtien pitänyt painottaa ilmastoa ja ympäristöä vähintään 30 prosentilla, ja tämä tarjouspyyntö on tasan sillä rajalla."
+    },
+    mail: {
+      subject: "Yksi sivu pisteytettäväksi.",
+      body: "Hei Atlas,\n\nOheisena yksi sivu tarjouskilpailusta, johon osallistuimme.\nKiitos.\n"
+    },
+    form: {
+      title: "Lähetä yksi sivu",
+      intro: "Yksi sivu hävitysta tarjouksesta. Menetelmäkuvaus, laatuosio tai kapasiteettivastaus. Se palaa pisteytettynä niitä perusteita vasten, joilla se arvioitiin, pisteet paikannettuina.",
+      email: "Sähköpostisi",
+      emailHint: "Tänne pisteytetty sivu palaa. Mitään muuta ei lähetetä sinne.",
+      file: "Sivu",
+      fileHint: "PDF, Word tai kuva sivusta. Enintään 10 Mt.",
+      choose: "Valitse tiedosto",
+      change: "Valitse toinen",
+      remove: "Poista",
+      send: "Lähetä",
+      sending: "Lähetetään",
+      cancel: "Sulje",
+      errEmail: "Sähköpostiosoite tarvitaan, muuten pisteytetyllä sivulla ei ole osoitetta.",
+      errEmailBad: "Osoite ei näytä kokonaiselta.",
+      errFile: "Liitä sivu, jonka haluat pisteytettävän.",
+      errType: "Tuota tiedostoa ei voi lukea. Lähetä PDF, Word-tiedosto tai kuva.",
+      errSize: "Tiedosto on yli 10 Mt. Vie yksittäinen sivu omaksi tiedostokseen ja yritä uudelleen.",
+      errSend: "Lähetys ei onnistunut. Lähetä sivu osoitteeseen atlas@arvorealta.com.",
+      doneTitle: "Se on matkalla",
+      doneBody: "Pisteytetty sivu palaa antamaasi osoitteeseen. Ei maksua eikä puhelua.",
+      dry: "Vain hiekkalaatikko. Mitään ei lähetetty, koska tällä lomakkeella ei vielä ole vastaanotto-osoitetta."
+    },
+    ladder: {
+      eyebrow: "Mitä se maksaa",
+      h2: "Tee siitä sitten järjestelmä.",
+      lede: "Jokainen taso hyvitetään ylempään. Hyvitykset eivät vanhene.",
+      tiers: [
+        { step: "Askel yksi", name: "Yksi asiakirja", price: "600 €", time: "3 tai 4 päivää",
+          terms: "Yksi asiakirja tehtynä kunnolla. Koko asiakirja, olipa sivuja kuinka monta tahansa, ei näytesivua.",
+          points: [
+            "Koko kapasiteettikuvaus, referenssisivu tai tarjouksen liite",
+            "Muokattava lähdetiedosto",
+            "Painoon ja näytölle viennit, mitoitettuina ja nimettyinä tarjousportaaleihin"
+          ],
+          note: "Hyvitetään kokonaan mihin tahansa myöhempään ostoon." },
+        { step: "Standardi", name: "Asiakirjastandardi", price: "2 400 €", time: "kaksi viikkoa", lead: true,
+          terms: "Jokainen tarjouksen ratkaiseva asiakirja yhdellä järjestelmällä, jota oma väkesi ajaa.",
+          points: [
+            "Mallit kapasiteettikuvauksiin, referenssisivuihin ja tarjouksen liitteisiin",
+            "Yksi asiakirja alusta loppuun, lisäksi tiedostorakenne ja nimeäminen",
+            "Hakemisto. Jokainen projekti asiakkaittain ja vuosittain, valmiina seuraavaan tarjoukseen",
+            "Yksi korjauskierros"
+          ],
+          note: "Kaikki lähdetiedostot ovat sinun. Toimii ilman suunnittelijaa luovutuksen jälkeen. 600 € hyvitetty." },
+        { step: "Asiakirjojen yli", name: "Identiteettijärjestelmä", price: "8 000 €", time: "kuusi viikkoa",
+          terms: "Asiakirjastandardi sovellettuna koko yritykseen.",
+          points: [
+            "Väri- ja typografiajärjestelmä painoon, näytölle ja tuotteeseen",
+            "Opasteet, ajoneuvot, messuosastot, tuotemerkinnät",
+            "Kirjalliset ohjeet, joiden mukaan toimittajasi voivat työskennellä",
+            "Sanamerkki tai tunnus"
+          ],
+          note: "Ota se, kun asiakirjastandardi on osoittanut arvonsa. 2 400 € hyvitetty." }
+      ],
+      foot: "Ruotsalainen tarjouskonsultti ilmoittaa hinnaksi 15 000 kr ilman arvonlisäveroa yhdestä luonnoksesta yhteen tarjoukseen, Word-tiedostona toimitettuna. Suunnilleen saman kuin koko standardi täällä, ja heidän versionsa vanhenee sinä päivänä kun kilpailu sulkeutuu.",
+      free: "Ensimmäinen askel on ilmainen, ja sitä koko sivu pyytää."
+    },
+
+    close: {
+      eyebrow: "Mistä aloittaa",
+      h2: "Selvitä, mitä se maksoi sinulle. Ilmaiseksi.",
+      body: "Lähetä yksi sivu hävitystä tarjouksesta. Menetelmäkuvaus, laatuosio, kyvykkyysvastaus. Se palaa pisteytettynä niitä perusteita vasten, joilla se arvioitiin, pisteet paikannettuina, perustelut kirjoitettuina ja merkintä siitä, mitä seuraavan tulisi sisältää."
+    },
+    langLabel: "Kieli"
+  }
+};
+const LANGS = ["en", "nb", "fi"];
+
+/* the one string this page has that the offer page does not */
+const EXTRA = { en:{ _scroll:"Scroll" }, nb:{ _scroll:"Rull" }, fi:{ _scroll:"Vieritä" } };
+
+const $  = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const clamp01 = v => v < 0 ? 0 : v > 1 ? 1 : v;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
+const dig = (o, path) => path.split(".").reduce((a, k) => (a == null ? a : a[k]), o);
+
+/* ══ the intake ════════════════════════════════════════════════════════
+   The site is static on GitHub Pages and has no server, so the form posts
+   to Basin. The endpoint is not a secret: a form action lives in the page's
+   own HTML and hiding it at local scope would be theatre. Basin's own spam
+   protection is what stands in for secrecy.                              */
+const INTAKE = "https://usebasin.com/f/945efcd39804";
+const MAX_MB = 10, MAX_BYTES = MAX_MB * 1024 * 1024;
+const OK_EXT = ["pdf","doc","docx","odt","rtf","png","jpg","jpeg","webp"];
+
+let LANG = "en";
+const T = () => STR[LANG];
+/* declared here and not beside markReveals: the language bootstrap below
+   calls renderLists -> markReveals, so a `let` further down puts this in the
+   temporal dead zone and kills the whole module on load */
+let revs = [];
+
+/* ══ render ════════════════════════════════════════════════════════════ */
+function renderLists(){
+  const t = T();
+
+  $("#gate").innerHTML = t.gate.map(([h, p]) =>
+    `<div class="rv"><h3>${esc(h)}</h3><p>${esc(p)}</p></div>`).join("");
+
+  $("#openFields").innerHTML = t.open.fields.map(([l, v]) =>
+    `<div><p class="lab">${esc(l)}</p><p class="val">${esc(v)}</p></div>`).join("");
+
+  $("#openFiles").innerHTML =
+    `<a class="file" href="/assets/vedlegg-5/Vedlegg-5-eksempel.pdf" target="_blank" rel="noopener">
+       <b>${esc(t.open.seeEx)}</b><i>${esc(t.open.exMeta)}</i></a>
+     <a class="file" href="/assets/vedlegg-5/Vedlegg-5-Utfyllende-opplysninger.docx" download>
+       <b>${esc(t.open.getTpl)}</b><i>${esc(t.open.tplMeta)}</i></a>`;
+
+  /* the bar's track widths come from the data, and every track is
+     minmax(0,Nfr): an fr track takes its min-content width as a floor, so a
+     long name would otherwise push its own column wider than the segment
+     above it and the three rows would stop lining up */
+  const segs = t.weigh.segs;
+  const total = segs.reduce((n, [, p]) => n + p, 0);
+  const cols  = segs.map(([, p]) => `minmax(0,${p}fr)`).join(" ");
+  $("#segs").style.gridTemplateColumns = cols;
+  $("#segs").style.gridAutoFlow = "column";
+  $("#names").style.gridTemplateColumns = cols;
+  $("#names").style.gridAutoFlow = "column";
+  $("#dim").style.gridTemplateColumns = `minmax(0,${segs[0][1] + segs[1][1]}fr) minmax(0,${segs[2][1]}fr)`;
+  $("#segs").innerHTML = segs.map(([, p], i) =>
+    `<div class="s" data-s="${i}"><b>${p}</b></div>`).join("") + `<div class="curtain" id="curtain"></div>`;
+  $("#names").innerHTML = segs.map(([n]) => `<span>${esc(n)}</span>`).join("");
+
+  $("#rungs").innerHTML = t.ladder.tiers.map(x => `
+    <div class="rung"${x.lead ? " data-lead" : ""} tabindex="0">
+      <div class="col">
+        <p class="step">${esc(x.step)}</p>
+        <p class="nm">${esc(x.name)}</p>
+        <p class="terms">${esc(x.terms)}</p>
+      </div>
+      <div class="col">
+        <p class="pr">${esc(x.price)}</p>
+        <p class="when">${esc(x.time)}</p>
+      </div>
+      <div class="col">
+        <ul>${x.points.map(pt => `<li>${esc(pt)}</li>`).join("")}</ul>
+        <p class="note">${esc(x.note)}</p>
+      </div>
+    </div>`).join("");
+
+  /* the prewritten mail is the path that always works, and it is filled in
+     the reader's own language: an empty compose window asks the reader to
+     write the thing we are asking them for */
+  const m = t.mail;
+  $("#dlgAlt").innerHTML =
+    `<a href="mailto:atlas@arvorealta.com?subject=${encodeURIComponent(m.subject)}&body=${encodeURIComponent(m.body)}">atlas@arvorealta.com</a>`;
+
+  bindSegs();
+  markReveals();
+}
+
+function setLang(code, remember){
+  LANG = STR[code] ? code : "en";
+  const t = STR[LANG];
+  document.documentElement.lang = t.htmlLang;
+  for (const el of $$("[data-t]")) {
+    const k = el.dataset.t;
+    const v = (EXTRA[LANG] && EXTRA[LANG][k] != null) ? EXTRA[LANG][k] : dig(t, k);
+    if (v != null) el.textContent = v;
+  }
+  for (const b of $("#langs").children) b.setAttribute("aria-pressed", b.dataset.l === LANG ? "true" : "false");
+  renderLists();
+  if (remember) { try { localStorage.setItem("arvo-lang", LANG) } catch (e) {} }
+}
+
+$("#langs").innerHTML = LANGS.map(c =>
+  `<button type="button" data-l="${c}" lang="${STR[c].htmlLang}" aria-pressed="false"
+     title="${esc(STR[c].label)}">${esc(STR[c].short)}</button>`).join("");
+$("#langs").addEventListener("click", e => {
+  const b = e.target.closest("button[data-l]"); if (b) setLang(b.dataset.l, true);
+});
+
+(() => {
+  let pick = "en";
+  for (const n of (navigator.languages || [navigator.language || "en"])) {
+    const two = String(n).slice(0,2).toLowerCase();
+    if (two === "nb" || two === "no" || two === "nn") { pick = "nb"; break; }
+    if (two === "fi") { pick = "fi"; break; }
+    if (two === "en") { pick = "en"; break; }
+  }
+  let saved = null; try { saved = localStorage.getItem("arvo-lang") } catch (e) {}
+  setLang(STR[saved] ? saved : pick, false);
+})();
+
+/* ══ the hero video ════════════════════════════════════════════════════
+   React is not here to drop muted/playsinline/autoplay, but the autoplay
+   policy still is. Gated on `playing` rather than canplaythrough, which
+   iOS throttles hard enough that it frequently never fires.              */
+(function mountVideo(){
+  const v = $("#herov");
+  if (!v) return;
+  if (reduce) { v.remove(); return; }
+  v.muted = true; v.defaultMuted = true; v.playsInline = true; v.loop = true;
+  const on = () => v.classList.add("on");
+  v.addEventListener("playing", on);
+  v.addEventListener("timeupdate", () => { if (v.currentTime > 0) on(); });
+  v.addEventListener("canplaythrough", on);
+  v.addEventListener("error", () => v.remove());
+  const ask = () => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+  ask();
+  const evs = ["pointerdown","touchstart","touchend","click","keydown","visibilitychange"];
+  const retry = () => { if (v.classList.contains("on")) { evs.forEach(e => removeEventListener(e, retry)); return; } ask(); };
+  evs.forEach(e => addEventListener(e, retry, { passive:true }));
+})();
+
+/* ══ the bar's isolation, by mouse and by keyboard alike ═══════════════ */
+function bindSegs(){
+  const box = $("#segs"), names = $$("#names span");
+  const cells = $$("#segs .s");
+  const lift = i => {
+    box.classList.toggle("dim1", i !== null);
+    cells.forEach((c, k) => c.classList.toggle("lit", k === i));
+    names.forEach((n, k) => n.style.opacity = i === null ? "" : (k === i ? "1" : ".34"));
+  };
+  box.addEventListener("pointerleave", () => lift(null));
+  cells.forEach((c, i) => {
+    c.addEventListener("pointerenter", () => lift(i));
+  });
+}
+
+/* ══ reveals ═══════════════════════════════════════════════════════════
+   A sweep on a rAF-throttled scroll, never an IntersectionObserver. An
+   observer reports a CHANGE in intersection, so a jump that crosses a block
+   without painting it takes that block from below the fold to above it with
+   ratio 0 at both ends, fires nothing, and leaves it at opacity 0 for the
+   life of the page. The hero's own anchor does exactly that jump.        */
+function markReveals(){ revs = $$(".rv"); sweep(); }
+function sweep(){
+  const line = innerHeight * 0.88;
+  for (const el of revs) {
+    if (el.classList.contains("on")) continue;
+    if (el.getBoundingClientRect().top <= line) el.classList.add("on");
+  }
+}
+/* a block stuck at zero is worse than no animation */
+setTimeout(() => revs.forEach(el => el.classList.add("on")), 4000);
+
+/* ══ the chrome's two states ═══════════════════════════════════════════ */
+const toned = $$("[data-tone]");
+let chromeTone = null;
+function setChrome(tone){
+  if (tone === chromeTone) return;
+  chromeTone = tone;
+  document.documentElement.style.setProperty("--chrome", tone === "dark" ? "#E9E7E4" : "#17352C");
+}
+
+/* ══ one loop ══════════════════════════════════════════════════════════ */
+const hero = $(".hero"), bed = hero.querySelector(".bed"), heroInner = hero.querySelector(".inner");
+const weigh = $("#weigh");
+let ticking = false;
+
+function frame(){
+  ticking = false;
+  const vh = innerHeight, y = scrollY;
+
+  sweep();
+
+  /* whichever section is under the bar owns its colour */
+  let over = null;
+  for (const el of toned) { const r = el.getBoundingClientRect();
+    if (r.top <= 54 && r.bottom > 54) over = el; }
+  setChrome(over ? over.dataset.tone : "light");
+
+  /* the hero leaves slowly and its ground leaves slower */
+  if (y < vh * 1.3) {
+    const p = clamp01(y / vh);
+    heroInner.style.transform = "translate3d(0," + (p * -11).toFixed(2) + "vh,0)";
+    heroInner.style.opacity = (1 - clamp01(p * 1.45)).toFixed(3);
+    bed.style.transform = "translate3d(0," + (p * 7).toFixed(2) + "%,0) scale(" + (1 + p * 0.06).toFixed(4) + ")";
+  }
+
+  /* ACT IV — the curtain, scrubbed.
+     One block of the page's own ink sliding right off the whole bar is one
+     event at one speed, and the segment geometry is never distorted while it
+     runs. It also sidesteps the trap this repo has recorded three times, an
+     element that starts outside its own box never being seen by whatever is
+     watching it, because the curtain starts covering the bar and is
+     therefore always in view. */
+  const wr = weigh.getBoundingClientRect();
+  if (wr.top < vh && wr.bottom > 0) {
+    const span = weigh.offsetHeight - vh;
+    const raw = clamp01((-wr.top) / Math.max(1, span));
+    const p = clamp01((raw - 0.10) / 0.62);          /* a beat of hold at each end */
+    const curtain = $("#curtain");
+    if (curtain) curtain.style.transform = "scaleX(" + (1 - p).toFixed(4) + ")";
+    const segs = T().weigh.segs, total = segs.reduce((n, [, q]) => n + q, 0);
+    let run = 0;
+    $$("#names span").forEach((n, i) => {
+      run += segs[i][1];
+      n.classList.toggle("on", p >= (run / total) - 0.04);
+    });
+    $("#dim").classList.toggle("on", p > 0.97);      /* the dimension line draws last */
+  }
+}
+addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(frame) } }, { passive:true });
+addEventListener("resize", () => { if (!ticking) { ticking = true; requestAnimationFrame(frame) } }, { passive:true });
+frame();
+
+const go = () => document.body.classList.add("ready");
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(go).catch(go); else go();
+setTimeout(go, 1200);
+
+/* ══ the dialog ════════════════════════════════════════════════════════
+   A native <dialog>, not a div: showModal() gives the focus trap, the inert
+   background, Escape, ::backdrop and focus returning to the control that
+   opened it, and all five are things a hand-rolled modal gets wrong.
+   One dialog at the root, because four copies would be four copies of the
+   reader's half-filled form.                                             */
+const dlg = $("#dlg"), sheet = $("#sheet"), fl = $("#fl"), flName = $("#flName"),
+      flClear = $("#flClear"), errEl = $("#dlgErr"), sendBtn = $("#dlgSend");
+let busy = false;
+
+function fail(msg){ errEl.textContent = msg; errEl.hidden = false; }
+function clearErr(){ errEl.hidden = true; errEl.textContent = ""; }
+
+$$("[data-cta]").forEach(b => b.addEventListener("click", () => {
+  clearErr(); dlg.showModal();
+  /* focus is moved by hand. Written as lowercase autofocus in a template
+     React dropped the attribute entirely and showModal fell back to the
+     close button; the live property is the only thing worth checking. */
+  requestAnimationFrame(() => $("#em").focus());
+}));
+$("#dlgX").addEventListener("click", () => dlg.close());
+$("#dlgCancel").addEventListener("click", () => dlg.close());
+sheet.addEventListener("submit", e => e.preventDefault());
+
+$("#flBtn").addEventListener("click", () => fl.click());
+flClear.addEventListener("click", () => { fl.value = ""; flName.textContent = ""; flClear.hidden = true;
+  $("#flBtn").textContent = T().form.choose; clearErr(); });
+fl.addEventListener("change", () => {
+  const f = fl.files && fl.files[0];
+  if (!f) return;
+  flName.textContent = f.name + "  ·  " + (f.size < 1048576
+    ? Math.round(f.size / 1024) + " KB" : (f.size / 1048576).toFixed(1) + " MB");
+  flClear.hidden = false;
+  $("#flBtn").textContent = T().form.change;
+  clearErr();
+});
+
+/* The cap and the extension are checked before any request. A reader who
+   finds out from a server that their file was too large has already waited
+   for the upload. */
+function validate(){
+  const t = T().form;
+  const email = $("#em").value.trim();
+  if (!email) return t.errEmail;
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return t.errEmailBad;
+  const f = fl.files && fl.files[0];
+  if (!f) return t.errFile;
+  const ext = (f.name.split(".").pop() || "").toLowerCase();
+  if (!OK_EXT.includes(ext)) return t.errType;
+  if (f.size > MAX_BYTES) return t.errSize;
+  return null;
+}
+
+sendBtn.addEventListener("click", async () => {
+  if (busy) return;
+  clearErr();
+  const bad = validate();
+  if (bad) { fail(bad); return; }
+  const t = T().form;
+
+  /* kept on purpose: if the endpoint is ever unset the dialog says nothing
+     was sent rather than faking a success */
+  if (!INTAKE) { fail(t.dry); return; }
+
+  busy = true; sendBtn.textContent = t.sending; sendBtn.disabled = true;
+  try {
+    const fd = new FormData();
+    fd.append("email", $("#em").value.trim());
+    fd.append("file", fl.files[0]);
+    fd.append("page", location.href);
+    fd.append("language", LANG);
+    /* Accept: application/json is not optional. Without it Basin answers a
+       form post with a 302 to its own thank-you page, fetch follows it
+       silently, and ok reads true off Basin's HTML. Content-Type is
+       deliberately NOT set: FormData writes its own with the multipart
+       boundary, and naming it by hand drops the boundary and the upload
+       arrives empty. */
+    const res = await fetch(INTAKE, { method:"POST", body:fd, headers:{ Accept:"application/json" } });
+    if (!res.ok) throw new Error("http " + res.status);
+    $("#dlgBody").innerHTML =
+      `<p style="font-family:'EB Garamond',Georgia,serif;font-size:1.5rem;line-height:1.2;margin-bottom:10px">${esc(t.doneTitle)}</p>
+       <p class="intro">${esc(t.doneBody)}</p>`;
+    $("#dlgActs").innerHTML = "";
+    const close = document.createElement("button");
+    close.type = "button"; close.className = "act act-line"; close.textContent = t.cancel;
+    close.addEventListener("click", () => dlg.close());
+    $("#dlgActs").appendChild(close);
+  } catch (err) {
+    fail(t.errSend);
+    busy = false; sendBtn.disabled = false; sendBtn.textContent = t.send;
+  }
+});
+
+/* ══ the software keyboard ═════════════════════════════════════════════
+   Driven by visualViewport and nothing else. 100svh and
+   interactive-widget=resizes-content both look like the fix and neither
+   reaches iOS: interactive-widget is Chromium only, and on iOS Safari svh
+   and dvh do not shrink for the keyboard at all, the layout viewport keeps
+   its full height and the keyboard simply covers it. offsetTop matters as
+   much as height, because iOS scrolls the visual viewport inside the layout
+   viewport and a fixed element does not move with it.                    */
+(function keyboard(){
+  const vv = window.visualViewport;
+  if (!vv) { sheet.style.top = "6vh"; sheet.style.maxHeight = "88svh"; return; }
+  const place = () => {
+    if (!dlg.open) return;
+    const h = vv.height, top = vv.offsetTop;
+    const cap = Math.max(160, h - 24);
+    sheet.style.maxHeight = cap + "px";
+    const sh = sheet.offsetHeight;
+    sheet.style.top = (sh < h - 24 ? top + (h - sh) / 2 : top + 12) + "px";
+  };
+  vv.addEventListener("resize", place);
+  vv.addEventListener("scroll", place);
+  dlg.addEventListener("close", () => { document.body.classList.remove("locked"); });
+  const obs = new MutationObserver(() => { if (dlg.open) { document.body.classList.add("locked");
+    requestAnimationFrame(place); } });
+  obs.observe(dlg, { attributes:true, attributeFilter:["open"] });
+  addEventListener("resize", place);
+})();
+})();
+</script>
+</body>
+</html>

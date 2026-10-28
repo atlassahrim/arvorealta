@@ -499,6 +499,112 @@ Measured at the wrap against an unrelated pair: water 4.05 against 21.52 of 255,
 paper 1.01 against 7.51. **Real motion beats a synthetic move**, and the
 synthetic `ground-*-1-1080.mp4` set is kept only for the ground with no footage.
 
+### `lab/max-home/` — the offer page at that standard, and the language bar
+
+The owner's call on `lab/max/` was to use it, with the language control added
+and the same standard taken to the home page.
+
+**The language control is on both, and it is the offer page's own three.**
+English, Norwegian Bokmål and Finnish, the browser's language first and a
+remembered choice over it from then on, `html lang` following so a screen
+reader gets its pronunciation. On `lab/max-home/` every string is read from
+**`STR` copied verbatim out of `index.html`** rather than retyped, so every
+price, every deadline and every word of the Norwegian and Finnish is the one
+the live page already ships. That is a snapshot and it will drift; it is the
+same trade as `lab/_tw.src.css` copying the live tokens rather than importing
+them, and a copy change on the offer page has to be carried across.
+`lab/max/` has its own short object, which reuses the offer page's tier names,
+prices, times and credit lines exactly and writes only the connective prose
+around them. **That prose is not a native speaker's** and is the part worth
+having checked before the page is used in an approach.
+
+**A project's role line is never translated.** `Advice`, `Negócios
+imobiliários` and the rest are what the lockup itself states, and a quotation
+does not move language — the same rule the annex editions already carry.
+
+**`lab/max-home/` is LIGHT first, and that is the argument.** `lab/max` is
+dark because a brand portfolio is a dark room with pictures in it. The offer
+page emulates print, so this one keeps the paper ground and its own two ink
+folds, the hero and the award. **Taking the sandbox's palette along with its
+standard would make the site look like two firms**, which is the mistake this
+repo already made once with the editorial theme on `/brand/`. What crosses is
+the standard: one file, no Tailwind, no build step, the argument performed by
+the scroll, chrome with two states, and every ground measured.
+
+**The award fold is the thing that got better.** The curtain is the offer
+page's own design and the reasoning there is unchanged, but it is scrubbed by
+the scroll here instead of played once on arrival: the reader drives the bar
+across, the three names arrive as the sweep passes each segment, and the
+dimension line carrying `65 / 100` draws last. It is still a part-to-whole bar
+and not a progress meter, still `aria-hidden` with the sentence carried in
+text, and every track is still `minmax(0,Nfr)`.
+
+**Measured on `after-1` at 1512 x 900**, type hidden so the strips sample the
+picture, with the hero's objects held inside the scrimmed left column:
+
+| | median | brightest 2% |
+|---|---|---|
+| eyebrow, bone at 60% | 5.34:1 | 4.83:1 |
+| headline, full bone | 11.94:1 | 6.54:1 |
+| standfirst, bone at 80% | 8.42:1 | 7.23:1 |
+| scroll cue, bone at 72% | 6.98:1 | 6.82:1 |
+
+**The eyebrow clears here, and the reason is the column rather than the
+type.** The live page's table has it failing at 3.28:1 because the headline
+runs the full measure and the eyebrow sits in the band where the window
+highlights run. Capping the hero's objects at 54% of the width on wide screens
+keeps all four inside the part of the frame CLAUDE.md measured as safe. **The
+brick is barred here as everywhere on a dark ground** — it reads 1.95:1 over
+this photograph, close to the 2.03:1 recorded on flat ink — so the hero and the
+award take `bone/60` and the brick is spent only on the paper folds.
+
+**`--ink-soft` darkened to `#4C5B54` measures 4.99:1 on paper and 6.18:1 on
+paper-3.** This file has carried that value as a proposal for a while, noting
+that the live `#5A6B63` reads 3.93:1 and fails what small text needs, and that
+the change has not been made because it shifts the whole page's temperature.
+The sandbox runs the darkened token throughout, which is what settles the
+contrast half of that question; the temperature half is still a decision and
+still the owner's.
+
+**Four faults found in the building, and all four are general.**
+
+**A `let` below the code that reaches it kills the whole module.** The
+language bootstrap calls the list renderer, which assigns to `revs`, which was
+declared with `let` further down the file: `Cannot access 'revs' before
+initialization` threw at load, so nothing after it ever bound and the call to
+action simply did nothing when clicked. The page rendered perfectly and was
+completely inert. **A temporal dead zone fails silently from the outside.**
+
+**`.on-ink` carried a focus-ring colour and no colour.** The hero headline
+inherited `body`'s ink and drew dark green on a dark photograph. A class whose
+whole job is inversion has to state the text colour, not only the ring.
+
+**`[hidden]` loses to any rule that sets `display`.** The Remove button
+carried the attribute and `.act{display:inline-flex}` overrode it, so it
+showed with no file chosen. `[hidden]{display:none!important}` is the fix and
+it belongs in the reset.
+
+**A descendant selector beats `.wrap`, and it only shows below the max-width.**
+`.hero .inner` at (0,2,0) zeroed the side padding `.wrap` sets at (0,1,0). On
+desktop the wrap's own centring margin hid it completely; on a phone the whole
+hero ran flush to the screen edge.
+
+**The credit note was mono and carried a price.** Geist Mono gives the comma a
+full advance, so `€2,400 credited` drew as `€2 , 400`. The note is a sentence
+that is read rather than a label that is found, so it is set in the sans.
+**The rule is in this file and it was still broken**, which is the argument for
+grepping the prices rather than trusting the eye.
+
+**The intake is ported whole, not reimplemented.** Native `<dialog>` with
+`showModal`, focus moved by hand to the email field, `visualViewport` driving
+`top` and `max-height` on both its events, the 10 MB cap and the extension
+list checked before any request, `Accept: application/json` with the
+`Content-Type` deliberately unset, the `INTAKE` null branch kept, and the
+prewritten mail in the footer filled in the reader's own language. Verified:
+the dialog opens, focus lands on the field rather than the close button, the
+body locks, the two validation messages fire in order, Escape closes and
+unlocks.
+
 ## The pricing ladder
 
 Three tiers on `index.html` and a free step that is not one.
@@ -554,7 +660,9 @@ brand/index.html        brand portfolio
 lab/brand/index.html    the first sandbox — a full portfolio page, noindex
 lab/max/index.html      the second sandbox — every restriction off. One file,
                         hand-written CSS, vanilla JS, WebGL, no build step
-                        and no Tailwind at all. noindex
+                        and no Tailwind at all. Three languages. noindex
+lab/max-home/index.html the offer page at that standard, light first, with
+                        the intake form and STR copied from index.html. noindex
 branding/index.html     a noindex stub redirecting to /brand/
 video/index.html        video portfolio
 reference/index.html    the first offer page, kept for reference — noindex
