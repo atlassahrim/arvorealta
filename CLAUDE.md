@@ -421,6 +421,84 @@ dark page. The offer page already reverses out to full-bleed ink twice. It is
 still the owner's call, and the rule gets rewritten in the same commit if the
 answer is yes.
 
+### The second sandbox — `lab/max/`, with the restrictions taken off
+
+The owner's question was whether the first sandbox looks plain because of the
+rules in this file. **Mostly it does not**, and the honest split is worth
+keeping: the rules that bind a sandbox at all are the two infrastructure ones
+below, and everything else about `lab/brand/` being a stack of boxes was a
+choice made in the building. `lab/max/` is the same material with nothing held
+back, so the two can be compared rather than argued about.
+
+**It has no Tailwind, no compiled stylesheet, no vendored runtime and no build
+step at all.** One file, 54 KB, hand-written CSS and vanilla JS. That removes
+the sandbox-stylesheet rule above along with the whole class of bug it exists
+to prevent, and it removes `html\`...\`` and every htm trap with it. **A page
+that needs no utility classes should not carry a utility compiler**, and a
+sandbox is where that is allowed to be tested.
+
+**The centrepiece is the page's own argument performed instead of claimed.**
+340vh of scroll over one sticky stage, where a single mark dissolves through
+deep water, warm light and bare paper. It works because the owner shot the
+three grounds in register: measured across six projects, the mark lands in the
+same place in all three frames, Turvatikas excepted, which carries a card on
+paper that the others do not. **The dissolve is a WebGL displacement, not a
+cross-fade** — a value-noise height field melts one ground into the next and
+warps hardest at the halfway point. The three stacked `<img>` beneath are the
+floor, cross-faded on opacity, and they are what runs when there is no WebGL
+context and under `prefers-reduced-motion`.
+
+**The chrome has two states and the page decides which per frame.** Two of the
+grounds are light, so the bar, the rail and the progress rule read ink over the
+paper case panel and over the close, and bone everywhere else. `mix-blend-mode:
+difference` was the first attempt and it is recorded as rejected: it depends on
+what the backdrop happens to be inside which stacking context, and it was
+measured rendering a near-invisible bar over the paper panel. **State the two
+colours; do not derive them from a blend.**
+
+**It crosses the light-only rule twice over and on purpose.** It is dark for
+five sections and then turns to full paper for the close, chrome included,
+which is the clearest argument available that one identity can carry both
+grounds without becoming two firms. Promoting any of it is still the owner's
+decision in front of the figures.
+
+**Measured on the new hero ground**, type hidden so the strips sample the
+picture, bone over the water at 1512 x 900:
+
+| | median | brightest 2% |
+|---|---|---|
+| kicker, bone at 78% | 8.78:1 | 5.17:1 |
+| headline, full bone | 12.76:1 | 8.08:1 |
+| headline, gold `#C9A227` | 6.45:1 | 4.31:1 |
+| standfirst, bone at 62% | 6.33:1 | 6.04:1 |
+| scroll cue, bone at 72% | 7.92:1 | 7.38:1 |
+
+The two faint lines started at `--bone-faint`, which measured **2.38:1** there
+and failed. **A token tuned for a flat ground is not a value for a photograph**,
+and the hero's quiet lines carry their own.
+
+**One stacking bug is worth recording because it looks like nothing.** The
+hero's video bed was `position:fixed; z-index:-2` inside a `position:relative`
+section, which establishes no stacking context, so the bed painted at step 2 of
+the root context and `body`'s own background painted at step 3, on top of it.
+The result is a hero that looks deliberately black. Measured: the source
+ground's brightest 2% is 0.0801 in relative luminance and the render showed
+0.0075, so **ninety percent of what the video was for had been thrown away and
+nothing in the markup said so.** `isolation: isolate` on the section and an
+absolute bed fixed it, and the parallax is written rather than implied.
+
+**A pinned horizontal scroller is a desktop idea.** On a phone it leaves each
+panel's copy half off the screen at most scroll positions and crops a 16:9
+frame to a sliver, so below 820px the three cases simply stack and the pin is
+switched off in JS as well as in CSS.
+
+**The two ground loops are the owner's own footage**, not a camera move over a
+still: `ground-water-2-720.mp4` and `ground-paper-2-720.mp4`. Neither looped, so
+the tail is crossfaded into the head and the file is shortened by that much.
+Measured at the wrap against an unrelated pair: water 4.05 against 21.52 of 255,
+paper 1.01 against 7.51. **Real motion beats a synthetic move**, and the
+synthetic `ground-*-1-1080.mp4` set is kept only for the ground with no footage.
+
 ## The pricing ladder
 
 Three tiers on `index.html` and a free step that is not one.
@@ -473,7 +551,10 @@ document agreed before the work starts, not listed on the page.
 ```
 index.html              offer page
 brand/index.html        brand portfolio
-lab/brand/index.html    the sandbox — a full portfolio page, noindex
+lab/brand/index.html    the first sandbox — a full portfolio page, noindex
+lab/max/index.html      the second sandbox — every restriction off. One file,
+                        hand-written CSS, vanilla JS, WebGL, no build step
+                        and no Tailwind at all. noindex
 branding/index.html     a noindex stub redirecting to /brand/
 video/index.html        video portfolio
 reference/index.html    the first offer page, kept for reference — noindex
@@ -494,9 +575,10 @@ assets/
                         portrait frames — <slug>-<ver>-<width>.{webp,jpg}
   land/                 the sandbox's 51 landscape frames, 17 marks on three
                         grounds — <slug>-<ground>-<ver>-<width>.webp
-  video/                the hero clip, and the sandbox's three ground loops —
+  video/                the hero clip; the synthetic ground loops
                         ground-<ground>-1-1080.{mp4,jpg}, built by
-                        _tools/portfolio/ground-loop.py
+                        _tools/portfolio/ground-loop.py; and the owner's own
+                        footage, ground-{water,paper}-2-720.{mp4,jpg}
   vedlegg-5/            the open tender's example PDF and fillable Word file
   fonts/                Geist, Geist Mono and EB Garamond, self-hosted woff2
   vendor/runtime.js     React, react-dom, Motion and htm, bundled once
