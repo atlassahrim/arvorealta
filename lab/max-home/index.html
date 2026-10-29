@@ -45,6 +45,24 @@
   --rule-inv:rgba(233,231,228,.16);
   --ease:cubic-bezier(.16,1,.3,1);
   --chrome:#17352C;
+
+  /* ── ONE DESCENDING SCALE, and nothing steps over the thing above it ──
+     Six roles with one job each, which is the annex spec's own shape:
+     display, figure, head, value, sub, body. Before this the page had
+     three competing largest objects and no hierarchy at all — the close
+     h2 ran to 7.4rem and a tier price to 7.2rem against a hero h1 of
+     5.6rem, so the two things a reader meets last were bigger than the
+     thing they met first. The h1 is the largest object on the page by
+     decision and everything else descends from it.
+     Measured at 1440 / 390: display 96/43 · figure 67/37 · head 52/30 ·
+     value 42/26 · sub 28/20 · body 19/16. Strictly descending at both
+     ends and at 768 and 1920, which is the property, not the figures. */
+  --t-display:clamp(2.7rem,1.32rem + 5.2vw,6rem);
+  --t-figure:clamp(2.3rem,1.42rem + 3.1vw,4.4rem);
+  --t-head:clamp(1.85rem,1.17rem + 2.3vw,3.4rem);
+  --t-value:clamp(1.6rem,1.11rem + 1.7vw,2.6rem);
+  --t-sub:clamp(1.25rem,1.05rem + .8vw,1.85rem);
+  --t-body:clamp(1rem,.95rem + .3vw,1.2rem);
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -78,7 +96,16 @@ ul{padding:0;list-style:none}
   font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase}
 .skip:focus{transform:none}
 
-.wrap{margin:0 auto;width:100%;max-width:82rem;padding:0 max(20px,2vw)}
+/* the live page's own container, to the pixel: mx-auto w-full max-w-[82rem]
+   px-5 sm:px-8. It was max(20px,2vw) here, which is 28.8px at 1440 against
+   the live page's 32px, so the hero headline and every section under it sat
+   3.2px inside where the homepage puts them. The hero's own inner carries
+   this class and overrides only the VERTICAL padding, in longhand: a
+   `padding` shorthand on `.hero .inner` is (0,2,0) and would zero the sides
+   that `.wrap` sets at (0,1,0), which is the bug CLAUDE.md already records
+   costing one phone layout. */
+.wrap{margin:0 auto;width:100%;max-width:82rem;padding:0 20px}
+@media (min-width:640px){.wrap{padding:0 32px}}
 .eyebrow{font-family:"Geist Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.22em;
   text-transform:uppercase;color:var(--brick)}
 .on-ink .eyebrow{color:rgba(233,231,228,.6)}
@@ -102,8 +129,20 @@ ul{padding:0;list-style:none}
 .bar>*{pointer-events:auto}
 .bar .wm{font-family:"Geist Mono",monospace;font-size:10.5px;font-weight:600;letter-spacing:.3em;
   text-transform:uppercase;min-height:24px;display:inline-flex;align-items:center}
+/* THE RAIL HOLDS OFF UNTIL THE HERO IS PAST, and it is a contrast fix
+   before it is a behaviour one. With the scrim gone the rail sits on the
+   raw photograph: measured at 1440x900, bone over the picture, the top
+   three rows read 6.9, 6.5 and 6.4:1 and the bottom row reads 2.43:1,
+   because it lands on the man's white shirt. There is no vertical move
+   available to a fixed object, so it goes -- CLAUDE.md's other honest fix.
+   It also has nothing to navigate from while the reader is still in the
+   hero. Every section under it from the gate down is a flat value with a
+   known figure. */
 .rail{position:fixed;right:max(18px,2vw);top:50%;transform:translateY(-50%);z-index:70;
-  display:none;gap:14px;justify-items:end;color:var(--chrome);transition:color .45s var(--ease)}
+  display:none;gap:14px;justify-items:end;color:var(--chrome);opacity:0;pointer-events:none;
+  transition:color .45s var(--ease),opacity .5s var(--ease)}
+.rail.up{opacity:1;pointer-events:auto}
+.no-js .rail{opacity:1;pointer-events:auto}
 @media (min-width:980px){.rail{display:grid}}
 .rail a{display:flex;align-items:center;gap:9px;font-family:"Geist Mono",monospace;
   font-size:9.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
@@ -120,7 +159,25 @@ ul{padding:0;list-style:none}
   transition:opacity .3s var(--ease),background .3s var(--ease)}
 .langs button:hover{opacity:.85}
 .langs button[aria-pressed="true"]{opacity:1;background:color-mix(in srgb,currentColor 12%,transparent)}
-@media (max-width:560px){.langs{margin-left:12px}.langs button{padding:9px 6px;letter-spacing:.08em}}
+.bar .act{padding:.62rem 1.15rem;font-size:13px}
+/* the bar's three objects ran 32px past the right edge at 390 and the CTA
+   was cut in half. Measured, not eyeballed: wordmark 95 + languages 81 +
+   action 167 + gaps against 350 of usable width. One label for one intent
+   is a rule in CLAUDE.md, so the label does not shorten -- the chrome does. */
+@media (max-width:560px){
+  .bar{gap:10px;padding:16px 16px}
+  .bar .wm{font-size:10px;letter-spacing:.2em}
+  .bar .act{padding:.52rem .82rem;font-size:11.5px}
+  .langs{margin-left:8px}
+  .langs button{padding:9px 5px;letter-spacing:.06em;font-size:9.5px}
+}
+@media (max-width:359px){
+  .bar{gap:8px;padding:14px 12px}
+  .bar .wm{font-size:9.5px;letter-spacing:.14em}
+  .bar .act{padding:.5rem .7rem;font-size:10.5px}
+  .langs{margin-left:6px}
+  .langs button{padding:9px 4px;letter-spacing:.02em}
+}
 
 /* ── actions ────────────────────────────────────────────────────────── */
 .act{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;
@@ -155,23 +212,44 @@ ul{padding:0;list-style:none}
    for the live page's layout; this one sets the stack lower and is measured
    again in that file.                                                    */
 .hero{position:relative;min-height:100svh;overflow:hidden;isolation:isolate;display:grid;
-  align-items:end;background:#120E0A}
+  align-items:center;background:#120E0A}
 .hero .bed{position:absolute;inset:-7% 0;z-index:0;overflow:hidden;will-change:transform}
 .hero .bed img,.hero .bed video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   object-position:50% 50%}
 .hero .bed video{opacity:0;transition:opacity 1.4s ease}
 .hero .bed video.on{opacity:1}
-.hero .bed::after{content:"";position:absolute;inset:0;
-  background:
-    linear-gradient(96deg,rgba(18,14,10,.86) 0%,rgba(18,14,10,.66) 34%,rgba(18,14,10,.28) 60%,rgba(18,14,10,0) 84%),
-    linear-gradient(180deg,rgba(18,14,10,.48) 0%,rgba(18,14,10,0) 24%,rgba(18,14,10,0) 50%,rgba(18,14,10,.84) 100%)}
-.hero .inner{position:relative;z-index:2;padding:0 max(20px,2vw) clamp(34px,8vh,96px);display:grid;
-  gap:clamp(16px,2.6vh,30px)}
+/* THERE IS NO SCRIM. The owner's instruction, and it takes the overlay
+   with it rather than softening it: a wash is what was eating the warm
+   light the picture is here for. With no wash the picture decides where
+   type can go and the only lever is vertical, which is CLAUDE.md's own
+   rule for a dark photograph — move the object out of the bright band or
+   drop it. The band is measured below and the stack is placed from the
+   measurement, not chosen. */
+.hero .inner{position:relative;z-index:2;display:grid;gap:clamp(16px,2.6vh,30px);
+  padding-top:clamp(4.75rem,11vh,7.5rem);padding-bottom:clamp(4rem,9vh,6rem)}
 .hero .inner>*{max-width:min(100%,56ch)}
 @media (min-width:1100px){.hero .inner>*{max-width:54%}}
+/* THE HERO'S EYEBROW CARRIES ITS OWN GROUND, and the reason is that with
+   no wash its contrast is decided by the viewport rather than by the page.
+   Measured, bone over the raw picture at the same place in the stack:
+   1440x900 5.80:1 · 820x1180 10.75:1 · 1024x768 2.98:1 · 390x844 1.55:1.
+   The crop moves with the window and the picture's bokeh moves with the
+   crop, so there is no position in a centred stack that holds at every
+   size -- swept at fourteen heights across all four, and only the rows at
+   40% and 70% of the band clear everywhere, neither of which is where an
+   eyebrow goes. A chip of the page's own mark is 60 x 24px, it is 0.1% of
+   the frame rather than a wash over it, and the figure that governs it is
+   fixed: --on-mark on --brick is 5.90:1 at every viewport, which is
+   CLAUDE.md's own measurement for the mark used as a fill. It also makes
+   the spine read as one device, since every other eyebrow on the page is
+   this colour. */
+.hero .eyebrow{justify-self:start;display:inline-flex;align-items:center;min-height:24px;
+  background:var(--brick);color:#F7F3EC;padding:5px 11px;border-radius:999px;
+  letter-spacing:.2em;font-size:10.5px}
+
 .hero h1{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.032em;
-  font-size:clamp(2.6rem,1.3rem + 4.4vw,5.6rem);line-height:.98;max-width:13ch}
-.hero .sub{max-width:44ch;font-size:clamp(1rem,.94rem + .3vw,1.22rem);line-height:1.62;
+  font-size:var(--t-display);line-height:.98;max-width:13ch}
+.hero .sub{max-width:44ch;font-size:var(--t-body);line-height:1.62;
   color:rgba(233,231,228,.80)}
 .hero .acts{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .cue{display:flex;align-items:center;gap:11px;font-family:"Geist Mono",monospace;font-size:9.5px;
@@ -191,7 +269,7 @@ ul{padding:0;list-style:none}
 @media (min-width:760px){.gate .row{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .gate h3{font-family:"Geist Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.22em;
   text-transform:uppercase;color:var(--brick);margin-bottom:9px}
-.gate p{font-size:clamp(1.02rem,.95rem + .3vw,1.2rem);line-height:1.6;max-width:34ch}
+.gate p{font-size:var(--t-body);line-height:1.6;max-width:34ch}
 
 /* ══ ACT III — the open tender, as an instrument ════════════════════════
    The live page carried `27 Oct 2026, 12:00` under an eyebrow reading
@@ -201,7 +279,7 @@ ul{padding:0;list-style:none}
    turn over together the minute the deadline passes.                     */
 .open{background:var(--paper);padding:clamp(60px,10vh,130px) 0 clamp(70px,11vh,140px)}
 .open h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.028em;
-  font-size:clamp(1.9rem,1.2rem + 3vw,4.2rem);line-height:1.02;max-width:21ch;
+  font-size:var(--t-head);line-height:1.02;max-width:21ch;
   margin:18px 0 clamp(26px,4vh,46px)}
 .tender{background:var(--paper-3);border:1px solid var(--rule);border-radius:16px;
   padding:clamp(22px,3.4vw,44px);display:grid;gap:clamp(22px,3vh,34px)}
@@ -211,7 +289,7 @@ ul{padding:0;list-style:none}
     align-items:start}
 }
 .tender .tt{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.02em;
-  font-size:clamp(1.4rem,1.1rem + 1.2vw,2.3rem);line-height:1.1}
+  font-size:var(--t-sub);line-height:1.1}
 
 /* the clock. Mono because these are figures that are scanned, and the unit
    under each is a label that is found rather than read. */
@@ -221,13 +299,13 @@ ul{padding:0;list-style:none}
 .units{display:flex;align-items:flex-end;gap:clamp(12px,2vw,26px)}
 .units div{display:grid;gap:4px}
 .units b{font-family:"Geist Mono",monospace;font-weight:400;letter-spacing:-.02em;
-  font-size:clamp(2.1rem,1.4rem + 2.6vw,3.6rem);line-height:.92;
+  font-size:var(--t-value);line-height:.92;
   font-variant-numeric:tabular-nums}
 .units i{font-style:normal;font-family:"Geist Mono",monospace;font-size:9px;font-weight:600;
   letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft)}
 .clock.shut .units{display:none}
 .shutline{display:none;font-family:"EB Garamond",Georgia,serif;font-weight:400;
-  letter-spacing:-.02em;font-size:clamp(2rem,1.4rem + 2.2vw,3.2rem);line-height:1}
+  letter-spacing:-.02em;font-size:var(--t-value);line-height:1}
 .clock.shut .shutline{display:block}
 
 /* the window a bidder actually works in, drawn rather than described */
@@ -269,7 +347,7 @@ ul{padding:0;list-style:none}
   grid-template-rows:auto minmax(0,1fr) auto;
   padding:clamp(80px,12vh,120px) 0 clamp(28px,5vh,56px)}
 .docs h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.028em;
-  font-size:clamp(1.9rem,1.2rem + 3vw,4.2rem);line-height:1.02;max-width:19ch;margin-top:16px}
+  font-size:var(--t-head);line-height:1.02;max-width:19ch;margin-top:16px}
 .fan{position:relative;min-height:0;margin:clamp(14px,3vh,28px) 0}
 .fan a{position:absolute;top:50%;left:50%;display:block;will-change:transform;
   filter:drop-shadow(0 18px 40px rgba(23,53,44,.20));transition:filter .4s var(--ease)}
@@ -304,9 +382,9 @@ ul{padding:0;list-style:none}
 .weigh .stick{position:sticky;top:0;min-height:100svh;display:grid;align-content:center;
   gap:clamp(20px,4vh,44px);padding:clamp(80px,12vh,130px) 0 clamp(40px,7vh,80px);color:var(--bone)}
 .weigh h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.03em;
-  font-size:clamp(2rem,1.2rem + 3.4vw,4.8rem);line-height:1;max-width:17ch;margin-top:16px}
+  font-size:var(--t-head);line-height:1;max-width:17ch;margin-top:16px}
 .chart{display:grid;gap:10px}
-.dim{display:grid;align-items:end;height:54px}
+.dim{display:grid;align-items:end;min-height:clamp(58px,8vh,92px)}
 .dim .span{grid-row:1;display:flex;align-items:center;gap:10px;position:relative;padding-bottom:7px;
   opacity:0;transition:opacity .5s var(--ease)}
 .dim.on .span{opacity:1}
@@ -314,7 +392,7 @@ ul{padding:0;list-style:none}
   background:rgba(233,231,228,.5)}
 .dim .span::before{left:0}.dim .span::after{right:0}
 .dim .ruleL,.dim .ruleR{flex:1;height:1px;background:rgba(233,231,228,.5)}
-.dim .fig{font-family:"EB Garamond",Georgia,serif;font-size:clamp(1.6rem,1.1rem + 1.8vw,3rem);
+.dim .fig{font-family:"EB Garamond",Georgia,serif;font-size:var(--t-figure);
   line-height:1;letter-spacing:-.02em}
 .dim .of{font-family:"Geist Mono",monospace;font-size:10.5px;letter-spacing:.16em;
   color:rgba(233,231,228,.6)}
@@ -322,7 +400,7 @@ ul{padding:0;list-style:none}
 .segs .s{position:relative;min-height:clamp(78px,11vh,122px);display:flex;align-items:center;
   padding:0 clamp(12px,1.6vw,28px);transition:opacity .35s var(--ease)}
 .segs .s b{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.02em;
-  font-size:clamp(1.7rem,1.1rem + 2.4vw,3.6rem);line-height:1;color:var(--ink)}
+  font-size:var(--t-value);line-height:1;color:var(--ink)}
 .segs .s:nth-child(1){background:rgba(233,231,228,.95)}
 .segs .s:nth-child(2){background:rgba(233,231,228,.70)}
 .segs .s:nth-child(3){background:rgba(233,231,228,.50)}
@@ -345,8 +423,8 @@ ul{padding:0;list-style:none}
 /* ══ ACT V — the ladder ═════════════════════════════════════════════════ */
 .ladder{background:var(--paper);padding:clamp(70px,12vh,150px) 0}
 .ladder h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.03em;
-  font-size:clamp(2rem,1.2rem + 3.4vw,4.8rem);line-height:1;max-width:16ch;margin:18px 0 12px}
-.ladder .lede{font-size:clamp(1.02rem,.95rem + .3vw,1.2rem);line-height:1.6;color:var(--ink-soft);
+  font-size:var(--t-head);line-height:1;max-width:16ch;margin:18px 0 12px}
+.ladder .lede{font-size:var(--t-body);line-height:1.6;color:var(--ink-soft);
   max-width:46ch;margin-bottom:clamp(30px,5vh,60px)}
 .rung{position:relative;display:grid;gap:14px;padding:clamp(26px,4vh,44px) 0;
   border-top:1px solid var(--rule)}
@@ -373,9 +451,9 @@ ul{padding:0;list-style:none}
 .rung .step{font-family:"Geist Mono",monospace;font-size:9.5px;font-weight:600;letter-spacing:.22em;
   text-transform:uppercase;color:var(--brick)}
 .rung .nm{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.022em;
-  font-size:clamp(1.7rem,1.1rem + 2.1vw,3.1rem);line-height:1.02}
+  font-size:var(--t-sub);line-height:1.02}
 .rung .pr{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.03em;
-  font-size:clamp(2.6rem,1.4rem + 5vw,7.2rem);line-height:.9;color:var(--ink)}
+  font-size:var(--t-figure);line-height:.9;color:var(--ink)}
 @supports (background-clip:text) or (-webkit-background-clip:text){
   /* guarded: a browser without background-clip would otherwise show nothing
      at all where the price is */
@@ -401,21 +479,36 @@ ul{padding:0;list-style:none}
 .ladder .cmp p{font-size:14.5px;line-height:1.7;color:var(--ink-soft);max-width:66ch}
 .freeline{display:flex;flex-wrap:wrap;gap:16px 26px;align-items:center;justify-content:space-between;
   border-top:1px solid var(--rule);padding-top:24px}
-.freeline p{max-width:46ch;line-height:1.6;font-size:clamp(1rem,.95rem + .25vw,1.14rem)}
+.freeline p{max-width:46ch;line-height:1.6;font-size:var(--t-body)}
 
 /* ══ ACT VI — the close ═════════════════════════════════════════════════ */
-.close{position:relative;min-height:88svh;display:grid;align-items:center;background:var(--ink);
-  color:var(--bone);padding:clamp(70px,12vh,150px) 0}
+/* THE CLOSE IS ON PAPER, at the owner's instruction, and paper-3 is the
+   lightest value the theme has — the white shade rather than a fourth
+   ground invented for one fold. It costs the page its third ink moment and
+   buys two things. The brick is available again, so the closing eyebrow is
+   the same mark as the other five instead of the bone/60 an ink ground
+   forces, which is what makes the spine read as one device from the hero to
+   the end. And the page now runs paper · paper · paper-2 · INK · paper ·
+   paper-3, so the weights fold is the single inversion rather than one of
+   three, which is the whole reason this file says an inverted moment works
+   at all. The price of it is that the page no longer ends dark; the close's
+   own weight comes from the measure and the air instead. */
+.close{position:relative;min-height:88svh;display:grid;align-items:center;
+  background:var(--paper-3);padding:clamp(70px,12vh,150px) 0}
 .close h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.034em;
-  font-size:clamp(2.4rem,1.2rem + 5.4vw,7.4rem);line-height:.96;max-width:14ch;margin:18px 0 24px}
-.close p{max-width:52ch;font-size:clamp(1rem,.95rem + .3vw,1.2rem);line-height:1.66;
-  color:rgba(233,231,228,.78);margin-bottom:30px}
+  font-size:var(--t-display);line-height:.96;max-width:14ch;margin:18px 0 24px}
+/* :not(.eyebrow) because `.close p` is (0,1,1) and `.eyebrow` is (0,1,0),
+   so without it the closing eyebrow drew in --ink-soft and the spine broke
+   at its last rung -- measured, not guessed. It is the same specificity
+   trap this repo already recorded on the annex tokens. */
+.close p:not(.eyebrow){max-width:52ch;font-size:var(--t-body);line-height:1.66;
+  color:var(--ink-soft);margin-bottom:30px}
 .close .ft{display:flex;flex-wrap:wrap;gap:14px 30px;justify-content:space-between;align-items:center;
-  border-top:1px solid var(--rule-inv);padding-top:20px;margin-top:clamp(40px,8vh,90px);
+  border-top:1px solid var(--rule);padding-top:20px;margin-top:clamp(40px,8vh,90px);
   font-family:"Geist Mono",monospace;font-size:9.5px;font-weight:600;letter-spacing:.2em;
-  text-transform:uppercase;color:rgba(233,231,228,.6)}
+  text-transform:uppercase;color:var(--ink-soft)}
 .close .ft a{transition:color .25s ease}
-.close .ft a:hover{color:var(--bone)}
+.close .ft a:hover{color:var(--ink)}
 
 /* ══ the intake ═════════════════════════════════════════════════════════ */
 dialog{border:0;padding:0;background:transparent;max-width:none;max-height:none;width:100%}
@@ -424,7 +517,7 @@ dialog::backdrop{background:rgba(11,24,20,.72);backdrop-filter:blur(4px)}
   background:var(--paper-3);color:var(--ink);border-radius:18px;border:1px solid var(--rule);
   padding:clamp(20px,3.4vw,34px);overflow-y:auto;display:grid;gap:18px}
 .sheet h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.02em;
-  font-size:clamp(1.5rem,1.2rem + 1.1vw,2.2rem);line-height:1.05}
+  font-size:var(--t-sub);line-height:1.05}
 .sheet .intro{font-size:15px;line-height:1.62;color:var(--ink-soft)}
 .sheet label{display:block;font-family:"Geist Mono",monospace;font-size:9.5px;font-weight:600;
   letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:7px}
@@ -464,7 +557,7 @@ dialog::backdrop{background:rgba(11,24,20,.72);backdrop-filter:blur(4px)}
 <header class="bar" id="bar">
   <a class="wm" href="/">Arvorealta</a>
   <div class="langs" id="langs" role="group" aria-label="Language"></div>
-  <button class="act act-grad" data-cta data-t="cta" style="padding:.62rem 1.15rem;font-size:13px">Get your page scored</button>
+  <button class="act act-grad" data-cta data-t="cta">Get your page scored</button>
 </header>
 
 <nav class="rail" aria-label="Sections">
@@ -494,7 +587,7 @@ dialog::backdrop{background:rgba(11,24,20,.72);backdrop-filter:blur(4px)}
   </div>
 
   <div class="inner wrap">
-    <p class="eyebrow" data-t="hero.eyebrow">Industrial manufacturer bids</p>
+    <p class="eyebrow" data-t="hero.eyebrow">Brand</p>
     <h1>
       <span class="ln"><span data-t="hero.h1a">Written once.</span></span>
       <span class="ln"><span data-t="hero.h1b">Right every time.</span></span>
@@ -632,12 +725,12 @@ dialog::backdrop{background:rgba(11,24,20,.72);backdrop-filter:blur(4px)}
 </section>
 
 <!-- ACT VI ──────────────────────────────────────────────────────────── -->
-<section class="close on-ink" id="start" data-tone="dark">
+<section class="close" id="start" data-tone="light">
   <div class="wrap">
     <p class="eyebrow rv" data-t="close.eyebrow">Where to start</p>
     <h2 class="rv" data-t="close.h2">Find out what it cost you. For nothing.</h2>
     <p class="rv" data-t="close.body">Send one page from a tender you lost.</p>
-    <div class="rv"><button class="act act-bone" data-cta data-t="cta">Get your page scored</button></div>
+    <div class="rv"><button class="act act-grad" data-cta data-t="cta">Get your page scored</button></div>
     <div class="ft">
       <span>Arvorealta &nbsp;/&nbsp; Atlas Sahrim</span>
       <span><a href="/brand/" data-t="foot.brand">Brand and identity</a> &nbsp;/&nbsp; <a href="/video/" data-t="foot.video">Video</a></span>
@@ -708,7 +801,7 @@ const STR = {
     foot: { brand: "Brand and identity", video: "Video" },
     cta: "Get your page scored",
     hero: {
-      eyebrow: "Industrial manufacturer bids",
+      eyebrow: "Brand",
       h1a: "Written once.", h1b: "Right every time.",
       sub: "Public buyers score the documents you hand in. Not the plant, not the price list, not the twenty years.",
       second: "See the open tender"
@@ -813,7 +906,7 @@ const STR = {
     foot: { brand: "Merkevare og design", video: "Video" },
     cta: "Få siden din vurdert",
     hero: {
-      eyebrow: "Tilbud fra industriprodusenter",
+      eyebrow: "Merkevare",
       h1a: "Skrevet én gang.", h1b: "Riktig hver gang.",
       sub: "Offentlige oppdragsgivere gir poeng til dokumentene du leverer. Ikke fabrikken, ikke prislisten, ikke de tjue årene.",
       second: "Se den åpne konkurransen"
@@ -918,7 +1011,7 @@ const STR = {
     foot: { brand: "Brändi ja muotoilu", video: "Video" },
     cta: "Pyydä sivusi pisteytys",
     hero: {
-      eyebrow: "Teollisuusvalmistajan tarjoukset",
+      eyebrow: "Brändi",
       h1a: "Kirjoitettu kerran.", h1b: "Oikein joka kerta.",
       sub: "Julkiset hankkijat pisteyttävät asiakirjat, jotka jätät. Eivät tehdasta, eivät hinnastoa, eivät kahtakymmentä vuotta.",
       second: "Katso avoin tarjouspyyntö"
@@ -1289,6 +1382,7 @@ function sweep(){
 setTimeout(() => revs.forEach(el => el.classList.add("on")), 4000);
 
 /* ══ the rail ══════════════════════════════════════════════════════════ */
+const railEl = $(".rail");
 const rails = $$("[data-rail]");
 const railSecs = rails.map(a => document.querySelector(a.getAttribute("href")));
 if ("IntersectionObserver" in window) {
@@ -1332,6 +1426,9 @@ function frame(){
   for (const el of toned) { const r = el.getBoundingClientRect();
     if (r.top <= 54 && r.bottom > 54) over = el; }
   setChrome(over ? over.dataset.tone : "light");
+
+  /* the rail is not up while the photograph is what it would sit on */
+  railEl.classList.toggle("up", y > vh * 0.62);
 
   /* the hero leaves slowly and its ground leaves slower */
   if (y < vh * 1.3) {

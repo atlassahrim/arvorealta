@@ -667,6 +667,111 @@ brightest 2 percent against 4.80, headline 6.80, standfirst 8.09, warmth held
 at +32.4. The base scale still lives in the scroll loop beside the parallax,
 because a CSS rule there is overwritten on the loop's first frame.
 
+**The scrim is gone entirely and the picture is the whole ground.** The warm
+near-black above was the second attempt at a wash and the owner's instruction
+is that there is no third: remove it. With nothing over the picture the hero
+is the warmest thing on the site and every object in it is placed by
+measurement. Measured at 1440 x 900, type hidden so the strips sample the
+photograph, bone over `after-1`:
+
+| | median | brightest 2% |
+|---|---|---|
+| headline, full bone | 9.40:1 | 2.28:1 |
+| standfirst, bone at 80% | 9.52:1 | 2.74:1 |
+| actions | 10.30:1 | 5.85:1 |
+| scroll cue, bone at 72% | 10.52:1 | 4.98:1 |
+
+Against the live page's own table — headline 7.25, standfirst 9.49 — every
+object is at or above what the site already ships, and the brightest-2%
+figures are the bokeh, which is what that column has always measured here.
+**The loop was measured too, not only the poster**: across the ten seconds of
+`hero-1-720.mp4` the headline's worst frame is 6.04:1 and the standfirst's is
+8.36:1, so the floor holds for every frame.
+
+**The hero's eyebrow carries its own ground, because with no wash its contrast
+is a lottery decided by the window.** This is the finding worth keeping and it
+is general. The same line at the same place in the same centred stack
+measures 5.80:1 at 1440 x 900, 10.75:1 at 820 x 1180, 2.98:1 at 1024 x 768 and
+**1.55:1 at 390 x 844** — a 7x spread, because `object-fit: cover` re-crops the
+picture at every aspect and the bokeh moves with the crop. Swept at fourteen
+heights across all four viewports, only the rows at 40 percent and 70 percent
+of the band clear everywhere, and neither is where an eyebrow goes. So the
+page stops trying to find a safe position and gives the object a ground: a
+60 x 24px chip of the page's own mark, `--on-mark` on `--brick`, which is a
+fixed **5.90:1** at every size. It is 0.1 percent of the frame rather than a
+wash over it, and it makes the spine read as one device, since every other
+eyebrow on the page is that colour. **A single value's contrast figure is a
+property of the page; an object's contrast over a photograph is a property of
+the viewport.**
+
+**The eyebrow is one word, and the one word was the owner's instruction.** It
+reads `Brand` · `Merkevare` · `Brändi`. Before the chip, shortening the line
+was itself worth 1.9 stops at the desktop width — the 28-character
+`Industrial manufacturer bids` ran straight across the bokeh at 3.87:1 and
+`Brand` at the same baseline measured 5.80:1, because a short word can miss a
+highlight a long line cannot. **It changes the spine**, which now opens on a
+noun naming the subject rather than on a step in the route, and the other five
+eyebrows are unchanged. That is the first visible move of the repositioning
+and it is the owner's call to extend or undo.
+
+**The rail holds off until the hero is past**, which is a contrast fix before
+it is a behaviour one. On the raw photograph its top three rows read 6.9, 6.5
+and 6.4:1 and its bottom row reads **2.43:1**, because that row lands on the
+man's white shirt. A fixed object has no vertical move available, so it goes
+until there is something to navigate from. Every section under it from the
+gate down is a flat value with a known figure.
+
+**The bar is the one thing still measured against the picture and not against
+a ground.** Over the hero the wordmark reads 5.06:1 and **the three language
+buttons read 3.20:1**, because they sit at x 160–400, which is the only
+stretch of the bar's own row where this photograph is bright — the row runs
+8:1 to 13:1 everywhere from x 400 right. The two honest fixes are to move them
+right, which breaks the position the owner asked to keep, or to give them a
+ground, which is a wash by another name. It is left as measured and flagged
+rather than fixed on a guess.
+
+**One descending type scale, six roles, nothing steps over the thing above
+it.** The page had three competing largest objects: a close headline at 7.4rem
+and a tier price at 7.2rem against a hero headline of 5.6rem, so the two
+things a reader met last were bigger than the thing they met first. The scale
+is six tokens on `:root` — display, figure, head, value, sub, body — and
+measured at 1440 it runs **96 · 67 · 52 · 42 · 28 · 19**, at 390 **43 · 37 ·
+30 · 26 · 20 · 16**. Strictly descending at 390, 768, 1440 and 1920, which is
+the property rather than the figures. The hero headline and the close are the
+only display, the three prices and the award fold's `65` are the only figures,
+every section headline is head. **The `65` was smaller than the three numerals
+it concludes** and is now larger, which is the dimension line's whole job.
+
+**The close is on paper and it costs the page its third ink fold.** The owner's
+instruction, and `--paper-3` is the lightest value the theme already has rather
+than a fourth ground invented for one section. The page now runs paper · paper
+· paper-2 · **ink** · paper · paper-3, so the weights fold is the single
+inversion instead of one of three — which is the reason this file gives for an
+inverted moment working at all, and the reason the old dark mode was removed.
+The closing eyebrow goes back to the brick, so the spine is one colour from the
+hero to the end. **It needed `:not(.eyebrow)`**: `.close p` is (0,1,1) and
+`.eyebrow` is (0,1,0), so without it the last eyebrow on the page drew in
+`--ink-soft` and the spine broke at its last rung. Same shape as the annex
+token bug already recorded here.
+
+**The wrap is the live page's container to the pixel**, `max-w-[82rem]` with
+`px-5 sm:px-8`. It was `max(20px,2vw)`, which is 28.8px at 1440 against the
+live page's 32, so the hero headline and every section under it sat 3.2px
+inside where the homepage puts them. The hero's inner carries `.wrap` and
+overrides only the **vertical** padding, in longhand — a `padding` shorthand
+there is (0,2,0) and zeroes the sides `.wrap` sets at (0,1,0), which is the
+bug this file already records costing one phone layout.
+
+**The hero stack is vertically centred**, which is the live page's own
+`content-center` and the owner's preference over the bottom anchor.
+
+**The bar ran 32px off the right edge at 390 and the action was cut in half.**
+Measured rather than eyeballed: wordmark 95 + languages 81 + action 167 + gaps
+against 350px of usable width. One label for one intent is a rule here, so the
+label does not shorten — the chrome does, in two tiers at 560 and 360. Checked
+at 320, 340, 360, 390, 430, 560 and 600 with no horizontal page scroll at any
+of them.
+
 **The bar is `lab/max`'s.** Wordmark in Geist Mono at 10.5px with `.3em` of
 tracking, the three languages immediately beside it, and the action pushed to
 the far right by the languages' own `margin-right:auto`.
