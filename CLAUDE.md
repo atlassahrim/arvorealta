@@ -421,13 +421,13 @@ dark page. The offer page already reverses out to full-bleed ink twice. It is
 still the owner's call, and the rule gets rewritten in the same commit if the
 answer is yes.
 
-### The second sandbox — `lab/max/`, with the restrictions taken off
+### The second sandbox — `lab/max-brand/`, with the restrictions taken off
 
 The owner's question was whether the first sandbox looks plain because of the
 rules in this file. **Mostly it does not**, and the honest split is worth
 keeping: the rules that bind a sandbox at all are the two infrastructure ones
 below, and everything else about `lab/brand/` being a stack of boxes was a
-choice made in the building. `lab/max/` is the same material with nothing held
+choice made in the building. `lab/max-brand/` is the same material with nothing held
 back, so the two can be compared rather than argued about.
 
 **It has no Tailwind, no compiled stylesheet, no vendored runtime and no build
@@ -493,7 +493,7 @@ screen at most scroll positions and cropped a 16:9 frame to a sliver, so it
 had to be switched off below 820px in JS as well as in CSS, which is two
 behaviours for one section. A case study is read, not panned.
 
-### `lab/max/` pulls one project apart, and it is Turvatikas
+### `lab/max-brand/` pulls one project apart, and it is Turvatikas
 
 The three pinned panels carried the word `Placeholder.` in every paragraph.
 The owner's instruction is to pull one project apart as the example, and the
@@ -590,7 +590,7 @@ synthetic `ground-*-1-1080.mp4` set is kept only for the ground with no footage.
 
 ### `lab/max-home/` — the offer page at that standard, and the language bar
 
-The owner's call on `lab/max/` was to use it, with the language control added
+The owner's call on `lab/max-brand/` was to use it, with the language control added
 and the same standard taken to the home page.
 
 **The language control is on both, and it is the offer page's own three.**
@@ -602,7 +602,7 @@ price, every deadline and every word of the Norwegian and Finnish is the one
 the live page already ships. That is a snapshot and it will drift; it is the
 same trade as `lab/_tw.src.css` copying the live tokens rather than importing
 them, and a copy change on the offer page has to be carried across.
-`lab/max/` has its own short object, which reuses the offer page's tier names,
+`lab/max-brand/` has its own short object, which reuses the offer page's tier names,
 prices, times and credit lines exactly and writes only the connective prose
 around them. **That prose is not a native speaker's** and is the part worth
 having checked before the page is used in an approach.
@@ -611,7 +611,7 @@ having checked before the page is used in an approach.
 imobiliários` and the rest are what the lockup itself states, and a quotation
 does not move language — the same rule the annex editions already carry.
 
-**`lab/max-home/` is LIGHT first, and that is the argument.** `lab/max` is
+**`lab/max-home/` is LIGHT first, and that is the argument.** `lab/max-brand` is
 dark because a brand portfolio is a dark room with pictures in it. The offer
 page emulates print, so this one keeps the paper ground and its own two ink
 folds, the hero and the award. **Taking the sandbox's palette along with its
@@ -687,7 +687,7 @@ grepping the prices rather than trusting the eye.
 **The homepage sold documents and showed none, and that was the ceiling.**
 Asked what was blocking the page, the honest answer was the material: it owns
 exactly one photograph, `after-1`, against the brand sandbox's 51 frames and
-two films. Everything strong on `lab/max/` is a picture doing work.
+two films. Everything strong on `lab/max-brand/` is a picture doing work.
 
 **Three real documents fixed most of it, and they were already on the domain.**
 `annex/sample/`, `annex/proposta-motorhome/` and `deck/reference-pipeline/`
@@ -777,8 +777,13 @@ figures are the bokeh, which is what that column has always measured here.
 `hero-1-720.mp4` the headline's worst frame is 6.04:1 and the standfirst's is
 8.36:1, so the floor holds for every frame.
 
-**The hero's eyebrow carries its own ground, because with no wash its contrast
-is a lottery decided by the window.** This is the finding worth keeping and it
+**The eyebrow chip is reversed and the line is back to what it was.** The
+owner's call: `Industrial manufacturer bids` in plain bone, no ground. The
+measurement below is kept because it is the part that would otherwise be
+re-derived from scratch, not as an objection to work around.
+
+**With no wash an object's contrast over a photograph is a lottery decided by
+the window.** This is the finding worth keeping and it
 is general. The same line at the same place in the same centred stack
 measures 5.80:1 at 1440 x 900, 10.75:1 at 820 x 1180, 2.98:1 at 1024 x 768 and
 **1.55:1 at 390 x 844** — a 7x spread, because `object-fit: cover` re-crops the
@@ -793,22 +798,23 @@ eyebrow on the page is that colour. **A single value's contrast figure is a
 property of the page; an object's contrast over a photograph is a property of
 the viewport.**
 
-**The eyebrow is one word, and the one word was the owner's instruction.** It
-reads `Brand` · `Merkevare` · `Brändi`. Before the chip, shortening the line
-was itself worth 1.9 stops at the desktop width — the 28-character
-`Industrial manufacturer bids` ran straight across the bokeh at 3.87:1 and
-`Brand` at the same baseline measured 5.80:1, because a short word can miss a
-highlight a long line cannot. **It changes the spine**, which now opens on a
-noun naming the subject rather than on a step in the route, and the other five
-eyebrows are unchanged. That is the first visible move of the repositioning
-and it is the owner's call to extend or undo.
+**`Brand` belongs to the brand page and not to this one**, which settles an
+ambiguity this file carried for a turn. The offer page's spine opens on
+`Industrial manufacturer bids` as it always did; `lab/max-brand`'s kicker is
+the one word. For the record, what the one word was worth here:  the 28-character line ran straight across the bokeh at 3.87:1 and `Brand` at
+the same baseline measured 5.80:1, because a short word can miss a highlight a
+long line cannot. **A short label is a contrast tool and not only a copy
+decision**, which is worth knowing the next time an object has to sit on a
+picture.
 
-**The rail holds off until the hero is past**, which is a contrast fix before
-it is a behaviour one. On the raw photograph its top three rows read 6.9, 6.5
-and 6.4:1 and its bottom row reads **2.43:1**, because that row lands on the
-man's white shirt. A fixed object has no vertical move available, so it goes
-until there is something to navigate from. Every section under it from the
-gate down is a flat value with a known figure.
+**The rail is up from the first frame**, at the owner's instruction. It held
+off over the hero for one version, and the figure that argued for that is
+still the figure: on the raw photograph its top three rows read 6.9, 6.5 and
+6.4:1 and **its bottom row reads 2.43:1**, because that row lands on the
+man's white shirt. A fixed object has no vertical move available, so hiding
+it or giving it a ground were the only two fixes, and hiding it cost the page
+its wayfinding exactly where a reader arrives. It is shown and the one row is
+recorded. Every section under the hero is a flat value with a known figure.
 
 **The bar is the one thing still measured against the picture and not against
 a ground.** Over the hero the wordmark reads 5.06:1 and **the three language
@@ -830,6 +836,40 @@ the property rather than the figures. The hero headline and the close are the
 only display, the three prices and the award fold's `65` are the only figures,
 every section headline is head. **The `65` was smaller than the three numerals
 it concludes** and is now larger, which is the dimension line's whole job.
+
+**The cost is a field, not a shout.** The price ran at `--t-figure`, 67px at
+1440 against a fold headline of 52px, so the figure was the largest object in
+its own fold and larger than the sentence framing it. It takes `--t-value`
+now, 42px, under the headline and over the tier name at 28px. The size is
+half of it. The other half is that **everything about cost lives in one
+column** — the figure, the term and the credit — where the credit used to sit
+at the foot of the deliverables list two columns from the number it modifies.
+The credit is the ladder's whole mechanic and a mechanic stated far from its
+figure is not stated. A hairline on the left of the block says the three
+lines are one object, and it inverts with the row.
+
+**The document fold is centred like its neighbours, and its stage was never
+centred at all.** It was three rows over a `1fr` middle inside a `100svh`
+grid, which is `stretch` by another name: header on the top edge, legend on
+the bottom edge, stage taking the rest, so one fold read as full bleed while
+every other sticky section read as centred. `align-content:center` over a
+stage of definite height fixes it, and the definite height is what the fan's
+own pixel maths wanted anyway, since **an `fr` row counts as indefinite**.
+
+**`.fan` carried `.wrap` and its own rule, and its own rule won.** Both are
+(0,1,0) and `.fan` is later in the sheet, so `margin: X 0` overwrote the
+`margin-inline:auto` that centres every other block on the page. The stage
+sat hard against the left edge of the viewport at every width, and it only
+became visible past 1312px, where the headline above it starts moving right
+and the pile did not. **Longhands, not a shorthand, when a block already
+carries a class that sets the same property.** Measured after: plate centre
+721 against a viewport centre of 720 at 1440, and 961 against 960 at 1920.
+
+**The pile's own centre is not the stage's.** The three plates differ in
+width and in scale, so symmetric offsets do not give a symmetric group: the
+open span ran 199 to 1180 inside a 1312 stage, 34px right of centre. The two
+outer offsets are pulled left by that much, measured rather than balanced by
+eye.
 
 **The close is on paper and it costs the page its third ink fold.** The owner's
 instruction, and `--paper-3` is the lightest value the theme already has rather
@@ -861,7 +901,7 @@ label does not shorten — the chrome does, in two tiers at 560 and 360. Checked
 at 320, 340, 360, 390, 430, 560 and 600 with no horizontal page scroll at any
 of them.
 
-**The bar is `lab/max`'s.** Wordmark in Geist Mono at 10.5px with `.3em` of
+**The bar is `lab/max-brand`'s.** Wordmark in Geist Mono at 10.5px with `.3em` of
 tracking, the three languages immediately beside it, and the action pushed to
 the far right by the languages' own `margin-right:auto`.
 
@@ -890,7 +930,7 @@ line in all three languages: the two attachments are still there and still
 useful, which is what remains true. The rail is `aria-hidden` and the same
 content is carried as a sentence, the way the award bar already is.
 
-**`.rung` takes `lab/max`'s treatment and the whole row inverts.** On hover or
+**`.rung` takes `lab/max-brand`'s treatment and the whole row inverts.** On hover or
 focus the row fills with ink and every value in it flips: the brick step to
 `bone/60`, the terms and the time to `bone/75`, the bullets' dashes to
 `bone/55`, and the price gradient off entirely to flat bone. **The gradient's
@@ -898,7 +938,7 @@ amber stop is barred on ink for the same reason the brick is** — this is the
 `-webkit-text-fill-color` override, because `background-clip:text` keeps
 painting through a plain `color`.
 
-**The section links left the top bar for a rail.** Same as `lab/max`: the bar
+**The section links left the top bar for a rail.** Same as `lab/max-brand`: the bar
 keeps the three things that are not wayfinding, which are the wordmark, the
 languages and the action, and the six sections sit in a fixed right-hand rail
 that takes the chrome's two states and marks where the reader is. It is hidden
@@ -981,7 +1021,7 @@ document agreed before the work starts, not listed on the page.
 index.html              offer page
 brand/index.html        brand portfolio
 lab/brand/index.html    the first sandbox — a full portfolio page, noindex
-lab/max/index.html      the second sandbox — every restriction off. One file,
+lab/max-brand/index.html      the second sandbox — every restriction off. One file,
                         hand-written CSS, vanilla JS, WebGL, no build step
                         and no Tailwind at all. Three languages. noindex
 lab/max-home/index.html the offer page at that standard, light first, with
@@ -1676,6 +1716,31 @@ than adding to it. Regenerate the image from `annex/sample/` if the sheets
 change.
 
 ## Rules that matter
+
+**One content column, and it is the site's only width.** 82rem as the outer
+box, with 20px of gutter inside it below 640 and 32px from 640 up, so the
+measure is 1248px at 1440 and the text starts at 96. `index.html`, `/brand/`
+and `/video/` have always carried it as
+`mx-auto w-full max-w-[82rem] px-5 sm:px-8`, **the top bar included**, which
+is why a wordmark sits on the same left edge as the headline under it. The
+two sandboxes wrote their own figures and drifted: `max(20px,2vw)` on one and
+`max(18px,2vw)` with no max-width at all on the other, so above 1312px the
+brand page's headline ran to the screen edge while its own gallery did not.
+
+Both now declare the standard as tokens, `--col`, `--gut` and `--pad`, and
+nothing writes a width figure of its own. **`--pad` is the same column
+expressed as padding**, for a section that bleeds full width and only wants
+its content inset:
+`max(var(--gut), calc((100% - var(--col)) / 2 + var(--gut)))`. The
+`+ var(--gut)` is the part that is easy to leave out and wrong without:
+82rem is the outer box, so a section that centres 82rem of *content* is 64px
+wider than every other page and the drift comes back one level down.
+Verified on both pages at 320, 390, 640, 1024, 1440, 1920 and 2560: wordmark
+and headline on the same pixel at every one.
+
+**Media bleeds and content does not.** A photographic hero, a WebGL stage and
+a video bed still run the full viewport; everything a reader reads sits in
+the column.
 
 **Hand-break headlines** with `<br>`. Never let display type wrap on its own —
 every line ending is a decision.

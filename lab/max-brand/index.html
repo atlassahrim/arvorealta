@@ -32,6 +32,18 @@
   --mx:0; --my:0;     /* pointer, -1..1 */
 }
 
+/* ── THE CONTENT COLUMN IS THE SITE'S ONE STANDARD ───────────────────
+   82rem wide, 20px of gutter below 640 and 32px from 640 up. index.html,
+   /brand/ and /video/ already carry it as
+   `mx-auto w-full max-w-[82rem] px-5 sm:px-8`, the top bar included, so a
+   wordmark lines up with the headline under it on every page the site has.
+   `--pad` is the same column expressed as padding, for a section that is
+   full bleed itself and only wants its CONTENT inset: it falls back to the
+   gutter below 1312 + 2 x gutter and takes over above it. Media bleeds;
+   content does not. */
+:root{--col:82rem; --gut:20px; --pad:max(var(--gut),calc((100% - var(--col)) / 2 + var(--gut)))}
+@media (min-width:640px){:root{--gut:32px}}
+
 *,*::before,*::after{box-sizing:border-box}
 html{background:var(--ink);-webkit-text-size-adjust:100%}
 body{
@@ -84,7 +96,7 @@ h1,h2,h3,p{margin:0}
 
 /* ── the one fixed control ───────────────────────────────────────────── */
 .brandbar{position:fixed;top:0;left:0;right:0;z-index:72;display:flex;align-items:center;
-  justify-content:space-between;padding:22px max(18px,2vw);pointer-events:none}
+  justify-content:space-between;padding:22px var(--pad);pointer-events:none}
 .brandbar>*{pointer-events:auto;color:var(--chrome,var(--bone));transition:color .45s var(--ease)}
 .brandbar .wm{font-family:"Geist Mono",monospace;font-size:10.5px;letter-spacing:.3em;text-transform:uppercase}
 .langs{display:flex;align-items:center;gap:2px;margin-right:auto;margin-left:clamp(14px,3vw,40px)}
@@ -100,14 +112,14 @@ h1,h2,h3,p{margin:0}
    reached at all on a 390px screen. The label does not shorten, because one
    label for one intent is a rule here. The chrome does, in two tiers. */
 @media (max-width:620px){
-  .brandbar{padding:18px 14px;gap:8px}
+  .brandbar{padding:18px var(--gut);gap:8px}
   .brandbar .wm{font-size:9.5px;letter-spacing:.18em}
   .langs{margin-left:8px}
   .langs button{padding:9px 5px;letter-spacing:.04em;font-size:9.5px}
   .brandbar .mag{font-size:9px;letter-spacing:.12em;padding:10px 12px}
 }
 @media (max-width:400px){
-  .brandbar{padding:16px 11px;gap:6px}
+  .brandbar{padding:16px var(--gut);gap:6px}
   .brandbar .wm{font-size:9px;letter-spacing:.1em}
   .langs{margin-left:5px}
   .langs button{padding:9px 4px;letter-spacing:0}
@@ -134,7 +146,7 @@ h1,h2,h3,p{margin:0}
     linear-gradient(100deg,rgba(7,16,13,.74) 0%,rgba(7,16,13,.40) 34%,rgba(7,16,13,0) 62%),
     linear-gradient(180deg,rgba(7,16,13,.42) 0%,rgba(7,16,13,0) 22%,rgba(7,16,13,0) 52%,rgba(7,16,13,.80) 100%)}
 
-.hero .inner{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:0 max(18px,2vw) clamp(32px,7vh,84px);
+.hero .inner{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:0 var(--pad) clamp(32px,7vh,84px);
   display:grid;gap:clamp(18px,3vh,34px)}
 .hero h1{font-size:clamp(3.1rem,1.1rem + 9.2vw,11.5rem);line-height:.92;letter-spacing:-.035em;
   font-family:"EB Garamond",Georgia,serif;font-weight:400;max-width:16ch}
@@ -166,7 +178,7 @@ h1,h2,h3,p{margin:0}
    ────────────────────────────────────────────────────────────────────── */
 .thesis{position:relative;height:340vh;background:var(--ink)}
 .thesis .stick{position:sticky;top:0;height:100svh;overflow:hidden;display:grid;
-  grid-template-rows:auto minmax(0,1fr) auto;padding:clamp(70px,10vh,110px) max(18px,2vw) clamp(28px,5vh,56px)}
+  grid-template-rows:auto minmax(0,1fr) auto;padding:clamp(70px,10vh,110px) var(--pad) clamp(28px,5vh,56px)}
 .thesis .head{display:flex;justify-content:space-between;align-items:baseline;gap:20px}
 .thesis .head h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.02em;
   font-size:clamp(1.5rem,1rem + 1.9vw,3rem);line-height:1.04;max-width:14ch}
@@ -206,7 +218,10 @@ h1,h2,h3,p{margin:0}
    that collides with it. The gutter grows on both sides rather than one, or
    the triptych below stops being centred in its own section. */
 @media (min-width:980px){
-  .sys{padding-left:calc(max(18px,2vw) + 106px);padding-right:calc(max(18px,2vw) + 106px)}
+  /* the rail is fixed to the screen edge and the column's own margin does
+     not clear it until about 1560px, so this section keeps its extra
+     clearance until the standard provides it by itself. */
+  .sys{padding-left:calc(var(--pad) + 106px);padding-right:calc(var(--pad) + 106px)}
 }
 .sys .lede{display:grid;gap:16px}
 .sys .num{font-family:"Geist Mono",monospace;font-size:10px;letter-spacing:.3em;
@@ -279,7 +294,7 @@ h1,h2,h3,p{margin:0}
 /* ──────────────────────────────────────────────────────────────────────
    ACT IV — the rest. A grid that knows where the cursor is.
    ────────────────────────────────────────────────────────────────────── */
-.marks{position:relative;padding:clamp(80px,14vh,170px) max(18px,2vw) clamp(70px,12vh,150px);background:var(--ink)}
+.marks{position:relative;padding:clamp(80px,14vh,170px) var(--pad) clamp(70px,12vh,150px);background:var(--ink)}
 .marks header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;
   padding-bottom:26px;border-bottom:1px solid var(--rule);margin-bottom:clamp(26px,5vh,54px)}
 .marks h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.028em;
@@ -304,7 +319,7 @@ h1,h2,h3,p{margin:0}
 /* ──────────────────────────────────────────────────────────────────────
    ACT V — the ladder. Rows, not cards. The price is the headline.
    ────────────────────────────────────────────────────────────────────── */
-.ways{position:relative;padding:clamp(80px,14vh,170px) max(18px,2vw);background:var(--ink-3)}
+.ways{position:relative;padding:clamp(80px,14vh,170px) var(--pad);background:var(--ink-3)}
 .ways h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.03em;
   font-size:clamp(2rem,1.2rem + 3.6vw,5rem);line-height:.98;max-width:16ch;margin-bottom:clamp(34px,6vh,68px)}
 .rung{position:relative;display:grid;gap:10px;grid-template-columns:1fr;align-items:baseline;
@@ -354,7 +369,7 @@ h1,h2,h3,p{margin:0}
 .close .bed video.on{opacity:1}
 .close .bed::after{content:"";position:absolute;inset:0;
   background:linear-gradient(180deg,rgba(239,234,225,.30) 0%,rgba(239,234,225,.62) 55%,rgba(239,234,225,.95) 100%)}
-.close .inner{padding:clamp(90px,16vh,190px) max(18px,2vw) clamp(34px,6vh,70px);display:grid;gap:26px}
+.close .inner{padding:clamp(90px,16vh,190px) var(--pad) clamp(34px,6vh,70px);display:grid;gap:26px}
 .close h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.034em;
   font-size:clamp(2.6rem,1.2rem + 6.6vw,8.5rem);line-height:.94;max-width:13ch}
 .close p{max-width:44ch;font-size:clamp(1rem,.95rem + .3vw,1.18rem);line-height:1.64;color:rgba(26,23,19,.72)}
@@ -402,13 +417,13 @@ h1,h2,h3,p{margin:0}
   grid-template-rows:auto minmax(0,1fr) auto;opacity:0;visibility:hidden;
   transition:opacity .5s var(--ease),visibility .5s}
 .view.on{opacity:1;visibility:visible}
-.view .vh{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;padding:22px max(18px,2vw)}
+.view .vh{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;padding:22px var(--pad)}
 .view .vh h3{font-family:"EB Garamond",Georgia,serif;font-weight:400;font-size:clamp(1.3rem,1rem + 1.3vw,2.3rem);
   line-height:1.05;margin-top:6px}
 .view .vstage{position:relative;min-height:0}
 .view .vstage img{position:absolute;inset:0;margin:auto;width:auto;height:auto;
   max-width:calc(100% - 2*max(18px,4vw));max-height:100%;border-radius:2px}
-.view .vf{display:flex;gap:6px;overflow-x:auto;padding:12px max(18px,2vw) 20px;scrollbar-width:none}
+.view .vf{display:flex;gap:6px;overflow-x:auto;padding:12px var(--pad) 20px;scrollbar-width:none}
 .view .vf::-webkit-scrollbar{display:none}
 .view .vf button{flex:0 0 auto;width:84px;aspect-ratio:16/9;border-radius:2px;overflow:hidden;
   opacity:.34;transition:opacity .3s}

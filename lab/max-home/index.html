@@ -22,7 +22,7 @@
    lab/max-home — the offer page at the sandbox standard.
    One file, hand-written CSS, vanilla JS, no build step, no Tailwind.
 
-   LIGHT FIRST, and that is the whole argument. lab/max is dark because a
+   LIGHT FIRST, and that is the whole argument. lab/max-brand is dark because a
    brand portfolio is a dark room with pictures in it. This page emulates
    print, so it keeps the offer page's own paper ground and its own two ink
    folds. Taking the sandbox's palette as well as its standard would make
@@ -96,16 +96,19 @@ ul{padding:0;list-style:none}
   font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase}
 .skip:focus{transform:none}
 
-/* the live page's own container, to the pixel: mx-auto w-full max-w-[82rem]
-   px-5 sm:px-8. It was max(20px,2vw) here, which is 28.8px at 1440 against
-   the live page's 32px, so the hero headline and every section under it sat
-   3.2px inside where the homepage puts them. The hero's own inner carries
-   this class and overrides only the VERTICAL padding, in longhand: a
-   `padding` shorthand on `.hero .inner` is (0,2,0) and would zero the sides
-   that `.wrap` sets at (0,1,0), which is the bug CLAUDE.md already records
-   costing one phone layout. */
-.wrap{margin:0 auto;width:100%;max-width:82rem;padding:0 20px}
-@media (min-width:640px){.wrap{padding:0 32px}}
+/* ── THE CONTENT COLUMN IS THE SITE'S ONE STANDARD ───────────────────
+   82rem wide, 20px of gutter below 640 and 32px from 640 up. It is what
+   index.html, /brand/ and /video/ already carry as
+   `mx-auto w-full max-w-[82rem] px-5 sm:px-8`, and it is now written as
+   tokens so a page cannot drift from it by writing its own figures. Media
+   still bleeds full width; CONTENT does not.
+   Anything that overrides this must override the VERTICAL padding only, in
+   longhand: a `padding` shorthand from a descendant selector is (0,2,0) and
+   zeroes the sides `.wrap` sets at (0,1,0), which is the bug CLAUDE.md
+   already records costing one phone layout. */
+:root{--col:82rem; --gut:20px; --pad:max(var(--gut),calc((100% - var(--col)) / 2 + var(--gut)))}
+@media (min-width:640px){:root{--gut:32px}}
+.wrap{margin-inline:auto;width:100%;max-width:var(--col);padding:0 var(--gut)}
 .eyebrow{font-family:"Geist Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.22em;
   text-transform:uppercase;color:var(--brick)}
 .on-ink .eyebrow{color:rgba(233,231,228,.6)}
@@ -124,25 +127,22 @@ ul{padding:0;list-style:none}
       there: it depends on what the backdrop happens to be inside which
       stacking context. State the two colours. ─────────────────────────── */
 .bar{position:fixed;top:0;left:0;right:0;z-index:72;display:flex;align-items:center;gap:14px;
-  padding:18px max(20px,2vw);pointer-events:none;color:var(--chrome);
+  padding:18px var(--pad);pointer-events:none;color:var(--chrome);
   transition:color .45s var(--ease)}
 .bar>*{pointer-events:auto}
 .bar .wm{font-family:"Geist Mono",monospace;font-size:10.5px;font-weight:600;letter-spacing:.3em;
   text-transform:uppercase;min-height:24px;display:inline-flex;align-items:center}
-/* THE RAIL HOLDS OFF UNTIL THE HERO IS PAST, and it is a contrast fix
-   before it is a behaviour one. With the scrim gone the rail sits on the
-   raw photograph: measured at 1440x900, bone over the picture, the top
-   three rows read 6.9, 6.5 and 6.4:1 and the bottom row reads 2.43:1,
-   because it lands on the man's white shirt. There is no vertical move
-   available to a fixed object, so it goes -- CLAUDE.md's other honest fix.
-   It also has nothing to navigate from while the reader is still in the
-   hero. Every section under it from the gate down is a flat value with a
-   known figure. */
+/* THE RAIL IS UP FROM THE FIRST FRAME, at the owner's instruction. It held
+   off over the hero for one version because the photograph is what it sits
+   on there: measured at 1440x900, bone over the picture, its top three rows
+   read 6.9, 6.5 and 6.4:1 and its bottom row read 2.43:1, landing on the
+   man's white shirt. A fixed object has no vertical move available, so the
+   only honest fixes were to hide it or give it a ground, and hiding it cost
+   the page its wayfinding exactly where a reader arrives. It is shown, and
+   the one row that fails is recorded rather than papered over. */
 .rail{position:fixed;right:max(18px,2vw);top:50%;transform:translateY(-50%);z-index:70;
-  display:none;gap:14px;justify-items:end;color:var(--chrome);opacity:0;pointer-events:none;
-  transition:color .45s var(--ease),opacity .5s var(--ease)}
-.rail.up{opacity:1;pointer-events:auto}
-.no-js .rail{opacity:1;pointer-events:auto}
+  display:none;gap:14px;justify-items:end;color:var(--chrome);
+  transition:color .45s var(--ease)}
 @media (min-width:980px){.rail{display:grid}}
 .rail a{display:flex;align-items:center;gap:9px;font-family:"Geist Mono",monospace;
   font-size:9.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
@@ -165,14 +165,14 @@ ul{padding:0;list-style:none}
    action 167 + gaps against 350 of usable width. One label for one intent
    is a rule in CLAUDE.md, so the label does not shorten -- the chrome does. */
 @media (max-width:560px){
-  .bar{gap:10px;padding:16px 16px}
+  .bar{gap:10px;padding:16px var(--gut)}
   .bar .wm{font-size:10px;letter-spacing:.2em}
   .bar .act{padding:.52rem .82rem;font-size:11.5px}
   .langs{margin-left:8px}
   .langs button{padding:9px 5px;letter-spacing:.06em;font-size:9.5px}
 }
 @media (max-width:359px){
-  .bar{gap:8px;padding:14px 12px}
+  .bar{gap:8px;padding:14px var(--gut)}
   .bar .wm{font-size:9.5px;letter-spacing:.14em}
   .bar .act{padding:.5rem .7rem;font-size:10.5px}
   .langs{margin-left:6px}
@@ -229,23 +229,14 @@ ul{padding:0;list-style:none}
   padding-top:clamp(4.75rem,11vh,7.5rem);padding-bottom:clamp(4rem,9vh,6rem)}
 .hero .inner>*{max-width:min(100%,56ch)}
 @media (min-width:1100px){.hero .inner>*{max-width:54%}}
-/* THE HERO'S EYEBROW CARRIES ITS OWN GROUND, and the reason is that with
-   no wash its contrast is decided by the viewport rather than by the page.
-   Measured, bone over the raw picture at the same place in the stack:
-   1440x900 5.80:1 · 820x1180 10.75:1 · 1024x768 2.98:1 · 390x844 1.55:1.
-   The crop moves with the window and the picture's bokeh moves with the
-   crop, so there is no position in a centred stack that holds at every
-   size -- swept at fourteen heights across all four, and only the rows at
-   40% and 70% of the band clear everywhere, neither of which is where an
-   eyebrow goes. A chip of the page's own mark is 60 x 24px, it is 0.1% of
-   the frame rather than a wash over it, and the figure that governs it is
-   fixed: --on-mark on --brick is 5.90:1 at every viewport, which is
-   CLAUDE.md's own measurement for the mark used as a fill. It also makes
-   the spine read as one device, since every other eyebrow on the page is
-   this colour. */
-.hero .eyebrow{justify-self:start;display:inline-flex;align-items:center;min-height:24px;
-  background:var(--brick);color:#F7F3EC;padding:5px 11px;border-radius:999px;
-  letter-spacing:.2em;font-size:10.5px}
+/* THE HERO EYEBROW IS PLAIN BONE AND CARRIES NO GROUND. The chip is the
+   owner's call reversed: it measured a fixed 5.90:1 at every viewport,
+   against a plain line that runs 5.80:1 at 1440 x 900 and 1.55:1 at
+   390 x 844 because object-fit re-crops the bokeh at every aspect. He has
+   read that and judges it readable as it was, which is the decision. The
+   measurement stays here because it is the thing that would otherwise be
+   re-derived; it is not an objection to work around. */
+.hero .eyebrow{color:rgba(233,231,228,.92)}
 
 .hero h1{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.032em;
   font-size:var(--t-display);line-height:.98;max-width:13ch}
@@ -343,12 +334,27 @@ ul{padding:0;list-style:none}
    asserted. One standard, three documents: the pile fans out as the
    reader scrolls, which is this page's own argument performed.          */
 .docs{position:relative;height:250vh;background:var(--paper-2)}
-.docs .stick{position:sticky;top:0;min-height:100svh;display:grid;
-  grid-template-rows:auto minmax(0,1fr) auto;
+/* the fold is centred as a block like every other sticky section here. It
+   was three rows over a 1fr middle inside a 100svh grid, which is `stretch`
+   by another name: the header sat on the top edge, the legend on the bottom
+   edge and the stage took whatever was left, so this one fold read as full
+   bleed while its neighbours read as centred. align-content:center with a
+   stage of definite height centres the three rows as one object -- and the
+   definite height is also what the fan's own pixel maths wants, since an
+   `fr` row counts as indefinite. */
+.docs .stick{position:sticky;top:0;min-height:100svh;display:grid;align-content:center;
+  grid-template-rows:auto minmax(0,clamp(260px,46vh,470px)) auto;
   padding:clamp(80px,12vh,120px) 0 clamp(28px,5vh,56px)}
 .docs h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.028em;
   font-size:var(--t-head);line-height:1.02;max-width:19ch;margin-top:16px}
-.fan{position:relative;min-height:0;margin:clamp(14px,3vh,28px) 0}
+/* `.fan` carries `.wrap` AND its own rule, both at (0,1,0), and this one
+   is later in the sheet -- so its `margin: X 0` shorthand overwrote the
+   `margin-inline:auto` that centres every other block on the page. The
+   stage sat hard against the left edge of the viewport at every width and
+   the misalignment only became visible past 1312px, where the headline
+   above it starts moving right and the pile does not. Longhands only. */
+.fan{position:relative;min-height:0;margin-inline:auto;
+  margin-top:clamp(14px,3vh,28px);margin-bottom:clamp(14px,3vh,28px)}
 .fan a{position:absolute;top:50%;left:50%;display:block;will-change:transform;
   filter:drop-shadow(0 18px 40px rgba(23,53,44,.20));transition:filter .4s var(--ease)}
 .fan a:hover{filter:drop-shadow(0 26px 56px rgba(23,53,44,.30))}
@@ -452,8 +458,24 @@ ul{padding:0;list-style:none}
   text-transform:uppercase;color:var(--brick)}
 .rung .nm{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.022em;
   font-size:var(--t-sub);line-height:1.02}
-.rung .pr{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.03em;
-  font-size:var(--t-figure);line-height:.9;color:var(--ink)}
+/* ── THE COST IS A FIELD, NOT A SHOUT ────────────────────────────────
+   The price ran at --t-figure, which is 67px at 1440 against a fold
+   headline of 52px: the figure was the largest object in its own fold and
+   larger than the sentence that frames it. It takes --t-value now, 42px,
+   which sits under the headline and over the tier name at 28px, so the
+   three read in the order a reader needs them.
+   The size is half of it. The other half is that everything about cost now
+   lives in one column -- the figure, the term and the credit -- instead of
+   the credit sitting at the foot of the deliverables list two columns away
+   from the number it modifies. The credit IS the ladder's mechanic, and a
+   mechanic stated far from its figure is not stated. A hairline on the
+   left of the block says the three lines are one object. */
+.rung .cost{position:relative;padding-left:clamp(14px,1.6vw,22px)}
+.rung .cost::before{content:"";position:absolute;left:0;top:.18em;bottom:.2em;width:1px;
+  background:var(--rule)}
+.rung:hover .cost::before,.rung:focus-within .cost::before{background:var(--rule-inv)}
+.rung .pr{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.028em;
+  font-size:var(--t-value);line-height:1;color:var(--ink)}
 @supports (background-clip:text) or (-webkit-background-clip:text){
   /* guarded: a browser without background-clip would otherwise show nothing
      at all where the price is */
@@ -466,13 +488,13 @@ ul{padding:0;list-style:none}
 .rung ul{display:grid;gap:9px;margin-top:4px}
 .rung li{position:relative;padding-left:20px;font-size:15px;line-height:1.55;max-width:44ch}
 .rung li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:1px;background:var(--brick)}
-.rung .note{font-size:13px;line-height:1.6;color:var(--ink-soft);max-width:42ch}
+.rung .note{font-size:13px;line-height:1.55;color:var(--ink-soft);max-width:34ch;margin-top:4px}
 .rung[data-lead]{padding-left:clamp(14px,2vw,26px);margin-left:calc(-1 * clamp(14px,2vw,26px))}
 .rung[data-lead]::after{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;
   background:linear-gradient(var(--g1),var(--g3));z-index:1}
 .rung .col{display:grid;align-content:start;gap:12px}
 @media (min-width:980px){
-  .rung{grid-template-columns:minmax(0,5fr) minmax(0,4fr) minmax(0,6fr);
+  .rung{grid-template-columns:minmax(0,5fr) minmax(0,4.5fr) minmax(0,5.5fr);
     gap:clamp(20px,3vw,56px);align-items:start}
 }
 .ladder .cmp{margin-top:clamp(28px,5vh,56px);display:grid;gap:18px}
@@ -587,7 +609,7 @@ dialog::backdrop{background:rgba(11,24,20,.72);backdrop-filter:blur(4px)}
   </div>
 
   <div class="inner wrap">
-    <p class="eyebrow" data-t="hero.eyebrow">Brand</p>
+    <p class="eyebrow" data-t="hero.eyebrow">Industrial manufacturer bids</p>
     <h1>
       <span class="ln"><span data-t="hero.h1a">Written once.</span></span>
       <span class="ln"><span data-t="hero.h1b">Right every time.</span></span>
@@ -801,7 +823,7 @@ const STR = {
     foot: { brand: "Brand and identity", video: "Video" },
     cta: "Get your page scored",
     hero: {
-      eyebrow: "Brand",
+      eyebrow: "Industrial manufacturer bids",
       h1a: "Written once.", h1b: "Right every time.",
       sub: "Public buyers score the documents you hand in. Not the plant, not the price list, not the twenty years.",
       second: "See the open tender"
@@ -906,7 +928,7 @@ const STR = {
     foot: { brand: "Merkevare og design", video: "Video" },
     cta: "Få siden din vurdert",
     hero: {
-      eyebrow: "Merkevare",
+      eyebrow: "Tilbud fra industriprodusenter",
       h1a: "Skrevet én gang.", h1b: "Riktig hver gang.",
       sub: "Offentlige oppdragsgivere gir poeng til dokumentene du leverer. Ikke fabrikken, ikke prislisten, ikke de tjue årene.",
       second: "Se den åpne konkurransen"
@@ -1011,7 +1033,7 @@ const STR = {
     foot: { brand: "Brändi ja muotoilu", video: "Video" },
     cta: "Pyydä sivusi pisteytys",
     hero: {
-      eyebrow: "Brändi",
+      eyebrow: "Teollisuusvalmistajan tarjoukset",
       h1a: "Kirjoitettu kerran.", h1b: "Oikein joka kerta.",
       sub: "Julkiset hankkijat pisteyttävät asiakirjat, jotka jätät. Eivät tehdasta, eivät hinnastoa, eivät kahtakymmentä vuotta.",
       second: "Katso avoin tarjouspyyntö"
@@ -1153,8 +1175,12 @@ const EXTRA = {
    carry the argument on its own. */
 const FAN = [
   { pile:[ 0,     0,     0, 1.00], out:[ 0,    -0.02,  1.5, 1.00] },  /* the annex, held */
-  { pile:[-0.012, 0.016,-2, 0.96], out:[-0.265, 0.045,-6.0, 0.94] },  /* the proposal */
-  { pile:[ 0.016,-0.016, 2, 0.96], out:[ 0.275,-0.095, 4.5, 1.04] }   /* the deck */
+  /* the open pile's own centre, not the stage's: the three plates differ in
+     width and scale, so symmetric offsets do not give a symmetric group.
+     Measured at 1440 the span ran 199 to 1180 inside a 1312 stage, 34px
+     right of centre; these two are pulled left by that much. */
+  { pile:[-0.012, 0.016,-2, 0.96], out:[-0.290, 0.045,-6.0, 0.94] },  /* the proposal */
+  { pile:[ 0.016,-0.016, 2, 0.96], out:[ 0.250,-0.095, 4.5, 1.04] }   /* the deck */
 ];
 
 const $  = s => document.querySelector(s);
@@ -1226,13 +1252,13 @@ function renderLists(){
         <p class="nm">${esc(x.name)}</p>
         <p class="terms">${esc(x.terms)}</p>
       </div>
-      <div class="col">
+      <div class="col cost">
         <p class="pr">${esc(x.price)}</p>
         <p class="when">${esc(x.time)}</p>
+        <p class="note">${esc(x.note)}</p>
       </div>
       <div class="col">
         <ul>${x.points.map(pt => `<li>${esc(pt)}</li>`).join("")}</ul>
-        <p class="note">${esc(x.note)}</p>
       </div>
     </div>`).join(""));
 
@@ -1382,7 +1408,6 @@ function sweep(){
 setTimeout(() => revs.forEach(el => el.classList.add("on")), 4000);
 
 /* ══ the rail ══════════════════════════════════════════════════════════ */
-const railEl = $(".rail");
 const rails = $$("[data-rail]");
 const railSecs = rails.map(a => document.querySelector(a.getAttribute("href")));
 if ("IntersectionObserver" in window) {
@@ -1426,9 +1451,6 @@ function frame(){
   for (const el of toned) { const r = el.getBoundingClientRect();
     if (r.top <= 54 && r.bottom > 54) over = el; }
   setChrome(over ? over.dataset.tone : "light");
-
-  /* the rail is not up while the photograph is what it would sit on */
-  railEl.classList.toggle("up", y > vh * 0.62);
 
   /* the hero leaves slowly and its ground leaves slower */
   if (y < vh * 1.3) {
