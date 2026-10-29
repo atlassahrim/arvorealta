@@ -646,6 +646,29 @@ locked: every string is `STR` verbatim, which keeps the prices and the Nordic
 text right and means the structure cannot be re-cut without new headlines in
 three languages.
 
+**The hero carries the gold, and the green scrim was eating it.** The owner's
+note is that the thing worth keeping from the live hero is the video's warm
+light. The scrim was `rgba(17,38,31,…)`, the page's own ink green, which turned
+every golden highlight olive; it is a warm near-black at `rgba(18,14,10,…)`
+now. Measured across the hero's right half, warmth as mean R minus B went from
+olive to **+30.1**, and the type improved with it rather than suffering for it:
+eyebrow 4.80:1 at the brightest 2 percent against 4.83, headline 7.17, cue
+7.81. **A scrim in a hue the picture does not contain is a colour cast, not a
+darkener.**
+
+**The crop moved off the subject and onto the light.** The frame is an office
+at night, the bokeh sits in the left third at R minus B of +35, and the person
+sits right of centre; `object-position:14% 50%` with the bed at `scale(1.75)`
+lands on the bokeh alone. **That is a 2.3x upscale of a 1141px source and it
+costs nothing visible**, because the region is already out of focus, which is
+the one kind of picture that tolerates being enlarged. The base scale lives in
+the scroll loop beside the parallax, not in a CSS rule the loop would overwrite
+on its first frame.
+
+**The bar is `lab/max`'s.** Wordmark in Geist Mono at 10.5px with `.3em` of
+tracking, the three languages immediately beside it, and the action pushed to
+the far right by the languages' own `margin-right:auto`.
+
 ### The tender fold is a clock now, and the live page is wrong today
 
 **On 28 October 2026 `index.html` carried `27 Oct 2026, 12:00` under an
