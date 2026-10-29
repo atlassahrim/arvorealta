@@ -158,7 +158,7 @@ ul{padding:0;list-style:none}
   align-items:end;background:#120E0A}
 .hero .bed{position:absolute;inset:-7% 0;z-index:0;overflow:hidden;will-change:transform}
 .hero .bed img,.hero .bed video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  object-position:14% 50%}
+  object-position:50% 50%}
 .hero .bed video{opacity:0;transition:opacity 1.4s ease}
 .hero .bed video.on{opacity:1}
 .hero .bed::after{content:"";position:absolute;inset:0;
@@ -1338,7 +1338,7 @@ function frame(){
     const p = clamp01(y / vh);
     heroInner.style.transform = "translate3d(0," + (p * -11).toFixed(2) + "vh,0)";
     heroInner.style.opacity = (1 - clamp01(p * 1.45)).toFixed(3);
-    bed.style.transform = "translate3d(0," + (p * 7).toFixed(2) + "%,0) scale(" + (1.75 + p * 0.06).toFixed(4) + ")";
+    bed.style.transform = "translate3d(0," + (p * 7).toFixed(2) + "%,0) scale(" + (1 + p * 0.05).toFixed(4) + ")";
   }
 
   /* ACT III-b — the pile becomes three documents */

@@ -656,14 +656,16 @@ eyebrow 4.80:1 at the brightest 2 percent against 4.83, headline 7.17, cue
 7.81. **A scrim in a hue the picture does not contain is a colour cast, not a
 darkener.**
 
-**The crop moved off the subject and onto the light.** The frame is an office
-at night, the bokeh sits in the left third at R minus B of +35, and the person
-sits right of centre; `object-position:14% 50%` with the bed at `scale(1.75)`
-lands on the bokeh alone. **That is a 2.3x upscale of a 1141px source and it
-costs nothing visible**, because the region is already out of focus, which is
-the one kind of picture that tolerates being enlarged. The base scale lives in
-the scroll loop beside the parallax, not in a CSS rule the loop would overwrite
-on its first frame.
+**The frame is shown as shot, and the crop into the bokeh is recorded as
+rejected.** A version cropped to the left third at `scale(1.75)` removed the
+subject and kept only the office lights; the owner's instruction is the man in
+frame and nothing zoomed, so it runs at `object-position:50% 50%` and
+`scale(1)`, which is the least a 1.783:1 source can be cropped inside a 1.68:1
+container. **The green was the fault, not the framing**, and the type reads
+better at the full frame than it did at the crop: eyebrow 5.24:1 at the
+brightest 2 percent against 4.80, headline 6.80, standfirst 8.09, warmth held
+at +32.4. The base scale still lives in the scroll loop beside the parallax,
+because a CSS rule there is overwritten on the loop's first frame.
 
 **The bar is `lab/max`'s.** Wordmark in Geist Mono at 10.5px with `.3em` of
 tracking, the three languages immediately beside it, and the action pushed to
