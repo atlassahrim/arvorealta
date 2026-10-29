@@ -100,7 +100,8 @@ ul{padding:0;list-style:none}
   padding:18px max(20px,2vw);pointer-events:none;color:var(--chrome);
   transition:color .45s var(--ease)}
 .bar>*{pointer-events:auto}
-.bar .wm{font-family:"EB Garamond",Georgia,serif;font-size:19px;letter-spacing:.01em}
+.bar .wm{font-family:"Geist Mono",monospace;font-size:10.5px;font-weight:600;letter-spacing:.3em;
+  text-transform:uppercase;min-height:24px;display:inline-flex;align-items:center}
 .rail{position:fixed;right:max(18px,2vw);top:50%;transform:translateY(-50%);z-index:70;
   display:none;gap:14px;justify-items:end;color:var(--chrome);transition:color .45s var(--ease)}
 @media (min-width:980px){.rail{display:grid}}
@@ -112,13 +113,14 @@ ul{padding:0;list-style:none}
 .rail a:hover{opacity:.7}
 .rail a[aria-current="true"]{opacity:1}
 .rail a[aria-current="true"] i{width:38px}
-.langs{display:flex;align-items:center;gap:2px;margin-left:auto}
+.langs{display:flex;align-items:center;gap:2px;margin-right:auto;
+  margin-left:clamp(14px,3vw,40px)}
 .langs button{font-family:"Geist Mono",monospace;font-size:10px;font-weight:600;letter-spacing:.16em;
   text-transform:uppercase;padding:9px 10px;border-radius:999px;opacity:.45;min-height:24px;
   transition:opacity .3s var(--ease),background .3s var(--ease)}
 .langs button:hover{opacity:.85}
 .langs button[aria-pressed="true"]{opacity:1;background:color-mix(in srgb,currentColor 12%,transparent)}
-@media (max-width:560px){.langs button{padding:9px 6px;letter-spacing:.08em}}
+@media (max-width:560px){.langs{margin-left:12px}.langs button{padding:9px 6px;letter-spacing:.08em}}
 
 /* ── actions ────────────────────────────────────────────────────────── */
 .act{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;
@@ -153,16 +155,16 @@ ul{padding:0;list-style:none}
    for the live page's layout; this one sets the stack lower and is measured
    again in that file.                                                    */
 .hero{position:relative;min-height:100svh;overflow:hidden;isolation:isolate;display:grid;
-  align-items:end;background:var(--ink-2)}
+  align-items:end;background:#120E0A}
 .hero .bed{position:absolute;inset:-7% 0;z-index:0;overflow:hidden;will-change:transform}
 .hero .bed img,.hero .bed video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  object-position:62% 50%}
+  object-position:14% 50%}
 .hero .bed video{opacity:0;transition:opacity 1.4s ease}
 .hero .bed video.on{opacity:1}
 .hero .bed::after{content:"";position:absolute;inset:0;
   background:
-    linear-gradient(96deg,rgba(17,38,31,.88) 0%,rgba(17,38,31,.70) 34%,rgba(17,38,31,.34) 58%,rgba(17,38,31,.02) 82%),
-    linear-gradient(180deg,rgba(17,38,31,.52) 0%,rgba(17,38,31,0) 24%,rgba(17,38,31,0) 50%,rgba(17,38,31,.86) 100%)}
+    linear-gradient(96deg,rgba(18,14,10,.86) 0%,rgba(18,14,10,.66) 34%,rgba(18,14,10,.28) 60%,rgba(18,14,10,0) 84%),
+    linear-gradient(180deg,rgba(18,14,10,.48) 0%,rgba(18,14,10,0) 24%,rgba(18,14,10,0) 50%,rgba(18,14,10,.84) 100%)}
 .hero .inner{position:relative;z-index:2;padding:0 max(20px,2vw) clamp(34px,8vh,96px);display:grid;
   gap:clamp(16px,2.6vh,30px)}
 .hero .inner>*{max-width:min(100%,56ch)}
@@ -1336,7 +1338,7 @@ function frame(){
     const p = clamp01(y / vh);
     heroInner.style.transform = "translate3d(0," + (p * -11).toFixed(2) + "vh,0)";
     heroInner.style.opacity = (1 - clamp01(p * 1.45)).toFixed(3);
-    bed.style.transform = "translate3d(0," + (p * 7).toFixed(2) + "%,0) scale(" + (1 + p * 0.06).toFixed(4) + ")";
+    bed.style.transform = "translate3d(0," + (p * 7).toFixed(2) + "%,0) scale(" + (1.75 + p * 0.06).toFixed(4) + ")";
   }
 
   /* ACT III-b — the pile becomes three documents */
