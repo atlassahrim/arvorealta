@@ -169,44 +169,93 @@ h1,h2,h3,p{margin:0}
   letter-spacing:-.01em;font-size:clamp(1.05rem,.9rem + .8vw,1.9rem);color:inherit;margin-top:6px}
 
 /* ──────────────────────────────────────────────────────────────────────
-   ACT III — three cases, travelled sideways by a vertical scroll.
+   ACT III — one mark, pulled apart. Turvatikas, with the real material.
+
+   It replaced three pinned panels whose copy read `Placeholder.` CLAUDE.md's
+   reasoning for three cases was that three shows a system where one shows a
+   lucky mark, and that still holds for a page of summaries. This is not a
+   summary: it is the lockup, its three parts, the same lockup on all three
+   grounds, one real application and the mark it replaced. The question three
+   panels could not answer is what is actually inside one of these. The other
+   sixteen projects moved into the gallery, which is where a frame with no
+   argument under it belongs.
    ────────────────────────────────────────────────────────────────────── */
-.cases{position:relative;height:330vh;background:var(--ink-2)}
-.cases .stick{position:sticky;top:0;height:100svh;overflow:hidden}
-.track{display:flex;height:100%;will-change:transform}
-.panel{position:relative;flex:0 0 100vw;height:100%;overflow:hidden;
-  display:grid;grid-template-rows:1fr auto}
-.panel .shot{position:absolute;inset:0}
-.panel .shot img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);will-change:transform}
-.panel .shot::after{content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(7,16,13,.45) 0%,rgba(7,16,13,.04) 36%,rgba(7,16,13,.90) 100%)}
-.panel[data-tone="light"] .shot::after{
-  background:linear-gradient(180deg,rgba(239,234,225,.34) 0%,rgba(239,234,225,0) 34%,rgba(239,234,225,.93) 100%)}
-.panel[data-tone="light"]{color:var(--paper-ink)}
-.panel[data-tone="light"] .num,.panel[data-tone="light"] .role{color:rgba(26,23,19,.55)}
-.panel[data-tone="light"] .say{color:rgba(26,23,19,.72)}
-.panel[data-tone="light"] .parts span{color:rgba(26,23,19,.6);border-color:rgba(26,23,19,.22)}
-.panel .meta{position:relative;align-self:end;padding:0 max(18px,2vw) clamp(40px,8vh,96px);display:grid;gap:16px}
-.panel .num{font-family:"Geist Mono",monospace;font-size:10px;letter-spacing:.3em;color:var(--bone-faint)}
-.panel h3{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.028em;
-  font-size:clamp(2.4rem,1.2rem + 5.4vw,7rem);line-height:.96}
-.panel .role{font-family:"Geist Mono",monospace;font-size:10px;letter-spacing:.24em;
-  text-transform:uppercase;color:var(--bone-dim)}
-.panel .say{max-width:46ch;font-size:clamp(.95rem,.9rem + .25vw,1.1rem);line-height:1.66;color:var(--bone-dim)}
-.panel .parts{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
-.panel .parts span{font-family:"Geist Mono",monospace;font-size:9.5px;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--bone-faint);border:1px solid var(--rule);border-radius:999px;padding:7px 12px}
-@media (max-width:820px){
-  .cases{height:auto}
-  .cases .stick{position:static;height:auto}
-  .track{flex-direction:column;transform:none!important}
-  .panel{flex:0 0 auto;width:100%;height:auto;min-height:82svh}
-  .panel .shot img{transform:none!important}
-  .casesbar{display:none}
+.sys{position:relative;background:var(--ink-2);
+  padding:clamp(80px,14vh,170px) max(18px,2vw) clamp(70px,12vh,150px)}
+/* the rail is fixed at the right edge and is about 122px wide. This is the
+   only section whose prose runs to the full measure, so it is the only one
+   that collides with it. The gutter grows on both sides rather than one, or
+   the triptych below stops being centred in its own section. */
+@media (min-width:980px){
+  .sys{padding-left:calc(max(18px,2vw) + 106px);padding-right:calc(max(18px,2vw) + 106px)}
 }
-.casesbar{position:absolute;left:max(18px,2vw);right:max(18px,2vw);bottom:22px;height:1px;
-  background:color-mix(in srgb,var(--chrome,var(--bone)) 20%,transparent);transition:background .45s var(--ease)}
-.casesbar i{display:block;height:100%;width:0;background:var(--chrome,var(--bone));transition:background .45s var(--ease)}
+.sys .lede{display:grid;gap:16px}
+.sys .num{font-family:"Geist Mono",monospace;font-size:10px;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--bone-faint)}
+.sys h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.03em;
+  font-size:clamp(2.6rem,1.3rem + 5.2vw,6.6rem);line-height:.94}
+.sys .role{font-family:"Geist Mono",monospace;font-size:10px;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--bone-dim)}
+.sys .say{max-width:54ch;font-size:clamp(.98rem,.92rem + .3vw,1.16rem);line-height:1.7;
+  color:var(--bone-dim)}
+.sys .band{margin-top:clamp(36px,7vh,96px)}
+
+/* a plate is somebody else's artwork on its own stock. It is framed, it is
+   never cropped, and it must not read as our photograph -- the same rule
+   the annex already carries for .plate-doc. */
+.plate{background:var(--paper);border-radius:3px;display:grid;place-items:center;
+  padding:clamp(20px,4vw,64px)}
+.plate img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+.cap{font-family:"Geist Mono",monospace;font-size:9.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--bone-faint);padding-top:12px;margin-top:12px;
+  border-top:1px solid var(--rule)}
+.cap b{font-weight:400;color:var(--bone-dim)}
+
+.parts3{display:grid;gap:clamp(22px,3vw,54px)}
+@media (min-width:860px){.parts3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.parts3 h3{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.02em;
+  font-size:clamp(1.3rem,1rem + 1.1vw,2rem);line-height:1.1;margin-bottom:10px}
+.parts3 p{font-size:15px;line-height:1.7;color:var(--bone-dim);max-width:42ch}
+
+.trip{display:grid;gap:clamp(9px,1.5vw,20px)}
+@media (min-width:780px){.trip{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.trip figure{margin:0}
+/* the source set's own ratio is the only safe cell for a landscape frame.
+   A 16:9 lockup cropped into a portrait cell loses its wordmark, which this
+   repo has measured once already and does not need to measure again. */
+.trip img{width:100%;height:auto;aspect-ratio:1400/788;object-fit:cover;border-radius:3px;
+  display:block}
+.trip figcaption{font-family:"Geist Mono",monospace;font-size:9.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--bone-faint);padding-top:11px;margin-top:11px;
+  border-top:1px solid var(--rule)}
+
+.approw{display:grid;gap:clamp(18px,3vw,48px);align-items:end}
+@media (min-width:900px){.approw{grid-template-columns:minmax(0,8fr) minmax(0,4fr)}}
+.appshot img{width:100%;height:auto;border-radius:3px;display:block}
+
+/* the comparison. It is a sorting instrument and not an apology: the page
+   states which one lasts and lets the reader agree or leave. */
+.vs{margin-top:clamp(64px,12vh,150px);padding-top:clamp(34px,6vh,74px);
+  border-top:1px solid var(--rule);display:grid;gap:clamp(26px,5vh,56px)}
+.vs h3{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.028em;
+  font-size:clamp(1.9rem,1.1rem + 3.2vw,4.2rem);line-height:1.04;max-width:22ch}
+.vsrow{display:grid;gap:clamp(14px,2.4vw,34px)}
+@media (min-width:820px){.vsrow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* the two plates are one shape so the comparison is of the two marks and
+   not of two different photographs. The supplied before file is 600 x 200
+   and will not take being shown large, so both are capped at a width the
+   weaker of them survives. */
+.vsrow .plate{aspect-ratio:2/1;padding:clamp(18px,3.5vw,44px)}
+.vsrow .plate img{max-width:min(100%,430px)}
+.plate.spec{padding:clamp(22px,4vw,64px) clamp(22px,5vw,96px);justify-items:center}
+.plate.spec img{max-width:min(100%,980px)}
+.vs .note{font-size:12px;line-height:1.6;color:var(--bone-faint);margin-top:9px;max-width:40ch}
+.vstail{display:grid;gap:clamp(18px,3vh,30px)}
+@media (min-width:900px){.vstail{grid-template-columns:minmax(0,7fr) minmax(0,5fr);
+  gap:clamp(24px,4vw,70px);align-items:start}}
+.vs .sort{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.018em;
+  font-size:clamp(1.2rem,.98rem + .9vw,1.8rem);line-height:1.28;max-width:28ch;color:var(--bone)}
+
 
 /* ──────────────────────────────────────────────────────────────────────
    ACT IV — the rest. A grid that knows where the cursor is.
@@ -348,8 +397,8 @@ h1,h2,h3,p{margin:0}
 
 <nav class="rail" aria-label="Sections">
   <a href="#open"   data-rail><span data-t="r0">Open</span><i></i></a>
-  <a href="#light"  data-rail><span data-t="r1">Light</span><i></i></a>
-  <a href="#cases"  data-rail><span data-t="r2">Cases</span><i></i></a>
+  <a href="#light"  data-rail><span data-t="r1">Proof</span><i></i></a>
+  <a href="#system" data-rail><span data-t="r2">System</span><i></i></a>
   <a href="#marks"  data-rail><span data-t="r3">Marks</span><i></i></a>
   <a href="#ways"   data-rail><span data-t="r4">Ways</span><i></i></a>
   <a href="#start"  data-rail><span data-t="r5">Start</span><i></i></a>
@@ -367,13 +416,13 @@ h1,h2,h3,p{margin:0}
   </div>
 
   <div class="inner">
-    <p class="kicker" data-t="kicker">Brand and identity &nbsp;/&nbsp; Seventeen marks</p>
+    <p class="kicker" data-t="kicker">Brand</p>
     <h1 id="h1">
-      <span class="ln"><span data-t="h1a">One mark.</span></span>
-      <span class="ln"><span data-t="h1b">Every <em>light</em> it meets.</span></span>
+      <span class="ln"><span data-t="h1a">Introduced with <em>class</em>.</span></span>
+      <span class="ln"><span data-t="h1b">A name made undeniable.</span></span>
     </h1>
     <div class="herofoot">
-      <p data-t="sub">A mark that only works in the light it was drawn in is a drawing. Every identity here was built and then carried through three grounds to find out which it was.</p>
+      <p data-t="sub">Most marks are redrawn within five years, because they were drawn to win the short term rather than the long. Nothing here was.</p>
       <div class="cue"><i></i><span data-t="scroll">Scroll</span></div>
     </div>
   </div>
@@ -383,7 +432,7 @@ h1,h2,h3,p{margin:0}
 <section class="thesis" id="light" aria-label="One mark, three grounds">
   <div class="stick">
     <div class="head">
-      <h2 data-t="thesis">The same mark,<br>three times over.</h2>
+      <h2 data-t="thesis">The same mark,<br>every time.</h2>
       <p class="mono" style="font-size:10px;color:var(--bone-faint)">Venner &nbsp;/&nbsp; Advice</p>
     </div>
 
@@ -405,55 +454,100 @@ h1,h2,h3,p{margin:0}
 </section>
 
 <!-- ACT III ─────────────────────────────────────────────────────────── -->
-<section class="cases" id="cases" aria-label="Three cases">
-  <div class="stick">
-    <div class="track" id="track">
+<section class="sys" id="system" aria-label="One mark, pulled apart">
 
-      <article class="panel">
-        <div class="shot"><img src="/assets/land/remedios-w-1-1400.webp" alt="Ilha dos Remédios, the crest on deep water" width="1400" height="788" loading="lazy"></div>
-        <div class="meta">
-          <p class="num">01 / 03</p>
-          <h3>Ilha dos<br>Remédios</h3>
-          <p class="role">Crest and seal</p>
-          <p class="say">Placeholder. One paragraph on what the client needed and what the crest had to
-             survive, from a stamped seal to a signboard. Two or three sentences.</p>
-          <div class="parts"><span>Crest</span><span>Seal</span><span>Wordmark</span><span>Palette</span></div>
-        </div>
-      </article>
-
-      <article class="panel" data-tone="light">
-        <div class="shot"><img src="/assets/land/venner-p-1-1400.webp" alt="Venner, the mark on bare paper" width="1400" height="788" loading="lazy"></div>
-        <div class="meta">
-          <p class="num">02 / 03</p>
-          <h3>Venner</h3>
-          <p class="role">Advice</p>
-          <p class="say">Placeholder. One paragraph on the brief and the constraint that shaped it.
-             The pictures carry the rest.</p>
-          <div class="parts"><span>Monogram</span><span>Wordmark</span><span>Type</span><span>Stationery</span></div>
-        </div>
-      </article>
-
-      <article class="panel">
-        <div class="shot"><img src="/assets/land/lobo-l-1-1400.webp" alt="Leonardo Lobo, the mark in warm light" width="1400" height="788" loading="lazy"></div>
-        <div class="meta">
-          <p class="num">03 / 03</p>
-          <h3>Leonardo<br>Lobo</h3>
-          <p class="role">Negócios imobiliários</p>
-          <p class="say">Placeholder. One paragraph on what was made and why it is shaped this way.
-             Replace with the real text.</p>
-          <div class="parts"><span>Mark</span><span>Wordmark</span><span>Colour</span><span>Signage</span></div>
-        </div>
-      </article>
-
-    </div>
-    <div class="casesbar"><i id="casesbar"></i></div>
+  <div class="lede">
+    <p class="num" data-t="sysNum">01 of 17 &nbsp;/&nbsp; pulled apart</p>
+    <h2>Turvatikas</h2>
+    <p class="role">Safety ladder</p>
+    <p class="say" data-t="sysSay">Turvatikas make safety ladders. The mark is four forms stacked and what you read is three rungs: the ladder drawn as the space between them rather than as the rails.</p>
   </div>
+
+  <div class="band">
+    <div class="plate spec">
+      <img src="/assets/img/turva-lock-1-979.webp" alt="The Turvatikas lockup: the mark left, TURVATIKAS SAFETY LADDER set in three lines of tracked capitals to its right"
+           width="979" height="192" sizes="(min-width:1040px) 980px, 92vw"
+           srcset="/assets/img/turva-lock-1-700.webp 700w, /assets/img/turva-lock-1-979.webp 979w" loading="lazy">
+    </div>
+    <p class="cap"><b data-t="capLock">The lockup, as it is drawn</b></p>
+  </div>
+
+  <div class="band parts3">
+    <div>
+      <h3 data-t="p0t">The mark</h3>
+      <p data-t="p0b">Four lens forms, stacked. The three gaps between them are the rungs. Nothing in it is thinner than the thinnest thing beside it, which is what lets it go small without a second drawing.</p>
+    </div>
+    <div>
+      <h3 data-t="p1t">The wordmark</h3>
+      <p data-t="p1b">TURVATIKAS, SAFETY, LADDER. Three lines of tracked capitals in a serif, ranged left, set to the height of the mark beside them. The name is not abbreviated and the trade is not hidden.</p>
+    </div>
+    <div>
+      <h3 data-t="p2t">The lockup</h3>
+      <p data-t="p2b">Mark left, wordmark right, on one optical centre. It is the arrangement every surface here uses, which is what makes the three grounds below read as one thing rather than three.</p>
+    </div>
+  </div>
+
+  <div class="band trip">
+    <figure>
+      <img src="/assets/land/turvatikas-w-1-1400.webp" alt="The Turvatikas lockup in amber over dark water" width="1400" height="788" loading="lazy">
+      <figcaption data-t="g0">Deep water</figcaption>
+    </figure>
+    <figure>
+      <img src="/assets/land/turvatikas-l-1-1400.webp" alt="The Turvatikas lockup in warm light" width="1400" height="788" loading="lazy">
+      <figcaption data-t="g1">Warm light</figcaption>
+    </figure>
+    <figure>
+      <img src="/assets/land/turvatikas-p-1-1400.webp" alt="The Turvatikas card on bare paper" width="1400" height="788" loading="lazy">
+      <figcaption data-t="g2">Bare paper</figcaption>
+    </figure>
+  </div>
+  <p class="cap"><b data-t="capGround">One drawing, three grounds. The colour moves to meet the ground. The construction does not move at all.</b></p>
+
+  <div class="band approw">
+    <div class="appshot">
+      <img src="/assets/img/turva-card-2-848.webp" alt="The Turvatikas business card: amber through chocolate, the lockup reversed out in the palest step of its own gradient"
+           width="848" height="476" sizes="(min-width:900px) 56vw, 92vw"
+           srcset="/assets/img/turva-card-2-700.webp 700w, /assets/img/turva-card-2-848.webp 848w" loading="lazy">
+    </div>
+    <div>
+      <h3 class="serifish" data-t="appT">The card</h3>
+      <p class="say" data-t="appB">Amber through chocolate on a forty five degree axis, the lockup reversed out in the palest step of its own gradient. The price gradient on this firm's own homepage is sampled off this card.</p>
+    </div>
+  </div>
+
+  <!-- the comparison. The one project here that has a before, which is why
+       it is the one pulled apart. -->
+  <div class="vs">
+    <h3 data-t="vsH">One of these was drawn to look current.<br>The other was drawn to last.</h3>
+
+    <div class="vsrow">
+      <div>
+        <div class="plate">
+          <img src="/assets/img/turva-before-1-600.webp" alt="The previous Turvatikas mark: a boxed A frame pictogram locked to a heavy condensed wordmark" width="600" height="200" loading="lazy">
+        </div>
+        <p class="cap"><b data-t="vsA">Before, as supplied</b></p>
+        <p class="note" data-t="vsNote">The client's own file, 600 by 200 pixels. It is reproduced at the size it holds.</p>
+      </div>
+      <div>
+        <div class="plate">
+          <img src="/assets/img/turva-lock-1-700.webp" alt="The Turvatikas lockup as drawn now" width="700" height="137" loading="lazy">
+        </div>
+        <p class="cap"><b data-t="vsB">After</b></p>
+      </div>
+    </div>
+
+    <div class="vstail">
+      <p class="say" data-t="vsSay">Most marks are redrawn within five years, because they were drawn to win the short term rather than the long. A mark is read before it is explained, so the test is not what it means. The test is what you think of the company in the second before you read the name.</p>
+      <p class="sort" data-t="vsSort">If the difference is not obvious to you, nothing written here will make it so.</p>
+    </div>
+  </div>
+
 </section>
 
 <!-- ACT IV ──────────────────────────────────────────────────────────── -->
 <section class="marks" id="marks">
   <header>
-    <h2 data-t="more">Fourteen more.</h2>
+    <h2 data-t="more">Sixteen more.</h2>
     <p class="mono" style="font-size:10px;color:var(--bone-faint)" data-t="moreMeta">Click any one &nbsp;/&nbsp; 51 frames behind it</p>
   </header>
   <div class="grid" id="grid"></div>
@@ -502,8 +596,8 @@ h1,h2,h3,p{margin:0}
     </video>
   </div>
   <div class="inner">
-    <h2 data-t="closeH">Tell me what it has to survive.</h2>
-    <p data-t="closeB">Signage, embroidery, an engraved plate and a favicon are four different briefs. The cheapest time to know which one you have is before the mark is drawn.</p>
+    <h2 data-t="closeH">Win with <em>class</em>.</h2>
+    <p data-t="closeB">A mark drawn to last costs more than one drawn to look current, and it is bought once. If that is the arithmetic you already do, we will get on.</p>
     <div><a class="mag" href="mailto:atlas@arvorealta.com" data-c data-mag data-t="cta">Start a project</a></div>
     <footer>
       <span>Arvorealta &nbsp;/&nbsp; Atlas Sahrim</span>
@@ -546,12 +640,16 @@ h1,h2,h3,p{margin:0}
    Names were read at full resolution before they shipped. A client's name
    spelled wrong on a portfolio is the one error that client is certain to
    see, so these are copied from the verified list and not retyped.        */
+/* the one project the page pulls apart. The other sixteen are the gallery,
+   and a role line is what that lockup itself states -- never a sector
+   inferred from a company name, and never translated. */
 const FEATURED = [
-  ["remedios","Ilha dos Remédios","Crest and seal"],
-  ["venner","Venner","Advice"],
-  ["lobo","Leonardo Lobo","Negócios imobiliários"]
+  ["turvatikas","Turvatikas","Safety ladder"]
 ];
 const GALLERY = [
+  ["remedios","Ilha dos Remédios","Crest and seal"],
+  ["venner","Venner","Advice"],
+  ["lobo","Leonardo Lobo","Negócios imobiliários"],
   ["demillion","Demillion","Landscapes"],
   ["boaventura","Boaventura Noleto Sousa Souto","Advogados"],
   ["figueiredo","Figueiredo & Velloso","Advogados associados"],
@@ -562,7 +660,6 @@ const GALLERY = [
   ["soledad","Soledad Molina","Monogram and wordmark"],
   ["archy","Archy","Mark and wordmark"],
   ["noleto","Noleto","Mark and wordmark"],
-  ["turvatikas","Turvatikas","Safety ladder"],
   ["amazonia","Amazônia Store","Store"],
   ["autotrack","Autotrack","Mark and wordmark"],
   ["arvorealta","Arvorealta","Our own"]
@@ -720,7 +817,7 @@ GL = initGL();
 if (GL) { stage.classList.add("gl"); sizeGL(); } else { cv.remove(); }
 
 /* ══ ACT III — the sideways travel ═════════════════════════════════════ */
-const casesSec = $("#cases"), track = $("#track"), casesbar = $("#casesbar");
+const sysSec = $("#system");
 
 /* ══ ACT IV — the grid ═════════════════════════════════════════════════ */
 const grid = $("#grid");
@@ -785,14 +882,31 @@ view.addEventListener("touchend", e => {
 const LANG = {
   en: { _n:"English", _s:"EN", _l:"en",
     cta:"Start a project",
-    r0:"Open", r1:"Light", r2:"Cases", r3:"Marks", r4:"Ways", r5:"Start",
-    kicker:"Brand and identity &nbsp;/&nbsp; Seventeen marks",
-    h1a:"One mark.", h1b:"Every <em>light</em> it meets.",
-    sub:"A mark that only works in the light it was drawn in is a drawing. Every identity here was built and then carried through three grounds to find out which it was.",
+    r0:"Open", r1:"Proof", r2:"System", r3:"Marks", r4:"Ways", r5:"Start",
+    kicker:"Brand",
+    h1a:"Introduced with <em>class</em>.", h1b:"A name made undeniable.",
+    sub:"Most marks are redrawn within five years, because they were drawn to win the short term rather than the long. Nothing here was.",
     scroll:"Scroll",
-    thesis:"The same mark,<br>three times over.",
+    thesis:"The same mark,<br>every time.",
     g0:"Deep water", g1:"Warm light", g2:"Bare paper",
-    more:"Fourteen more.", moreMeta:"Click any one &nbsp;/&nbsp; 51 frames behind it",
+    sysNum:"01 of 17 &nbsp;/&nbsp; pulled apart",
+    sysSay:"Turvatikas make safety ladders. The mark is four forms stacked and what you read is three rungs: the ladder drawn as the space between them rather than as the rails.",
+    capLock:"The lockup, as it is drawn",
+    p0t:"The mark",
+    p0b:"Four lens forms, stacked. The three gaps between them are the rungs. Nothing in it is thinner than the thinnest thing beside it, which is what lets it go small without a second drawing.",
+    p1t:"The wordmark",
+    p1b:"TURVATIKAS, SAFETY, LADDER. Three lines of tracked capitals in a serif, ranged left, set to the height of the mark beside them. The name is not abbreviated and the trade is not hidden.",
+    p2t:"The lockup",
+    p2b:"Mark left, wordmark right, on one optical centre. It is the arrangement every surface here uses, which is what makes the three grounds below read as one thing rather than three.",
+    capGround:"One drawing, three grounds. The colour moves to meet the ground. The construction does not move at all.",
+    appT:"The card",
+    appB:"Amber through chocolate on a forty five degree axis, the lockup reversed out in the palest step of its own gradient. The price gradient on this firm's own homepage is sampled off this card.",
+    vsH:"One of these was drawn to look current.<br>The other was drawn to last.",
+    vsA:"Before, as supplied", vsB:"After",
+    vsNote:"The client's own file, 600 by 200 pixels. It is reproduced at the size it holds.",
+    vsSay:"Most marks are redrawn within five years, because they were drawn to win the short term rather than the long. A mark is read before it is explained, so the test is not what it means. The test is what you think of the company in the second before you read the name.",
+    vsSort:"If the difference is not obvious to you, nothing written here will make it so.",
+    more:"Sixteen more.", moreMeta:"Click any one &nbsp;/&nbsp; 51 frames behind it",
     waysH:"One document, the standard, or the whole system.",
     t0w:"3 to 4 days", t0n:"One document", t0p:"&euro;600",
     t0s:"One document, done properly. The whole thing, however many pages it runs to.",
@@ -803,20 +917,37 @@ const LANG = {
     t2w:"Six weeks", t2n:"Identity system", t2p:"&euro;8,000",
     t2s:"Colour, type, signage, product marking and the mark itself, written down so suppliers can work from it.",
     t2c:"Your &euro;2,400 credited &nbsp;/&nbsp; credits never expire",
-    closeH:"Tell me what it has to survive.",
-    closeB:"Signage, embroidery, an engraved plate and a favicon are four different briefs. The cheapest time to know which one you have is before the mark is drawn.",
+    closeH:"Win with <em>class</em>.",
+    closeB:"A mark drawn to last costs more than one drawn to look current, and it is bought once. If that is the arithmetic you already do, we will get on.",
     free:"Before any of them, one page of your own scored against the tender that is open now. Free."
   },
   nb: { _n:"Norsk", _s:"NO", _l:"nb",
     cta:"Start et prosjekt",
-    r0:"Åpning", r1:"Lys", r2:"Prosjekter", r3:"Merker", r4:"Trinn", r5:"Start",
-    kicker:"Merkevare og design &nbsp;/&nbsp; Sytten merker",
-    h1a:"Ett merke.", h1b:"Hvert <em>lys</em> det møter.",
-    sub:"Et merke som bare virker i lyset det ble tegnet i, er en tegning. Hver identitet her ble bygget og så båret gjennom tre underlag for å finne ut hvilket det var.",
+    r0:"Åpning", r1:"Bevis", r2:"System", r3:"Merker", r4:"Trinn", r5:"Start",
+    kicker:"Merkevare",
+    h1a:"Introdusert med <em>klasse</em>.", h1b:"Et navn gjort ubestridelig.",
+    sub:"De fleste merker tegnes på nytt innen fem år, fordi de ble tegnet for å vinne på kort sikt og ikke på lang. Ingenting her ble det.",
     scroll:"Rull",
-    thesis:"Det samme merket,<br>tre ganger.",
+    thesis:"Det samme merket,<br>hver gang.",
     g0:"Dypt vann", g1:"Varmt lys", g2:"Bart papir",
-    more:"Fjorten til.", moreMeta:"Klikk på én &nbsp;/&nbsp; 51 bilder bak",
+    sysNum:"01 av 17 &nbsp;/&nbsp; tatt fra hverandre",
+    sysSay:"Turvatikas lager sikkerhetsstiger. Merket er fire former stablet oppå hverandre, og det du leser er tre trinn: stigen tegnet som rommet mellom dem, ikke som vangene.",
+    capLock:"Oppsettet, slik det er tegnet",
+    p0t:"Merket",
+    p0b:"Fire linseformer, stablet. De tre mellomrommene mellom dem er trinnene. Ingenting i merket er tynnere enn det tynneste ved siden av, og det er dette som lar det bli lite uten en ny tegning.",
+    p1t:"Ordmerket",
+    p1b:"TURVATIKAS, SAFETY, LADDER. Tre linjer med sperrede versaler i en antikva, venstrestilt, satt til høyden på merket ved siden av. Navnet er ikke forkortet og faget er ikke skjult.",
+    p2t:"Oppsettet",
+    p2b:"Merket til venstre, ordmerket til høyre, på ett optisk midtpunkt. Det er oppsettet hver eneste flate her bruker, og det er derfor de tre underlagene under leser som én ting og ikke som tre.",
+    capGround:"Én tegning, tre underlag. Fargen flytter seg for å møte underlaget. Konstruksjonen flytter seg ikke i det hele tatt.",
+    appT:"Kortet",
+    appB:"Rav gjennom sjokolade på en akse på førtifem grader, med oppsettet speilet ut i det lyseste trinnet i sin egen gradient. Prisgradienten på dette firmaets egen forside er hentet fra dette kortet.",
+    vsH:"Det ene ble tegnet for å se moderne ut.<br>Det andre ble tegnet for å vare.",
+    vsA:"Før, slik det ble levert", vsB:"Etter",
+    vsNote:"Kundens egen fil, 600 ganger 200 piksler. Den er gjengitt i den størrelsen den har.",
+    vsSay:"De fleste merker tegnes på nytt innen fem år, fordi de ble tegnet for å vinne på kort sikt og ikke på lang. Et merke leses før det forklares, så prøven er ikke hva det betyr. Prøven er hva du tenker om selskapet i sekundet før du leser navnet.",
+    vsSort:"Er ikke forskjellen åpenbar for deg, er det ingenting her som gjør den det.",
+    more:"Seksten til.", moreMeta:"Klikk på én &nbsp;/&nbsp; 51 bilder bak",
     waysH:"Ett dokument, standarden, eller hele systemet.",
     t0w:"3 til 4 dager", t0n:"Ett dokument", t0p:"&euro;600",
     t0s:"Ett dokument gjort ordentlig. Hele dokumentet, uansett hvor mange sider det går over.",
@@ -827,20 +958,37 @@ const LANG = {
     t2w:"Seks uker", t2n:"Identitetssystem", t2p:"&euro;8 000",
     t2s:"Farge, typografi, skilting, produktmerking og selve merket, skrevet ned så leverandørene dine kan arbeide etter det.",
     t2c:"Dine &euro;2 400 kreditert &nbsp;/&nbsp; krediteringen utløper aldri",
-    closeH:"Si hva det må tåle.",
-    closeB:"Skilting, broderi, en gravert plate og et favicon er fire ulike oppdrag. Det billigste tidspunktet å vite hvilket du har, er før merket tegnes.",
+    closeH:"Vinn med <em>klasse</em>.",
+    closeB:"Et merke tegnet for å vare koster mer enn ett tegnet for å se moderne ut, og det kjøpes én gang. Er det regnestykket du allerede gjør, kommer vi til å forstå hverandre.",
     free:"Før noe av dette: én av dine egne sider vurdert mot konkurransen som er åpen nå. Gratis."
   },
   fi: { _n:"Suomi", _s:"FI", _l:"fi",
     cta:"Aloita projekti",
-    r0:"Avaus", r1:"Valo", r2:"Projektit", r3:"Merkit", r4:"Tasot", r5:"Aloita",
-    kicker:"Brändi ja muotoilu &nbsp;/&nbsp; Seitsemäntoista merkkiä",
-    h1a:"Yksi merkki.", h1b:"Jokainen <em>valo</em>, jonka se kohtaa.",
-    sub:"Merkki, joka toimii vain siinä valossa jossa se piirrettiin, on piirros. Jokainen identiteetti täällä rakennettiin ja kannettiin kolmen pohjan läpi, jotta selvisi mikä se oli.",
+    r0:"Avaus", r1:"Todiste", r2:"Järjestelmä", r3:"Merkit", r4:"Tasot", r5:"Aloita",
+    kicker:"Brändi",
+    h1a:"Esitelty <em>tyylillä</em>.", h1b:"Nimi, jota ei voi kiistää.",
+    sub:"Useimmat merkit piirretään uudelleen viidessä vuodessa, koska ne piirrettiin voittamaan lyhyellä aikavälillä eikä pitkällä. Mitään täällä ei piirretty niin.",
     scroll:"Vieritä",
-    thesis:"Sama merkki,<br>kolme kertaa.",
+    thesis:"Sama merkki,<br>joka kerta.",
     g0:"Syvä vesi", g1:"Lämmin valo", g2:"Paljas paperi",
-    more:"Neljätoista lisää.", moreMeta:"Klikkaa mitä tahansa &nbsp;/&nbsp; 51 kuvaa takana",
+    sysNum:"01 / 17 &nbsp;/&nbsp; purettuna",
+    sysSay:"Turvatikas valmistaa turvatikkaita. Merkki on neljä muotoa päällekkäin, ja se mitä luet on kolme askelmaa: tikkaat piirrettynä niiden väliin jäävänä tilana eikä sivujohteina.",
+    capLock:"Asettelu, sellaisena kuin se on piirretty",
+    p0t:"Merkki",
+    p0b:"Neljä linssimäistä muotoa päällekkäin. Kolme väliä niiden välissä ovat askelmat. Mikään merkissä ei ole ohuempi kuin ohuin asia sen vieressä, ja juuri se antaa sen pienentyä ilman toista piirrosta.",
+    p1t:"Sanamerkki",
+    p1b:"TURVATIKAS, SAFETY, LADDER. Kolme riviä harvennettuja versaaleja antiikvassa, vasempaan tasattuna, viereisen merkin korkeuteen asetettuna. Nimeä ei ole lyhennetty eikä toimialaa piilotettu.",
+    p2t:"Asettelu",
+    p2b:"Merkki vasemmalla, sanamerkki oikealla, yhdellä optisella keskiöllä. Sitä asettelua käyttää jokainen pinta täällä, ja siksi alla olevat kolme pohjaa luetaan yhtenä asiana eikä kolmena.",
+    capGround:"Yksi piirros, kolme pohjaa. Väri siirtyy kohtaamaan pohjan. Rakenne ei siirry lainkaan.",
+    appT:"Kortti",
+    appB:"Meripihkasta suklaaseen neljänkymmenenviiden asteen akselilla, asettelu käännettynä esiin oman gradienttinsa vaaleimmassa portaassa. Tämän toimiston oman etusivun hintagradientti on poimittu tästä kortista.",
+    vsH:"Toinen piirrettiin näyttämään ajanmukaiselta.<br>Toinen piirrettiin kestämään.",
+    vsA:"Ennen, toimitettuna", vsB:"Jälkeen",
+    vsNote:"Asiakkaan oma tiedosto, 600 kertaa 200 pikseliä. Se on toistettu siinä koossa, joka siinä on.",
+    vsSay:"Useimmat merkit piirretään uudelleen viidessä vuodessa, koska ne piirrettiin voittamaan lyhyellä aikavälillä eikä pitkällä. Merkki luetaan ennen kuin se selitetään, joten koe ei ole se mitä se tarkoittaa. Koe on se, mitä ajattelet yrityksestä sekuntia ennen kuin luet nimen.",
+    vsSort:"Jos ero ei ole sinulle ilmeinen, mikään tässä kirjoitettu ei tee siitä ilmeistä.",
+    more:"Kuusitoista lisää.", moreMeta:"Klikkaa mitä tahansa &nbsp;/&nbsp; 51 kuvaa takana",
     waysH:"Yksi asiakirja, standardi, tai koko järjestelmä.",
     t0w:"3 tai 4 päivää", t0n:"Yksi asiakirja", t0p:"600 &euro;",
     t0s:"Yksi asiakirja tehtynä kunnolla. Koko asiakirja, olipa sivuja kuinka monta tahansa.",
@@ -851,8 +999,8 @@ const LANG = {
     t2w:"Kuusi viikkoa", t2n:"Identiteettijärjestelmä", t2p:"8 000 &euro;",
     t2s:"Väri, typografia, opasteet, tuotemerkinnät ja itse merkki, kirjattuina niin että toimittajasi voivat työskennellä niiden mukaan.",
     t2c:"2 400 &euro; hyvitetty &nbsp;/&nbsp; hyvitykset eivät vanhene",
-    closeH:"Kerro mitä sen on kestettävä.",
-    closeB:"Opasteet, brodeeraus, kaiverrettu laatta ja favicon ovat neljä eri tehtävää. Halvin hetki tietää mikä sinulla on, on ennen kuin merkki piirretään.",
+    closeH:"Voita <em>tyylillä</em>.",
+    closeB:"Kestämään piirretty merkki maksaa enemmän kuin ajanmukaiselta näyttämään piirretty, ja se ostetaan kerran. Jos teet jo sen laskutoimituksen, tulemme toimeen.",
     free:"Ennen mitään näistä: yksi oma sivusi pisteytettynä nyt avoinna olevaa tarjouspyyntöä vasten. Ilmaiseksi."
   }
 };
@@ -931,7 +1079,6 @@ function measureCells(){ cellBoxes = cells.map(c => { const r = c.getBoundingCli
 
 /* ══ one loop ══════════════════════════════════════════════════════════ */
 const hero = $("#open"), heroInner = hero.querySelector(".inner"), bed = hero.querySelector(".bed");
-const panels = [...track.querySelectorAll(".panel")];
 const wide = matchMedia("(min-width: 821px)");
 const closeSec = $("#start");
 let chromeLight = null;
@@ -999,38 +1146,16 @@ function frame(now){
     }
   }
 
-  /* ACT III — vertical scroll, horizontal travel */
-  const cr = casesSec.getBoundingClientRect();
-  if (wide.matches && cr.top < vh && cr.bottom > 0) {
-    const span = casesSec.offsetHeight - vh;
-    const p = clamp01((-cr.top) / Math.max(1, span));
-    const travel = track.scrollWidth - innerWidth;
-    track.style.transform = "translate3d(" + (-p * travel).toFixed(1) + "px,0,0)";
-    casesbar.style.width = (p * 100).toFixed(2) + "%";
-    /* the chrome belongs to whichever panel is under it, not to the page */
-    const atPanel = panels[Math.round(p * (panels.length - 1))];
-    if (cr.top <= 1) setChrome(!!atPanel && atPanel.dataset.tone === "light");
-    /* the picture inside each panel drifts the other way, which is what
-       makes a flat pan read as depth */
-    const shots = track.querySelectorAll(".shot img");
-    shots.forEach((im,i) => {
-      const local = clamp01(p * shots.length - i + 0.5);
-      im.style.transform = "scale(1.08) translate3d(" + ((local - 0.5) * 5).toFixed(2) + "%,0,0)";
-    });
-  }
-
-  if (!wide.matches && cr.top < vh && cr.bottom > 0) {
-    /* stacked: whichever panel the bar is actually over owns the chrome */
-    let over = null;
-    for (const el of panels) { const r = el.getBoundingClientRect();
-      if (r.top <= 60 && r.bottom > 60) over = el; }
-    if (over) setChrome(over.dataset.tone === "light");
-  }
+  /* ACT III is a flowing dark section now rather than a pinned scroller.
+     A pinned horizontal scroller is a desktop idea -- recorded here once
+     already -- and a case study is read, not panned. The chrome stays bone
+     over it, so nothing needs to be computed per panel. */
+  const sr = sysSec.getBoundingClientRect();
 
   /* the close is the other light ground, and it owns the bar once it arrives */
   const clr = closeSec.getBoundingClientRect();
   if (clr.top < vh * 0.35 && clr.bottom > 0) setChrome(true);
-  else if (clr.top >= vh * 0.35 && cr.bottom <= 0) setChrome(false);
+  else if (clr.top >= vh * 0.35 && sr.bottom <= 0) setChrome(false);
 
   /* ACT IV — the grid leans toward the cursor */
   if (fine && cells.length) {

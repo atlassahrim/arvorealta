@@ -487,10 +487,71 @@ ground's brightest 2% is 0.0801 in relative luminance and the render showed
 nothing in the markup said so.** `isolation: isolate` on the section and an
 absolute bed fixed it, and the parallax is written rather than implied.
 
-**A pinned horizontal scroller is a desktop idea.** On a phone it leaves each
-panel's copy half off the screen at most scroll positions and crops a 16:9
-frame to a sliver, so below 820px the three cases simply stack and the pin is
-switched off in JS as well as in CSS.
+**A pinned horizontal scroller is a desktop idea**, and it is gone with the
+three panels it carried. On a phone it left each panel's copy half off the
+screen at most scroll positions and cropped a 16:9 frame to a sliver, so it
+had to be switched off below 820px in JS as well as in CSS, which is two
+behaviours for one section. A case study is read, not panned.
+
+### `lab/max/` pulls one project apart, and it is Turvatikas
+
+The three pinned panels carried the word `Placeholder.` in every paragraph.
+The owner's instruction is to pull one project apart as the example, and the
+project is the one that has a before: **Turvatikas is the only one of the
+seventeen that does**, which is why the comparison and the case study are the
+same section rather than two. The other sixteen moved into the gallery, where
+a frame with no argument under it belongs, and its heading counts them.
+
+**The section is the real material and nothing in it is a stand-in.** The
+lockup cut out of its own whitespace, its three parts in words, the same
+lockup on all three grounds, the card cut out of the surface it was shot on,
+and the mark it replaced. CLAUDE.md's reasoning for three cases was that
+three shows a system where one shows a lucky mark, and that still holds for a
+page of summaries. This is not a summary.
+
+**Two crops were generated rather than cropped by eye.** `turva-lock-1-979`
+is `turva-after-1`'s ink bounding box plus five percent, which is 979 x 192
+and 5.1:1, so a lockup plate can be wide and shallow and still read large.
+`turva-card-2-848` is the card's own bounds inside `turvatikas-p-1-1400`,
+found by scanning for the gradient edge, 848 x 476 and 1.782:1, which is a
+business card's own ratio and is the check that the crop is right. **The
+triptych's paper cell and the application are now two views rather than one
+picture twice.**
+
+**The before file is 600 x 200 and its wordmark does not resolve.** At any
+size the old slab lockup reads as black boxes, which looks like a redaction
+rather than a logo, so the page says in its own caption that it is the
+client's own file reproduced at the size it holds. **An unlabelled
+low-resolution reference reads as something being hidden.** A higher
+resolution original would roughly double what the comparison is worth.
+
+**The comparison is a sorting instrument, not an apology.** The owner's
+correction is the whole of it: the people who preferred the old mark were
+wrong, and the new one is better at every level. So the page states which one
+lasts, gives the reasoning in one paragraph, and closes on a line that lets
+the reader agree or leave: *if the difference is not obvious to you, nothing
+written here will make it so.* An earlier draft built a whole centrepiece on
+the opposite reading and it was inverted at the root.
+
+**One accent fact crosses onto the page and it is checkable.** The price
+gradient on `index.html` is sampled off this client's card, which this file
+has recorded since the gradient was made, so the application caption can say
+it. That is the kind of detail a generated summary does not have.
+
+**The copy is the owner's own lines.** The hero was `One mark. Every light it
+meets.` and the close was `Tell me what it has to survive.` Both were
+rejected for the same reason: the light at the back of the frame is a craft
+point and the customer does not buy it. The hero is `Introduced with class. A
+name made undeniable.` and the close is `Win with class.`, which are his
+phrases, and the standfirst carries the redirect he kept: *most marks are
+redrawn within five years, because they were drawn to win the short term
+rather than the long.* The kicker is one word, `Brand`.
+
+**The rail costs this section 106px of gutter on each side.** It is fixed at
+the right edge and about 122px wide, and this is the only section whose prose
+runs to the full measure, so it is the only one that collides with it. The
+gutter grows on **both** sides rather than one, or the triptych stops being
+centred in its own section. Measured clear at 980, 1200, 1440 and 1920.
 
 **The two ground loops are the owner's own footage**, not a camera move over a
 still: `ground-water-2-720.mp4` and `ground-paper-2-720.mp4`. Neither looped, so
