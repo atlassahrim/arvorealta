@@ -547,6 +547,34 @@ phrases, and the standfirst carries the redirect he kept: *most marks are
 redrawn within five years, because they were drawn to win the short term
 rather than the long.* The kicker is one word, `Brand`.
 
+**The CTA opens a form now, and it asks for two things.** The owner's
+instruction is email and phone number, very minimal, so that is the whole
+form: a native `<dialog>` with `showModal`, focus moved by hand to the email
+field, the body locked, `visualViewport` driving `top` and `max-height` on
+both its events, `Accept: application/json` with the `Content-Type`
+deliberately unset, the `INTAKE` null branch kept, and the prewritten mail in
+the footer filled in the reader's own language. Same Basin endpoint as the
+offer page, which is not a secret and is not treated as one. The phone field
+is optional and says so. Verified in all three languages at 390 and 1440: the
+dialog opens, focus lands on the field rather than the close button, the
+validation fires, Escape closes and unlocks.
+
+**`curLang` is declared above `setLang` and the `#dlgAlt` lookup is inside
+it.** A `let` below the code that reaches it kills the whole module, and a
+temporal dead zone fails silently from the outside: the page renders
+perfectly and every control is inert. This file has paid for that twice
+already and the third one was avoided by writing the declaration first.
+
+**The bar's action covered the language control on a phone, and in Norwegian
+it covered it outright.** `Start et prosjekt` is longer than `Start a
+project`, the languages carry `margin-right:auto`, and the action is last in
+the flex row, so at 390px the FI chip could not be reached at all. Found by a
+Playwright click that timed out on an intercepted pointer event rather than
+by looking at a screenshot, which showed nothing wrong. The label does not
+shorten, because one label for one intent is a rule here; the chrome does, in
+two tiers at 620 and 400. Checked at 320, 360, 390, 430, 560 and 620 with the
+longest label loaded.
+
 **The rail costs this section 106px of gutter on each side.** It is fixed at
 the right edge and about 122px wide, and this is the only section whose prose
 runs to the full measure, so it is the only one that collides with it. The

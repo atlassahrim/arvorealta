@@ -93,7 +93,26 @@ h1,h2,h3,p{margin:0}
   transition:opacity .3s var(--ease),background .3s var(--ease)}
 .langs button:hover{opacity:.8}
 .langs button[aria-pressed="true"]{opacity:1;background:color-mix(in srgb,var(--chrome,var(--bone)) 13%,transparent)}
-@media (max-width:560px){.langs{margin-left:12px}.langs button{padding:9px 7px;letter-spacing:.1em}}
+/* the bar's three objects collide on a phone and the action wins, because
+   it is last in the flex row and the languages carry margin-right:auto.
+   Measured with Playwright rather than by eye: in Norwegian the action's
+   pill covered the FI chip outright, so the language control could not be
+   reached at all on a 390px screen. The label does not shorten, because one
+   label for one intent is a rule here. The chrome does, in two tiers. */
+@media (max-width:620px){
+  .brandbar{padding:18px 14px;gap:8px}
+  .brandbar .wm{font-size:9.5px;letter-spacing:.18em}
+  .langs{margin-left:8px}
+  .langs button{padding:9px 5px;letter-spacing:.04em;font-size:9.5px}
+  .brandbar .mag{font-size:9px;letter-spacing:.12em;padding:10px 12px}
+}
+@media (max-width:400px){
+  .brandbar{padding:16px 11px;gap:6px}
+  .brandbar .wm{font-size:9px;letter-spacing:.1em}
+  .langs{margin-left:5px}
+  .langs button{padding:9px 4px;letter-spacing:0}
+  .brandbar .mag{font-size:8.5px;letter-spacing:.08em;padding:9px 10px}
+}
 
 .mag{position:relative;display:inline-flex;align-items:center;gap:10px;
   font-family:"Geist Mono",monospace;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
@@ -346,6 +365,39 @@ h1,h2,h3,p{margin:0}
   color:rgba(26,23,19,.55)}
 
 /* ── the viewer ──────────────────────────────────────────────────────── */
+/* ──────────────────────────────────────────────────────────────────────
+   the intake. A native <dialog>, because showModal gives the focus trap,
+   the inert background, Escape, ::backdrop and focus returning to the
+   control that opened it, and all five are things a hand-rolled modal gets
+   wrong. Two fields and nothing else: the owner's instruction is minimal.
+   ────────────────────────────────────────────────────────────────────── */
+#dlg{border:0;padding:0;background:none;max-width:min(92vw,30rem);width:100%;
+  position:fixed;left:0;right:0;margin-inline:auto}
+#dlg::backdrop{background:rgba(5,11,9,.74)}
+.sheet{background:var(--ink-3);color:var(--bone);border:1px solid var(--rule);border-radius:16px;
+  padding:clamp(20px,4vw,32px);display:grid;gap:16px;overflow-y:auto}
+.sheet .top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.sheet h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.02em;
+  font-size:clamp(1.5rem,1.2rem + 1.1vw,2.1rem);line-height:1.05}
+.sheet .x{font-family:"Geist Mono",monospace;font-size:13px;line-height:1;padding:8px;
+  margin:-8px -8px 0 0;color:var(--bone-dim);min-width:24px;min-height:24px}
+.sheet .x:hover{color:var(--bone)}
+.sheet .intro{font-size:14.5px;line-height:1.6;color:var(--bone-dim)}
+.fld{display:grid;gap:7px}
+.fld label{font-family:"Geist Mono",monospace;font-size:9.5px;font-weight:600;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--bone-dim)}
+.fld input{font:inherit;font-size:16px;color:var(--bone);background:rgba(233,231,228,.05);
+  border:1px solid var(--rule);border-radius:10px;padding:13px 14px;width:100%;min-height:24px}
+.fld input:focus-visible{outline:2px solid var(--bone);outline-offset:2px;border-color:transparent}
+.fld .hint{font-size:11.5px;color:var(--bone-faint)}
+.sheet .err{font-size:13px;line-height:1.5;color:#E9A09A}
+.sheet .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.sheet .alt{font-size:12px;line-height:1.6;color:var(--bone-faint);border-top:1px solid var(--rule);
+  padding-top:14px}
+.sheet .alt a{text-decoration:underline;text-underline-offset:3px}
+.sheet .mag{font-size:10px}
+.sheet .mag[disabled]{opacity:.55;cursor:default}
+
 .view{position:fixed;inset:0;z-index:98;background:rgba(5,11,9,.97);display:grid;
   grid-template-rows:auto minmax(0,1fr) auto;opacity:0;visibility:hidden;
   transition:opacity .5s var(--ease),visibility .5s}
@@ -392,7 +444,7 @@ h1,h2,h3,p{margin:0}
 <header class="brandbar">
   <a class="wm" href="/brand/" data-c>Arvorealta</a>
   <div class="langs" id="langs" role="group" aria-label="Language"></div>
-  <a class="mag" href="mailto:atlas@arvorealta.com" data-c data-mag data-t="cta">Start a project</a>
+  <button type="button" class="mag" data-cta data-c data-mag data-t="cta">Start a project</button>
 </header>
 
 <nav class="rail" aria-label="Sections">
@@ -583,7 +635,7 @@ h1,h2,h3,p{margin:0}
 
   <div class="freeline">
     <p data-t="free">Before any of them, one page of your own scored against the tender that is open now. Free.</p>
-    <a class="mag" href="mailto:atlas@arvorealta.com" data-c data-mag data-t="cta">Start a project</a>
+    <button type="button" class="mag" data-cta data-c data-mag data-t="cta">Start a project</button>
   </div>
 </section>
 
@@ -598,7 +650,7 @@ h1,h2,h3,p{margin:0}
   <div class="inner">
     <h2 data-t="closeH">Win with <em>class</em>.</h2>
     <p data-t="closeB">A mark drawn to last costs more than one drawn to look current, and it is bought once. If that is the arithmetic you already do, we will get on.</p>
-    <div><a class="mag" href="mailto:atlas@arvorealta.com" data-c data-mag data-t="cta">Start a project</a></div>
+    <div><button type="button" class="mag" data-cta data-c data-mag data-t="cta">Start a project</button></div>
     <footer>
       <span>Arvorealta &nbsp;/&nbsp; Atlas Sahrim</span>
       <span>atlas@arvorealta.com</span>
@@ -606,6 +658,33 @@ h1,h2,h3,p{margin:0}
   </div>
 </section>
 </main>
+
+<dialog id="dlg" aria-labelledby="dlgT">
+  <form method="dialog" class="sheet" id="sheet">
+    <div class="top">
+      <h2 id="dlgT" data-t="fT">Start a project</h2>
+      <button type="button" class="x" id="dlgX" aria-label="Close">&#10005;</button>
+    </div>
+    <div id="dlgBody">
+      <p class="intro" data-t="fI">Two lines is enough. I read these myself and answer the same day.</p>
+      <div class="fld" style="margin-top:16px">
+        <label for="fem" data-t="fEm">Email</label>
+        <input type="email" id="fem" name="email" autocomplete="email" inputmode="email" required>
+      </div>
+      <div class="fld" style="margin-top:14px">
+        <label for="fph" data-t="fPh">Phone</label>
+        <input type="tel" id="fph" name="phone" autocomplete="tel" inputmode="tel">
+        <span class="hint" data-t="fPhH">Optional. Only if you would rather talk than write.</span>
+      </div>
+      <p class="err" id="dlgErr" role="alert" hidden></p>
+    </div>
+    <div class="row" id="dlgActs">
+      <button type="button" class="mag" id="dlgSend" data-t="fS">Send it</button>
+      <button type="button" class="mag" id="dlgCancel" data-t="fC">Close</button>
+    </div>
+    <p class="alt" id="dlgAlt"></p>
+  </form>
+</dialog>
 
 <!-- the viewer ──────────────────────────────────────────────────────── -->
 <div class="view" id="view" role="dialog" aria-modal="false" aria-label="Frame viewer">
@@ -917,6 +996,18 @@ const LANG = {
     t2w:"Six weeks", t2n:"Identity system", t2p:"&euro;8,000",
     t2s:"Colour, type, signage, product marking and the mark itself, written down so suppliers can work from it.",
     t2c:"Your &euro;2,400 credited &nbsp;/&nbsp; credits never expire",
+    fT:"Start a project",
+    fI:"Two lines is enough. I read these myself.",
+    fEm:"Email", fPh:"Phone",
+    fPhH:"Optional. Only if you would rather talk than write.",
+    fS:"Send it", fSending:"Sending", fC:"Close",
+    fErrEm:"That email address does not look right.",
+    fErrSend:"That did not send. The address below always works.",
+    fDry:"Nothing was sent. The address below always works.",
+    fDoneT:"It is here.", fDoneB:"You will hear back from me, usually the same day.",
+    fAlt:"Or write to me directly at",
+    fMailS:"A project",
+    fMailB:"Hello Atlas,\n\nI am thinking about a project. Here is what it is:\n\n\n\nMy phone number is:\n\n\nThank you.",
     closeH:"Win with <em>class</em>.",
     closeB:"A mark drawn to last costs more than one drawn to look current, and it is bought once. If that is the arithmetic you already do, we will get on.",
     free:"Before any of them, one page of your own scored against the tender that is open now. Free."
@@ -958,6 +1049,18 @@ const LANG = {
     t2w:"Seks uker", t2n:"Identitetssystem", t2p:"&euro;8 000",
     t2s:"Farge, typografi, skilting, produktmerking og selve merket, skrevet ned så leverandørene dine kan arbeide etter det.",
     t2c:"Dine &euro;2 400 kreditert &nbsp;/&nbsp; krediteringen utløper aldri",
+    fT:"Start et prosjekt",
+    fI:"To linjer holder. Jeg leser disse selv.",
+    fEm:"E-post", fPh:"Telefon",
+    fPhH:"Valgfritt. Bare hvis du heller vil snakke enn skrive.",
+    fS:"Send", fSending:"Sender", fC:"Lukk",
+    fErrEm:"Den e-postadressen ser ikke riktig ut.",
+    fErrSend:"Det ble ikke sendt. Adressen under virker alltid.",
+    fDry:"Ingenting ble sendt. Adressen under virker alltid.",
+    fDoneT:"Den er her.", fDoneB:"Du hører fra meg, som regel samme dag.",
+    fAlt:"Eller skriv direkte til meg på",
+    fMailS:"Et prosjekt",
+    fMailB:"Hei Atlas,\n\nJeg tenker på et prosjekt. Dette er hva det er:\n\n\n\nTelefonnummeret mitt er:\n\n\nTakk.",
     closeH:"Vinn med <em>klasse</em>.",
     closeB:"Et merke tegnet for å vare koster mer enn ett tegnet for å se moderne ut, og det kjøpes én gang. Er det regnestykket du allerede gjør, kommer vi til å forstå hverandre.",
     free:"Før noe av dette: én av dine egne sider vurdert mot konkurransen som er åpen nå. Gratis."
@@ -999,6 +1102,18 @@ const LANG = {
     t2w:"Kuusi viikkoa", t2n:"Identiteettijärjestelmä", t2p:"8 000 &euro;",
     t2s:"Väri, typografia, opasteet, tuotemerkinnät ja itse merkki, kirjattuina niin että toimittajasi voivat työskennellä niiden mukaan.",
     t2c:"2 400 &euro; hyvitetty &nbsp;/&nbsp; hyvitykset eivät vanhene",
+    fT:"Aloita projekti",
+    fI:"Kaksi riviä riittää. Luen nämä itse.",
+    fEm:"Sähköposti", fPh:"Puhelin",
+    fPhH:"Vapaaehtoinen. Vain jos puhut mieluummin kuin kirjoitat.",
+    fS:"Lähetä", fSending:"Lähetetään", fC:"Sulje",
+    fErrEm:"Tuo sähköpostiosoite ei näytä oikealta.",
+    fErrSend:"Lähetys ei onnistunut. Alla oleva osoite toimii aina.",
+    fDry:"Mitään ei lähetetty. Alla oleva osoite toimii aina.",
+    fDoneT:"Se on perillä.", fDoneB:"Kuulet minusta, yleensä saman päivän aikana.",
+    fAlt:"Tai kirjoita minulle suoraan osoitteeseen",
+    fMailS:"Projekti",
+    fMailB:"Hei Atlas,\n\nMietin projektia. Tässä mistä on kyse:\n\n\n\nPuhelinnumeroni on:\n\n\nKiitos.",
     closeH:"Voita <em>tyylillä</em>.",
     closeB:"Kestämään piirretty merkki maksaa enemmän kuin ajanmukaiselta näyttämään piirretty, ja se ostetaan kerran. Jos teet jo sen laskutoimituksen, tulemme toimeen.",
     free:"Ennen mitään näistä: yksi oma sivusi pisteytettynä nyt avoinna olevaa tarjouspyyntöä vasten. Ilmaiseksi."
@@ -1007,12 +1122,25 @@ const LANG = {
 const LCODES = ["en","nb","fi"];
 const langBox = $("#langs");
 
+let curLang = "en";
 function setLang(code, remember){
   const t = LANG[code] || LANG.en;
+  curLang = LANG[code] ? code : "en";
   document.documentElement.lang = t._l;
   for (const el of document.querySelectorAll("[data-t]")) {
     const v = t[el.dataset.t];
     if (v != null) el.innerHTML = v;
+  }
+  /* the prewritten mail is the path that always works, and it is filled in
+     the reader's own language. encodeURIComponent, not escape: the body
+     carries newlines and two of the three languages carry non-ASCII. The
+     lookup is inside the function because nothing module-level should be
+     read by anything that can run before the module finishes. */
+  const alt = document.querySelector("#dlgAlt");
+  if (alt) {
+    const href = "mailto:atlas@arvorealta.com?subject=" + encodeURIComponent(t.fMailS) +
+                 "&body=" + encodeURIComponent(t.fMailB);
+    alt.innerHTML = t.fAlt + ' <a href="' + href + '">atlas@arvorealta.com</a>';
   }
   for (const b of langBox.children) b.setAttribute("aria-pressed", b.dataset.l === code ? "true" : "false");
   if (remember) { try { localStorage.setItem("arvo-lang", code) } catch (e) {} }
@@ -1196,6 +1324,105 @@ addEventListener("resize", () => { needMeasure = true; sizeGL(); }, { passive:tr
 const go = () => document.body.classList.add("ready");
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(go).catch(go); else go();
 setTimeout(go, 1200);           /* a deadline, because a stuck line is worse than no animation */
+
+/* ══ the intake ════════════════════════════════════════════════════════
+   The endpoint is not a secret: a form action lives in the page's own HTML,
+   so anybody reading source has it, and hiding it at local scope the way an
+   API key is hidden would be theatre. What stands in for secrecy is Basin's
+   own spam protection, switched on at their end.                         */
+const INTAKE = "https://usebasin.com/f/945efcd39804";
+const dlg = $("#dlg"), sheet = $("#sheet");
+const esc = v => String(v).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let sending = false;
+
+function openDlg(){
+  if (!dlg.showModal) { location.href = mailto(); return; }
+  dlg.showModal();
+  document.body.style.overflow = "hidden";
+  /* by hand, through the node. Written as a lowercase `autofocus` attribute
+     React does not put it on the element at all, and showModal then falls
+     back to the first focusable thing in the dialog, which is the close
+     button. There is no React here, but the lesson is the same: check the
+     live property, never the markup. */
+  const em = $("#fem"); if (em) { em.focus({ preventScroll:true }); }
+}
+function closeDlg(){ if (dlg.open) dlg.close(); }
+dlg.addEventListener("close", () => { document.body.style.overflow = ""; });
+for (const b of document.querySelectorAll("[data-cta]"))
+  b.addEventListener("click", e => { e.preventDefault(); openDlg(); });
+$("#dlgX").addEventListener("click", closeDlg);
+$("#dlgCancel").addEventListener("click", closeDlg);
+
+function mailto(){
+  const t = LANG_T();
+  return "mailto:atlas@arvorealta.com?subject=" + encodeURIComponent(t.fMailS) +
+         "&body=" + encodeURIComponent(t.fMailB);
+}
+function LANG_T(){ return LANG[curLang] || LANG.en; }
+function dlgErr(msg){ const e = $("#dlgErr"); e.textContent = msg; e.hidden = false; }
+function dlgClear(){ const e = $("#dlgErr"); e.textContent = ""; e.hidden = true; }
+
+$("#dlgSend").addEventListener("click", async () => {
+  if (sending) return;
+  dlgClear();
+  const t = LANG_T();
+  const em = $("#fem").value.trim(), ph = $("#fph").value.trim();
+  if (!em || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)) { dlgErr(t.fErrEm); return; }
+
+  /* kept on purpose: if the endpoint is ever unset the dialog says nothing
+     was sent rather than faking a success */
+  if (!INTAKE) { dlgErr(t.fDry); return; }
+
+  sending = true;
+  const btn = $("#dlgSend"); btn.disabled = true; btn.textContent = t.fSending;
+  try {
+    const fd = new FormData();
+    fd.append("email", em);
+    fd.append("phone", ph);
+    fd.append("page", location.href);
+    fd.append("language", curLang);
+    /* Accept: application/json is not optional. Without it Basin answers a
+       form post with a 302 to its own thank-you page, fetch follows it
+       silently, and ok reads true off Basin's own HTML. Content-Type is
+       deliberately NOT set: FormData writes its own with the multipart
+       boundary, and naming it by hand drops the boundary. */
+    const res = await fetch(INTAKE, { method:"POST", body:fd, headers:{ Accept:"application/json" } });
+    if (!res.ok) throw new Error("http " + res.status);
+    $("#dlgBody").innerHTML =
+      '<p style="font-family:\'EB Garamond\',Georgia,serif;font-size:1.5rem;line-height:1.15;margin-bottom:10px">' +
+      esc(t.fDoneT) + '</p><p class="intro">' + esc(t.fDoneB) + '</p>';
+    $("#dlgActs").innerHTML = "";
+    const c = document.createElement("button");
+    c.type = "button"; c.className = "mag"; c.textContent = t.fC;
+    c.addEventListener("click", closeDlg);
+    $("#dlgActs").appendChild(c);
+  } catch (err) {
+    dlgErr(t.fErrSend);
+    sending = false; btn.disabled = false; btn.textContent = t.fS;
+  }
+});
+
+/* the software keyboard, driven by visualViewport and nothing else. 100svh
+   and interactive-widget=resizes-content both look like the fix and neither
+   reaches iOS: interactive-widget is Chromium only, and on iOS Safari svh
+   and dvh do not shrink for the keyboard at all. offsetTop matters as much
+   as height, because iOS scrolls the visual viewport inside the layout
+   viewport and a fixed element does not move with it. */
+(function keyboard(){
+  const vv = window.visualViewport;
+  if (!vv) { sheet.style.maxHeight = "88svh"; return; }
+  const place = () => {
+    if (!dlg.open) return;
+    const h = vv.height, top = vv.offsetTop;
+    sheet.style.maxHeight = Math.max(160, h - 24) + "px";
+    const sh = sheet.offsetHeight;
+    dlg.style.top = (sh + 24 < h ? top + (h - sh) / 2 : top + 12) + "px";
+    dlg.style.marginTop = "0";
+  };
+  vv.addEventListener("resize", place); vv.addEventListener("scroll", place);
+  dlg.addEventListener("close", () => { dlg.style.top = ""; });
+  const mo = new MutationObserver(place); mo.observe(dlg, { attributes:true, attributeFilter:["open"] });
+})();
 
 /* a deep link straight into the viewer */
 if (location.hash.length > 1) {
