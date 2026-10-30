@@ -1272,6 +1272,85 @@ cells return. The cost is that a grep for `placeholder` finds eleven hits
 on a page that displays none, so **check `data-t` before believing a
 string is on the page.**
 
+### The rail fought the lock, and the plates went to 49 per cent
+
+**The rail was landing on the wrong fold, and the lock-in is what broke
+it.** Reported on the owner's iPad: *I click fold 3 and it comes back to 1
+or 2.* A programmatic jump and `scroll-snap-type: mandatory` fight each
+other, and WebKit is where the fight is lost — the snap algorithm re-runs
+while a smooth scroll is still in flight and settles near wherever the
+animation has got to rather than at its destination, so a jump that
+crosses fold two lands on fold two. **This is a regression the lock-in
+introduced**: before mandatory snap the anchors were plain `<a href="#…">`
+and worked.
+
+**It does not reproduce in this container's Chromium**, which lands every
+rail target exactly in six scenarios — a real mouse click, a touch tap, a
+double tap, a click thrown during an in-flight scroll, a click after a
+wheel, and a click chasing another jump. That is the same shape of limit
+as the missing H.264 and the refused Basin certificate, and it is not a
+reason to call the report wrong. **A bug that reproduces on one engine and
+not another is still a bug; what it is not is licence to go on guessing
+which engine is at fault.**
+
+**So the fix removes the fight rather than tuning it.** Every in-page hash
+anchor is intercepted, the snap comes off for the length of the jump, the
+page scrolls, and the snap goes back on once the scroll has actually
+stopped. Putting it back is a no-op at the destination, because **a
+section top IS the snap point we scrolled to**. `scrollend` is deliberately
+not used — Safari only shipped it in 17.4 and Safari is the engine that
+reported this — so the settle test is six frames of a motionless
+`scrollY`, with a 1600ms cap so a scroll that never settles cannot leave
+the page unlocked for the rest of its life. A `jumpToken` makes a newer
+jump cancel the older one's watcher, or two fast taps would have one
+restoring the snap while the other was still flying.
+
+**Preventing the default also prevents the focus move**, which is the
+entire point of the skip link, so it is done by hand with `tabindex="-1"`
+and `focus({preventScroll:true})` — without `preventScroll` the focus
+fights the scroll it just started. A hash in the URL on arrival takes the
+same route for the same reason; a frame slug is not an element id, so the
+viewer's own deep link is untouched.
+
+Verified at 1440, 1180, 820 and 390: six of six rail targets land on the
+exact pixel and the snap reads `y mandatory` again afterwards, sixteen
+jumps in a row with no drift, the skip link reaches `#open` and moves
+focus there, `/lab/max-brand/#system` and `#start` land on load, and under
+`prefers-reduced-motion` the jump is instant and the snap stays `none`,
+which is what that media query already says.
+
+**The plates are 49 per cent, which is 70 twice, and they are centred.**
+The owner asked for them smaller again and for white space around them.
+Centring is the second half of that: at 70 per cent, flush left, all the
+slack sat on one side and the pair read as pushed against the text column
+rather than as objects with air. **Centring costs nothing that mattered**,
+because both images are 1400px wide and take the same cap, so they still
+begin and end on the same two pixels and the eye still runs down one edge.
+
+| | plate | share of screen | air each side |
+|---|---|---|---|
+| 1440 x 900 | 264px | 1.19% | 137px |
+| 1180 x 820 | 235px | 1.27% | 122px |
+| 820 x 1180 | 370px | 3.16% | 193px |
+| **390 x 844** | **172px** | 1.99% | 89px |
+
+**The phone figure is the one to look at.** A 1400 x 312 lockup drawn at
+172px sets its wordmark at about seven pixels, on the fold whose own
+headline is `Can you see the difference?`. The page's one checkable claim
+is now the smallest thing on it. Against the recorded series — 26.8 per
+cent, then 5.0, then 2.4, now 1.19 — this is the fourth step in one
+direction, and this file's hardest-won rule is the other way. **It is
+stated rather than fixed, because the owner has looked at each size and
+chosen each time**, and the honest fix if the phone ever reads wrong is
+one media query: scope the cap above 980px and let the stacked layout keep
+the full column.
+
+**`supplied` is gone too**, so rule 01 now carries no status label either
+and the fold states nothing about which parts are real. The reasoning for
+the four labels is two sections above and is kept for the same reason:
+it is the argument for putting them back before any of this is shown to a
+client. `_real` joins the dead strings, kept for its three languages.
+
 Verified: six folds at exactly one screen at 1440, 1180, 820 and 390; snap
 `y mandatory` at all four and `none` under reduced motion; fold tops at 0,
 900, 1800, 2700, 3600, 4500; 21 of 21 reveals after a jump to the end; all

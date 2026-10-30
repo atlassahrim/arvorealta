@@ -293,12 +293,16 @@ html.rv [data-rv].in{opacity:1;transform:none}
    comparison: the eye runs down one edge rather than across a gutter. */
 .align{background:var(--paper);color:var(--paper-ink)}
 .align .duo-text .say{color:var(--ink-dim)}
-/* 70% of the column, at the owner's instruction. The cap is on the plate
-   rather than on the image so the rule under each caption shortens with
-   its mark instead of running on past it, and `justify-self` stays at its
-   default so both plates keep the same left edge, which is the whole
-   reason they stack. */
-.plate{display:grid;gap:12px;margin:0;max-width:70%}
+/* 49% of the column, which is 70% twice, at the owner's instruction. The
+   cap is on the plate rather than on the image so the rule under each
+   caption shortens with its mark instead of running on past it. The pair
+   is centred rather than flush left, which is the white space the owner
+   asked for: at 70% all of the slack sat on one side and the plates read
+   as pushed against the text column. Centring does not cost the shared
+   left edge that is the reason they stack at all, because both images are
+   1400px wide and take the same cap, so they still begin and end on the
+   same two pixels. */
+.plate{display:grid;gap:12px;margin:0;max-width:49%;justify-self:center}
 .plate img{width:100%;height:auto}
 .plate figcaption{display:flex;align-items:center;gap:14px;color:var(--ink-faint)}
 .plate figcaption::after{content:"";flex:1;height:1px;background:var(--rule-ink)}
@@ -569,7 +573,7 @@ html.rv [data-rv].in{opacity:1;transform:none}
       <h2 class="disp" data-rv data-t="h4a">Tools are the easy part.</h2>
       <p class="say" data-rv data-t="sysSay">Direction is often mistaken for micromanagement. We need clean vectors, not 30 page ruling documents.</p>
       <ol class="rules" data-rv>
-        <li><b>01</b><span><i data-t="p1t">The vector</i><em data-t="_real">supplied</em></span></li>
+        <li><b>01</b><span><i data-t="p1t">The vector</i></span></li>
         <li><b>02</b><span><i data-t="p2t">Ten, twenty, seventy</i></span></li>
         <li><b>03</b><span><i data-t="p3t">One typeface</i></span></li>
         <li><b>04</b><span><i data-t="p4t">The culture stack</i></span></li>
@@ -1136,6 +1140,65 @@ if ("IntersectionObserver" in window) {
   }, { rootMargin:"-45% 0px -45% 0px" });
   secs.forEach(s => s && io.observe(s));
 }
+
+/* ══ in-page jumps, and the fight with mandatory snap ═══════════════════
+   A programmatic jump and `scroll-snap-type: mandatory` fight each other,
+   and WebKit is where the fight is lost: the snap algorithm re-runs while
+   a smooth scroll is still in flight and settles near wherever the
+   animation has got to rather than at its destination, so a jump from
+   fold one to fold three lands on one or two. Reported on the owner's
+   iPad, and NOT reproducible in this container's Chromium, which lands
+   every rail target exactly in six scenarios including a real tap, a
+   double tap, and a click thrown during an in-flight scroll. A bug that
+   reproduces on one engine and not another is still a bug; what it is
+   not is a reason to go on guessing which engine is at fault.
+   So the fix removes the fight rather than tuning it. The snap comes off
+   for the length of the jump, the page scrolls, and the snap goes back on
+   once the scroll has actually stopped. Putting it back is a no-op at the
+   destination, because a section top IS the snap point we scrolled to.
+   `scrollend` is deliberately not used: Safari only shipped it in 17.4,
+   and Safari is the engine that reported this. Six frames of a motionless
+   scrollY is the portable test, with a 1600ms cap so a scroll that never
+   settles cannot leave the page unlocked for the rest of its life. */
+const root = document.documentElement;
+let jumpToken = 0;
+function jumpTo(el, hash){
+  if (!el) return;
+  root.style.scrollSnapType = "none";
+  const t0 = performance.now(), mine = ++jumpToken;
+  scrollTo({ top: Math.round(el.getBoundingClientRect().top + scrollY),
+             behavior: reduce ? "auto" : "smooth" });
+  if (hash) history.replaceState(null, "", hash);
+  let last = -1, still = 0;
+  (function quiet(){
+    if (mine !== jumpToken) return;              /* a newer jump owns the lock */
+    const y = Math.round(scrollY);
+    if (y === last) still++; else { still = 0; last = y; }
+    if (still >= 6 || performance.now() - t0 > 1600) { root.style.scrollSnapType = ""; return; }
+    requestAnimationFrame(quiet);
+  })();
+}
+addEventListener("click", e => {
+  const a = e.target.closest && e.target.closest('a[href^="#"]');
+  if (!a) return;
+  const hash = a.getAttribute("href");
+  const el = hash.length > 1 && document.getElementById(hash.slice(1));
+  if (!el) return;
+  e.preventDefault();
+  jumpTo(el, hash);
+  /* preventing the default also prevents the focus move the browser would
+     have made, which is the whole point of the skip link, so it is done by
+     hand. preventScroll, or the focus fights the scroll it just started. */
+  el.setAttribute("tabindex", "-1");
+  el.focus({ preventScroll: true });
+});
+/* A hash in the URL on arrival is the same jump and loses the same fight.
+   A frame slug is not an element id, so the viewer's own deep link at the
+   foot of this file is untouched by this. */
+addEventListener("load", () => {
+  const el = location.hash.length > 1 && document.getElementById(location.hash.slice(1));
+  if (el) jumpTo(el, null);
+});
 
 /* ══ one loop ══════════════════════════════════════════════════════════ */
 const hero = $("#open"), heroInner = hero.querySelector(".inner"), bed = hero.querySelector(".bed");
