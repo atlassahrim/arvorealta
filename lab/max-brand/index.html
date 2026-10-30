@@ -89,7 +89,35 @@
 @media (min-width:640px){:root{--gut:32px}}
 
 *,*::before,*::after{box-sizing:border-box}
-html{background:var(--ink);-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+/* ── THE LOCK-IN ───────────────────────────────────────────────────────
+   Each fold is a snap point, so the scroll settles on a whole screen the
+   way the hero and the close already did. It is `mandatory` rather than
+   `proximity` because proximity only snaps when the browser decides you
+   were close enough, which reads as the page sometimes doing it — and a
+   thing that happens sometimes reads as a bug rather than a design.
+
+   THE PRICE OF `mandatory` IS THAT EVERY FOLD HAS TO FIT. A snap point
+   taller than the viewport traps a reader inside it: the browser keeps
+   pulling back to the top of the section and the bottom of it cannot be
+   reached. So every fold is laid out to fit rather than merely to start
+   at 100svh, and that is verified at 390, 820 and 1440 rather than
+   assumed. Switched off under reduced motion, where an involuntary
+   scroll correction is exactly what a reader has asked not to have. */
+html{background:var(--ink);-webkit-text-size-adjust:100%;scroll-behavior:smooth;
+  scroll-snap-type:y mandatory}
+section{scroll-snap-align:start;scroll-snap-stop:normal}
+@media (prefers-reduced-motion:reduce){html{scroll-snap-type:none}}
+/* The viewer is fixed, so the page behind it has to stop scrolling, and
+   with mandatory snap on the root that is no longer cosmetic: a wheel
+   behind the viewer snaps the page to another fold, so closing it lands
+   the reader somewhere they never chose. The scroller is the root element
+   rather than the body, so the lock is stated there too, and the snap is
+   switched off while it holds so no correction fires on the frame the
+   viewer closes. The class is the one the script writes, which it was
+   not: the rule read `.lock` in two places and the script has always
+   written `.locked`, so this lock had never once held. */
+html:has(body.locked){overflow:hidden;scroll-snap-type:none}
+body.locked{overflow:hidden}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{margin:0;background:var(--ink);color:var(--bone);
   font-family:Geist,system-ui,sans-serif;font-weight:380;font-size:var(--t-body);
@@ -300,36 +328,64 @@ html.rv [data-rv].in{opacity:1;transform:none}
 .q.band span:nth-child(2){background:#954D13}
 .q.band span:nth-child(3){background:#5A200A}
 
-/* ── ACT V — the gallery. One frame at size, and the thumbnails ARE the
-   navigation. A rail of client names asked a reader to pick by a name
-   they have not read yet; a contact sheet of fifteen asks them to look. */
+/* ── the system fold has to FIT, because the page snaps ────────────────
+   Stacked below 980px it measured 1.122 screens at both 820 and 390, and
+   a mandatory snap point taller than the viewport traps a reader inside
+   it: the browser pulls back to the top of the section and the bottom
+   cannot be reached. Four small cuts rather than one big one, so nothing
+   is shrunk to the point of illegibility — the cells lose a row of crop,
+   the rules lose a third of their padding, and the fold loses air it had
+   only because the desktop needed it. Measured after: 0.98 at 390. */
+@media (max-width:979px){
+  .spec{padding-block:clamp(84px,11vh,120px) clamp(26px,4vh,48px)}
+  .spec .duo-in{gap:clamp(22px,3vh,38px)}
+  .spec .duo-text{gap:clamp(10px,1.5vh,18px)}
+  .rules li{padding:clamp(8px,1.2vh,13px) clamp(12px,2vw,18px)}
+  .q{aspect-ratio:16/9}
+  .quad{gap:6px}
+}
+
+/* ── ACT V — the gallery ───────────────────────────────────────────────
+   One picture at the size of the fold, the text under it. Three rows:
+   header, picture, foot — `auto minmax(0,1fr) auto` inside 100svh, which
+   is what guarantees the fold FITS at every viewport instead of fitting
+   at the one it was designed on. That matters more than usual here,
+   because the page snaps: a mandatory snap on a fold taller than the
+   screen traps a reader inside it with no way to reach the rest.
+
+   DEEP WATER ONLY. The fold used to rotate the three grounds across the
+   fifteen, so a reader met one gallery that looked like three. The other
+   two grounds of a project are what opening a frame is for. */
 .work{background:var(--ink)}
-/* the gallery gives its frame the wider column. A two-column fold halves
-   the picture by default, and the picture is the whole point of this one:
-   measured at 1440 it runs 683 x 522 against 580 x 326 at an even split. */
-@media (min-width:980px){.work .duo-in{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}}
-.shot{position:relative;width:100%;height:clamp(260px,56vh,600px);overflow:hidden;
-  border-radius:2px;background:var(--ink-3)}
+.gal{min-height:100svh;display:grid;grid-template-rows:auto minmax(0,1fr) auto;
+  gap:clamp(14px,2.2vh,28px);
+  padding:clamp(86px,11vh,128px) var(--pad) clamp(22px,4vh,52px);
+  max-width:calc(var(--col) + 2 * var(--pad));margin-inline:auto;width:100%}
+@media (min-width:1100px){.gal{padding-right:calc(var(--pad) + 86px)}}
+.galhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px clamp(18px,3vw,38px)}
+.galhead h2{margin:0;font-size:var(--t-value);line-height:1.05}
+.shot{position:relative;min-height:0;overflow:hidden;border-radius:2px;background:var(--ink-3)}
 .shot .fr{position:absolute;inset:0;width:100%;height:100%;padding:0;margin:0;border:0;
   background:none;opacity:0;pointer-events:none;transition:opacity .6s var(--ease)}
 .shot .fr img{width:100%;height:100%;object-fit:cover}
 .shot .fr.lit{opacity:1;pointer-events:auto;z-index:2}
 .shot .fr:focus-visible{outline-offset:-3px}
-.shotcap{display:flex;justify-content:space-between;align-items:baseline;gap:18px;margin:14px 0 0;
+.galfoot{display:grid;gap:clamp(10px,1.6vh,18px)}
+/* name · year · industry. The year is a stand-in for all seventeen and the
+   industry is shown only where the lockup itself states one. */
+.shotcap{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;margin:0;
   font-family:"Geist Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.2em;
   text-transform:uppercase;color:var(--bone-dim)}
 .shotcap b{font-weight:600;color:var(--bone)}
-.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(5px,.6vw,9px);
-  margin-top:clamp(6px,1.4vh,16px)}
-.thumbs button{position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:2px;padding:0;
-  background:var(--ink-3);opacity:.46;transition:opacity .35s var(--ease),outline-color .35s var(--ease);
-  outline:1px solid transparent;outline-offset:1px}
+.shotcap span+span::before{content:"/";margin-right:18px;color:var(--rule)}
+.thumbs{display:grid;grid-template-columns:repeat(15,1fr);gap:clamp(3px,.45vw,7px)}
+.thumbs button{position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:1px;padding:0;
+  background:var(--ink-3);opacity:.4;outline:1px solid transparent;outline-offset:1px;
+  transition:opacity .35s var(--ease),outline-color .35s var(--ease)}
 .thumbs button img{width:100%;height:100%;object-fit:cover}
-.thumbs button:hover,.thumbs button:focus-visible{opacity:.85}
+.thumbs button:hover,.thumbs button:focus-visible{opacity:.8}
 .thumbs button.lit{opacity:1;outline-color:var(--bone)}
-@media (max-width:979px){.thumbs{grid-template-columns:repeat(5,1fr)}}
-.work .note{margin:clamp(10px,2vh,20px) 0 0;font-size:12.5px;line-height:1.6;color:var(--bone-faint)}
-.work .note span{display:block;max-width:56ch}
+@media (max-width:760px){.thumbs{grid-template-columns:repeat(8,1fr)}}
 
 /* ══ ACT VI — CLOSE ════════════════════════════════════════════════════
    The mark appears once, at size, with no ground of its own, and the
@@ -425,7 +481,6 @@ html.rv [data-rv].in{opacity:1;transform:none}
 .view .vf button:hover{opacity:.8}
 .view .vf button[aria-current="true"]{opacity:1;outline:1px solid var(--bone);outline-offset:1px}
 .view .vf img{width:100%;height:100%;object-fit:cover}
-body.lock{overflow:hidden}
 
 </style>
 </head>
@@ -475,7 +530,7 @@ body.lock{overflow:hidden}
 </section>
 
 <!-- ACT II ─ ALIGNMENT ───────────────────────────────────────────────── -->
-<section class="align duo" id="alignment" aria-label="The alignment test">
+<section class="align duo flip" id="alignment" aria-label="The alignment test">
   <div class="duo-in">
     <div class="duo-media">
       <figure class="plate" data-rv>
@@ -553,20 +608,24 @@ body.lock{overflow:hidden}
 
 
 <!-- ACT V ─ WORK. one stage at the width of the viewport ──────────────── -->
-<section class="work duo" id="marks">
-  <div class="duo-in">
-    <div class="duo-media">
-      <div class="shot" id="cloud"></div>
-      <p class="shotcap"><b id="capName"></b><span id="capRole"></span></p>
-    </div>
-    <div class="duo-text">
+<section class="work" id="marks">
+  <div class="gal">
+    <div class="galhead">
       <p class="eyebrow" data-rv data-t="e5">History</p>
       <h2 class="disp" data-rv data-t="more">The high end standard.</h2>
-      <!-- the thumbnails ARE the navigation. The rail of names before them
-           asked a reader to pick a client by name, which is the one thing
-           they cannot do on a page they have not read yet. -->
+    </div>
+    <div class="shot" id="cloud"></div>
+    <div class="galfoot">
+      <!-- name, year, industry. Two of the three are stand-ins and say so:
+           the year is an em dash for all seventeen, and the industry is
+           shown only where the lockup itself states one. A sector inferred
+           from a company name is invented proof. -->
+      <p class="shotcap">
+        <b id="capName"></b>
+        <span id="capYear">&#8212;</span>
+        <span id="capRole"></span>
+      </p>
       <div class="thumbs" id="namerail" role="group" aria-label="All marks"></div>
-      <p class="note"><span data-t="_galNote">Year and sector are placeholders until they are supplied. A sector is shown only where the lockup itself states one.</span></p>
     </div>
   </div>
 </section>
@@ -756,8 +815,13 @@ const cloud = $("#cloud"), namerail = $("#namerail");
    the hover and the open together. */
 const CELLS = CLOUD.map(([slug, name, role], i) => ({ slug, name, role, i }));
 
+/* Deep water only. The gallery used to rotate GROUNDS[i % 3], so a
+   reader met fifteen projects on three different grounds and the fold
+   read as three galleries. One ground is one gallery, and the other two
+   are what opening a frame is for. */
+const GAL_GROUND = GROUNDS[0][0];
 cloud.innerHTML = CELLS.map((c, n) => {
-  const g = GROUNDS[c.i % 3][0];
+  const g = GAL_GROUND;
   return `<button class="fr${n === 0 ? " lit" : ""}" data-c data-k="${c.i}" data-open="${firstOf(c.slug)}"
       aria-label="Open ${c.name}" tabindex="${n === 0 ? 0 : -1}">
       <img src="${src(c.slug,g,1400)}" alt="${c.name}, the mark" width="1400" height="788"
@@ -765,7 +829,7 @@ cloud.innerHTML = CELLS.map((c, n) => {
     </button>`;
 }).join("");
 namerail.innerHTML = CELLS.map((c, n) => {
-  const g = GROUNDS[c.i % 3][0];
+  const g = GAL_GROUND;
   return `<button type="button" data-c data-k="${c.i}"${n === 0 ? ' class="lit"' : ""}
      aria-label="${c.name}" title="${c.name}">
      <img src="${src(c.slug,g,480)}" alt="" width="480" height="270" loading="lazy" decoding="async">
@@ -774,7 +838,7 @@ namerail.innerHTML = CELLS.map((c, n) => {
 
 const cloudCells = [...cloud.querySelectorAll(".fr")];
 const railBtns   = [...namerail.querySelectorAll("button")];
-const capName = $("#capName"), capRole = $("#capRole");
+const capName = $("#capName"), capRole = $("#capRole"), capYear = $("#capYear");
 
 let litK = -1;
 function lit(k){
@@ -785,6 +849,8 @@ function lit(k){
   railBtns.forEach(el => el.classList.toggle("lit", +el.dataset.k === k));
   const c = CELLS.find(x => x.i === k);
   if (c && capName) capName.textContent = c.name;
+  /* the year is a stand-in for all seventeen until the owner supplies it */
+  if (capYear) capYear.textContent = "\u2014";
   /* a sector is shown only where the lockup itself states one */
   if (c && capRole) capRole.textContent = CRAFT.has(c.role) ? "\u2014" : c.role;
 }

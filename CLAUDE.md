@@ -1107,6 +1107,100 @@ Verified: 21 of 21 reveals, the viewer opens from the stage and closes on
 Escape, the chrome flips to ink on both paper folds, no horizontal scroll
 and no page errors at 390, 820 and 1440.
 
+### The lock-in, and the gallery as one picture
+
+The owner's call after the six-fold build: fold two's columns are the wrong
+way round, the folds should lock to the browser the way the first and last
+do, and the gallery should be one full-screen picture with the name, the
+year and the industry under it, showing only the water frames until a
+reader clicks.
+
+**The lock is `scroll-snap-type: y mandatory` on the root, and mandatory
+rather than proximity is a promise the layout has to keep.** A snap point
+taller than the viewport **traps the reader**: the browser keeps correcting
+back to the top of the section and the bottom of it cannot be reached at
+all. So the folds are not merely started at `100svh`, they are laid out to
+fit it, and that is measured rather than assumed — `[1,1,1,1,1,1]` at 1440,
+1180, 820 and 390. The system fold was the only one over, at 1.12 on a
+phone, and it is trimmed at 979px and down: tighter block padding, a
+smaller `duo` gap, `16/9` on the quote and 6px in the quad. **Switched off
+under `prefers-reduced-motion`**, where an involuntary scroll correction is
+exactly what a reader has asked not to have.
+
+**The viewer's scroll lock had never once held, and mandatory snap is what
+turned that from cosmetic into a teleport.** The stylesheet carried
+`body.lock{overflow:hidden}` **twice** and the script has always written
+`document.body.classList.add("locked")`. So with the viewer open a wheel
+behind it scrolled the page *and snapped it to another fold*, and closing
+the viewer put the reader somewhere they never chose. Two further things
+were wrong with the rule even spelled right: **the scroller is the root
+element, not the body**, so the lock is stated as `html:has(body.locked)`
+as well, and the snap is set to `none` while it holds so no correction
+fires on the frame the viewer closes. Measured at 1440 and 390: scrollY
+3600 before, 3600 through a 1400px wheel, 3600 after Escape.
+
+**This is the third time a class name has been the interface between two
+files on this page and one side has moved.** `.cell` renamed to `.fr` in
+the stylesheet while the script still emitted `.cell`, so the stage
+measured zero frames; `.cap` colliding with the rule captions, so rule 01
+shipped in tracked capitals; and now a rule that matched nothing for the
+life of the page. **None of the three threw.** Two of them looked like
+design decisions and this one looked like nothing at all.
+
+**The gallery is one picture at the measure with the words underneath.** It
+was fifteen frames on jittered orbits, then a frame beside a contact sheet.
+It is now `grid-template-rows: auto minmax(0,1fr) auto` inside `100svh` —
+heading, stage, foot — and **that middle track is what makes the fold fit
+at every viewport** rather than a height that has to be re-tuned per
+breakpoint. Measured, the picture is **54.8 per cent of the screen at 1440,
+67.1 at 820 and 61.0 at 390**, against the 5.2 per cent this fold measured
+before the stage existed.
+
+**The caption is name, year and industry, and two of the three are still
+stand-ins.** The year is an em dash for all seventeen, and the industry is
+shown only where the lockup itself states one — `Advogados`, `Hospitais`,
+`Landscapes` — because **a sector inferred from a company name is invented
+proof**, which this file records twice already and which a bigger picture
+does not change.
+
+**The gallery shows one ground and the viewer holds all three.** `const
+GAL_GROUND = GROUNDS[0][0]` replaces the old `GROUNDS[c.i % 3][0]` in both
+the stage and the thumbnail builders, so the fold is fifteen marks on deep
+water and reads as one room rather than as a sampler. Clicking opens on
+that same water frame — `firstOf(slug)` is the first `FRAMES` index for the
+project, which is its water one — and the viewer's 51-frame strip is where
+warm light and bare paper live. The three-grounds argument is made once, as
+evidence, inside the system fold.
+
+**`currentSrc` reports what has been fetched, not what the page specifies.**
+Fourteen of the fifteen frames sit at `opacity: 0` behind the lit one and
+carry `loading="lazy"`, so at 820 exactly **one of fifteen** had a
+`currentSrc` at all while all fifteen `src` attributes were water. A check
+reading `currentSrc` called the fold a mixed-ground failure twice before
+the attributes were read. **Audit a page against the value it states, not
+against the value the browser has got round to** — the same shape as
+measuring small text on its specified colour rather than on its pixels.
+
+**Fold two is `.align duo flip`, so the text is left and the plates are
+right.** That is the owner's instruction and it costs the plates their full
+measure: at 1440 the larger one is **538px, 5.0 per cent of the screen**,
+against the 1248px and 26.8 per cent they held when they were stacked at
+the page's own width. At 820 they are 756px and 13.2 per cent, because the
+template stacks there and gives them the whole column back. **It is stated
+rather than fixed**, because this file's hardest-won rule is to measure the
+work as a share of the frame, and a lockup at five per cent is the
+neighbourhood the four earlier passes were in. A full-measure plate pair
+and a side-by-side text column cannot both have the width; which one gets
+it is the owner's call and he has made it.
+
+Verified: six folds at exactly one screen at 1440, 1180, 820 and 390; snap
+`y mandatory` at all four and `none` under reduced motion; fold tops at 0,
+900, 1800, 2700, 3600, 4500; 21 of 21 reveals after a jump to the end; all
+fifteen stage frames and all fifteen thumbnails on water; the tenth thumb
+reads `Offrire / — / Hospitais`; the viewer opens from the stage on the
+water frame with its 51-frame strip, holds the page still, and closes on
+Escape; no horizontal scroll and no page errors anywhere.
+
 ### `lab/max-home/` — the offer page at that standard, and the language bar
 
 The owner's call on `lab/max-brand/` was to use it, with the language control added
