@@ -293,7 +293,12 @@ html.rv [data-rv].in{opacity:1;transform:none}
    comparison: the eye runs down one edge rather than across a gutter. */
 .align{background:var(--paper);color:var(--paper-ink)}
 .align .duo-text .say{color:var(--ink-dim)}
-.plate{display:grid;gap:12px;margin:0}
+/* 70% of the column, at the owner's instruction. The cap is on the plate
+   rather than on the image so the rule under each caption shortens with
+   its mark instead of running on past it, and `justify-self` stays at its
+   default so both plates keep the same left edge, which is the whole
+   reason they stack. */
+.plate{display:grid;gap:12px;margin:0;max-width:70%}
 .plate img{width:100%;height:auto}
 .plate figcaption{display:flex;align-items:center;gap:14px;color:var(--ink-faint)}
 .plate figcaption::after{content:"";flex:1;height:1px;background:var(--rule-ink)}
@@ -561,13 +566,13 @@ html.rv [data-rv].in{opacity:1;transform:none}
   <div class="duo-in">
     <div class="duo-text">
       <p class="eyebrow" data-rv data-t="e4">The system</p>
-      <h2 class="disp" data-rv data-t="h4a">Specified, not styled.</h2>
-      <p class="say" data-rv data-t="sysSay">Four rules, on one project, all the way down. A clear vector, three colours in a fixed proportion, one typeface and a culture stack. Turvatikas make safety ladders; the mark is four forms stacked and what you read is three rungs.</p>
+      <h2 class="disp" data-rv data-t="h4a">Tools are the easy part.</h2>
+      <p class="say" data-rv data-t="sysSay">Direction is often mistaken for micromanagement. We need clean vectors, not 30 page ruling documents.</p>
       <ol class="rules" data-rv>
         <li><b>01</b><span><i data-t="p1t">The vector</i><em data-t="_real">supplied</em></span></li>
-        <li><b>02</b><span><i data-t="p2t">Ten, twenty, seventy</i><em data-t="_php">proportion placeholder</em></span></li>
-        <li><b>03</b><span><i data-t="p3t">One typeface</i><em data-t="_ph">placeholder</em></span></li>
-        <li><b>04</b><span><i data-t="p4t">The culture stack</i><em data-t="_ph">placeholder</em></span></li>
+        <li><b>02</b><span><i data-t="p2t">Ten, twenty, seventy</i></span></li>
+        <li><b>03</b><span><i data-t="p3t">One typeface</i></span></li>
+        <li><b>04</b><span><i data-t="p4t">The culture stack</i></span></li>
       </ol>
     </div>
     <div class="duo-media">
@@ -933,9 +938,9 @@ const LANG = {
     vsSort:"If the difference is not obvious to you, nothing written here will make it so.",
     e3:"Direction", h3a:"You are the compass.",
     dirSay:"Most designers will ask you to kneel to whichever audience was easiest for them to describe. <b>Not here.</b> Clarity is how we get you where you are already pointing.",
-    e4:"The system", h4a:"Specified, not styled.",
-    sysSay:"Four rules, on one project, all the way down. A clear vector, three colours in a fixed proportion, one typeface and a culture stack. Turvatikas make safety ladders; the mark is four forms stacked and what you read is three rungs.",
-    _real:"supplied", _ph:"placeholder", _php:"proportion placeholder",
+    e4:"The system", h4a:"Tools are the easy part.",
+    sysSay:"Direction is often mistaken for micromanagement. We need clean vectors, not 30 page ruling documents.",
+    _real:"supplied",
     p1t:"The vector",
     p1b:"One message, one shape. The ladder is the space between the rungs and not the rails, so nothing in it has to be redrawn to go small.",
     g0:"Deep water", g1:"Warm light", g2:"Bare paper",
@@ -981,9 +986,9 @@ const LANG = {
     vsSort:"Er ikke forskjellen \u00e5penbar for deg, er det ingenting her som gj\u00f8r den det.",
     e3:"Retning", h3a:"Du er kompasset.",
     dirSay:"De fleste designere vil be deg knele for det publikummet som var lettest for dem \u00e5 beskrive. <b>Ikke her.</b> Klarhet er m\u00e5ten vi f\u00e5r deg dit du allerede peker.",
-    e4:"Systemet", h4a:"Spesifisert, ikke stylet.",
-    sysSay:"Fire regler, p\u00e5 ett prosjekt, hele veien ned. En tydelig vektor, tre farger i en fast andel, \u00e9n skrift og en kulturstabel. Turvatikas lager sikkerhetsstiger; merket er fire former stablet, og det du leser er tre trinn.",
-    _real:"levert", _ph:"plassholder", _php:"andel er plassholder",
+    e4:"Systemet", h4a:"Verkt\u00f8yene er den enkle delen.",
+    sysSay:"Retning blir ofte forvekslet med detaljstyring. Vi trenger rene vektorer, ikke 30 siders regelverk.",
+    _real:"levert",
     p1t:"Vektoren",
     p1b:"Ett budskap, \u00e9n form. Stigen er rommet mellom trinnene og ikke vangene, s\u00e5 ingenting i den m\u00e5 tegnes p\u00e5 nytt for \u00e5 bli liten.",
     g0:"Dypt vann", g1:"Varmt lys", g2:"Bart papir",
@@ -1029,9 +1034,9 @@ const LANG = {
     vsSort:"Jos ero ei ole sinulle ilmeinen, mik\u00e4\u00e4n t\u00e4ss\u00e4 kirjoitettu ei tee siit\u00e4 ilmeist\u00e4.",
     e3:"Suunta", h3a:"Sin\u00e4 olet kompassi.",
     dirSay:"Useimmat suunnittelijat pyyt\u00e4v\u00e4t sinua polvistumaan sille yleis\u00f6lle, joka oli heille helpoin kuvata. <b>Ei t\u00e4\u00e4ll\u00e4.</b> Selkeys on tapa, jolla viemme sinut sinne, minne jo osoitat.",
-    e4:"J\u00e4rjestelm\u00e4", h4a:"M\u00e4\u00e4ritelty, ei tyylitelty.",
-    sysSay:"Nelj\u00e4 s\u00e4\u00e4nt\u00f6\u00e4, yhdess\u00e4 projektissa, alusta loppuun. Selke\u00e4 vektori, kolme v\u00e4ri\u00e4 kiinte\u00e4ss\u00e4 suhteessa, yksi kirjasin ja kulttuuripino. Turvatikas valmistaa turvatikkaita; merkki on nelj\u00e4 muotoa p\u00e4\u00e4llekk\u00e4in, ja se mit\u00e4 luet on kolme askelmaa.",
-    _real:"toimitettu", _ph:"paikanvaraaja", _php:"suhde on paikanvaraaja",
+    e4:"J\u00e4rjestelm\u00e4", h4a:"Ty\u00f6kalut ovat helppo osa.",
+    sysSay:"Suunta sekoitetaan usein mikromanageeraukseen. Tarvitsemme selkei\u00e4 vektoreita, emme 30-sivuisia s\u00e4\u00e4nt\u00f6kirjoja.",
+    _real:"toimitettu",
     p1t:"Vektori",
     p1b:"Yksi viesti, yksi muoto. Tikkaat ovat askelmien v\u00e4liin j\u00e4\u00e4v\u00e4 tila eiv\u00e4tk\u00e4 sivujohteet, joten mit\u00e4\u00e4n ei tarvitse piirt\u00e4\u00e4 uudelleen pienennett\u00e4ess\u00e4.",
     g0:"Syv\u00e4 vesi", g1:"L\u00e4mmin valo", g2:"Paljas paperi",

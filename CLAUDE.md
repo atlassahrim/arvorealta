@@ -628,6 +628,19 @@ that names a real client, is the one error that client is certain to see.
 **An unlabelled stand-in is how invented proof gets shipped by accident**,
 and this page labels four of them.
 
+**Three of those four labels are off the page, at the owner's
+instruction**, and the reasoning above is kept because it is the argument
+for putting them back if the page is ever shown to a client. What remains
+is `supplied` on the vector, which is a positive claim about the one real
+part rather than a stand-in notice. Rules 02, 03 and 04 now carry nothing.
+The hex values are still the sampled ones and the typeface is still
+unnamed — **what changed is the labelling, not the material**, so nothing
+on the fold asserts more than it did; it simply no longer says which
+parts are provisional. The risk this trades against is the recorded one:
+a reader cannot tell the proportion split and the culture stack from
+delivered work. On a sandbox that is the owner's call; it is worth a
+second look before any of this is promoted or sent.
+
 ### The gallery is a field, not a grid and not a scroll
 
 Sixteen equal tiles is a contact sheet. Sixteen full-width bands is eleven
@@ -1206,6 +1219,58 @@ work as a share of the frame, and a lockup at five per cent is the
 neighbourhood the four earlier passes were in. A full-measure plate pair
 and a side-by-side text column cannot both have the width; which one gets
 it is the owner's call and he has made it.
+
+### Fold two at 70 per cent, and fold three on the owner's own line
+
+**The plates are 30 per cent smaller, at the owner's instruction**, which
+is `max-width:70%` on `.plate` rather than on its image, so the hairline
+under each caption shortens with its mark instead of running on past it.
+`justify-self` stays at its default, so both plates keep the same left
+edge, which is the only reason stacking them beats setting them side by
+side. Measured at 1440 the larger one is **376px, 2.4 per cent of the
+screen**, from 538px and 5.0; at 820 it is 529px and 6.4 per cent, and at
+390 it is **245px**, where a 1400 x 312 lockup draws its wordmark at about
+ten pixels.
+
+**That is the fourth figure this file has recorded against the same rule,
+and it now reads the other way.** Measure the work as a share of the frame:
+the pass that found nothing above six per cent took the plates to 26.8, the
+duo template took them to 5.0, and this takes them to 2.4 — a tenth of what
+they held two builds ago, on the fold carrying the page's one checkable
+claim. The owner has looked at both sizes and chosen; the figure is here so
+the next session does not re-derive it, not as an objection to work around.
+**If the phone case ever reads as too small, the honest fix is to scope the
+cap above 980px** and leave the stacked layout at full column width, which
+is one media query.
+
+**Fold three is the owner's own copy, replacing the session's.** The
+headline is `Tools are the easy part.` and the line under it reads
+`Direction is often mistaken for micromanagement. We need clean vectors,
+not 30 page ruling documents.` It was handed over inside quotation marks
+and is set as plain prose, because every other explanation on the page is,
+and a quotation on this page means a string taken from another document.
+**The Norwegian and Finnish are this session's**, which is the standing
+caveat: `detaljstyring` and `regelverk` are the ordinary Norwegian terms
+and `mikromanageeraus` and `sääntökirja` the Finnish ones, but the register
+of two sentences is the part worth a native speaker.
+
+**What the replaced line was doing, and what now has no introduction.**
+The old `sysSay` read *Four rules, on one project, all the way down*, named
+all four, and tied the mark to the client: *Turvatikas make safety ladders;
+the mark is four forms stacked and what you read is three rungs.* The
+numbered list and the grid of four beneath it are unchanged, so the fold
+still shows the specification — **it no longer says that is what it is**,
+and the Turvatikas reading is gone from the page entirely. That is a
+content decision rather than a fault, and it is recorded because it is
+invisible in a screenshot.
+
+**Ten strings in `STR` are dead and are kept on purpose.** `_ph`, `_php`,
+the culture stack's six and `_galNote` and `_typeMeta` are rendered
+nowhere — verified by grepping every `data-t` against the object — and they
+hold three languages of copy that would have to be written again if those
+cells return. The cost is that a grep for `placeholder` finds eleven hits
+on a page that displays none, so **check `data-t` before believing a
+string is on the page.**
 
 Verified: six folds at exactly one screen at 1440, 1180, 820 and 390; snap
 `y mandatory` at all four and `none` under reduced motion; fold tops at 0,
