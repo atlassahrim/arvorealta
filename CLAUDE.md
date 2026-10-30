@@ -822,6 +822,60 @@ decision instead, and the decision is that no language gets an orphan. The
 hero keeps its own hard breaks. **If the Nordic text is ever checked by a
 native speaker, hand-break them then and this paragraph comes out.**
 
+### The work was never at scale, which is why it still looked wrong
+
+Three passes fixed the frame and none of them touched the pictures. Asked
+again what could be done, the honest way to answer was to measure every
+image on the page as a share of the screen at 1440 x 900:
+
+| fold | what it shows | biggest | median width |
+|---|---|---|---|
+| alignment | the two lockups | 4.1% | 490px |
+| system | the supplied vector | 5.9% | 370px |
+| **work** | **fifteen client marks** | **5.2%** | **198px** |
+| hero, close | the ground loops | 133%, 100% | 1440px |
+
+**No piece of work anywhere on this page reached six per cent of the
+frame, and the only two images that filled it were background video.** On
+a brand portfolio. The source frames are 1920 x 1080 compositions and they
+were being drawn at 198px, which throws away ninety per cent of what was
+shot. Everything else — arrival, the type scale, the chrome, the column —
+was correct and none of it could have fixed this.
+
+**The drifting field is gone and the fold is a stage.** Fifteen frames on
+jittered orbits at 13 to 22 per cent of the measure also let the tiles
+occlude each other, so marks sat half under their neighbours and the one
+fold whose whole job is to show the work was the least legible thing on
+the page. Every frame now sits at `inset:0` on one stage at the page's own
+measure and the rail of names that was already underneath is the control
+rather than a caption. Measured after: **1142 x 642, 56.6 per cent of the
+screen against 5.2**, one lit at a time, 1.35 screens against 1.26.
+
+**Hover drives the stage and the stage opens the viewer, and the split is
+the point.** With hover and open both on the tile, one tap on a phone fired
+both and the viewer opened on whatever was touched first. The rail changes
+what is shown — by hover where there is a pointer, by tap where there is
+not — and only the stage itself opens the frame full screen.
+
+**The caption is the name and the role, and the role is still only what the
+lockup states.** `Advogados` and `Hospitais` appear; a craft-only lockup
+reads an em dash. A sector inferred from a company name is invented proof,
+which this file already records and the stage does not change.
+
+**The other two were raised for the same reason.** The alignment plates ran
+`clamp(230px,34vw,520px)` inside `clamp(28px,6vw,90px)` of padding, so the
+page's one checkable claim measured 490px: 628px now, 6.8 per cent against
+4.1. The supplied vector was capped at 620px inside a cell 756px wide and
+rendered at 370; it is 681px, which is ninety per cent of its cell. A
+lockup is a wide, thin object and will never take a quarter of a screen —
+but it should not take a twentieth either.
+
+**The rule worth keeping is the one this took four passes to reach.
+Measure the work as a share of the frame, not the layout as a composition.**
+A page can pass every contrast, column, scale and motion check and still
+read as cheap, because the thing it is selling is being shown at thumbnail
+size next to stock video that is not.
+
 ### `lab/max-home/` — the offer page at that standard, and the language bar
 
 The owner's call on `lab/max-brand/` was to use it, with the language control added

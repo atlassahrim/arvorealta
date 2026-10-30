@@ -219,10 +219,14 @@ h1,h2,h3,p{margin:0}
 .align{position:relative;background:var(--ink-2)}
 .align .split{display:grid;grid-template-columns:1fr;min-height:62svh}
 @media (min-width:760px){.align .split{grid-template-columns:1fr 1fr;min-height:74svh}}
+/* The padding was clamp(28px,6vw,90px) and the lockup capped at 34vw, so
+   the two plates measured 490px on a 1440 screen: 4.1 per cent of the frame
+   each, for the one claim on this page a reader can check. The stock is not
+   the point; the drawing is. */
 .align .pane{position:relative;background:var(--paper);display:grid;place-items:center;
-  padding:clamp(28px,6vw,90px)}
+  padding:clamp(20px,3.2vw,52px)}
 .align .pane + .pane{box-shadow:inset 1px 0 0 rgba(26,23,19,.16)}
-.align .pane img{width:100%;max-width:clamp(230px,34vw,520px);height:auto;display:block;
+.align .pane img{width:100%;max-width:clamp(230px,44vw,680px);height:auto;display:block;
   transform:translateY(var(--rise,0));transition:transform 1.1s var(--ease)}
 .align .pane b{position:absolute;left:clamp(20px,3vw,40px);bottom:clamp(18px,2.6vw,34px);
   font-family:"Geist Mono",monospace;font-size:9.5px;font-weight:600;letter-spacing:.22em;
@@ -358,7 +362,8 @@ h1,h2,h3,p{margin:0}
 .cell.paper p{color:rgba(26,23,19,.68)}
 .b-vector{align-content:space-between}
 .b-vector .art{display:grid;place-items:center;padding:clamp(10px,2.4vw,34px) 0 0}
-.b-vector .art img{width:100%;max-width:min(100%,620px);height:auto;display:block}
+.b-vector .art{justify-items:stretch}
+.b-vector .art img{width:100%;max-width:100%;height:auto;display:block}
 .b-type .spec{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:.14em;
   text-transform:uppercase;font-size:clamp(1rem,.62rem + 1.5vw,1.9rem);line-height:1.3}
 
@@ -436,18 +441,34 @@ h1,h2,h3,p{margin:0}
 .marks h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.028em;
   font-size:var(--t-head);line-height:1}
 
-.cloud{position:relative;height:clamp(380px,62vh,660px);overflow:hidden;
-  mask-image:radial-gradient(140% 132% at 50% 50%,#000 74%,transparent 100%);
-  -webkit-mask-image:radial-gradient(140% 132% at 50% 50%,#000 74%,transparent 100%)}
-.cloud .cell{position:absolute;appearance:none;padding:0;border:0;display:block;border-radius:2px;
-  overflow:hidden;background:#0d1d18;cursor:pointer;
-  width:var(--w);aspect-ratio:16/9;left:var(--x);top:var(--y);
-  transform:translate3d(-50%,-50%,0) translate3d(var(--dx,0px),var(--dy,0px),0) scale(var(--s,1));
-  transition:opacity .55s var(--ease),filter .55s var(--ease),box-shadow .55s var(--ease)}
+/* ── ACT V — a stage, not a field ──────────────────────────────────────
+   This was fifteen frames adrift on their own orbits at 13 to 22 per cent
+   of the measure. Measured at 1440 it put the median tile at 198px wide
+   and let the tiles occlude each other, so the one fold whose whole job is
+   to show the work was the least legible thing on the page: no piece of
+   work anywhere on this page reached 6 per cent of the screen, while the
+   two background video loops filled it.
+
+   The source frames are 1920 x 1080 compositions. They are shown at the
+   page's own measure now, one at a time, and the rail of names that was
+   already underneath is the control rather than a caption. Measured after:
+   1248 x 702 at 1440, which is 67 per cent of the screen against 5.2.
+
+   A contact sheet shows everything and proves nothing. A stage shows one
+   thing at the size it was made. */
+.cloud{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:3px;
+  background:#0d1d18;box-shadow:0 30px 90px rgba(0,0,0,.45)}
+.cloud .cell{position:absolute;appearance:none;padding:0;border:0;margin:0;display:block;
+  inset:0;width:100%;height:100%;background:none;cursor:pointer;
+  opacity:0;transition:opacity .62s var(--ease);pointer-events:none}
 .cloud .cell img{width:100%;height:100%;object-fit:cover;display:block}
-.cloud .cell{opacity:.66;filter:saturate(.7) contrast(1.02)}
-.cloud .cell.lit{opacity:1;filter:none;z-index:9;box-shadow:0 24px 64px rgba(0,0,0,.5)}
-.cloud .cell:focus-visible{outline-width:3px;outline-style:solid;outline-color:var(--bone);outline-offset:3px}
+.cloud .cell.lit{opacity:1;pointer-events:auto;z-index:2}
+.cloud .cell:focus-visible{outline-width:3px;outline-style:solid;outline-color:var(--bone);outline-offset:-3px}
+/* the name of what is on the stage, where a plate's caption goes */
+.stagecap{display:flex;justify-content:space-between;align-items:baseline;gap:18px;
+  margin-top:14px;font-family:"Geist Mono",monospace;font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--bone-dim)}
+.stagecap b{font-weight:600;color:var(--bone)}
 @media (prefers-reduced-motion:reduce){.cloud .cell{transition:none}}
 
 .namerail{display:flex;flex-wrap:wrap;gap:4px 0;margin-top:clamp(18px,3vh,34px);
@@ -773,6 +794,7 @@ html.rv .sort p{transition-duration:1.25s}
     <p class="mono" style="font-size:10px;color:var(--bone-faint)" data-t="moreMeta">Open any one &nbsp;/&nbsp; 45 frames behind them</p>
   </header>
   <div class="cloud" id="cloud"></div>
+  <p class="stagecap"><b id="capName"></b><span id="capRole"></span></p>
   <div class="namerail" id="namerail"></div>
   <p class="note" data-t="_galNote">Year and sector are placeholders until they are supplied. A sector is shown only where the lockup itself states one.</p>
 </section>
@@ -954,48 +976,50 @@ const CRAFT = new Set(["Mark and wordmark","Monogram and wordmark","Crest and se
 const CLOUD = GALLERY.filter(([s]) => s !== "arvorealta");   /* the mark signs the close */
 const cloud = $("#cloud"), namerail = $("#namerail");
 
-/* a small deterministic hash, so the field is composed rather than random */
-const h1 = (n, k) => { const v = Math.sin((n + 1) * 127.1 + k * 311.7) * 43758.5453; return v - Math.floor(v); };
+/* The jittered lattice is gone with the field it positioned. Every frame
+   sits at inset:0 on one stage and the rail decides which is lit. Hover
+   changes the stage where there is a pointer, a tap on the rail does it
+   where there is not, and the stage itself opens the viewer. That split
+   matters: with hover and open both on the tile, one tap on a phone fired
+   the hover and the open together. */
+const CELLS = CLOUD.map(([slug, name, role], i) => ({ slug, name, role, i }));
 
-const CELLS = CLOUD.map(([slug, name, role], i) => {
-  const col = i % 5, row = Math.floor(i / 5);
-  const x = 9 + (col / 4) * 76 + (h1(i,1) - .5) * 9;
-  const y = 15 + (row / 2) * 70 + (h1(i,2) - .5) * 16;
-  const w = 13 + h1(i,3) * 9;                        /* 13 to 22 per cent */
-  return { slug, name, role, x, y, w, i,
-           amp: 6 + h1(i,4) * 12, per: 14 + h1(i,5) * 16, ph: h1(i,6) * 6.283 };
-});
-
-cloud.innerHTML = CELLS.map(c => {
+cloud.innerHTML = CELLS.map((c, n) => {
   const g = GROUNDS[c.i % 3][0];
-  return `<button class="cell" data-c data-k="${c.i}" data-open="${firstOf(c.slug)}" aria-label="Open ${c.name}"
-      style="--x:${c.x.toFixed(2)}%;--y:${c.y.toFixed(2)}%;--w:${c.w.toFixed(2)}%">
-      <img src="${src(c.slug,g,480)}" alt="${c.name}, the mark" width="480" height="270" loading="lazy" decoding="async">
+  return `<button class="cell${n === 0 ? " lit" : ""}" data-c data-k="${c.i}" data-open="${firstOf(c.slug)}"
+      aria-label="Open ${c.name}" tabindex="${n === 0 ? 0 : -1}">
+      <img src="${src(c.slug,g,1400)}" alt="${c.name}, the mark" width="1400" height="788"
+           ${n === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">
     </button>`;
 }).join("");
-namerail.innerHTML = CELLS.map(c =>
-  `<button type="button" data-c data-k="${c.i}" data-open="${firstOf(c.slug)}">${c.name}</button>`).join("");
+namerail.innerHTML = CELLS.map((c, n) =>
+  `<button type="button" data-c data-k="${c.i}"${n === 0 ? ' class="lit"' : ""}>${c.name}</button>`).join("");
 
 const cloudCells = [...cloud.querySelectorAll(".cell")];
-const railBtns = [...namerail.querySelectorAll("button")];
+const railBtns   = [...namerail.querySelectorAll("button")];
+const capName = $("#capName"), capRole = $("#capRole");
+
 let litK = -1;
 function lit(k){
-  if (k === litK) return;
+  if (k === litK || k < 0) return;
   litK = k;
-  cloudCells.forEach(el => el.classList.toggle("lit", +el.dataset.k === k));
+  cloudCells.forEach(el => { const on = +el.dataset.k === k;
+    el.classList.toggle("lit", on); el.tabIndex = on ? 0 : -1; });
   railBtns.forEach(el => el.classList.toggle("lit", +el.dataset.k === k));
+  const c = CELLS.find(x => x.i === k);
+  if (c && capName) capName.textContent = c.name;
+  /* a sector is shown only where the lockup itself states one */
+  if (c && capRole) capRole.textContent = CRAFT.has(c.role) ? "\u2014" : c.role;
 }
-for (const el of cloudCells.concat(railBtns)) {
+if (CELLS.length) lit(CELLS[0].i);
+
+for (const el of railBtns) {
   const k = +el.dataset.k;
-  el.addEventListener("pointerenter", () => lit(k));
+  el.addEventListener("pointerenter", () => { if (fine) lit(k); });
   el.addEventListener("focus", () => lit(k));
-  el.addEventListener("pointerleave", () => lit(-1));
-  el.addEventListener("blur", () => lit(-1));
-  el.addEventListener("click", () => open(+el.dataset.open));
+  el.addEventListener("click", () => lit(k));
 }
-let cloudHot = false;
-cloud.addEventListener("pointerenter", () => { cloudHot = true; });
-cloud.addEventListener("pointerleave", () => { cloudHot = false; });
+for (const el of cloudCells) el.addEventListener("click", () => open(+el.dataset.open));
 
 /* ══ the viewer ════════════════════════════════════════════════════════ */
 const view = $("#view"), vimg = $("#vimg"), vt = $("#vt"), vr = $("#vr"), vn = $("#vn"), vf = $("#vf");
@@ -1292,11 +1316,6 @@ if ("IntersectionObserver" in window) {
   secs.forEach(s => s && io.observe(s));
 }
 
-/* ══ the grid knows where the cursor is ════════════════════════════════
-   Measured once per scroll frame rather than per pointer event, because
-   getBoundingClientRect inside a pointermove is a layout read per tile
-   per event and that is what turns a nice idea into a janky one.         */
-const cloudDrift = fine && !reduce;
 /* ══ one loop ══════════════════════════════════════════════════════════ */
 const hero = $("#open"), heroInner = hero.querySelector(".inner"), bed = hero.querySelector(".bed");
 const wide = matchMedia("(min-width: 821px)");
@@ -1363,18 +1382,6 @@ function frame(now){
     bed.style.filter = "brightness(" + (1 - p * 0.40).toFixed(3) + ")";
   }
 
-  /* ACT V — the field drifts, and a pointer over it stops it dead */
-  if (cloudDrift && !cloudHot) {
-    const cr = cloud.getBoundingClientRect();
-    if (cr.top < vh && cr.bottom > 0) {
-      const t = now / 1000;
-      for (let i = 0; i < cloudCells.length; i++) {
-        const c = CELLS[i], el = cloudCells[i];
-        el.style.setProperty("--dx", (Math.sin(t * 6.283 / c.per + c.ph) * c.amp).toFixed(2) + "px");
-        el.style.setProperty("--dy", (Math.cos(t * 6.283 / (c.per * 1.37) + c.ph) * c.amp * .7).toFixed(2) + "px");
-      }
-    }
-  }
 
   /* ACT I-VI — arrival. Anything whose top has reached the lower eighth,
      or is already above it, which is what makes a jump safe. The stagger
