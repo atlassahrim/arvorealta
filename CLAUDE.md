@@ -607,7 +607,6 @@ Measured after: headline left edges at **433, 362, 202, 202, 96**, four
 distinct positions against one, and the page is 8.4 screens against 9.1.
 
 ### The system fold is four rules, and it says which parts are stand-ins
-### The system fold is four rules, and it says which parts are stand-ins
 
 The rules are the owner's: **a clear message or vector, three colours in a
 10 / 20 / 70 proportion, a typeface, and a culture stack of wardrobe, music
@@ -688,12 +687,140 @@ count the comment openers against the closers and the braces against each
 other before looking at the page** — it is four lines of Python and it is
 the difference between a diagnosis and an afternoon.
 
-**The two ground loops are the owner's own footage****The two ground loops are the owner's own footage**, not a camera move over a
+**The two ground loops are the owner's own footage**, not a camera move over a
 still: `ground-water-2-720.mp4` and `ground-paper-2-720.mp4`. Neither looped, so
 the tail is crossfaded into the head and the file is shortened by that much.
 Measured at the wrap against an unrelated pair: water 4.05 against 21.52 of 255,
 paper 1.01 against 7.51. **Real motion beats a synthetic move**, and the
 synthetic `ground-*-1-1080.mp4` set is kept only for the ground with no footage.
+
+### The second audit, and what the skills were actually worth
+
+The owner's question was whether the skills had been applied to push the
+interface to a high end with the restrictions off. The honest answer was
+no: `taste-skill` had been run as a linter, and `ui-ux-pro-max` had never
+been opened on this page at all. A linter finds faults. It does not raise a
+ceiling, and the first rebuild fixed faults.
+
+**What the vendored skill was worth, and what it was not.** Its
+design-system search returned Liquid Glass, a Cormorant / Montserrat
+pairing and a premium-black palette, all three of which this file already
+decides against and none of which were applied. The one real return was
+the pattern: **Scroll-Triggered Storytelling**, intro hook, three chapters,
+climax CTA, with a progress indicator. The page was already that shape, so
+it confirmed the structure rather than changing it. The GSAP presets are
+for a library this page does not carry, but one figure crossed: **a reveal
+offset of 8 to 16px, so it reads as a fade rather than a slide.** Its
+vocabulary section is the part worth keeping open — the page used one
+pattern from roughly fifty, which was the Bento Grid.
+
+**The real finding is that the page had no arrival below the hero.** The
+hero's two lines lift in on load and then every object on the five folds
+beneath it was simply present. Nothing arriving is the plainest thing an
+expensive page can do, and it is invisible in a screenshot, which is why
+three audits missed it.
+
+**The reveal measures, and it is not an IntersectionObserver.** Same
+reasoning as `/brand/` and the award fold, recorded three times now: an
+observer reports a *change* in intersection, so a jump that crosses a block
+without painting it takes that block from below the fold to above it with
+ratio 0 at both ends and leaves it at opacity 0 for the life of the page.
+The rail's own anchors make exactly that jump. It runs inside the rAF loop
+that was already there, revealing anything whose top has reached the lower
+eighth **or is already above it**, with the stagger per batch and not per
+document. Three failsafes: `no-js` on the root, a four second deadline set
+above the content it gates, and `prefers-reduced-motion`. Verified 22 of 22
+revealed in six scenarios: jump to the end, rail jump and back, a normal
+read, after the deadline with the loop dead, under reduced motion, and on a
+phone jumping to the end.
+
+**A gate at a fraction of the viewport cannot reach an element that is
+still below that fraction when the page runs out of scroll.** The close is
+bottom aligned, so its footer's top rests at 840 of 900 against a gate of
+787, and it stayed at zero in all four scroll tests while the other 21
+revealed. At the scroll floor, everything left is due. This is general to
+any gate and any bottom-aligned block.
+
+**One scale, six roles, and the page had seven curves and no tokens.** It
+carried 150 / 124 / 114 / 80 / 68 / 67 / 63 at 1440, each written where it
+was needed. Two of them were one pixel apart, which a reader cannot see as
+hierarchy, so that was one level written twice. It is three display levels
+now and every object of a kind takes the same one: the hero alone is
+display, the two full-bleed statement folds share `--t-mani`, and the three
+section headlines and the sorting line share `--t-head`. Measured at 1440
+**124 · 93 · 63**, at 820 **80 · 63 · 44**, at 390 **50 · 42 · 30**.
+
+**The chrome's two states are per control, not per page, because the
+controls sit at different heights.** The bar is at the top of the screen
+and the rail is at its middle, so over the alignment fold the bar is on
+paper while the rail is on ink and one value cannot serve both. Each is
+decided against a list of the light surfaces that actually exist, sampled
+at its own row, and **the dim opacity moves with the colour** — ink at 34%
+on paper measures 1.70:1 while the same token on ink is right.
+
+Before, measured off rendered pixels at 1440 over the alignment fold:
+wordmark **1.03:1**, languages **1.02**, action **1.03**, rail **1.02**.
+The whole bar was invisible, because the fold's paper panes were added in
+the rebuild and never put on the list. After, measured on the specified
+colours, which is what the ratio is defined on:
+
+| | over paper |
+|---|---|
+| wordmark, action, current rail row | 14.90:1 |
+| language chip, ink at 75% | 7.15:1 |
+| rail row, ink at 72% | 6.47:1 |
+
+**Measure small text on its specified colour, not on its pixels.** The same
+objects sampled from the render read 7.48, 2.86 and 2.58, because a 10px
+mono glyph with tracking is almost all antialiasing and almost no pixel
+reaches the text colour. The pixel method is right for type over a
+photograph, where the question is what is behind each glyph. It is wrong
+for small type on a flat ground, where it under-reports by a factor of two
+and would have sent a correct page back for a second fix.
+
+**`mix-blend-mode: difference` was still on the cursor.** This file already
+records it as rejected for the bar on this page and the cursor kept it:
+`#fff` differenced against the system fold's `#954D13` swatch renders
+(106, 178, 236), a light blue on a page that contains no blue, and it goes
+a different colour on every surface it crosses. It takes the chrome's own
+two values now, sampled at the pointer's own row. **A rule written for one
+element is not applied to the others by itself.**
+
+**The cells take a light that follows the cursor, and `--mx`/`--my` were
+already being written for nothing.** They were set on every pointer move
+and read by no rule in the stylesheet. The bento is the flattest fold on
+the page and the cells now carry an edge light in their own local
+coordinates — per-cell, because a single global pointer lights every cell
+identically, which reads as wrong. It states its two colours the way the
+chrome does, bone on the ink cells and ink on the client's paper, where a
+bone highlight is invisible. Rects are cached and refreshed in the loop,
+never read inside the pointer event: a `getBoundingClientRect` per cell per
+move is a layout read per cell per move. Off entirely where there is no
+hover, which is the owner's own device, and off under reduced motion.
+
+**The content column was broken in two folds by a nudge meant for one
+side.** `.sys` and `.marks` carried `calc(var(--pad) + 106px)` on both
+sides at 980px up, and the comment beside it says why: the field would
+drift under the fixed rail. **The rail is on the right.** The left inset
+bought nothing and put those two headlines at x=202 against the hero's 96,
+which is the standard the owner asked for in the same session it broke. It
+shows from 980px up, so iPad landscape has it and iPad portrait does not.
+
+**The close's last sentence had no measure.** 144 characters on one line at
+1440, against 26 to 58 for every other paragraph on the page, and it is the
+last thing a reader reads.
+
+**`text-wrap: balance` is used on the five section headlines, and that
+crosses the hand-break rule.** This file says to break display type with
+`<br>` because every line ending is a decision, and at 1440
+`Specified, not styled.` was wrapping to leave `styled.` alone on line two.
+The rule is not followed literally here and the reasoning is the three
+languages: five headlines in three languages is fifteen sets of line
+endings, the Norwegian and Finnish are not a native speaker's, and a break
+in the wrong place there is worse than a balanced wrap. `balance` is the
+decision instead, and the decision is that no language gets an orphan. The
+hero keeps its own hard breaks. **If the Nordic text is ever checked by a
+native speaker, hand-break them then and this paragraph comes out.**
 
 ### `lab/max-home/` — the offer page at that standard, and the language bar
 
