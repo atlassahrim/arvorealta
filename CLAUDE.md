@@ -876,6 +876,106 @@ A page can pass every contrast, column, scale and motion check and still
 read as cheap, because the thing it is selling is being shown at thumbnail
 size next to stock video that is not.
 
+### The interface rebuilt from zero, on one idea the owner already wrote
+
+Four passes of fixes and the owner's answer was still that it did not look
+good, with the right instinct behind it: *maybe my instructions were bad,
+start the interface over, zero guard rails.* The content is unchanged —
+every string, all three languages, the six folds in order. Everything
+around it was rewritten.
+
+**The organising idea is the owner's own sentence.** `vsSay` reads *a mark
+is a statement read before it is explained*. So every fold opens on the
+picture and the words arrive second. The previous build had it exactly
+backwards: flat ink-green was the page and the work was an inset between
+paragraphs.
+
+**What `taste-skill` caught that four passes had not.**
+
+- **The custom cursor is banned outright**, accessibility and performance
+  both. The page had one, and a session had just finished recolouring it
+  rather than deleting it. Gone.
+- **`NO oversized H1s that just scream. Control hierarchy with weight +
+  color, not raw scale.`** The hero was 150px, then 124.
+- **The palette is the single most-recurring AI tell in production**, and
+  this page is almost exactly it: banned backgrounds list `#efeae0`
+  against this page's `--paper:#EFEAE1`, banned text `#1a1714` against
+  `--paper-ink:#1A1713`, and the banned accent family is brass and ochre.
+  **It survives only because it is sampled off the owner's own frames
+  rather than chosen** — the paper is his paper ground and the amber is
+  the ink his marks are drawn in. That is the articulable reason the
+  skill's override requires. What follows from it is that the palette has
+  to be carried with far more conviction than a default would need, which
+  is the part the earlier builds did not do.
+- **The emphasis rule.** `<em>You</em>` was coloured gold, which is
+  colouring one word to make a headline interesting. Italic of the same
+  family is the rule, so it is italic — and `You` carries a descender, so
+  the line takes 1.08 leading and a reserve, which is the skill's
+  clearance rule.
+
+**Measured before and after, at 1440 x 900:**
+
+| | before | after |
+|---|---|---|
+| the two lockups | 4.1% of the screen | **26.8%** |
+| the gallery stage | 5.2% | **80.4%** |
+| the supplied vector | 5.9% | 5.8%, in a row rather than a card |
+| display sizes on the page | 7 curves | **2 tokens, spent twice** |
+| distinct font sizes | 21 | 12 |
+| headline left edges | 96 and 202 | **96 everywhere** |
+| page | 9.1 screens | 8.68 |
+
+**The plates stack, and that is not a compromise.** Side by side gave each
+586px of a 1248 measure. Stacked at the full measure, same left edge and
+same width, each is 1248px — and for an object five times wider than it is
+tall the eye runs down one edge rather than across a gutter, so the
+comparison is *directer*, not merely bigger.
+
+**Four rules, four shapes, and never four cards.** The bento was a template
+used once and the block before it was the same text block four times. Each
+rule is led by its own evidence at the size the evidence wants: the lockup
+runs its row, the proportion is drawn full width at `10fr 20fr 70fr`, the
+typeface is a specimen, and the culture stack is the only text-only one so
+it is last and least. Caption beside evidence rather than above it took the
+fold from 4.59 screens to 2.77 without taking a pixel off any evidence.
+
+**The specimen is the one size on the page that is not in the scale, and
+that is deliberate**: its size is its content. A typeface is shown by
+setting a line in it and a line set small shows nothing.
+
+**Three faults found in the building, all general.**
+
+**A class name used for two different things is a bug with no error.**
+`.cap` was the gallery's caption and also the system fold's rule captions.
+The gallery's rule is a single class at (0,1,0), so it set every rule
+caption in tracked monospace capitals: rule 01 shipped its serif heading
+and its body paragraph as `THE VECTOR` and `ONE MESSAGE, ONE SHAPE.` It
+renders perfectly and reads as a design decision. Renamed `.stagecap`.
+
+**The column applied twice is the column applied wrong.** Several blocks
+carried `padding-inline:var(--pad)` *and* an inner `max-width` plus auto
+margins, which is 96px and then 32px again: the hero headline sat at 96
+and every other headline at 128. One helper, used everywhere —
+`max-width:var(--col);margin-inline:auto;padding-inline:var(--gut)`.
+
+**A fixed rail and a full-bleed stage cannot share an edge.** The stage ran
+under the rail and the rail's contrast became a property of whatever pixel
+of the photograph sat behind each row. The stage gives back the rail's own
+width, on the right only, from the width the rail appears at: still 1334 of
+1440.
+
+**And one about measuring rather than about the page.** The chrome read
+1.03:1 on the close in one run and 14.90:1 in the next, from the same
+build. The first measurement landed inside the 0.5s colour transition —
+the giveaway was the rail reporting an opacity of 0.65, which is neither
+of its two states. **Let a transition finish before sampling a computed
+colour, or the figure is of a frame nobody sees.**
+
+Verified: reveals 31 of 31 in five scenarios including both jump traps and
+the four-second deadline; chrome 6.47 to 14.90:1 on both light grounds; no
+horizontal scroll and no page errors at 390, 820 and 1440; three type
+levels at every viewport.
+
 ### `lab/max-home/` — the offer page at that standard, and the language bar
 
 The owner's call on `lab/max-brand/` was to use it, with the language control added
