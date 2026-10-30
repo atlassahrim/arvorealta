@@ -1037,6 +1037,76 @@ drawing and a ghost of the stencil survived into the rest state. `k` runs
 to 1.22 now. **Check the rest states, not the middle** — the middle of a
 dissolve hides everything.
 
+### Six folds, six screens, and one template used twice
+
+The owner's call after the WebGL build: the full-screen fold is right and
+every fold should have it; the scroll-driven image transition is not; take
+the typography and the interface details from `lab/max-home/`; folds two
+and three are one template; erase the statement and the price; rebuild the
+gallery; change the hero line.
+
+**Every fold is exactly one screen.** Measured at 1440: 1.00 x 6, the page
+at 6.00 against 8.68. On a phone two of them exceed it — the system fold at
+1.12 and the gallery at 1.30 — because a two-column fold stacks there and
+forcing it back to 100svh would mean shrinking a lockup or a frame to fit.
+**100svh is the floor; those two overflow it on a phone and that is the
+honest outcome rather than a miss.**
+
+**The WebGL dissolve is deleted.** It worked and it was measured, and the
+owner did not want the images changing under the scroll. That is the second
+time this page has carried that effect and the second time it has gone; it
+is not coming back without a reason that is about the pitch rather than the
+craft.
+
+**`lab/max-home`'s scale is ported whole**, six tokens strictly descending —
+96 · 67 · 52 · 42 · 28 · 19 at 1440 — along with its eyebrow, 11px mono at
+600 with .22em of tracking. This page had its own four-token set. **Two
+scales across two sandboxes is how a site drifts into two dialects**, which
+is the reason the three live pages share one stylesheet.
+
+**Folds two and three are one template, mirrored.** `.duo` is media one
+side and text the other, centred, generous margins. `.flip` swaps the
+order, so alignment runs media-left and the system media-right and a reader
+meets the two sides alternately rather than reading the same column twice.
+The owner asked for the same template and named the system's grid as being
+on the right, which is what mirroring gives; **if he meant the two
+identical, it is one class.**
+
+**The system fold is four rules as a numbered list and a grid of four.**
+The grid is the specification rather than decoration: the vector on its own
+stock, the proportion drawn at `10fr 20fr 70fr`, and the mark carried on
+two of its three grounds. The bento and the four full-width rule bands are
+both gone.
+
+**The statement and the price block are erased**, at the owner's
+instruction. That takes the €8,000 off this page entirely; it still lives
+on `index.html` and `lab/max-home/`, and this file's note that the brand
+page carries the top rung no longer describes it.
+
+**The gallery was broken, and the cause is worth recording because nothing
+threw.** The interface rebuild renamed the stage's tile class in the
+stylesheet from `.cell` to `.fr` and the script still emitted `.cell`, so
+every tile lost its positioning and its opacity rule: fifteen buttons were
+in the DOM and the stage measured zero frames. The page rendered, the rail
+worked, the caption updated, and the picture never appeared. **A class name
+is an interface between two files and renaming one side of it is a silent
+break** — the same shape as `.cap` colliding with the rule captions two
+builds ago, from the opposite direction.
+
+**The thumbnails are the navigation now.** A rail of fifteen client names
+asked a reader to choose by a name they have not read yet; a contact sheet
+asks them to look. One frame at 683 x 522, the grid of fifteen beside it,
+and the frame still opens the full viewer.
+
+**The hero reads `You set the direction, not the audience.`** in all three
+languages. **The Norwegian and Finnish are this session's**, not the
+owner's and not a native speaker's, which is the standing caveat on the
+Nordic text and is narrower here than usual because the line is six words.
+
+Verified: 21 of 21 reveals, the viewer opens from the stage and closes on
+Escape, the chrome flips to ink on both paper folds, no horizontal scroll
+and no page errors at 390, 820 and 1440.
+
 ### `lab/max-home/` — the offer page at that standard, and the language bar
 
 The owner's call on `lab/max-brand/` was to use it, with the language control added

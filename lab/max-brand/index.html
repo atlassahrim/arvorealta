@@ -72,19 +72,19 @@
   --col:82rem; --gut:20px;
   --pad:max(var(--gut),calc((100% - var(--col)) / 2 + var(--gut)));
 
-  /* ── the scale. Four roles and no more. ────────────────────────────
-     The first build carried seven display clamps, two of them one pixel
-     apart. `taste-skill` also bans the oversized H1 that only screams:
-     hierarchy is weight, position and ground, not raw size. So display
-     is spent exactly twice on this page, the hero and the close, and
-     every section headline is one size below it.
-     Measured at 1440: 104 · 58 · 19 · 11.                             */
-  --t-display:clamp(2.6rem,1.15rem + 5.9vw,7.4rem);
-  --t-head:clamp(1.7rem,1.05rem + 2.7vw,3.9rem);
-  --t-sub:clamp(1.4rem,1.05rem + 1.5vw,2.8rem);
-  --t-body:clamp(1rem,.95rem + .25vw,1.22rem);
-  --t-small:14px;
-  --t-label:11px;
+  /* ── THE SCALE, ported whole from lab/max-home ─────────────────────
+     Six roles with one job each, strictly descending, which is the annex
+     spec's own shape: display, figure, head, value, sub, body. This page
+     carried its own four-token set and max-home six; two scales across two
+     sandboxes is how a site drifts into two dialects, and the owner asked
+     for max-home's interface template.
+     Measured at 1440 / 390: 96/43 · 67/37 · 52/30 · 42/26 · 28/20 · 19/16 */
+  --t-display:clamp(2.7rem,1.32rem + 5.2vw,6rem);
+  --t-figure:clamp(2.3rem,1.42rem + 3.1vw,4.4rem);
+  --t-head:clamp(1.85rem,1.17rem + 2.3vw,3.4rem);
+  --t-value:clamp(1.6rem,1.11rem + 1.7vw,2.6rem);
+  --t-sub:clamp(1.25rem,1.05rem + .8vw,1.85rem);
+  --t-body:clamp(1rem,.95rem + .3vw,1.2rem);
 }
 @media (min-width:640px){:root{--gut:32px}}
 
@@ -104,12 +104,18 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
 .wrap{width:100%;max-width:var(--col);margin-inline:auto;padding-inline:var(--gut)}
 .mono{font-family:"Geist Mono",ui-monospace,monospace}
-.lbl{font-family:"Geist Mono",ui-monospace,monospace;font-size:var(--t-label);
+/* max-home's eyebrow: 11px mono, 600, .22em of tracking, uppercase, in the
+   page's own accent. On a dark ground the brick measures 2.03:1 and is
+   barred, so the amber the marks are drawn in carries it here. */
+.eyebrow{font-family:"Geist Mono",ui-monospace,monospace;font-size:11px;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--amber);margin:0}
+.align .eyebrow,.close .eyebrow{color:#8E4A45}
+.lbl{font-family:"Geist Mono",ui-monospace,monospace;font-size:11px;
   font-weight:600;letter-spacing:.26em;text-transform:uppercase;margin:0}
 .disp{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.022em}
 
 .skip{position:fixed;left:-999px;top:0;z-index:200;background:var(--bone);color:var(--ink);
-  padding:12px 18px;font-size:var(--t-small)}
+  padding:12px 18px;font-size:var(--t-body)}
 .skip:focus{left:12px;top:12px}
 
 /* ══ CHROME ════════════════════════════════════════════════════════════
@@ -209,62 +215,13 @@ html.rv [data-rv].in{opacity:1;transform:none}
    build gave the plates 4.1 per cent of the screen each and put the
    sorting line on its own ink band, which made two ink folds in a row.
    One ground, and the plates are the composition.                      */
-/* ══ ACT II — a stage, pinned ══════════════════════════════════════════
-   300vh of scroll over one sticky frame. That is three screens of travel
-   and it reads as a single held moment rather than three screens of
-   stacked content, which is the trade: the fold goes from 1.58 screens
-   to about 4, and it is the only place on the page that spends like
-   that. Everything else was tightened to pay for it.                   */
-.align{background:var(--paper);color:var(--paper-ink);position:relative}
-/* The travel belongs to .pinwrap. It was on the section, so the copy
-   below sat INSIDE the pin's sticky range and, carrying z-index:2,
-   painted straight over the stage: at the halfway point the fold showed
-   its own closing paragraph instead of the melt. A sticky element holds
-   its place; it does not hold the stacking order. */
-.align .pinwrap{height:300svh;position:relative}
-.align .pin{position:sticky;top:0;height:100svh;display:grid;place-items:center;overflow:hidden}
-#alignGL{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;
-  transition:opacity .8s var(--ease)}
-.align.gl-on #alignGL{opacity:1}
-/* the fallback: with no context, or under reduced motion, the plates show */
-.align.gl-on .plates{opacity:0;pointer-events:none}
-.align .plates{position:relative;z-index:2;display:grid;gap:clamp(30px,5vh,64px);
-  width:100%;max-width:var(--col);margin-inline:auto;padding-inline:var(--gut);
-  transition:opacity .6s var(--ease)}
-.plate{display:grid;gap:14px;margin:0}
-.plate img{width:100%;height:auto}
-.plate figcaption{display:flex;align-items:center;gap:14px;color:var(--ink-faint)}
-.plate figcaption::after{content:"";flex:1;height:1px;background:var(--rule-ink)}
-/* the two names, lit by the scroll, so the stage is captioned without a
-   legend to hop to. Only mounted when the stage is actually running. */
-.align .state{position:absolute;z-index:3;left:0;right:0;bottom:clamp(26px,6vh,64px);
-  margin:0;display:flex;justify-content:center;gap:0;
-  max-width:var(--col);margin-inline:auto;padding-inline:var(--gut);opacity:0;
-  transition:opacity .6s var(--ease)}
-.align.gl-on .state{opacity:1}
-.align .state b{font-family:"Geist Mono",ui-monospace,monospace;font-size:var(--t-label);
-  font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--paper-ink);
-  position:relative;padding:0 14px}
-.align .state .a{opacity:calc(1 - (var(--t,0) - .18) / .3)}
-.align .state .b{opacity:calc((var(--t,0) - .5) / .3)}
-.align .after{position:relative;z-index:2;background:var(--paper);
-  padding-block:clamp(70px,12vh,150px) clamp(70px,12vh,140px)}
-.ask{margin:clamp(54px,9vh,110px) 0 0;max-width:30ch;font-size:var(--t-head);
-  line-height:1.08;text-wrap:balance}
-.align .say{margin:22px 0 0;max-width:52ch;color:var(--ink-dim)}
-/* the line whose job is to let a reader leave gets the width of the page
-   and nothing beside it */
-.sort{margin:clamp(70px,12vh,150px) 0 0;padding-top:clamp(34px,5vh,60px);
-  border-top:1px solid var(--rule-ink);
-  font-size:var(--t-head);line-height:1.1;max-width:24ch;text-wrap:balance}
-
 /* ══ ACT III — DIRECTION ═══════════════════════════════════════════════
    The page's one void. No picture, no chrome, nothing to look at. It
    sits between a surface covered in work and a surface covered in work,
    so the strongest thing available to it is to show nothing. Centred is
    banned for a section headline and allowed for a line whose content is
    the design, which is the distinction worth keeping.                   */
-.void{background:var(--ink-2);min-height:88svh;display:grid;align-content:center;
+.void{background:var(--ink);min-height:100svh;display:grid;align-content:center;
   justify-items:center;text-align:center;gap:clamp(22px,4vh,44px);
   padding:clamp(80px,14vh,170px) var(--pad);
   border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
@@ -273,128 +230,106 @@ html.rv [data-rv].in{opacity:1;transform:none}
 .void p{margin:0;max-width:46ch;color:var(--bone-dim)}
 .void p b{font-weight:400;color:var(--bone)}
 
-/* ══ ACT IV — THE SYSTEM ═══════════════════════════════════════════════
-   Four rules, four shapes, and never four cards. The first build made it
-   a bento of four text cards, which is a template used once; the rule
-   before that made it the same text block four times. Each rule is led
-   by its own evidence at the size the evidence wants: the lockup is wide
-   so it runs the measure, the proportion is a proportion so it is drawn
-   full bleed at 10/20/70, the typeface is a specimen so it is set, and
-   the culture stack is the only text-only one, so it is last and least. */
-.spec{background:var(--ink);padding:clamp(76px,12vh,150px) 0 clamp(60px,10vh,115px)}
-.spec .head{display:grid;gap:clamp(14px,2vh,26px);max-width:var(--col);margin-inline:auto;padding-inline:var(--gut)}
-.spec .head .lbl{color:var(--bone-faint)}
-.spec h2{margin:0;font-size:var(--t-head);line-height:1.04;max-width:16ch;text-wrap:balance}
-.spec .lede{margin:0;max-width:56ch;color:var(--bone-dim)}
+/* ══ THE TWO-COLUMN FOLD ═══════════════════════════════════════════════
+   Folds two and three are the same template at the owner's instruction:
+   media one side, text the other, generous margins, one screen. `.flip`
+   mirrors it, so the alignment fold runs media-left and the system fold
+   media-right and a reader meets the two sides alternately rather than
+   reading the same column twice.
 
-/* Four rules stacked caption-over-evidence ran the fold to 4.59 screens.
-   The caption sits beside its evidence now, in a column narrow enough to
-   read and wide enough not to ladder, which halves the height without
-   taking a pixel off any piece of evidence. */
-.rules{margin-top:clamp(44px,7vh,90px);display:grid;gap:clamp(44px,7vh,92px)}
-.rule{max-width:var(--col);margin-inline:auto;padding-inline:var(--gut)}
-.rule{display:grid;gap:clamp(20px,3.5vh,40px);align-items:start}
+   EVERY FOLD IS A FULL SCREEN. That is the owner's call and it costs
+   something worth stating: content that would have set its own height now
+   has to fit 100svh or overflow it, so the template centres its content
+   and caps the media rather than letting either grow. */
+.duo{min-height:100svh;display:grid;align-content:center;
+  padding:clamp(96px,13vh,150px) var(--pad) clamp(56px,9vh,110px)}
+/* the rail is fixed at the right edge and the column ran under it: the
+   gallery's last thumbnail ended at 1343 against a rail starting at 1340.
+   The right side gives back the rail's own width, from the width the rail
+   appears at, and the left is untouched. */
+@media (min-width:1100px){.duo{padding-right:calc(var(--pad) + 86px)}}
+.duo-in{width:100%;max-width:var(--col);margin-inline:auto;
+  display:grid;gap:clamp(34px,6vh,72px);align-items:center}
 @media (min-width:980px){
-  .rule{grid-template-columns:minmax(0,22rem) minmax(0,1fr);gap:clamp(34px,4vw,72px)}
-  .rule > :last-child{margin-top:0}
+  .duo-in{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(48px,6vw,110px)}
+  .duo.flip .duo-media{order:2}
+  .duo.flip .duo-text{order:1}
 }
-.rule .cap{display:grid;gap:10px;max-width:42ch;align-self:start}
-.rule .n{display:flex;align-items:baseline;gap:14px;color:var(--bone-faint)}
-.rule .n b{font-weight:600;color:var(--bone);font-family:"Geist Mono",ui-monospace,monospace;
-  font-size:var(--t-label);letter-spacing:.26em}
-.rule h3{margin:0;font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.018em;
-  font-size:clamp(1.35rem,1.05rem + 1.1vw,2.1rem);line-height:1.1}
-.rule p{margin:0;color:var(--bone-dim);font-size:var(--t-small);line-height:1.68}
-.rule .tag{font-family:"Geist Mono",ui-monospace,monospace;font-size:9.5px;font-weight:600;
-  letter-spacing:.22em;text-transform:uppercase;color:var(--amber)}
+.duo-text{display:grid;gap:clamp(14px,2.2vh,26px);align-content:center}
+.duo-text h2{margin:0;font-size:var(--t-head);line-height:1.04;max-width:16ch;text-wrap:balance}
+.duo-text .say{margin:0;max-width:44ch;font-size:var(--t-body);line-height:1.62;color:var(--bone-dim)}
+.duo-media{display:grid;gap:clamp(22px,3.5vh,44px);min-width:0}
 
-/* rule 01 — the vector, on the client's own stock, at the measure */
-.r-vector .stage{background:var(--paper);border-radius:2px;
-  padding:clamp(26px,3.4vw,52px) clamp(22px,3vw,46px);display:grid;place-items:center}
-.r-vector .stage img{width:100%;max-width:100%;height:auto}
-/* rule 02 — the proportion is drawn at the proportion, full bleed */
-.r-prop .band{display:grid;
-  grid-template-columns:10fr 20fr 70fr;gap:2px;height:clamp(130px,22vh,230px)}
-.r-prop .band div{position:relative;display:flex;align-items:flex-end;justify-content:space-between;
-  padding:14px 16px;font-family:"Geist Mono",ui-monospace,monospace;font-size:9.5px;
-  font-weight:600;letter-spacing:.16em;text-transform:uppercase}
-.r-prop .band .s1{background:#BD9059;color:#2A1D0E}
-.r-prop .band .s2{background:#954D13;color:#F4E7D6}
-.r-prop .band .s3{background:#5A200A;color:#F4E7D6}
-@media (max-width:620px){.r-prop .band div{padding:10px;font-size:8.5px;letter-spacing:.06em}}
-/* rule 03 — a typeface is shown by setting a line in it */
-/* the one size on this page that is not in the scale, because it is a
-   SPECIMEN: its size is the content. A typeface is shown by setting a
-   line in it, and a line set small shows nothing. */
-.r-type .spm{margin:0;font-family:"EB Garamond",Georgia,serif;
-  font-weight:400;font-size:clamp(2rem,1rem + 4.4vw,5.6rem);line-height:1;letter-spacing:.02em;
-  color:var(--bone);text-transform:uppercase}
-.r-type .spm span{color:var(--bone-faint)}
-/* rule 04 — the only text-only rule, so it is last and smallest */
-.r-cult .stack{display:grid;gap:1px;background:var(--rule);
-  border-radius:2px;overflow:hidden}
-@media (min-width:760px) and (max-width:979px){.r-cult .stack{grid-template-columns:repeat(3,1fr)}}
-.r-cult .stack div{background:var(--ink-2);padding:clamp(18px,2.6vw,30px);display:grid;gap:8px;
-  align-content:start}
-.r-cult .stack p{font-size:13px}
+/* ── ACT II — alignment. The plates stack, same left edge, same width,
+   which for an object five times wider than it is tall is the directer
+   comparison: the eye runs down one edge rather than across a gutter. */
+.align{background:var(--paper);color:var(--paper-ink)}
+.align .duo-text .say{color:var(--ink-dim)}
+.plate{display:grid;gap:12px;margin:0}
+.plate img{width:100%;height:auto}
+.plate figcaption{display:flex;align-items:center;gap:14px;color:var(--ink-faint)}
+.plate figcaption::after{content:"";flex:1;height:1px;background:var(--rule-ink)}
+.sort{margin:clamp(10px,2vh,22px) 0 0;padding-top:clamp(18px,3vh,32px);
+  border-top:1px solid var(--rule-ink);font-size:var(--t-value);line-height:1.12;
+  max-width:24ch;text-wrap:balance}
 
-/* the statement, and the one price */
-.stmt{margin-top:clamp(56px,9vh,110px);padding:clamp(48px,7vh,88px) var(--gut);
-  background:var(--ink-3);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
-.stmt p{margin:0 auto;max-width:24ch;font-family:"EB Garamond",Georgia,serif;font-weight:400;
-  letter-spacing:-.018em;font-size:var(--t-sub);line-height:1.14;text-wrap:balance}
-.price{margin-top:clamp(40px,6vh,76px);display:grid;gap:clamp(18px,3vh,34px);
-  justify-items:start;max-width:var(--col);margin-inline:auto;padding-inline:var(--gut)}
-/* the cost is a field, not a shout: it sits below the section headline
-   and takes the same token as the statement it belongs to */
-.price .fig{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.02em;
-  font-size:var(--t-sub);line-height:1}
-.price .lbl{color:var(--amber)}
-.price p{margin:0;max-width:44ch;color:var(--bone-dim);font-size:var(--t-small)}
+/* ── ACT III — the system. Four rules as a numbered list, and the grid is
+   the specification rather than decoration: the vector, the proportion
+   drawn at 10/20/70, and the mark carried on two of its three grounds. */
+.spec{background:var(--ink-2)}
+.rules{list-style:none;margin:clamp(8px,1.6vh,18px) 0 0;padding:0;display:grid;gap:1px;
+  background:var(--rule);border-radius:2px;overflow:hidden}
+.rules li{background:var(--ink-2);display:grid;grid-template-columns:auto 1fr;gap:16px;
+  align-items:baseline;padding:clamp(12px,1.8vh,18px) clamp(14px,2vw,22px)}
+.rules b{font-family:"Geist Mono",ui-monospace,monospace;font-size:11px;font-weight:600;
+  letter-spacing:.22em;color:var(--bone-faint)}
+.rules span{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px}
+.rules i{font-style:normal;font-family:"EB Garamond",Georgia,serif;font-size:var(--t-sub);
+  line-height:1.1;letter-spacing:-.015em}
+.rules em{font-style:normal;font-family:"Geist Mono",ui-monospace,monospace;font-size:9.5px;
+  font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-left:auto}
+.quad{display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,1.1vw,14px)}
+.q{margin:0;position:relative;aspect-ratio:16/10;overflow:hidden;border-radius:2px;
+  background:var(--ink-3)}
+.q img{width:100%;height:100%;object-fit:cover}
+.q.paper{background:var(--paper);display:grid;place-items:center;padding:clamp(14px,2.4vw,30px)}
+.q.paper img{width:100%;height:auto;object-fit:contain}
+/* the proportion is drawn AT the proportion */
+.q.band{display:grid;grid-template-rows:10fr 20fr 70fr;gap:2px;background:var(--ink-2)}
+.q.band span:nth-child(1){background:#BD9059}
+.q.band span:nth-child(2){background:#954D13}
+.q.band span:nth-child(3){background:#5A200A}
 
-/* ══ ACT V — WORK ══════════════════════════════════════════════════════
-   One stage at the full width of the viewport, and the rail of names is
-   the control rather than a caption. The first build put fifteen 1920 x
-   1080 compositions on jittered orbits at a median 198px, overlapping
-   each other. The source frames are the rarest thing this page owns and
-   they were the smallest thing on it.                                  */
-.work{background:var(--ink-2);padding:clamp(80px,13vh,160px) 0 clamp(60px,10vh,120px)}
-.work .head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;
-  gap:16px;max-width:var(--col);margin-inline:auto;padding-inline:var(--gut)}
-.work .head .lbl{color:var(--bone-faint)}
-.work h2{margin:6px 0 0;font-size:var(--t-head);line-height:1.04}
-.stage{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:var(--ink);
-  margin-top:clamp(28px,5vh,58px)}
-/* The rail is fixed at the right edge and the stage bleeds to it, so the
-   frame ran underneath it and the rail's contrast became a lottery decided
-   by whatever pixel of the photograph was behind each row. The stage gives
-   back the rail's own width, on the right only, from the width the rail
-   appears at. It is still 1334 of 1440 — 79 per cent of the screen. */
-@media (min-width:1100px){.stage{width:calc(100% - 106px)}}
-.stage .fr{position:absolute;inset:0;width:100%;height:100%;padding:0;
-  opacity:0;pointer-events:none;transition:opacity .62s var(--ease)}
-.stage .fr img{width:100%;height:100%;object-fit:cover}
-.stage .fr.lit{opacity:1;pointer-events:auto;z-index:2}
-.stage .fr:focus-visible{outline-offset:-3px}
-/* named for what it is, because `.cap` also existed on the system fold's
-   rule captions and a single class at (0,1,0) set every one of them in
-   tracked monospace capitals */
-.stagecap{max-width:var(--col);margin-inline:auto;padding-inline:var(--gut);
-  display:flex;justify-content:space-between;align-items:baseline;gap:18px;margin-top:16px;
+/* ── ACT V — the gallery. One frame at size, and the thumbnails ARE the
+   navigation. A rail of client names asked a reader to pick by a name
+   they have not read yet; a contact sheet of fifteen asks them to look. */
+.work{background:var(--ink)}
+/* the gallery gives its frame the wider column. A two-column fold halves
+   the picture by default, and the picture is the whole point of this one:
+   measured at 1440 it runs 683 x 522 against 580 x 326 at an even split. */
+@media (min-width:980px){.work .duo-in{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}}
+.shot{position:relative;width:100%;height:clamp(260px,56vh,600px);overflow:hidden;
+  border-radius:2px;background:var(--ink-3)}
+.shot .fr{position:absolute;inset:0;width:100%;height:100%;padding:0;margin:0;border:0;
+  background:none;opacity:0;pointer-events:none;transition:opacity .6s var(--ease)}
+.shot .fr img{width:100%;height:100%;object-fit:cover}
+.shot .fr.lit{opacity:1;pointer-events:auto;z-index:2}
+.shot .fr:focus-visible{outline-offset:-3px}
+.shotcap{display:flex;justify-content:space-between;align-items:baseline;gap:18px;margin:14px 0 0;
   font-family:"Geist Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.2em;
   text-transform:uppercase;color:var(--bone-dim)}
-.stagecap b{font-weight:600;color:var(--bone)}
-.names{max-width:var(--col);margin-inline:auto;padding-inline:var(--gut);
-  display:flex;flex-wrap:wrap;gap:2px 0;margin-top:clamp(20px,3.5vh,40px);
-  border-top:1px solid var(--rule);padding-top:clamp(18px,3vh,32px)}
-.names button{font-family:"Geist Mono",ui-monospace,monospace;font-size:9.5px;font-weight:600;
-  letter-spacing:.18em;text-transform:uppercase;color:var(--bone-faint);padding:7px 0;
-  transition:color .35s var(--ease)}
-.names button::after{content:"/";margin:0 13px;color:var(--rule)}
-.names button:last-child::after{content:""}
-.names button:hover,.names button:focus-visible,.names button.lit{color:var(--bone)}
-.work .note{max-width:var(--col);margin-inline:auto;padding-inline:var(--gut);margin-block:clamp(20px,3vh,34px) 0;font-size:12.5px;line-height:1.66;color:var(--bone-faint)}
-.work .note span{display:block;max-width:64ch}
+.shotcap b{font-weight:600;color:var(--bone)}
+.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(5px,.6vw,9px);
+  margin-top:clamp(6px,1.4vh,16px)}
+.thumbs button{position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:2px;padding:0;
+  background:var(--ink-3);opacity:.46;transition:opacity .35s var(--ease),outline-color .35s var(--ease);
+  outline:1px solid transparent;outline-offset:1px}
+.thumbs button img{width:100%;height:100%;object-fit:cover}
+.thumbs button:hover,.thumbs button:focus-visible{opacity:.85}
+.thumbs button.lit{opacity:1;outline-color:var(--bone)}
+@media (max-width:979px){.thumbs{grid-template-columns:repeat(5,1fr)}}
+.work .note{margin:clamp(10px,2vh,20px) 0 0;font-size:12.5px;line-height:1.6;color:var(--bone-faint)}
+.work .note span{display:block;max-width:56ch}
 
 /* ══ ACT VI — CLOSE ════════════════════════════════════════════════════
    The mark appears once, at size, with no ground of its own, and the
@@ -440,7 +375,7 @@ html.rv [data-rv].in{opacity:1;transform:none}
 .sheet .x{font-family:"Geist Mono",ui-monospace,monospace;font-size:13px;line-height:1;padding:8px;
   margin:-8px -8px 0 0;color:var(--bone-faint)}
 .sheet .x:hover{color:var(--bone)}
-.sheet .intro{margin:0;font-size:var(--t-small);line-height:1.6;color:var(--bone-dim)}
+.sheet .intro{margin:0;font-size:var(--t-body);line-height:1.6;color:var(--bone-dim)}
 .fld{display:grid;gap:7px}
 .fld label{font-family:"Geist Mono",ui-monospace,monospace;font-size:9.5px;font-weight:600;
   letter-spacing:.22em;text-transform:uppercase;color:var(--bone-dim)}
@@ -516,8 +451,8 @@ body.lock{overflow:hidden}
 <nav class="rail" aria-label="Sections">
   <a href="#open"      data-rail data-t="r0"><em>01</em> Open <i></i></a>
   <a href="#alignment" data-rail data-t="r1"><em>02</em> Alignment <i></i></a>
-  <a href="#direction" data-rail data-t="r2"><em>03</em> Direction <i></i></a>
-  <a href="#system"    data-rail data-t="r3"><em>04</em> System <i></i></a>
+  <a href="#system"    data-rail data-t="r3"><em>03</em> System <i></i></a>
+  <a href="#direction" data-rail data-t="r2"><em>04</em> Direction <i></i></a>
   <a href="#marks"     data-rail data-t="r4"><em>05</em> Work <i></i></a>
   <a href="#start"     data-rail data-t="r5"><em>06</em> Start <i></i></a>
 </nav>
@@ -540,39 +475,69 @@ body.lock{overflow:hidden}
 </section>
 
 <!-- ACT II ─ ALIGNMENT ───────────────────────────────────────────────── -->
-<section class="align" id="alignment" aria-label="The alignment test">
-  <!-- the two plates are the WebGL stage's source AND its fallback: with
-       no context, or under prefers-reduced-motion, .gl-off shows them -->
-  <div class="pinwrap">
-  <div class="pin">
-    <canvas id="alignGL" aria-hidden="true"></canvas>
-    <div class="plates">
-      <figure class="plate">
-        <img src="/assets/img/turva-old-2-1400.webp" width="1400" height="312"
-             sizes="(min-width:860px) 62vw, 88vw" crossorigin="anonymous"
+<section class="align duo" id="alignment" aria-label="The alignment test">
+  <div class="duo-in">
+    <div class="duo-media">
+      <figure class="plate" data-rv>
+        <img src="/assets/img/turva-old-2-1400.webp" width="1400" height="312" loading="lazy"
+             sizes="(min-width:980px) 44vw, 86vw"
              srcset="/assets/img/turva-old-2-700.webp 700w, /assets/img/turva-old-2-1400.webp 1400w"
              alt="The previous Turvatikas lockup: a hook pictogram beside a heavy stencilled wordmark">
         <figcaption class="lbl" data-t="vsA">Before</figcaption>
       </figure>
-      <figure class="plate">
-        <img src="/assets/img/turva-new-2-1400.webp" width="1400" height="250"
-             sizes="(min-width:860px) 62vw, 88vw" crossorigin="anonymous"
+      <figure class="plate" data-rv>
+        <img src="/assets/img/turva-new-2-1400.webp" width="1400" height="250" loading="lazy"
+             sizes="(min-width:980px) 44vw, 86vw"
              srcset="/assets/img/turva-new-2-700.webp 700w, /assets/img/turva-new-2-1400.webp 1400w"
              alt="The Turvatikas lockup as drawn now: three rungs beside tracked serif capitals">
         <figcaption class="lbl" data-t="vsB">After</figcaption>
       </figure>
     </div>
-    <!-- the two states are named in text, because the stage is aria-hidden
-         and a reader who cannot see it still has to be told what it shows -->
-    <p class="state" aria-hidden="true"><b class="a" data-t="vsA">Before</b><b class="b" data-t="vsB">After</b></p>
-  </div>
-  </div>
-
-  <div class="after">
-    <div class="wrap">
-      <h2 class="ask disp" data-rv data-t="h2a">Can you see the difference?</h2>
+    <div class="duo-text">
+      <p class="eyebrow" data-rv data-t="e2">Alignment</p>
+      <h2 class="disp" data-rv data-t="h2a">Can you see the difference?</h2>
       <p class="say" data-rv data-t="vsSay">A mark is a statement read before it is explained. The test is clarity, not meaning. It is impact in the second before you think.</p>
       <p class="sort disp" data-rv data-t="vsSort">If the difference is not obvious to you, nothing written here will make it so.</p>
+    </div>
+  </div>
+</section>
+
+<section class="spec duo flip" id="system" aria-label="The system">
+  <div class="duo-in">
+    <div class="duo-text">
+      <p class="eyebrow" data-rv data-t="e4">The system</p>
+      <h2 class="disp" data-rv data-t="h4a">Specified, not styled.</h2>
+      <p class="say" data-rv data-t="sysSay">Four rules, on one project, all the way down. A clear vector, three colours in a fixed proportion, one typeface and a culture stack. Turvatikas make safety ladders; the mark is four forms stacked and what you read is three rungs.</p>
+      <ol class="rules" data-rv>
+        <li><b>01</b><span><i data-t="p1t">The vector</i><em data-t="_real">supplied</em></span></li>
+        <li><b>02</b><span><i data-t="p2t">Ten, twenty, seventy</i><em data-t="_php">proportion placeholder</em></span></li>
+        <li><b>03</b><span><i data-t="p3t">One typeface</i><em data-t="_ph">placeholder</em></span></li>
+        <li><b>04</b><span><i data-t="p4t">The culture stack</i><em data-t="_ph">placeholder</em></span></li>
+      </ol>
+    </div>
+    <div class="duo-media">
+      <!-- four cells, one per rule, so the grid is the specification and
+           not decoration: the vector, the proportion drawn at 10/20/70,
+           and the mark carried on two of its three grounds -->
+      <div class="quad" data-rv>
+        <figure class="q paper">
+          <img src="/assets/img/turva-new-2-1400.webp" width="1400" height="250" loading="lazy"
+               sizes="(min-width:980px) 22vw, 43vw"
+               srcset="/assets/img/turva-new-2-700.webp 700w, /assets/img/turva-new-2-1400.webp 1400w"
+               alt="The Turvatikas lockup on its own stock">
+        </figure>
+        <figure class="q band" aria-label="Ten, twenty, seventy">
+          <span class="s1"></span><span class="s2"></span><span class="s3"></span>
+        </figure>
+        <figure class="q">
+          <img src="/assets/land/turvatikas-w-1-1400.webp" width="1400" height="788" loading="lazy"
+               sizes="(min-width:980px) 22vw, 43vw" alt="The Turvatikas mark over deep water">
+        </figure>
+        <figure class="q">
+          <img src="/assets/land/turvatikas-p-1-1400.webp" width="1400" height="788" loading="lazy"
+               sizes="(min-width:980px) 22vw, 43vw" alt="The Turvatikas card on bare paper">
+        </figure>
+      </div>
     </div>
   </div>
 </section>
@@ -585,89 +550,25 @@ body.lock{overflow:hidden}
 </section>
 
 <!-- ACT IV ─ THE SYSTEM. four rules, four shapes, never four cards ───── -->
-<section class="spec" id="system" aria-label="The system">
-  <div class="head">
-    <p class="lbl" data-rv data-t="e4">The system</p>
-    <h2 class="disp" data-rv data-t="h4a">Specified, not styled.</h2>
-    <p class="lede" data-rv data-t="sysSay">Four rules, on one project, all the way down. A clear vector, three colours in a fixed proportion, one typeface and a culture stack. Turvatikas make safety ladders; the mark is four forms stacked and what you read is three rungs.</p>
-  </div>
 
-  <div class="rules">
-    <article class="rule r-vector">
-      <div class="cap" data-rv>
-        <p class="n"><b>01</b> <span class="tag" data-t="_real">supplied</span></p>
-        <h3 data-t="p1t">The vector</h3>
-        <p data-t="p1b">One message, one shape. The ladder is the space between the rungs and not the rails, so nothing in it has to be redrawn to go small.</p>
-      </div>
-      <div class="stage" data-rv>
-        <img src="/assets/img/turva-new-2-1400.webp" width="1400" height="250" loading="lazy"
-             sizes="(min-width:1100px) 1000px, 88vw"
-             srcset="/assets/img/turva-new-2-700.webp 700w, /assets/img/turva-new-2-1400.webp 1400w"
-             alt="The Turvatikas lockup on its own stock">
-      </div>
-    </article>
-
-    <article class="rule r-prop">
-      <div class="cap" data-rv>
-        <p class="n"><b>02</b> <span class="tag" data-t="_php">proportion placeholder</span></p>
-        <h3 data-t="p2t">Ten, twenty, seventy</h3>
-        <p data-t="p2b">Three values and the share of the surface each one holds. The hex is read off the printed card.</p>
-      </div>
-      <!-- the proportion is drawn AT the proportion: 10fr 20fr 70fr -->
-      <div class="band" data-rv aria-hidden="true">
-        <div class="s1"><span data-t="_c1">Mark</span><span>#BD9059</span></div>
-        <div class="s2"><span data-t="_c2">Accent</span><span>#954D13</span></div>
-        <div class="s3"><span data-t="_c3">Ground</span><span>#5A200A</span></div>
-      </div>
-    </article>
-
-    <article class="rule r-type">
-      <div class="cap" data-rv>
-        <p class="n"><b>03</b> <span class="tag" data-t="_ph">placeholder</span></p>
-        <h3 data-t="p3t">One typeface</h3>
-        <p data-t="p3b">One face for the name, the signage, the datasheet and the label. A second face is a decision every supplier has to make for you.</p>
-      </div>
-      <p class="spm" data-rv aria-hidden="true">Turvatikas <span>Safety ladder</span></p>
-    </article>
-
-    <article class="rule r-cult">
-      <div class="cap" data-rv>
-        <p class="n"><b>04</b> <span class="tag" data-t="_ph">placeholder</span></p>
-        <h3 data-t="p4t">The culture stack</h3>
-        <p data-t="p4b">A mark survives because the things around it agree with it. Written down, a stranger can match it without asking.</p>
-      </div>
-      <div class="stack" data-rv>
-        <div><p class="lbl" data-t="_cw">Wardrobe</p><p data-t="_cwp">Placeholder. What the people wear when they arrive on site.</p></div>
-        <div><p class="lbl" data-t="_cm">Music</p><p data-t="_cmp">Placeholder. What plays in the film, the stand and the waiting room.</p></div>
-        <div><p class="lbl" data-t="_ca">Art</p><p data-t="_cap">Placeholder. The references a photographer is given before they start.</p></div>
-      </div>
-    </article>
-  </div>
-
-  <div class="stmt">
-    <p class="disp" data-rv data-t="sysStmt">Drawn once. Followed by strangers for thirty years. Signage shops, embroiderers, printers and whoever runs your marketing three decades from now will all use this without ever speaking to us.</p>
-  </div>
-
-  <div class="price">
-    <p class="lbl" data-rv data-t="_prl">Identity system</p>
-    <p class="fig disp" data-rv data-t="_pr">&euro;8,000</p>
-    <p data-rv data-t="_prt">Colour, type, signage, product marking and the mark itself, written down so suppliers can work from it.</p>
-  </div>
-</section>
 
 <!-- ACT V ─ WORK. one stage at the width of the viewport ──────────────── -->
-<section class="work" id="marks">
-  <div class="head">
-    <div>
-      <p class="lbl" data-rv data-t="e5">History</p>
-      <h2 class="disp" data-rv data-t="more">The high end standard.</h2>
+<section class="work duo" id="marks">
+  <div class="duo-in">
+    <div class="duo-media">
+      <div class="shot" id="cloud"></div>
+      <p class="shotcap"><b id="capName"></b><span id="capRole"></span></p>
     </div>
-    <p class="lbl" data-rv data-t="moreMeta" style="color:var(--bone-faint)">Open any one &nbsp;/&nbsp; 45 frames behind them</p>
+    <div class="duo-text">
+      <p class="eyebrow" data-rv data-t="e5">History</p>
+      <h2 class="disp" data-rv data-t="more">The high end standard.</h2>
+      <!-- the thumbnails ARE the navigation. The rail of names before them
+           asked a reader to pick a client by name, which is the one thing
+           they cannot do on a page they have not read yet. -->
+      <div class="thumbs" id="namerail" role="group" aria-label="All marks"></div>
+      <p class="note"><span data-t="_galNote">Year and sector are placeholders until they are supplied. A sector is shown only where the lockup itself states one.</span></p>
+    </div>
   </div>
-  <div class="stage" id="cloud"></div>
-  <p class="stagecap"><b id="capName"></b><span id="capRole"></span></p>
-  <div class="names" id="namerail"></div>
-  <p class="note"><span data-t="_galNote">Year and sector are placeholders until they are supplied. A sector is shown only where the lockup itself states one.</span></p>
 </section>
 
 <!-- ACT VI ─ CLOSE. the mark signs it, once ───────────────────────────── -->
@@ -857,16 +758,21 @@ const CELLS = CLOUD.map(([slug, name, role], i) => ({ slug, name, role, i }));
 
 cloud.innerHTML = CELLS.map((c, n) => {
   const g = GROUNDS[c.i % 3][0];
-  return `<button class="cell${n === 0 ? " lit" : ""}" data-c data-k="${c.i}" data-open="${firstOf(c.slug)}"
+  return `<button class="fr${n === 0 ? " lit" : ""}" data-c data-k="${c.i}" data-open="${firstOf(c.slug)}"
       aria-label="Open ${c.name}" tabindex="${n === 0 ? 0 : -1}">
       <img src="${src(c.slug,g,1400)}" alt="${c.name}, the mark" width="1400" height="788"
            ${n === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">
     </button>`;
 }).join("");
-namerail.innerHTML = CELLS.map((c, n) =>
-  `<button type="button" data-c data-k="${c.i}"${n === 0 ? ' class="lit"' : ""}>${c.name}</button>`).join("");
+namerail.innerHTML = CELLS.map((c, n) => {
+  const g = GROUNDS[c.i % 3][0];
+  return `<button type="button" data-c data-k="${c.i}"${n === 0 ? ' class="lit"' : ""}
+     aria-label="${c.name}" title="${c.name}">
+     <img src="${src(c.slug,g,480)}" alt="" width="480" height="270" loading="lazy" decoding="async">
+   </button>`;
+}).join("");
 
-const cloudCells = [...cloud.querySelectorAll(".cell")];
+const cloudCells = [...cloud.querySelectorAll(".fr")];
 const railBtns   = [...namerail.querySelectorAll("button")];
 const capName = $("#capName"), capRole = $("#capRole");
 
@@ -952,7 +858,7 @@ const LANG = {
     cta:"Start a project",
     r0:"Open", r1:"Alignment", r2:"Direction", r3:"System", r4:"Work", r5:"Start",
     kicker:"Brands for decision makers",
-    h1a:"<em>You</em> set the brand,", h1b:"not your audience.",
+    h1a:"<em>You</em> set the direction,", h1b:"not the audience.",
     sub:"Most marks fade away within five years, made for the short term and perceived wind direction. Winds change. We do not negotiate direction. We pick the winds to ride.",
     scroll:"Scroll",
     e2:"Alignment", h2a:"Can you see the difference?",
@@ -978,9 +884,6 @@ const LANG = {
     _cw:"Wardrobe", _cwp:"Placeholder. What the people wear when they arrive on site.",
     _cm:"Music", _cmp:"Placeholder. What plays in the film, the stand and the waiting room.",
     _ca:"Art", _cap:"Placeholder. The references a photographer is given before they start.",
-    sysStmt:"Drawn once. Followed by strangers for thirty years. Signage shops, embroiderers, printers and whoever runs your marketing three decades from now will all use this without ever speaking to us.",
-    _pr:"&euro;8,000", _prl:"Identity system",
-    _prt:"Colour, type, signage, product marking and the mark itself, written down so suppliers can work from it.",
     e5:"History", more:"The high end standard.", moreMeta:"Open any one &nbsp;/&nbsp; 45 frames behind them",
     _galNote:"Year and sector are placeholders until they are supplied. A sector is shown only where the lockup itself states one.",
     e6:"Where to start", closeH:"Win with <em>class</em>.",
@@ -1003,7 +906,7 @@ const LANG = {
     cta:"Start et prosjekt",
     r0:"\u00c5pning", r1:"Innretting", r2:"Retning", r3:"System", r4:"Arbeid", r5:"Start",
     kicker:"Merkevarer for beslutningstakere",
-    h1a:"<em>Du</em> setter merkevaren,", h1b:"ikke publikummet ditt.",
+    h1a:"<em>Du</em> setter retningen,", h1b:"ikke publikummet.",
     sub:"De fleste merker falmer bort innen fem \u00e5r, laget for kort sikt og for en antatt vindretning. Vinden snur. Vi forhandler ikke om retning. Vi velger vinden vi rir p\u00e5.",
     scroll:"Rull",
     e2:"Innretting", h2a:"Ser du forskjellen?",
@@ -1029,9 +932,6 @@ const LANG = {
     _cw:"Garderobe", _cwp:"Plassholder. Hva folkene har p\u00e5 seg n\u00e5r de kommer ut p\u00e5 anlegget.",
     _cm:"Musikk", _cmp:"Plassholder. Hva som spilles i filmen, p\u00e5 standen og i venterommet.",
     _ca:"Kunst", _cap:"Plassholder. Referansene en fotograf f\u00e5r f\u00f8r de begynner.",
-    sysStmt:"Tegnet \u00e9n gang. Fulgt av fremmede i tretti \u00e5r. Skiltverksteder, broderier, trykkerier og den som styrer markedsf\u00f8ringen din om tre ti\u00e5r kommer alle til \u00e5 bruke dette uten noen gang \u00e5 snakke med oss.",
-    _pr:"&euro;8 000", _prl:"Identitetssystem",
-    _prt:"Farge, typografi, skilting, produktmerking og selve merket, skrevet ned s\u00e5 leverand\u00f8rene dine kan arbeide etter det.",
     e5:"Historikk", more:"Den h\u00f8ye standarden.", moreMeta:"\u00c5pne hvilken som helst &nbsp;/&nbsp; 45 bilder bak",
     _galNote:"\u00c5r og bransje er plassholdere til de er levert. Bransje vises bare der merket selv oppgir en.",
     e6:"Hvor du begynner", closeH:"Vinn med <em>klasse</em>.",
@@ -1054,7 +954,7 @@ const LANG = {
     cta:"Aloita projekti",
     r0:"Avaus", r1:"Linjaus", r2:"Suunta", r3:"J\u00e4rjestelm\u00e4", r4:"Ty\u00f6t", r5:"Aloita",
     kicker:"Br\u00e4ndej\u00e4 p\u00e4\u00e4tt\u00e4jille",
-    h1a:"<em>Sin\u00e4</em> asetat br\u00e4ndin,", h1b:"ei yleis\u00f6si.",
+    h1a:"<em>Sin\u00e4</em> asetat suunnan,", h1b:"ei yleis\u00f6.",
     sub:"Useimmat merkit haipuvat viidess\u00e4 vuodessa, tehtyin\u00e4 lyhyelle aikav\u00e4lille ja oletetulle tuulensuunnalle. Tuulet k\u00e4\u00e4ntyv\u00e4t. Me emme neuvottele suunnasta. Me valitsemme tuulen, jolla purjehdimme.",
     scroll:"Vierit\u00e4",
     e2:"Linjaus", h2a:"N\u00e4etk\u00f6 eron?",
@@ -1080,9 +980,6 @@ const LANG = {
     _cw:"Vaatetus", _cwp:"Paikanvaraaja. Mit\u00e4 ihmiset pit\u00e4v\u00e4t p\u00e4\u00e4ll\u00e4\u00e4n saapuessaan ty\u00f6maalle.",
     _cm:"Musiikki", _cmp:"Paikanvaraaja. Mit\u00e4 soi elokuvassa, messuosastolla ja odotushuoneessa.",
     _ca:"Taide", _cap:"Paikanvaraaja. Viitteet, jotka valokuvaaja saa ennen aloittamista.",
-    sysStmt:"Piirretty kerran. Vieraiden noudattamana kolmekymment\u00e4 vuotta. Opastepajat, brodeeraajat, painotalot ja kuka tahansa hoitaa markkinointiasi kolmen vuosikymmenen kuluttua k\u00e4ytt\u00e4v\u00e4t kaikki t\u00e4t\u00e4 koskaan puhumatta meille.",
-    _pr:"8 000 &euro;", _prl:"Identiteettij\u00e4rjestelm\u00e4",
-    _prt:"V\u00e4ri, typografia, opasteet, tuotemerkinn\u00e4t ja itse merkki, kirjattuina niin ett\u00e4 toimittajasi voivat ty\u00f6skennell\u00e4 niiden mukaan.",
     e5:"Historia", more:"Korkean luokan standardi.", moreMeta:"Avaa mik\u00e4 tahansa &nbsp;/&nbsp; 45 kuvaa takana",
     _galNote:"Vuosi ja toimiala ovat paikanvaraajia kunnes ne toimitetaan. Toimiala n\u00e4ytet\u00e4\u00e4n vain siell\u00e4, miss\u00e4 merkki itse ilmoittaa sellaisen.",
     e6:"Mist\u00e4 aloittaa", closeH:"Voita <em>tyylill\u00e4</em>.",
@@ -1146,216 +1043,6 @@ langBox.addEventListener("click", e => {
   }
   let saved = null; try { saved = localStorage.getItem("arvo-lang") } catch (e) {}
   setLang(LANG[saved] ? saved : pick, false);
-})();
-
-/* ══ ACT II — the alignment stage ══════════════════════════════════════
-   The fold's claim is that one of these two marks is better drawn. The
-   reader cannot check that from two pictures sitting next to each other,
-   so the fold performs it: the old mark melts and the new one resolves
-   out of the same field, in register, driven by the reader's own scroll.
-
-   This is the displacement CLAUDE.md records being built here once and
-   cut — correctly, because there it performed the craft point for a
-   reader who does not buy the craft point. Here the comparison IS the
-   fold's content, so performing it is the fold rather than a demo.
-
-   WHY RAW WEBGL AND NOT A LIBRARY. The page has no build step and
-   vendors everything. A displacement between two alpha textures with a
-   light term is about sixty lines of GLSL; three.js is 600 KB to do it.
-
-   WHAT MAKES IT READ AS MATERIAL RATHER THAN A CROSSFADE.
-   · The normal is derived from the alpha channel's own gradient, so the
-     edges of the drawing catch light. Nothing is faked and no normal map
-     is shipped: the mark's own silhouette is the relief.
-   · Both files are drawn in exactly rgb(190,145,89), read off the opaque
-     pixels of each. So the ink is one value and the only variable left
-     in the fold is the drawing, which is the claim being made.
-   · The paper is lit, not flat: a wide soft falloff plus grain, so it
-     reads as stock under a light rather than as a swatch.
-
-   THREE FALLBACKS, because a fold that shows nothing is worse than a
-   fold that does not move: no WebGL, prefers-reduced-motion, and a
-   context loss all drop to the two plates already in the DOM.         */
-(function(){
-  const sec = document.getElementById("alignment");
-  const cv  = document.getElementById("alignGL");
-  if (!sec || !cv) return;
-  const reduceM = matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  const give_up = () => { sec.classList.add("gl-off"); };
-  if (reduceM) return give_up();
-
-  let gl = null;
-  try { gl = cv.getContext("webgl", { alpha:false, antialias:false, premultipliedAlpha:false }); }
-  catch (e) { gl = null; }
-  if (!gl) return give_up();
-
-  const VERT = `attribute vec2 p; varying vec2 v; void main(){ v = p*0.5+0.5; gl_Position = vec4(p,0.,1.); }`;
-
-  const FRAG = `
-precision highp float;
-varying vec2 v;
-uniform sampler2D uA, uB;        /* before, after */
-uniform vec2  uRes;              /* stage size in px */
-uniform vec2  uSA, uSB;          /* each mark's size in px, its own aspect kept */
-uniform float uT;                /* 0..1, the melt */
-uniform float uTime;
-uniform vec3  uInk, uPaper;
-
-/* value noise. cheap, and the only thing the melt needs. */
-float h(vec2 p){ return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }
-float n(vec2 p){
-  vec2 i=floor(p), f=fract(p); f=f*f*(3.-2.*f);
-  return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);
-}
-float fbm(vec2 p){ float s=0., a=.5; for(int k=0;k<5;k++){ s+=a*n(p); p*=2.03; a*=.5; } return s; }
-
-/* a mark placed at its own aspect, centred, and its alpha */
-float markA(sampler2D t, vec2 uv, vec2 size){
-  vec2 q = (uv - .5) * uRes / size + .5;
-  if (q.x<0.||q.x>1.||q.y<0.||q.y>1.) return 0.;
-  return texture2D(t, vec2(q.x, 1.-q.y)).a;
-}
-
-void main(){
-  vec2 uv = v;
-  float t = clamp(uT,0.,1.);
-
-  /* the melt warps hardest at the halfway point and is still at both ends,
-     so the two rest states are the files themselves and not a smear */
-  float bump = sin(3.14159*t);
-  vec2  fl   = vec2(fbm(uv*3.1 + uTime*.03), fbm(uv*3.1 - uTime*.025 + 11.3)) - .5;
-  vec2  duv  = uv + fl * (0.085 * bump);
-
-  float a0 = markA(uA, duv + fl*0.018*bump, uSA);
-  float a1 = markA(uB, duv - fl*0.018*bump, uSB);
-
-  /* the crossfade is sharpened through the noise so the drawing dissolves
-     grain by grain instead of ghosting one over the other */
-  float e  = fbm(uv*5.0 + 3.0);
-  float k  = smoothstep(0., 1., clamp((t - .16)/.46, 0., 1.)) * 1.44 - 0.22;
-  float m  = smoothstep(k-0.22, k+0.22, e*0.55 + 0.45);
-  float a  = mix(a0, a1, 1.0 - m);
-  a = clamp(a, 0., 1.);
-
-  /* the relief is the drawing's own silhouette: a sobel on the alpha */
-  vec2 px = 1.0/uRes;
-  float ax1 = mix(markA(uA,duv+vec2(px.x,0.),uSA), markA(uB,duv+vec2(px.x,0.),uSB), 1.-m);
-  float ax0 = mix(markA(uA,duv-vec2(px.x,0.),uSA), markA(uB,duv-vec2(px.x,0.),uSB), 1.-m);
-  float ay1 = mix(markA(uA,duv+vec2(0.,px.y),uSA), markA(uB,duv+vec2(0.,px.y),uSB), 1.-m);
-  float ay0 = mix(markA(uA,duv-vec2(0.,px.y),uSA), markA(uB,duv-vec2(0.,px.y),uSB), 1.-m);
-  vec3 nrm = normalize(vec3((ax0-ax1)*2.2, (ay0-ay1)*2.2, 1.0));
-
-  /* one light, raking, travelling slowly. It is what turns a flat fill
-     into something with an edge. */
-  vec3 L = normalize(vec3(cos(uTime*.18)*.55, sin(uTime*.14)*.42 + .35, .80));
-  float diff = max(dot(nrm,L), 0.);
-  float spec = pow(max(dot(reflect(-L, nrm), vec3(0.,0.,1.)), 0.), 22.) * 0.55;
-
-  vec3 ink = uInk * (0.80 + 0.30*diff) + spec;
-
-  /* the paper is lit rather than flat, and carries its own grain */
-  vec2  c  = (uv - vec2(.5,.46)) * vec2(uRes.x/uRes.y, 1.);
-  float fall = 1.0 - smoothstep(.15, 1.05, length(c));
-  vec3  paper = uPaper * (0.955 + 0.055*fall);
-  paper -= (h(uv*uRes*0.9 + uTime) - .5) * 0.018;
-
-  /* a soft contact shadow so the mark sits ON the stock */
-  float sh = 0.;
-  for (int i=0;i<6;i++){
-    float fi = float(i);
-    vec2 o = vec2(sin(fi*1.7), cos(fi*1.7)) * (0.004 + 0.002*fi);
-    sh += mix(markA(uA,duv+o,uSA), markA(uB,duv+o,uSB), 1.-m);
-  }
-  paper *= 1.0 - clamp(sh/6.0,0.,1.) * 0.10;
-
-  gl_FragColor = vec4(mix(paper, ink, a), 1.0);
-}`;
-
-  function sh(type, src){
-    const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
-    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { console.warn(gl.getShaderInfoLog(s)); return null; }
-    return s;
-  }
-  const vs = sh(gl.VERTEX_SHADER, VERT), fs = sh(gl.FRAGMENT_SHADER, FRAG);
-  if (!vs || !fs) return give_up();
-  const pr = gl.createProgram();
-  gl.attachShader(pr, vs); gl.attachShader(pr, fs); gl.linkProgram(pr);
-  if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) { console.warn(gl.getProgramInfoLog(pr)); return give_up(); }
-  gl.useProgram(pr);
-
-  const buf = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
-  const loc = gl.getAttribLocation(pr, "p");
-  gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-
-  const U = n => gl.getUniformLocation(pr, n);
-  const uRes=U("uRes"), uSA=U("uSA"), uSB=U("uSB"), uT=U("uT"), uTime=U("uTime");
-  gl.uniform3f(U("uInk"), 190/255, 145/255, 89/255);      /* read off both files */
-  gl.uniform3f(U("uPaper"), 0xEF/255, 0xEA/255, 0xE1/255);
-  gl.uniform1i(U("uA"), 0); gl.uniform1i(U("uB"), 1);
-
-  /* the two plates already in the DOM are the source AND the fallback */
-  const imgs = [...sec.querySelectorAll(".plate img")];
-  if (imgs.length < 2) return give_up();
-
-  const texes = [];
-  function mkTex(img, unit){
-    const t = gl.createTexture();
-    gl.activeTexture(gl.TEXTURE0 + unit); gl.bindTexture(gl.TEXTURE_2D, t);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
-    return t;
-  }
-
-  let ready = false, W = 0, H = 0, dpr = 1;
-  function size(){
-    const r = cv.getBoundingClientRect();
-    dpr = Math.min(devicePixelRatio || 1, 2);
-    W = Math.max(1, Math.round(r.width * dpr)); H = Math.max(1, Math.round(r.height * dpr));
-    if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
-    gl.viewport(0, 0, W, H);
-    gl.uniform2f(uRes, W, H);
-    /* Each mark keeps its own aspect and takes the same share of the
-       stage width, which is what puts the two in register. A lockup is a
-       wide thin object: give it the width and the height follows. */
-    const share = W * (W / dpr < 760 ? 0.88 : 0.70);
-    for (const [i, im] of imgs.entries()) {
-      const w = share, hh = share * (im.naturalHeight / im.naturalWidth);
-      gl.uniform2f(i ? uSB : uSA, w, hh);
-    }
-  }
-
-  Promise.all(imgs.map(im => im.decode ? im.decode().catch(()=>{}) : Promise.resolve()))
-    .then(() => {
-      if (!imgs.every(i => i.naturalWidth)) return give_up();
-      texes.push(mkTex(imgs[0], 0), mkTex(imgs[1], 1));
-      size(); ready = true; sec.classList.add("gl-on");
-    }).catch(give_up);
-
-  cv.addEventListener("webglcontextlost", e => { e.preventDefault(); ready = false; give_up(); });
-  addEventListener("resize", () => { if (ready) size(); }, { passive:true });
-
-  const t0 = performance.now();
-  /* the stage is driven from the page's own loop rather than a second
-     rAF, and it only draws while it is on screen */
-  window.__alignDraw = function(){
-    if (!ready) return;
-    const r = cv.getBoundingClientRect();
-    if (r.bottom < 0 || r.top > innerHeight) return;
-    const wrap = sec.querySelector(".pinwrap") || sec;
-    const run = wrap.getBoundingClientRect();
-    const span = Math.max(1, run.height - innerHeight);
-    const t = Math.min(1, Math.max(0, -run.top / span));
-    gl.uniform1f(uT, t);
-    gl.uniform1f(uTime, (performance.now() - t0) / 1000);
-    gl.drawArrays(gl.TRIANGLES, 0, 3);
-    sec.style.setProperty("--t", t.toFixed(3));
-  };
 })();
 
 /* ══ the pointer ═══════════════════════════════════════
@@ -1474,8 +1161,6 @@ function frame(now){
     const r = el.getBoundingClientRect();
     return r.top <= py && r.bottom >= py;
   });
-  if (window.__alignDraw) window.__alignDraw();
-
   setBar(overLight(34));
   setRail(overLight(vh * 0.5));
   /* the controls reach for the pointer. The second cursor that used to be
