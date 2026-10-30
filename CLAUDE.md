@@ -493,95 +493,139 @@ screen at most scroll positions and cropped a 16:9 frame to a sliver, so it
 had to be switched off below 820px in JS as well as in CSS, which is two
 behaviours for one section. A case study is read, not panned.
 
-### `lab/max-brand/` pulls one project apart, and it is Turvatikas
+### `lab/max-brand/` — six folds, rebuilt on the owner's own copy
 
-The three pinned panels carried the word `Placeholder.` in every paragraph.
-The owner's instruction is to pull one project apart as the example, and the
-project is the one that has a before: **Turvatikas is the only one of the
-seventeen that does**, which is why the comparison and the case study are the
-same section rather than two. The other sixteen moved into the gallery, where
-a frame with no argument under it belongs, and its heading counts them.
+The page was hero, dissolve, three placeholder panels, gallery, ladder,
+close. It is now **hero · alignment · direction · system · work · close**,
+and the copy is the owner's, written by him and tightened here rather than
+proposed and approved. Two folds were deleted outright.
 
-**The section is the real material and nothing in it is a stand-in.** The
-lockup cut out of its own whitespace, its three parts in words, the same
-lockup on all three grounds, the card cut out of the surface it was shot on,
-and the mark it replaced. CLAUDE.md's reasoning for three cases was that
-three shows a system where one shows a lucky mark, and that still holds for a
-page of summaries. This is not a summary.
+**The WebGL dissolve is gone and the reason is the pitch, not the craft.**
+It was 340vh of scroll over one sticky stage, a single mark melting through
+deep water, warm light and bare paper, and it worked. The owner's note is
+that it added nothing: it performed the craft point, which is that a mark
+survives three grounds, for a reader who does not buy the craft point.
+**A thing can be the best-built object on a page and still be the first
+thing to cut.** The three grounds survive as a triptych inside the system
+fold, where they are evidence rather than the argument.
 
-**Two crops were generated rather than cropped by eye.** `turva-lock-1-979`
-is `turva-after-1`'s ink bounding box plus five percent, which is 979 x 192
-and 5.1:1, so a lockup plate can be wide and shallow and still read large.
-`turva-card-2-848` is the card's own bounds inside `turvatikas-p-1-1400`,
-found by scanning for the gradient edge, 848 x 476 and 1.782:1, which is a
-business card's own ratio and is the check that the crop is right. **The
-triptych's paper cell and the application are now two views rather than one
-picture twice.**
+**The ladder is gone and one price stays.** The brand page carries €8,000
+and nothing else; €600 and €2,400 belong to the tender offer and live on
+`index.html` and `lab/max-home/`. The figure sits beside the statement that
+earns it, in the system fold, localised per reader the way the offer page
+already does it: `€8,000` · `€8 000` · `8 000 €`.
 
-**The before file is 600 x 200 and its wordmark does not resolve.** At any
-size the old slab lockup reads as black boxes, which looks like a redaction
-rather than a logo, so the page says in its own caption that it is the
-client's own file reproduced at the size it holds. **An unlabelled
-low-resolution reference reads as something being hidden.** A higher
-resolution original would roughly double what the comparison is worth.
+**`we` on this page means the client and the partners around the work**,
+which is the owner's own definition, so the page says `we` throughout and
+the statement reads *without ever speaking to us*. It said `me` for a draft
+and the mix of the two was the kind of thing a careful reader notices.
 
-**The comparison is a sorting instrument, not an apology.** The owner's
-correction is the whole of it: the people who preferred the old mark were
-wrong, and the new one is better at every level. So the page states which one
-lasts, gives the reasoning in one paragraph, and closes on a line that lets
-the reader agree or leave: *if the difference is not obvious to you, nothing
-written here will make it so.* An earlier draft built a whole centrepiece on
-the opposite reading and it was inverted at the root.
+**No year appears anywhere.** A specific future year ages exactly the way a
+tender deadline does, which this repo has already paid for once, so the
+statement reads `three decades from now` rather than naming 2041.
 
-**One accent fact crosses onto the page and it is checkable.** The price
-gradient on `index.html` is sampled off this client's card, which this file
-has recorded since the gradient was made, so the application caption can say
-it. That is the kind of detail a generated summary does not have.
+**The alignment fold is the page's one checkable claim, and it finally has
+the file for it.** The owner supplied both lockups at full resolution as PNG
+with alpha, and **both are drawn in exactly the same `#BD9059`**, read off
+the opaque pixels of each file rather than assumed. So the two plates are
+the same stock, the same ink and the same mark height, and the only variable
+left in the fold is the drawing. The 600 x 200 reference that read as black
+boxes is deleted with the problem it caused.
 
-**The copy is the owner's own lines.** The hero was `One mark. Every light it
-meets.` and the close was `Tell me what it has to survive.` Both were
-rejected for the same reason: the light at the back of the frame is a craft
-point and the customer does not buy it. The hero is `Introduced with class. A
-name made undeniable.` and the close is `Win with class.`, which are his
-phrases, and the standfirst carries the redirect he kept: *most marks are
-redrawn within five years, because they were drawn to win the short term
-rather than the long.* The kicker is one word, `Brand`.
+**The statement that sorts the reader gets its own ground and its own
+width.** `If the difference is not obvious to you, nothing written here will
+make it so.` sits alone above a rule at display size. A line whose job is to
+let a reader leave cannot share a row with the reasoning it follows.
 
-**The CTA opens a form now, and it asks for two things.** The owner's
-instruction is email and phone number, very minimal, so that is the whole
-form: a native `<dialog>` with `showModal`, focus moved by hand to the email
-field, the body locked, `visualViewport` driving `top` and `max-height` on
-both its events, `Accept: application/json` with the `Content-Type`
-deliberately unset, the `INTAKE` null branch kept, and the prewritten mail in
-the footer filled in the reader's own language. Same Basin endpoint as the
-offer page, which is not a secret and is not treated as one. The phone field
-is optional and says so. Verified in all three languages at 390 and 1440: the
-dialog opens, focus lands on the field rather than the close button, the
-validation fires, Escape closes and unlocks.
+**Fold three gives up the pictures entirely**, which is the site's own
+statement slide: full-bleed ink, display type, no chrome. It sits between
+two plates on paper and a project taken apart, so the strongest thing
+available to it is to show nothing. **The wind metaphor is spent in the hero
+and this fold does not re-run it** — it states the enemy instead, which is
+the only new thing it has.
 
-**`curLang` is declared above `setLang` and the `#dlgAlt` lookup is inside
-it.** A `let` below the code that reaches it kills the whole module, and a
-temporal dead zone fails silently from the outside: the page renders
-perfectly and every control is inert. This file has paid for that twice
-already and the third one was avoided by writing the declaration first.
+### The system fold is four rules, and it says which parts are stand-ins
 
-**The bar's action covered the language control on a phone, and in Norwegian
-it covered it outright.** `Start et prosjekt` is longer than `Start a
-project`, the languages carry `margin-right:auto`, and the action is last in
-the flex row, so at 390px the FI chip could not be reached at all. Found by a
-Playwright click that timed out on an intercepted pointer event rather than
-by looking at a screenshot, which showed nothing wrong. The label does not
-shorten, because one label for one intent is a rule here; the chrome does, in
-two tiers at 620 and 400. Checked at 320, 360, 390, 430, 560 and 620 with the
-longest label loaded.
+The rules are the owner's: **a clear message or vector, three colours in a
+10 / 20 / 70 proportion, a typeface, and a culture stack of wardrobe, music
+and art.** The fold is those four in order on one project, which is what
+makes it a specification rather than a mood board and what the €8,000 is
+for.
 
-**The rail costs this section 106px of gutter on each side.** It is fixed at
-the right edge and about 122px wide, and this is the only section whose prose
-runs to the full measure, so it is the only one that collides with it. The
-gutter grows on **both** sides rather than one, or the triptych stops being
-centred in its own section. Measured clear at 980, 1200, 1440 and 1920.
+**The 10 / 20 / 70 is drawn at 10 / 20 / 70.** The swatch row's track widths
+are `10fr 20fr 70fr`, so the rule is stated and demonstrated by the same
+object. A row of three equal swatches would have contradicted its own
+caption.
 
-**The two ground loops are the owner's own footage**, not a camera move over a
+**Every part carries a word saying whether it is real.** `supplied` on the
+vector, `proportion placeholder` on the colour, `placeholder` on the type
+and the culture stack. The three hex values are **sampled off the printed
+card rather than chosen**; the split between them is not. The typeface is
+not named, because naming a face this session has not identified, on a page
+that names a real client, is the one error that client is certain to see.
+**An unlabelled stand-in is how invented proof gets shipped by accident**,
+and this page labels four of them.
+
+### The gallery is a field, not a grid and not a scroll
+
+Sixteen equal tiles is a contact sheet. Sixteen full-width bands is eleven
+screens. **It is one bounded stage with fifteen frames adrift on their own
+orbits, and a rail of names underneath that is the navigation.** Hovering or
+focusing a name lifts its frame and brings it to full; clicking either opens
+the viewer.
+
+**The positions are composed, not random.** A five by three lattice with
+per-tile jitter and width, all from `sin`-based hashes of the index, so the
+field is identical on every load. A gallery a reader cannot come back to is
+a gallery they cannot recommend.
+
+**Touch has no hover, which is the trap in a gallery you stop by hovering.**
+The drift runs only where `pointer: fine` is true and never under
+`prefers-reduced-motion`; on a phone or an iPad the field is laid out and
+still and the names are the whole control. Found by reasoning rather than by
+testing, because the owner's own device is the one with no hover.
+
+**Playwright cannot hover a moving element**, which is worth knowing: the
+hover test timed out on `element is not stable` rather than failing. Drive
+`lit` with a dispatched `pointerenter` instead.
+
+**The viewer carries title, year and sector, and two of the three are
+stand-ins.** The year is `—` for all seventeen. The sector is shown only
+where the lockup itself states one, so `Advogados`, `Hospitais` and
+`Landscapes` appear and `Mark and wordmark`, `Monogram and wordmark`,
+`Crest and seal` and `Our own` read `—`. **A sector inferred from a company
+name is invented proof**, which this file already records.
+
+### The close is a signature
+
+**Arvorealta's own mark appears once, at size, with no ground of its own**,
+centred over the moving paper with the fold's content beneath it. For the
+same reason it is out of the gallery: a signature shown twice is not a
+signature. That leaves fifteen in the field, since Turvatikas has its own
+two folds above.
+
+**Measured, the mark reads 1.35:1 against the paper at its median.** A
+logotype is exempt from the contrast floor and the render carries its own
+internal range, which is what makes it legible, but it is a soft presence
+rather than a crisp one. Ink type on the same paper measures **11.06:1**, so
+the words are not the question. If the mark should punch, the close needs a
+darker ground or a darker file; that is a decision rather than a fix.
+
+**The close is bottom aligned and the hero is vertically centred, on both
+pages.** The owner's instruction. A close that sits in the middle of its own
+band reads as another section; a close on the floor reads as the end.
+
+**One build bug worth recording because the symptom was total.** Splicing a
+new CSS block in front of an existing section comment left **two `/*`
+openers and one `*/`**, so everything after it was commented out and the
+page rendered with no stylesheet at all while every element and every string
+was correct. The second splice also ate a rule's closing brace. Neither
+showed as an error anywhere. **After editing a `<style>` block by script,
+count the comment openers against the closers and the braces against each
+other before looking at the page** — it is four lines of Python and it is
+the difference between a diagnosis and an afternoon.
+
+**The two ground loops are the owner's own footage****The two ground loops are the owner's own footage**, not a camera move over a
 still: `ground-water-2-720.mp4` and `ground-paper-2-720.mp4`. Neither looped, so
 the tail is crossfaded into the head and the file is shortened by that much.
 Measured at the wrap against an unrelated pair: water 4.05 against 21.52 of 255,
@@ -1021,9 +1065,10 @@ document agreed before the work starts, not listed on the page.
 index.html              offer page
 brand/index.html        brand portfolio
 lab/brand/index.html    the first sandbox — a full portfolio page, noindex
-lab/max-brand/index.html      the second sandbox — every restriction off. One file,
-                        hand-written CSS, vanilla JS, WebGL, no build step
-                        and no Tailwind at all. Three languages. noindex
+lab/max-brand/index.html
+                        the brand portfolio at the sandbox standard. One
+                        file, hand-written CSS, vanilla JS, no build step and
+                        no Tailwind. Six folds, three languages. noindex
 lab/max-home/index.html the offer page at that standard, light first, with
                         the intake form and STR copied from index.html. noindex
 branding/index.html     a noindex stub redirecting to /brand/

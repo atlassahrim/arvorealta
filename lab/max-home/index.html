@@ -515,8 +515,11 @@ ul{padding:0;list-style:none}
    three, which is the whole reason this file says an inverted moment works
    at all. The price of it is that the page no longer ends dark; the close's
    own weight comes from the measure and the air instead. */
-.close{position:relative;min-height:88svh;display:grid;align-items:center;
-  background:var(--paper-3);padding:clamp(70px,12vh,150px) 0}
+/* bottom aligned, at the owner's instruction, and the same on both pages:
+   a close that sits in the middle of its own band reads as another section,
+   and a close that sits on the floor reads as the end of the page. */
+.close{position:relative;min-height:88svh;display:grid;align-items:end;
+  background:var(--paper-3);padding:clamp(70px,12vh,150px) 0 clamp(40px,7vh,80px)}
 .close h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.034em;
   font-size:var(--t-display);line-height:.96;max-width:14ch;margin:18px 0 24px}
 /* :not(.eyebrow) because `.close p` is (0,1,1) and `.eyebrow` is (0,1,0),
