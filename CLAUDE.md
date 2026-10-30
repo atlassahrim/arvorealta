@@ -976,6 +976,67 @@ the four-second deadline; chrome 6.47 to 14.90:1 on both light grounds; no
 horizontal scroll and no page errors at 390, 820 and 1440; three type
 levels at every viewport.
 
+### Fold two is a pinned WebGL stage, and the skills were not the engine
+
+The owner's note on the rebuild was that folds one and six worked and the
+rest felt amateurish, which was right and had one cause: one and six are
+his photographs with type set on them, and two through five were mine —
+flat grounds with a caption beside a box, the same move four times. His
+instruction was to give each fold an experience, with animation, depth and
+glow, and to try it on fold two first.
+
+**What any of the skills were actually worth here: nothing, as an engine.**
+`ui-ux-pro-max` ships seventeen GSAP presets for a library this page does
+not carry and `taste-skill` ships a vocabulary of about fifty pattern
+names. They are catalogues. The thing that does this is hand-written
+WebGL, which this repo had already proven once and then deleted.
+
+**The dissolve is back, in the one place where it is the argument.** It was
+cut from the first `lab/max-brand` because it performed the craft point for
+a reader who does not buy the craft point — correct, there. The alignment
+fold's whole content IS the comparison, so performing it is the fold rather
+than a demonstration beside it. 300svh of scroll over one sticky frame: the
+old mark melts through a value-noise displacement and the new one resolves
+out of the same field, in register, driven by the reader's own scroll.
+
+**The relief is the drawing's own silhouette.** Both lockups carry real
+alpha, measured at 68 and 80 per cent transparent, and **both are drawn in
+exactly `rgb(190,145,89)`**, read off the opaque pixels of each file. So
+the normal is a sobel on the alpha channel — no normal map is shipped and
+nothing is invented — and one travelling light gives the ink an edge. The
+ink is one value across both, which is the claim the fold is making.
+
+**The paper is lit rather than flat**: a wide falloff, its own grain, and a
+six-tap contact shadow so the mark sits on the stock instead of over it.
+
+**Three fallbacks, all verified**: `prefers-reduced-motion`, no WebGL
+context, and a context loss each drop to the two plates already in the DOM,
+which are also the stage's own texture source. Measured in both states at
+1440 and 390: the fallback fits inside the pin at both.
+
+**The cost is stated rather than hidden.** The fold goes from 1.58 screens
+to 3.86 and the page to about 10.9 on a phone. It is the only place on the
+page that spends like that, and everything else was tightened to pay for
+it. **A pinned 300svh stage is three screens of travel that read as one
+held moment**, which is a different thing from three screens of stacked
+content — but it is still three screens, and a second one would make the
+page a slideshow.
+
+**One bug worth recording because a sticky element looks like it is
+working.** The travel was on the section and the closing copy was a sibling
+inside it, carrying `z-index:2`. A sticky element holds its place; it does
+not hold the stacking order. So at the halfway point the fold painted its
+own closing paragraph straight over the melt, and both the pin and the copy
+were individually correct. The travel belongs to its own wrapper, with the
+copy after it in flow.
+
+**And one shader note that is general.** A crossfade driven through noise
+needs its threshold to overshoot both ends. The band was `k ± 0.22` against
+an input topping out at 1.0, so at `k = 1` some pixels still carried the old
+drawing and a ghost of the stencil survived into the rest state. `k` runs
+to 1.22 now. **Check the rest states, not the middle** — the middle of a
+dissolve hides everything.
+
 ### `lab/max-home/` — the offer page at that standard, and the language bar
 
 The owner's call on `lab/max-brand/` was to use it, with the language control added

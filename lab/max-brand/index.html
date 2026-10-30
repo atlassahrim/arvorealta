@@ -209,19 +209,46 @@ html.rv [data-rv].in{opacity:1;transform:none}
    build gave the plates 4.1 per cent of the screen each and put the
    sorting line on its own ink band, which made two ink folds in a row.
    One ground, and the plates are the composition.                      */
-.align{background:var(--paper);color:var(--paper-ink);
-  padding-block:clamp(90px,15vh,180px) clamp(70px,12vh,140px)}
-/* Side by side gave each plate 586px of a 1248 measure and 4 per cent of
-   the screen, for the one claim on this page a reader can check. They are
-   stacked instead, each at the full measure, same left edge and same
-   width — which for an object five times wider than it is tall is the
-   DIRECTER comparison, not a compromise: the eye runs down one edge
-   rather than across a gutter. Measured after: 1248px, 21 per cent. */
-.plates{display:grid;gap:clamp(34px,6vh,76px)}
+/* ══ ACT II — a stage, pinned ══════════════════════════════════════════
+   300vh of scroll over one sticky frame. That is three screens of travel
+   and it reads as a single held moment rather than three screens of
+   stacked content, which is the trade: the fold goes from 1.58 screens
+   to about 4, and it is the only place on the page that spends like
+   that. Everything else was tightened to pay for it.                   */
+.align{background:var(--paper);color:var(--paper-ink);position:relative}
+/* The travel belongs to .pinwrap. It was on the section, so the copy
+   below sat INSIDE the pin's sticky range and, carrying z-index:2,
+   painted straight over the stage: at the halfway point the fold showed
+   its own closing paragraph instead of the melt. A sticky element holds
+   its place; it does not hold the stacking order. */
+.align .pinwrap{height:300svh;position:relative}
+.align .pin{position:sticky;top:0;height:100svh;display:grid;place-items:center;overflow:hidden}
+#alignGL{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;
+  transition:opacity .8s var(--ease)}
+.align.gl-on #alignGL{opacity:1}
+/* the fallback: with no context, or under reduced motion, the plates show */
+.align.gl-on .plates{opacity:0;pointer-events:none}
+.align .plates{position:relative;z-index:2;display:grid;gap:clamp(30px,5vh,64px);
+  width:100%;max-width:var(--col);margin-inline:auto;padding-inline:var(--gut);
+  transition:opacity .6s var(--ease)}
 .plate{display:grid;gap:14px;margin:0}
 .plate img{width:100%;height:auto}
 .plate figcaption{display:flex;align-items:center;gap:14px;color:var(--ink-faint)}
 .plate figcaption::after{content:"";flex:1;height:1px;background:var(--rule-ink)}
+/* the two names, lit by the scroll, so the stage is captioned without a
+   legend to hop to. Only mounted when the stage is actually running. */
+.align .state{position:absolute;z-index:3;left:0;right:0;bottom:clamp(26px,6vh,64px);
+  margin:0;display:flex;justify-content:center;gap:0;
+  max-width:var(--col);margin-inline:auto;padding-inline:var(--gut);opacity:0;
+  transition:opacity .6s var(--ease)}
+.align.gl-on .state{opacity:1}
+.align .state b{font-family:"Geist Mono",ui-monospace,monospace;font-size:var(--t-label);
+  font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--paper-ink);
+  position:relative;padding:0 14px}
+.align .state .a{opacity:calc(1 - (var(--t,0) - .18) / .3)}
+.align .state .b{opacity:calc((var(--t,0) - .5) / .3)}
+.align .after{position:relative;z-index:2;background:var(--paper);
+  padding-block:clamp(70px,12vh,150px) clamp(70px,12vh,140px)}
 .ask{margin:clamp(54px,9vh,110px) 0 0;max-width:30ch;font-size:var(--t-head);
   line-height:1.08;text-wrap:balance}
 .align .say{margin:22px 0 0;max-width:52ch;color:var(--ink-dim)}
@@ -514,26 +541,39 @@ body.lock{overflow:hidden}
 
 <!-- ACT II ─ ALIGNMENT ───────────────────────────────────────────────── -->
 <section class="align" id="alignment" aria-label="The alignment test">
-  <div class="wrap">
+  <!-- the two plates are the WebGL stage's source AND its fallback: with
+       no context, or under prefers-reduced-motion, .gl-off shows them -->
+  <div class="pinwrap">
+  <div class="pin">
+    <canvas id="alignGL" aria-hidden="true"></canvas>
     <div class="plates">
-      <figure class="plate" data-rv>
-        <img src="/assets/img/turva-old-2-1400.webp" width="1400" height="312" loading="lazy"
-             sizes="(min-width:860px) 42vw, 86vw"
+      <figure class="plate">
+        <img src="/assets/img/turva-old-2-1400.webp" width="1400" height="312"
+             sizes="(min-width:860px) 62vw, 88vw" crossorigin="anonymous"
              srcset="/assets/img/turva-old-2-700.webp 700w, /assets/img/turva-old-2-1400.webp 1400w"
              alt="The previous Turvatikas lockup: a hook pictogram beside a heavy stencilled wordmark">
         <figcaption class="lbl" data-t="vsA">Before</figcaption>
       </figure>
-      <figure class="plate" data-rv>
-        <img src="/assets/img/turva-new-2-1400.webp" width="1400" height="250" loading="lazy"
-             sizes="(min-width:860px) 42vw, 86vw"
+      <figure class="plate">
+        <img src="/assets/img/turva-new-2-1400.webp" width="1400" height="250"
+             sizes="(min-width:860px) 62vw, 88vw" crossorigin="anonymous"
              srcset="/assets/img/turva-new-2-700.webp 700w, /assets/img/turva-new-2-1400.webp 1400w"
              alt="The Turvatikas lockup as drawn now: three rungs beside tracked serif capitals">
         <figcaption class="lbl" data-t="vsB">After</figcaption>
       </figure>
     </div>
-    <h2 class="ask disp" data-rv data-t="h2a">Can you see the difference?</h2>
-    <p class="say" data-rv data-t="vsSay">A mark is a statement read before it is explained. The test is clarity, not meaning. It is impact in the second before you think.</p>
-    <p class="sort disp" data-rv data-t="vsSort">If the difference is not obvious to you, nothing written here will make it so.</p>
+    <!-- the two states are named in text, because the stage is aria-hidden
+         and a reader who cannot see it still has to be told what it shows -->
+    <p class="state" aria-hidden="true"><b class="a" data-t="vsA">Before</b><b class="b" data-t="vsB">After</b></p>
+  </div>
+  </div>
+
+  <div class="after">
+    <div class="wrap">
+      <h2 class="ask disp" data-rv data-t="h2a">Can you see the difference?</h2>
+      <p class="say" data-rv data-t="vsSay">A mark is a statement read before it is explained. The test is clarity, not meaning. It is impact in the second before you think.</p>
+      <p class="sort disp" data-rv data-t="vsSort">If the difference is not obvious to you, nothing written here will make it so.</p>
+    </div>
   </div>
 </section>
 
@@ -1108,6 +1148,216 @@ langBox.addEventListener("click", e => {
   setLang(LANG[saved] ? saved : pick, false);
 })();
 
+/* ══ ACT II — the alignment stage ══════════════════════════════════════
+   The fold's claim is that one of these two marks is better drawn. The
+   reader cannot check that from two pictures sitting next to each other,
+   so the fold performs it: the old mark melts and the new one resolves
+   out of the same field, in register, driven by the reader's own scroll.
+
+   This is the displacement CLAUDE.md records being built here once and
+   cut — correctly, because there it performed the craft point for a
+   reader who does not buy the craft point. Here the comparison IS the
+   fold's content, so performing it is the fold rather than a demo.
+
+   WHY RAW WEBGL AND NOT A LIBRARY. The page has no build step and
+   vendors everything. A displacement between two alpha textures with a
+   light term is about sixty lines of GLSL; three.js is 600 KB to do it.
+
+   WHAT MAKES IT READ AS MATERIAL RATHER THAN A CROSSFADE.
+   · The normal is derived from the alpha channel's own gradient, so the
+     edges of the drawing catch light. Nothing is faked and no normal map
+     is shipped: the mark's own silhouette is the relief.
+   · Both files are drawn in exactly rgb(190,145,89), read off the opaque
+     pixels of each. So the ink is one value and the only variable left
+     in the fold is the drawing, which is the claim being made.
+   · The paper is lit, not flat: a wide soft falloff plus grain, so it
+     reads as stock under a light rather than as a swatch.
+
+   THREE FALLBACKS, because a fold that shows nothing is worse than a
+   fold that does not move: no WebGL, prefers-reduced-motion, and a
+   context loss all drop to the two plates already in the DOM.         */
+(function(){
+  const sec = document.getElementById("alignment");
+  const cv  = document.getElementById("alignGL");
+  if (!sec || !cv) return;
+  const reduceM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const give_up = () => { sec.classList.add("gl-off"); };
+  if (reduceM) return give_up();
+
+  let gl = null;
+  try { gl = cv.getContext("webgl", { alpha:false, antialias:false, premultipliedAlpha:false }); }
+  catch (e) { gl = null; }
+  if (!gl) return give_up();
+
+  const VERT = `attribute vec2 p; varying vec2 v; void main(){ v = p*0.5+0.5; gl_Position = vec4(p,0.,1.); }`;
+
+  const FRAG = `
+precision highp float;
+varying vec2 v;
+uniform sampler2D uA, uB;        /* before, after */
+uniform vec2  uRes;              /* stage size in px */
+uniform vec2  uSA, uSB;          /* each mark's size in px, its own aspect kept */
+uniform float uT;                /* 0..1, the melt */
+uniform float uTime;
+uniform vec3  uInk, uPaper;
+
+/* value noise. cheap, and the only thing the melt needs. */
+float h(vec2 p){ return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }
+float n(vec2 p){
+  vec2 i=floor(p), f=fract(p); f=f*f*(3.-2.*f);
+  return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);
+}
+float fbm(vec2 p){ float s=0., a=.5; for(int k=0;k<5;k++){ s+=a*n(p); p*=2.03; a*=.5; } return s; }
+
+/* a mark placed at its own aspect, centred, and its alpha */
+float markA(sampler2D t, vec2 uv, vec2 size){
+  vec2 q = (uv - .5) * uRes / size + .5;
+  if (q.x<0.||q.x>1.||q.y<0.||q.y>1.) return 0.;
+  return texture2D(t, vec2(q.x, 1.-q.y)).a;
+}
+
+void main(){
+  vec2 uv = v;
+  float t = clamp(uT,0.,1.);
+
+  /* the melt warps hardest at the halfway point and is still at both ends,
+     so the two rest states are the files themselves and not a smear */
+  float bump = sin(3.14159*t);
+  vec2  fl   = vec2(fbm(uv*3.1 + uTime*.03), fbm(uv*3.1 - uTime*.025 + 11.3)) - .5;
+  vec2  duv  = uv + fl * (0.085 * bump);
+
+  float a0 = markA(uA, duv + fl*0.018*bump, uSA);
+  float a1 = markA(uB, duv - fl*0.018*bump, uSB);
+
+  /* the crossfade is sharpened through the noise so the drawing dissolves
+     grain by grain instead of ghosting one over the other */
+  float e  = fbm(uv*5.0 + 3.0);
+  float k  = smoothstep(0., 1., clamp((t - .16)/.46, 0., 1.)) * 1.44 - 0.22;
+  float m  = smoothstep(k-0.22, k+0.22, e*0.55 + 0.45);
+  float a  = mix(a0, a1, 1.0 - m);
+  a = clamp(a, 0., 1.);
+
+  /* the relief is the drawing's own silhouette: a sobel on the alpha */
+  vec2 px = 1.0/uRes;
+  float ax1 = mix(markA(uA,duv+vec2(px.x,0.),uSA), markA(uB,duv+vec2(px.x,0.),uSB), 1.-m);
+  float ax0 = mix(markA(uA,duv-vec2(px.x,0.),uSA), markA(uB,duv-vec2(px.x,0.),uSB), 1.-m);
+  float ay1 = mix(markA(uA,duv+vec2(0.,px.y),uSA), markA(uB,duv+vec2(0.,px.y),uSB), 1.-m);
+  float ay0 = mix(markA(uA,duv-vec2(0.,px.y),uSA), markA(uB,duv-vec2(0.,px.y),uSB), 1.-m);
+  vec3 nrm = normalize(vec3((ax0-ax1)*2.2, (ay0-ay1)*2.2, 1.0));
+
+  /* one light, raking, travelling slowly. It is what turns a flat fill
+     into something with an edge. */
+  vec3 L = normalize(vec3(cos(uTime*.18)*.55, sin(uTime*.14)*.42 + .35, .80));
+  float diff = max(dot(nrm,L), 0.);
+  float spec = pow(max(dot(reflect(-L, nrm), vec3(0.,0.,1.)), 0.), 22.) * 0.55;
+
+  vec3 ink = uInk * (0.80 + 0.30*diff) + spec;
+
+  /* the paper is lit rather than flat, and carries its own grain */
+  vec2  c  = (uv - vec2(.5,.46)) * vec2(uRes.x/uRes.y, 1.);
+  float fall = 1.0 - smoothstep(.15, 1.05, length(c));
+  vec3  paper = uPaper * (0.955 + 0.055*fall);
+  paper -= (h(uv*uRes*0.9 + uTime) - .5) * 0.018;
+
+  /* a soft contact shadow so the mark sits ON the stock */
+  float sh = 0.;
+  for (int i=0;i<6;i++){
+    float fi = float(i);
+    vec2 o = vec2(sin(fi*1.7), cos(fi*1.7)) * (0.004 + 0.002*fi);
+    sh += mix(markA(uA,duv+o,uSA), markA(uB,duv+o,uSB), 1.-m);
+  }
+  paper *= 1.0 - clamp(sh/6.0,0.,1.) * 0.10;
+
+  gl_FragColor = vec4(mix(paper, ink, a), 1.0);
+}`;
+
+  function sh(type, src){
+    const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { console.warn(gl.getShaderInfoLog(s)); return null; }
+    return s;
+  }
+  const vs = sh(gl.VERTEX_SHADER, VERT), fs = sh(gl.FRAGMENT_SHADER, FRAG);
+  if (!vs || !fs) return give_up();
+  const pr = gl.createProgram();
+  gl.attachShader(pr, vs); gl.attachShader(pr, fs); gl.linkProgram(pr);
+  if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) { console.warn(gl.getProgramInfoLog(pr)); return give_up(); }
+  gl.useProgram(pr);
+
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(pr, "p");
+  gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+  const U = n => gl.getUniformLocation(pr, n);
+  const uRes=U("uRes"), uSA=U("uSA"), uSB=U("uSB"), uT=U("uT"), uTime=U("uTime");
+  gl.uniform3f(U("uInk"), 190/255, 145/255, 89/255);      /* read off both files */
+  gl.uniform3f(U("uPaper"), 0xEF/255, 0xEA/255, 0xE1/255);
+  gl.uniform1i(U("uA"), 0); gl.uniform1i(U("uB"), 1);
+
+  /* the two plates already in the DOM are the source AND the fallback */
+  const imgs = [...sec.querySelectorAll(".plate img")];
+  if (imgs.length < 2) return give_up();
+
+  const texes = [];
+  function mkTex(img, unit){
+    const t = gl.createTexture();
+    gl.activeTexture(gl.TEXTURE0 + unit); gl.bindTexture(gl.TEXTURE_2D, t);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+    return t;
+  }
+
+  let ready = false, W = 0, H = 0, dpr = 1;
+  function size(){
+    const r = cv.getBoundingClientRect();
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    W = Math.max(1, Math.round(r.width * dpr)); H = Math.max(1, Math.round(r.height * dpr));
+    if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
+    gl.viewport(0, 0, W, H);
+    gl.uniform2f(uRes, W, H);
+    /* Each mark keeps its own aspect and takes the same share of the
+       stage width, which is what puts the two in register. A lockup is a
+       wide thin object: give it the width and the height follows. */
+    const share = W * (W / dpr < 760 ? 0.88 : 0.70);
+    for (const [i, im] of imgs.entries()) {
+      const w = share, hh = share * (im.naturalHeight / im.naturalWidth);
+      gl.uniform2f(i ? uSB : uSA, w, hh);
+    }
+  }
+
+  Promise.all(imgs.map(im => im.decode ? im.decode().catch(()=>{}) : Promise.resolve()))
+    .then(() => {
+      if (!imgs.every(i => i.naturalWidth)) return give_up();
+      texes.push(mkTex(imgs[0], 0), mkTex(imgs[1], 1));
+      size(); ready = true; sec.classList.add("gl-on");
+    }).catch(give_up);
+
+  cv.addEventListener("webglcontextlost", e => { e.preventDefault(); ready = false; give_up(); });
+  addEventListener("resize", () => { if (ready) size(); }, { passive:true });
+
+  const t0 = performance.now();
+  /* the stage is driven from the page's own loop rather than a second
+     rAF, and it only draws while it is on screen */
+  window.__alignDraw = function(){
+    if (!ready) return;
+    const r = cv.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > innerHeight) return;
+    const wrap = sec.querySelector(".pinwrap") || sec;
+    const run = wrap.getBoundingClientRect();
+    const span = Math.max(1, run.height - innerHeight);
+    const t = Math.min(1, Math.max(0, -run.top / span));
+    gl.uniform1f(uT, t);
+    gl.uniform1f(uTime, (performance.now() - t0) / 1000);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    sec.style.setProperty("--t", t.toFixed(3));
+  };
+})();
+
 /* ══ the pointer ═══════════════════════════════════════
    No second cursor is drawn. What is kept is the position, because the
    controls reach for it, and that is a property of the control rather
@@ -1224,6 +1474,8 @@ function frame(now){
     const r = el.getBoundingClientRect();
     return r.top <= py && r.bottom >= py;
   });
+  if (window.__alignDraw) window.__alignDraw();
+
   setBar(overLight(34));
   setRail(overLight(vh * 0.5));
   /* the controls reach for the pointer. The second cursor that used to be
