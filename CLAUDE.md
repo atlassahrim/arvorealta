@@ -1072,6 +1072,13 @@ The owner asked for the same template and named the system's grid as being
 on the right, which is what mirroring gives; **if he meant the two
 identical, it is one class.**
 
+**He did, and the mirroring is gone.** Both folds carry `.duo flip` now,
+so both run text-left and media-right and a reader meets the same
+arrangement twice. The reasoning above still describes what the
+alternation bought and is kept for that; the page no longer has it.
+Restoring it is removing `flip` from `.align`, which is the one class
+the paragraph above names.
+
 **The system fold is four rules as a numbered list and a grid of four.**
 The grid is the specification rather than decoration: the vector on its own
 stock, the proportion drawn at `10fr 20fr 70fr`, and the mark carried on
@@ -1182,7 +1189,14 @@ against the value the browser has got round to** — the same shape as
 measuring small text on its specified colour rather than on its pixels.
 
 **Fold two is `.align duo flip`, so the text is left and the plates are
-right.** That is the owner's instruction and it costs the plates their full
+right — and that ends the mirroring.** Fold three is `.spec duo flip` and
+was already text-left, so the two folds now carry the same arrangement
+rather than alternating, which the six-fold section above was written
+against. The owner named folds two and five and not three, so three is
+left alone and the loss is stated rather than fixed; restoring the
+alternation is removing `flip` from `.align`, one class.
+
+The flip also costs the plates their full
 measure: at 1440 the larger one is **538px, 5.0 per cent of the screen**,
 against the 1248px and 26.8 per cent they held when they were stacked at
 the page's own width. At 820 they are 756px and 13.2 per cent, because the
