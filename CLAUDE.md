@@ -544,6 +544,69 @@ available to it is to show nothing. **The wind metaphor is spent in the hero
 and this fold does not re-run it** — it states the enemy instead, which is
 the only new thing it has.
 
+### The audit that followed, and the three folds it rebuilt
+
+The owner's note on the first build was that the interface looked bad. He was
+right and the measurement says why. Audited at 1440 under `taste-skill`,
+dials read `DESIGN_VARIANCE 8 · MOTION_INTENSITY 7 · VISUAL_DENSITY 3`:
+
+| fold | screens | ground |
+|---|---|---|
+| hero | 1.00 | video |
+| alignment | 1.38 | ink-2 |
+| direction | 0.92 | ink |
+| **system** | **3.52** | ink-2 |
+| work | 1.27 | ink |
+| close | 1.00 | paper |
+
+**Every headline on the page started at the same x: 96, 96, 202, 202, 96.**
+Six folds, one composition, used six times: mono eyebrow, serif headline
+flush left, body paragraph flush left. The skill's floor is four layout
+families for eight sections and the page had **one**. The system fold was
+thirty-nine per cent of the page and was that same block four more times
+inside it. **This was caused by the rebuild**: deleting the WebGL dissolve
+and the pinned scroller removed the only two sections with their own
+structure, and what replaced them was more of the one block. It is the exact
+failure this file already records for `lab/brand/`.
+
+**The alignment fold is a split panel now.** Two paper panes at fifty per
+cent each, bleeding to the screen edges, one hairline between them, each
+label at its own foot. The question is set small and centred directly under
+them, because it is a caption on a plate pair rather than a headline
+competing with the marks, and the line that sorts the reader takes its own
+full-bleed band on ink. **The comparison is the composition.**
+
+**The direction fold is the page's one centred object.** Full-bleed ink,
+display type at up to 9.5rem, no picture and no chrome. Centred is banned
+for a section headline at this variance and allowed for a line whose content
+is the design, which is the distinction worth keeping.
+
+**The system fold is a bento of its own four rules**, which took it from
+3.52 screens to 2.43. The grid is asymmetric by content rather than by
+taste: the vector needs width because a lockup is wide, the proportion needs
+height because a proportion reads as a column, the specimen needs width to
+set a line, and the culture stack is three rows. Four rules, four cells, no
+empty ones. Three of the four carry real visual variation, which is what
+stops a grid of text cards reading as a template.
+
+**The 10 / 20 / 70 is the cell's row heights.** `grid-template-rows:10fr
+20fr 70fr`, so the rule is stated and demonstrated by one object. Three equal
+swatches would contradict their own caption.
+
+**The scroll cue is gone**, which the skill bans outright: a reader who has
+not scrolled is looking at the hero and knows what scroll is.
+
+**Six eyebrows against a mechanical ceiling of two**, and they stay. The
+owner wrote all six and asked for the sixth himself, and this file outranks
+the skill. What changed is that they no longer sit in the same place above
+the same headline six times: one is a caption under a split, one is centred
+over a manifesto, one heads a bento. **The repetition was the placement, not
+the existence.**
+
+Measured after: headline left edges at **433, 362, 202, 202, 96**, four
+distinct positions against one, and the page is 8.4 screens against 9.1.
+
+### The system fold is four rules, and it says which parts are stand-ins
 ### The system fold is four rules, and it says which parts are stand-ins
 
 The rules are the owner's: **a clear message or vector, three colours in a

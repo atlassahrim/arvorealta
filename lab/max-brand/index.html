@@ -176,145 +176,162 @@ h1,h2,h3,p{margin:0}
   55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
 /* ──────────────────────────────────────────────────────────────────────
-   ACT II — the alignment test. Two lockups, one stock, one ink.
+   ACT II — the alignment test, as a split panel.
 
-   The WebGL dissolve stood here for two versions and is deleted. The owner's
-   note on it is the whole argument: it added nothing to the pitch. It was the
-   craft point -- one mark surviving three grounds -- performed beautifully
-   for a reader who does not buy the craft point. What replaces it is the one
-   comparison on the site that a reader can judge without being told how.
+   It was an eyebrow, a headline, two plates in a row and two paragraphs,
+   which is the same block every other fold on this page used. Audited at
+   1440: five headlines, five identical left edges at the gutter, one layout
+   family carrying six sections. The skill's own floor is four families for
+   eight sections.
+
+   SO THE COMPARISON IS THE COMPOSITION. Two panels fill the fold at fifty
+   per cent each, bleeding to the screen edges, divided by one hairline. The
+   question is set small and centred directly under them, because it is a
+   caption on a plate pair rather than a headline competing with the marks.
+   The line that sorts the reader gets its own full-bleed band after.
    ────────────────────────────────────────────────────────────────────── */
-.align{position:relative;background:var(--ink-2);
-  padding:clamp(80px,14vh,170px) var(--pad) clamp(70px,12vh,150px)}
-.align .lede{display:grid;gap:16px}
-.align h2{max-width:17ch}
-.align h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.03em;
-  font-size:clamp(2.2rem,1.2rem + 4.2vw,5.4rem);line-height:.98}
-.vsrow{display:grid;gap:clamp(14px,2.4vw,34px);margin-top:clamp(40px,8vh,96px)}
-@media (min-width:820px){.vsrow{grid-template-columns:repeat(2,minmax(0,1fr))}}
-/* ONE STOCK AND ONE INK. Both lockups are supplied as PNG with alpha and
-   both are drawn in exactly the same #BD9059, read off the opaque pixels of
-   each file rather than assumed. So the plates are identical, the ink is
-   identical, and the mark heights are matched: the only variable left in
-   the fold is the drawing, which is what the fold claims. */
-.plate{background:var(--paper);border-radius:3px;display:grid;place-items:center;
-  padding:clamp(20px,4vw,64px)}
-.plate img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
-.vsrow .plate{aspect-ratio:16/7;padding:clamp(18px,3.4vw,52px)}
-.vsrow .plate img{max-height:clamp(54px,9vw,122px);width:auto}
-.cap{font-family:"Geist Mono",monospace;font-size:9.5px;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--bone-faint);padding-top:12px;margin-top:12px;
-  border-top:1px solid var(--rule)}
-.cap b{font-weight:400;color:var(--bone-dim)}
-.align .say{max-width:48ch;font-size:clamp(.98rem,.92rem + .3vw,1.16rem);line-height:1.7;
-  color:var(--bone-dim);margin-top:clamp(34px,6vh,70px)}
-/* the statement takes the whole width and its own ground, because a line
-   that sorts the reader cannot share a row with the reasoning it follows */
-.sort{margin-top:clamp(46px,9vh,110px);padding-top:clamp(34px,6vh,70px);
-  border-top:1px solid var(--rule)}
+.align{position:relative;background:var(--ink-2)}
+.align .split{display:grid;grid-template-columns:1fr;min-height:62svh}
+@media (min-width:760px){.align .split{grid-template-columns:1fr 1fr;min-height:74svh}}
+.align .pane{position:relative;background:var(--paper);display:grid;place-items:center;
+  padding:clamp(28px,6vw,90px)}
+.align .pane + .pane{box-shadow:inset 1px 0 0 rgba(26,23,19,.16)}
+.align .pane img{width:100%;max-width:clamp(230px,34vw,520px);height:auto;display:block;
+  transform:translateY(var(--rise,0));transition:transform 1.1s var(--ease)}
+.align .pane b{position:absolute;left:clamp(20px,3vw,40px);bottom:clamp(18px,2.6vw,34px);
+  font-family:"Geist Mono",monospace;font-size:9.5px;font-weight:600;letter-spacing:.22em;
+  text-transform:uppercase;color:rgba(26,23,19,.46)}
+/* the question is a caption under the plates, centred, and it is the one
+   centred object on the page. A manifesto line is allowed to be centred;
+   a section headline is not. */
+.align .ask{text-align:center;padding:clamp(34px,6vh,74px) var(--pad) clamp(26px,4vh,52px)}
+.align .ask p{font-family:"Geist Mono",monospace;font-size:10px;font-weight:600;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--bone-faint);margin-bottom:clamp(14px,2.4vh,26px)}
+.align .ask h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.028em;
+  font-size:clamp(1.9rem,1.1rem + 3.4vw,4.4rem);line-height:1.04;margin-inline:auto;max-width:18ch}
+.align .say{max-width:52ch;margin:0 auto;padding:0 var(--pad) clamp(50px,9vh,110px);
+  text-align:center;font-size:clamp(.98rem,.92rem + .3vw,1.16rem);line-height:1.7;color:var(--bone-dim)}
+/* the sorting line takes the whole band, its own ground and its own rules */
+.sort{background:var(--ink);padding:clamp(60px,12vh,150px) var(--pad);
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
 .sort p{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.025em;
-  font-size:clamp(1.7rem,1.05rem + 2.9vw,4rem);line-height:1.08;max-width:24ch;color:var(--bone)}
+  font-size:clamp(1.8rem,1.05rem + 3.2vw,4.4rem);line-height:1.08;max-width:22ch;color:var(--bone)}
 
 /* ──────────────────────────────────────────────────────────────────────
-   ACT III — the perspective. No picture at all.
+   ACT III — the perspective. The page's one centred manifesto.
 
-   The fold before it is two plates on paper and the fold after it is a
-   project taken apart, so the strongest thing this one can do is give up
-   the pictures entirely. It is the site's own statement slide: full-bleed
-   ink, display type, no chrome.
+   Full-bleed ink, display type, no chrome and no picture. It is centred,
+   which every other fold here is forbidden to be: a line whose content IS
+   the design may be centred, a section headline may not.
    ────────────────────────────────────────────────────────────────────── */
-.dir{position:relative;background:var(--ink);min-height:92svh;display:grid;align-content:center;
-  padding:clamp(90px,16vh,190px) var(--pad)}
+.dir{position:relative;background:var(--ink);min-height:96svh;display:grid;align-content:center;
+  justify-items:center;text-align:center;padding:clamp(90px,16vh,190px) var(--pad);
+  gap:clamp(24px,4.5vh,52px)}
+.dir .n{font-family:"Geist Mono",monospace;font-size:10px;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--bone-faint)}
 .dir h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.035em;
-  font-size:clamp(2.8rem,1.2rem + 6.4vw,8rem);line-height:.94;max-width:13ch;margin:18px 0 clamp(28px,5vh,56px)}
-.dir p{max-width:46ch;font-size:clamp(1.05rem,.95rem + .45vw,1.5rem);line-height:1.58;color:var(--bone-dim)}
+  font-size:clamp(3rem,1.1rem + 7.4vw,9.5rem);line-height:.92;max-width:12ch;margin:0}
+.dir p{max-width:44ch;font-size:clamp(1.05rem,.95rem + .45vw,1.5rem);line-height:1.56;
+  color:var(--bone-dim)}
 .dir p b{font-weight:400;color:var(--bone)}
 
 /* ──────────────────────────────────────────────────────────────────────
-   ACT IV — the system, stated as its own four rules.
+   ACT IV — the system, as a bento of its own four rules.
 
-   The rules this studio works to are: a clear message or vector, three
-   colours in a 10 / 20 / 70 proportion, a typeface, and a culture stack of
-   wardrobe, music and art. The fold is those four, in order, on one
-   project. That is what makes it a specification rather than a mood board,
-   and it is what the price is for.
+   It was four stacked rows, each a hairline, a heading and a paragraph, and
+   it ran 3165px: thirty-nine per cent of the whole page in one fold, built
+   out of one block used four times inside a page already built out of one
+   block used six times.
+
+   FOUR RULES, FOUR CELLS, NO EMPTY ONES. The grid is asymmetric by content
+   rather than by taste: the vector needs width because a lockup is wide, the
+   proportion needs height because a proportion reads as a column, the
+   specimen needs width to set a line, and the culture stack is three rows.
+   Three of the four cells carry real visual variation, which is what stops a
+   grid of text cards reading as a template.
+
+   The rules are the owner's: a clear message or vector, three colours in a
+   10 / 20 / 70 proportion, a typeface, and a culture stack of wardrobe,
+   music and art.
 
    WHAT IS REAL AND WHAT IS A STAND-IN is marked on the page itself. The
    lockup and the three grounds are the owner's own files. The three colours
-   are sampled off the card rather than chosen, but the 10 / 20 / 70 split
-   between them is a stand-in until the real split is supplied. The typeface
-   and the culture stack are stand-ins outright: naming a face this session
-   has not identified, on a page that names a real client, is the one error
-   that client is certain to see.
+   are sampled off the card rather than chosen, but the split between them is
+   a stand-in. The typeface and the culture stack are stand-ins outright:
+   naming a face this session has not identified, on a page that names a real
+   client, is the one error that client is certain to see.
    ────────────────────────────────────────────────────────────────────── */
 .sys{position:relative;background:var(--ink-2);
-  padding:clamp(80px,14vh,170px) var(--pad) clamp(70px,12vh,150px)}
+  padding:clamp(80px,13vh,150px) var(--pad) clamp(70px,12vh,150px)}
 @media (min-width:980px){
-  /* the rail is fixed to the screen edge and the column's own margin does
-     not clear it until about 1560px */
   .sys{padding-left:calc(var(--pad) + 106px);padding-right:calc(var(--pad) + 106px)}
 }
-.sys .lede{display:grid;gap:16px}
+.sys .lede{display:grid;gap:16px;max-width:46ch}
 .sys h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.03em;
-  font-size:clamp(2.2rem,1.2rem + 4.2vw,5.4rem);line-height:.98}
-.sys .say{max-width:54ch;font-size:clamp(.98rem,.92rem + .3vw,1.16rem);line-height:1.7;
-  color:var(--bone-dim)}
+  font-size:clamp(2.2rem,1.2rem + 4.2vw,5.4rem);line-height:.98;max-width:14ch}
+.sys .say{font-size:clamp(.98rem,.92rem + .3vw,1.16rem);line-height:1.7;color:var(--bone-dim)}
 
-/* each rule is a numbered part with its own evidence under it */
-.part{margin-top:clamp(46px,9vh,120px);padding-top:clamp(22px,4vh,40px);
-  border-top:1px solid var(--rule);display:grid;gap:clamp(18px,3vh,34px)}
-.part .hd{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 18px}
-.part .n{font-family:"Geist Mono",monospace;font-size:10px;letter-spacing:.3em;color:var(--bone-faint)}
-.part h3{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.02em;
-  font-size:clamp(1.4rem,1rem + 1.4vw,2.4rem);line-height:1.05}
-.part .hd i{font-style:normal;font-family:"Geist Mono",monospace;font-size:9px;letter-spacing:.22em;
-  text-transform:uppercase;color:var(--brick-lite,#C58C72);margin-left:auto}
-.part p{font-size:15px;line-height:1.7;color:var(--bone-dim);max-width:52ch}
-.plate.spec{padding:clamp(26px,5vw,72px) clamp(26px,6vw,110px);justify-items:center}
-.plate.spec img{max-width:min(100%,900px)}
+.bento{display:grid;gap:clamp(8px,1.1vw,16px);margin-top:clamp(40px,7vh,96px)}
+@media (min-width:900px){
+  .bento{grid-template-columns:repeat(3,minmax(0,1fr));
+    grid-template-areas:"vector vector colour" "type culture culture"}
+  .b-vector{grid-area:vector} .b-colour{grid-area:colour}
+  .b-type{grid-area:type} .b-culture{grid-area:culture}
+}
+.cell{position:relative;border-radius:3px;overflow:hidden;display:grid;align-content:start;
+  gap:clamp(12px,1.8vh,22px);padding:clamp(20px,2.6vw,40px);min-height:clamp(200px,30vh,330px)}
+.cell .hd{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 16px}
+.cell h3{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.02em;
+  font-size:clamp(1.25rem,.95rem + 1.1vw,2rem);line-height:1.05;margin:0}
+.cell .hd i{font-style:normal;font-family:"Geist Mono",monospace;font-size:9px;letter-spacing:.2em;
+  text-transform:uppercase;margin-left:auto;opacity:.72}
+.cell p{font-size:14.5px;line-height:1.66;max-width:46ch;margin:0}
 
-/* THE 10 / 20 / 70 IS DRAWN AT 10 / 20 / 70. The rule is a proportion, so
-   a row of three equal swatches would state it and contradict it in the
-   same object. The widths are the figures. */
-.swatch{display:grid;grid-template-columns:10fr 20fr 70fr;gap:2px;border-radius:3px;overflow:hidden;
-  min-height:clamp(74px,11vh,124px)}
-.swatch div{display:flex;align-items:flex-end;padding:10px 12px}
-.swatch b{font-family:"Geist Mono",monospace;font-size:9px;font-weight:600;letter-spacing:.16em;
-  text-transform:uppercase}
-.swkeys{display:grid;gap:8px;margin-top:4px}
-@media (min-width:760px){.swkeys{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.swkeys span{font-family:"Geist Mono",monospace;font-size:9.5px;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--bone-faint);display:flex;gap:10px;align-items:baseline}
-.swkeys span em{font-style:normal;color:var(--bone-dim)}
+/* a cell on the client's own stock, carrying the client's own artwork */
+.cell.paper{background:var(--paper);color:var(--paper-ink)}
+.cell.paper .hd i{color:#8E4A45}
+.cell.paper p{color:rgba(26,23,19,.68)}
+.b-vector{align-content:space-between}
+.b-vector .art{display:grid;place-items:center;padding:clamp(10px,2.4vw,34px) 0 0}
+.b-vector .art img{width:100%;max-width:min(100%,620px);height:auto;display:block}
+.b-type .spec{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:.14em;
+  text-transform:uppercase;font-size:clamp(1rem,.62rem + 1.5vw,1.9rem);line-height:1.3}
 
-.specimen{background:var(--paper);color:var(--paper-ink);border-radius:3px;
-  padding:clamp(22px,4vw,56px);display:grid;gap:14px}
-.specimen .line{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:.14em;
-  text-transform:uppercase;font-size:clamp(1.1rem,.7rem + 1.9vw,2.6rem);line-height:1.25}
-.specimen .meta{font-family:"Geist Mono",monospace;font-size:9.5px;letter-spacing:.2em;
-  text-transform:uppercase;color:rgba(26,23,19,.5)}
+/* a cell on ink, where the content IS the colour */
+.cell.ink{background:var(--ink-3);color:var(--bone)}
+.cell.ink .hd i{color:var(--bone-faint)}
+.cell.ink p{color:var(--bone-dim)}
+/* THE PROPORTION IS DRAWN AT THE PROPORTION. Ten, twenty and seventy are
+   the row heights, so the rule is stated and demonstrated by one object.
+   Three equal swatches would contradict their own caption. */
+.b-colour .prop{display:grid;grid-template-rows:10fr 20fr 70fr;gap:2px;border-radius:2px;
+  overflow:hidden;min-height:clamp(170px,26vh,300px)}
+.b-colour .prop div{display:flex;align-items:flex-end;justify-content:space-between;
+  padding:9px 11px;font-family:"Geist Mono",monospace;font-size:9px;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase}
+.b-culture .rows{display:grid;gap:1px;background:var(--rule);border-radius:2px;overflow:hidden}
+.b-culture .rows div{background:var(--ink-3);padding:clamp(13px,1.8vh,20px) 0;display:grid;gap:5px}
+.b-culture .rows b{font-family:"Geist Mono",monospace;font-size:9.5px;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--bone-dim)}
+.b-culture .rows span{font-size:13.5px;line-height:1.6;color:var(--bone-faint)}
 
-.culture{display:grid;gap:clamp(12px,2vw,24px)}
-@media (min-width:760px){.culture{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.culture div{border:1px solid var(--rule);border-radius:3px;padding:clamp(18px,2.6vw,30px);
-  display:grid;gap:9px;align-content:start;min-height:clamp(120px,18vh,190px)}
-.culture b{font-family:"Geist Mono",monospace;font-size:9.5px;font-weight:600;letter-spacing:.22em;
-  text-transform:uppercase;color:var(--bone-dim)}
-.culture p{font-size:14px;line-height:1.66;color:var(--bone-faint);max-width:none}
-
-.trip{display:grid;gap:clamp(9px,1.5vw,20px)}
-@media (min-width:780px){.trip{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.trip figure{margin:0}
-/* the source set's own ratio is the only safe cell for a landscape frame.
-   A 16:9 lockup cropped into a portrait cell loses its wordmark, which this
-   repo has measured once already. */
-.trip img{width:100%;height:auto;aspect-ratio:1400/788;object-fit:cover;border-radius:3px;display:block}
-.trip figcaption{font-family:"Geist Mono",monospace;font-size:9.5px;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--bone-faint);padding-top:11px;margin-top:11px;
-  border-top:1px solid var(--rule)}
+/* the three grounds bleed under the bento: the vector's evidence, not a cell */
+.grounds{display:grid;gap:clamp(8px,1.1vw,16px);margin-top:clamp(8px,1.1vw,16px)}
+@media (min-width:780px){.grounds{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.grounds figure{margin:0;position:relative}
+.grounds img{width:100%;height:auto;aspect-ratio:1400/788;object-fit:cover;border-radius:3px;display:block}
+/* the caption is bone and one of the three grounds is pale paper, so the
+   label carries its own scrim rather than the picture carrying a wash. It
+   is 46% of one 16:9 thumbnail, not a cast over the frame. */
+.grounds figure::after{content:"";position:absolute;left:0;right:0;bottom:0;height:46%;
+  border-radius:0 0 3px 3px;pointer-events:none;
+  background:linear-gradient(transparent,rgba(7,16,13,.74))}
+.grounds figcaption{z-index:1;position:absolute;left:clamp(12px,1.4vw,20px);bottom:clamp(10px,1.2vw,16px);
+  font-family:"Geist Mono",monospace;font-size:9px;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:rgba(233,231,228,.82);text-shadow:0 1px 10px rgba(0,0,0,.6)}
 
 /* the statement and the one price this page carries */
-.sysend{margin-top:clamp(56px,11vh,140px);padding-top:clamp(34px,6vh,74px);
+.sysend{margin-top:clamp(50px,9vh,120px);padding-top:clamp(34px,6vh,74px);
   border-top:1px solid var(--rule);display:grid;gap:clamp(26px,5vh,52px)}
 @media (min-width:980px){.sysend{grid-template-columns:minmax(0,7fr) minmax(0,4fr);
   gap:clamp(30px,5vw,96px);align-items:start}}
@@ -521,37 +538,32 @@ h1,h2,h3,p{margin:0}
     </h1>
     <div class="herofoot">
       <p data-t="sub">Most marks fade away within five years, made for the short term and perceived wind direction. Winds change. We do not negotiate direction. We pick the winds to ride.</p>
-      <div class="cue"><i></i><span data-t="scroll">Scroll</span></div>
+      
     </div>
   </div>
 </section>
 
 <!-- ACT II ──────────────────────────────────────────────────────────── -->
 <section class="align" id="alignment" aria-label="The alignment test">
-  <div class="lede">
-    <p class="num mono" style="font-size:10px;letter-spacing:.3em;color:var(--bone-faint)" data-t="e2">Alignment</p>
+  <div class="split">
+    <div class="pane">
+      <img src="/assets/img/turva-old-2-1400.webp" alt="The previous Turvatikas lockup: a hook pictogram beside a heavy stencilled wordmark"
+           width="1400" height="312" sizes="(min-width:760px) 34vw, 72vw"
+           srcset="/assets/img/turva-old-2-700.webp 700w, /assets/img/turva-old-2-1400.webp 1400w" loading="lazy">
+      <b data-t="vsA">Before</b>
+    </div>
+    <div class="pane">
+      <img src="/assets/img/turva-new-2-1400.webp" alt="The Turvatikas lockup as drawn now: three rungs beside tracked serif capitals"
+           width="1400" height="250" sizes="(min-width:760px) 34vw, 72vw"
+           srcset="/assets/img/turva-new-2-700.webp 700w, /assets/img/turva-new-2-1400.webp 1400w" loading="lazy">
+      <b data-t="vsB">After</b>
+    </div>
+  </div>
+
+  <div class="ask">
+    <p data-t="e2">Alignment</p>
     <h2 data-t="h2a">Can you see the difference?</h2>
   </div>
-
-  <div class="vsrow">
-    <div>
-      <div class="plate">
-        <img src="/assets/img/turva-old-2-1400.webp" alt="The previous Turvatikas lockup: a hook pictogram beside a heavy stencilled wordmark"
-             width="1400" height="312" sizes="(min-width:820px) 44vw, 90vw"
-             srcset="/assets/img/turva-old-2-700.webp 700w, /assets/img/turva-old-2-1400.webp 1400w" loading="lazy">
-      </div>
-      <p class="cap"><b data-t="vsA">Before</b></p>
-    </div>
-    <div>
-      <div class="plate">
-        <img src="/assets/img/turva-new-2-1400.webp" alt="The Turvatikas lockup as drawn now: three rungs beside tracked serif capitals"
-             width="1400" height="250" sizes="(min-width:820px) 44vw, 90vw"
-             srcset="/assets/img/turva-new-2-700.webp 700w, /assets/img/turva-new-2-1400.webp 1400w" loading="lazy">
-      </div>
-      <p class="cap"><b data-t="vsB">After</b></p>
-    </div>
-  </div>
-
   <p class="say" data-t="vsSay">A mark is a statement read before it is explained. The test is clarity, not meaning. It is impact in the second before you think.</p>
 
   <div class="sort">
@@ -561,7 +573,7 @@ h1,h2,h3,p{margin:0}
 
 <!-- ACT III ─────────────────────────────────────────────────────────── -->
 <section class="dir" id="direction" aria-label="Direction">
-  <p class="num mono" style="font-size:10px;letter-spacing:.3em;color:var(--bone-faint)" data-t="e3">Direction</p>
+  <p class="n" data-t="e3">Direction</p>
   <h2 data-t="h3a">You are the compass.</h2>
   <p data-t="dirSay">Most designers will ask you to kneel to whichever audience was easiest for them to describe. <b>Not here.</b> Clarity is how we get you where you are already pointing.</p>
 </section>
@@ -569,68 +581,63 @@ h1,h2,h3,p{margin:0}
 <!-- ACT IV ──────────────────────────────────────────────────────────── -->
 <section class="sys" id="system" aria-label="The system">
   <div class="lede">
-    <p class="num mono" style="font-size:10px;letter-spacing:.3em;color:var(--bone-faint)" data-t="e4">The system</p>
+    <p class="n mono" style="font-size:10px;letter-spacing:.3em;color:var(--bone-faint)" data-t="e4">The system</p>
     <h2 data-t="h4a">Specified, not styled.</h2>
     <p class="say" data-t="sysSay">Four rules, on one project, all the way down. A clear vector, three colours in a fixed proportion, one typeface and a culture stack. Turvatikas make safety ladders; the mark is four forms stacked and what you read is three rungs.</p>
   </div>
 
-  <div class="part">
-    <div class="hd"><span class="n">01</span><h3 data-t="p1t">The vector</h3><i data-t="_real">supplied</i></div>
-    <div class="plate spec">
-      <img src="/assets/img/turva-new-2-1400.webp" alt="The Turvatikas lockup" width="1400" height="250"
-           sizes="(min-width:1040px) 900px, 88vw"
-           srcset="/assets/img/turva-new-2-700.webp 700w, /assets/img/turva-new-2-1400.webp 1400w" loading="lazy">
+  <div class="bento">
+    <div class="cell paper b-vector">
+      <div>
+        <div class="hd"><h3 data-t="p1t">The vector</h3><i data-t="_real">supplied</i></div>
+        <p data-t="p1b" style="margin-top:12px">One message, one shape. The ladder is the space between the rungs and not the rails, so nothing in it has to be redrawn to go small.</p>
+      </div>
+      <div class="art">
+        <img src="/assets/img/turva-new-2-1400.webp" alt="The Turvatikas lockup" width="1400" height="250"
+             sizes="(min-width:900px) 40vw, 80vw"
+             srcset="/assets/img/turva-new-2-700.webp 700w, /assets/img/turva-new-2-1400.webp 1400w" loading="lazy">
+      </div>
     </div>
-    <p data-t="p1b">One message carried by one shape. The ladder is drawn as the space between the rungs rather than as the rails, and nothing in it is thinner than the thinnest thing beside it, which is what lets it go small without a second drawing.</p>
-    <div class="trip">
-      <figure>
-        <img src="/assets/land/turvatikas-w-1-1400.webp" alt="The Turvatikas lockup in amber over dark water" width="1400" height="788" loading="lazy">
-        <figcaption data-t="g0">Deep water</figcaption>
-      </figure>
-      <figure>
-        <img src="/assets/land/turvatikas-l-1-1400.webp" alt="The Turvatikas lockup in warm light" width="1400" height="788" loading="lazy">
-        <figcaption data-t="g1">Warm light</figcaption>
-      </figure>
-      <figure>
-        <img src="/assets/land/turvatikas-p-1-1400.webp" alt="The Turvatikas card on bare paper" width="1400" height="788" loading="lazy">
-        <figcaption data-t="g2">Bare paper</figcaption>
-      </figure>
+
+    <div class="cell ink b-colour">
+      <div class="hd"><h3 data-t="p2t">Ten, twenty, seventy</h3><i data-t="_php">proportion placeholder</i></div>
+      <div class="prop" aria-hidden="true">
+        <div style="background:#BD9059;color:#1A1713"><b>10</b><span>#BD9059</span></div>
+        <div style="background:#954D13;color:#E9E7E4"><b>20</b><span>#954D13</span></div>
+        <div style="background:#5A200A;color:#E9E7E4"><b>70</b><span>#5A200A</span></div>
+      </div>
+      <p data-t="p2b">Three values and the share of the surface each one holds. The hex is read off the printed card.</p>
+    </div>
+
+    <div class="cell paper b-type">
+      <div class="hd"><h3 data-t="p3t">One typeface</h3><i data-t="_ph">placeholder</i></div>
+      <p class="spec">TURVATIKAS<br>SAFETY LADDER</p>
+      <p data-t="p3b">One face for the name, the signage, the datasheet and the label. A second face is a decision every supplier has to make for you.</p>
+    </div>
+
+    <div class="cell ink b-culture">
+      <div class="hd"><h3 data-t="p4t">The culture stack</h3><i data-t="_ph">placeholder</i></div>
+      <div class="rows">
+        <div><b data-t="_cw">Wardrobe</b><span data-t="_cwp">Placeholder. What the people wear when they arrive on site.</span></div>
+        <div><b data-t="_cm">Music</b><span data-t="_cmp">Placeholder. What plays in the film, the stand and the waiting room.</span></div>
+        <div><b data-t="_ca">Art</b><span data-t="_cap">Placeholder. The references a photographer is given before they start.</span></div>
+      </div>
     </div>
   </div>
 
-  <div class="part">
-    <div class="hd"><span class="n">02</span><h3 data-t="p2t">Three colours, ten twenty seventy</h3><i data-t="_php">proportion placeholder</i></div>
-    <div class="swatch" aria-hidden="true">
-      <div style="background:#BD9059;color:#1A1713"><b>10</b></div>
-      <div style="background:#954D13;color:#E9E7E4"><b>20</b></div>
-      <div style="background:#5A200A;color:#E9E7E4"><b>70</b></div>
-    </div>
-    <div class="swkeys">
-      <span><em data-t="_c1">Mark</em> #BD9059</span>
-      <span><em data-t="_c2">Accent</em> #954D13</span>
-      <span><em data-t="_c3">Ground</em> #5A200A</span>
-    </div>
-    <p data-t="p2b">Three values and the share of the surface each one holds. The hex is read off the printed card rather than chosen, and the ten twenty seventy split is a stand-in until the real split is supplied. A proportion is the rule, so the bar above is drawn at the proportion it states.</p>
-  </div>
-
-  <div class="part">
-    <div class="hd"><span class="n">03</span><h3 data-t="p3t">One typeface</h3><i data-t="_ph">placeholder</i></div>
-    <div class="specimen">
-      <p class="line">TURVATIKAS SAFETY LADDER</p>
-      <p class="line" style="letter-spacing:.06em;text-transform:none">Handling, inspection and the load rating, in one voice</p>
-      <p class="meta" data-t="_typeMeta">Typeface not yet named. Set here in the site's own display face as a stand-in.</p>
-    </div>
-    <p data-t="p3b">One face for the name, the signage, the datasheet and the instruction label. A second face is a second decision every supplier has to make for you.</p>
-  </div>
-
-  <div class="part">
-    <div class="hd"><span class="n">04</span><h3 data-t="p4t">The culture stack</h3><i data-t="_ph">placeholder</i></div>
-    <div class="culture">
-      <div><b data-t="_cw">Wardrobe</b><p data-t="_cwp">Placeholder. What the people wear when they arrive on site, and why that is part of the mark.</p></div>
-      <div><b data-t="_cm">Music</b><p data-t="_cmp">Placeholder. What plays in the film, the stand and the waiting room.</p></div>
-      <div><b data-t="_ca">Art</b><p data-t="_cap">Placeholder. The references a photographer or an illustrator is given before they start.</p></div>
-    </div>
-    <p data-t="p4b">A mark survives because the things around it agree with it. The stack is written down so a stranger can match it without asking.</p>
+  <div class="grounds">
+    <figure>
+      <img src="/assets/land/turvatikas-w-1-1400.webp" alt="The Turvatikas lockup in amber over dark water" width="1400" height="788" loading="lazy">
+      <figcaption data-t="g0">Deep water</figcaption>
+    </figure>
+    <figure>
+      <img src="/assets/land/turvatikas-l-1-1400.webp" alt="The Turvatikas lockup in warm light" width="1400" height="788" loading="lazy">
+      <figcaption data-t="g1">Warm light</figcaption>
+    </figure>
+    <figure>
+      <img src="/assets/land/turvatikas-p-1-1400.webp" alt="The Turvatikas card on bare paper" width="1400" height="788" loading="lazy">
+      <figcaption data-t="g2">Bare paper</figcaption>
+    </figure>
   </div>
 
   <div class="sysend">
@@ -950,19 +957,19 @@ const LANG = {
     sysSay:"Four rules, on one project, all the way down. A clear vector, three colours in a fixed proportion, one typeface and a culture stack. Turvatikas make safety ladders; the mark is four forms stacked and what you read is three rungs.",
     _real:"supplied", _ph:"placeholder", _php:"proportion placeholder",
     p1t:"The vector",
-    p1b:"One message carried by one shape. The ladder is drawn as the space between the rungs rather than as the rails, and nothing in it is thinner than the thinnest thing beside it, which is what lets it go small without a second drawing.",
+    p1b:"One message, one shape. The ladder is the space between the rungs and not the rails, so nothing in it has to be redrawn to go small.",
     g0:"Deep water", g1:"Warm light", g2:"Bare paper",
-    p2t:"Three colours, ten twenty seventy",
-    p2b:"Three values and the share of the surface each one holds. The hex is read off the printed card rather than chosen, and the ten twenty seventy split is a stand-in until the real split is supplied. A proportion is the rule, so the bar above is drawn at the proportion it states.",
+    p2t:"Ten, twenty, seventy",
+    p2b:"Three values and the share of the surface each one holds. The hex is read off the printed card.",
     _c1:"Mark", _c2:"Accent", _c3:"Ground",
     p3t:"One typeface",
-    p3b:"One face for the name, the signage, the datasheet and the instruction label. A second face is a second decision every supplier has to make for you.",
+    p3b:"One face for the name, the signage, the datasheet and the label. A second face is a decision every supplier has to make for you.",
     _typeMeta:"Typeface not yet named. Set here in the site\u2019s own display face as a stand-in.",
     p4t:"The culture stack",
-    p4b:"A mark survives because the things around it agree with it. The stack is written down so a stranger can match it without asking.",
-    _cw:"Wardrobe", _cwp:"Placeholder. What the people wear when they arrive on site, and why that is part of the mark.",
+    p4b:"A mark survives because the things around it agree with it. Written down, a stranger can match it without asking.",
+    _cw:"Wardrobe", _cwp:"Placeholder. What the people wear when they arrive on site.",
     _cm:"Music", _cmp:"Placeholder. What plays in the film, the stand and the waiting room.",
-    _ca:"Art", _cap:"Placeholder. The references a photographer or an illustrator is given before they start.",
+    _ca:"Art", _cap:"Placeholder. The references a photographer is given before they start.",
     sysStmt:"Drawn once. Followed by strangers for thirty years. Signage shops, embroiderers, printers and whoever runs your marketing three decades from now will all use this without ever speaking to us.",
     _pr:"&euro;8,000", _prl:"Identity system",
     _prt:"Colour, type, signage, product marking and the mark itself, written down so suppliers can work from it.",
@@ -1001,19 +1008,19 @@ const LANG = {
     sysSay:"Fire regler, p\u00e5 ett prosjekt, hele veien ned. En tydelig vektor, tre farger i en fast andel, \u00e9n skrift og en kulturstabel. Turvatikas lager sikkerhetsstiger; merket er fire former stablet, og det du leser er tre trinn.",
     _real:"levert", _ph:"plassholder", _php:"andel er plassholder",
     p1t:"Vektoren",
-    p1b:"Ett budskap b\u00e5ret av \u00e9n form. Stigen er tegnet som rommet mellom trinnene og ikke som vangene, og ingenting i den er tynnere enn det tynneste ved siden av, og det er dette som lar den bli liten uten en ny tegning.",
+    p1b:"Ett budskap, \u00e9n form. Stigen er rommet mellom trinnene og ikke vangene, s\u00e5 ingenting i den m\u00e5 tegnes p\u00e5 nytt for \u00e5 bli liten.",
     g0:"Dypt vann", g1:"Varmt lys", g2:"Bart papir",
-    p2t:"Tre farger, ti tjue sytti",
-    p2b:"Tre verdier og andelen av flaten hver av dem holder. Kodene er lest av det trykte kortet og ikke valgt, og fordelingen ti tjue sytti er en plassholder til den virkelige fordelingen er levert. En andel er regelen, s\u00e5 stolpen over er tegnet i den andelen den oppgir.",
+    p2t:"Ti, tjue, sytti",
+    p2b:"Tre verdier og andelen av flaten hver av dem holder. Kodene er lest av det trykte kortet.",
     _c1:"Merke", _c2:"Aksent", _c3:"Bunn",
     p3t:"\u00c9n skrift",
-    p3b:"\u00c9n skrift for navnet, skiltingen, databladet og instruksjonsetiketten. En skrift nummer to er en avgj\u00f8relse til som hver leverand\u00f8r m\u00e5 ta for deg.",
+    p3b:"\u00c9n skrift for navnet, skiltingen, databladet og etiketten. En skrift nummer to er en avgj\u00f8relse hver leverand\u00f8r m\u00e5 ta for deg.",
     _typeMeta:"Skriften er enn\u00e5 ikke navngitt. Satt her i nettstedets egen displayskrift som plassholder.",
     p4t:"Kulturstabelen",
-    p4b:"Et merke overlever fordi tingene rundt det er enige med det. Stabelen er skrevet ned slik at en fremmed kan treffe den uten \u00e5 sp\u00f8rre.",
-    _cw:"Garderobe", _cwp:"Plassholder. Hva folkene har p\u00e5 seg n\u00e5r de kommer ut p\u00e5 anlegget, og hvorfor det er en del av merket.",
+    p4b:"Et merke overlever fordi tingene rundt det er enige med det. Skrevet ned kan en fremmed treffe det uten \u00e5 sp\u00f8rre.",
+    _cw:"Garderobe", _cwp:"Plassholder. Hva folkene har p\u00e5 seg n\u00e5r de kommer ut p\u00e5 anlegget.",
     _cm:"Musikk", _cmp:"Plassholder. Hva som spilles i filmen, p\u00e5 standen og i venterommet.",
-    _ca:"Kunst", _cap:"Plassholder. Referansene en fotograf eller en illustrat\u00f8r f\u00e5r f\u00f8r de begynner.",
+    _ca:"Kunst", _cap:"Plassholder. Referansene en fotograf f\u00e5r f\u00f8r de begynner.",
     sysStmt:"Tegnet \u00e9n gang. Fulgt av fremmede i tretti \u00e5r. Skiltverksteder, broderier, trykkerier og den som styrer markedsf\u00f8ringen din om tre ti\u00e5r kommer alle til \u00e5 bruke dette uten noen gang \u00e5 snakke med oss.",
     _pr:"&euro;8 000", _prl:"Identitetssystem",
     _prt:"Farge, typografi, skilting, produktmerking og selve merket, skrevet ned s\u00e5 leverand\u00f8rene dine kan arbeide etter det.",
@@ -1052,19 +1059,19 @@ const LANG = {
     sysSay:"Nelj\u00e4 s\u00e4\u00e4nt\u00f6\u00e4, yhdess\u00e4 projektissa, alusta loppuun. Selke\u00e4 vektori, kolme v\u00e4ri\u00e4 kiinte\u00e4ss\u00e4 suhteessa, yksi kirjasin ja kulttuuripino. Turvatikas valmistaa turvatikkaita; merkki on nelj\u00e4 muotoa p\u00e4\u00e4llekk\u00e4in, ja se mit\u00e4 luet on kolme askelmaa.",
     _real:"toimitettu", _ph:"paikanvaraaja", _php:"suhde on paikanvaraaja",
     p1t:"Vektori",
-    p1b:"Yksi viesti yhden muodon kantamana. Tikkaat on piirretty askelmien v\u00e4liin j\u00e4\u00e4v\u00e4n\u00e4 tilana eik\u00e4 sivujohteina, eik\u00e4 mik\u00e4\u00e4n siin\u00e4 ole ohuempi kuin ohuin asia sen vieress\u00e4, ja juuri se antaa sen pienenty\u00e4 ilman toista piirrosta.",
+    p1b:"Yksi viesti, yksi muoto. Tikkaat ovat askelmien v\u00e4liin j\u00e4\u00e4v\u00e4 tila eiv\u00e4tk\u00e4 sivujohteet, joten mit\u00e4\u00e4n ei tarvitse piirt\u00e4\u00e4 uudelleen pienennett\u00e4ess\u00e4.",
     g0:"Syv\u00e4 vesi", g1:"L\u00e4mmin valo", g2:"Paljas paperi",
-    p2t:"Kolme v\u00e4ri\u00e4, kymmenen kaksikymment\u00e4 seitsem\u00e4nkymment\u00e4",
-    p2b:"Kolme arvoa ja se osuus pinnasta, jonka kukin niist\u00e4 pit\u00e4\u00e4. Koodit on luettu painetusta kortista eik\u00e4 valittu, ja jako kymmenen kaksikymment\u00e4 seitsem\u00e4nkymment\u00e4 on paikanvaraaja kunnes todellinen jako toimitetaan. Suhde on s\u00e4\u00e4nt\u00f6, joten yll\u00e4 oleva palkki on piirretty siin\u00e4 suhteessa, jonka se ilmoittaa.",
+    p2t:"Kymmenen, kaksikymment\u00e4, seitsem\u00e4nkymment\u00e4",
+    p2b:"Kolme arvoa ja se osuus pinnasta, jonka kukin niist\u00e4 pit\u00e4\u00e4. Koodit on luettu painetusta kortista.",
     _c1:"Merkki", _c2:"Korostus", _c3:"Pohja",
     p3t:"Yksi kirjasin",
-    p3b:"Yksi kirjasin nimelle, opasteille, tietolehdelle ja ohjetarralle. Toinen kirjasin on toinen p\u00e4\u00e4t\u00f6s, joka jokaisen toimittajan on tehtav\u00e4 puolestasi.",
+    p3b:"Yksi kirjasin nimelle, opasteille, tietolehdelle ja tarralle. Toinen kirjasin on p\u00e4\u00e4t\u00f6s, joka jokaisen toimittajan on tehtav\u00e4 puolestasi.",
     _typeMeta:"Kirjasinta ei ole viel\u00e4 nimetty. Ladottu t\u00e4ss\u00e4 sivuston omalla otsikkokirjasimella paikanvaraajana.",
     p4t:"Kulttuuripino",
-    p4b:"Merkki s\u00e4ilyy, koska sen ymp\u00e4rill\u00e4 olevat asiat ovat samaa mielt\u00e4 sen kanssa. Pino on kirjattu yl\u00f6s, jotta vieras voi osua siihen kysym\u00e4tt\u00e4.",
-    _cw:"Vaatetus", _cwp:"Paikanvaraaja. Mit\u00e4 ihmiset pit\u00e4v\u00e4t p\u00e4\u00e4ll\u00e4\u00e4n saapuessaan ty\u00f6maalle, ja miksi se on osa merkki\u00e4.",
+    p4b:"Merkki s\u00e4ilyy, koska sen ymp\u00e4rill\u00e4 olevat asiat ovat samaa mielt\u00e4 sen kanssa. Kirjattuna vieras osuu siihen kysym\u00e4tt\u00e4.",
+    _cw:"Vaatetus", _cwp:"Paikanvaraaja. Mit\u00e4 ihmiset pit\u00e4v\u00e4t p\u00e4\u00e4ll\u00e4\u00e4n saapuessaan ty\u00f6maalle.",
     _cm:"Musiikki", _cmp:"Paikanvaraaja. Mit\u00e4 soi elokuvassa, messuosastolla ja odotushuoneessa.",
-    _ca:"Taide", _cap:"Paikanvaraaja. Viitteet, jotka valokuvaaja tai kuvittaja saa ennen aloittamista.",
+    _ca:"Taide", _cap:"Paikanvaraaja. Viitteet, jotka valokuvaaja saa ennen aloittamista.",
     sysStmt:"Piirretty kerran. Vieraiden noudattamana kolmekymment\u00e4 vuotta. Opastepajat, brodeeraajat, painotalot ja kuka tahansa hoitaa markkinointiasi kolmen vuosikymmenen kuluttua k\u00e4ytt\u00e4v\u00e4t kaikki t\u00e4t\u00e4 koskaan puhumatta meille.",
     _pr:"8 000 &euro;", _prl:"Identiteettij\u00e4rjestelm\u00e4",
     _prt:"V\u00e4ri, typografia, opasteet, tuotemerkinn\u00e4t ja itse merkki, kirjattuina niin ett\u00e4 toimittajasi voivat ty\u00f6skennell\u00e4 niiden mukaan.",
