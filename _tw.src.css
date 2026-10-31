@@ -1,9 +1,15 @@
-/* Tailwind v4 source for the offer page. Compiled and the output committed,
-   the same way the fonts and the JS runtime are, so the published page makes
-   no third-party request and nothing outside this repo can change what it
-   renders.
+/* Tailwind v4 source for /video/, which is the one page left that uses it.
+   Compiled and the output committed, the same way the fonts and the JS
+   runtime are, so the published page makes no third-party request and
+   nothing outside this repo can change what it renders.
 
-   Rebuild after editing this file or index.html:
+   It was the offer page's source, and the offer page and /brand/ were
+   promoted out of lab/ as single self-contained files with hand-written
+   CSS. Both are OFF this stylesheet, and that is why they are out of the
+   list below: a page named here gets its <link> rewritten by the build,
+   and neither has one to rewrite.
+
+   Rebuild after editing this file or video/index.html:
      sh _build-css.sh
 
    Run that and nothing else. The compiled stylesheet is named after its own
@@ -15,21 +21,18 @@
    writes an unhashed assets/tw.css that no page links to, and leaves the real
    stylesheet stale.
 
-   The underscore keeps this source out of the deploy. lab/strict/ keeps its
-   own source and its own output on purpose: a sandbox edit must never force
-   a rebuild of the live page's stylesheet, and must never change it. */
+   The underscore keeps this source out of the deploy. */
 @import "tailwindcss";
 
-/* Three pages share one compiled stylesheet, and that is the point rather
-   than a saving. /brand/ and /video/ are built from the offer page's own
-   utilities, so a token changed here changes all three in the same frame and
-   they cannot drift into three dialects of the same system. It also means
-   one hashed file in the cache instead of three.
+/* One page, one source. It carried three for as long as the offer page and
+   /brand/ were Tailwind, and sharing one hashed file is what stopped them
+   drifting into three dialects of the same system. Both are hand-written
+   now, so /video/ is the whole list.
 
-   Add a page here and in PAGES in _build-css.sh, or its classes compile to
-   nothing and the page renders bare. */
-@source "./index.html";
-@source "./brand/index.html";
+   Add a page here and in PAGES in _build-css.sh, in the same change, or
+   its classes compile to nothing and the page renders bare. The reverse is
+   just as sharp: a page that no longer links this stylesheet has to leave
+   BOTH lists, or the build rewrites a <link> it does not have. */
 @source "./video/index.html";
 
 /* The brand's own values. The skill's redesign protocol says extract the

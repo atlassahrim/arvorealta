@@ -56,8 +56,14 @@ front of the figures. Promoting one is that decision, and the owner makes it.
 | arvorealta.com/deck/`<slug>`/ | decks — 1920 × 1080, for presenting |
 | arvorealta.com/annex/`<slug>`/ | annexes — A4, for submitting |
 
-**`index.html` and `video/index.html` are live and in use.** Do not restructure
-them without being asked. Copy changes are fine; layout surgery is not.
+All five are live and in use. **Do not restructure any of them without being
+asked.** Copy changes are fine; layout surgery is not.
+
+**`index.html` and `brand/index.html` are single self-contained files.** No
+Tailwind, no compiled stylesheet, no vendored runtime, no build step: open
+the file and everything the page is, is in it. `video/index.html` is the one
+page still on the compiled stylesheet, and it is the only reason
+`_tw.src.css` and `_build-css.sh` still exist.
 
 ## Not published
 
@@ -101,37 +107,32 @@ reason.
 
 `reference/` is the first offer page, kept for the owner.
 
-**`lab/` was deleted once because it won**, and it is rebuilt. Everything the
-first one tested — the skip link, the page's own focus ring, `cursor:
-pointer` on buttons, the 24px targets, EB Garamond, the measured bar, the
-restored ladder and the intake form — is the offer page now. A sandbox that
-has been promoted is not a sandbox any more, it is a second copy of the live
-page that will drift, and the one before that was deleted for exactly that.
-**A sandbox is deleted when it falls behind or when it wins, and rebuilt
-from the live page when there is something new to try.**
+**`lab/` is deleted for the second time, and for the second time because it
+won.** The first one tested the skip link, the page's own focus ring,
+`cursor: pointer` on buttons, the 24px targets, EB Garamond, the measured
+bar, the restored ladder and the intake form, and all of it became the offer
+page. The second held three pages, and two of them are the site now:
+`lab/max-home/` is `index.html` and `lab/max-brand/` is `brand/index.html`.
+`lab/brand/`, the Tailwind portfolio sandbox that came before them, went
+with the folder.
 
-**`lab/brand/` is the current one: a full portfolio page, not a viewer.**
-It opens on a hero over a moving ground, takes three projects apart as
-systems, gives the remaining fourteen a gallery of one frame and one
-paragraph each, and closes on the ladder's three rungs. The mosaic alone was
-two versions ago, and the owner's objection is the right one: a photo library
-is not a portfolio, because it introduces nothing and demonstrates no craft
-beyond the pictures. A single featured project was the version after that,
-and three is what shows a system rather than a lucky mark. **It is not
-promoted and it crosses the light-only rule**, so promoting it is a decision
-made in front of the figures, not a merge.
+**A sandbox that has been promoted is not a sandbox any more, it is a second
+copy of the live page that will drift**, which is the whole reason both
+deletions happened. **A sandbox is deleted when it falls behind or when it
+wins, and rebuilt from the live page when there is something new to try.**
 
-Two rules come with a rebuilt sandbox. It carries `noindex, nofollow`, or it
-is a second `index.html` bidding against the first for the same terms. And
-**it needs its own compiled stylesheet, built by its own script**:
-`_build-css.sh` runs `rm -f assets/tw-*.css` before it writes, so a lab
-stylesheet kept beside the live one would be deleted by the next build of
-the offer page and the sandbox would silently lose every rule it is testing.
-`lab/_build.sh` writes `lab/tw-<hash>.css`, which that pattern does not
-match, and `lab/_tw.src.css` copies the live tokens rather than importing
-them — **a token changed in `_tw.src.css` has to be changed there too**,
-which is a cost the separation buys and a reason not to leave a sandbox
-standing.
+Two rules come with a rebuilt sandbox, and the second one is now cheap to
+satisfy. It carries `noindex, nofollow`, or it is a second `index.html`
+bidding against the first for the same terms. And **it must not share the
+compiled stylesheet**: `_build-css.sh` runs `rm -f assets/tw-*.css` before
+it writes, so a lab stylesheet kept beside the live one is deleted by the
+next build and the sandbox silently loses every rule it is testing. The
+second lab solved that by not using Tailwind at all — one self-contained
+file, hand-written CSS, which is also what made promoting it a `git mv`.
+**That is the pattern to repeat.** The older answer was `lab/_build.sh`
+writing `lab/tw-<hash>.css` beside a `lab/_tw.src.css` that copied the live
+tokens rather than importing them, and the cost of it was that a token
+changed in `_tw.src.css` had to be changed in two places.
 
 `mal/` was a Norwegian-only landing page for one tender in the retired
 editorial identity; its two files moved to `assets/vedlegg-5/` and the offer
@@ -150,32 +151,50 @@ or a friend about to point somebody at Atlas wants one link that shows the
 work, and the offer page is not that link — it sells one service to one buyer.
 
 **They are built from the offer page, not beside it.** Same self-hosted EB
-Garamond, Geist and Geist Mono, same compiled Tailwind, same ink and paper
-grounds, same numbered section eyebrows, same card corner. The first version
-of `/brand/` was built on the editorial theme to match the old `/video/`, and
-the owner's correction is the right one: the homepage is the template, and a
-portfolio in a second identity makes the site look like two firms.
+Garamond, Geist and Geist Mono, same ink and paper grounds, same eyebrow,
+same card corner. The first version of `/brand/` was built on the editorial
+theme to match the old `/video/`, and the owner's correction is the right
+one: the homepage is the template, and a portfolio in a second identity
+makes the site look like two firms.
+
+**What is shared is now the SCALE rather than a stylesheet**, and that is a
+weaker guarantee than it reads. `/` and `/brand/` are single hand-written
+files and `/video/` is the compiled one, so the six type tokens that run
+96 · 67 · 52 · 42 · 28 · 19 at 1440 are written out in two files and
+compiled in a third. Nothing enforces them. **A token changed on one page
+has to be changed on the other, in the same commit**, which is the cost the
+promotion bought and the thing to check first when the two pages stop
+looking like one site.
 
 `/brand/` was `/branding/` for part of one day. **That path keeps a stub** —
 `noindex, follow`, canonical to `/brand/`, a meta refresh and a real link
 under it — because a public path stays public and the link may already have
 been sent. Delete it only when something says nobody is holding it.
 
-### One stylesheet, three pages
+### One stylesheet, one page
 
-All three link the same `assets/tw-<hash>.css`. **That is the point rather
-than a saving:** a token changed once changes all three in the same frame and
-they cannot drift into three dialects. `_tw.src.css` carries an `@source` per
-page and `_build-css.sh` carries `PAGES`, and **a page missing from either
-list renders bare** — out of `@source` its classes compile to nothing, out of
-`PAGES` its `<link>` keeps pointing at a hash that no longer exists. Add a
-page to both, in the same change.
+`assets/tw-<hash>.css` is `/video/`'s now and nothing else links it. It
+carried all three for as long as all three were Tailwind, and that was the
+point rather than a saving: a token changed once changed all three in the
+same frame and they could not drift into three dialects. **That guarantee is
+gone and the note above says what replaces it, which is discipline.**
 
-### No runtime on either page
+The build's own trap is unchanged and cuts both ways. `_tw.src.css` carries
+an `@source` per page and `_build-css.sh` carries `PAGES`, and **a page
+missing from either list renders bare** — out of `@source` its classes
+compile to nothing, out of `PAGES` its `<link>` keeps pointing at a hash
+that no longer exists. Add a page to both in the same change. **A page that
+stops using the stylesheet has to leave both in the same change too**, or
+the next build rewrites a `<link>` it does not have. Rebuilt after the
+promotion with `/video/` alone: 62,553 bytes to 52,359.
 
-The offer page needs React for the language switcher and the intake dialog.
-These need neither, so they carry no runtime at all — the reveal is about
-thirty lines of vanilla JS and the header state is one sentinel.
+### No runtime anywhere
+
+The offer page needed React for the language switcher and the intake dialog
+until it was rebuilt; it does neither with a runtime now, and **no page on
+the site loads one.** `assets/vendor/runtime.js` is referenced by nothing.
+The reveal is about thirty lines of vanilla JS and the header state is one
+sentinel, on every page that has them.
 
 **The reveal is a sweep, and an IntersectionObserver is the wrong tool for
 it.** An observer reports a *change* in intersection, so a jump that crosses
@@ -248,6 +267,55 @@ missing H.264. **Check a real browser after deploying.**
 
 The social cards are `assets/_og/brand.html` and `video.html`, rendered by
 `assets/_og/render.sh`.
+
+## The promotion, and how to read everything below it
+
+**On 31 October 2026 the two sandboxes became the site.** `lab/max-home/`
+is `index.html` and `lab/max-brand/` is `brand/index.html`, both moved
+whole — the same bytes, with four things changed around them:
+
+- `noindex, nofollow` off both, since a page nobody can index is not a
+  live page
+- a canonical, five Open Graph tags and a Twitter card added to each,
+  pointing at the real paths and at the social cards that already existed
+- **the `<title>` and the offer page's `<meta description>` kept from the
+  pages they replaced**, because those two strings exist for search rather
+  than for a reader and `Written once. Right every time.` names neither the
+  firm nor a term anybody searches for. The brand page's description is the
+  sandbox's own, because the one it replaced said twelve marks and the page
+  shows seventeen
+- `lab/` deleted, `PAGES` and `@source` cut back to `video/index.html`, and
+  the stylesheet rebuilt at 52,359 bytes from 62,553
+
+**Everything in the run of sections below describes those two pages under
+their sandbox paths**, because that is where the work was done and the
+figures were measured. Read `lab/max-home/` as `/` and `lab/max-brand/` as
+`/brand/` throughout. The measurements still hold — the files did not
+change — and the paths do not.
+
+**The pages they replaced are in git and nowhere else.** The previous offer
+page was React, htm, Motion and compiled Tailwind; the previous brand page
+was Tailwind with a vanilla reveal. Neither is reachable at a URL any more,
+and `reference/` is a third, older page that is not either of them.
+
+**What this cost, stated rather than buried.** Three things are worth
+knowing before the next change:
+
+1. **The front page now says the tender is closed**, in all three
+   languages, because the clock derives it from two timestamps rather than
+   from typed copy. The deadline passed on 27 October and the page it
+   replaced was still reading `Open now` under it. This is the fix for the
+   fault recorded further down, and the first thing a reader sees under the
+   second fold's eyebrow is `Closed` — which is true, and is the point
+2. **The intake form is on an indexed page now.** Basin's free tier is 50
+   submissions a month and the previous offer page was already carrying it,
+   so nothing changed except that the sandbox twin is gone. If the quota
+   empties without real submissions behind it, that is the cause
+3. **The Nordic connective prose is this session's, not a native speaker's**,
+   and it is now on two indexed pages rather than two unlisted ones. The
+   procurement vocabulary on `/` came off the page it replaced and is the
+   safe half; the brand page's prose was written here. It is the part worth
+   having checked before either page is used in an approach
 
 ### The sandbox — what it is testing now
 
@@ -415,11 +483,13 @@ dropped. `assets/land/` holds the 51 that remain, webp only, 2.0 MB, cut by
 set: Figueiredo & Velloso, Noleto, Wright Minussi, Leonardo Lobo and Offrire.
 Every name was read at full resolution first.
 
-**Promoting it crosses the light-only rule** above, which is written against
-*dark mode* as a second identity toggled by preference rather than against a
-dark page. The offer page already reverses out to full-bleed ink twice. It is
-still the owner's call, and the rule gets rewritten in the same commit if the
-answer is yes.
+**Promoting it crossed the light-only rule** above, which was written
+against *dark mode* as a second identity toggled by preference rather than
+against a dark page. The offer page already reverses out to full-bleed ink
+twice. The owner's answer was yes, and **the rule was rewritten in the same
+commit**, which is what that section now says: no dark mode, no restriction
+on a dark page. This sandbox is not the page that was promoted — that was
+`lab/max-brand/` — but the argument it made is the one that carried.
 
 ### The second sandbox — `lab/max-brand/`, with the restrictions taken off
 
@@ -459,8 +529,9 @@ colours; do not derive them from a blend.**
 **It crosses the light-only rule twice over and on purpose.** It is dark for
 five sections and then turns to full paper for the close, chrome included,
 which is the clearest argument available that one identity can carry both
-grounds without becoming two firms. Promoting any of it is still the owner's
-decision in front of the figures.
+grounds without becoming two firms. **That argument won**: this page is
+`/brand/` now and the light-only rule reads the other way, against a mode
+and not against a ground.
 
 **Measured on the new hero ground**, type hidden so the strips sample the
 picture, bone over the water at 1512 x 900:
@@ -1428,6 +1499,13 @@ fix, when it is wanted, is to give the label its own node — `<em>01</em>
 <b data-t="r0"></b> <i></i>` — so the translation lands on the word and
 leaves the device alone.
 
+**It is on `/brand/` now rather than on a sandbox**, and re-measured after
+the promotion it is unchanged: six `.rail a`, zero `.rail a i`. The offer
+page's rail has always been built the other way, with the label in its own
+`<span data-t>`, and measures five anchors and five markers. **Two rails,
+one three-character difference, and only one of them draws what its
+stylesheet describes.**
+
 ### What the owner's copy changed, and the fan at twice the rate
 
 **Fold two's explanation is the owner's**, replacing the session's:
@@ -1563,12 +1641,18 @@ and the same standard taken to the home page.
 **The language control is on both, and it is the offer page's own three.**
 English, Norwegian Bokmål and Finnish, the browser's language first and a
 remembered choice over it from then on, `html lang` following so a screen
-reader gets its pronunciation. On `lab/max-home/` every string is read from
-**`STR` copied verbatim out of `index.html`** rather than retyped, so every
-price, every deadline and every word of the Norwegian and Finnish is the one
-the live page already ships. That is a snapshot and it will drift; it is the
-same trade as `lab/_tw.src.css` copying the live tokens rather than importing
-them, and a copy change on the offer page has to be carried across.
+reader gets its pronunciation. On `lab/max-home/` every string was read from
+**`STR` copied verbatim out of the `index.html` of the day** rather than
+retyped, so every price, every deadline and every word of the Norwegian and
+Finnish is the one that page shipped. That was a snapshot and the cost of it
+was that a copy change on the offer page had to be carried across.
+
+**The promotion collapses that.** This file IS `index.html` now, so `STR` is
+no longer a copy of anything: it is the copy, and there is no second object
+to keep in step. What survives is the one real dependency — **the prices and
+the deliverables come off `reference/index.html`**, which is where the
+original ladder wording lives, and a tier that changes scope changes in both
+or in neither.
 `lab/max-brand/` has its own short object, which reuses the offer page's tier names,
 prices, times and credit lines exactly and writes only the connective prose
 around them. **That prose is not a native speaker's** and is the part worth
@@ -1907,15 +1991,24 @@ of them.
 tracking, the three languages immediately beside it, and the action pushed to
 the far right by the languages' own `margin-right:auto`.
 
-### The tender fold is a clock now, and the live page is wrong today
+### The tender fold is a clock, and it is live now
 
 **On 28 October 2026 `index.html` carried `27 Oct 2026, 12:00` under an
 eyebrow reading `Open now`, and the deadline had passed the day before.**
 That is the third of the three things this file says to flag, because the page
 is read by the people running the procurement. **A date typed into copy goes
-stale in silence.** It is flagged rather than fixed on the live page, which is
-the owner's call, and the sandbox carries the mechanism that prevents it
+stale in silence.** It was flagged rather than fixed at the time, which was
+the owner's call, and the sandbox carried the mechanism that prevents it
 happening again.
+
+**The promotion is what fixed it.** Since 31 October the front page derives
+the fold from the timestamps, so on the day of writing it reads `Closed` in
+the eyebrow and `The deadline passed on 27 Oct 2026` in the clock, in all
+three languages. **That is the correct state and not a regression**: the
+fold's own headline turns with it, because `If you are bidding on this
+one…` is false once the tender shuts, and the two attachments stay linked
+because they stay useful. The next tender replaces two timestamps and
+nothing else.
 
 **`lab/max-home/` derives the whole fold from two timestamps.** `TENDER` holds
 the question deadline at `+02:00` and the tender deadline at `+01:00`, because
@@ -2020,19 +2113,19 @@ document agreed before the work starts, not listed on the page.
 ## Files
 
 ```
-index.html              offer page
-brand/index.html        brand portfolio
-lab/brand/index.html    the first sandbox — a full portfolio page, noindex
-lab/max-brand/index.html
-                        the brand portfolio at the sandbox standard. One
-                        file, hand-written CSS, vanilla JS, no build step and
-                        no Tailwind. Six folds, three languages. noindex
-lab/max-home/index.html the offer page at that standard, light first, with
-                        the intake form and STR copied from index.html. noindex
+index.html              offer page. One self-contained file, hand-written
+                        CSS, vanilla JS, no build step and no Tailwind.
+                        Light. Five folds, three languages, the intake form
+                        and the tender clock
+brand/index.html        brand portfolio. Same shape of file. Dark, with a
+                        paper close. Six folds locked to the viewport by
+                        scroll snap, three languages
 branding/index.html     a noindex stub redirecting to /brand/
-video/index.html        video portfolio
-reference/index.html    the first offer page, kept for reference — noindex
-_tw.src.css             the offer page's Tailwind source, compiled by
+video/index.html        video portfolio — the one page still on the
+                        compiled Tailwind stylesheet
+reference/index.html    the first offer page, kept for reference — noindex.
+                        Still where the original ladder copy lives
+_tw.src.css             /video/'s Tailwind source, compiled by
                         _build-css.sh into assets/tw-<hash>.css
 templates/index.html    index of every template
 deck/<slug>/index.html  one deck per folder
@@ -2045,25 +2138,28 @@ assets/
   img/                  photography, as webp + jpg at the widths the source
                         actually holds — the name carries a version:
                         after-1-<width>.<ext>
-  marks/                the live brand page's tiles, cut 4:5 from the
-                        portrait frames — <slug>-<ver>-<width>.{webp,jpg}
-  land/                 the sandbox's 51 landscape frames, 17 marks on three
-                        grounds — <slug>-<ground>-<ver>-<width>.webp
+  marks/                2.2 MB, REFERENCED BY NOTHING. The previous brand
+                        page's tiles, cut 4:5 from the portrait frames. Kept
+                        rather than deleted with the page they served
+  land/                 the brand page's 51 landscape frames, 17 marks on
+                        three grounds — <slug>-<ground>-<ver>-<width>.webp
   video/                the hero clip; the synthetic ground loops
                         ground-<ground>-1-1080.{mp4,jpg}, built by
                         _tools/portfolio/ground-loop.py; and the owner's own
                         footage, ground-{water,paper}-2-720.{mp4,jpg}
   vedlegg-5/            the open tender's example PDF and fillable Word file
   fonts/                Geist, Geist Mono and EB Garamond, self-hosted woff2
-  vendor/runtime.js     React, react-dom, Motion and htm, bundled once
-  tw-<hash>.css         the offer page's compiled Tailwind, built by _build-css.sh
+  vendor/runtime.js     324 KB, REFERENCED BY NOTHING. React, react-dom,
+                        Motion and htm, bundled once for the offer page
+                        before it was rebuilt without a runtime
+  tw-<hash>.css         /video/'s compiled Tailwind, built by _build-css.sh
   themes/arvorealta.css tokens for the editorial system
   themes/technical.css  tokens for the technical system
   system.css            structure only — no colour, no typefaces
   deck.css              editorial deck — slide geometry + print
   deck-technical.css    technical deck — slide geometry + print
   annex.css             A4 document geometry + print rules
-  site.js               live clocks, scroll reveal
+  site.js               live clocks, scroll reveal — reference/ only
 CNAME                   custom domain
 ```
 
@@ -2802,21 +2898,35 @@ headline is an independent decision each time, and those multiply until every
 fold opens the same way. The offer page runs three. **Keep the numbered spine
 unbroken and keep the unnumbered ones under about one per three folds.**
 
-**The site is light only, and that is a decision.** It emulates print at every
-output it has — A4 annexes, 1920 × 1080 decks, a paper ground on screen. A
-dark mode would be a second identity for a firm whose whole argument is what
-a document looks like when it is printed and scored. Do not add one as a
-courtesy.
+**The site has no dark MODE, and that is the rule. It is no longer light
+only, and that was the owner's decision.** `/brand/` is a dark page: five
+folds on ink and a close on full paper, chrome included. It was promoted
+out of the sandbox knowing it crossed the rule as the rule was written, and
+the rule is rewritten here rather than quietly broken.
 
-The offer page carried one for a while, as a toggle in the nav, and it is
-gone. Two things killed it. The page is three greens — paper ground, ink
-statement fold, ink-2 dark ground — so in dark mode the statement fold, whose
-entire job is to be the one inverted moment on the page, had nothing left to
-invert against and the page flattened to three shades of the same colour. And
-it cost a `dark:` variant on every colour utility, a pre-paint script, a
-listener and a stored preference, for a second identity the file above says
-not to have. `prefers-color-scheme: dark` now changes nothing, which is
-checked: the body stays `#D9D7D4` under either setting.
+**What the rule forbids is one page rendering two ways. It does not forbid
+two pages on two grounds.** A preference-toggled second identity is what
+the argument cannot survive — the firm's whole case is what a document
+looks like when it is printed and scored, at A4, at 1920 × 1080 and on a
+paper ground on screen, and a page that reverses itself because of a
+setting is a second identity for that firm. A page that is dark for every
+reader is a choice the firm made once, which is the same kind of thing as
+an ink statement fold. **Do not add a mode as a courtesy.**
+
+Checked on all three live pages at 1440: under `prefers-color-scheme: dark`
+every one of them renders the identical computed `background-color` and
+`color` as under light. `/` and `/video/` stay `#D9D7D4` on `#17352C`;
+`/brand/` stays `#070D0B` on `#EFECE7`.
+
+The offer page carried a real mode for a while, as a toggle in the nav, and
+it is gone. Two things killed it. The page is three greens — paper ground,
+ink statement fold, ink-2 dark ground — so in dark mode the statement fold,
+whose entire job is to be the one inverted moment on the page, had nothing
+left to invert against and the page flattened to three shades of the same
+colour. And it cost a `dark:` variant on every colour utility, a pre-paint
+script, a listener and a stored preference, for a second identity this file
+says not to have. **That reasoning is why `/brand/` being dark is not the
+same thing**: it has no second state to flatten into.
 
 **Snap to the baseline**, including captions and table rows. Display excepted, above.
 
@@ -2825,12 +2935,30 @@ swap is total.
 
 ## The offer page's folds
 
-Six, in order: the photographic hero, a two-item strip, the open tender, the
-award's weights on ink, the pricing ladder, and the close.
+Six sections, in order: the photographic hero, a two-item strip, the open
+tender, the award's weights on ink, the pricing ladder, and the close. That
+shape survived the rebuild; most of the mechanics under it did not.
 
-**This page was the sandbox until it was promoted.** Everything below was
-measured in `lab/` first and then moved here whole. The figures are that
-sandbox's figures and they still hold, because the page is the same file.
+**Read this whole run as the page BEFORE the promotion.** It was React, htm,
+Motion and compiled Tailwind, and the offer page is a single hand-written
+file now. Three kinds of thing are mixed together below and they age
+differently:
+
+- **Still governing.** Every contrast figure and every photograph
+  measurement, the ladder's prices and deliverables, the credit mechanic,
+  the dialog's own mechanics — `showModal`, `visualViewport`, the 10 MB cap,
+  `Accept: application/json` with the `Content-Type` unset, focus moved by
+  hand — which the new page ports whole and unchanged
+- **General findings, worth keeping whatever the page is built in.** The
+  observer trap, the curtain, `fr` tracks taking a min-content floor, Motion
+  writing inline `opacity` over a class, the autoplay gesture retry, measuring
+  the image rather than the layout
+- **History.** Everything about React, htm and Tailwind: `<br />` inside
+  `html\`...\``, a prop name matching what a component destructures,
+  backticks in a markup-template comment, React not writing `muted`,
+  Tailwind's preflight on `cursor`. **No page on the site loads a runtime or
+  a utility compiler any more**, so none of it can bite today. It is kept
+  because the repo has vendored a runtime twice and may again.
 
 ### Type, and the one failure the serif solved sideways
 

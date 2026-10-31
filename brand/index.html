@@ -3,437 +3,1496 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- The title keeps the previous brand page's, because it is the one string
+     here that exists for search and a referral rather than for a reader, and
+     `Every light it meets` names neither the craft nor the person. The
+     description is the sandbox's own and it is the accurate one: the page the
+     old description described showed twelve marks and this one shows
+     seventeen. -->
 <title>Brand and identity — Atlas Sahrim</title>
-<meta name="description" content="Visual identity by Atlas Sahrim. Twelve marks, each shown on the three grounds it has to survive: deep water, warm light and bare paper.">
+<meta name="description" content="Seventeen identities, shown the way they were made: one mark, carried through three grounds.">
 <link rel="canonical" href="https://arvorealta.com/brand/">
 <meta property="og:title" content="Brand and identity — Atlas Sahrim">
-<meta property="og:description" content="Twelve marks, each shown on the three grounds it has to survive.">
+<meta property="og:description" content="Seventeen identities, shown the way they were made: one mark, carried through three grounds.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://arvorealta.com/brand/">
 <meta property="og:image" content="https://arvorealta.com/assets/og-brand.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#07100D">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-<meta name="theme-color" content="#17352C">
 
-<!-- Self-hosted, exactly as the offer page does it: no third-party request
-     for type, and nothing outside this repo can change what renders. -->
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ebgaramond-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/geist-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/geist-mono-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ebgaramond-latin.woff2" crossorigin>
-<link rel="stylesheet" href="/assets/fonts/geist.css">
 <link rel="stylesheet" href="/assets/fonts/ebgaramond.css">
-
-<link rel="stylesheet" href="/assets/tw-ad6ad844.css">
+<link rel="stylesheet" href="/assets/fonts/geist.css">
+<link rel="preload" as="image" href="/assets/video/ground-water-2-720.jpg" fetchpriority="high">
 
 <style>
-/* The reveal, without the runtime. The offer page animates with Motion
-   because it needs React anyway for the language switcher and the intake
-   dialog; these pages need neither, so they carry no runtime at all.
+/* ══════════════════════════════════════════════════════════════════════
+   brand/index.html — the brand portfolio. Built in lab/max-brand/ and
+   promoted here whole, so the comments below argue with a live page that
+   this file now is.
 
-   Three failsafes, because a block stuck at opacity 0 is worse than no
-   animation at all. `.no-js` covers scripting off. `.rv-off` is a four
-   second deadline set in the head: if the script at the foot of the page
-   never runs, everything shows. And reduced motion opts out entirely. */
-.rv{opacity:0;transform:translateY(14px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
-.rv.in{opacity:1;transform:none}
-.no-js .rv,.rv-off .rv{opacity:1;transform:none;transition:none}
-@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+   THE INTERFACE, second build.
+
+   DESIGN READ. A brand-identity portfolio for owner-operators who buy a
+   mark once and keep it for thirty years. Photography-led, editorial.
+   Full-bleed imagery is the default state of the page and type is the
+   interruption.
+
+   THE ORGANISING IDEA IS THE OWNER'S OWN SENTENCE: a mark is a statement
+   read before it is explained. So every fold opens on the picture and the
+   words arrive second. The first build had it the other way round — flat
+   ink-green was the page and the work was an inset, and no piece of work
+   anywhere reached six per cent of the frame while the background video
+   filled it.
+
+   WHAT WAS DELETED FROM THE FIRST BUILD AND WHY
+   · The custom cursor. `taste-skill` bans it outright, accessibility and
+     performance both, and this one also blended its colour rather than
+     stating it. Gone, not recoloured.
+   · The gold word in the hero headline. Colouring one word to make a
+     headline interesting is the emphasis tell; the skill's rule is italic
+     or bold of the same family. EB Garamond has an italic, so `You` is
+     italic. `You` carries a descender, so the line gets 1.08 leading and
+     a reserve, which is the clearance rule.
+   · The bento. Four rules as four text cards is a template. The four are
+     four different shapes now, evidence first and caption second.
+   · The flat ink ground under four of six folds.
+
+   THE PALETTE IS SAMPLED, NOT CHOSEN, AND THAT IS THE ONLY DEFENCE IT HAS.
+   `taste-skill` bans this exact family as a default — paper near #EFEAE0,
+   a brass accent, espresso near #1A1714 — as the most-recurring AI tell in
+   production. Every value here is read off the owner's own photographs
+   instead: the paper is his paper ground, the amber is the ink his marks
+   are drawn in. Keeping it means carrying it with more conviction than a
+   default would need, which is what the first build did not do.
+   ══════════════════════════════════════════════════════════════════════ */
+
+:root{
+  /* grounds, read off the frames */
+  --ink:#070D0B; --ink-2:#0B1512; --ink-3:#121D19;
+  --paper:#EFEAE1; --paper-2:#E5DED2; --paper-ink:#171412;
+  --bone:#EFECE7;
+  --bone-dim:rgba(239,236,231,.60);
+  --bone-faint:rgba(239,236,231,.32);
+  --ink-dim:rgba(23,20,18,.62);
+  --ink-faint:rgba(23,20,18,.34);
+  --amber:#BD9059;                       /* the ink the marks are drawn in */
+  --rule:rgba(239,236,231,.13);
+  --rule-ink:rgba(23,20,18,.16);
+  --ease:cubic-bezier(.16,1,.3,1);
+
+  /* ── the column. 82rem outer box, the site's only width ───────────── */
+  --col:82rem; --gut:20px;
+  --pad:max(var(--gut),calc((100% - var(--col)) / 2 + var(--gut)));
+
+  /* ── THE SCALE, ported whole from the offer page ───────────────────
+     Six roles with one job each, strictly descending, which is the annex
+     spec's own shape: display, figure, head, value, sub, body. This page
+     carried its own four-token set and the offer page six; two scales
+     across two pages is how a site drifts into two dialects, which is the
+     reason the three Tailwind pages ever shared one stylesheet.
+     Measured at 1440 / 390: 96/43 · 67/37 · 52/30 · 42/26 · 28/20 · 19/16 */
+  --t-display:clamp(2.7rem,1.32rem + 5.2vw,6rem);
+  --t-figure:clamp(2.3rem,1.42rem + 3.1vw,4.4rem);
+  --t-head:clamp(1.85rem,1.17rem + 2.3vw,3.4rem);
+  --t-value:clamp(1.6rem,1.11rem + 1.7vw,2.6rem);
+  --t-sub:clamp(1.25rem,1.05rem + .8vw,1.85rem);
+  --t-body:clamp(1rem,.95rem + .3vw,1.2rem);
+}
+@media (min-width:640px){:root{--gut:32px}}
+
+*,*::before,*::after{box-sizing:border-box}
+/* ── THE LOCK-IN ───────────────────────────────────────────────────────
+   Each fold is a snap point, so the scroll settles on a whole screen the
+   way the hero and the close already did. It is `mandatory` rather than
+   `proximity` because proximity only snaps when the browser decides you
+   were close enough, which reads as the page sometimes doing it — and a
+   thing that happens sometimes reads as a bug rather than a design.
+
+   THE PRICE OF `mandatory` IS THAT EVERY FOLD HAS TO FIT. A snap point
+   taller than the viewport traps a reader inside it: the browser keeps
+   pulling back to the top of the section and the bottom of it cannot be
+   reached. So every fold is laid out to fit rather than merely to start
+   at 100svh, and that is verified at 390, 820 and 1440 rather than
+   assumed. Switched off under reduced motion, where an involuntary
+   scroll correction is exactly what a reader has asked not to have. */
+html{background:var(--ink);-webkit-text-size-adjust:100%;scroll-behavior:smooth;
+  scroll-snap-type:y mandatory}
+section{scroll-snap-align:start;scroll-snap-stop:normal}
+@media (prefers-reduced-motion:reduce){html{scroll-snap-type:none}}
+/* The viewer is fixed, so the page behind it has to stop scrolling, and
+   with mandatory snap on the root that is no longer cosmetic: a wheel
+   behind the viewer snaps the page to another fold, so closing it lands
+   the reader somewhere they never chose. The scroller is the root element
+   rather than the body, so the lock is stated there too, and the snap is
+   switched off while it holds so no correction fires on the frame the
+   viewer closes. The class is the one the script writes, which it was
+   not: the rule read `.lock` in two places and the script has always
+   written `.locked`, so this lock had never once held. */
+html:has(body.locked){overflow:hidden;scroll-snap-type:none}
+body.locked{overflow:hidden}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--bone);
+  font-family:Geist,system-ui,sans-serif;font-weight:380;font-size:var(--t-body);
+  line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+[hidden]{display:none!important}
+::selection{background:var(--amber);color:var(--ink)}
+
+/* one focus ring the page owns, inverting with the ground */
+:focus-visible{outline-width:2px;outline-style:solid;outline-color:currentColor;outline-offset:3px}
+
+.wrap{width:100%;max-width:var(--col);margin-inline:auto;padding-inline:var(--gut)}
+.mono{font-family:"Geist Mono",ui-monospace,monospace}
+/* The offer page's eyebrow: 11px mono, 600, .22em of tracking, uppercase,
+   in the page's own accent. On a dark ground the brick measures 2.03:1 and is
+   barred, so the amber the marks are drawn in carries it here. */
+.eyebrow{font-family:"Geist Mono",ui-monospace,monospace;font-size:11px;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--amber);margin:0}
+.align .eyebrow,.close .eyebrow{color:#8E4A45}
+.lbl{font-family:"Geist Mono",ui-monospace,monospace;font-size:11px;
+  font-weight:600;letter-spacing:.26em;text-transform:uppercase;margin:0}
+.disp{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.022em}
+
+.skip{position:fixed;left:-999px;top:0;z-index:200;background:var(--bone);color:var(--ink);
+  padding:12px 18px;font-size:var(--t-body)}
+.skip:focus{left:12px;top:12px}
+
+/* ══ CHROME ════════════════════════════════════════════════════════════
+   Two states, stated per control rather than derived, because the bar
+   sits at the top of the screen and the rail at its middle: over a light
+   fold the bar can be on paper while the rail is on ink. The dim opacity
+   moves with the colour — ink at 34% on paper measures 1.70:1 and the
+   same token on ink is right.                                          */
+.bar{position:fixed;inset:0 0 auto;z-index:80;display:flex;align-items:center;gap:clamp(10px,2vw,28px);
+  padding:20px var(--pad);pointer-events:none;
+  color:var(--chrome,var(--bone));transition:color .5s var(--ease)}
+.bar>*{pointer-events:auto}
+.bar .wm{font-family:"Geist Mono",ui-monospace,monospace;font-size:10.5px;font-weight:500;
+  letter-spacing:.3em;text-transform:uppercase;text-decoration:none;color:inherit}
+.langs{display:flex;gap:1px;margin-right:auto}
+.langs button{font-family:"Geist Mono",ui-monospace,monospace;font-size:10px;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;padding:8px 9px;border-radius:2px;
+  opacity:var(--bar-dim,.45);transition:opacity .3s var(--ease),background .3s var(--ease)}
+.langs button:hover{opacity:.85}
+.langs button[aria-pressed="true"]{opacity:1;
+  background:color-mix(in srgb,currentColor 12%,transparent)}
+.act{display:inline-flex;align-items:center;gap:10px;
+  font-family:"Geist Mono",ui-monospace,monospace;font-size:10.5px;font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;padding:11px 20px;border-radius:999px;
+  border:1px solid currentColor;color:inherit;text-decoration:none;
+  transition:background .4s var(--ease),color .4s var(--ease)}
+.act:hover{background:currentColor}
+.act:hover span{mix-blend-mode:normal}
+.act::after{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.55}
+
+/* the rail. wayfinding, and the only numbered device on the page */
+.rail{position:fixed;right:max(16px,1.6vw);top:50%;transform:translateY(-50%);z-index:78;
+  display:grid;gap:3px;justify-items:end;
+  color:var(--chrome-rail,var(--bone));transition:color .5s var(--ease)}
+.rail a{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:10px;
+  font-family:"Geist Mono",ui-monospace,monospace;font-size:9px;font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:inherit;
+  padding:6px 0;opacity:var(--rail-dim,.36);transition:opacity .4s var(--ease)}
+.rail a em{font-style:normal;font-size:8.5px;opacity:.7;font-variant-numeric:tabular-nums}
+.rail a i{display:block;width:14px;height:1px;background:currentColor;
+  transition:width .5s var(--ease);justify-self:end}
+.rail a[aria-current="true"]{opacity:1}
+.rail a[aria-current="true"] i{width:40px}
+@media (max-width:1100px){.rail{display:none}}
+@media (max-width:620px){
+  .bar{padding:16px var(--gut);gap:7px}
+  .bar .wm{font-size:9px;letter-spacing:.16em}
+  .langs button{padding:8px 5px;letter-spacing:.04em;font-size:9.5px}
+  .act{font-size:9px;letter-spacing:.1em;padding:10px 13px;gap:7px}
+  .act::after{width:4px;height:4px}
+}
+
+/* ══ ARRIVAL ═══════════════════════════════════════════════════════════
+   Not an IntersectionObserver. An observer reports a CHANGE in
+   intersection, so a jump that crosses a block without painting it takes
+   it from below the fold to above with ratio 0 at both ends and leaves
+   it at zero for the life of the page — and the rail's own anchors make
+   exactly that jump. The loop measures instead. 14px, which reads as a
+   fade rather than a slide. The selector list is paired with REVEAL in
+   the script; a block in one and not the other either never arrives or
+   arrives already visible.                                             */
+html.rv [data-rv]{opacity:0;transform:translate3d(0,14px,0);
+  transition:opacity .9s var(--ease),transform .9s var(--ease);
+  transition-delay:var(--d,0ms)}
+html.rv [data-rv].in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html.rv [data-rv]{opacity:1!important;transform:none!important;transition:none}
+}
+
+/* ══ ACT I — OPEN ══════════════════════════════════════════════════════
+   The water is the page and the words sit in it. Vertically centred,
+   which is the owner's instruction, and held to the left half so the
+   type never competes with the brightest part of the frame.           */
+.open{position:relative;isolation:isolate;min-height:100svh;display:grid;align-content:center;
+  padding:clamp(96px,14vh,150px) var(--pad) clamp(40px,8vh,90px);overflow:hidden}
+.bed{position:absolute;inset:0;z-index:-1}
+.bed img,.bed video{width:100%;height:100%;object-fit:cover}
+.bed video{position:absolute;inset:0;opacity:0;transition:opacity 1.1s var(--ease)}
+.bed video.on{opacity:1}
+/* a reader needs the type legible at every crop; the figures are in
+   CLAUDE.md and the left column is the part of this frame that is safe */
+.open .inner{max-width:min(100%,46rem);display:grid;gap:clamp(16px,2.6vh,30px)}
+.open .lbl{color:var(--bone-dim)}
+.open h1{margin:0;font-size:var(--t-display);line-height:1.08;padding-bottom:.08em;
+  max-width:14ch;text-wrap:balance}
+/* italic for emphasis, never a second family and never a second colour.
+   `You` carries a descender, so the line keeps 1.08 and a reserve. */
+.open h1 em{font-style:italic}
+.open .sub{margin:0;max-width:40ch;color:var(--bone-dim);font-size:var(--t-body)}
+.open .foot{display:flex;flex-wrap:wrap;align-items:baseline;gap:14px 26px;
+  border-top:1px solid var(--rule);padding-top:16px;margin-top:clamp(8px,2vh,22px)}
+.open .foot .lbl{color:var(--bone-faint)}
+
+/* ══ ACT II — ALIGNMENT ════════════════════════════════════════════════
+   One paper surface carrying three moments: the two plates, the question
+   that captions them, and the line that lets a reader leave. The first
+   build gave the plates 4.1 per cent of the screen each and put the
+   sorting line on its own ink band, which made two ink folds in a row.
+   One ground, and the plates are the composition.                      */
+/* ══ ACT III — DIRECTION ═══════════════════════════════════════════════
+   The page's one void. No picture, no chrome, nothing to look at. It
+   sits between a surface covered in work and a surface covered in work,
+   so the strongest thing available to it is to show nothing. Centred is
+   banned for a section headline and allowed for a line whose content is
+   the design, which is the distinction worth keeping.                   */
+.void{background:var(--ink);min-height:100svh;display:grid;align-content:center;
+  justify-items:center;text-align:center;gap:clamp(22px,4vh,44px);
+  padding:clamp(80px,14vh,170px) var(--pad);
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.void .lbl{color:var(--bone-faint)}
+.void h2{margin:0;font-size:var(--t-head);line-height:1.02;max-width:11ch;text-wrap:balance}
+.void p{margin:0;max-width:46ch;color:var(--bone-dim)}
+.void p b{font-weight:400;color:var(--bone)}
+
+/* ══ THE TWO-COLUMN FOLD ═══════════════════════════════════════════════
+   Folds two and three are the same template at the owner's instruction:
+   media one side, text the other, generous margins, one screen. `.flip`
+   mirrors it, so the alignment fold runs media-left and the system fold
+   media-right and a reader meets the two sides alternately rather than
+   reading the same column twice.
+
+   EVERY FOLD IS A FULL SCREEN. That is the owner's call and it costs
+   something worth stating: content that would have set its own height now
+   has to fit 100svh or overflow it, so the template centres its content
+   and caps the media rather than letting either grow. */
+.duo{min-height:100svh;display:grid;align-content:center;
+  padding:clamp(96px,13vh,150px) var(--pad) clamp(56px,9vh,110px)}
+/* the rail is fixed at the right edge and the column ran under it: the
+   gallery's last thumbnail ended at 1343 against a rail starting at 1340.
+   The right side gives back the rail's own width, from the width the rail
+   appears at, and the left is untouched. */
+@media (min-width:1100px){.duo{padding-right:calc(var(--pad) + 86px)}}
+.duo-in{width:100%;max-width:var(--col);margin-inline:auto;
+  display:grid;gap:clamp(34px,6vh,72px);align-items:center}
+@media (min-width:980px){
+  .duo-in{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(48px,6vw,110px)}
+  .duo.flip .duo-media{order:2}
+  .duo.flip .duo-text{order:1}
+}
+.duo-text{display:grid;gap:clamp(14px,2.2vh,26px);align-content:center}
+.duo-text h2{margin:0;font-size:var(--t-head);line-height:1.04;max-width:16ch;text-wrap:balance}
+.duo-text .say{margin:0;max-width:44ch;font-size:var(--t-body);line-height:1.62;color:var(--bone-dim)}
+.duo-media{display:grid;gap:clamp(22px,3.5vh,44px);min-width:0}
+
+/* ── ACT II — alignment. The plates stack, same left edge, same width,
+   which for an object five times wider than it is tall is the directer
+   comparison: the eye runs down one edge rather than across a gutter. */
+.align{background:var(--paper);color:var(--paper-ink)}
+.align .duo-text .say{color:var(--ink-dim)}
+/* 49% of the column, which is 70% twice, at the owner's instruction. The
+   cap is on the plate rather than on the image so the rule under each
+   caption shortens with its mark instead of running on past it. The pair
+   is centred rather than flush left, which is the white space the owner
+   asked for: at 70% all of the slack sat on one side and the plates read
+   as pushed against the text column. Centring does not cost the shared
+   left edge that is the reason they stack at all, because both images are
+   1400px wide and take the same cap, so they still begin and end on the
+   same two pixels. */
+/* the gap is the distance from the mark to the word that labels it, and
+   it is the owner's call that 12px read as cramped: a label sitting that
+   close to a lockup reads as part of the drawing rather than as a caption
+   on it */
+.plate{display:grid;gap:clamp(20px,3.4vh,42px);margin:0;max-width:49%;justify-self:center}
+.plate img{width:100%;height:auto}
+.plate figcaption{display:flex;align-items:center;gap:14px;color:var(--ink-faint)}
+.plate figcaption::after{content:"";flex:1;height:1px;background:var(--rule-ink)}
+.sort{margin:clamp(10px,2vh,22px) 0 0;padding-top:clamp(18px,3vh,32px);
+  border-top:1px solid var(--rule-ink);font-size:var(--t-value);line-height:1.12;
+  max-width:24ch;text-wrap:balance}
+
+/* ── ACT III — the system. Four rules as a numbered list, and the grid is
+   the specification rather than decoration: the vector, the proportion
+   drawn at 10/20/70, and the mark carried on two of its three grounds. */
+.spec{background:var(--ink-2)}
+.rules{list-style:none;margin:clamp(8px,1.6vh,18px) 0 0;padding:0;display:grid;gap:1px;
+  background:var(--rule);border-radius:2px;overflow:hidden}
+.rules li{background:var(--ink-2);display:grid;grid-template-columns:auto 1fr;gap:16px;
+  align-items:baseline;padding:clamp(12px,1.8vh,18px) clamp(14px,2vw,22px)}
+.rules b{font-family:"Geist Mono",ui-monospace,monospace;font-size:11px;font-weight:600;
+  letter-spacing:.22em;color:var(--bone-faint)}
+.rules span{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px}
+.rules i{font-style:normal;font-family:"EB Garamond",Georgia,serif;font-size:var(--t-sub);
+  line-height:1.1;letter-spacing:-.015em}
+.rules em{font-style:normal;font-family:"Geist Mono",ui-monospace,monospace;font-size:9.5px;
+  font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-left:auto}
+.quad{display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,1.1vw,14px)}
+.q{margin:0;position:relative;aspect-ratio:16/10;overflow:hidden;border-radius:2px;
+  background:var(--ink-3)}
+.q img{width:100%;height:100%;object-fit:cover}
+.q.paper{background:var(--paper);display:grid;place-items:center;padding:clamp(14px,2.4vw,30px)}
+.q.paper img{width:100%;height:auto;object-fit:contain}
+/* the proportion is drawn AT the proportion */
+.q.band{display:grid;grid-template-rows:10fr 20fr 70fr;gap:2px;background:var(--ink-2)}
+.q.band span:nth-child(1){background:#BD9059}
+.q.band span:nth-child(2){background:#954D13}
+.q.band span:nth-child(3){background:#5A200A}
+
+/* ── the system fold has to FIT, because the page snaps ────────────────
+   Stacked below 980px it measured 1.122 screens at both 820 and 390, and
+   a mandatory snap point taller than the viewport traps a reader inside
+   it: the browser pulls back to the top of the section and the bottom
+   cannot be reached. Four small cuts rather than one big one, so nothing
+   is shrunk to the point of illegibility — the cells lose a row of crop,
+   the rules lose a third of their padding, and the fold loses air it had
+   only because the desktop needed it. Measured after: 0.98 at 390. */
+@media (max-width:979px){
+  .spec{padding-block:clamp(84px,11vh,120px) clamp(26px,4vh,48px)}
+  .spec .duo-in{gap:clamp(22px,3vh,38px)}
+  .spec .duo-text{gap:clamp(10px,1.5vh,18px)}
+  .rules li{padding:clamp(8px,1.2vh,13px) clamp(12px,2vw,18px)}
+  .q{aspect-ratio:16/9}
+  .quad{gap:6px}
+}
+
+/* ── ACT V — the gallery ───────────────────────────────────────────────
+   One picture at the size of the fold, the text under it. Three rows:
+   header, picture, foot — `auto minmax(0,1fr) auto` inside 100svh, which
+   is what guarantees the fold FITS at every viewport instead of fitting
+   at the one it was designed on. That matters more than usual here,
+   because the page snaps: a mandatory snap on a fold taller than the
+   screen traps a reader inside it with no way to reach the rest.
+
+   DEEP WATER ONLY. The fold used to rotate the three grounds across the
+   fifteen, so a reader met one gallery that looked like three. The other
+   two grounds of a project are what opening a frame is for. */
+.work{background:var(--ink)}
+.gal{min-height:100svh;display:grid;grid-template-rows:auto minmax(0,1fr) auto;
+  gap:clamp(14px,2.2vh,28px);
+  padding:clamp(86px,11vh,128px) var(--pad) clamp(22px,4vh,52px);
+  max-width:calc(var(--col) + 2 * var(--pad));margin-inline:auto;width:100%}
+@media (min-width:1100px){.gal{padding-right:calc(var(--pad) + 86px)}}
+.galhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px clamp(18px,3vw,38px)}
+.galhead h2{margin:0;font-size:var(--t-value);line-height:1.05}
+.shot{position:relative;min-height:0;overflow:hidden;border-radius:2px;background:var(--ink-3)}
+.shot .fr{position:absolute;inset:0;width:100%;height:100%;padding:0;margin:0;border:0;
+  background:none;opacity:0;pointer-events:none;transition:opacity .6s var(--ease)}
+.shot .fr img{width:100%;height:100%;object-fit:cover}
+.shot .fr.lit{opacity:1;pointer-events:auto;z-index:2}
+.shot .fr:focus-visible{outline-offset:-3px}
+.galfoot{display:grid;gap:clamp(10px,1.6vh,18px)}
+/* name · year · industry. The year is a stand-in for all seventeen and the
+   industry is shown only where the lockup itself states one. */
+.shotcap{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;margin:0;
+  font-family:"Geist Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--bone-dim)}
+.shotcap b{font-weight:600;color:var(--bone)}
+.shotcap span+span::before{content:"/";margin-right:18px;color:var(--rule)}
+.thumbs{display:grid;grid-template-columns:repeat(15,1fr);gap:clamp(3px,.45vw,7px)}
+.thumbs button{position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:1px;padding:0;
+  background:var(--ink-3);opacity:.4;outline:1px solid transparent;outline-offset:1px;
+  transition:opacity .35s var(--ease),outline-color .35s var(--ease)}
+.thumbs button img{width:100%;height:100%;object-fit:cover}
+.thumbs button:hover,.thumbs button:focus-visible{opacity:.8}
+.thumbs button.lit{opacity:1;outline-color:var(--bone)}
+@media (max-width:760px){.thumbs{grid-template-columns:repeat(8,1fr)}}
+
+/* ══ ACT VI — CLOSE ════════════════════════════════════════════════════
+   The mark appears once, at size, with no ground of its own, and the
+   fold's content sits beneath it. A signature shown twice is not a
+   signature, which is why it is out of the gallery. Bottom aligned: a
+   close in the middle of its own band reads as another section.        */
+.close{position:relative;isolation:isolate;min-height:100svh;display:grid;align-items:end;
+  background:var(--paper);color:var(--paper-ink);overflow:hidden}
+.close .inner{position:relative;z-index:2;width:100%;
+  padding-block:clamp(80px,13vh,150px) clamp(30px,6vh,64px);
+  display:grid;gap:clamp(14px,2.4vh,28px);max-width:var(--col);margin-inline:auto;padding-inline:var(--gut)}
+.sig{justify-self:center;width:100%;display:grid;place-items:center;
+  margin-bottom:clamp(14px,4vh,48px)}
+.sig img{width:clamp(180px,27vw,400px);height:auto}
+.close .lbl{color:var(--amber)}
+.close h2{margin:0;font-size:var(--t-display);line-height:1.08;padding-bottom:.06em;
+  max-width:12ch;text-wrap:balance}
+.close h2 em{font-style:italic}
+.close .say{margin:0;max-width:46ch;color:var(--ink-dim)}
+.close .act{align-self:start;justify-self:start;margin-top:4px}
+.close footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;
+  border-top:1px solid var(--rule-ink);padding-top:16px;margin-top:clamp(20px,4vh,44px);
+  font-family:"Geist Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ink-faint)}
+/* the two site links take the whole first line, so the identity row below
+   keeps the space-between it already had rather than becoming three
+   cramped items at 10px */
+.close footer>span:first-child{flex:1 0 100%;margin-bottom:clamp(6px,1.4vh,14px)}
+.close footer a{color:var(--paper-ink);text-decoration:none;opacity:.72;
+  padding:6px 0;transition:opacity .25s var(--ease)}
+.close footer a:hover,.close footer a:focus-visible{opacity:1}
+
+/* ══ THE INTAKE ════════════════════════════════════════════════════════
+   A native <dialog> with showModal, because the focus trap, the inert
+   background, Escape, ::backdrop and focus returning to the opener are
+   five things a hand-rolled modal gets wrong. Carried whole from the
+   first build with its behaviour intact: focus is moved by hand to the
+   email field, and visualViewport drives top and max-height on both its
+   events, because on iOS svh and dvh do not shrink for the keyboard and
+   a fixed dialog does not move with the visual viewport.
+   Restyled only.                                                       */
+#dlg{border:0;padding:0;background:none;max-width:min(92vw,30rem);width:100%;
+  position:fixed;margin:0 auto;color:var(--bone)}
+#dlg::backdrop{background:rgba(4,9,8,.78)}
+.sheet{background:var(--ink-3);border:1px solid var(--rule);border-radius:3px;
+  padding:clamp(22px,4vw,34px);display:grid;gap:18px}
+.sheet .top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.sheet h2{margin:0;font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.02em;
+  font-size:clamp(1.4rem,1.1rem + 1vw,2rem);line-height:1.1}
+.sheet .x{font-family:"Geist Mono",ui-monospace,monospace;font-size:13px;line-height:1;padding:8px;
+  margin:-8px -8px 0 0;color:var(--bone-faint)}
+.sheet .x:hover{color:var(--bone)}
+.sheet .intro{margin:0;font-size:var(--t-body);line-height:1.6;color:var(--bone-dim)}
+.fld{display:grid;gap:7px}
+.fld label{font-family:"Geist Mono",ui-monospace,monospace;font-size:9.5px;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--bone-dim)}
+/* 16px or iOS zooms the page on focus */
+.fld input{font:inherit;font-size:16px;color:var(--bone);background:rgba(239,236,231,.05);
+  border:1px solid var(--rule);border-radius:2px;padding:12px 13px;width:100%}
+.fld input:focus-visible{outline:2px solid var(--bone);outline-offset:2px;border-color:transparent}
+.fld .hint{margin:0;font-size:11.5px;color:var(--bone-faint)}
+.sheet .err{margin:0;font-size:13px;line-height:1.5;color:#E9A09A}
+.sheet .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.sheet .alt{margin:0;font-size:12px;line-height:1.6;color:var(--bone-faint);
+  border-top:1px solid var(--rule);padding-top:14px}
+.sheet .alt a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.sheet .act{font-size:9.5px;padding:10px 16px}
+.sheet .act[disabled]{opacity:.5;cursor:default}
+
+/* ══ THE VIEWER ════════════════════════════════════════════════════════
+   The stage opens here at the frame's own proportions. A percentage
+   max-height resolves to none against an indefinite containing block and
+   an fr row counts as indefinite, so the picture is absolutely placed
+   inside a relative stage rather than sized against its row — and it has
+   to be the picture's own box, not a full-size box with object-fit, or
+   the tile takes the wrong shape on a tall screen.                     */
+.view{position:fixed;inset:0;z-index:98;background:rgba(4,9,8,.975);display:grid;
+  grid-template-rows:auto minmax(0,1fr) auto;opacity:0;visibility:hidden;
+  transition:opacity .5s var(--ease),visibility .5s}
+.view.on{opacity:1;visibility:visible}
+.view .vh{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;
+  padding:20px var(--pad)}
+.view .vh h3{margin:4px 0 0;font-family:"EB Garamond",Georgia,serif;font-weight:400;
+  font-size:clamp(1.3rem,1rem + 1.3vw,2.3rem);line-height:1.08}
+.view .vclose{font-family:"Geist Mono",ui-monospace,monospace;font-size:13px;line-height:1;
+  padding:10px;color:var(--bone-dim)}
+.view .vclose:hover{color:var(--bone)}
+.view .vstage{position:relative;min-height:0}
+.view .vstage img{position:absolute;inset:0;margin:auto;width:auto;height:auto;
+  max-width:calc(100% - 2 * var(--pad));max-height:100%;
+  transition:opacity .45s var(--ease),transform .45s var(--ease)}
+.view .varrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;
+  font-size:30px;line-height:1;padding:16px 18px;color:var(--bone-dim)}
+.view .varrow:hover{color:var(--bone)}
+.view .varrow.p{left:4px} .view .varrow.n{right:4px}
+.view .vf{display:flex;gap:6px;overflow-x:auto;padding:12px var(--pad) 18px;scrollbar-width:none}
+.view .vf::-webkit-scrollbar{display:none}
+.view .vf button{flex:0 0 auto;width:82px;aspect-ratio:16/9;border-radius:2px;overflow:hidden;
+  opacity:.42;transition:opacity .35s var(--ease)}
+.view .vf button:hover{opacity:.8}
+.view .vf button[aria-current="true"]{opacity:1;outline:1px solid var(--bone);outline-offset:1px}
+.view .vf img{width:100%;height:100%;object-fit:cover}
+
 </style>
-<script>
-/* Marks scripting as available, then hands the reveal a deadline. The offer
-   page carries the same four seconds for the same reason: show everything
-   rather than nothing if the script never arrives. */
-(function(h){h.className=h.className.replace(/\bno-js\b/,"").trim()+" js";
-setTimeout(function(){if(!h.classList.contains("rv-ready"))h.classList.add("rv-off")},4000)})(document.documentElement);
-</script>
 </head>
+<body>
+<script>
+/* Reveals are armed above every element they touch, so nothing is painted
+   visible and then hidden. The deadline is the failsafe: a block stuck at
+   zero is worse than no animation, so after four seconds the arming class
+   comes off and everything is simply shown. */
+(function(){var h=document.documentElement;h.classList.remove('no-js');
+ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){h.classList.add('rv');
+   setTimeout(function(){h.classList.remove('rv')},4000);}})();
+</script>
 
-<body class="font-sans antialiased bg-paper text-ink">
+<a class="skip" href="#open">Skip to content</a>
 
-<a href="#work" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-[14px] focus:text-bone">Skip to the work</a>
-
-<!-- Fixed, and bone while it is over the ink band, exactly as the offer
-     page's header is bone while it is over the photograph. A sentinel at the
-     foot of the hero flips it rather than a scroll handler, so nothing runs
-     on every frame. -->
-<header id="bar" class="on-ink fixed inset-x-0 top-0 z-40 border-b border-transparent text-bone transition-colors">
-  <div class="mx-auto flex h-[68px] w-full max-w-[82rem] items-center justify-between gap-5 px-5 sm:px-8">
-    <a href="/" class="-my-1 py-1 font-mono text-[13px] uppercase tracking-[.22em]">Arvorealta</a>
-    <nav class="flex items-center gap-5 sm:gap-7">
-      <a href="/" class="-my-1 py-1 text-[14px] opacity-75 transition-opacity hover:opacity-100">the offer</a>
-      <a href="/brand/" aria-current="page" class="-my-1 border-b border-current py-1 text-[14px]">brand</a>
-      <a href="/video/" class="-my-1 py-1 text-[14px] opacity-75 transition-opacity hover:opacity-100">video</a>
-    </nav>
-    <a href="mailto:atlas@arvorealta.com"
-       class="hidden rounded-full bg-bone px-5 py-2.5 text-[14px] font-medium text-ink transition-colors hover:bg-bone/90 sm:inline-flex">Start a project</a>
-  </div>
+<header class="bar">
+  <a class="wm" href="#open">Arvorealta</a>
+  <div class="langs" id="langs" role="group" aria-label="Language"></div>
+  <button type="button" class="act" data-cta data-t="cta">Start a project</button>
 </header>
 
-<main>
+<nav class="rail" aria-label="Sections">
+  <a href="#open"      data-rail data-t="r0"><em>01</em> Open <i></i></a>
+  <a href="#alignment" data-rail data-t="r1"><em>02</em> Alignment <i></i></a>
+  <a href="#system"    data-rail data-t="r3"><em>03</em> System <i></i></a>
+  <a href="#direction" data-rail data-t="r2"><em>04</em> Direction <i></i></a>
+  <a href="#marks"     data-rail data-t="r4"><em>05</em> Work <i></i></a>
+  <a href="#start"     data-rail data-t="r5"><em>06</em> Start <i></i></a>
+</nav>
 
-<!-- ─────────────────────────────────────────────────────────────── hero
-     The offer page opens on a full-bleed photograph. This one opens on the
-     ink ground instead, which is the same page's statement fold: a portfolio
-     that spends a whole screen on type before showing a single mark is a
-     portfolio nobody scrolls. The band is tall enough to be a hero and short
-     enough that the first row of work is one scroll away. -->
-<section class="on-ink bg-ink text-bone">
-  <div class="mx-auto w-full max-w-[82rem] px-5 pb-20 pt-[8.5rem] sm:px-8 sm:pb-28 sm:pt-[10rem]">
-    <p class="rv font-mono text-[11px] uppercase tracking-[.18em] text-bone/75">Brand and identity</p>
-    <h1 class="rv mt-7 max-w-[18ch] font-display text-[clamp(2.6rem,1rem+5vw,5.2rem)] font-normal leading-[1.02] tracking-[-.02em]">
-      Drawn once.<br>Stamped everywhere.
-    </h1>
-    <p class="rv mt-8 max-w-[46ch] text-[clamp(1.05rem,.98rem+.35vw,1.25rem)] leading-[1.6] text-bone/80">
-      A mark is approved on a screen and then spends its life on brass, on
-      letterheads, on a sign in the rain. Twelve of them below, each shown on
-      the three grounds it has to survive.
-    </p>
-    <div class="rv mt-10 flex flex-wrap items-center gap-3">
-      <a href="#work" class="inline-flex items-center justify-center rounded-full bg-bone px-6 py-3 text-[15px] font-medium text-ink transition-colors hover:bg-bone/90">See the work</a>
-      <a href="https://www.behance.net/arvorealta" class="inline-flex items-center justify-center rounded-full border border-bone/30 px-6 py-3 text-[15px] font-medium transition-colors hover:border-bone/70">Full case studies on Behance</a>
+<!-- ACT I ─ OPEN ─────────────────────────────────────────────────────── -->
+<section class="open" id="open">
+  <div class="bed" aria-hidden="true">
+    <img src="/assets/video/ground-water-2-720.jpg" alt="" width="1280" height="720" fetchpriority="high">
+    <video id="bedv" muted playsinline loop preload="metadata" poster="/assets/video/ground-water-2-720.jpg">
+      <source src="/assets/video/ground-water-2-720.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="inner">
+    <p class="lbl" data-t="kicker">Brands for decision makers</p>
+    <h1 class="disp"><span data-t="h1a"><em>You</em> set the brand,</span> <span data-t="h1b">not your audience.</span></h1>
+    <div class="foot">
+      <p class="sub" data-t="sub">Most marks fade away within five years, made for the short term and perceived wind direction. Winds change. We do not negotiate direction. We pick the winds to ride.</p>
     </div>
   </div>
-  <div id="sentinel" aria-hidden="true" class="h-px"></div>
 </section>
 
-<!-- ───────────────────────────────────────────────────── 01 the work
-     Three columns, and each column holds one ground: water on the left,
-     light in the middle, paper on the right. The frames came three to a
-     project in that order, so the grid is the source material's own
-     structure rather than a mood board. On a phone it is one column and the
-     three grounds simply alternate down the page. -->
-<section id="work" class="mx-auto w-full max-w-[82rem] scroll-mt-[92px] px-5 py-20 sm:px-8 sm:py-28">
-  <p class="rv font-mono text-[11px] uppercase tracking-[.18em] text-brick"><b class="font-semibold tabular-nums">01</b> &nbsp;Selected identities</p>
-
-  <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-16">
-    <figure class="rv group">
-      <div class="overflow-hidden rounded-2xl border border-ink/15 bg-paper-3">
-        <picture>
-          <source type="image/webp" srcset="/assets/marks/remedios-1-440.webp 440w, /assets/marks/remedios-1-880.webp 880w" sizes="(min-width:64rem) 26vw, (min-width:40rem) 44vw, 90vw">
-          <img src="/assets/marks/remedios-1-880.jpg" width="880" height="1100" loading="lazy" decoding="async"
-               alt="The Ilha dos Remédios crest in gold and deep green, two birds flanking a carved cartouche, over dark water." class="block w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]">
-        </picture>
-      </div>
-      <figcaption class="mt-4 border-t border-ink/15 pt-3.5">
-        <h3 class="font-display text-[1.45rem] leading-tight">Ilha dos Remédios</h3>
-        <p class="mt-1 font-mono text-[11px] uppercase tracking-[.14em] text-ink/75">Crest and seal</p>
-      </figcaption>
-    </figure>
-    <figure class="rv group">
-      <div class="overflow-hidden rounded-2xl border border-ink/15 bg-paper-3">
-        <picture>
-          <source type="image/webp" srcset="/assets/marks/demillion-1-440.webp 440w, /assets/marks/demillion-1-880.webp 880w" sizes="(min-width:64rem) 26vw, (min-width:40rem) 44vw, 90vw">
-          <img src="/assets/marks/demillion-1-880.jpg" width="880" height="1100" loading="lazy" decoding="async"
-               alt="The Demillion Landscapes mark, a gold leaf folded into a seed form, over warm backlit grasses." class="block w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]">
-        </picture>
-      </div>
-      <figcaption class="mt-4 border-t border-ink/15 pt-3.5">
-        <h3 class="font-display text-[1.45rem] leading-tight">Demillion</h3>
-        <p class="mt-1 font-mono text-[11px] uppercase tracking-[.14em] text-ink/75">Landscapes</p>
-      </figcaption>
-    </figure>
-    <figure class="rv group">
-      <div class="overflow-hidden rounded-2xl border border-ink/15 bg-paper-3">
-        <picture>
-          <source type="image/webp" srcset="/assets/marks/soledad-1-440.webp 440w, /assets/marks/soledad-1-880.webp 880w" sizes="(min-width:64rem) 26vw, (min-width:40rem) 44vw, 90vw">
-          <img src="/assets/marks/soledad-1-880.jpg" width="880" height="1100" loading="lazy" decoding="async"
-               alt="The Soledad Molina monogram, an S cut into a tall gold panel, on pale paper under blurred leaf shadows." class="block w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]">
-        </picture>
-      </div>
-      <figcaption class="mt-4 border-t border-ink/15 pt-3.5">
-        <h3 class="font-display text-[1.45rem] leading-tight">Soledad Molina</h3>
-        <p class="mt-1 font-mono text-[11px] uppercase tracking-[.14em] text-ink/75">Monogram and wordmark</p>
-      </figcaption>
-    </figure>
-    <figure class="rv group">
-      <div class="overflow-hidden rounded-2xl border border-ink/15 bg-paper-3">
-        <picture>
-          <source type="image/webp" srcset="/assets/marks/venner-1-440.webp 440w, /assets/marks/venner-1-880.webp 880w" sizes="(min-width:64rem) 26vw, (min-width:40rem) 44vw, 90vw">
-          <img src="/assets/marks/venner-1-880.jpg" width="880" height="1100" loading="lazy" decoding="async"
-               alt="The Venner Advice mark, a fluted gold crescent, over dark water." class="block w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]">
-        </picture>
-      </div>
-      <figcaption class="mt-4 border-t border-ink/15 pt-3.5">
-        <h3 class="font-display text-[1.45rem] leading-tight">Venner</h3>
-        <p class="mt-1 font-mono text-[11px] uppercase tracking-[.14em] text-ink/75">Advice</p>
-      </figcaption>
-    </figure>
-    <figure class="rv group">
-      <div class="overflow-hidden rounded-2xl border border-ink/15 bg-paper-3">
-        <picture>
-          <source type="image/webp" srcset="/assets/marks/archy-1-440.webp 440w, /assets/marks/archy-1-880.webp 880w" sizes="(min-width:64rem) 26vw, (min-width:40rem) 44vw, 90vw">
-          <img src="/assets/marks/archy-1-880.jpg" width="880" height="1100" loading="lazy" decoding="async"
-               alt="The Archy mark, a ruled gold wing resolving into a leaf, over warm backlit grasses." class="block w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]">
-        </picture>
-      </div>
-      <figcaption class="mt-4 border-t border-ink/15 pt-3.5">
-        <h3 class="font-display text-[1.45rem] leading-tight">Archy</h3>
-        <p class="mt-1 font-mono text-[11px] uppercase tracking-[.14em] text-ink/75">Mark and wordmark</p>
-      </figcaption>
-    </figure>
-    <figure class="rv group">
-      <div class="overflow-hidden rounded-2xl border border-ink/15 bg-paper-3">
-        <picture>
-          <source type="image/webp" srcset="/assets/marks/boaventura-1-440.webp 440w, /assets/marks/boaventura-1-880.webp 880w" sizes="(min-width:64rem) 26vw, (min-width:40rem) 44vw, 90vw">
-          <img src="/assets/marks/boaventura-1-880.jpg" width="880" height="1100" loading="lazy" decoding="async"
-               alt="The Boaventura Noleto Sousa Souto mark, a fluted gold vessel, on pale paper under blurred leaf shadows." class="block w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]">
-        </picture>
-      </div>
-      <figcaption class="mt-4 border-t border-ink/15 pt-3.5">
-        <h3 class="font-display text-[1.45rem] leading-tight">Boaventura Noleto Sousa Souto</h3>
-        <p class="mt-1 font-mono text-[11px] uppercase tracking-[.14em] text-ink/75">Advogados</p>
-      </figcaption>
-    </figure>
-    <figure class="rv group">
-      <div class="overflow-hidden rounded-2xl border border-ink/15 bg-paper-3">
-        <picture>
-          <source type="image/webp" srcset="/assets/marks/dantas-1-440.webp 440w, /assets/marks/dantas-1-880.webp 880w" sizes="(min-width:64rem) 26vw, (min-width:40rem) 44vw, 90vw">
-          <img src="/assets/marks/dantas-1-880.jpg" width="880" height="1100" loading="lazy" decoding="async"
-               alt="The Dantas and Martins mark, a gold wing of ruled feathers, over dark water." class="block w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]">
-        </picture>
-      </div>
-      <figcaption class="mt-4 border-t border-ink/15 pt-3.5">
-        <h3 class="font-display text-[1.45rem] leading-tight">Dantas &amp; Martins</h3>
-        <p class="mt-1 font-mono text-[11px] uppercase tracking-[.14em] text-ink/75">Advogadas associadas</p>
-      </figcaption>
-    </figure>
-    <figure class="rv group">
-      <div class="overflow-hidden rounded-2xl border border-ink/15 bg-paper-3">
-        <picture>
-          <source type="image/webp" srcset="/assets/marks/amazonia-1-440.webp 440w, /assets/marks/amazonia-1-880.webp 880w" sizes="(min-width:64rem) 26vw, (min-width:40rem) 44vw, 90vw">
-          <img src="/assets/marks/amazonia-1-880.jpg" width="880" height="1100" loading="lazy" decoding="async"
-               alt="The Amazônia Store mark, a gold Y drawn as a canopy, over warm backlit grasses." class="block w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]">
-        </picture>
-      </div>
-      <figcaption class="mt-4 border-t border-ink/15 pt-3.5">
-        <h3 class="font-display text-[1.45rem] leading-tight">Amazônia Store</h3>
-        <p class="mt-1 font-mono text-[11px] uppercase tracking-[.14em] text-ink/75">Retail mark</p>
-      </figcaption>
-    </figure>
-    <figure class="rv group">
-      <div class="overflow-hidden rounded-2xl border border-ink/15 bg-paper-3">
-        <picture>
-          <source type="image/webp" srcset="/assets/marks/turvatikas-1-440.webp 440w, /assets/marks/turvatikas-1-880.webp 880w" sizes="(min-width:64rem) 26vw, (min-width:40rem) 44vw, 90vw">
-          <img src="/assets/marks/turvatikas-1-880.jpg" width="880" height="1100" loading="lazy" decoding="async"
-               alt="The Turvatikas Safety Ladder mark on a terracotta card, three gold rungs beside the name, on pale paper." class="block w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]">
-        </picture>
-      </div>
-      <figcaption class="mt-4 border-t border-ink/15 pt-3.5">
-        <h3 class="font-display text-[1.45rem] leading-tight">Turvatikas</h3>
-        <p class="mt-1 font-mono text-[11px] uppercase tracking-[.14em] text-ink/75">Safety ladder</p>
-      </figcaption>
-    </figure>
-    <figure class="rv group">
-      <div class="overflow-hidden rounded-2xl border border-ink/15 bg-paper-3">
-        <picture>
-          <source type="image/webp" srcset="/assets/marks/autotrack-1-440.webp 440w, /assets/marks/autotrack-1-880.webp 880w" sizes="(min-width:64rem) 26vw, (min-width:40rem) 44vw, 90vw">
-          <img src="/assets/marks/autotrack-1-880.jpg" width="880" height="1100" loading="lazy" decoding="async"
-               alt="The Autotrack mark, a gold chevron drawn in one stroke, over dark water." class="block w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]">
-        </picture>
-      </div>
-      <figcaption class="mt-4 border-t border-ink/15 pt-3.5">
-        <h3 class="font-display text-[1.45rem] leading-tight">Autotrack</h3>
-        <p class="mt-1 font-mono text-[11px] uppercase tracking-[.14em] text-ink/75">Mark and wordmark</p>
-      </figcaption>
-    </figure>
-    <figure class="rv group">
-      <div class="overflow-hidden rounded-2xl border border-ink/15 bg-paper-3">
-        <picture>
-          <source type="image/webp" srcset="/assets/marks/arvorealta-1-440.webp 440w, /assets/marks/arvorealta-1-880.webp 880w" sizes="(min-width:64rem) 26vw, (min-width:40rem) 44vw, 90vw">
-          <img src="/assets/marks/arvorealta-1-880.jpg" width="880" height="1100" loading="lazy" decoding="async"
-               alt="The Arvorealta mark, a fluted gold fan, over warm backlit grasses." class="block w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]">
-        </picture>
-      </div>
-      <figcaption class="mt-4 border-t border-ink/15 pt-3.5">
-        <h3 class="font-display text-[1.45rem] leading-tight">Arvorealta</h3>
-        <p class="mt-1 font-mono text-[11px] uppercase tracking-[.14em] text-ink/75">Our own</p>
-      </figcaption>
-    </figure>
-    <figure class="rv group">
-      <div class="overflow-hidden rounded-2xl border border-ink/15 bg-paper-3">
-        <picture>
-          <source type="image/webp" srcset="/assets/marks/machado-1-440.webp 440w, /assets/marks/machado-1-880.webp 880w" sizes="(min-width:64rem) 26vw, (min-width:40rem) 44vw, 90vw">
-          <img src="/assets/marks/machado-1-880.jpg" width="880" height="1100" loading="lazy" decoding="async"
-               alt="The Machado Gobbo wordmark reversed out of a deep blue plate, on pale paper under blurred leaf shadows." class="block w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]">
-        </picture>
-      </div>
-      <figcaption class="mt-4 border-t border-ink/15 pt-3.5">
-        <h3 class="font-display text-[1.45rem] leading-tight">Machado Gobbo</h3>
-        <p class="mt-1 font-mono text-[11px] uppercase tracking-[.14em] text-ink/75">Advogados</p>
-      </figcaption>
-    </figure>
-  </div>
-</section>
-
-<!-- ───────────────────────────────────────────── 02 the three grounds -->
-<section class="border-y border-ink/10 bg-paper-2">
-  <div class="mx-auto w-full max-w-[82rem] px-5 py-20 sm:px-8 sm:py-28">
-    <p class="rv font-mono text-[11px] uppercase tracking-[.18em] text-brick"><b class="font-semibold tabular-nums">02</b> &nbsp;Three grounds</p>
-    <h2 class="rv mt-7 max-w-[20ch] font-display text-[clamp(2rem,1.2rem+2.4vw,3.4rem)] font-normal leading-[1.06] tracking-[-.015em]">
-      A mark is approved<br>in one light and used<br>in all of them.
-    </h2>
-    <p class="rv mt-7 max-w-[52ch] text-[1.05rem] leading-[1.65] text-ink/80">
-      Deep water, warm light and bare paper. A mark that holds its shape
-      across all three holds it on a business card, on a facade and on a
-      screen at four in the afternoon. One that only works on white was never
-      finished.
-    </p>
-
-    <div class="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-3 sm:gap-6">
-      <figure class="rv">
-        <div class="overflow-hidden rounded-2xl border border-ink/15 bg-paper-3">
-          <picture>
-          <source type="image/webp" srcset="/assets/marks/ground-water-1-440.webp 440w, /assets/marks/ground-water-1-880.webp 880w" sizes="(min-width:40rem) 30vw, 90vw">
-          <img src="/assets/marks/ground-water-1-880.jpg" width="880" height="1100" loading="lazy" decoding="async"
-               alt="The mark in gold over dark moving water." class="block w-full">
-        </picture>
-        </div>
-        <figcaption class="mt-3 font-mono text-[11px] uppercase tracking-[.14em] text-ink/75">Deep water</figcaption>
+<!-- ACT II ─ ALIGNMENT ───────────────────────────────────────────────── -->
+<section class="align duo flip" id="alignment" aria-label="The alignment test">
+  <div class="duo-in">
+    <div class="duo-media">
+      <figure class="plate" data-rv>
+        <img src="/assets/img/turva-old-2-1400.webp" width="1400" height="312" loading="lazy"
+             sizes="(min-width:980px) 44vw, 86vw"
+             srcset="/assets/img/turva-old-2-700.webp 700w, /assets/img/turva-old-2-1400.webp 1400w"
+             alt="The previous Turvatikas lockup: a hook pictogram beside a heavy stencilled wordmark">
+        <figcaption class="lbl" data-t="vsA">Before</figcaption>
       </figure>
-      <figure class="rv">
-        <div class="overflow-hidden rounded-2xl border border-ink/15 bg-paper-3">
-          <picture>
-          <source type="image/webp" srcset="/assets/marks/ground-light-1-440.webp 440w, /assets/marks/ground-light-1-880.webp 880w" sizes="(min-width:40rem) 30vw, 90vw">
-          <img src="/assets/marks/ground-light-1-880.jpg" width="880" height="1100" loading="lazy" decoding="async"
-               alt="The same mark over warm backlit grasses." class="block w-full">
-        </picture>
-        </div>
-        <figcaption class="mt-3 font-mono text-[11px] uppercase tracking-[.14em] text-ink/75">Warm light</figcaption>
-      </figure>
-      <figure class="rv">
-        <div class="overflow-hidden rounded-2xl border border-ink/15 bg-paper-3">
-          <picture>
-          <source type="image/webp" srcset="/assets/marks/ground-paper-1-440.webp 440w, /assets/marks/ground-paper-1-880.webp 880w" sizes="(min-width:40rem) 30vw, 90vw">
-          <img src="/assets/marks/ground-paper-1-880.jpg" width="880" height="1100" loading="lazy" decoding="async"
-               alt="The same mark on pale paper under blurred leaf shadows." class="block w-full">
-        </picture>
-        </div>
-        <figcaption class="mt-3 font-mono text-[11px] uppercase tracking-[.14em] text-ink/75">Bare paper</figcaption>
+      <figure class="plate" data-rv>
+        <img src="/assets/img/turva-new-2-1400.webp" width="1400" height="250" loading="lazy"
+             sizes="(min-width:980px) 44vw, 86vw"
+             srcset="/assets/img/turva-new-2-700.webp 700w, /assets/img/turva-new-2-1400.webp 1400w"
+             alt="The Turvatikas lockup as drawn now: three rungs beside tracked serif capitals">
+        <figcaption class="lbl" data-t="vsB">After</figcaption>
       </figure>
     </div>
-  </div>
-</section>
-
-<!-- ───────────────────────────────────────────────────── 03 elsewhere -->
-<section class="mx-auto w-full max-w-[82rem] px-5 py-20 sm:px-8 sm:py-28">
-  <p class="rv font-mono text-[11px] uppercase tracking-[.18em] text-brick"><b class="font-semibold tabular-nums">03</b> &nbsp;Elsewhere</p>
-
-  <div class="mt-10 grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-3">
-    <div class="rv border-t border-ink/15 pt-6">
-      <h3 class="font-display text-[1.6rem] leading-tight">Behance</h3>
-      <p class="mt-3 max-w-[32ch] text-[.95rem] leading-[1.65] text-ink/75">The full case studies — construction, applications and the work behind each mark.</p>
-      <a href="https://www.behance.net/arvorealta" class="mt-4 inline-block font-mono text-[12px] uppercase tracking-[.14em] underline decoration-ink/30 underline-offset-4 transition-colors hover:decoration-ink">behance.net/arvorealta</a>
-    </div>
-    <div class="rv border-t border-ink/15 pt-6">
-      <h3 class="font-display text-[1.6rem] leading-tight">Video</h3>
-      <p class="mt-3 max-w-[32ch] text-[.95rem] leading-[1.65] text-ink/75">Vertical edits for social: pacing, type, sound and colour.</p>
-      <a href="/video/" class="mt-4 inline-block font-mono text-[12px] uppercase tracking-[.14em] underline decoration-ink/30 underline-offset-4 transition-colors hover:decoration-ink">arvorealta.com/video</a>
-    </div>
-    <div class="rv border-t border-ink/15 pt-6">
-      <h3 class="font-display text-[1.6rem] leading-tight">Documents</h3>
-      <p class="mt-3 max-w-[32ch] text-[.95rem] leading-[1.65] text-ink/75">The other half of the practice: document standards for public tenders.</p>
-      <a href="/" class="mt-4 inline-block font-mono text-[12px] uppercase tracking-[.14em] underline decoration-ink/30 underline-offset-4 transition-colors hover:decoration-ink">arvorealta.com</a>
+    <div class="duo-text">
+      <p class="eyebrow" data-rv data-t="e2">Alignment</p>
+      <h2 class="disp" data-rv data-t="h2a">Can you see the difference?</h2>
+      <p class="say" data-rv data-t="vsSay">A mark is a statement read before it is explained. The test is clarity, not meaning. It is impact in the second before you think.</p>
+      <p class="sort disp" data-rv data-t="vsSort">If the difference is not obvious to you, nothing written here will make it so.</p>
     </div>
   </div>
 </section>
 
-<!-- ───────────────────────────────────────────────────────── the close -->
-<section class="on-ink bg-ink text-bone">
-  <div class="mx-auto w-full max-w-[82rem] px-5 py-20 sm:px-8 sm:py-28">
-    <p class="rv font-mono text-[11px] uppercase tracking-[.18em] text-bone/75">Start a project</p>
-    <h2 class="rv mt-7 max-w-[22ch] font-display text-[clamp(2rem,1.2rem+2.4vw,3.4rem)] font-normal leading-[1.06] tracking-[-.015em]">
-      Tell me what it has<br>to survive.
-    </h2>
-    <p class="rv mt-7 max-w-[48ch] leading-[1.7] text-bone/80">
-      Where the mark will be used decides what it can be. Signage, embroidery,
-      an engraved plate and a favicon are four different briefs, and the cheapest
-      time to know that is before the first sketch.
-    </p>
-    <div class="rv mt-10">
-      <a href="mailto:atlas@arvorealta.com" class="inline-flex items-center justify-center rounded-full bg-bone px-6 py-3 text-[15px] font-medium text-ink transition-colors hover:bg-bone/90">atlas@arvorealta.com</a>
+<section class="spec duo flip" id="system" aria-label="The system">
+  <div class="duo-in">
+    <div class="duo-text">
+      <p class="eyebrow" data-rv data-t="e4">The system</p>
+      <h2 class="disp" data-rv data-t="h4a">Tools are the easy part.</h2>
+      <p class="say" data-rv data-t="sysSay">Direction is often mistaken for micromanagement. We need clean vectors, not 30 page ruling documents.</p>
+      <ol class="rules" data-rv>
+        <li><b>01</b><span><i data-t="p1t">The vector</i></span></li>
+        <li><b>02</b><span><i data-t="p2t">Ten, twenty, seventy</i></span></li>
+        <li><b>03</b><span><i data-t="p3t">One typeface</i></span></li>
+        <li><b>04</b><span><i data-t="p4t">The culture stack</i></span></li>
+      </ol>
+    </div>
+    <div class="duo-media">
+      <!-- four cells, one per rule, so the grid is the specification and
+           not decoration: the vector, the proportion drawn at 10/20/70,
+           and the mark carried on two of its three grounds -->
+      <div class="quad" data-rv>
+        <figure class="q paper">
+          <img src="/assets/img/turva-new-2-1400.webp" width="1400" height="250" loading="lazy"
+               sizes="(min-width:980px) 22vw, 43vw"
+               srcset="/assets/img/turva-new-2-700.webp 700w, /assets/img/turva-new-2-1400.webp 1400w"
+               alt="The Turvatikas lockup on its own stock">
+        </figure>
+        <figure class="q band" aria-label="Ten, twenty, seventy">
+          <span class="s1"></span><span class="s2"></span><span class="s3"></span>
+        </figure>
+        <figure class="q">
+          <img src="/assets/land/turvatikas-w-1-1400.webp" width="1400" height="788" loading="lazy"
+               sizes="(min-width:980px) 22vw, 43vw" alt="The Turvatikas mark over deep water">
+        </figure>
+        <figure class="q">
+          <img src="/assets/land/turvatikas-p-1-1400.webp" width="1400" height="788" loading="lazy"
+               sizes="(min-width:980px) 22vw, 43vw" alt="The Turvatikas card on bare paper">
+        </figure>
+      </div>
     </div>
   </div>
 </section>
 
-</main>
+<!-- ACT III ─ DIRECTION, the page's one void ─────────────────────────── -->
+<section class="void" id="direction" aria-label="Direction">
+  <p class="lbl" data-rv data-t="e3">Direction</p>
+  <h2 class="disp" data-rv data-t="h3a">You are the compass.</h2>
+  <p data-rv data-t="dirSay">Most designers will ask you to kneel to whichever audience was easiest for them to describe. <b>Not here.</b> Clarity is how we get you where you are already pointing.</p>
+</section>
 
-<footer class="border-t border-ink/10 py-10">
-  <div class="mx-auto flex w-full max-w-[82rem] flex-wrap items-center justify-between gap-x-8 gap-y-4 px-5 font-mono text-[11px] uppercase tracking-[.18em] text-ink/75 sm:px-8">
-    <span>Arvorealta</span>
-    <nav class="flex flex-wrap items-center gap-x-7 gap-y-2">
-      <a href="/" class="-my-1.5 py-1.5 transition-colors hover:text-ink">The offer</a>
-      <a href="/brand/" class="-my-1.5 py-1.5 transition-colors hover:text-ink">Brand</a>
-      <a href="/video/" class="-my-1.5 py-1.5 transition-colors hover:text-ink">Video</a>
-      <a href="https://www.behance.net/arvorealta" class="-my-1.5 py-1.5 transition-colors hover:text-ink">Behance</a>
-      <a href="https://www.linkedin.com/in/atlassahrim" class="-my-1.5 py-1.5 transition-colors hover:text-ink">LinkedIn</a>
-    </nav>
-    <a href="mailto:atlas@arvorealta.com" class="-my-1.5 py-1.5 transition-colors hover:text-ink">atlas@arvorealta.com</a>
+<!-- ACT IV ─ THE SYSTEM. four rules, four shapes, never four cards ───── -->
+
+
+<!-- ACT V ─ WORK. one stage at the width of the viewport ──────────────── -->
+<section class="work" id="marks">
+  <div class="gal">
+    <div class="galhead">
+      <p class="eyebrow" data-rv data-t="e5">History</p>
+      <h2 class="disp" data-rv data-t="more">The high end standard.</h2>
+    </div>
+    <div class="shot" id="cloud"></div>
+    <div class="galfoot">
+      <!-- name, year, industry. Two of the three are stand-ins and say so:
+           the year is an em dash for all seventeen, and the industry is
+           shown only where the lockup itself states one. A sector inferred
+           from a company name is invented proof. -->
+      <p class="shotcap">
+        <b id="capName"></b>
+        <span id="capYear">&#8212;</span>
+        <span id="capRole"></span>
+      </p>
+      <div class="thumbs" id="namerail" role="group" aria-label="All marks"></div>
+    </div>
   </div>
-</footer>
+</section>
+
+<!-- ACT VI ─ CLOSE. the mark signs it, once ───────────────────────────── -->
+<section class="close" id="start">
+  <div class="bed" aria-hidden="true">
+    <img src="/assets/video/ground-paper-2-720.jpg" alt="" width="1280" height="720" loading="lazy">
+    <video id="closev" muted playsinline loop preload="none" poster="/assets/video/ground-paper-2-720.jpg">
+      <source src="/assets/video/ground-paper-2-720.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="inner">
+    <div class="sig">
+      <img src="/assets/img/arvo-mark-1-1200.webp" width="1200" height="443" loading="lazy"
+           sizes="(min-width:1100px) 400px, 44vw"
+           srcset="/assets/img/arvo-mark-1-600.webp 600w, /assets/img/arvo-mark-1-1200.webp 1200w"
+           alt="The Arvorealta mark">
+    </div>
+    <p class="lbl" data-rv data-t="e6">Where to start</p>
+    <h2 class="disp" data-rv data-t="closeH">Win with <em>class</em>.</h2>
+    <p class="say" data-rv data-t="closeB">A mark drawn to last costs more than one drawn to look current, but it is bought once. If that is the arithmetic you already do, we will get on.</p>
+    <button type="button" class="act" data-rv data-cta data-t="cta">Start a project</button>
+    <!-- The two links are to the OTHER pages of the site, not to this
+         page's own sections: the offer page at `/` carries the same pair in the
+         same place, pointing here and at the video page, so the three read
+         as one site rather than three. The rail above is the wayfinding
+         inside this page and this is the wayfinding out of it. -->
+    <footer data-rv>
+      <span><a href="/" data-t="fHome">Documents and tenders</a>
+        &nbsp;/&nbsp; <a href="/video/" data-t="fVideo">Video</a></span>
+      <span>Arvorealta &nbsp;/&nbsp; Atlas Sahrim</span>
+      <span><a href="mailto:atlas@arvorealta.com">atlas@arvorealta.com</a></span>
+    </footer>
+  </div>
+</section>
+<dialog id="dlg" aria-labelledby="dlgT">
+  <form method="dialog" class="sheet" id="sheet">
+    <div class="top">
+      <h2 id="dlgT" data-t="fT">Start a project</h2>
+      <button type="button" class="x" id="dlgX" aria-label="Close">&#10005;</button>
+    </div>
+    <div id="dlgBody">
+      <p class="intro" data-t="fI">Two lines is enough. I read these myself and answer the same day.</p>
+      <div class="fld" style="margin-top:16px">
+        <label for="fem" data-t="fEm">Email</label>
+        <input type="email" id="fem" name="email" autocomplete="email" inputmode="email" required>
+      </div>
+      <div class="fld" style="margin-top:14px">
+        <label for="fph" data-t="fPh">Phone</label>
+        <input type="tel" id="fph" name="phone" autocomplete="tel" inputmode="tel">
+        <span class="hint" data-t="fPhH">Optional. Only if you would rather talk than write.</span>
+      </div>
+      <p class="err" id="dlgErr" role="alert" hidden></p>
+    </div>
+    <div class="row" id="dlgActs">
+      <button type="button" class="act" id="dlgSend" data-t="fS">Send it</button>
+      <button type="button" class="act" id="dlgCancel" data-t="fC">Close</button>
+    </div>
+    <p class="alt" id="dlgAlt"></p>
+  </form>
+</dialog>
+
+<!-- the viewer ──────────────────────────────────────────────────────── -->
+<div class="view" id="view" role="dialog" aria-modal="false" aria-label="Frame viewer">
+  <div class="vh">
+    <div>
+      <p class="mono" style="font-size:10px;color:var(--bone-faint)"><span id="vn">1</span> of 51</p>
+      <h3 id="vt">&nbsp;</h3>
+      <p class="mono" style="font-size:9.5px;color:var(--bone-dim)" id="vr">&nbsp;</p>
+    </div>
+    <button class="vclose" id="vclose" aria-label="Close">&#10005;</button>
+  </div>
+  <div class="vstage" id="vstage">
+    <img id="vimg" alt="" width="1400" height="788">
+    <button class="varrow p" id="vprev" aria-label="Previous">&#8249;</button>
+    <button class="varrow n" id="vnext" aria-label="Next">&#8250;</button>
+  </div>
+  <div class="vf" id="vf" aria-label="All frames"></div>
+</div>
+
+<noscript style="display:block;padding:6rem 1.5rem;max-width:40rem;margin:0 auto">
+  <h1 style="font-family:'EB Garamond',serif;font-size:2.6rem;line-height:1.05;margin:0 0 1.2rem">One mark.</h1>
+  <p style="line-height:1.7;color:#aaa">The sections above read without scripting.
+  The grid of fourteen marks and the frame viewer do not, and
+  <a href="/brand/" style="color:#E9E7E4">the live brand page</a> needs none of it.</p>
+</noscript>
+
 
 <script>
-/* The reveal is a sweep, and an IntersectionObserver is the wrong tool for
-   it. An observer only reports a CHANGE in intersection, so a jump that
-   crosses a block without ever painting it — the hero's own "See the work"
-   anchor, a restored scroll position, Cmd+End — takes the block from "below
-   the fold" to "above the fold" with ratio 0 at both ends, fires nothing,
-   and leaves it at opacity 0 for the life of the page. Measured: jumping
-   straight to 1600px left the first row of work permanently invisible.
+(() => {
+"use strict";
 
-   This is the trap CLAUDE.md records twice in the award fold, in its other
-   form: an element that hides itself cannot be the thing you observe.
+/* ══ data ══════════════════════════════════════════════════════════════
+   Names were read at full resolution before they shipped. A client's name
+   spelled wrong on a portfolio is the one error that client is certain to
+   see, so these are copied from the verified list and not retyped.        */
+/* The one project the page pulls apart, then the gallery. Each row is
+   slug, name, sector, year.
 
-   So the page measures instead, on a rAF-throttled passive scroll, and
-   reveals anything whose top has reached the lower eighth of the screen OR
-   is already above it. The list only shrinks, and the listeners take
-   themselves off once it is empty, so nothing survives the arrival. */
-(function () {
-  document.documentElement.classList.add("rv-ready");
-  var left = [].slice.call(document.querySelectorAll(".rv")), tick = 0;
+   The sector and the year are the OWNER'S OWN, supplied for fifteen of the
+   seventeen. Until that list arrived both were stand-ins: every year read
+   an em dash, and the second line was whatever the lockup itself stated,
+   because a sector inferred from a company name is invented proof. It is
+   not inferred now -- it is the owner's record of his own clients -- so
+   that rule is satisfied rather than broken, and the em dash goes.
 
-  function sweep() {
-    tick = 0;
-    var vh = innerHeight, shown = 0, rest = [];
-    for (var i = 0; i < left.length; i++) {
-      var el = left[i];
-      if (el.getBoundingClientRect().top < vh * 0.92) {
-        /* The stagger is per batch, not per document. Indexing globally
-           means everything below the fourth element arrives with the same
-           delay, which is no stagger at all. */
-        el.style.transitionDelay = Math.min(shown++, 4) * 60 + "ms";
+   TWO ARE STILL WAITING. Dantas & Martins and Amazônia Store are not in
+   the supplied list, so they keep the line their own lockup states and an
+   em dash year. An em dash is what says a field is unknown; filling it in
+   would be the exact thing the rule above forbids.
+
+   TWO NAMES DISAGREE WITH THEIR OWN ARTWORK, and the owner has settled
+   it. Read at full resolution off the warm-light frames, the Boaventura
+   lockup is drawn SOUSA and the Autotrack lockup is drawn with a K. The
+   owner's list says Souza and Autotrac, he was asked which held, and he
+   said fix them -- so these are his spellings, not the drawings'.
+   The slug stays `autotrack` because that is what 51 files on disk are
+   called; only the name a reader sees has moved. A client's name spelled
+   wrong on a portfolio is still the one error that client is certain to
+   see, which is why this was asked rather than guessed. */
+const FEATURED = [
+  ["turvatikas","Turvatikas","Industrial manufacturers","2018"]
+];
+const GALLERY = [
+  ["remedios","Ilha dos Remédios","Healthcare","2023"],
+  ["venner","Venner Advice","Accounting","2016"],
+  ["lobo","Leonardo Lobo","Real estate","2015"],
+  ["demillion","Demillion Landscapes","Architecture","2023"],
+  ["boaventura","Boaventura Noleto Souza Souto","Lawyers","2021"],
+  ["figueiredo","Figueiredo & Velloso","Lawyers","2015"],
+  ["dantas","Dantas & Martins","Advogadas associadas","—"],
+  ["wright","Wright Minussi","Lawyer","2016"],
+  ["machado","Machado Gobbo","Lawyers","2015"],
+  ["offrire","Offrire","Healthcare","2016"],
+  ["soledad","Soledad Molina","Architecture","2018"],
+  ["archy","Archy/Atlas","Personal","2017"],
+  ["noleto","Noleto","Lawyer","2021"],
+  ["amazonia","Amazônia Store","Store","—"],
+  ["autotrack","Autotrac","Software","2014"],
+  ["arvorealta","Arvorealta","Branding","2020"]
+];
+const GROUNDS = [["w","Deep water"],["l","Warm light"],["p","Bare paper"]];
+const src = (s,g,w) => "/assets/land/" + s + "-" + g + "-1-" + w + ".webp";
+
+const FRAMES = [];
+for (const [s,n,r,y] of FEATURED.concat(GALLERY))
+  for (const [g,gn] of GROUNDS)
+    FRAMES.push({ slug:s, name:n, role:r, year:y, g, gname:gn,
+                  full:src(s,g,1400), thumb:src(s,g,480),
+                  alt:n + ", the mark on " + gn.toLowerCase() });
+const firstOf = s => FRAMES.findIndex(f => f.slug === s);
+
+const $  = s => document.querySelector(s);
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const clamp01 = v => v < 0 ? 0 : v > 1 ? 1 : v;
+const lerp = (a,b,t) => a + (b-a)*t;
+
+/* ══ video. The picture is the floor; the loop arrives over it. ═════════
+   Gated on `playing`, never on canplaythrough: iOS throttles preloading
+   hard enough that canplaythrough frequently never fires, which once left
+   a hero video playing behind opacity 0.                                  */
+function mountVideo(v){
+  if (!v || reduce) { if (v) v.remove(); return; }
+  v.muted = true; v.defaultMuted = true; v.playsInline = true; v.loop = true;
+  const on = () => v.classList.add("on");
+  v.addEventListener("playing", on);
+  v.addEventListener("timeupdate", () => { if (v.currentTime > 0) on(); });
+  v.addEventListener("canplaythrough", on);
+  v.addEventListener("error", () => v.remove());
+  const ask = () => { const p = v.play(); if (p && p.catch) p.catch(()=>{}); };
+  ask();
+  /* A gesture lifts the autoplay restriction for the whole document, so the
+     first touch anywhere is enough. The listeners stay until playback has
+     actually started, because a gesture that lands while Low Power Mode is
+     still in force must not spend the only attempt there was.             */
+  const evs = ["pointerdown","touchstart","touchend","click","keydown","visibilitychange"];
+  const retry = () => { if (v.classList.contains("on")) {
+      evs.forEach(e => removeEventListener(e, retry)); return; } ask(); };
+  evs.forEach(e => addEventListener(e, retry, { passive:true }));
+}
+mountVideo($("#bedv"));
+
+/* the close video is 1.4 MB of paper and only matters at the bottom */
+const closev = $("#closev");
+if (closev && !reduce) {
+  const io = new IntersectionObserver(es => {
+    if (es.some(e => e.isIntersecting)) { closev.preload = "auto"; mountVideo(closev); io.disconnect(); }
+  }, { rootMargin: "600px" });
+  io.observe($("#start"));
+} else if (closev) closev.remove();
+
+/* ══ ACT V — the drifting field ════════════════════════════════════════
+   The WebGL dissolve stood here and is deleted with the fold it drove.
+
+   Fifteen frames on a jittered five by three lattice, each with its own
+   orbit. The lattice keeps the composition balanced and the jitter keeps
+   it from reading as a grid; both come from a hash of the index, so the
+   field is the same on every load rather than random, which is what lets
+   a reader come back to it.
+
+   THE DRIFT RUNS ONLY WHERE THERE IS A POINTER TO STOP IT WITH. Touch has
+   no hover, so on a phone or an iPad the field is laid out and still and
+   the name rail is the whole control. prefers-reduced-motion stops it
+   everywhere.                                                            */
+/* CRAFT is gone with the stand-ins it covered for. It held the four
+   craft-only lines -- Mark and wordmark, Monogram and wordmark, Crest and
+   seal, Our own -- and swapped each for an em dash so the page never
+   printed a craft label where a sector belongs. Every one of those rows
+   now carries a real sector from the owner's list, so the set matched
+   nothing and a rule that matches nothing is a rule the next session
+   trusts and gets wrong. */
+const CLOUD = GALLERY.filter(([s]) => s !== "arvorealta");   /* the mark signs the close */
+const cloud = $("#cloud"), namerail = $("#namerail");
+
+/* The jittered lattice is gone with the field it positioned. Every frame
+   sits at inset:0 on one stage and the rail decides which is lit. Hover
+   changes the stage where there is a pointer, a tap on the rail does it
+   where there is not, and the stage itself opens the viewer. That split
+   matters: with hover and open both on the tile, one tap on a phone fired
+   the hover and the open together. */
+const CELLS = CLOUD.map(([slug, name, role, year], i) => ({ slug, name, role, year, i }));
+
+/* Deep water only. The gallery used to rotate GROUNDS[i % 3], so a
+   reader met fifteen projects on three different grounds and the fold
+   read as three galleries. One ground is one gallery, and the other two
+   are what opening a frame is for. */
+const GAL_GROUND = GROUNDS[0][0];
+cloud.innerHTML = CELLS.map((c, n) => {
+  const g = GAL_GROUND;
+  return `<button class="fr${n === 0 ? " lit" : ""}" data-c data-k="${c.i}" data-open="${firstOf(c.slug)}"
+      aria-label="Open ${c.name}" tabindex="${n === 0 ? 0 : -1}">
+      <img src="${src(c.slug,g,1400)}" alt="${c.name}, the mark" width="1400" height="788"
+           ${n === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">
+    </button>`;
+}).join("");
+namerail.innerHTML = CELLS.map((c, n) => {
+  const g = GAL_GROUND;
+  return `<button type="button" data-c data-k="${c.i}"${n === 0 ? ' class="lit"' : ""}
+     aria-label="${c.name}" title="${c.name}">
+     <img src="${src(c.slug,g,480)}" alt="" width="480" height="270" loading="lazy" decoding="async">
+   </button>`;
+}).join("");
+
+const cloudCells = [...cloud.querySelectorAll(".fr")];
+const railBtns   = [...namerail.querySelectorAll("button")];
+const capName = $("#capName"), capRole = $("#capRole"), capYear = $("#capYear");
+
+let litK = -1;
+function lit(k){
+  if (k === litK || k < 0) return;
+  litK = k;
+  cloudCells.forEach(el => { const on = +el.dataset.k === k;
+    el.classList.toggle("lit", on); el.tabIndex = on ? 0 : -1; });
+  railBtns.forEach(el => el.classList.toggle("lit", +el.dataset.k === k));
+  const c = CELLS.find(x => x.i === k);
+  if (c && capName) capName.textContent = c.name;
+  /* Both are the owner's own now, and the two rows he has not supplied
+     carry an em dash rather than a guess. */
+  if (c && capYear) capYear.textContent = c.year;
+  if (c && capRole) capRole.textContent = c.role;
+}
+if (CELLS.length) lit(CELLS[0].i);
+
+for (const el of railBtns) {
+  const k = +el.dataset.k;
+  el.addEventListener("pointerenter", () => { if (fine) lit(k); });
+  el.addEventListener("focus", () => lit(k));
+  el.addEventListener("click", () => lit(k));
+}
+for (const el of cloudCells) el.addEventListener("click", () => open(+el.dataset.open));
+
+/* ══ the viewer ════════════════════════════════════════════════════════ */
+const view = $("#view"), vimg = $("#vimg"), vt = $("#vt"), vr = $("#vr"), vn = $("#vn"), vf = $("#vf");
+let at = -1, opener = null;
+
+vf.innerHTML = FRAMES.map((f,i) =>
+  `<button data-i="${i}" aria-label="${f.name}, ${f.gname}"><img src="${f.thumb}" alt="" loading="lazy"></button>`).join("");
+const vfb = [...vf.querySelectorAll("button")];
+
+function show(i){
+  i = Math.max(0, Math.min(FRAMES.length - 1, i));
+  at = i; const f = FRAMES[i];
+  vimg.src = f.full; vimg.alt = f.alt;
+  vt.textContent = f.name;
+  /* year, sector, ground. The first two are the owner's own now; the two
+     projects not in his list carry an em dash year, which is what says a
+     field is unknown rather than inventing one. */
+  vr.textContent = f.year + "  ·  " + f.role + "  ·  " + f.gname;
+  vn.textContent = i + 1;
+    vfb.forEach((b,k) => b.setAttribute("aria-current", k === i ? "true" : "false"));
+  $("#vprev").disabled = i === 0; $("#vnext").disabled = i === FRAMES.length - 1;
+  const cur = vfb[i]; if (cur) vf.scrollTo({ left: cur.offsetLeft - vf.clientWidth/2 + 42, behavior: reduce ? "auto" : "smooth" });
+  history.replaceState(null,"","#" + f.slug + "-" + f.g);
+}
+function open(i){ opener = document.activeElement; view.classList.add("on");
+  view.setAttribute("aria-modal","true"); document.body.classList.add("locked"); show(i); $("#vclose").focus(); }
+function shut(){ view.classList.remove("on"); view.setAttribute("aria-modal","false");
+  document.body.classList.remove("locked"); history.replaceState(null,"",location.pathname);
+  if (opener && opener.focus) opener.focus(); }
+
+vf.addEventListener("click", e => { const b = e.target.closest("button[data-i]"); if (b) show(+b.dataset.i); });
+$("#vclose").addEventListener("click", shut);
+$("#vprev").addEventListener("click", () => show(at - 1));
+$("#vnext").addEventListener("click", () => show(at + 1));
+addEventListener("keydown", e => {
+  if (!view.classList.contains("on")) return;
+  if (e.key === "Escape") shut();
+  else if (e.key === "ArrowRight") show(at + 1);
+  else if (e.key === "ArrowLeft") show(at - 1);
+});
+let tx0 = null;
+view.addEventListener("touchstart", e => { tx0 = e.touches[0].clientX }, { passive:true });
+view.addEventListener("touchend", e => {
+  if (tx0 === null) return; const d = e.changedTouches[0].clientX - tx0; tx0 = null;
+  if (Math.abs(d) > 46) show(at + (d < 0 ? 1 : -1));
+}, { passive:true });
+
+/* ══ three languages ═══════════════════════════════════════════════════
+   The tier names, prices, times and credit lines are copied verbatim from
+   index.html's own STR object rather than retyped, so the figures and the
+   procurement vocabulary are the ones the offer page already ships. The
+   connective prose around them is written here and is NOT a native
+   speaker's; it is the part worth having checked before this page is used
+   in an approach. A project's role line is never translated: it is what the
+   lockup itself states, and a quotation does not move language.           */
+const LANG = {
+  en: { _n:"English", _s:"EN", _l:"en",
+    cta:"Start a project",
+    r0:"Open", r1:"Alignment", r2:"Direction", r3:"System", r4:"Work", r5:"Start",
+    kicker:"Brands for decision makers",
+    h1a:"<em>You</em> set the direction,", h1b:"not the audience.",
+    sub:"Most marks fade away within five years, made for the short term and perceived wind direction. Winds change. We do not negotiate direction. We pick the winds to ride.",
+    scroll:"Scroll",
+    e2:"Alignment", h2a:"Can you see the difference?",
+    vsA:"Before", vsB:"After",
+    vsSay:"Look at this before and after and check if those look the same to you. The first test is clarity, not meaning. A mark is a statement perceived before explained. Most people are numb to nuance.",
+    vsSort:"If the difference is not obvious to you, nothing written here will make it so.",
+    e3:"Direction", h3a:"You are the compass.",
+    dirSay:"Most designers will ask you to kneel to whichever audience was easiest for them to describe. <b>Not here.</b> Clarity is how we get you where you are already pointing.",
+    e4:"The system", h4a:"Tools are the easy part.",
+    sysSay:"Direction is often mistaken for micromanagement. We need clean vectors, not 30 page ruling documents.",
+    _real:"supplied",
+    p1t:"The synthesis",
+    p1b:"One message, one shape. The ladder is the space between the rungs and not the rails, so nothing in it has to be redrawn to go small.",
+    g0:"Deep water", g1:"Warm light", g2:"Bare paper",
+    p2t:"Ten, twenty, seventy",
+    p2b:"Three values and the share of the surface each one holds. The hex is read off the printed card.",
+    _c1:"Mark", _c2:"Accent", _c3:"Ground",
+    p3t:"One typeface",
+    p3b:"One face for the name, the signage, the datasheet and the label. A second face is a decision every supplier has to make for you.",
+    _typeMeta:"Typeface not yet named. Set here in the site\u2019s own display face as a stand-in.",
+    p4t:"The culture stack",
+    p4b:"A mark survives because the things around it agree with it. Written down, a stranger can match it without asking.",
+    _cw:"Wardrobe", _cwp:"Placeholder. What the people wear when they arrive on site.",
+    _cm:"Music", _cmp:"Placeholder. What plays in the film, the stand and the waiting room.",
+    _ca:"Art", _cap:"Placeholder. The references a photographer is given before they start.",
+    e5:"History", more:"The high end standard.", moreMeta:"Open any one &nbsp;/&nbsp; 45 frames behind them",
+    _galNote:"Year and sector are placeholders until they are supplied. A sector is shown only where the lockup itself states one.",
+    e6:"Where to start", closeH:"Win with <em>class</em>.",
+    fHome:"Documents and tenders", fVideo:"Video",
+    closeB:"A brand built to last takes more, but it happens once. If that is the arithmetic you already do, we will get on.",
+    fT:"Start a project",
+    fI:"Two lines is enough. I read these myself.",
+    fEm:"Email", fPh:"Phone",
+    fPhH:"Optional. Only if you would rather talk than write.",
+    fS:"Send it", fSending:"Sending", fC:"Close",
+    fErrEm:"That email address does not look right.",
+    fErrSend:"That did not send. The address below always works.",
+    fDry:"Nothing was sent. The address below always works.",
+    fDoneT:"It is here.", fDoneB:"You will hear back from me, usually the same day.",
+    fAlt:"Or write to me directly at",
+    fMailS:"A project",
+    fMailB:"Hello Atlas,\n\nI am thinking about a project. Here is what it is:\n\n\n\nMy phone number is:\n\n\nThank you."
+  },
+
+  nb: { _n:"Norsk", _s:"NO", _l:"nb",
+    cta:"Start et prosjekt",
+    r0:"\u00c5pning", r1:"Innretting", r2:"Retning", r3:"System", r4:"Arbeid", r5:"Start",
+    kicker:"Merkevarer for beslutningstakere",
+    h1a:"<em>Du</em> setter retningen,", h1b:"ikke publikummet.",
+    sub:"De fleste merker falmer bort innen fem \u00e5r, laget for kort sikt og for en antatt vindretning. Vinden snur. Vi forhandler ikke om retning. Vi velger vinden vi rir p\u00e5.",
+    scroll:"Rull",
+    e2:"Innretting", h2a:"Ser du forskjellen?",
+    vsA:"F\u00f8r", vsB:"Etter",
+    vsSay:"Se p\u00e5 dette f\u00f8r og etter, og sjekk om de ser like ut for deg. Den f\u00f8rste testen er klarhet, ikke mening. Et merke er et utsagn som oppfattes f\u00f8r det forklares. De fleste er avstumpet for nyanser.",
+    vsSort:"Er ikke forskjellen \u00e5penbar for deg, er det ingenting her som gj\u00f8r den det.",
+    e3:"Retning", h3a:"Du er kompasset.",
+    dirSay:"De fleste designere vil be deg knele for det publikummet som var lettest for dem \u00e5 beskrive. <b>Ikke her.</b> Klarhet er m\u00e5ten vi f\u00e5r deg dit du allerede peker.",
+    e4:"Systemet", h4a:"Verkt\u00f8yene er den enkle delen.",
+    sysSay:"Retning blir ofte forvekslet med detaljstyring. Vi trenger rene vektorer, ikke 30 siders regelverk.",
+    _real:"levert",
+    p1t:"Syntesen",
+    p1b:"Ett budskap, \u00e9n form. Stigen er rommet mellom trinnene og ikke vangene, s\u00e5 ingenting i den m\u00e5 tegnes p\u00e5 nytt for \u00e5 bli liten.",
+    g0:"Dypt vann", g1:"Varmt lys", g2:"Bart papir",
+    p2t:"Ti, tjue, sytti",
+    p2b:"Tre verdier og andelen av flaten hver av dem holder. Kodene er lest av det trykte kortet.",
+    _c1:"Merke", _c2:"Aksent", _c3:"Bunn",
+    p3t:"\u00c9n skrift",
+    p3b:"\u00c9n skrift for navnet, skiltingen, databladet og etiketten. En skrift nummer to er en avgj\u00f8relse hver leverand\u00f8r m\u00e5 ta for deg.",
+    _typeMeta:"Skriften er enn\u00e5 ikke navngitt. Satt her i nettstedets egen displayskrift som plassholder.",
+    p4t:"Kulturstabelen",
+    p4b:"Et merke overlever fordi tingene rundt det er enige med det. Skrevet ned kan en fremmed treffe det uten \u00e5 sp\u00f8rre.",
+    _cw:"Garderobe", _cwp:"Plassholder. Hva folkene har p\u00e5 seg n\u00e5r de kommer ut p\u00e5 anlegget.",
+    _cm:"Musikk", _cmp:"Plassholder. Hva som spilles i filmen, p\u00e5 standen og i venterommet.",
+    _ca:"Kunst", _cap:"Plassholder. Referansene en fotograf f\u00e5r f\u00f8r de begynner.",
+    e5:"Historikk", more:"Den h\u00f8ye standarden.", moreMeta:"\u00c5pne hvilken som helst &nbsp;/&nbsp; 45 bilder bak",
+    _galNote:"\u00c5r og bransje er plassholdere til de er levert. Bransje vises bare der merket selv oppgir en.",
+    e6:"Hvor du begynner", closeH:"Vinn med <em>klasse</em>.",
+    fHome:"Dokumenter og anbud", fVideo:"Video",
+    closeB:"En merkevare bygget for \u00e5 vare krever mer, men det skjer \u00e9n gang. Er det regnestykket du allerede gj\u00f8r, kommer vi til \u00e5 forst\u00e5 hverandre.",
+    fT:"Start et prosjekt",
+    fI:"To linjer holder. Jeg leser disse selv.",
+    fEm:"E-post", fPh:"Telefon",
+    fPhH:"Valgfritt. Bare hvis du heller vil snakke enn skrive.",
+    fS:"Send", fSending:"Sender", fC:"Lukk",
+    fErrEm:"Den e-postadressen ser ikke riktig ut.",
+    fErrSend:"Det ble ikke sendt. Adressen under virker alltid.",
+    fDry:"Ingenting ble sendt. Adressen under virker alltid.",
+    fDoneT:"Den er her.", fDoneB:"Du h\u00f8rer fra meg, som regel samme dag.",
+    fAlt:"Eller skriv direkte til meg p\u00e5",
+    fMailS:"Et prosjekt",
+    fMailB:"Hei Atlas,\n\nJeg tenker p\u00e5 et prosjekt. Dette er hva det er:\n\n\n\nTelefonnummeret mitt er:\n\n\nTakk."
+  },
+
+  fi: { _n:"Suomi", _s:"FI", _l:"fi",
+    cta:"Aloita projekti",
+    r0:"Avaus", r1:"Linjaus", r2:"Suunta", r3:"J\u00e4rjestelm\u00e4", r4:"Ty\u00f6t", r5:"Aloita",
+    kicker:"Br\u00e4ndej\u00e4 p\u00e4\u00e4tt\u00e4jille",
+    h1a:"<em>Sin\u00e4</em> asetat suunnan,", h1b:"ei yleis\u00f6.",
+    sub:"Useimmat merkit haipuvat viidess\u00e4 vuodessa, tehtyin\u00e4 lyhyelle aikav\u00e4lille ja oletetulle tuulensuunnalle. Tuulet k\u00e4\u00e4ntyv\u00e4t. Me emme neuvottele suunnasta. Me valitsemme tuulen, jolla purjehdimme.",
+    scroll:"Vierit\u00e4",
+    e2:"Linjaus", h2a:"N\u00e4etk\u00f6 eron?",
+    vsA:"Ennen", vsB:"J\u00e4lkeen",
+    vsSay:"Katso t\u00e4t\u00e4 ennen ja j\u00e4lkeen ja tarkista, n\u00e4ytt\u00e4v\u00e4tk\u00f6 ne sinusta samalta. Ensimm\u00e4inen testi on selkeys, ei merkitys. Merkki on v\u00e4ite, joka havaitaan ennen kuin se selitet\u00e4\u00e4n. Useimmat ovat turtuneita vivahteille.",
+    vsSort:"Jos ero ei ole sinulle ilmeinen, mik\u00e4\u00e4n t\u00e4ss\u00e4 kirjoitettu ei tee siit\u00e4 ilmeist\u00e4.",
+    e3:"Suunta", h3a:"Sin\u00e4 olet kompassi.",
+    dirSay:"Useimmat suunnittelijat pyyt\u00e4v\u00e4t sinua polvistumaan sille yleis\u00f6lle, joka oli heille helpoin kuvata. <b>Ei t\u00e4\u00e4ll\u00e4.</b> Selkeys on tapa, jolla viemme sinut sinne, minne jo osoitat.",
+    e4:"J\u00e4rjestelm\u00e4", h4a:"Ty\u00f6kalut ovat helppo osa.",
+    sysSay:"Suunta sekoitetaan usein mikromanageeraukseen. Tarvitsemme selkei\u00e4 vektoreita, emme 30-sivuisia s\u00e4\u00e4nt\u00f6kirjoja.",
+    _real:"toimitettu",
+    p1t:"Synteesi",
+    p1b:"Yksi viesti, yksi muoto. Tikkaat ovat askelmien v\u00e4liin j\u00e4\u00e4v\u00e4 tila eiv\u00e4tk\u00e4 sivujohteet, joten mit\u00e4\u00e4n ei tarvitse piirt\u00e4\u00e4 uudelleen pienennett\u00e4ess\u00e4.",
+    g0:"Syv\u00e4 vesi", g1:"L\u00e4mmin valo", g2:"Paljas paperi",
+    p2t:"Kymmenen, kaksikymment\u00e4, seitsem\u00e4nkymment\u00e4",
+    p2b:"Kolme arvoa ja se osuus pinnasta, jonka kukin niist\u00e4 pit\u00e4\u00e4. Koodit on luettu painetusta kortista.",
+    _c1:"Merkki", _c2:"Korostus", _c3:"Pohja",
+    p3t:"Yksi kirjasin",
+    p3b:"Yksi kirjasin nimelle, opasteille, tietolehdelle ja tarralle. Toinen kirjasin on p\u00e4\u00e4t\u00f6s, joka jokaisen toimittajan on tehtav\u00e4 puolestasi.",
+    _typeMeta:"Kirjasinta ei ole viel\u00e4 nimetty. Ladottu t\u00e4ss\u00e4 sivuston omalla otsikkokirjasimella paikanvaraajana.",
+    p4t:"Kulttuuripino",
+    p4b:"Merkki s\u00e4ilyy, koska sen ymp\u00e4rill\u00e4 olevat asiat ovat samaa mielt\u00e4 sen kanssa. Kirjattuna vieras osuu siihen kysym\u00e4tt\u00e4.",
+    _cw:"Vaatetus", _cwp:"Paikanvaraaja. Mit\u00e4 ihmiset pit\u00e4v\u00e4t p\u00e4\u00e4ll\u00e4\u00e4n saapuessaan ty\u00f6maalle.",
+    _cm:"Musiikki", _cmp:"Paikanvaraaja. Mit\u00e4 soi elokuvassa, messuosastolla ja odotushuoneessa.",
+    _ca:"Taide", _cap:"Paikanvaraaja. Viitteet, jotka valokuvaaja saa ennen aloittamista.",
+    e5:"Historia", more:"Korkean luokan standardi.", moreMeta:"Avaa mik\u00e4 tahansa &nbsp;/&nbsp; 45 kuvaa takana",
+    _galNote:"Vuosi ja toimiala ovat paikanvaraajia kunnes ne toimitetaan. Toimiala n\u00e4ytet\u00e4\u00e4n vain siell\u00e4, miss\u00e4 merkki itse ilmoittaa sellaisen.",
+    e6:"Mist\u00e4 aloittaa", closeH:"Voita <em>tyylill\u00e4</em>.",
+    fHome:"Asiakirjat ja tarjouskilpailut", fVideo:"Video",
+    closeB:"Kest\u00e4v\u00e4ksi rakennettu br\u00e4ndi vaatii enemm\u00e4n, mutta se tapahtuu kerran. Jos teet jo sen laskutoimituksen, tulemme toimeen.",
+    fT:"Aloita projekti",
+    fI:"Kaksi rivi\u00e4 riitt\u00e4\u00e4. Luen n\u00e4m\u00e4 itse.",
+    fEm:"S\u00e4hk\u00f6posti", fPh:"Puhelin",
+    fPhH:"Vapaaehtoinen. Vain jos puhut mieluummin kuin kirjoitat.",
+    fS:"L\u00e4het\u00e4", fSending:"L\u00e4hetet\u00e4\u00e4n", fC:"Sulje",
+    fErrEm:"Tuo s\u00e4hk\u00f6postiosoite ei n\u00e4yt\u00e4 oikealta.",
+    fErrSend:"L\u00e4hetys ei onnistunut. Alla oleva osoite toimii aina.",
+    fDry:"Mit\u00e4\u00e4n ei l\u00e4hetetty. Alla oleva osoite toimii aina.",
+    fDoneT:"Se on perill\u00e4.", fDoneB:"Kuulet minusta, yleens\u00e4 saman p\u00e4iv\u00e4n aikana.",
+    fAlt:"Tai kirjoita minulle suoraan osoitteeseen",
+    fMailS:"Projekti",
+    fMailB:"Hei Atlas,\n\nMietin projektia. T\u00e4ss\u00e4 mist\u00e4 on kyse:\n\n\n\nPuhelinnumeroni on:\n\n\nKiitos."
+  }
+};
+const LCODES = ["en","nb","fi"];
+const langBox = $("#langs");
+
+let curLang = "en";
+function setLang(code, remember){
+  const t = LANG[code] || LANG.en;
+  curLang = LANG[code] ? code : "en";
+  document.documentElement.lang = t._l;
+  for (const el of document.querySelectorAll("[data-t]")) {
+    const v = t[el.dataset.t];
+    if (v != null) el.innerHTML = v;
+  }
+  /* the prewritten mail is the path that always works, and it is filled in
+     the reader's own language. encodeURIComponent, not escape: the body
+     carries newlines and two of the three languages carry non-ASCII. The
+     lookup is inside the function because nothing module-level should be
+     read by anything that can run before the module finishes. */
+  const alt = document.querySelector("#dlgAlt");
+  if (alt) {
+    const href = "mailto:atlas@arvorealta.com?subject=" + encodeURIComponent(t.fMailS) +
+                 "&body=" + encodeURIComponent(t.fMailB);
+    alt.innerHTML = t.fAlt + ' <a href="' + href + '">atlas@arvorealta.com</a>';
+  }
+  for (const b of langBox.children) b.setAttribute("aria-pressed", b.dataset.l === code ? "true" : "false");
+  if (remember) { try { localStorage.setItem("arvo-lang", code) } catch (e) {} }
+}
+
+langBox.innerHTML = LCODES.map(c =>
+  `<button type="button" data-l="${c}" data-c lang="${LANG[c]._l}" aria-pressed="false"
+     title="${LANG[c]._n}">${LANG[c]._s}</button>`).join("");
+langBox.addEventListener("click", e => {
+  const b = e.target.closest("button[data-l]"); if (b) setLang(b.dataset.l, true);
+});
+
+/* the browser's language first, a remembered choice over it from then on */
+(() => {
+  let pick = "en";
+  for (const n of (navigator.languages || [navigator.language || "en"])) {
+    const two = String(n).slice(0,2).toLowerCase();
+    if (two === "nb" || two === "no" || two === "nn") { pick = "nb"; break; }
+    if (two === "fi") { pick = "fi"; break; }
+    if (two === "en") { pick = "en"; break; }
+  }
+  let saved = null; try { saved = localStorage.getItem("arvo-lang") } catch (e) {}
+  setLang(LANG[saved] ? saved : pick, false);
+})();
+
+/* ══ the pointer ═══════════════════════════════════════
+   No second cursor is drawn. What is kept is the position, because the
+   controls reach for it, and that is a property of the control rather
+   than a cursor painted over the page.                                 */
+const fine = matchMedia("(hover:hover) and (pointer:fine)").matches;
+const pt = { x: innerWidth / 2, y: innerHeight / 2 };
+const mags = fine ? [...document.querySelectorAll("[data-cta], .act")] : [];
+if (fine) addEventListener("pointermove", e => { pt.x = e.clientX; pt.y = e.clientY; },
+  { passive: true });
+
+/* ══ the rail ══════════════════════════════════════════════════════════ */
+const rails = [...document.querySelectorAll("[data-rail]")];
+const secs  = rails.map(a => document.querySelector(a.getAttribute("href")));
+if ("IntersectionObserver" in window) {
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => { const i = secs.indexOf(e.target);
+      if (i > -1 && e.isIntersecting) rails.forEach((a,k) => a.setAttribute("aria-current", k === i ? "true" : "false")); });
+  }, { rootMargin:"-45% 0px -45% 0px" });
+  secs.forEach(s => s && io.observe(s));
+}
+
+/* ══ in-page jumps, and the fight with mandatory snap ═══════════════════
+   A programmatic jump and `scroll-snap-type: mandatory` fight each other,
+   and WebKit is where the fight is lost: the snap algorithm re-runs while
+   a smooth scroll is still in flight and settles near wherever the
+   animation has got to rather than at its destination, so a jump from
+   fold one to fold three lands on one or two. Reported on the owner's
+   iPad, and NOT reproducible in this container's Chromium, which lands
+   every rail target exactly in six scenarios including a real tap, a
+   double tap, and a click thrown during an in-flight scroll. A bug that
+   reproduces on one engine and not another is still a bug; what it is
+   not is a reason to go on guessing which engine is at fault.
+   So the fix removes the fight rather than tuning it. The snap comes off
+   for the length of the jump, the page scrolls, and the snap goes back on
+   once the scroll has actually stopped. Putting it back is a no-op at the
+   destination, because a section top IS the snap point we scrolled to.
+   `scrollend` is deliberately not used: Safari only shipped it in 17.4,
+   and Safari is the engine that reported this. Six frames of a motionless
+   scrollY is the portable test, with a 1600ms cap so a scroll that never
+   settles cannot leave the page unlocked for the rest of its life. */
+const root = document.documentElement;
+let jumpToken = 0;
+function jumpTo(el, hash){
+  if (!el) return;
+  root.style.scrollSnapType = "none";
+  const t0 = performance.now(), mine = ++jumpToken;
+  scrollTo({ top: Math.round(el.getBoundingClientRect().top + scrollY),
+             behavior: reduce ? "auto" : "smooth" });
+  if (hash) history.replaceState(null, "", hash);
+  let last = -1, still = 0;
+  (function quiet(){
+    if (mine !== jumpToken) return;              /* a newer jump owns the lock */
+    const y = Math.round(scrollY);
+    if (y === last) still++; else { still = 0; last = y; }
+    if (still >= 6 || performance.now() - t0 > 1600) { root.style.scrollSnapType = ""; return; }
+    requestAnimationFrame(quiet);
+  })();
+}
+addEventListener("click", e => {
+  const a = e.target.closest && e.target.closest('a[href^="#"]');
+  if (!a) return;
+  const hash = a.getAttribute("href");
+  const el = hash.length > 1 && document.getElementById(hash.slice(1));
+  if (!el) return;
+  e.preventDefault();
+  jumpTo(el, hash);
+  /* preventing the default also prevents the focus move the browser would
+     have made, which is the whole point of the skip link, so it is done by
+     hand. preventScroll, or the focus fights the scroll it just started. */
+  el.setAttribute("tabindex", "-1");
+  el.focus({ preventScroll: true });
+});
+/* A hash in the URL on arrival is the same jump and loses the same fight.
+   A frame slug is not an element id, so the viewer's own deep link at the
+   foot of this file is untouched by this. */
+addEventListener("load", () => {
+  const el = location.hash.length > 1 && document.getElementById(location.hash.slice(1));
+  if (el) jumpTo(el, null);
+});
+
+/* ══ one loop ══════════════════════════════════════════════════════════ */
+const hero = $("#open"), heroInner = hero.querySelector(".inner"), bed = hero.querySelector(".bed");
+const wide = matchMedia("(min-width: 821px)");
+const closeSec = $("#start");
+/* ══ the chrome's two states ════════════════════════════════════════════
+   The bar sits at the top of the screen and the rail sits at its middle,
+   so one value cannot serve both: over the alignment fold the bar is on
+   paper while the rail is on ink. They are decided separately, each
+   against the light surfaces that actually exist, and the dim opacity
+   moves with the colour, because ink at 34% on paper measures 1.70:1
+   while the same token on ink is right.
+   The first build derived nothing and simply never fired over the
+   alignment fold, where the whole bar measured 1.02:1 on its own paper.
+   State the two colours, and do not leave a light surface off the list. */
+const INK_CHROME = "#1A1713", BONE_CHROME = "#E9E7E4";
+let barLight = null, railLight = null, curWasLight = null;
+function setBar(light){
+  if (light === barLight) return;
+  barLight = light;
+  const r = document.documentElement.style;
+  r.setProperty("--chrome", light ? INK_CHROME : BONE_CHROME);
+  r.setProperty("--bar-dim", light ? ".75" : ".42");
+}
+function setRail(light){
+  if (light === railLight) return;
+  railLight = light;
+  const r = document.documentElement.style;
+  r.setProperty("--chrome-rail", light ? INK_CHROME : BONE_CHROME);
+  r.setProperty("--rail-dim", light ? ".72" : ".34");
+}
+setBar(false); setRail(false);
+const alignSec = $("#alignment");
+/* paired with the arrival block in the stylesheet — change both together */
+const revArmed = document.documentElement.classList.contains("rv");
+/* declared on the element with data-rv rather than in a selector list the
+   stylesheet and the script both have to carry. A block in one and not the
+   other either never arrives or arrives already visible. */
+const revPending = revArmed ? [...document.querySelectorAll("[data-rv]")] : [];
+/* the deadline in the head takes the class off after four seconds; when it
+   does, the rules stop applying and anything still pending is simply shown */
+
+let lastY = scrollY, vel = 0, t0 = performance.now(), needMeasure = true;
+
+function frame(now){
+  const dt = Math.min(64, now - t0); t0 = now;
+  const y = scrollY, vh = innerHeight;
+
+  /* velocity, smoothed and clamped. Drives a stretch, never a position. */
+  const raw = (y - lastY); lastY = y;
+  vel = lerp(vel, Math.max(-1, Math.min(1, raw / 90)), 0.16);
+  document.documentElement.style.setProperty("--vel", vel.toFixed(3));
+
+  /* ACT I — the hero leaves slowly and the ground leaves slower */
+  if (y < vh * 1.3) {
+    const p = clamp01(y / vh);
+    heroInner.style.transform = "translate3d(0," + (p * -14).toFixed(2) + "vh,0)";
+    heroInner.style.opacity = (1 - clamp01(p * 1.5)).toFixed(3);
+    bed.style.transform = "translate3d(0," + (p * 9).toFixed(2) + "%,0) scale(" + (1 + p * 0.07).toFixed(4) + ")";
+    bed.style.filter = "brightness(" + (1 - p * 0.40).toFixed(3) + ")";
+  }
+
+
+  /* ACT I-VI — arrival. Anything whose top has reached the lower eighth,
+     or is already above it, which is what makes a jump safe. The stagger
+     is per BATCH and not per document: indexed globally, everything after
+     the fourth element shares one delay, which is no stagger at all. */
+  if (revArmed && revPending.length) {
+    /* A gate at a fraction of the viewport can never reach an element that
+       still sits below that fraction when the page has run out of scroll.
+       Measured: the close is bottom aligned, so its footer's top rests at
+       840 of 900 against a gate of 787 and stayed at opacity 0 for the life
+       of the page in all four scroll tests. At the floor, everything left
+       is due. This is general to any gate and any bottom-aligned block. */
+    const atFloor = y + vh >= document.documentElement.scrollHeight - 2;
+    const gate = atFloor ? vh : vh * 0.875;
+    let batch = 0;
+    for (let i = revPending.length - 1; i >= 0; i--) {
+      const el = revPending[i];
+      if (el.getBoundingClientRect().top < gate) {
+        el.style.setProperty("--d", Math.min(batch, 7) * 80 + "ms");
         el.classList.add("in");
-      } else rest.push(el);
-    }
-    left = rest;
-    if (!left.length) {
-      removeEventListener("scroll", onScroll);
-      removeEventListener("resize", sweep);
+        revPending.splice(i, 1);
+        batch++;
+      }
     }
   }
-  function onScroll() { if (!tick) tick = requestAnimationFrame(sweep) }
 
-  addEventListener("scroll", onScroll, { passive: true });
-  addEventListener("resize", sweep);
-  /* One frame late, so the opacity:0 start state is painted and the first
-     blocks animate in rather than appearing already arrived. */
-  requestAnimationFrame(sweep);
+  /* Every light surface on the page, sampled at the row each control sits
+     in. A new light surface goes in this list or the chrome walks over it. */
+  const lights = [alignSec, closeSec];
+  const overLight = py => lights.some(el => {
+    if (!el) return false;
+    const r = el.getBoundingClientRect();
+    return r.top <= py && r.bottom >= py;
+  });
+  setBar(overLight(34));
+  setRail(overLight(vh * 0.5));
+  /* the controls reach for the pointer. The second cursor that used to be
+     drawn here is gone: taste-skill bans a custom cursor outright, for
+     accessibility and for performance, and this one also derived its
+     colour from a blend instead of stating it. */
+  if (fine) {
+    for (const m of mags) {
+      const r = m.getBoundingClientRect();
+      if (r.bottom < -60 || r.top > vh + 60) { m.style.transform = ""; continue; }
+      const dx = pt.x - (r.left + r.width/2), dy = pt.y - (r.top + r.height/2);
+      const d = Math.hypot(dx,dy), reach = Math.max(r.width, 140);
+      if (d < reach) m.style.transform = "translate3d(" + (dx*0.22).toFixed(1) + "px," + (dy*0.26).toFixed(1) + "px,0)";
+      else m.style.transform = "";
+    }
+  }
 
-  /* The header is a sentinel rather than a measurement: its state changes
-     once, at a known place, and an observer reports that crossing in both
-     directions including on a jump, because the sentinel's own intersection
-     genuinely changes. */
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
 
-  var bar = document.getElementById("bar"), s = document.getElementById("sentinel");
-  if (!bar || !s) return;
-  var OVER = ["on-ink", "text-bone", "border-transparent"];
-  var PAST = ["border-ink/10", "bg-paper/85", "backdrop-blur-md"];
-  new IntersectionObserver(function (es) {
-    var over = es[0].isIntersecting;
-    OVER.forEach(function (c) { bar.classList.toggle(c, over) });
-    PAST.forEach(function (c) { bar.classList.toggle(c, !over) });
-  }, { threshold: 0 }).observe(s);
+addEventListener("resize", () => { needMeasure = true; }, { passive:true });
+
+/* the hero lines lift once the face they are set in has actually arrived */
+const go = () => document.body.classList.add("ready");
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(go).catch(go); else go();
+setTimeout(go, 1200);           /* a deadline, because a stuck line is worse than no animation */
+
+/* ══ the intake ════════════════════════════════════════════════════════
+   The endpoint is not a secret: a form action lives in the page's own HTML,
+   so anybody reading source has it, and hiding it at local scope the way an
+   API key is hidden would be theatre. What stands in for secrecy is Basin's
+   own spam protection, switched on at their end.                         */
+const INTAKE = "https://usebasin.com/f/945efcd39804";
+const dlg = $("#dlg"), sheet = $("#sheet");
+const esc = v => String(v).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let sending = false;
+
+function openDlg(){
+  if (!dlg.showModal) { location.href = mailto(); return; }
+  dlg.showModal();
+  document.body.style.overflow = "hidden";
+  /* by hand, through the node. Written as a lowercase `autofocus` attribute
+     React does not put it on the element at all, and showModal then falls
+     back to the first focusable thing in the dialog, which is the close
+     button. There is no React here, but the lesson is the same: check the
+     live property, never the markup. */
+  const em = $("#fem"); if (em) { em.focus({ preventScroll:true }); }
+}
+function closeDlg(){ if (dlg.open) dlg.close(); }
+dlg.addEventListener("close", () => { document.body.style.overflow = ""; });
+for (const b of document.querySelectorAll("[data-cta]"))
+  b.addEventListener("click", e => { e.preventDefault(); openDlg(); });
+$("#dlgX").addEventListener("click", closeDlg);
+$("#dlgCancel").addEventListener("click", closeDlg);
+
+function mailto(){
+  const t = LANG_T();
+  return "mailto:atlas@arvorealta.com?subject=" + encodeURIComponent(t.fMailS) +
+         "&body=" + encodeURIComponent(t.fMailB);
+}
+function LANG_T(){ return LANG[curLang] || LANG.en; }
+function dlgErr(msg){ const e = $("#dlgErr"); e.textContent = msg; e.hidden = false; }
+function dlgClear(){ const e = $("#dlgErr"); e.textContent = ""; e.hidden = true; }
+
+$("#dlgSend").addEventListener("click", async () => {
+  if (sending) return;
+  dlgClear();
+  const t = LANG_T();
+  const em = $("#fem").value.trim(), ph = $("#fph").value.trim();
+  if (!em || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)) { dlgErr(t.fErrEm); return; }
+
+  /* kept on purpose: if the endpoint is ever unset the dialog says nothing
+     was sent rather than faking a success */
+  if (!INTAKE) { dlgErr(t.fDry); return; }
+
+  sending = true;
+  const btn = $("#dlgSend"); btn.disabled = true; btn.textContent = t.fSending;
+  try {
+    const fd = new FormData();
+    fd.append("email", em);
+    fd.append("phone", ph);
+    fd.append("page", location.href);
+    fd.append("language", curLang);
+    /* Accept: application/json is not optional. Without it Basin answers a
+       form post with a 302 to its own thank-you page, fetch follows it
+       silently, and ok reads true off Basin's own HTML. Content-Type is
+       deliberately NOT set: FormData writes its own with the multipart
+       boundary, and naming it by hand drops the boundary. */
+    const res = await fetch(INTAKE, { method:"POST", body:fd, headers:{ Accept:"application/json" } });
+    if (!res.ok) throw new Error("http " + res.status);
+    $("#dlgBody").innerHTML =
+      '<p style="font-family:\'EB Garamond\',Georgia,serif;font-size:1.5rem;line-height:1.15;margin-bottom:10px">' +
+      esc(t.fDoneT) + '</p><p class="intro">' + esc(t.fDoneB) + '</p>';
+    $("#dlgActs").innerHTML = "";
+    const c = document.createElement("button");
+    c.type = "button"; c.className = "mag"; c.textContent = t.fC;
+    c.addEventListener("click", closeDlg);
+    $("#dlgActs").appendChild(c);
+  } catch (err) {
+    dlgErr(t.fErrSend);
+    sending = false; btn.disabled = false; btn.textContent = t.fS;
+  }
+});
+
+/* the software keyboard, driven by visualViewport and nothing else. 100svh
+   and interactive-widget=resizes-content both look like the fix and neither
+   reaches iOS: interactive-widget is Chromium only, and on iOS Safari svh
+   and dvh do not shrink for the keyboard at all. offsetTop matters as much
+   as height, because iOS scrolls the visual viewport inside the layout
+   viewport and a fixed element does not move with it. */
+(function keyboard(){
+  const vv = window.visualViewport;
+  if (!vv) { sheet.style.maxHeight = "88svh"; return; }
+  const place = () => {
+    if (!dlg.open) return;
+    const h = vv.height, top = vv.offsetTop;
+    sheet.style.maxHeight = Math.max(160, h - 24) + "px";
+    const sh = sheet.offsetHeight;
+    dlg.style.top = (sh + 24 < h ? top + (h - sh) / 2 : top + 12) + "px";
+    dlg.style.marginTop = "0";
+  };
+  vv.addEventListener("resize", place); vv.addEventListener("scroll", place);
+  dlg.addEventListener("close", () => { dlg.style.top = ""; });
+  const mo = new MutationObserver(place); mo.observe(dlg, { attributes:true, attributeFilter:["open"] });
+})();
+
+/* a deep link straight into the viewer */
+if (location.hash.length > 1) {
+  const k = location.hash.slice(1);
+  const i = FRAMES.findIndex(f => f.slug + "-" + f.g === k);
+  if (i > -1) open(i);
+}
 })();
 </script>
 </body>

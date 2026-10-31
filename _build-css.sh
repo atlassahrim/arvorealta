@@ -1,5 +1,7 @@
 #!/bin/sh
-# Compile the offer page's Tailwind and name the output after its own content.
+# Compile /video/'s Tailwind and name the output after its own content. This
+# was the offer page's build; the offer page and /brand/ are hand-written
+# single files now and are off this stylesheet entirely.
 #
 # The filename is the whole point. Pages serves max-age=600, so a stylesheet
 # whose name has not changed is held for ten minutes, and longer on a phone
@@ -24,7 +26,7 @@ fi
 # Every page that shares the stylesheet. Each is scanned for class names and
 # each has its <link> repointed at the new hash, so a page left out of this
 # list keeps a dead stylesheet URL and renders with no rules at all.
-PAGES="index.html brand/index.html video/index.html"
+PAGES="video/index.html"
 sed 's#@source "\./#@source "'"$ROOT"'/#' _tw.src.css > "$B/in.css"
 (cd "$B" && ./node_modules/.bin/tailwindcss -i in.css -o out.css -m >/dev/null 2>&1)
 HASH=$(sha256sum "$B/out.css" | cut -c1-8)

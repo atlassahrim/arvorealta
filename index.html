@@ -1,8 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<!-- The title and the description are the ones the previous offer page shipped,
+     carried across unchanged. They are the only two strings on the page that
+     exist for search rather than for a reader, and the sandbox's own title —
+     `Written once. Right every time.` — names neither the firm nor a term
+     anybody searches for. The page is the sandbox; the search surface is not
+     changed by promoting it. -->
 <title>Arvorealta · Document standards for public tenders</title>
 <meta name="description" content="Public buyers score the documents you hand in. Document standards for industrial manufacturers bidding into Nordic public tenders.">
 <link rel="canonical" href="https://arvorealta.com/">
@@ -14,59 +20,765 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#D9D7D4">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 
-<!-- Self-hosted. The skill bans a Google Fonts <link> in production and this
-     repo has no build step to self-host through, so the four woff2 files were
-     pulled once and committed. 100K in total, no third-party request for type,
-     and nothing outside this repo can change what the page renders in. -->
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ebgaramond-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ebgaramond-latin-ext.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/geist-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/geist-mono-latin.woff2" crossorigin>
-<link rel="stylesheet" href="/assets/fonts/geist.css">
 <link rel="stylesheet" href="/assets/fonts/ebgaramond.css">
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ebgaramond-latin.woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts/geist.css">
+<link rel="preload" as="image" href="/assets/img/after-1-1141.webp" fetchpriority="high">
 
-<link rel="stylesheet" href="/assets/tw-ad6ad844.css">
+<style>
+/* ──────────────────────────────────────────────────────────────────────
+   index.html — the offer page. Built in lab/max-home/ and promoted here
+   whole, which is why the comments below argue with a live page that this
+   file now is. One file, hand-written CSS, vanilla JS, no build step, no
+   Tailwind: nothing here is compiled and nothing is vendored.
 
+   LIGHT FIRST, and that is the whole argument. /brand/ is dark because a
+   brand portfolio is a dark room with pictures in it. This page emulates
+   print, so it keeps the paper ground and its own two ink folds. Taking
+   the other page's palette as well as its standard would make the site
+   look like two firms, which is the mistake this repo has already made
+   once with the editorial theme on /brand/.
+   ────────────────────────────────────────────────────────────────────── */
+
+:root{
+  --ink:#17352C; --ink-2:#11261F; --bone:#E9E7E4;
+  --paper:#D9D7D4; --paper-2:#E4E2DF; --paper-3:#EFEEEC;
+  --brick:#8E4A45;
+  /* --ink-soft was #5A6B63 and measured 3.93:1 on paper, under the 4.5:1
+     small text needs. CLAUDE.md carried #4C5B54 as a proposal for months and
+     the old page never took it, because it shifts the whole page's
+     temperature. This one ships it: 4.99:1 on paper, 6.18:1 on paper-3. */
+  --ink-soft:#4C5B54;
+  --g1:#954D13; --g2:#743813; --g3:#5A200A;
+  --rule:rgba(23,53,44,.16);
+  --rule-inv:rgba(233,231,228,.16);
+  --ease:cubic-bezier(.16,1,.3,1);
+  --chrome:#17352C;
+
+  /* ── ONE DESCENDING SCALE, and nothing steps over the thing above it ──
+     Six roles with one job each, which is the annex spec's own shape:
+     display, figure, head, value, sub, body. Before this the page had
+     three competing largest objects and no hierarchy at all — the close
+     h2 ran to 7.4rem and a tier price to 7.2rem against a hero h1 of
+     5.6rem, so the two things a reader meets last were bigger than the
+     thing they met first. The h1 is the largest object on the page by
+     decision and everything else descends from it.
+     Measured at 1440 / 390: display 96/43 · figure 67/37 · head 52/30 ·
+     value 42/26 · sub 28/20 · body 19/16. Strictly descending at both
+     ends and at 768 and 1920, which is the property, not the figures. */
+  --t-display:clamp(2.7rem,1.32rem + 5.2vw,6rem);
+  --t-figure:clamp(2.3rem,1.42rem + 3.1vw,4.4rem);
+  --t-head:clamp(1.85rem,1.17rem + 2.3vw,3.4rem);
+  --t-value:clamp(1.6rem,1.11rem + 1.7vw,2.6rem);
+  --t-sub:clamp(1.25rem,1.05rem + .8vw,1.85rem);
+  --t-body:clamp(1rem,.95rem + .3vw,1.2rem);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--paper);scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:Geist,system-ui,sans-serif;font-weight:380;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden}
+body.locked{overflow:hidden}
+img,video,canvas{display:block;max-width:100%}
+[hidden]{display:none!important}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+h1,h2,h3,p,ul{margin:0}
+ul{padding:0;list-style:none}
+
+.serif{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.02em}
+.mono{font-family:"Geist Mono",ui-monospace,monospace;text-transform:uppercase;letter-spacing:.2em;
+  font-weight:600}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* the page owns its focus ring, written longhand: as a shorthand Chrome
+   reported the colour as currentColor and drew bone where ink was asked for */
+:focus-visible{outline-width:3px;outline-style:solid;outline-color:var(--ink);outline-offset:2px;
+  border-radius:3px}
+.on-ink{color:var(--bone)}
+.on-ink :focus-visible,.on-ink:focus-visible{outline-color:var(--bone)}
+
+.skip{position:absolute;left:12px;top:12px;z-index:120;transform:translateY(-200%);
+  background:var(--ink);color:var(--bone);padding:12px 18px;border-radius:999px;
+  font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase}
+.skip:focus{transform:none}
+
+/* ── THE CONTENT COLUMN IS THE SITE'S ONE STANDARD ───────────────────
+   82rem wide, 20px of gutter below 640 and 32px from 640 up. It is what
+   index.html, /brand/ and /video/ already carry as
+   `mx-auto w-full max-w-[82rem] px-5 sm:px-8`, and it is now written as
+   tokens so a page cannot drift from it by writing its own figures. Media
+   still bleeds full width; CONTENT does not.
+   Anything that overrides this must override the VERTICAL padding only, in
+   longhand: a `padding` shorthand from a descendant selector is (0,2,0) and
+   zeroes the sides `.wrap` sets at (0,1,0), which is the bug CLAUDE.md
+   already records costing one phone layout. */
+:root{--col:82rem; --gut:20px; --pad:max(var(--gut),calc((100% - var(--col)) / 2 + var(--gut)))}
+@media (min-width:640px){:root{--gut:32px}}
+.wrap{margin-inline:auto;width:100%;max-width:var(--col);padding:0 var(--gut)}
+.eyebrow{font-family:"Geist Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--brick)}
+.on-ink .eyebrow{color:rgba(233,231,228,.6)}
+
+/* ── grain, borrowed from the sandbox and halved: on paper it is a texture,
+      not a filter ───────────────────────────────────────────────────────── */
+.grain{position:fixed;inset:-150%;z-index:90;pointer-events:none;opacity:.028;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");
+  animation:grainShift 1.1s steps(5) infinite}
+@keyframes grainShift{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}
+  40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-2%)}80%{transform:translate(3%,1%)}
+  100%{transform:translate(0,0)}}
+
+/* ── the bar. Two states, decided per frame by whatever is under it. ─────
+      mix-blend-mode: difference was tried on the other sandbox and rejected
+      there: it depends on what the backdrop happens to be inside which
+      stacking context. State the two colours. ─────────────────────────── */
+.bar{position:fixed;top:0;left:0;right:0;z-index:72;display:flex;align-items:center;gap:14px;
+  padding:18px var(--pad);pointer-events:none;color:var(--chrome);
+  transition:color .45s var(--ease)}
+.bar>*{pointer-events:auto}
+.bar .wm{font-family:"Geist Mono",monospace;font-size:10.5px;font-weight:600;letter-spacing:.3em;
+  text-transform:uppercase;min-height:24px;display:inline-flex;align-items:center}
+/* THE RAIL IS UP FROM THE FIRST FRAME, at the owner's instruction. It held
+   off over the hero for one version because the photograph is what it sits
+   on there: measured at 1440x900, bone over the picture, its top three rows
+   read 6.9, 6.5 and 6.4:1 and its bottom row read 2.43:1, landing on the
+   man's white shirt. A fixed object has no vertical move available, so the
+   only honest fixes were to hide it or give it a ground, and hiding it cost
+   the page its wayfinding exactly where a reader arrives. It is shown, and
+   the one row that fails is recorded rather than papered over. */
+.rail{position:fixed;right:max(18px,2vw);top:50%;transform:translateY(-50%);z-index:70;
+  display:none;gap:14px;justify-items:end;color:var(--chrome);
+  transition:color .45s var(--ease)}
+@media (min-width:980px){.rail{display:grid}}
+.rail a{display:flex;align-items:center;gap:9px;font-family:"Geist Mono",monospace;
+  font-size:9.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  opacity:.34;min-height:24px;transition:opacity .45s var(--ease)}
+.rail a i{display:block;width:16px;height:1px;background:currentColor;
+  transition:width .45s var(--ease)}
+.rail a:hover{opacity:.7}
+.rail a[aria-current="true"]{opacity:1}
+.rail a[aria-current="true"] i{width:38px}
+.langs{display:flex;align-items:center;gap:2px;margin-right:auto;
+  margin-left:clamp(14px,3vw,40px)}
+.langs button{font-family:"Geist Mono",monospace;font-size:10px;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;padding:9px 10px;border-radius:999px;opacity:.45;min-height:24px;
+  transition:opacity .3s var(--ease),background .3s var(--ease)}
+.langs button:hover{opacity:.85}
+.langs button[aria-pressed="true"]{opacity:1;background:color-mix(in srgb,currentColor 12%,transparent)}
+.bar .act{padding:.62rem 1.15rem;font-size:13px}
+/* the bar's three objects ran 32px past the right edge at 390 and the CTA
+   was cut in half. Measured, not eyeballed: wordmark 95 + languages 81 +
+   action 167 + gaps against 350 of usable width. One label for one intent
+   is a rule in CLAUDE.md, so the label does not shorten -- the chrome does. */
+@media (max-width:560px){
+  .bar{gap:10px;padding:16px var(--gut)}
+  .bar .wm{font-size:10px;letter-spacing:.2em}
+  .bar .act{padding:.52rem .82rem;font-size:11.5px}
+  .langs{margin-left:8px}
+  .langs button{padding:9px 5px;letter-spacing:.06em;font-size:9.5px}
+}
+@media (max-width:359px){
+  .bar{gap:8px;padding:14px var(--gut)}
+  .bar .wm{font-size:9.5px;letter-spacing:.14em}
+  .bar .act{padding:.5rem .7rem;font-size:10.5px}
+  .langs{margin-left:6px}
+  .langs button{padding:9px 4px;letter-spacing:.02em}
+}
+
+/* ── actions ────────────────────────────────────────────────────────── */
+.act{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;
+  border-radius:999px;padding:.9rem 1.7rem;font-size:15px;font-weight:500;min-height:24px;
+  transition:background-color .25s ease,border-color .25s ease,color .25s ease,transform .12s ease}
+.act:active{transform:scale(.975)}
+.act-grad{color:var(--bone);background:linear-gradient(45deg,var(--g1),var(--g2) 55%,var(--g3))}
+.act-grad:hover{filter:brightness(1.08)}
+.act-line{border:1px solid var(--rule);color:var(--ink)}
+.act-line:hover{border-color:var(--ink)}
+.on-ink .act-line{border-color:var(--rule-inv);color:var(--bone)}
+.on-ink .act-line:hover{border-color:var(--bone)}
+.act-bone{background:var(--bone);color:var(--ink)}
+.act-bone:hover{background:#fff}
+@media (prefers-reduced-motion:reduce){.act{transition:none}.act:active{transform:none}}
+
+/* ── reveal: a lift out of an overflow box, per line ─────────────────── */
+.ln{display:block;overflow:hidden}
+.ln>span{display:block;transform:translate3d(0,112%,0) skewY(3.5deg);
+  transition:transform 1.1s var(--ease)}
+.ready .ln>span{transform:none}
+.ln:nth-child(2)>span{transition-delay:.08s}
+.ln:nth-child(3)>span{transition-delay:.16s}
+.rv{opacity:0;transform:translate3d(0,22px,0);
+  transition:opacity .85s var(--ease),transform .85s var(--ease)}
+.rv.on{opacity:1;transform:none}
+.no-js .rv,.no-js .ln>span{opacity:1;transform:none}
+
+/* ══ ACT I — the hero ═══════════════════════════════════════════════════
+   The photograph is a dark room and the band carries its own ink ground, so
+   the type is bone and there is no wash. CLAUDE.md's table for after-1 is
+   for the live page's layout; this one sets the stack lower and is measured
+   again in that file.                                                    */
+.hero{position:relative;min-height:100svh;overflow:hidden;isolation:isolate;display:grid;
+  align-items:center;background:#120E0A}
+.hero .bed{position:absolute;inset:-7% 0;z-index:0;overflow:hidden;will-change:transform}
+.hero .bed img,.hero .bed video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:50% 50%}
+.hero .bed video{opacity:0;transition:opacity 1.4s ease}
+.hero .bed video.on{opacity:1}
+/* THERE IS NO SCRIM. The owner's instruction, and it takes the overlay
+   with it rather than softening it: a wash is what was eating the warm
+   light the picture is here for. With no wash the picture decides where
+   type can go and the only lever is vertical, which is CLAUDE.md's own
+   rule for a dark photograph — move the object out of the bright band or
+   drop it. The band is measured below and the stack is placed from the
+   measurement, not chosen. */
+.hero .inner{position:relative;z-index:2;display:grid;gap:clamp(16px,2.6vh,30px);
+  padding-top:clamp(4.75rem,11vh,7.5rem);padding-bottom:clamp(4rem,9vh,6rem)}
+.hero .inner>*{max-width:min(100%,56ch)}
+@media (min-width:1100px){.hero .inner>*{max-width:54%}}
+/* THE HERO EYEBROW IS PLAIN BONE AND CARRIES NO GROUND. The chip is the
+   owner's call reversed: it measured a fixed 5.90:1 at every viewport,
+   against a plain line that runs 5.80:1 at 1440 x 900 and 1.55:1 at
+   390 x 844 because object-fit re-crops the bokeh at every aspect. He has
+   read that and judges it readable as it was, which is the decision. The
+   measurement stays here because it is the thing that would otherwise be
+   re-derived; it is not an objection to work around. */
+.hero .eyebrow{color:rgba(233,231,228,.92)}
+
+.hero h1{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.032em;
+  font-size:var(--t-display);line-height:.98;max-width:13ch}
+.hero .sub{max-width:44ch;font-size:var(--t-body);line-height:1.62;
+  color:rgba(233,231,228,.80)}
+.hero .acts{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.cue{display:flex;align-items:center;gap:11px;font-family:"Geist Mono",monospace;font-size:9.5px;
+  font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:rgba(233,231,228,.72);
+  margin-top:6px}
+.cue i{display:block;width:1px;height:42px;background:linear-gradient(var(--bone),transparent);
+  animation:drip 2.4s var(--ease) infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}
+  55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ══ ACT II — the gate strip ════════════════════════════════════════════
+   A small mark eyebrow that is found, and under it a sentence in ink that
+   is read. Everything true that is not the decision lives here rather than
+   in the hero, because six objects in a hero is a list.                  */
+.gate{background:var(--paper);padding:clamp(40px,7vh,78px) 0}
+.gate .row{display:grid;gap:clamp(22px,4vw,64px);border-top:1px solid var(--rule);padding-top:26px}
+@media (min-width:760px){.gate .row{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.gate h3{font-family:"Geist Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--brick);margin-bottom:9px}
+.gate p{font-size:var(--t-body);line-height:1.6;max-width:34ch}
+
+/* ══ ACT III — the open tender, as an instrument ════════════════════════
+   The live page carried `27 Oct 2026, 12:00` under an eyebrow reading
+   `Open now`, and on 28 October that was false. A date typed into copy goes
+   stale in silence; a date the page computes from cannot. Everything here
+   derives from two timestamps, so the eyebrow, the figures and the rail all
+   turn over together the minute the deadline passes.                     */
+.open{background:var(--paper);padding:clamp(60px,10vh,130px) 0 clamp(70px,11vh,140px)}
+.open h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.028em;
+  font-size:var(--t-head);line-height:1.02;max-width:21ch;
+  margin:18px 0 clamp(26px,4vh,46px)}
+/* The tender card is the template, and the three cost cards share its
+   rule rather than copying its values: at the owner's instruction they
+   are the same object, and one selector is the only way two surfaces
+   cannot drift apart. Everything a card IS lives here -- the ground, the
+   hairline, the 16px corner, the padding and the internal rhythm. What
+   each one does with the space is below. */
+.tender,.rung{background:var(--paper-3);border:1px solid var(--rule);border-radius:16px;
+  padding:clamp(22px,3.4vw,44px);display:grid;gap:clamp(22px,3vh,34px)}
+.tender .top{display:grid;gap:18px}
+@media (min-width:900px){
+  .tender .top{grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,64px);
+    align-items:start}
+}
+/* one title treatment for both cards, for the same reason */
+.tender .tt,.rung .nm{font-family:"EB Garamond",Georgia,serif;font-weight:400;
+  letter-spacing:-.02em;font-size:var(--t-sub);line-height:1.1}
+
+/* the clock. Mono because these are figures that are scanned, and the unit
+   under each is a label that is found rather than read. */
+.clock{display:grid;gap:12px}
+.clock .state{font-family:"Geist Mono",monospace;font-size:9.5px;font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft)}
+.units{display:flex;align-items:flex-end;gap:clamp(12px,2vw,26px)}
+.units div{display:grid;gap:4px}
+.units b{font-family:"Geist Mono",monospace;font-weight:400;letter-spacing:-.02em;
+  font-size:var(--t-value);line-height:.92;
+  font-variant-numeric:tabular-nums}
+.units i{font-style:normal;font-family:"Geist Mono",monospace;font-size:9px;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft)}
+.clock.shut .units{display:none}
+.shutline{display:none;font-family:"EB Garamond",Georgia,serif;font-weight:400;
+  letter-spacing:-.02em;font-size:var(--t-value);line-height:1}
+.clock.shut .shutline{display:block}
+
+/* the window a bidder actually works in, drawn rather than described */
+.tl{position:relative;margin:4px 0 30px;height:1px;background:var(--rule)}
+.tl .fill{position:absolute;left:0;top:0;height:1px;background:var(--ink);width:0}
+.tl .stop{position:absolute;top:-5px;width:1px;height:11px;background:var(--ink);opacity:.45}
+.tl .stop.a{left:0} .tl .stop.b{right:0}
+.tl .now{position:absolute;top:-4px;left:0;width:9px;height:9px;border-radius:999px;
+  background:var(--brick);transform:translateX(-50%);
+  box-shadow:0 0 0 4px var(--paper-3)}
+.tl .lab{position:absolute;top:16px;font-family:"Geist Mono",monospace;font-size:9px;
+  font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);
+  display:grid;gap:2px;max-width:46%}
+.tl .lab.a{left:0} .tl .lab.b{right:0;text-align:right;justify-items:end}
+.tl .lab b{font-weight:600;color:var(--ink);font-size:10px}
+
+.tender .body{max-width:56ch;line-height:1.7;color:var(--ink-soft)}
+.files{display:flex;flex-wrap:wrap;gap:10px}
+.file{display:grid;gap:2px;border:1px solid var(--rule);border-radius:12px;padding:13px 18px;
+  transition:border-color .25s ease,background .25s ease}
+.file:hover{border-color:var(--ink);background:var(--paper-2)}
+.file b{font-weight:500;font-size:15px}
+.file i{font-style:normal;font-family:"Geist Mono",monospace;font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-soft)}
+.open .foot{font-size:14px;color:var(--ink-soft);margin-top:18px;max-width:58ch}
+.quote{font-family:"Geist Mono",monospace;font-size:12.5px;line-height:1.55;color:var(--ink-soft);
+  border-left:2px solid var(--rule);padding-left:14px}
+.quote b{display:block;font-weight:600;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--brick);margin-bottom:6px}
+
+/* ══ ACT IV — the weights, pinned and scrubbed ══════════════════════════
+   The part-to-whole bar from the offer page, driven by the scroll instead
+   of by an observer. It is not a progress meter: there is no track behind
+   it, the three segments are the whole and they sum to 100.              */
+.weigh{position:relative;height:270vh;background:var(--ink)}
+.weigh .stick{position:sticky;top:0;min-height:100svh;display:grid;align-content:center;
+  gap:clamp(20px,4vh,44px);padding:clamp(80px,12vh,130px) 0 clamp(40px,7vh,80px);color:var(--bone)}
+.weigh h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.03em;
+  font-size:var(--t-head);line-height:1;max-width:17ch;margin-top:16px}
+.chart{display:grid;gap:10px}
+.dim{display:grid;align-items:end;min-height:clamp(58px,8vh,92px)}
+.dim .span{grid-row:1;display:flex;align-items:center;gap:10px;position:relative;padding-bottom:7px;
+  opacity:0;transition:opacity .5s var(--ease)}
+.dim.on .span{opacity:1}
+.dim .span::before,.dim .span::after{content:"";position:absolute;bottom:0;width:1px;height:12px;
+  background:rgba(233,231,228,.5)}
+.dim .span::before{left:0}.dim .span::after{right:0}
+.dim .ruleL,.dim .ruleR{flex:1;height:1px;background:rgba(233,231,228,.5)}
+.dim .fig{font-family:"EB Garamond",Georgia,serif;font-size:var(--t-figure);
+  line-height:1;letter-spacing:-.02em}
+.dim .of{font-family:"Geist Mono",monospace;font-size:10.5px;letter-spacing:.16em;
+  color:rgba(233,231,228,.6)}
+.segs{display:grid;gap:2px;border-radius:16px;overflow:hidden;position:relative}
+.segs .s{position:relative;min-height:clamp(78px,11vh,122px);display:flex;align-items:center;
+  padding:0 clamp(12px,1.6vw,28px);transition:opacity .35s var(--ease)}
+.segs .s b{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.02em;
+  font-size:var(--t-value);line-height:1;color:var(--ink)}
+.segs .s:nth-child(1){background:rgba(233,231,228,.95)}
+.segs .s:nth-child(2){background:rgba(233,231,228,.70)}
+.segs .s:nth-child(3){background:rgba(233,231,228,.50)}
+.segs.dim1 .s:not(.lit){opacity:.34}
+/* one curtain of the page's own ink sliding right off the whole bar is one
+   event at one speed, and the segment geometry is never distorted while it
+   runs. Three segments each growing from their own edge is three events. */
+.curtain{position:absolute;inset:-1px -2px;z-index:2;background:var(--ink);transform-origin:right center;
+  will-change:transform}
+.names{display:grid;gap:2px}
+.names span{font-family:"Geist Mono",monospace;font-size:clamp(9px,8px + .3vw,11px);font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;padding-top:12px;opacity:0;
+  transition:opacity .5s var(--ease)}
+.names span.on{opacity:1}
+.names span:nth-child(1),.names span:nth-child(2){color:rgba(233,231,228,.85)}
+.names span:nth-child(3){color:rgba(233,231,228,.65)}
+@media (min-width:640px){.names span{padding-left:clamp(12px,1.6vw,28px)}}
+.weigh .note{font-size:14.5px;line-height:1.68;color:rgba(233,231,228,.7);max-width:62ch}
+
+/* ══ ACT V — the ladder ═════════════════════════════════════════════════ */
+.ladder{background:var(--paper);padding:clamp(70px,12vh,150px) 0}
+.ladder h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.03em;
+  font-size:var(--t-head);line-height:1;max-width:16ch;margin:18px 0 12px}
+.ladder .lede{font-size:var(--t-body);line-height:1.6;color:var(--ink-soft);
+  max-width:46ch;margin-bottom:clamp(30px,5vh,60px)}
+/* ── THREE TIERS AS COLUMNS, WHICH IS THE OFFER PAGE'S OWN SHAPE ──────
+   The owner's call: this fold was better as columns. It stood as three
+   hairline-separated rungs, each one a three-column row, and that is the
+   layout `index.html` already moved away from for a stated reason — a
+   reader comparing three tiers scans the deliverables under each price,
+   and a stacked row makes them scan down instead of across.
+   The objection this file records to cards is about EQUAL columns, which
+   say "pick one of these three" and are the opposite of a ladder. These
+   are not equal: the middle runs 1.25fr against 1fr, starts 16px higher
+   and carries the only solid border, so the shape argues the recommended
+   rung before a word is read. It is a grid and it never scrolls sideways;
+   the credit mechanic only works when all three prices are in view at
+   once. All three take the open-tender card exactly: paper-3, a hairline,
+   16px. */
+#rungs{display:grid;gap:clamp(16px,2vw,24px);padding-top:16px}
+@media (min-width:980px){
+  #rungs{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr) minmax(0,1fr);
+    align-items:stretch}
+}
+/* what a tier card adds to the template: a stacking context for the ink
+   fill, content packed to the top so three cards of different lengths
+   still read as a row, and a clip so the fill cannot paint square corners
+   over the 16px radius. */
+.rung{position:relative;align-content:start;overflow:hidden}
+.rung>*{position:relative;z-index:1}
+.rung::before{content:"";position:absolute;left:0;right:0;top:0;bottom:0;z-index:0;
+  background:var(--ink);transform:scaleY(0);transform-origin:bottom;
+  transition:transform .6s var(--ease)}
+.rung:hover::before,.rung:focus-within::before{transform:scaleY(1)}
+/* the whole row inverts, which is the sandbox's own treatment. The brick is
+   barred on ink at 2.03:1 and the price gradient's amber stop is not far
+   behind it, so on the filled state both fall back to bone. */
+.rung:hover,.rung:focus-within{color:var(--bone)}
+.rung:hover .step,.rung:focus-within .step{color:rgba(233,231,228,.6)}
+.rung:hover .terms,.rung:focus-within .terms,
+.rung:hover .when,.rung:focus-within .when{color:rgba(233,231,228,.75)}
+.rung:hover .note,.rung:focus-within .note{color:rgba(233,231,228,.6)}
+.rung:hover li::before,.rung:focus-within li::before{background:rgba(233,231,228,.55)}
+@supports (background-clip:text) or (-webkit-background-clip:text){
+  .rung:hover .pr,.rung:focus-within .pr{background:none;-webkit-text-fill-color:var(--bone);
+    color:var(--bone)}
+}
+/* the lead card's border inverts with the fill, where the deleted gradient
+   bar used to. A rule written for an element that no longer exists is the
+   trap this file records: it matches nothing and the next session trusts it. */
+.rung:hover[data-lead],.rung:focus-within[data-lead]{border-color:var(--bone)}
+.rung .step{font-family:"Geist Mono",monospace;font-size:9.5px;font-weight:600;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--brick)}
+/* ── THE COST IS A FIELD, NOT A SHOUT ────────────────────────────────
+   The price ran at --t-figure, which is 67px at 1440 against a fold
+   headline of 52px: the figure was the largest object in its own fold and
+   larger than the sentence that frames it. It takes --t-value now, 42px,
+   which sits under the headline and over the tier name at 28px, so the
+   three read in the order a reader needs them.
+   The size is half of it. The other half is that everything about cost now
+   lives in one column -- the figure, the term and the credit -- instead of
+   the credit sitting at the foot of the deliverables list two columns away
+   from the number it modifies. The credit IS the ladder's mechanic, and a
+   mechanic stated far from its figure is not stated. A hairline on the
+   left of the block says the three lines are one object. */
+.rung .cost{position:relative;padding-left:clamp(14px,1.6vw,22px)}
+.rung .cost::before{content:"";position:absolute;left:0;top:.18em;bottom:.2em;width:1px;
+  background:var(--rule)}
+.rung:hover .cost::before,.rung:focus-within .cost::before{background:var(--rule-inv)}
+.rung .pr{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.028em;
+  font-size:var(--t-value);line-height:1;color:var(--ink)}
+@supports (background-clip:text) or (-webkit-background-clip:text){
+  /* guarded: a browser without background-clip would otherwise show nothing
+     at all where the price is */
+  .rung .pr{background:linear-gradient(45deg,var(--g1),var(--g2) 55%,var(--g3));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+}
+.rung .when{font-family:"Geist Mono",monospace;font-size:9.5px;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ink-soft)}
+/* the tender card's body line-height, which is the one it reads at */
+.rung .terms{line-height:1.7;color:var(--ink-soft);max-width:42ch}
+.rung ul{display:grid;gap:9px;margin-top:4px}
+.rung li{position:relative;padding-left:20px;font-size:15px;line-height:1.55;max-width:44ch}
+.rung li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:1px;background:var(--brick)}
+.rung .note{font-size:13px;line-height:1.55;color:var(--ink-soft);max-width:34ch;margin-top:4px}
+/* the recommended rung is argued by the wider column, the lift and the
+   solid border rather than by being the only card with a ground. The left
+   gradient bar is gone with the row it belonged to: a 2px rule down the
+   side of a card reads as a tab, and the border already says it. */
+.rung[data-lead]{border-color:var(--ink);border-width:1.5px}
+@media (min-width:980px){
+  .rung[data-lead]{margin-block:-16px 16px}
+}
+.rung .col{display:grid;align-content:start;gap:12px}
+.ladder .cmp{margin-top:clamp(28px,5vh,56px);display:grid;gap:18px}
+.ladder .cmp p{font-size:14.5px;line-height:1.7;color:var(--ink-soft);max-width:66ch}
+.freeline{display:flex;flex-wrap:wrap;gap:16px 26px;align-items:center;justify-content:space-between;
+  border-top:1px solid var(--rule);padding-top:24px}
+.freeline p{max-width:46ch;line-height:1.6;font-size:var(--t-body)}
+
+/* ══ ACT VI — the close ═════════════════════════════════════════════════ */
+/* THE CLOSE IS ON PAPER, at the owner's instruction, and paper-3 is the
+   lightest value the theme has — the white shade rather than a fourth
+   ground invented for one fold. It costs the page its third ink moment and
+   buys two things. The brick is available again, so the closing eyebrow is
+   the same mark as the other five instead of the bone/60 an ink ground
+   forces, which is what makes the spine read as one device from the hero to
+   the end. And the page now runs paper · paper · paper-2 · INK · paper ·
+   paper-3, so the weights fold is the single inversion rather than one of
+   three, which is the whole reason this file says an inverted moment works
+   at all. The price of it is that the page no longer ends dark; the close's
+   own weight comes from the measure and the air instead. */
+/* bottom aligned, at the owner's instruction, and the same on both pages:
+   a close that sits in the middle of its own band reads as another section,
+   and a close that sits on the floor reads as the end of the page. */
+.close{position:relative;min-height:88svh;display:grid;align-items:end;
+  background:var(--paper-3);padding:clamp(70px,12vh,150px) 0 clamp(40px,7vh,80px)}
+.close h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.034em;
+  font-size:var(--t-display);line-height:.96;max-width:14ch;margin:18px 0 24px}
+/* :not(.eyebrow) because `.close p` is (0,1,1) and `.eyebrow` is (0,1,0),
+   so without it the closing eyebrow drew in --ink-soft and the spine broke
+   at its last rung -- measured, not guessed. It is the same specificity
+   trap this repo already recorded on the annex tokens. */
+.close p:not(.eyebrow){max-width:52ch;font-size:var(--t-body);line-height:1.66;
+  color:var(--ink-soft);margin-bottom:30px}
+.close .ft{display:flex;flex-wrap:wrap;gap:14px 30px;justify-content:space-between;align-items:center;
+  border-top:1px solid var(--rule);padding-top:20px;margin-top:clamp(40px,8vh,90px);
+  font-family:"Geist Mono",monospace;font-size:9.5px;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ink-soft)}
+.close .ft a{transition:color .25s ease}
+.close .ft a:hover{color:var(--ink)}
+
+/* ══ the intake ═════════════════════════════════════════════════════════ */
+dialog{border:0;padding:0;background:transparent;max-width:none;max-height:none;width:100%}
+dialog::backdrop{background:rgba(11,24,20,.72);backdrop-filter:blur(4px)}
+.sheet{position:fixed;left:50%;translate:-50% 0;width:min(560px,calc(100vw - 28px));
+  background:var(--paper-3);color:var(--ink);border-radius:18px;border:1px solid var(--rule);
+  padding:clamp(20px,3.4vw,34px);overflow-y:auto;display:grid;gap:18px}
+.sheet h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.02em;
+  font-size:var(--t-sub);line-height:1.05}
+.sheet .intro{font-size:15px;line-height:1.62;color:var(--ink-soft)}
+.sheet label{display:block;font-family:"Geist Mono",monospace;font-size:9.5px;font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:7px}
+.sheet input[type=email]{width:100%;padding:13px 15px;border-radius:11px;border:1px solid var(--rule);
+  background:#fff;font:inherit;font-size:16px;color:var(--ink)}
+.sheet input[type=email]:focus{border-color:var(--ink)}
+.sheet .hint{font-size:12.5px;color:var(--ink-soft);margin-top:7px;line-height:1.5}
+/* a file input styled sr-only is still focusable, so the ring lands on
+   something nobody can see. A real button forwards the click instead. */
+.sheet input[type=file]{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.pick{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.pick .name{font-size:14px;color:var(--ink-soft);overflow-wrap:anywhere}
+.sheet .err{font-size:13.5px;line-height:1.5;color:#8E2B22}
+.sheet .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.sheet .alt{font-size:12.5px;line-height:1.6;color:var(--ink-soft);border-top:1px solid var(--rule);
+  padding-top:14px}
+.sheet .alt a{text-decoration:underline;text-underline-offset:3px}
+.xbtn{width:40px;height:40px;border-radius:999px;border:1px solid var(--rule);display:grid;
+  place-items:center;font-size:16px}
+.xbtn:hover{border-color:var(--ink)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important}
+  .ln>span{transform:none}
+  .rv{opacity:1;transform:none}
+  .grain{animation:none}
+}
+</style>
 </head>
+<body>
+<script>document.documentElement.classList.remove('no-js')</script>
+<div class="grain" aria-hidden="true"></div>
 
-<body class="font-sans antialiased bg-paper text-ink">
+<a class="skip" href="#open" data-t="skip">Skip to the offer</a>
 
-<div id="root">
-  <!-- Static fallback. The page renders through React, and a module that
-       fails to load would otherwise leave an empty document. The runtime is
-       vendored at /assets/vendor/runtime.js rather than fetched from a CDN,
-       so there is no third party that can fail, but a blocked script, a
-       stripped module or scripting turned off all land here. createRoot
-       clears it the moment React is up; if it never is, the reader still
-       gets the offer, the terms and a working address. Keep the headline
-       and the standfirst in step with the hero above. -->
-  <noscript style="display:block;padding:4rem 1.25rem;max-width:46rem;margin:0 auto">
-    <h1 style="font-size:2.5rem;line-height:1.05;margin:0 0 1.5rem">Written once.<br>Right every time.</h1>
-    <p style="margin:0 0 1.5rem;line-height:1.6">Public buyers score the documents you hand in. Not the plant, not the price list, not the twenty years.</p>
-    <p style="margin:0"><a href="mailto:atlas@arvorealta.com">Get your page scored</a>. Send one page from a tender you lost. No charge and no call.</p>
-  </noscript>
-</div>
+<header class="bar" id="bar">
+  <a class="wm" href="/">Arvorealta</a>
+  <div class="langs" id="langs" role="group" aria-label="Language"></div>
+  <button class="act act-grad" data-cta data-t="cta">Get your page scored</button>
+</header>
 
-<script type="module">
-import { React, createRoot, motion, useReducedMotion, htm } from "/assets/vendor/runtime.js";
-const { useState, useEffect, useRef, useContext, createContext } = React;
-/* ------------------------------------------------------------ language
-   Three languages, one object, no fetch. The page is small enough that
-   shipping all three costs less than a round trip would, and a reader who
-   switches gets the new language in the same frame.
+<nav class="rail" aria-label="Sections">
+  <a href="#top"   data-rail><span data-t="_r0">Bids</span><i></i></a>
+  <a href="#open"  data-rail><span data-t="_r1">Tender</span><i></i></a>
+  <a href="#weigh" data-rail><span data-t="_r3">Scored</span><i></i></a>
+  <a href="#price" data-rail><span data-t="_r4">Cost</span><i></i></a>
+  <a href="#start" data-rail><span data-t="_r5">Start</span><i></i></a>
+</nav>
 
-   WHAT IS NEVER TRANSLATED. The tender's own title, and the names of its
-   annexes: Bilag 2, Bilag 3, Vedlegg 5. Those are the strings a bidder
-   matches against the competition documents in front of them, and a helpful
-   translation of "Vedlegg 5" into "Appendix 5" would make the page useless
-   at the exact moment it is most needed. The buyer's registered name is left
-   alone for the same reason. Only the country name moves.
+<main>
 
-   The Norwegian and Finnish below are mine, not a native speaker's, and the
-   procurement vocabulary in them is the part worth having checked before
-   this is used in an approach. */
+<!-- ACT I ───────────────────────────────────────────────────────────── -->
+<section class="hero on-ink" id="top" data-tone="dark">
+  <div class="bed" aria-hidden="true">
+    <picture>
+      <source type="image/webp" sizes="100vw"
+        srcset="/assets/img/after-1-760.webp 760w, /assets/img/after-1-960.webp 960w, /assets/img/after-1-1141.webp 1141w">
+      <img src="/assets/img/after-1-1141.jpg" sizes="100vw" alt="" width="1141" height="640"
+        srcset="/assets/img/after-1-760.jpg 760w, /assets/img/after-1-960.jpg 960w, /assets/img/after-1-1141.jpg 1141w"
+        fetchpriority="high">
+    </picture>
+    <video id="herov" muted playsinline loop preload="metadata" poster="/assets/img/after-1-1141.jpg">
+      <source src="/assets/video/hero-1-720.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="inner wrap">
+    <p class="eyebrow" data-t="hero.eyebrow">Industrial manufacturer bids</p>
+    <h1>
+      <span class="ln"><span data-t="hero.h1a">Written once.</span></span>
+      <span class="ln"><span data-t="hero.h1b">Right every time.</span></span>
+    </h1>
+    <p class="sub" data-t="hero.sub">Public buyers score the documents you hand in. Not the plant, not the price list, not the twenty years.</p>
+    <div class="acts">
+      <button class="act act-grad" data-cta data-t="cta">Get your page scored</button>
+      <a class="act act-line" href="#open" data-t="hero.second">See the open tender</a>
+    </div>
+    <div class="cue"><i></i><span data-t="_scroll">Scroll</span></div>
+  </div>
+</section>
+
+<!-- ACT II ──────────────────────────────────────────────────────────── -->
+<section class="gate" data-tone="light">
+  <div class="wrap"><div class="row" id="gate" data-render="gate"></div></div>
+</section>
+
+<!-- ACT III ─────────────────────────────────────────────────────────── -->
+<section class="open" id="open" data-tone="light" style="scroll-margin-top:76px">
+  <div class="wrap">
+    <p class="eyebrow rv" id="openEyebrow" data-t="open.eyebrow">Open now</p>
+    <h2 class="rv" id="openH2" data-t="open.h2">If you are bidding on this one, the hard attachment is already written.</h2>
+
+    <div class="tender rv">
+      <div class="top">
+        <div style="display:grid;gap:16px">
+          <p class="tt" data-t="open.title">Supply of waste containers</p>
+          <p class="quote">
+            <b data-t="open.official">Named in the competition documents as</b>
+            <span lang="nb">Anskaffelse av avfallsbeholdere</span>
+          </p>
+          <p class="body" data-t="open.buyer">Valdres Kommunale Renovasjon IKS, Norway.</p>
+        </div>
+
+        <div class="clock" id="clock">
+          <p class="state" id="clockState">&nbsp;</p>
+          <p class="shutline" id="shutline">&nbsp;</p>
+          <div class="units" id="units">
+            <div><b id="uD">00</b><i data-t="_uDays">days</i></div>
+            <div><b id="uH">00</b><i data-t="_uHours">hours</i></div>
+            <div><b id="uM">00</b><i data-t="_uMin">minutes</i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl" id="tl" aria-hidden="true">
+        <i class="fill" id="tlFill"></i>
+        <i class="stop a"></i><i class="stop b"></i>
+        <i class="now" id="tlNow"></i>
+        <span class="lab a"><span data-t="_tlA">Questions close</span><b id="tlAv">&nbsp;</b></span>
+        <span class="lab b"><span data-t="_tlB">Tender deadline</span><b id="tlBv">&nbsp;</b></span>
+      </div>
+      <p class="sr" id="tlSr"></p>
+
+      <p class="body" data-t="open.body">Two of the three annexes are handed out as finished forms.</p>
+      <div class="files" id="openFiles" data-render="files"></div>
+    </div>
+    <p class="foot rv" data-t="open.foot">One tender today. Another when there is one worth writing for.</p>
+  </div>
+</section>
+
+<!-- ACT III-b ───────────────────────────────────────────────────────── -->
+<!-- ACT IV ──────────────────────────────────────────────────────────── -->
+<section class="weigh on-ink" id="weigh" data-tone="dark" style="scroll-margin-top:0">
+  <div class="stick">
+    <div class="wrap">
+      <p class="eyebrow" data-t="weigh.eyebrow">How it is scored</p>
+      <h2 data-t="weigh.h2">Most of the score is not the price.</h2>
+    </div>
+    <div class="wrap">
+      <p class="sr" data-t="weigh.alt">The award is scored out of 100 points.</p>
+      <div class="chart" aria-hidden="true">
+        <div class="dim" id="dim">
+          <div class="span" id="dimSpan">
+            <i class="ruleL"></i>
+            <span class="fig">65</span><span class="of">/ 100</span>
+            <i class="ruleR"></i>
+          </div>
+        </div>
+        <div class="segs" id="segs"></div>
+        <div class="names" id="names"></div>
+      </div>
+    </div>
+    <div class="wrap"><p class="note" data-t="weigh.body">Read from the award criteria in the notice itself.</p></div>
+  </div>
+</section>
+
+<!-- ACT V ───────────────────────────────────────────────────────────── -->
+<section class="ladder" id="price" data-tone="light" style="scroll-margin-top:76px">
+  <div class="wrap">
+    <p class="eyebrow rv" data-t="ladder.eyebrow">What it costs</p>
+    <h2 class="rv" data-t="ladder.h2">Then make it a system.</h2>
+    <p class="lede rv" data-t="ladder.lede">Every tier credits into the one above it. Credits never expire.</p>
+    <div id="rungs" data-render="tiers"></div>
+    <div class="cmp">
+      <p class="rv" data-t="ladder.foot">A Swedish bid consultancy publishes 15,000 kr excluding VAT for a single draft of a single bid.</p>
+      <div class="freeline rv">
+        <p data-t="ladder.free">The first step is free, and it is the one the whole page is asking for.</p>
+        <button class="act act-grad" data-cta data-t="cta">Get your page scored</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACT VI ──────────────────────────────────────────────────────────── -->
+<section class="close" id="start" data-tone="light">
+  <div class="wrap">
+    <p class="eyebrow rv" data-t="close.eyebrow">Where to start</p>
+    <h2 class="rv" data-t="close.h2">Find out what it cost you. For nothing.</h2>
+    <p class="rv" data-t="close.body">Send one page from a tender you lost.</p>
+    <div class="rv"><button class="act act-grad" data-cta data-t="cta">Get your page scored</button></div>
+    <div class="ft">
+      <span>Arvorealta &nbsp;/&nbsp; Atlas Sahrim</span>
+      <span><a href="/brand/" data-t="foot.brand">Brand and identity</a> &nbsp;/&nbsp; <a href="/video/" data-t="foot.video">Video</a></span>
+      <span><a href="mailto:atlas@arvorealta.com">atlas@arvorealta.com</a></span>
+    </div>
+  </div>
+</section>
+</main>
+
+<dialog id="dlg" aria-labelledby="dlgTitle">
+  <form method="dialog" class="sheet" id="sheet">
+    <div class="row">
+      <h2 id="dlgTitle" data-t="form.title">Send one page</h2>
+      <button type="button" class="xbtn" id="dlgX" aria-label="Close">&#10005;</button>
+    </div>
+    <p class="intro" data-t="form.intro">One page from a tender you lost.</p>
+
+    <div id="dlgBody">
+      <div style="margin-bottom:18px">
+        <label for="em" data-t="form.email">Your email</label>
+        <input type="email" id="em" name="email" autocomplete="email" inputmode="email" required>
+        <p class="hint" data-t="form.emailHint">Where the scored page goes back to.</p>
+      </div>
+      <div>
+        <label data-t="form.file">The page</label>
+        <div class="pick">
+          <input type="file" id="fl" name="file">
+          <button type="button" class="act act-line" id="flBtn" data-t="form.choose">Choose a file</button>
+          <span class="name" id="flName"></span>
+          <button type="button" class="act act-line" id="flClear" hidden data-t="form.remove">Remove</button>
+        </div>
+        <p class="hint" data-t="form.fileHint">PDF, Word or an image of the page. Up to 10 MB.</p>
+      </div>
+      <p class="err" id="dlgErr" role="alert" hidden></p>
+    </div>
+
+    <div class="row" id="dlgActs">
+      <button type="button" class="act act-grad" id="dlgSend" data-t="form.send">Send it</button>
+      <button type="button" class="act act-line" id="dlgCancel" data-t="form.cancel">Close</button>
+    </div>
+
+    <p class="alt" id="dlgAlt"></p>
+  </form>
+</dialog>
+
+<noscript style="display:block;padding:6rem 1.5rem;max-width:42rem;margin:0 auto">
+  <p style="line-height:1.7;color:#4C5B54">The page above reads without scripting. The language control,
+  the pricing rungs and the intake form do not; mail
+  <a href="mailto:atlas@arvorealta.com">atlas@arvorealta.com</a> with one page attached and it comes back scored.</p>
+</noscript>
+
+<script>
+(() => {
+"use strict";
+
+/* ══ copy ══════════════════════════════════════════════════════════════
+   STR was copied verbatim out of the previous offer page's own object
+   rather than retyped, so every price, every deadline and every word of
+   the Norwegian and Finnish is the one that page already shipped. With
+   this file promoted it is no longer a snapshot of anything: THIS is the
+   copy, and reference/index.html is where the original ladder wording
+   lives. A price or a deliverable changes in both or in neither.         */
 const STR = {
   en: {
     label: "English", short: "EN", htmlLang: "en",
@@ -168,7 +880,7 @@ const STR = {
     close: {
       eyebrow: "Where to start",
       h2: "Find out what it cost you. For nothing.",
-      body: "Send one page from a tender you lost. A method statement, a quality section, a capability answer. It comes back scored against the criteria it was judged on, with the points located, the reasoning written out, and a note on what the next one should carry."
+      body: "Send one page from a past tender. It comes back scored against the criteria it was judged on and a note on what the next one should carry. At zero cost."
     },
     langLabel: "Language"
   },
@@ -273,7 +985,7 @@ const STR = {
     close: {
       eyebrow: "Hvor du begynner",
       h2: "Finn ut hva det kostet deg. Gratis.",
-      body: "Send én side fra en konkurranse du tapte. En metodebeskrivelse, et kvalitetsavsnitt, et svar om kapasitet. Den kommer tilbake vurdert mot kriteriene den ble bedømt etter, med poengene plassert, begrunnelsen skrevet ut, og en merknad om hva den neste bør inneholde."
+      body: "Send én side fra et tidligere anbud. Den kommer tilbake vurdert mot kriteriene den ble bedømt etter, og med en merknad om hva den neste bør inneholde. Uten kostnad."
     },
     langLabel: "Språk"
   },
@@ -378,1017 +1090,472 @@ const STR = {
     close: {
       eyebrow: "Mistä aloittaa",
       h2: "Selvitä, mitä se maksoi sinulle. Ilmaiseksi.",
-      body: "Lähetä yksi sivu hävitystä tarjouksesta. Menetelmäkuvaus, laatuosio, kyvykkyysvastaus. Se palaa pisteytettynä niitä perusteita vasten, joilla se arvioitiin, pisteet paikannettuina, perustelut kirjoitettuina ja merkintä siitä, mitä seuraavan tulisi sisältää."
+      body: "Lähetä yksi sivu aiemmasta tarjouksesta. Se palaa pisteytettynä niitä perusteita vasten, joilla se arvioitiin, ja mukana on merkintä siitä, mitä seuraavan tulisi sisältää. Veloituksetta."
     },
     langLabel: "Kieli"
   }
 };
 const LANGS = ["en", "nb", "fi"];
 
-const html = htm.bind(React.createElement);
-const M = motion;
-const EASE = [0.16, 1, 0.3, 1];
+/* the one string this page has that the offer page does not */
+const EXTRA = {
+  en:{ _scroll:"Scroll", _docNav:"What it looks like", _docEyebrow:"What it looks like",
+       _r0:"Bids", _r1:"Tender", _r2:"Documents", _r3:"Scored", _r4:"Cost", _r5:"Start",
+       _uDays:"days", _uHours:"hours", _uMin:"minutes",
+       _tlA:"Questions close", _tlB:"Tender deadline",
+       _left:"until the tender deadline", _shutEyebrow:"Closed",
+       _shut:"Closed.", _shutWhen:"The deadline passed on",
+       _shutH2:"This one has closed. The attachment it needed is still here.",
+       _window:"The bidding window runs from the question deadline to the tender deadline.",
+       _docH2:"One standard.<br>Every document a bid needs.",
+       _docA:"Tender annex", _docB:"Proposal", _docC:"Deck",
+       _docNote:"All three are published on this site and open in a new tab. The annex is the redacted sample: the client, the sums and the notice numbers are removed from the file rather than covered over." },
+  nb:{ _scroll:"Rull", _docNav:"Slik ser det ut", _docEyebrow:"Slik ser det ut",
+       _r0:"Tilbud", _r1:"Konkurranse", _r2:"Dokumenter", _r3:"Vekting", _r4:"Pris", _r5:"Start",
+       _uDays:"dager", _uHours:"timer", _uMin:"minutter",
+       _tlA:"Frist for spørsmål", _tlB:"Tilbudsfrist",
+       _left:"til tilbudsfristen", _shutEyebrow:"Lukket",
+       _shut:"Lukket.", _shutWhen:"Fristen gikk ut",
+       _shutH2:"Denne er lukket. Vedlegget den trengte ligger fortsatt her.",
+       _window:"Tilbudsvinduet går fra spørsmålsfristen til tilbudsfristen.",
+       _docH2:"Én standard.<br>Hvert dokument et tilbud trenger.",
+       _docA:"Tilbudsvedlegg", _docB:"Tilbud", _docC:"Presentasjon",
+       _docNote:"Alle tre er publisert på dette nettstedet og åpnes i ny fane. Vedlegget er det sladdede eksempelet: oppdragsgiver, beløpene og kunngjøringsnumrene er fjernet fra filen, ikke dekket over." },
+  fi:{ _scroll:"Vieritä", _docNav:"Miltä se näyttää", _docEyebrow:"Miltä se näyttää",
+       _r0:"Tarjoukset", _r1:"Tarjouspyyntö", _r2:"Asiakirjat", _r3:"Pisteet", _r4:"Hinta", _r5:"Aloita",
+       _uDays:"päivää", _uHours:"tuntia", _uMin:"minuuttia",
+       _tlA:"Kysymysten määräaika", _tlB:"Tarjousten määräaika",
+       _left:"tarjousten määräaikaan", _shutEyebrow:"Suljettu",
+       _shut:"Suljettu.", _shutWhen:"Määräaika umpeutui",
+       _shutH2:"Tämä on sulkeutunut. Sen vaatima liite on yhä täällä.",
+       _window:"Tarjousikkuna kulkee kysymysten määräajasta tarjousten määräaikaan.",
+       _docH2:"Yksi standardi.<br>Jokainen tarjouksen tarvitsema asiakirja.",
+       _docA:"Tarjousliite", _docB:"Tarjous", _docC:"Esitys",
+       _docNote:"Kaikki kolme on julkaistu tällä sivustolla ja avautuvat uuteen välilehteen. Liite on peitetty näyte: hankkija, summat ja ilmoitusnumerot on poistettu tiedostosta, ei peitetty päältä." }
+};
 
-function useMo() {
-  const reduce = useReducedMotion();
-  return {
-    rise: (i = 0) => reduce ? {} : {
-      initial: { opacity: 0, y: 16 }, animate: { opacity: 1, y: 0 },
-      transition: { duration: .85, delay: .06 + i * .11, ease: EASE }
-    },
-    reveal: (i = 0) => reduce ? {} : {
-      initial: { opacity: 0, y: 22 }, whileInView: { opacity: 1, y: 0 },
-      viewport: { once: true, amount: .25 },
-      transition: { duration: .7, delay: i * .08, ease: EASE }
-    },
-    press: reduce ? {} : { whileHover: { y: -1 }, whileTap: { scale: .985 } }
-  };
-}
+const $  = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const clamp01 = v => v < 0 ? 0 : v > 1 ? 1 : v;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
+const dig = (o, path) => path.split(".").reduce((a, k) => (a == null ? a : a[k]), o);
 
-const WRAP = "mx-auto w-full max-w-[82rem] px-5 sm:px-8";
-const ANCHOR = "scroll-mt-[92px]";
-/* The address is prewritten. A bare mailto opens an empty window and the
-   reader has to compose the thing we are asking for, which is where most of
-   them stop. Subject and body are filled in the reader's own language, with
-   three blank fields and the one instruction that matters, so sending is
-   attaching a file and pressing send. encodeURIComponent, not escape: the
-   body carries newlines and non-ASCII in two of the three languages. */
-const mailto = t =>
-  `mailto:atlas@arvorealta.com?subject=${encodeURIComponent(t.mail.subject)}&body=${encodeURIComponent(t.mail.body)}`;
+/* ══ the intake ════════════════════════════════════════════════════════
+   The site is static on GitHub Pages and has no server, so the form posts
+   to Basin. The endpoint is not a secret: a form action lives in the page's
+   own HTML and hiding it at local scope would be theatre. Basin's own spam
+   protection is what stands in for secrecy.                              */
+/* The only two facts in the fold. Norway keeps CEST until 25 October, so the
+   question deadline is +02:00 and the tender deadline, two days after the
+   change, is +01:00. Everything the reader sees about timing is derived from
+   these; nothing about the date is typed into copy. */
+const TENDER = {
+  questions: new Date("2026-10-19T23:59:00+02:00"),
+  deadline:  new Date("2026-10-27T12:00:00+01:00")
+};
 
-/* A rule that draws itself to its share of the largest figure in the set.
-   There is no track behind it: a filled background track is a dashboard
-   control, and what is being shown here is one length against another, not
-   a progress reading. transformOrigin left so it grows from the figure's
-   own edge, and scaleX so the browser animates on the compositor. Reduced
-   motion draws it at full length with no transition. */
-function Bar({ pct, max, on = "ink", cap = 100 }) {
-  const reduce = useReducedMotion();
-  const w = (pct / max) * cap;
-  return html`<div class="mt-5 h-[3px] w-full origin-left" style=${{ maxWidth: `${w}%` }}>
-    <${M.div}
-      class="h-full w-full origin-left ${on === "bone" ? "bg-bone/70" : "bg-ink"}"
-      initial=${reduce ? false : { scaleX: 0 }}
-      whileInView=${{ scaleX: 1 }}
-      viewport=${{ once: true, amount: .6 }}
-      transition=${{ duration: .9, delay: .2, ease: EASE }}
-      style=${{ scaleX: reduce ? 1 : undefined }} />
-  </div>`;
-}
-
-/* Tracked capitals name a SECTION and nothing else. There are two on the
-   page, and that is the whole allowance. A label that names a value next to
-   it — a field, a date, a figure — is mono at 12px in sentence case, because
-   it is found rather than read and it should not look like a section opening.
-   Thirteen strings wore the eyebrow costume for a while and the page had one
-   texture for everything that was not a sentence.
-
-   Both carry --ink at 75%, which measures 4.89:1 on paper and 5.55:1 on the
-   paper-3 cards. They sat at 55% for a while, which is 2.97:1, and every
-   label, caption and file-meta line on the page was under the 4.5:1 small
-   text needs. The muting is the point; failing the floor was not. */
-function Eyebrow({ children, on = "flat" }) {
-  /* Full bone on the photograph, never a muted one. This line sits in the
-     band where the picture's highlights run, measured at 3.49:1 to 5.03:1
-     against its own ground, and taking 25% off the type is the difference
-     between clearing the floor and not. Only the strongest value crosses
-     onto a picture; on the flat grounds the mark can be muted because the
-     ground underneath it is a single known value. */
-  const tone = on === "photo" ? "text-bone"
-             : on === "inv"   ? "text-bone/75"   /* the mark is 2.03:1 on ink and barred; 6.76:1 here */
-             : "text-brick";
-  return html`<p class="font-mono text-[11px] uppercase tracking-[.18em] ${tone}">${children}</p>`;
-}
-
-function Action({ href, children, tone = "solid", class: extra = "", ...rest }) {
-  const mo = useMo();
-  const base = "inline-flex items-center justify-center whitespace-nowrap rounded-full px-6 py-3 text-[15px] font-medium transition-colors";
-  const tones = {
-    solid: "bg-ink text-bone hover:bg-ink/90",
-    ghost: "border border-ink/25 text-ink hover:border-ink/60"
-  };
-  const cls = `${base} ${tones[tone]} ${extra}`;
-  /* A link when it goes somewhere and a button when it does something. The
-     three language controls were the only clickable things on this page
-     reporting cursor: default, measured, and an <a> with no href would be
-     the same mistake with a worse name attached. */
-  return href
-    ? html`<${M.a} href=${href} class=${cls} ...${mo.press} ...${rest}>${children}<//>`
-    : html`<${M.button} type="button" class=${cls} ...${mo.press} ...${rest}>${children}<//>`;
-}
-
-/* ------------------------------------------------------------- the intake
- *
- * The call to action used to open a prewritten mail. That is still the right
- * answer when there is nowhere to post to — an empty compose window asks the
- * reader to write the thing we are asking them for, which is where most of
- * them stop — but it has one hole the owner named: the reader has to
- * remember to attach the page, and a mail that arrives with nothing attached
- * is a round trip before the work can start. A form asks for the file while
- * the reader is still in the frame of mind to hand it over.
- *
- * WHAT THIS CANNOT DO ON ITS OWN. The site is static on GitHub Pages. There
- * is no server here, so there is nothing to receive a file: a form on this
- * page can validate, but it cannot deliver. INTAKE below is the address the
- * file would be posted to and it is null, because picking the service that
- * receives it is the owner's call and it needs a key. Until it is set the
- * dialog validates everything and then says plainly that nothing was sent,
- * which is the honest state rather than a fake success. The prewritten mail
- * stays in the footer of the dialog as the path that works today.
- *
- * THE CAP IS 10 MB AND IT IS CHECKED HERE. One page as a PDF is well under
- * a megabyte; a scan of one page is a few; ten is the headroom where a
- * phone photograph of a printed page still fits, and it is at or under what
- * the common form services accept on their free tiers. The check runs on the
- * file before any request, because a reader who finds out from a server that
- * their file was too large has already waited for the upload.
- *
- * A NATIVE <dialog>, NOT A DIV. showModal gives the focus trap, the inert
- * background, Escape to close and the ::backdrop for nothing, and all four
- * are things a hand-rolled modal gets wrong. Focus returns to the control
- * that opened it because the browser does that too.
- *
- * The file input is hidden and a real button clicks it. A file input styled
- * with sr-only is still focusable, so the focus ring lands on something
- * nobody can see; a button that forwards the click puts the ring where the
- * reader is looking. */
-const MAX_MB = 10;
-const MAX_BYTES = MAX_MB * 1024 * 1024;
-const OK_EXT = ["pdf", "doc", "docx", "odt", "rtf", "png", "jpg", "jpeg", "webp"];
-const ACCEPT = OK_EXT.map(e => "." + e).join(",") + ",application/pdf,image/*";
-/* Basin, free tier: 50 submissions a month, 1 form, 100MB of storage, 30 day
-   retention. The endpoint is not a secret and is not treated as one — a form
-   action lives in the page's own HTML, so anybody reading source has it. What
-   stands in for secrecy is Basin's own spam protection, which is why that is
-   switched on at their end rather than guarded here. Storage is the binding
-   limit rather than the submission count: 100MB against our own 10MB cap is
-   ten worst cases, where a one page PDF is well under one. */
 const INTAKE = "https://usebasin.com/f/945efcd39804";
+const MAX_MB = 10, MAX_BYTES = MAX_MB * 1024 * 1024;
+const OK_EXT = ["pdf","doc","docx","odt","rtf","png","jpg","jpeg","webp"];
 
-const CtaCtx = createContext(() => {});
+let LANG = "en";
+const T = () => STR[LANG];
+/* declared here and not beside markReveals: the language bootstrap below
+   calls renderLists -> markReveals, so a `let` further down puts this in the
+   temporal dead zone and kills the whole module on load */
+let revs = [];
 
-/* Every call to action on the page is this one control, so the label and the
-   intent cannot drift apart between the nav, the hero, the ladder and the
-   close. */
-function CTA({ t, class: extra = "" }) {
-  const open = useContext(CtaCtx);
-  return html`<${Action} onClick=${open} class=${extra}>${t.cta}<//>`;
-}
+/* ══ render ════════════════════════════════════════════════════════════ */
+function renderLists(){
+  const t = T();
+  const put = (sel, html) => { const el = $(sel); if (el) el.innerHTML = html; };
 
-const sizeOf = n => n < 1048576
-  ? Math.max(1, Math.round(n / 1024)) + " KB"
-  : (n / 1048576).toFixed(1) + " MB";
+  put("#gate", t.gate.map(([h, p]) =>
+    `<div class="rv"><h3>${esc(h)}</h3><p>${esc(p)}</p></div>`).join(""));
 
-function Intake({ t, open, onClose }) {
-  const dlg = useRef(null);
-  const picker = useRef(null);
-  const mail = useRef(null);
-  const [file, setFile] = useState(null);
-  const [err, setErr] = useState("");
-  const [state, setState] = useState("idle");
+  put("#openFiles",
+    `<a class="file" href="/assets/vedlegg-5/Vedlegg-5-eksempel.pdf" target="_blank" rel="noopener">
+       <b>${esc(t.open.seeEx)}</b><i>${esc(t.open.exMeta)}</i></a>
+     <a class="file" href="/assets/vedlegg-5/Vedlegg-5-Utfyllende-opplysninger.docx" download>
+       <b>${esc(t.open.getTpl)}</b><i>${esc(t.open.tplMeta)}</i></a>`);
 
-  useEffect(() => {
-    const d = dlg.current;
-    if (!d) return;
-    if (open) {
-      setFile(null); setErr(""); setState("idle");
-      if (!d.open) d.showModal();
-      /* Focus is moved by hand, not by an autofocus attribute. Measured:
-         written as lowercase `autofocus` in the template React simply did not
-         put it on the element, and showModal fell back to the first focusable
-         thing in the dialog, which is the close button. Same class of bug as
-         the hero video's missing `muted`, and the same fix: set it on the
-         node. */
-      if (mail.current) mail.current.focus();
-    } else if (d.open) {
-      d.close();
-    }
-  }, [open]);
-
-  /* The software keyboard, and why the first fix did not work.
-     Reported on an iPad in landscape: the keyboard pushed the dialog off the
-     top with nothing to scroll back to. The first attempt capped the dialog
-     at 100svh and added interactive-widget=resizes-content to the viewport
-     meta. Neither reaches iOS. interactive-widget is Chromium only, and on
-     iOS Safari svh and dvh do not shrink for the keyboard at all — the layout
-     viewport keeps its full height and the keyboard simply covers it.
-     window.visualViewport is the one API that reports what is actually
-     visible, so it is the only thing that can drive this.
-     offsetTop matters as much as height: iOS scrolls the visual viewport
-     inside the layout viewport, and a position:fixed dialog does not move
-     with it, which is exactly how the dialog ended up off screen. */
-  useEffect(() => {
-    const d = dlg.current, vv = window.visualViewport;
-    if (!d || !open || !vv) return;
-    const apply = () => {
-      d.style.position = "fixed";
-      d.style.bottom = "auto";
-      d.style.top = vv.offsetTop + "px";
-      d.style.marginBottom = "0";
-      d.style.maxHeight = vv.height + "px";
-      /* Centred while there is room, pinned to the top once there is not. */
-      d.style.marginTop = Math.max(0, (vv.height - d.offsetHeight) / 2) + "px";
-    };
-    apply();
-    vv.addEventListener("resize", apply);
-    vv.addEventListener("scroll", apply);
-    return () => {
-      vv.removeEventListener("resize", apply);
-      vv.removeEventListener("scroll", apply);
-      d.style.position = d.style.top = d.style.bottom = "";
-      d.style.marginTop = d.style.marginBottom = d.style.maxHeight = "";
-    };
-  }, [open]);
-
-  const pick = e => {
-    const f = e.target.files && e.target.files[0];
-    if (!f) return;
-    const ext = (f.name.split(".").pop() || "").toLowerCase();
-    if (!OK_EXT.includes(ext)) { setFile(null); setErr(t.form.errType); return }
-    if (f.size > MAX_BYTES) { setFile(null); setErr(t.form.errSize); return }
-    setErr(""); setFile(f);
-  };
-
-  const submit = async e => {
-    e.preventDefault();
-    const fd = new FormData(e.currentTarget);
-    const email = String(fd.get("email") || "").trim();
-    if (!email) return setErr(t.form.errEmail);
-    /* Deliberately loose. The only thing worth rejecting here is an address
-       that cannot be one; anything stricter turns away real addresses, and
-       the real check is whether the reply arrives. */
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return setErr(t.form.errEmailBad);
-    if (!file) return setErr(t.form.errFile);
-    setErr(""); setState("sending");
-    /* Kept deliberately. If the endpoint is ever unset the dialog says so
-       rather than faking a success, which is the state this shipped in and
-       the state it should fall back to rather than silently swallowing a
-       file. */
-    if (!INTAKE) { setState("done"); return }
-    try {
-      /* Accept: application/json or Basin answers a form post with a 302 to
-         its own thank-you page. Through fetch that redirect is followed
-         silently and `ok` reads true off Basin's HTML, so the dialog could
-         not tell a delivered file from a rejected one. The header is what
-         makes the reply a JSON status this can actually branch on. The
-         Content-Type is deliberately not set: FormData writes its own, with
-         the multipart boundary, and naming it by hand drops the boundary and
-         the upload arrives empty. */
-      const r = await fetch(INTAKE, {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: fd
-      });
-      if (!r.ok) throw new Error(String(r.status));
-      setState("done");
-    } catch (_) {
-      setState("idle"); setErr(t.form.errSend);
-    }
-  };
-
-  /* On a phone or an iPad in landscape the software keyboard takes most of the
-     screen. A native <dialog> is laid out against the layout viewport, not the
-     visual one, so iOS scrolls the page to keep the caret visible and the
-     dialog travels off the top with no way to scroll it back — position:fixed
-     does not scroll. Measured on an iPad in landscape: the email field was
-     above the visible area while being typed into.
-
-     Three things together fix it and none alone does. The dialog is capped at
-     100svh and scrolls inside itself, so there is always somewhere to scroll
-     to. interactive-widget=resizes-content asks the browser to shrink the
-     viewport rather than slide the page under the keyboard. And a focused
-     field pulls itself back into the dialog's own scroller, which covers the
-     browsers that honour neither. */
-  const keepInView = e => {
-    const el = e.currentTarget;
-    setTimeout(() => { try { el.scrollIntoView({ block: "center", behavior: "smooth" }) } catch (_) {} }, 250);
-  };
-
-  const field = "mt-2 w-full border border-ink/25 bg-paper px-4 py-3 text-[15px] text-ink placeholder:text-ink/40";
-  const label = "font-mono text-[12px] leading-snug text-ink/75";
-
-  return html`
-    <dialog ref=${dlg} onClose=${onClose}
-      onClick=${e => { if (e.target === dlg.current) onClose() }}
-      aria-labelledby="intake-title"
-      class="m-auto max-h-[100svh] w-[min(34rem,calc(100vw-1.5rem))] overflow-y-auto overscroll-contain
-             border border-ink/20 bg-paper-3 p-0 text-ink backdrop:bg-ink/70">
-      <div class="p-6 sm:p-9">
-        <div class="flex items-start justify-between gap-6">
-          <h2 id="intake-title" class="font-display text-[1.9rem] font-normal leading-tight tracking-[-.015em]">
-            ${state === "done" ? t.form.doneTitle : t.form.title}
-          </h2>
-          <button type="button" onClick=${onClose} aria-label=${t.form.cancel}
-            class="-m-2 shrink-0 p-2 font-mono text-[12px] text-ink/75 hover:text-ink">${t.form.cancel}</button>
-        </div>
-
-        ${state === "done" ? html`
-          <p class="mt-6 leading-[1.7] text-ink/80">${t.form.doneBody}</p>
-          ${!INTAKE && html`
-            <p class="mt-5 border-l-2 border-ink/30 pl-4 font-mono text-[12px] leading-[1.6] text-ink/75">
-              ${t.form.dry}
-            </p>`}
-        ` : html`
-          <p class="mt-5 text-[.95rem] leading-[1.7] text-ink/80">${t.form.intro}</p>
-
-          <form onSubmit=${submit} noValidate class="mt-7">
-            <div>
-              <label class="${label}" for="intake-email">${t.form.email}</label>
-              <input ref=${mail} id="intake-email" name="email" type="email" autocomplete="email"
-                onFocus=${keepInView}
-                inputmode="email" placeholder="name@company.com" class="${field}" />
-              <p class="mt-2 font-mono text-[11px] leading-snug text-ink/75">${t.form.emailHint}</p>
-            </div>
-
-            <div class="mt-7">
-              <p class="${label}">${t.form.file}</p>
-              <input ref=${picker} name="page" type="file" accept=${ACCEPT} hidden onChange=${pick} />
-              ${file ? html`
-                <div class="mt-2 flex flex-wrap items-center justify-between gap-x-5 gap-y-3 border border-ink/25 bg-paper px-4 py-3">
-                  <span class="min-w-0 break-all text-[15px]">${file.name}</span>
-                  <span class="flex shrink-0 items-center gap-4 font-mono text-[12px] text-ink/75">
-                    <span class="tabular-nums">${sizeOf(file.size)}</span>
-                    <button type="button" class="underline underline-offset-4 hover:text-ink"
-                      onClick=${() => { setFile(null); if (picker.current) picker.current.value = "" }}>${t.form.remove}</button>
-                  </span>
-                </div>`
-              : html`
-                <button type="button" onClick=${() => picker.current && picker.current.click()}
-                  class="mt-2 w-full border border-dashed border-ink/35 bg-paper px-4 py-5 text-[15px] text-ink/80 hover:border-ink/60 hover:text-ink">
-                  ${t.form.choose}
-                </button>`}
-              <p class="mt-2 font-mono text-[11px] leading-snug text-ink/75">${t.form.fileHint}</p>
-            </div>
-
-            <!-- One error line, under the fields and above the action, so it
-                 is between the thing that is wrong and the button that was
-                 just pressed. aria-live, because a reader who cannot see it
-                 appear is otherwise told nothing at all. -->
-            <p aria-live="polite" class="min-h-[1.5rem] pt-5 text-[.9rem] leading-snug text-brick">${err}</p>
-
-            <div class="mt-2 flex flex-wrap items-center gap-x-6 gap-y-4">
-              <${Action} type="submit" disabled=${state === "sending"}>
-                ${state === "sending" ? t.form.sending : t.form.send}
-              <//>
-              <!-- The prewritten mail stays, as the path that works with no
-                   server behind the form. -->
-              <a href=${mailto(t)} class="font-mono text-[12px] text-ink/75 underline underline-offset-4 hover:text-ink">
-                atlas@arvorealta.com
-              </a>
-            </div>
-          </form>
-        `}
-      </div>
-    </dialog>`;
-}
-
-/* The language control is three letters rather than a dropdown. There are
-   exactly three, a select would hide two of them behind a tap, and the
-   current one has to be readable at a glance by someone who cannot read the
-   other two. aria-pressed carries the state for anyone not seeing the fill. */
-function LangPick({ lang, setLang, t, onPhoto }) {
-  return html`
-    <div class="flex items-center rounded-full border p-[3px] ${onPhoto ? "border-bone/35" : "border-ink/20"}"
-         role="group" aria-label=${t.langLabel}>
-      ${LANGS.map(code => html`
-        <button key=${code} type="button" onClick=${() => setLang(code)}
-          aria-pressed=${lang === code} lang=${STR[code].htmlLang}
-          title=${STR[code].label}
-          class="rounded-full px-2.5 py-1 font-mono text-[11px] uppercase tracking-[.1em] transition-colors ${
-            lang === code
-              ? (onPhoto ? "bg-bone text-ink" : "bg-ink text-bone")
-              : (onPhoto ? "text-bone/70 hover:text-bone" : "text-ink/75 hover:text-ink")}">
-          ${STR[code].short}
-        </button>`)}
-    </div>`;
-}
-
-function Nav({ t, lang, setLang, onPhoto }) {
-  const links = [[t.nav.open, "#open"], [t.nav.case, "#case"], [t.nav.price, "#price"]];
-  const shell = onPhoto
-    ? "on-ink border-transparent bg-transparent text-bone"
-    : "border-ink/10 bg-paper/85 backdrop-blur-md";
-  return html`
-    <!-- Fixed, not sticky. A sticky header stays in normal flow, so it was
-         holding 68px of its own above the band and showing the page's ground
-         there: the bar read as a solid strip however transparent its own
-         background was. Fixed takes it out of flow and the photograph starts
-         at the top of the screen. -->
-    <header class="fixed inset-x-0 top-0 z-40 border-b transition-colors ${shell}">
-      <div class="${WRAP} flex h-[68px] items-center justify-between gap-5">
-        <a href="#top" class="-my-1 py-1 font-mono text-[13px] uppercase tracking-[.22em]">Arvorealta</a>
-        <nav class="hidden items-center gap-7 lg:flex">
-          ${links.map(([l, h]) => html`
-            <a key=${h} href=${h}
-               class="-my-1 py-1 text-[14px] transition-colors ${onPhoto
-                 ? "text-bone/75 hover:text-bone"
-                 : "text-ink/75 hover:text-ink"}">${l}</a>`)}
-        </nav>
-        <div class="flex items-center gap-2.5">
-          <${LangPick} lang=${lang} setLang=${setLang} t=${t} onPhoto=${onPhoto} />
-          <span class="hidden sm:block">
-            <${CTA} t=${t} class=${onPhoto ? "!bg-bone !text-ink hover:!bg-bone/90" : ""} />
-          </span>
-        </div>
-      </div>
-    </header>`;
-}
-
-/* The photograph holds the frame and the video arrives over it.
-   `preload="metadata"` rather than `auto`, so the 3.1 MB does not compete
-   with the stylesheet and the fonts for the first paint; the picture under it
-   is already decoded by then and the band is never empty. The handoff waits
-   for `canplaythrough` rather than `canplay`, because `canplay` fires with a
-   few frames buffered and a ten second loop that stalls two seconds in looks
-   worse than no video at all. It fades rather than cuts, so a reader who
-   never notices the swap is the success case.
-
-   Under `prefers-reduced-motion` the element is never rendered at all. A
-   `<video autoplay>` cannot be stopped from CSS, so the only honest way to
-   respect the setting is not to mount it, and that reader keeps the
-   photograph. Same for the failure path: `onError` drops it and the picture
-   is already there.
-
-   muted and playsinline are not optional. Without both, iOS refuses to
-   autoplay and shows a play button over the hero. */
-function Hero({ t }) {
-  const mo = useMo();
-  const reduce = useReducedMotion();
-  const [ready, setReady] = useState(false);
-  const [failed, setFailed] = useState(false);
-  const vid = useRef(null);
-
-  /* Autoplay is refused until the reader touches something, and the owner's
-     own report is the diagnosis: "the video is paused and rolls out only
-     after I push the button". A user gesture lifts the restriction for the
-     whole document, so the first touch anywhere — not only on the video —
-     is enough. iOS refuses a muted autoplay in Low Power Mode and Safari
-     lets a reader turn auto-play off entirely; in both cases play() is
-     rejected on load and there is nothing the page can do about it except
-     ask again the moment it is allowed to.
-
-     Once only, passive, and removed as soon as it has run or the video is
-     already going, so this never becomes a listener that fires for the life
-     of the page. */
-  /* The retry runs until the video is actually playing, not once.
-     `once: true` was the first version and it has one hole: a gesture that
-     lands before the element exists, or while the restriction is still in
-     force — Low Power Mode is not lifted by a tap — spends the only attempt
-     there was, and nothing asks again. Reported as a phone that plays and a
-     tablet that does not, which is not a viewport difference: **no media
-     query can grant autoplay permission**, because the policy is the
-     device's and not the layout's. What differs between two iOS devices is
-     Low Power Mode and Safari's own per-site Auto-Play setting, and the only
-     thing the page can do about either is keep asking.
-     `ready` is the exit. The effect tears the listeners down the moment
-     playback has actually started, so nothing lives for the life of the
-     page, which was the whole point of `once` in the first place. */
-  useEffect(() => {
-    if (reduce || failed || ready) return;
-    const kick = () => {
-      const v = vid.current;
-      if (v && v.paused) { const go = v.play(); if (go && go.catch) go.catch(() => {}) }
-    };
-    const evs = ["pointerdown", "touchstart", "touchend", "click", "keydown", "visibilitychange"];
-    evs.forEach(e => document.addEventListener(e, kick, { passive: true }));
-    return () => evs.forEach(e => document.removeEventListener(e, kick));
-  }, [reduce, failed, ready]);
-
-  return html`
-    <section id="top" class="on-ink relative isolate overflow-clip bg-ink text-bone">
-      <picture class="absolute inset-0 block">
-        <!-- The source file is 1141 x 640, so there is no 1920 or 2560 here:
-             a wider file would be upscaled bytes pretending to be detail. The
-             picture is soft above about 1200px and wants regenerating larger. -->
-        <source type="image/webp" sizes="100vw"
-          srcset="/assets/img/after-1-760.webp 760w, /assets/img/after-1-960.webp 960w, /assets/img/after-1-1141.webp 1141w" />
-        <img src="/assets/img/after-1-1141.jpg" sizes="100vw"
-          srcset="/assets/img/after-1-760.jpg 760w, /assets/img/after-1-960.jpg 960w, /assets/img/after-1-1141.jpg 1141w"
-          width="1141" height="640" alt="" fetchpriority="high" decoding="async"
-          class="size-full object-cover object-[62%_46%] [opacity:var(--hero-photo)]" />
-      </picture>
-      ${!reduce && !failed && html`
-        <video
-          class="absolute inset-0 size-full object-cover object-[62%_46%] transition-opacity duration-700
-                 ${ready ? "opacity-100" : "opacity-0"}"
-          src="/assets/video/hero-1-720.mp4"
-          poster="/assets/img/after-1-1141.jpg"
-          width="1280" height="720"
-          autoPlay muted loop playsInline preload="metadata"
-          aria-hidden="true" tabIndex="-1"
-          ref=${el => {
-            /* React writes `muted` as a property and skips it often enough on
-               first render that the attribute is simply absent, and a video
-               that is not muted is a video no browser will autoplay. The same
-               goes for playsInline, which iOS reads to decide whether to take
-               the hero fullscreen instead. Setting all three on the node is
-               the only way to be sure, and play() is called because autoplay
-               alone does not restart a video React has just re-mounted.
-               The rejection is swallowed: a blocked autoplay leaves the
-               photograph in place, which is the fallback either way.
-
-               iOS Low Power Mode blocks autoplay of muted video outright and
-               nothing here changes that. The photograph is the right answer
-               there and this is not a bug to chase. */
-            if (!el) return;
-            vid.current = el;
-            el.muted = true; el.defaultMuted = true;
-            el.playsInline = true; el.autoplay = true;
-            const go = el.play();
-            if (go && go.catch) go.catch(() => {});
-          }}
-          onPlaying=${() => setReady(true)}
-          onTimeUpdate=${e => { if (e.currentTarget.currentTime > 0) setReady(true) }}
-          onCanPlayThrough=${() => setReady(true)}
-          onError=${() => setFailed(true)} />`}
-      <!-- The band is the screen. The header floats on it rather than sitting
-           above it, so the hero takes the whole viewport rather than the
-           viewport minus a bar. dvh, not vh, so the iOS address bar does not
-           push the action off the bottom. -->
-      <!-- 100dvh alone is a trap on a short, wide window. On a 440px-tall
-           viewport the band is 440px and the 192px of padding leaves 248px
-           for four objects, which is the squashed look. The floor keeps the
-           band usable and lets the page scroll instead, and the padding
-           shrinks with the viewport rather than holding 96px a side at every
-           height. Tall screens are unaffected: there the max is 100dvh. -->
-      <div class="${WRAP} relative grid min-h-[max(34rem,100dvh)] content-center py-[clamp(4rem,9vh,6rem)]">
-        <div>
-          <${M.div} ...${mo.rise(0)}><${Eyebrow} on="photo">${t.hero.eyebrow}<//><//>
-          <${M.h1} ...${mo.rise(1)}
-            class="mt-7 font-display text-[clamp(2.7rem,1rem+5vw,5.2rem)] font-normal leading-[1.02] tracking-[-.02em]">
-            ${t.hero.h1a}<br /> ${t.hero.h1b}
-          <//>
-          <${M.p} ...${mo.rise(2)}
-            class="mt-8 max-w-[44ch] text-[clamp(1.05rem,.98rem+.35vw,1.25rem)] leading-[1.6] text-bone/80">
-            ${t.hero.sub}
-          <//>
-          <${M.div} ...${mo.rise(3)} class="mt-10 flex flex-wrap items-center gap-3">
-            <${CTA} t=${t} class="!bg-bone !text-ink hover:!bg-bone/90" />
-            <${Action} href="#open" tone="ghost" class="!border-bone/30 !text-bone hover:!border-bone/70">${t.hero.second}<//>
-          <//>
-        </div>
-      </div>
-    </section>`;
-}
-
-function Gate({ t }) {
-  const mo = useMo();
-  return html`
-    <section class="${WRAP} border-b border-ink/10 py-14">
-      <div class="grid gap-10 md:grid-cols-2 md:gap-16">
-        ${t.gate.map(([k, v], i) => html`
-          <${M.div} key=${k} ...${mo.reveal(i)}>
-            <p class="font-mono text-[12px] leading-snug text-ink/75">${k}</p>
-            <p class="mt-3 max-w-[44ch] text-[1.05rem] leading-[1.65]">${v}</p>
-          <//>`)}
-      </div>
-    </section>`;
-}
-
-function OpenTender({ t }) {
-  const mo = useMo();
-  return html`
-    <section id="open" class="${ANCHOR} ${WRAP} py-20 sm:py-28">
-      <${M.div} ...${mo.reveal(0)}>
-        <${Eyebrow}>${t.open.eyebrow}<//>
-        <h2 class="mt-6 max-w-[20ch] font-display text-[clamp(2.1rem,1.3rem+2.6vw,3.6rem)] font-normal leading-[1.06] tracking-[-.015em]">
-          ${t.open.h2}
-        </h2>
-      <//>
-      <${M.div} ...${mo.reveal(1)}
-        class="mt-12 grid overflow-hidden rounded-2xl border border-ink/15 bg-paper-3 lg:grid-cols-[1.15fr_1fr]">
-        <div class="border-b border-ink/12 p-8 sm:p-10 lg:border-b-0 lg:border-r">
-          <!-- The heading is in the reader's language. The Norwegian original
-               is still here, because a bidder has to match it against the
-               documents in front of them, but it sits on its own line under a
-               label that says what it is. A quotation from another document
-               reads as deliberate; the same words loose inside an English
-               sentence read as a half-finished translation, which is what
-               this was. -->
-          <h3 class="text-[1.5rem] font-medium leading-tight tracking-[-.02em]">${t.open.title}</h3>
-          ${t.open.official && html`
-            <div class="mt-4">
-              <p class="font-mono text-[12px] leading-snug text-ink/75">${t.open.official}</p>
-              <p lang="nb" class="mt-1.5 text-[1.05rem] leading-snug">Leveranse av avfallsbeholdere</p>
-            </div>`}
-          <p class="mt-3 text-[.95rem] leading-relaxed text-ink/75">${t.open.buyer}</p>
-          <p class="mt-7 max-w-[46ch] leading-[1.7]">${t.open.body}</p>
-
-          <div class="mt-8 flex flex-wrap gap-3">
-            <${Action} href="/assets/vedlegg-5/Vedlegg-5-eksempel.pdf" tone="ghost" target="_blank" rel="noopener">${t.open.seeEx}<//>
-            <${Action} href="/assets/vedlegg-5/Vedlegg-5-Utfyllende-opplysninger.docx" download>${t.open.getTpl}<//>
-          </div>
-          <p class="mt-4 text-[.85rem] leading-relaxed text-ink/75">
-            ${t.open.exMeta} · ${t.open.tplMeta}
-          </p>
-        </div>
-        <dl class="grid content-center gap-8 p-8 sm:p-10">
-          ${t.open.fields.map(([k, v]) => html`
-            <div key=${k}>
-              <dd class="font-mono text-[1.6rem] leading-none tracking-[-.02em]">${v}</dd>
-              <dt class="mt-3 font-mono text-[12px] leading-snug text-ink/75">${k}</dt>
-            </div>`)}
-        </dl>
-      <//>
-      <${M.p} ...${mo.reveal(2)} class="mt-8 max-w-[58ch] text-[.95rem] leading-[1.7] text-ink/75">
-        ${t.open.foot}
-      <//>
-    </section>`;
-}
-
-/* The award as one horizontal bar, measured rather than asserted.
- *
- * The waffle that stood here could be counted, which a bar cannot, and that
- * was its whole advantage. What it cost was the fold: a hundred cells is a
- * texture, and a texture reads as decoration before it reads as a score. A
- * bar is one object at full measure and the 65 / 35 split is a single break
- * in it, which is the argument. So the bar comes back, and the counting is
- * replaced by three things the first bar did not have.
- *
- * ONE. The 65 is drawn, not inferred. A bracket spans the first two segments
- * and carries "65 / 100" over it. The headline says most of the score is not
- * the price; the bracket is that sentence as a graphic, and it needs no
- * translating, which is why it is a figure and not a phrase.
- *
- * TWO. The figures sit inside the segments, so there is no legend to hop to.
- * Measured on ink the three fills read 9.85:1, 6.12:1 and 3.88:1, all clear
- * of the 3:1 a graphic mark needs. Ink type on those same fills reads the
- * same three figures, and the numerals are display size, where the floor is
- * 3:1 rather than 4.5:1. The names stay outside on the ink ground at 8.19:1
- * and 5.50:1 — words are small text and small text does not go on the
- * geometry. That split is the rule the first bar established and it holds.
- *
- * THREE. The fills separate properly. On the first bar the two non-price
- * fills had to sit almost on top of each other so the 65 would read as one
- * mass, which left them nearly indistinguishable from one another. The
- * bracket does the grouping now, so the three can descend in clear steps and
- * still group. That is the waffle's one real gain, kept without its cost.
- *
- * The motion is a single sweep, and it is a curtain rather than three fills.
- * Three segments each growing from their own left edge animate as three
- * events; one block of the page's own ink ground sliding right off the whole
- * bar is one event at one constant speed, and the segment geometry is never
- * distorted while it runs. It also sidesteps the trap this file records
- * twice: an element that starts outside its own box is never seen by the
- * observer watching it. The curtain starts covering the bar, so it is always
- * in view, and the state still lives on the container above it. Each name
- * fades in as the sweep passes its segment, and the bracket draws last,
- * after the bar it measures is complete.
- *
- * Because nothing in the bar is animated by Motion, the hover dim can be a
- * plain class on the segment. On the waffle it could not: Motion writes
- * opacity inline while it animates and that beats any class on the same
- * node, which was measured as a hundred cells sitting at opacity 1 with a
- * block hovered.
- *
- * Accessibility. The bar is aria-hidden and a sentence carries the same
- * content, because a chart is not reading matter. Identity is never colour
- * alone: every segment holds its own figure and sits over its own name. The
- * isolation works by keyboard as well as by mouse.
- */
-function Weighting({ t }) {
-  const mo = useMo();
-  const reduce = useReducedMotion();
-  const [lit, setLit] = useState(null);
-
+  /* the bar's track widths come from the data, and every track is
+     minmax(0,Nfr): an fr track takes its min-content width as a floor, so a
+     long name would otherwise push its own column wider than the segment
+     above it and the three rows would stop lining up */
   const segs = t.weigh.segs;
-  const tone = ["bg-bone/95", "bg-bone/70", "bg-bone/50"];
-  const name = ["text-bone/85", "text-bone/85", "text-bone/65"];
-
-  /* The bracket, the bar and the names are three rows of one grid, so the
-     65 boundary lands in the same place in all three to the pixel. Track
-     widths come from the data rather than from a hand-written template, and
-     every one is minmax(0, Nfr) rather than Nfr: an fr track takes its
-     min-content width as a floor, so at 375 the longest name pushed its own
-     column 13px wider than the segment above it and the three rows stopped
-     lining up. Measured, not reasoned about. */
-  const cols = { gridTemplateColumns: segs.map(([, p]) => "minmax(0," + p + "fr)").join(" ") };
   const total = segs.reduce((n, [, p]) => n + p, 0);
-  const group = segs[0][1] + segs[1][1];
+  const cols  = segs.map(([, p]) => `minmax(0,${p}fr)`).join(" ");
+  $("#segs").style.gridTemplateColumns = cols;
+  $("#segs").style.gridAutoFlow = "column";
+  $("#names").style.gridTemplateColumns = cols;
+  $("#names").style.gridAutoFlow = "column";
+  $("#dim").style.gridTemplateColumns = `minmax(0,${segs[0][1] + segs[1][1]}fr) minmax(0,${segs[2][1]}fr)`;
+  put("#segs", segs.map(([, p], i) =>
+    `<div class="s" data-s="${i}"><b>${p}</b></div>`).join("") + `<div class="curtain" id="curtain"></div>`);
+  put("#names", segs.map(([n]) => `<span>${esc(n)}</span>`).join(""));
 
-  /* Where the sweep is when it passes each segment's left edge, as a
-     fraction of the sweep's own duration. The names follow it. */
-  const SWEEP = 1.05;
-  let run = 0;
-  const starts = segs.map(([, p]) => { const s = run; run += p; return s / total; });
+  put("#rungs", t.ladder.tiers.map(x => `
+    <div class="rung"${x.lead ? " data-lead" : ""} tabindex="0">
+      <div class="col">
+        <p class="step">${esc(x.step)}</p>
+        <p class="nm">${esc(x.name)}</p>
+        <p class="terms">${esc(x.terms)}</p>
+      </div>
+      <div class="col cost">
+        <p class="pr">${esc(x.price)}</p>
+        <p class="when">${esc(x.time)}</p>
+        <p class="note">${esc(x.note)}</p>
+      </div>
+      <div class="col">
+        <ul>${x.points.map(pt => `<li>${esc(pt)}</li>`).join("")}</ul>
+      </div>
+    </div>`).join(""));
 
-  const dim = g => lit !== null && lit !== g ? "opacity-25" : "opacity-100";
-  const hold = g => ({
-    onMouseEnter: () => setLit(g), onMouseLeave: () => setLit(null),
-    onFocus: () => setLit(g), onBlur: () => setLit(null)
+  /* the prewritten mail is the path that always works, and it is filled in
+     the reader's own language: an empty compose window asks the reader to
+     write the thing we are asking them for */
+  const m = t.mail;
+  $("#dlgAlt").innerHTML =
+    `<a href="mailto:atlas@arvorealta.com?subject=${encodeURIComponent(m.subject)}&body=${encodeURIComponent(m.body)}">atlas@arvorealta.com</a>`;
+
+  bindSegs();
+  markReveals();
+}
+
+function setLang(code, remember){
+  LANG = STR[code] ? code : "en";
+  const t = STR[LANG];
+  document.documentElement.lang = t.htmlLang;
+  for (const el of $$("[data-t]")) {
+    const k = el.dataset.t;
+    const v = (EXTRA[LANG] && EXTRA[LANG][k] != null) ? EXTRA[LANG][k] : dig(t, k);
+    if (v != null) { if (/<br|&nbsp;/.test(v)) el.innerHTML = v; else el.textContent = v; }
+  }
+  for (const b of $("#langs").children) b.setAttribute("aria-pressed", b.dataset.l === LANG ? "true" : "false");
+  renderLists();
+  if (typeof tick === "function") tick();
+  if (remember) { try { localStorage.setItem("arvo-lang", LANG) } catch (e) {} }
+}
+
+$("#langs").innerHTML = LANGS.map(c =>
+  `<button type="button" data-l="${c}" lang="${STR[c].htmlLang}" aria-pressed="false"
+     title="${esc(STR[c].label)}">${esc(STR[c].short)}</button>`).join("");
+$("#langs").addEventListener("click", e => {
+  const b = e.target.closest("button[data-l]"); if (b) setLang(b.dataset.l, true);
+});
+
+(() => {
+  let pick = "en";
+  for (const n of (navigator.languages || [navigator.language || "en"])) {
+    const two = String(n).slice(0,2).toLowerCase();
+    if (two === "nb" || two === "no" || two === "nn") { pick = "nb"; break; }
+    if (two === "fi") { pick = "fi"; break; }
+    if (two === "en") { pick = "en"; break; }
+  }
+  let saved = null; try { saved = localStorage.getItem("arvo-lang") } catch (e) {}
+  setLang(STR[saved] ? saved : pick, false);
+})();
+
+/* ══ the hero video ════════════════════════════════════════════════════
+   React is not here to drop muted/playsinline/autoplay, but the autoplay
+   policy still is. Gated on `playing` rather than canplaythrough, which
+   iOS throttles hard enough that it frequently never fires.              */
+(function mountVideo(){
+  const v = $("#herov");
+  if (!v) return;
+  if (reduce) { v.remove(); return; }
+  v.muted = true; v.defaultMuted = true; v.playsInline = true; v.loop = true;
+  const on = () => v.classList.add("on");
+  v.addEventListener("playing", on);
+  v.addEventListener("timeupdate", () => { if (v.currentTime > 0) on(); });
+  v.addEventListener("canplaythrough", on);
+  v.addEventListener("error", () => v.remove());
+  const ask = () => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+  ask();
+  const evs = ["pointerdown","touchstart","touchend","click","keydown","visibilitychange"];
+  const retry = () => { if (v.classList.contains("on")) { evs.forEach(e => removeEventListener(e, retry)); return; } ask(); };
+  evs.forEach(e => addEventListener(e, retry, { passive:true }));
+})();
+
+/* ══ the bar's isolation, by mouse and by keyboard alike ═══════════════ */
+function bindSegs(){
+  const box = $("#segs"), names = $$("#names span");
+  const cells = $$("#segs .s");
+  const lift = i => {
+    box.classList.toggle("dim1", i !== null);
+    cells.forEach((c, k) => c.classList.toggle("lit", k === i));
+    names.forEach((n, k) => n.style.opacity = i === null ? "" : (k === i ? "1" : ".34"));
+  };
+  box.addEventListener("pointerleave", () => lift(null));
+  cells.forEach((c, i) => {
+    c.addEventListener("pointerenter", () => lift(i));
   });
-
-  return html`
-    <section id="case" class="on-ink ${ANCHOR} bg-ink py-20 text-bone sm:py-28">
-      <div class="${WRAP}">
-        <${M.div} ...${mo.reveal(0)}>
-          <${Eyebrow} on="inv">${t.weigh.eyebrow}<//>
-          <h2 class="mt-6 max-w-[20ch] font-display text-[clamp(2.1rem,1.3rem+2.6vw,3.6rem)] font-normal leading-[1.06] tracking-[-.015em]">
-            ${t.weigh.h2}
-          </h2>
-        <//>
-
-        <${M.div} class="mt-14 sm:mt-16"
-          initial=${reduce ? false : "out"} whileInView="in"
-          viewport=${{ once: true, amount: .35 }}>
-
-          <p class="sr-only">${t.weigh.alt}</p>
-
-          <div aria-hidden="true">
-            <!-- A dimension line, not a bracket, and the difference is the
-                 whole point. A bracket groups; a dimension line states a
-                 measurement, which is the language a firm whose product is
-                 technical documents already speaks. End ticks, a hairline
-                 broken for the figure, and the figure itself at display size
-                 so the one number a reader carries away is legible rather
-                 than a caption. The first version set it as a 10px bordered
-                 box with an 11px label and read as a stray rule.
-
-                 It spans the first two segments and it is drawn last, because
-                 a measurement that arrives before the thing it measures is a
-                 claim again. -->
-            <${M.div} class="grid gap-[2px]" style=${cols}
-              variants=${{
-                out: { opacity: 0, y: 8 },
-                in: { opacity: 1, y: 0, transition: { duration: .55, delay: SWEEP * (group / total) + .12, ease: EASE } }
-              }}>
-              <div class="col-span-2 flex items-center">
-                <div class="h-3.5 w-px shrink-0 bg-bone/50"></div>
-                <div class="h-px flex-1 bg-bone/50"></div>
-                <div class="flex shrink-0 items-baseline gap-2 px-3 sm:px-6">
-                  <span class="font-display text-[clamp(1.5rem,1.1rem+1.1vw,2rem)] leading-none text-bone tabular-nums">${group}</span>
-                  <span class="font-mono text-[11px] leading-none tracking-[.04em] text-bone/60 tabular-nums">/ ${total}</span>
-                </div>
-                <div class="h-px flex-1 bg-bone/50"></div>
-                <div class="h-3.5 w-px shrink-0 bg-bone/50"></div>
-              </div>
-            <//>
-
-            <!-- The bar takes the open-tender card's corner, rounded-2xl,
-                 and so do the price cards. It went from pill ends to square
-                 ends to this: the pill was a dashboard control and the square
-                 was the only hard corner on a page whose every other surface
-                 is a 16px card, which made it read as unfinished rather than
-                 as precise. One radius across the page is a system; three are
-                 three decisions.
-
-                 The radius lives on the wrapper, not on the segments, so the
-                 bar is one rounded surface with 2px of the page's own ink
-                 ground cut through it rather than three rounded tiles. The
-                 wrapper was already clipping, because the curtain travels a
-                 full bar width to the right and an unclipped one would take
-                 the page with it, so the rounding costs nothing. -->
-            <div class="relative mt-3.5 overflow-hidden rounded-2xl">
-              <div class="grid gap-[2px]" style=${cols}>
-                ${segs.map(([label, pct], g) => html`
-                  <div key=${label} ...${hold(g)}
-                    class="flex h-20 items-center px-5 transition-opacity duration-300 sm:h-24 sm:px-7
-                           ${tone[g]} ${dim(g)}">
-                    <span class="font-display text-[clamp(1.7rem,1.15rem+1.7vw,2.5rem)] leading-none tracking-[-.01em] text-ink tabular-nums">
-                      ${pct}
-                    </span>
-                  </div>`)}
-              </div>
-              ${!reduce && html`
-                <${M.div} class="absolute inset-0 bg-ink"
-                  variants=${{
-                    out: { x: "0%" },
-                    in: { x: "101%", transition: { duration: SWEEP, ease: EASE } }
-                  }} />`}
-            </div>
-
-            <!-- The names sit under their own segments on the ink ground,
-                 where a word reads at 8.19:1 and 5.50:1. Each one arrives as
-                 the sweep uncovers the segment it belongs to. They take the
-                 segment's own horizontal padding from sm up, so a name sits
-                 directly under the figure it names rather than under the
-                 segment's edge — the pair is one object and the corner is
-                 not. On a phone they run near flush instead: the first
-                 segment is 99px wide there, and 28px of matching inset left
-                 59px of measure, which broke "Climate and environment" over
-                 three lines. The 8px of misalignment costs less than that. -->
-            <div class="mt-4 grid gap-[2px]" style=${cols}>
-              <!-- Two elements again, and for the reason this file records:
-                   Motion writes opacity inline while it animates the arrival,
-                   and an inline opacity beats any class on the same node. The
-                   first version of this row carried the dim as a class on the
-                   motion div and was measured doing nothing at all — three
-                   names at opacity 1 with a segment hovered. The outer div
-                   owns the dim and the interaction, the inner one owns the
-                   arrival, and the two multiply. -->
-              ${segs.map(([label], g) => html`
-                <div key=${label} ...${hold(g)} tabindex="0"
-                  class="px-1 transition-opacity duration-300 sm:px-7 ${dim(g)}">
-                  <${M.div} custom=${g}
-                    variants=${{
-                      out: { opacity: 0 },
-                      in: i => ({ opacity: 1, transition: { duration: .45, delay: SWEEP * starts[i] + .18, ease: EASE } })
-                    }}
-                    class="font-mono text-[11px] leading-snug sm:text-[12px] ${name[g]}">
-                    ${label}
-                  <//>
-                </div>`)}
-            </div>
-          </div>
-        <//>
-
-        <!-- The sourcing note sits under the bar, on the same left edge as
-             the headline and the first segment. It spent a version opposite
-             the headline as a spread, which read as a standfirst; it is not
-             one. It says where the three figures come from, so it belongs
-             under the three figures, where a caption goes. -->
-        <${M.p} ...${mo.reveal(2)} class="mt-12 max-w-[62ch] text-[.95rem] leading-[1.7] text-bone/75">
-          ${t.weigh.body}
-        <//>
-      </div>
-    </section>`;
 }
 
-/* The ladder, restored.
- *
- * This fold stood as four rungs separated by hairlines — Free, 600, 2,400,
- * 8,000 — each tier a sentence. The owner asked for the earlier one back and
- * said it was better, and it is: that version carried the deliverables as a
- * list under each price, and a reader comparing three tiers is scanning for
- * what they get rather than reading a paragraph about it. One line had gone
- * missing in the compression and is back with it — "The index. Every
- * project, by client and year, ready at the next bid."
- *
- * The house file's objection to cards is that equal columns say "pick one of
- * these four", which is the opposite of a ladder. These are not equal: the
- * middle column runs 1.25 against 1, and it lifts four pixels out of the row
- * and carries the only solid border, so the recommended rung is argued for
- * rather than merely marked. The shape still carries the argument before a
- * word is read, which is the thing the rule was protecting.
- *
- * Three tiers, not four. The free step is the mouth of the funnel and it is
- * not a tier — it was never in this ladder, it lives in the hero and the
- * close, and the line under the row carries it here with the page's one
- * action beside it.
- *
- * The earlier fold's 16px radius is back, because it is the open-tender
- * card's radius and that card is the page's surface. All three cards take
- * the same ground as well — paper-3, a hairline at ink/15 — so the
- * recommended rung is argued by the wider column, the 16px lift and a solid
- * ink border rather than by being the only card with a ground. The page's
- * own label conventions rather than the original's tracked capitals.
- * Everything else is the earlier fold: the widths, the lift, the lists, and
- * the comparison under the row.
- *
- * Every price, every deliverable and the 15,000 kr come off
- * reference/index.html. Do not round one and do not invent one. */
-function Ladder({ t }) {
-  const mo = useMo();
-  return html`
-    <section id="price" class="${ANCHOR} ${WRAP} py-20 sm:py-28">
-      <${M.div} ...${mo.reveal(0)} class="max-w-[46ch]">
-        <${Eyebrow}>${t.ladder.eyebrow}<//>
-        <h2 class="mt-6 font-display text-[clamp(2.1rem,1.3rem+2.6vw,3.6rem)] font-normal leading-[1.06] tracking-[-.015em]">${t.ladder.h2}</h2>
-        <p class="mt-7 leading-[1.7] text-ink/80">${t.ladder.lede}</p>
-      <//>
+/* ══ the tender clock ══════════════════════════════════════════════════
+   Three states out of one comparison, so the eyebrow, the figures and the
+   rail can never disagree with each other or with the date.             */
+function fmt(d){
+  const l = STR[LANG].htmlLang;
+  try { return new Intl.DateTimeFormat(l, { day:"numeric", month:"short", year:"numeric" }).format(d) }
+  catch (e) { return d.toISOString().slice(0,10) }
+}
+function tick(){
+  const clock = $("#clock"), tlFill = $("#tlFill"), tlNow = $("#tlNow");
+  if (!clock) return;
+  const t = T(), x = EXTRA[LANG] || EXTRA.en;
+  const now = Date.now();
+  const a = TENDER.questions.getTime(), b = TENDER.deadline.getTime();
+  const shut = now >= b;
 
-      <!-- One column on a phone, three from lg, and nothing scrolls sideways
-           at any width. The middle column is the wider one and it lifts out
-           of the row, so the recommended tier is the shape of the row rather
-           than a badge stuck on a card. -->
-      <div class="mt-14 grid gap-6 lg:grid-cols-[1fr_1.25fr_1fr] lg:items-start">
-        ${t.ladder.tiers.map((x, i) => html`
-          <${M.div} key=${x.name} ...${mo.reveal(i * .6)}
-            class="flex h-full flex-col rounded-2xl border bg-paper-3 p-7 sm:p-9 ${x.lead
-              ? "border-ink lg:-mt-4 lg:pb-11"
-              : "border-ink/15"}">
-            <p class="font-mono text-[12px] leading-snug text-ink/75">${x.step}</p>
-            <h3 class="mt-4 text-[1.3rem] font-medium leading-tight tracking-[-.02em]">${x.name}</h3>
-            <p class="mt-6 flex flex-wrap items-baseline gap-x-4">
-              <b class="font-display text-[clamp(2.3rem,1.8rem+1.4vw,3.2rem)] font-normal leading-none tracking-[-.01em] tabular-nums">${x.price}</b>
-              <em class="font-mono text-[12px] not-italic leading-snug text-ink/75">${x.time}</em>
-            </p>
-            <p class="mt-6 text-[.95rem] leading-[1.65] text-ink/80">${x.terms}</p>
-            <!-- The deliverables, one to a row with a hairline above each, so
-                 the list is countable at a glance. This is the part the
-                 compressed version lost and the reason the owner wanted the
-                 earlier fold back. -->
-            <ul class="mt-6 grid gap-3 text-[.95rem] leading-[1.55]">
-              ${x.points.map(pt => html`
-                <li key=${pt} class="border-t border-ink/15 pt-3">${pt}</li>`)}
-            </ul>
-            <!-- mt-auto pins the credit line to the foot of every card, so
-                 the three read across at the same height however many
-                 deliverables each one carries. The credit is not a footnote,
-                 it is the mechanic. -->
-            <p class="mt-auto pt-7 font-mono text-[12px] leading-[1.5] text-ink/75">${x.note}</p>
-          <//>`)}
-      </div>
+  $("#openEyebrow").textContent = shut ? x._shutEyebrow : t.open.eyebrow;
+  $("#openH2").textContent = shut ? x._shutH2 : t.open.h2;
+  clock.classList.toggle("shut", shut);
+  $("#tlAv").textContent = fmt(TENDER.questions);
+  $("#tlBv").textContent = fmt(TENDER.deadline);
 
-      <!-- The free step is not a tier and never was one in this fold. It gets
-           the line and the action under the row instead, so the page's one
-           CTA is still in front of a reader who came here for the price. -->
-      <${M.div} ...${mo.reveal(1)} class="mt-12 flex flex-wrap items-center gap-x-8 gap-y-5">
-        <p class="text-[.95rem] leading-[1.7] text-ink/80">${t.ladder.free}</p>
-        <${CTA} t=${t} />
-      <//>
+  if (shut) {
+    $("#shutline").textContent = x._shut;
+    $("#clockState").textContent = x._shutWhen + " " + fmt(TENDER.deadline);
+    tlFill.style.width = "100%";
+    tlNow.style.left = "100%";
+  } else {
+    let ms = b - now;
+    const d = Math.floor(ms / 86400000); ms -= d * 86400000;
+    const h = Math.floor(ms / 3600000);  ms -= h * 3600000;
+    const m = Math.floor(ms / 60000);
+    const pad = n => String(n).padStart(2, "0");
+    $("#uD").textContent = pad(d); $("#uH").textContent = pad(h); $("#uM").textContent = pad(m);
+    $("#clockState").textContent = x._left;
+    const p = clamp01((now - a) / Math.max(1, b - a));
+    tlFill.style.width = (p * 100).toFixed(2) + "%";
+    tlNow.style.left = (p * 100).toFixed(2) + "%";
+  }
+  /* a rail is not reading matter, so the same content is carried as a
+     sentence for anything that does not draw it */
+  $("#tlSr").textContent = x._window + " " + x._tlA + ": " + fmt(TENDER.questions) +
+    ". " + x._tlB + ": " + fmt(TENDER.deadline) + ".";
+}
+tick();
+setInterval(tick, 30000);
 
-      <${M.p} ...${mo.reveal(2)} class="mt-10 max-w-[62ch] text-[.95rem] leading-[1.7] text-ink/75">
-        ${t.ladder.foot}
-      <//>
-    </section>`;
+/* ══ reveals ═══════════════════════════════════════════════════════════
+   A sweep on a rAF-throttled scroll, never an IntersectionObserver. An
+   observer reports a CHANGE in intersection, so a jump that crosses a block
+   without painting it takes that block from below the fold to above it with
+   ratio 0 at both ends, fires nothing, and leaves it at opacity 0 for the
+   life of the page. The hero's own anchor does exactly that jump.        */
+function markReveals(){ revs = $$(".rv"); sweep(); }
+function sweep(){
+  const line = innerHeight * 0.88;
+  for (const el of revs) {
+    if (el.classList.contains("on")) continue;
+    if (el.getBoundingClientRect().top <= line) el.classList.add("on");
+  }
+}
+/* a block stuck at zero is worse than no animation */
+setTimeout(() => revs.forEach(el => el.classList.add("on")), 4000);
+
+/* ══ the rail ══════════════════════════════════════════════════════════ */
+const rails = $$("[data-rail]");
+const railSecs = rails.map(a => document.querySelector(a.getAttribute("href")));
+if ("IntersectionObserver" in window) {
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => { const i = railSecs.indexOf(e.target);
+      if (i > -1 && e.isIntersecting)
+        rails.forEach((a, k) => a.setAttribute("aria-current", k === i ? "true" : "false")); });
+  }, { rootMargin:"-45% 0px -45% 0px" });
+  railSecs.forEach(x => x && io.observe(x));
 }
 
-function Close({ t }) {
-  const mo = useMo();
-  return html`
-    <section class="${WRAP} py-24 sm:py-32">
-      <${M.div} ...${mo.reveal(0)} class="max-w-[52ch]">
-        <${Eyebrow}>${t.close.eyebrow}<//>
-        <h2 class="mt-6 font-display text-[clamp(2.1rem,1.3rem+2.6vw,3.6rem)] font-normal leading-[1.06] tracking-[-.015em]">${t.close.h2}</h2>
-        <p class="mt-7 leading-[1.7] text-ink/80">${t.close.body}</p>
-        <div class="mt-10"><${CTA} t=${t} /></div>
-      <//>
-    </section>
-    <footer class="border-t border-ink/10 py-10">
-      <div class="${WRAP} flex flex-wrap items-center justify-between gap-x-8 gap-y-4 font-mono text-[11px] uppercase tracking-[.18em] text-ink/75">
-        <span>Arvorealta</span>
-        <nav class="flex flex-wrap items-center gap-x-7 gap-y-2">
-          <a href="/brand/" class="-my-1.5 py-1.5 transition-colors hover:text-ink">${t.foot.brand}</a>
-          <a href="/video/" class="-my-1.5 py-1.5 transition-colors hover:text-ink">${t.foot.video}</a>
-        </nav>
-        <a href="mailto:atlas@arvorealta.com" class="-my-1.5 py-1.5 transition-colors hover:text-ink">atlas@arvorealta.com</a>
-      </div>
-    </footer>`;
+/* ══ the chrome's two states ═══════════════════════════════════════════ */
+const toned = $$("[data-tone]");
+let chromeTone = null;
+function setChrome(tone){
+  if (tone === chromeTone) return;
+  chromeTone = tone;
+  document.documentElement.style.setProperty("--chrome", tone === "dark" ? "#E9E7E4" : "#17352C");
 }
 
-function App() {
-  /* The browser's own preference decides the first language, so a Norwegian
-     or Finnish reader arriving cold gets their own. English is the fallback
-     and the default everywhere else. A choice, once made, is remembered and
-     outranks the browser from then on. */
-  const [lang, setLang] = useState(() => {
-    try { const s = localStorage.getItem("ar-lang"); if (s && STR[s]) return s } catch (e) {}
-    const want = (navigator.languages || [navigator.language || "en"]).map(l => String(l).toLowerCase());
-    for (const l of want) {
-      if (l.startsWith("nb") || l.startsWith("nn") || l.startsWith("no")) return "nb";
-      if (l.startsWith("fi")) return "fi";
-      if (l.startsWith("en")) return "en";
-    }
-    return "en";
-  });
+/* ══ one loop ══════════════════════════════════════════════════════════ */
+const hero = $(".hero"), bed = hero.querySelector(".bed"), heroInner = hero.querySelector(".inner");
+const weigh = $("#weigh");
+let ticking = false;
 
-  useEffect(() => {
-    document.documentElement.lang = STR[lang].htmlLang;
-    try { localStorage.setItem("ar-lang", lang) } catch (e) {}
-  }, [lang]);
+function frame(){
+  ticking = false;
+  const vh = innerHeight, y = scrollY;
 
-  const [onPhoto, setOnPhoto] = useState(true);
-  useEffect(() => {
-    /* The band itself is the sentinel. A 1px marker at its top sits above
-       the header's own 68px, so with that margin it never intersects and the
-       bar claimed it was past the photograph while sitting on it. Watching
-       the whole band asks the right question: is any part of the picture
-       still under the bar. */
-    const el = document.getElementById("top");
-    if (!el || !("IntersectionObserver" in window)) return;
-    const io = new IntersectionObserver(([e]) => setOnPhoto(e.isIntersecting),
-      { rootMargin: "-68px 0px 0px 0px", threshold: 0 });
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
+  sweep();
 
-  const t = STR[lang];
+  /* whichever section is under the bar owns its colour */
+  let over = null;
+  for (const el of toned) { const r = el.getBoundingClientRect();
+    if (r.top <= 54 && r.bottom > 54) over = el; }
+  setChrome(over ? over.dataset.tone : "light");
 
-  /* The intake dialog is mounted once, at the root, and every call to action
-     on the page opens this one. Four copies of a <dialog> would be four
-     copies of the reader's half-filled form, and whichever one they opened
-     second would be empty. The opener travels down as context rather than as
-     a prop through five components that have no other reason to know about
-     it. */
-  const [intake, setIntake] = useState(false);
+  /* the hero leaves slowly and its ground leaves slower */
+  if (y < vh * 1.3) {
+    const p = clamp01(y / vh);
+    heroInner.style.transform = "translate3d(0," + (p * -11).toFixed(2) + "vh,0)";
+    heroInner.style.opacity = (1 - clamp01(p * 1.45)).toFixed(3);
+    bed.style.transform = "translate3d(0," + (p * 7).toFixed(2) + "%,0) scale(" + (1 + p * 0.05).toFixed(4) + ")";
+  }
 
-  return html`
-    <${CtaCtx.Provider} value=${() => setIntake(true)}>
-      <!-- Measured on the live page: the first Tab lands on the wordmark and
-           it takes eight stops to reach the hero's own action. This is the
-           first focusable thing in the document and it is invisible until it
-           has focus, which is the whole pattern. -->
-      <a href="#main"
-         class="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:left-4 focus-visible:top-4
-                focus-visible:z-50 focus-visible:rounded-full focus-visible:bg-ink focus-visible:px-5
-                focus-visible:py-3 focus-visible:text-[15px] focus-visible:text-bone">
-        ${t.skip}
-      </a>
-      <${Nav} t=${t} lang=${lang} setLang=${setLang} onPhoto=${onPhoto} />
-      <main id="main" tabindex="-1">
-        <${Hero} t=${t} />
-        <${Gate} t=${t} />
-        <${OpenTender} t=${t} />
-        <${Weighting} t=${t} />
-        <${Ladder} t=${t} />
-        <${Close} t=${t} />
-      </main>
-      <${Intake} t=${t} open=${intake} onClose=${() => setIntake(false)} />
-    <//>`;
+  /* ACT IV — the curtain, scrubbed.
+     One block of the page's own ink sliding right off the whole bar is one
+     event at one speed, and the segment geometry is never distorted while it
+     runs. It also sidesteps the trap this repo has recorded three times, an
+     element that starts outside its own box never being seen by whatever is
+     watching it, because the curtain starts covering the bar and is
+     therefore always in view. */
+  const wr = weigh.getBoundingClientRect();
+  if (wr.top < vh && wr.bottom > 0) {
+    const span = weigh.offsetHeight - vh;
+    const raw = clamp01((-wr.top) / Math.max(1, span));
+    const p = clamp01((raw - 0.10) / 0.62);          /* a beat of hold at each end */
+    const curtain = $("#curtain");
+    if (curtain) curtain.style.transform = "scaleX(" + (1 - p).toFixed(4) + ")";
+    const segs = T().weigh.segs, total = segs.reduce((n, [, q]) => n + q, 0);
+    let run = 0;
+    $$("#names span").forEach((n, i) => {
+      run += segs[i][1];
+      n.classList.toggle("on", p >= (run / total) - 0.04);
+    });
+    $("#dim").classList.toggle("on", p > 0.97);      /* the dimension line draws last */
+  }
+}
+addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(frame) } }, { passive:true });
+addEventListener("resize", () => { if (!ticking) { ticking = true; requestAnimationFrame(frame) } }, { passive:true });
+frame();
+
+const go = () => document.body.classList.add("ready");
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(go).catch(go); else go();
+setTimeout(go, 1200);
+
+/* ══ the dialog ════════════════════════════════════════════════════════
+   A native <dialog>, not a div: showModal() gives the focus trap, the inert
+   background, Escape, ::backdrop and focus returning to the control that
+   opened it, and all five are things a hand-rolled modal gets wrong.
+   One dialog at the root, because four copies would be four copies of the
+   reader's half-filled form.                                             */
+const dlg = $("#dlg"), sheet = $("#sheet"), fl = $("#fl"), flName = $("#flName"),
+      flClear = $("#flClear"), errEl = $("#dlgErr"), sendBtn = $("#dlgSend");
+let busy = false;
+
+function fail(msg){ errEl.textContent = msg; errEl.hidden = false; }
+function clearErr(){ errEl.hidden = true; errEl.textContent = ""; }
+
+$$("[data-cta]").forEach(b => b.addEventListener("click", () => {
+  clearErr(); dlg.showModal();
+  /* focus is moved by hand. Written as lowercase autofocus in a template
+     React dropped the attribute entirely and showModal fell back to the
+     close button; the live property is the only thing worth checking. */
+  requestAnimationFrame(() => $("#em").focus());
+}));
+$("#dlgX").addEventListener("click", () => dlg.close());
+$("#dlgCancel").addEventListener("click", () => dlg.close());
+sheet.addEventListener("submit", e => e.preventDefault());
+
+$("#flBtn").addEventListener("click", () => fl.click());
+flClear.addEventListener("click", () => { fl.value = ""; flName.textContent = ""; flClear.hidden = true;
+  $("#flBtn").textContent = T().form.choose; clearErr(); });
+fl.addEventListener("change", () => {
+  const f = fl.files && fl.files[0];
+  if (!f) return;
+  flName.textContent = f.name + "  ·  " + (f.size < 1048576
+    ? Math.round(f.size / 1024) + " KB" : (f.size / 1048576).toFixed(1) + " MB");
+  flClear.hidden = false;
+  $("#flBtn").textContent = T().form.change;
+  clearErr();
+});
+
+/* The cap and the extension are checked before any request. A reader who
+   finds out from a server that their file was too large has already waited
+   for the upload. */
+function validate(){
+  const t = T().form;
+  const email = $("#em").value.trim();
+  if (!email) return t.errEmail;
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return t.errEmailBad;
+  const f = fl.files && fl.files[0];
+  if (!f) return t.errFile;
+  const ext = (f.name.split(".").pop() || "").toLowerCase();
+  if (!OK_EXT.includes(ext)) return t.errType;
+  if (f.size > MAX_BYTES) return t.errSize;
+  return null;
 }
 
-createRoot(document.getElementById("root")).render(html`<${App} />`);
+sendBtn.addEventListener("click", async () => {
+  if (busy) return;
+  clearErr();
+  const bad = validate();
+  if (bad) { fail(bad); return; }
+  const t = T().form;
+
+  /* kept on purpose: if the endpoint is ever unset the dialog says nothing
+     was sent rather than faking a success */
+  if (!INTAKE) { fail(t.dry); return; }
+
+  busy = true; sendBtn.textContent = t.sending; sendBtn.disabled = true;
+  try {
+    const fd = new FormData();
+    fd.append("email", $("#em").value.trim());
+    fd.append("file", fl.files[0]);
+    fd.append("page", location.href);
+    fd.append("language", LANG);
+    /* Accept: application/json is not optional. Without it Basin answers a
+       form post with a 302 to its own thank-you page, fetch follows it
+       silently, and ok reads true off Basin's HTML. Content-Type is
+       deliberately NOT set: FormData writes its own with the multipart
+       boundary, and naming it by hand drops the boundary and the upload
+       arrives empty. */
+    const res = await fetch(INTAKE, { method:"POST", body:fd, headers:{ Accept:"application/json" } });
+    if (!res.ok) throw new Error("http " + res.status);
+    $("#dlgBody").innerHTML =
+      `<p style="font-family:'EB Garamond',Georgia,serif;font-size:1.5rem;line-height:1.2;margin-bottom:10px">${esc(t.doneTitle)}</p>
+       <p class="intro">${esc(t.doneBody)}</p>`;
+    $("#dlgActs").innerHTML = "";
+    const close = document.createElement("button");
+    close.type = "button"; close.className = "act act-line"; close.textContent = t.cancel;
+    close.addEventListener("click", () => dlg.close());
+    $("#dlgActs").appendChild(close);
+  } catch (err) {
+    fail(t.errSend);
+    busy = false; sendBtn.disabled = false; sendBtn.textContent = t.send;
+  }
+});
+
+/* ══ the software keyboard ═════════════════════════════════════════════
+   Driven by visualViewport and nothing else. 100svh and
+   interactive-widget=resizes-content both look like the fix and neither
+   reaches iOS: interactive-widget is Chromium only, and on iOS Safari svh
+   and dvh do not shrink for the keyboard at all, the layout viewport keeps
+   its full height and the keyboard simply covers it. offsetTop matters as
+   much as height, because iOS scrolls the visual viewport inside the layout
+   viewport and a fixed element does not move with it.                    */
+(function keyboard(){
+  const vv = window.visualViewport;
+  if (!vv) { sheet.style.top = "6vh"; sheet.style.maxHeight = "88svh"; return; }
+  const place = () => {
+    if (!dlg.open) return;
+    const h = vv.height, top = vv.offsetTop;
+    const cap = Math.max(160, h - 24);
+    sheet.style.maxHeight = cap + "px";
+    const sh = sheet.offsetHeight;
+    sheet.style.top = (sh < h - 24 ? top + (h - sh) / 2 : top + 12) + "px";
+  };
+  vv.addEventListener("resize", place);
+  vv.addEventListener("scroll", place);
+  dlg.addEventListener("close", () => { document.body.classList.remove("locked"); });
+  const obs = new MutationObserver(() => { if (dlg.open) { document.body.classList.add("locked");
+    requestAnimationFrame(place); } });
+  obs.observe(dlg, { attributes:true, attributeFilter:["open"] });
+  addEventListener("resize", place);
+})();
+})();
 </script>
 </body>
 </html>
