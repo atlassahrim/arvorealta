@@ -423,14 +423,13 @@ html.rv [data-rv].in{opacity:1;transform:none}
   border-top:1px solid var(--rule-ink);padding-top:16px;margin-top:clamp(20px,4vh,44px);
   font-family:"Geist Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.2em;
   text-transform:uppercase;color:var(--ink-faint)}
-/* the links take the whole first line of the footer, so the identity row
-   below keeps the space-between it already had rather than becoming three
+/* the two site links take the whole first line, so the identity row below
+   keeps the space-between it already had rather than becoming three
    cramped items at 10px */
-.fnav{flex:1 0 100%;display:flex;flex-wrap:wrap;gap:10px clamp(14px,2.4vw,30px);
-  margin-bottom:clamp(8px,1.6vh,18px)}
-.fnav a{color:var(--paper-ink);text-decoration:none;opacity:.72;
+.close footer>span:first-child{flex:1 0 100%;margin-bottom:clamp(6px,1.4vh,14px)}
+.close footer a{color:var(--paper-ink);text-decoration:none;opacity:.72;
   padding:6px 0;transition:opacity .25s var(--ease)}
-.fnav a:hover,.fnav a:focus-visible{opacity:1}
+.close footer a:hover,.close footer a:focus-visible{opacity:1}
 
 /* ══ THE INTAKE ════════════════════════════════════════════════════════
    A native <dialog> with showModal, because the focus trap, the inert
@@ -670,10 +669,16 @@ html.rv [data-rv].in{opacity:1;transform:none}
     <h2 class="disp" data-rv data-t="closeH">Win with <em>class</em>.</h2>
     <p class="say" data-rv data-t="closeB">A mark drawn to last costs more than one drawn to look current, but it is bought once. If that is the arithmetic you already do, we will get on.</p>
     <button type="button" class="act" data-rv data-cta data-t="cta">Start a project</button>
+    <!-- The two links are to the OTHER pages of the site, not to this
+         page's own sections: `lab/max-home/` carries the same pair in the
+         same place, pointing here and at the video page, so the three read
+         as one site rather than three. The rail above is the wayfinding
+         inside this page and this is the wayfinding out of it. -->
     <footer data-rv>
-      <nav class="fnav" aria-label="Sections"></nav>
+      <span><a href="/" data-t="fHome">Documents and tenders</a>
+        &nbsp;/&nbsp; <a href="/video/" data-t="fVideo">Video</a></span>
       <span>Arvorealta &nbsp;/&nbsp; Atlas Sahrim</span>
-      <span>atlas@arvorealta.com</span>
+      <span><a href="mailto:atlas@arvorealta.com">atlas@arvorealta.com</a></span>
     </footer>
   </div>
 </section>
@@ -998,6 +1003,7 @@ const LANG = {
     e5:"History", more:"The high end standard.", moreMeta:"Open any one &nbsp;/&nbsp; 45 frames behind them",
     _galNote:"Year and sector are placeholders until they are supplied. A sector is shown only where the lockup itself states one.",
     e6:"Where to start", closeH:"Win with <em>class</em>.",
+    fHome:"Documents and tenders", fVideo:"Video",
     closeB:"A brand built to last takes more, but it happens once. If that is the arithmetic you already do, we will get on.",
     fT:"Start a project",
     fI:"Two lines is enough. I read these myself.",
@@ -1046,6 +1052,7 @@ const LANG = {
     e5:"Historikk", more:"Den h\u00f8ye standarden.", moreMeta:"\u00c5pne hvilken som helst &nbsp;/&nbsp; 45 bilder bak",
     _galNote:"\u00c5r og bransje er plassholdere til de er levert. Bransje vises bare der merket selv oppgir en.",
     e6:"Hvor du begynner", closeH:"Vinn med <em>klasse</em>.",
+    fHome:"Dokumenter og anbud", fVideo:"Video",
     closeB:"En merkevare bygget for \u00e5 vare krever mer, men det skjer \u00e9n gang. Er det regnestykket du allerede gj\u00f8r, kommer vi til \u00e5 forst\u00e5 hverandre.",
     fT:"Start et prosjekt",
     fI:"To linjer holder. Jeg leser disse selv.",
@@ -1094,6 +1101,7 @@ const LANG = {
     e5:"Historia", more:"Korkean luokan standardi.", moreMeta:"Avaa mik\u00e4 tahansa &nbsp;/&nbsp; 45 kuvaa takana",
     _galNote:"Vuosi ja toimiala ovat paikanvaraajia kunnes ne toimitetaan. Toimiala n\u00e4ytet\u00e4\u00e4n vain siell\u00e4, miss\u00e4 merkki itse ilmoittaa sellaisen.",
     e6:"Mist\u00e4 aloittaa", closeH:"Voita <em>tyylill\u00e4</em>.",
+    fHome:"Asiakirjat ja tarjouskilpailut", fVideo:"Video",
     closeB:"Kest\u00e4v\u00e4ksi rakennettu br\u00e4ndi vaatii enemm\u00e4n, mutta se tapahtuu kerran. Jos teet jo sen laskutoimituksen, tulemme toimeen.",
     fT:"Aloita projekti",
     fI:"Kaksi rivi\u00e4 riitt\u00e4\u00e4. Luen n\u00e4m\u00e4 itse.",
@@ -1142,23 +1150,6 @@ langBox.innerHTML = LCODES.map(c =>
 langBox.addEventListener("click", e => {
   const b = e.target.closest("button[data-l]"); if (b) setLang(b.dataset.l, true);
 });
-
-/* ══ the footer's section links ═════════════════════════════════════════
-   The rail is hidden below 980px, so on a phone and on an iPad in portrait
-   the footer is the only wayfinding the page has. The six links are built
-   from the rail's own anchors rather than typed a second time: a section
-   list written in two places is the exact class of bug this page has paid
-   for three times, where one side moves and nothing throws. They carry the
-   rail's `data-t` keys and not `data-rail`, because the rail's observer
-   maps its anchors to sections by index and a second set of six would put
-   that mapping out by six. Built here, above the language bootstrap, so
-   the one setLang call below fills them with everything else. */
-(() => {
-  const nav = document.querySelector(".fnav");
-  if (!nav) return;
-  nav.innerHTML = [...document.querySelectorAll("[data-rail]")].map(a =>
-    `<a href="${a.getAttribute("href")}" data-t="${a.dataset.t}"></a>`).join("");
-})();
 
 /* the browser's language first, a remembered choice over it from then on */
 (() => {

@@ -1440,16 +1440,21 @@ lockup, which is what a synthesis of a brief looks like when it is drawn.
 If that is the arithmetic you already do, we will get on.`** The second
 sentence is unchanged, which is the part that was already the owner's.
 
-**The footer carries the six section links**, built in JS from the rail's
-own anchors rather than typed a second time, because **a section list
-written in two places is the class of bug this page has already paid for
-three times** and nothing throws when one side moves. They take the rail's
-`data-t` keys and not `data-rail`: the rail's observer maps anchors to
-sections by index, and a second set of six would put that mapping out by
-six. They are built above the language bootstrap so the single `setLang`
-call fills them with everything else. **The rail is hidden below 980px**,
-so on a phone and on an iPad in portrait this is the only wayfinding the
-page has.
+**The footer's links are to the other pages, not to this page's own
+sections**, which was read wrong once and is worth recording as wrong. The
+first build put the six rail sections in the footer on the reasoning that
+the rail is hidden below 980px; the owner's correction is that he asked
+for what `lab/max-home/` already carries in the same place. **That page's
+footer holds `Brand and identity / Video`**, so this one holds
+`Documents and tenders / Video` — each sandbox pointing at the other two
+pages of the site. The rail is the wayfinding *inside* a page and the
+footer is the wayfinding *out* of it, and conflating them left the page
+with its own section list printed twice.
+
+`fHome` and `fVideo` are translated like everything else:
+`Dokumenter og anbud` and `Asiakirjat ja tarjouskilpailut`; `Video` is
+`Video` in all three. The mail address is a `mailto:` now rather than
+plain text, which it already was on `lab/max-home/`.
 
 **On `lab/max-home/` the document fan opens twice as fast**, at the
 owner's instruction. The window inside the pinned section ran `raw 0.12`
@@ -1463,9 +1468,49 @@ wants a reader to look at.
 Verified: six folds at exactly one screen at 1440, 820 and 390 with the
 footer's new row in place; no horizontal scroll and no page errors; all
 fifteen gallery captions carry the supplied name, year and sector with two
-em dash years; the viewer reads `2014 · Software · Deep water`; the six
-footer links resolve to the six section ids; the fan holds at 981px from
-raw 0.40.
+em dash years; the viewer reads `2014 · Software · Deep water`; the fan
+holds at 981px from raw 0.40.
+
+### The cost fold is three columns again, which is the offer page's shape
+
+**The owner's call: this fold was better as columns.** It stood on
+`lab/max-home/` as three hairline-separated rungs, each one a
+three-column row, which is the layout `index.html` itself moved away from
+and for a reason this file already records — a reader comparing three
+tiers scans the deliverables under each price, and a stacked row makes
+them scan down the page instead of across it.
+
+**The objection to cards is about EQUAL columns**, which say *pick one of
+these three* and are the opposite of a ladder. These are not equal, and
+the figures are the offer page's own to the pixel: measured at 1440
+**369 / 462 / 369**, equal heights at 541, and **the middle starting 16px
+higher**. The middle runs `1.25fr` against `1fr`, lifts out of the row,
+and carries the only solid border — so the shape argues the recommended
+rung before a word is read. One column below 980px, three above, and **it
+is a grid that never scrolls sideways**: the credit mechanic only works
+when €600, €2,400 and €8,000 are in view together.
+
+**All three take the open-tender card exactly** — `--paper-3`, a hairline
+at `--rule`, 16px — so the recommended rung is argued by the column, the
+lift and the border rather than by being the only card with a ground. The
+card needs `overflow:hidden`, or the row's ink fill paints square corners
+over the radius.
+
+**The row's left gradient bar is deleted and its hover rule with it.** A
+2px rule down the side of a card reads as a tab, and the solid border
+already says what it said. The rule that coloured it,
+`.rung:hover[data-lead]::after`, would have matched nothing — which is
+the trap recorded one section above, and it is the border that inverts
+with the fill now.
+
+**Nothing about the ladder's content moved.** Every price, tier name,
+term, deliverable and credit line is the same string; the whole-row
+inversion, the gradient price fill and its `@supports` guard, and the
+`-webkit-text-fill-color` override on ink are all unchanged. Verified at
+1440 and 1180 side by side and at 820 and 390 stacked, with the prices
+reading `€600 · €2,400 · €8,000`, the lead card's colour, border and
+price all going to bone on hover, no horizontal scroll and no page
+errors.
 
 Verified: six folds at exactly one screen at 1440, 1180, 820 and 390; snap
 `y mandatory` at all four and `none` under reduced motion; fold tops at 0,
