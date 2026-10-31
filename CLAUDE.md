@@ -1512,6 +1512,30 @@ reading `€600 · €2,400 · €8,000`, the lead card's colour, border and
 price all going to bone on hover, no horizontal scroll and no page
 errors.
 
+**And then the tier cards became the tender card, by sharing its rule
+rather than copying its values.** The owner's instruction was to redesign
+them on the tender template, and `.tender,.rung{…}` is the literal reading
+as well as the maintainable one: **one selector is the only way two
+surfaces cannot drift apart**, which is this file's own argument for one
+stylesheet across three pages. The ground, the hairline, the 16px corner,
+the padding and the internal gap are now stated once, and
+`.tender .tt,.rung .nm` does the same for the title. Measured, the tier
+card's computed `padding` and `gap` are identical to the tender card's:
+**44px and 27px at 1440**. `.rung`'s own rule keeps only what a tier card
+adds — `position:relative` for the ink fill, `align-content:start` so three
+cards of different lengths still read as a row, and `overflow:hidden` so
+the fill cannot paint square corners over the radius.
+
+The cards go from 541px to **583px** tall on the tender card's more
+generous rhythm, and 369 / 462 / 369 with the 16px lift are unchanged.
+**Two of the template's own devices are deliberately not taken.** The
+clock's figures are mono with `tabular-nums`, and a price is never mono
+here — `€2,400` draws as `€2 , 400` — so the price keeps EB Garamond. And
+the cost block keeps its own left hairline rather than the card's top
+rule, because that hairline is what says the figure, the term and the
+credit are one object, and the tender card has no equivalent for a
+three-line group.
+
 Verified: six folds at exactly one screen at 1440, 1180, 820 and 390; snap
 `y mandatory` at all four and `none` under reduced motion; fold tops at 0,
 900, 1800, 2700, 3600, 4500; 21 of 21 reveals after a jump to the end; all
@@ -1621,6 +1645,37 @@ Asked what was blocking the page, the honest answer was the material: it owns
 exactly one photograph, `after-1`, against the brand sandbox's 51 frames and
 two films. Everything strong on `lab/max-brand/` is a picture doing work.
 
+**That fold is deleted, at the owner's instruction**, and everything below
+it is kept as history because the fold may come back — his words were that
+it does not matter as much to be present there *at this time*. What follows
+describes a section `lab/max-home/` no longer has. The page is five folds
+now: hero · tender · award · cost · close, and the rail is five entries.
+
+**Removing a section means removing everything that writes to it, and this
+file already records what happens otherwise** — `renderLists` kept writing
+to a node that had gone and threw `Cannot set properties of null`, which
+left three other blocks unrendered while the page looked normal. So the
+sweep was six places and each was asserted gone before the file was
+written: the `.docs` CSS block, the `<section>`, the rail's `#docs` entry,
+the `FAN` table, the loop's five element lookups, and the loop's fan block.
+Verified after: zero `#docs`, `.fan` or `.legend` nodes, zero page errors
+at 1440, 1180, 820 and 390. **7,800 bytes.**
+
+**Fifteen `STR` keys and three images are kept deliberately.** `_docEyebrow`,
+`_docH2`, `_docA/B/C`, `_docNote` and `_r2` are dead in all three
+languages, and `assets/img/doc-{annex,proposal,deck}-*` are now referenced
+by nothing — 81 KB. Both survive for the same reason as the other dead
+strings: the fold is paused rather than rejected, and re-writing three
+languages of copy and re-rendering three plates is the cost of deleting
+them today for nothing.
+
+**The rail here is built the way `lab/max-brand`'s is not**, and this is
+the fix for the bug flagged on that page: the label sits in its own
+`<span data-t="_r0">` inside the anchor, so `setLang` writing `innerHTML`
+lands on the span and leaves the anchor's `<i></i>` marker alone. Measured:
+five rail anchors, five `.rail a i` markers. On `lab/max-brand/` the
+`data-t` is on the anchor itself and the markers are destroyed on load.
+
 **Three real documents fixed most of it, and they were already on the domain.**
 `annex/sample/`, `annex/proposta-motorhome/` and `deck/reference-pipeline/`
 are published, ours, and rendered by Playwright into `assets/img/doc-*`, 520px
@@ -1636,8 +1691,12 @@ they were never the wrong answer**, because the home page sells documents.
 documents as the reader scrolls, which is `written once, right every time`
 stated as a movement rather than a claim, and it is the same move as the brand
 page's one mark through three grounds. The eyebrow joins the spine rather than
-decorating: the route now reads `Industrial manufacturer bids` · `Open now` ·
+decorating: the route read `Industrial manufacturer bids` · `Open now` ·
 `What it looks like` · `How it is scored` · `What it costs` · `Where to start`.
+**With the document fold deleted the spine is five**, and `What it looks
+like` goes with it: `Industrial manufacturer bids` · `Open now` ·
+`How it is scored` · `What it costs` · `Where to start`, which is the live
+offer page's own five exactly.
 
 **`translate(X%)` is a percentage of the element, not of its container.** The
 fan was written with the offsets as percentages and a 200px plate moved 60px
