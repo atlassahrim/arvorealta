@@ -1383,15 +1383,26 @@ assumed — the `dantas` frames read `DANTAS & MARTINS / ADVOGADAS
 ASSOCIADAS` at full resolution and are a different firm. A project cannot
 be added to a portfolio without its photography, so it is not added.
 
-**Two spellings are the artwork's and not the list's, read at full
-resolution off the warm-light frames.** The Boaventura lockup is drawn
-**`SOUSA`** and the list says Souza; the Autotrack lockup is drawn
-**`AUTOTRACK`**, with a K, and the list says Autotrac. This file's own
-rule is that a client's name spelled wrong on a portfolio is the one error
-that client is certain to see, and the drawing is the thing that was
-verified, so **the drawing holds until the owner says otherwise.** Both
-are flagged rather than silently resolved either way, because the owner
-knows his clients and the frames only know how the mark was set.
+**Two spellings disagreed with their own artwork, and the owner settled
+it.** Read at full resolution off the warm-light frames, the Boaventura
+lockup is drawn **`SOUSA`** and the Autotrack lockup is drawn
+**`AUTOTRACK`**, with a K; the owner's list said `Souza` and `Autotrac`.
+The drawing held for one turn, because a client's name spelled wrong on a
+portfolio is the one error that client is certain to see and the drawing
+was the thing that had been verified. Asked which held, **the owner said
+fix them**, so the page now carries `Boaventura Noleto Souza Souto` and
+`Autotrac`.
+
+**The slug stays `autotrack`**, because that is what fifty-one files on
+disk are called and renaming an asset set to match a caption is a cost
+with no reader on the other end of it. Only the name a reader sees moved,
+and the `alt` text follows it because it is built from the name.
+
+**The rule the episode leaves behind is the asking, not the answer.** A
+lockup and the person who commissioned it can disagree about a spelling,
+and neither is automatically right: the drawing is what a stranger can
+check, and the owner is who knows the client. **Flag it and let him
+decide** rather than picking the source that happens to be nearer.
 
 Three names took the fuller form the list gives: `Venner` is `Venner
 Advice`, `Demillion` is `Demillion Landscapes`, `Archy` is `Archy/Atlas`.
