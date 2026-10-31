@@ -302,7 +302,11 @@ html.rv [data-rv].in{opacity:1;transform:none}
    left edge that is the reason they stack at all, because both images are
    1400px wide and take the same cap, so they still begin and end on the
    same two pixels. */
-.plate{display:grid;gap:12px;margin:0;max-width:49%;justify-self:center}
+/* the gap is the distance from the mark to the word that labels it, and
+   it is the owner's call that 12px read as cramped: a label sitting that
+   close to a lockup reads as part of the drawing rather than as a caption
+   on it */
+.plate{display:grid;gap:clamp(20px,3.4vh,42px);margin:0;max-width:49%;justify-self:center}
 .plate img{width:100%;height:auto}
 .plate figcaption{display:flex;align-items:center;gap:14px;color:var(--ink-faint)}
 .plate figcaption::after{content:"";flex:1;height:1px;background:var(--rule-ink)}
@@ -419,6 +423,14 @@ html.rv [data-rv].in{opacity:1;transform:none}
   border-top:1px solid var(--rule-ink);padding-top:16px;margin-top:clamp(20px,4vh,44px);
   font-family:"Geist Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.2em;
   text-transform:uppercase;color:var(--ink-faint)}
+/* the links take the whole first line of the footer, so the identity row
+   below keeps the space-between it already had rather than becoming three
+   cramped items at 10px */
+.fnav{flex:1 0 100%;display:flex;flex-wrap:wrap;gap:10px clamp(14px,2.4vw,30px);
+  margin-bottom:clamp(8px,1.6vh,18px)}
+.fnav a{color:var(--paper-ink);text-decoration:none;opacity:.72;
+  padding:6px 0;transition:opacity .25s var(--ease)}
+.fnav a:hover,.fnav a:focus-visible{opacity:1}
 
 /* ══ THE INTAKE ════════════════════════════════════════════════════════
    A native <dialog> with showModal, because the focus trap, the inert
@@ -659,6 +671,7 @@ html.rv [data-rv].in{opacity:1;transform:none}
     <p class="say" data-rv data-t="closeB">A mark drawn to last costs more than one drawn to look current, but it is bought once. If that is the arithmetic you already do, we will get on.</p>
     <button type="button" class="act" data-rv data-cta data-t="cta">Start a project</button>
     <footer data-rv>
+      <nav class="fnav" aria-label="Sections"></nav>
       <span>Arvorealta &nbsp;/&nbsp; Atlas Sahrim</span>
       <span>atlas@arvorealta.com</span>
     </footer>
@@ -725,37 +738,55 @@ html.rv [data-rv].in{opacity:1;transform:none}
    Names were read at full resolution before they shipped. A client's name
    spelled wrong on a portfolio is the one error that client is certain to
    see, so these are copied from the verified list and not retyped.        */
-/* the one project the page pulls apart. The other sixteen are the gallery,
-   and a role line is what that lockup itself states -- never a sector
-   inferred from a company name, and never translated. */
+/* The one project the page pulls apart, then the gallery. Each row is
+   slug, name, sector, year.
+
+   The sector and the year are the OWNER'S OWN, supplied for fifteen of the
+   seventeen. Until that list arrived both were stand-ins: every year read
+   an em dash, and the second line was whatever the lockup itself stated,
+   because a sector inferred from a company name is invented proof. It is
+   not inferred now -- it is the owner's record of his own clients -- so
+   that rule is satisfied rather than broken, and the em dash goes.
+
+   TWO ARE STILL WAITING. Dantas & Martins and Amazônia Store are not in
+   the supplied list, so they keep the line their own lockup states and an
+   em dash year. An em dash is what says a field is unknown; filling it in
+   would be the exact thing the rule above forbids.
+
+   TWO SPELLINGS ARE THE ARTWORK'S AND NOT THE LIST'S, read at full
+   resolution off the warm-light frames rather than assumed: the Boaventura
+   lockup is drawn SOUSA and the supplied list says Souza, and the Autotrack
+   lockup is drawn with a K and the list says Autotrac. A client's name
+   spelled wrong on a portfolio is the one error that client is certain to
+   see, so the drawing holds until the owner says otherwise. */
 const FEATURED = [
-  ["turvatikas","Turvatikas","Safety ladder"]
+  ["turvatikas","Turvatikas","Industrial manufacturers","2018"]
 ];
 const GALLERY = [
-  ["remedios","Ilha dos Remédios","Crest and seal"],
-  ["venner","Venner","Advice"],
-  ["lobo","Leonardo Lobo","Negócios imobiliários"],
-  ["demillion","Demillion","Landscapes"],
-  ["boaventura","Boaventura Noleto Sousa Souto","Advogados"],
-  ["figueiredo","Figueiredo & Velloso","Advogados associados"],
-  ["dantas","Dantas & Martins","Advogadas associadas"],
-  ["wright","Wright Minussi","Advogados"],
-  ["machado","Machado Gobbo","Advogados"],
-  ["offrire","Offrire","Hospitais"],
-  ["soledad","Soledad Molina","Monogram and wordmark"],
-  ["archy","Archy","Mark and wordmark"],
-  ["noleto","Noleto","Mark and wordmark"],
-  ["amazonia","Amazônia Store","Store"],
-  ["autotrack","Autotrack","Mark and wordmark"],
-  ["arvorealta","Arvorealta","Our own"]
+  ["remedios","Ilha dos Remédios","Healthcare","2023"],
+  ["venner","Venner Advice","Accounting","2016"],
+  ["lobo","Leonardo Lobo","Real estate","2015"],
+  ["demillion","Demillion Landscapes","Architecture","2023"],
+  ["boaventura","Boaventura Noleto Sousa Souto","Lawyers","2021"],
+  ["figueiredo","Figueiredo & Velloso","Lawyers","2015"],
+  ["dantas","Dantas & Martins","Advogadas associadas","—"],
+  ["wright","Wright Minussi","Lawyer","2016"],
+  ["machado","Machado Gobbo","Lawyers","2015"],
+  ["offrire","Offrire","Healthcare","2016"],
+  ["soledad","Soledad Molina","Architecture","2018"],
+  ["archy","Archy/Atlas","Personal","2017"],
+  ["noleto","Noleto","Lawyer","2021"],
+  ["amazonia","Amazônia Store","Store","—"],
+  ["autotrack","Autotrack","Software","2014"],
+  ["arvorealta","Arvorealta","Branding","2020"]
 ];
 const GROUNDS = [["w","Deep water"],["l","Warm light"],["p","Bare paper"]];
 const src = (s,g,w) => "/assets/land/" + s + "-" + g + "-1-" + w + ".webp";
 
 const FRAMES = [];
-for (const [s,n,r] of FEATURED.concat(GALLERY))
+for (const [s,n,r,y] of FEATURED.concat(GALLERY))
   for (const [g,gn] of GROUNDS)
-    FRAMES.push({ slug:s, name:n, role:r, g, gname:gn,
+    FRAMES.push({ slug:s, name:n, role:r, year:y, g, gname:gn,
                   full:src(s,g,1400), thumb:src(s,g,480),
                   alt:n + ", the mark on " + gn.toLowerCase() });
 const firstOf = s => FRAMES.findIndex(f => f.slug === s);
@@ -812,7 +843,13 @@ if (closev && !reduce) {
    no hover, so on a phone or an iPad the field is laid out and still and
    the name rail is the whole control. prefers-reduced-motion stops it
    everywhere.                                                            */
-const CRAFT = new Set(["Mark and wordmark","Monogram and wordmark","Crest and seal","Our own"]);
+/* CRAFT is gone with the stand-ins it covered for. It held the four
+   craft-only lines -- Mark and wordmark, Monogram and wordmark, Crest and
+   seal, Our own -- and swapped each for an em dash so the page never
+   printed a craft label where a sector belongs. Every one of those rows
+   now carries a real sector from the owner's list, so the set matched
+   nothing and a rule that matches nothing is a rule the next session
+   trusts and gets wrong. */
 const CLOUD = GALLERY.filter(([s]) => s !== "arvorealta");   /* the mark signs the close */
 const cloud = $("#cloud"), namerail = $("#namerail");
 
@@ -822,7 +859,7 @@ const cloud = $("#cloud"), namerail = $("#namerail");
    where there is not, and the stage itself opens the viewer. That split
    matters: with hover and open both on the tile, one tap on a phone fired
    the hover and the open together. */
-const CELLS = CLOUD.map(([slug, name, role], i) => ({ slug, name, role, i }));
+const CELLS = CLOUD.map(([slug, name, role, year], i) => ({ slug, name, role, year, i }));
 
 /* Deep water only. The gallery used to rotate GROUNDS[i % 3], so a
    reader met fifteen projects on three different grounds and the fold
@@ -858,10 +895,10 @@ function lit(k){
   railBtns.forEach(el => el.classList.toggle("lit", +el.dataset.k === k));
   const c = CELLS.find(x => x.i === k);
   if (c && capName) capName.textContent = c.name;
-  /* the year is a stand-in for all seventeen until the owner supplies it */
-  if (capYear) capYear.textContent = "\u2014";
-  /* a sector is shown only where the lockup itself states one */
-  if (c && capRole) capRole.textContent = CRAFT.has(c.role) ? "\u2014" : c.role;
+  /* Both are the owner's own now, and the two rows he has not supplied
+     carry an em dash rather than a guess. */
+  if (c && capYear) capYear.textContent = c.year;
+  if (c && capRole) capRole.textContent = c.role;
 }
 if (CELLS.length) lit(CELLS[0].i);
 
@@ -886,11 +923,10 @@ function show(i){
   at = i; const f = FRAMES[i];
   vimg.src = f.full; vimg.alt = f.alt;
   vt.textContent = f.name;
-  /* title, year and sector. The year is a stand-in for every project and
-     the sector is shown only where the lockup itself states one, because a
-     sector inferred from a company name is invented proof. */
-  const sector = CRAFT.has(f.role) ? "\u2014" : f.role;
-  vr.textContent = "\u2014  ·  " + sector + "  ·  " + f.gname;
+  /* year, sector, ground. The first two are the owner's own now; the two
+     projects not in his list carry an em dash year, which is what says a
+     field is unknown rather than inventing one. */
+  vr.textContent = f.year + "  ·  " + f.role + "  ·  " + f.gname;
   vn.textContent = i + 1;
     vfb.forEach((b,k) => b.setAttribute("aria-current", k === i ? "true" : "false"));
   $("#vprev").disabled = i === 0; $("#vnext").disabled = i === FRAMES.length - 1;
@@ -938,14 +974,14 @@ const LANG = {
     scroll:"Scroll",
     e2:"Alignment", h2a:"Can you see the difference?",
     vsA:"Before", vsB:"After",
-    vsSay:"A mark is a statement read before it is explained. The test is clarity, not meaning. It is impact in the second before you think.",
+    vsSay:"Look at this before and after and check if those look the same to you. The first test is clarity, not meaning. A mark is a statement perceived before explained. Most people are numb to nuance.",
     vsSort:"If the difference is not obvious to you, nothing written here will make it so.",
     e3:"Direction", h3a:"You are the compass.",
     dirSay:"Most designers will ask you to kneel to whichever audience was easiest for them to describe. <b>Not here.</b> Clarity is how we get you where you are already pointing.",
     e4:"The system", h4a:"Tools are the easy part.",
     sysSay:"Direction is often mistaken for micromanagement. We need clean vectors, not 30 page ruling documents.",
     _real:"supplied",
-    p1t:"The vector",
+    p1t:"The synthesis",
     p1b:"One message, one shape. The ladder is the space between the rungs and not the rails, so nothing in it has to be redrawn to go small.",
     g0:"Deep water", g1:"Warm light", g2:"Bare paper",
     p2t:"Ten, twenty, seventy",
@@ -962,7 +998,7 @@ const LANG = {
     e5:"History", more:"The high end standard.", moreMeta:"Open any one &nbsp;/&nbsp; 45 frames behind them",
     _galNote:"Year and sector are placeholders until they are supplied. A sector is shown only where the lockup itself states one.",
     e6:"Where to start", closeH:"Win with <em>class</em>.",
-    closeB:"A mark drawn to last costs more than one drawn to look current, but it is bought once. If that is the arithmetic you already do, we will get on.",
+    closeB:"A brand built to last takes more, but it happens once. If that is the arithmetic you already do, we will get on.",
     fT:"Start a project",
     fI:"Two lines is enough. I read these myself.",
     fEm:"Email", fPh:"Phone",
@@ -986,14 +1022,14 @@ const LANG = {
     scroll:"Rull",
     e2:"Innretting", h2a:"Ser du forskjellen?",
     vsA:"F\u00f8r", vsB:"Etter",
-    vsSay:"Et merke er et utsagn som leses f\u00f8r det forklares. Pr\u00f8ven er klarhet, ikke mening. Det er anslaget i sekundet f\u00f8r du tenker.",
+    vsSay:"Se p\u00e5 dette f\u00f8r og etter, og sjekk om de ser like ut for deg. Den f\u00f8rste testen er klarhet, ikke mening. Et merke er et utsagn som oppfattes f\u00f8r det forklares. De fleste er avstumpet for nyanser.",
     vsSort:"Er ikke forskjellen \u00e5penbar for deg, er det ingenting her som gj\u00f8r den det.",
     e3:"Retning", h3a:"Du er kompasset.",
     dirSay:"De fleste designere vil be deg knele for det publikummet som var lettest for dem \u00e5 beskrive. <b>Ikke her.</b> Klarhet er m\u00e5ten vi f\u00e5r deg dit du allerede peker.",
     e4:"Systemet", h4a:"Verkt\u00f8yene er den enkle delen.",
     sysSay:"Retning blir ofte forvekslet med detaljstyring. Vi trenger rene vektorer, ikke 30 siders regelverk.",
     _real:"levert",
-    p1t:"Vektoren",
+    p1t:"Syntesen",
     p1b:"Ett budskap, \u00e9n form. Stigen er rommet mellom trinnene og ikke vangene, s\u00e5 ingenting i den m\u00e5 tegnes p\u00e5 nytt for \u00e5 bli liten.",
     g0:"Dypt vann", g1:"Varmt lys", g2:"Bart papir",
     p2t:"Ti, tjue, sytti",
@@ -1010,7 +1046,7 @@ const LANG = {
     e5:"Historikk", more:"Den h\u00f8ye standarden.", moreMeta:"\u00c5pne hvilken som helst &nbsp;/&nbsp; 45 bilder bak",
     _galNote:"\u00c5r og bransje er plassholdere til de er levert. Bransje vises bare der merket selv oppgir en.",
     e6:"Hvor du begynner", closeH:"Vinn med <em>klasse</em>.",
-    closeB:"Et merke tegnet for \u00e5 vare koster mer enn ett tegnet for \u00e5 se moderne ut, og det kj\u00f8pes \u00e9n gang. Er det regnestykket du allerede gj\u00f8r, kommer vi til \u00e5 forst\u00e5 hverandre.",
+    closeB:"En merkevare bygget for \u00e5 vare krever mer, men det skjer \u00e9n gang. Er det regnestykket du allerede gj\u00f8r, kommer vi til \u00e5 forst\u00e5 hverandre.",
     fT:"Start et prosjekt",
     fI:"To linjer holder. Jeg leser disse selv.",
     fEm:"E-post", fPh:"Telefon",
@@ -1034,14 +1070,14 @@ const LANG = {
     scroll:"Vierit\u00e4",
     e2:"Linjaus", h2a:"N\u00e4etk\u00f6 eron?",
     vsA:"Ennen", vsB:"J\u00e4lkeen",
-    vsSay:"Merkki on v\u00e4ite, joka luetaan ennen kuin se selitet\u00e4\u00e4n. Koe on selkeys, ei merkitys. Se on vaikutus sekuntia ennen kuin ajattelet.",
+    vsSay:"Katso t\u00e4t\u00e4 ennen ja j\u00e4lkeen ja tarkista, n\u00e4ytt\u00e4v\u00e4tk\u00f6 ne sinusta samalta. Ensimm\u00e4inen testi on selkeys, ei merkitys. Merkki on v\u00e4ite, joka havaitaan ennen kuin se selitet\u00e4\u00e4n. Useimmat ovat turtuneita vivahteille.",
     vsSort:"Jos ero ei ole sinulle ilmeinen, mik\u00e4\u00e4n t\u00e4ss\u00e4 kirjoitettu ei tee siit\u00e4 ilmeist\u00e4.",
     e3:"Suunta", h3a:"Sin\u00e4 olet kompassi.",
     dirSay:"Useimmat suunnittelijat pyyt\u00e4v\u00e4t sinua polvistumaan sille yleis\u00f6lle, joka oli heille helpoin kuvata. <b>Ei t\u00e4\u00e4ll\u00e4.</b> Selkeys on tapa, jolla viemme sinut sinne, minne jo osoitat.",
     e4:"J\u00e4rjestelm\u00e4", h4a:"Ty\u00f6kalut ovat helppo osa.",
     sysSay:"Suunta sekoitetaan usein mikromanageeraukseen. Tarvitsemme selkei\u00e4 vektoreita, emme 30-sivuisia s\u00e4\u00e4nt\u00f6kirjoja.",
     _real:"toimitettu",
-    p1t:"Vektori",
+    p1t:"Synteesi",
     p1b:"Yksi viesti, yksi muoto. Tikkaat ovat askelmien v\u00e4liin j\u00e4\u00e4v\u00e4 tila eiv\u00e4tk\u00e4 sivujohteet, joten mit\u00e4\u00e4n ei tarvitse piirt\u00e4\u00e4 uudelleen pienennett\u00e4ess\u00e4.",
     g0:"Syv\u00e4 vesi", g1:"L\u00e4mmin valo", g2:"Paljas paperi",
     p2t:"Kymmenen, kaksikymment\u00e4, seitsem\u00e4nkymment\u00e4",
@@ -1058,7 +1094,7 @@ const LANG = {
     e5:"Historia", more:"Korkean luokan standardi.", moreMeta:"Avaa mik\u00e4 tahansa &nbsp;/&nbsp; 45 kuvaa takana",
     _galNote:"Vuosi ja toimiala ovat paikanvaraajia kunnes ne toimitetaan. Toimiala n\u00e4ytet\u00e4\u00e4n vain siell\u00e4, miss\u00e4 merkki itse ilmoittaa sellaisen.",
     e6:"Mist\u00e4 aloittaa", closeH:"Voita <em>tyylill\u00e4</em>.",
-    closeB:"Kest\u00e4m\u00e4\u00e4n piirretty merkki maksaa enemm\u00e4n kuin ajanmukaiselta n\u00e4ytt\u00e4m\u00e4\u00e4n piirretty, ja se ostetaan kerran. Jos teet jo sen laskutoimituksen, tulemme toimeen.",
+    closeB:"Kest\u00e4v\u00e4ksi rakennettu br\u00e4ndi vaatii enemm\u00e4n, mutta se tapahtuu kerran. Jos teet jo sen laskutoimituksen, tulemme toimeen.",
     fT:"Aloita projekti",
     fI:"Kaksi rivi\u00e4 riitt\u00e4\u00e4. Luen n\u00e4m\u00e4 itse.",
     fEm:"S\u00e4hk\u00f6posti", fPh:"Puhelin",
@@ -1106,6 +1142,23 @@ langBox.innerHTML = LCODES.map(c =>
 langBox.addEventListener("click", e => {
   const b = e.target.closest("button[data-l]"); if (b) setLang(b.dataset.l, true);
 });
+
+/* ══ the footer's section links ═════════════════════════════════════════
+   The rail is hidden below 980px, so on a phone and on an iPad in portrait
+   the footer is the only wayfinding the page has. The six links are built
+   from the rail's own anchors rather than typed a second time: a section
+   list written in two places is the exact class of bug this page has paid
+   for three times, where one side moves and nothing throws. They carry the
+   rail's `data-t` keys and not `data-rail`, because the rail's observer
+   maps its anchors to sections by index and a second set of six would put
+   that mapping out by six. Built here, above the language bootstrap, so
+   the one setLang call below fills them with everything else. */
+(() => {
+  const nav = document.querySelector(".fnav");
+  if (!nav) return;
+  nav.innerHTML = [...document.querySelectorAll("[data-rail]")].map(a =>
+    `<a href="${a.getAttribute("href")}" data-t="${a.dataset.t}"></a>`).join("");
+})();
 
 /* the browser's language first, a remembered choice over it from then on */
 (() => {

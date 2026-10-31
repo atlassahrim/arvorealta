@@ -1468,7 +1468,15 @@ function frame(){
   if (fanWide.matches && dr.top < vh && dr.bottom > 0) {
     const span = docsSec.offsetHeight - vh;
     const raw = clamp01((-dr.top) / Math.max(1, span));
-    const p = clamp01((raw - 0.12) / 0.56);
+    /* The fan opens twice as fast, at the owner's instruction. `raw` is the
+       section's own scroll progress and the window is where inside it the
+       pile travels: it ran 0.12 to 0.68 and now runs 0.12 to 0.40, so the
+       three documents are fully out at forty per cent of the pin instead
+       of at sixty-eight. The start is unchanged, since what was asked for
+       is the rate rather than the moment it begins, and the remaining 0.60
+       is the open pile simply held, which is what the fold wants a reader
+       to look at. */
+    const p = clamp01((raw - 0.12) / 0.28);
     const e = p < .5 ? 4*p*p*p : 1 - Math.pow(-2*p + 2, 3) / 2;   /* ease in and out */
     const sw = fan.clientWidth, sh = fan.clientHeight;
     fanEls.forEach((el, i) => {

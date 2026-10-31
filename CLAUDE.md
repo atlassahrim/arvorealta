@@ -1351,6 +1351,122 @@ the four labels is two sections above and is kept for the same reason:
 it is the argument for putting them back before any of this is shown to a
 client. `_real` joins the dead strings, kept for its three languages.
 
+### The sectors and the years are real now, and two rows are still waiting
+
+**The owner supplied a sector and a year for fifteen of the seventeen
+projects**, so the gallery's two stand-ins are retired. Until this list
+arrived every year read an em dash and the second line was whatever the
+lockup itself stated — `Advogados`, `Hospitais`, `Mark and wordmark` —
+because **a sector inferred from a company name is invented proof.** It is
+not inferred now; it is the owner's own record of his own clients, so the
+rule is satisfied rather than broken. Each row is `slug, name, sector,
+year`.
+
+**`CRAFT` is deleted with the problem it solved.** It held the four
+craft-only lines and swapped each for an em dash so the page could never
+print a craft label where a sector belongs. Every one of those rows now
+carries a real sector, so the set matched nothing — and **a rule that
+matches nothing is a rule the next session trusts and gets wrong**, which
+is this file's own stated reason for not leaving one standing.
+
+**Two projects are still waiting and say so.** `Dantas & Martins` and
+`Amazônia Store` are not in the supplied list, so they keep the line their
+own lockup states and an em dash year. **An em dash is what says a field
+is unknown**; filling either in from the company name would be the exact
+thing the rule above forbids. The em dash in the year is also what makes
+the gap visible at a glance rather than silently complete.
+
+**One name on the supplied list has no frames in the repo.** `Érica
+Evangelista, Lawyer, 2025` is in the owner's sixteen and is not among the
+seventeen projects in `assets/land/`, which was checked rather than
+assumed — the `dantas` frames read `DANTAS & MARTINS / ADVOGADAS
+ASSOCIADAS` at full resolution and are a different firm. A project cannot
+be added to a portfolio without its photography, so it is not added.
+
+**Two spellings are the artwork's and not the list's, read at full
+resolution off the warm-light frames.** The Boaventura lockup is drawn
+**`SOUSA`** and the list says Souza; the Autotrack lockup is drawn
+**`AUTOTRACK`**, with a K, and the list says Autotrac. This file's own
+rule is that a client's name spelled wrong on a portfolio is the one error
+that client is certain to see, and the drawing is the thing that was
+verified, so **the drawing holds until the owner says otherwise.** Both
+are flagged rather than silently resolved either way, because the owner
+knows his clients and the frames only know how the mark was set.
+
+Three names took the fuller form the list gives: `Venner` is `Venner
+Advice`, `Demillion` is `Demillion Landscapes`, `Archy` is `Archy/Atlas`.
+Sectors are normalised to sentence case, which is typography rather than
+voice — the caption renders in tracked capitals either way.
+
+### The rail's numbers and marker lines have never once rendered
+
+**`setLang` writes `innerHTML` over every `[data-t]` node, and the rail's
+six anchors are `[data-t]`.** Each is authored as `<em>01</em> Open
+<i></i>` and each language string is the bare word `Open`, so the first
+call of the bootstrap replaces the whole anchor's contents with that word.
+Measured on a cold load: the first rail anchor's `innerHTML` is `"Open"`,
+and the document holds **zero** `.rail a em` and **zero** `.rail a i`.
+
+So the numbered spine the markup promises is destroyed before the first
+paint, and `.rail a i{display:block;width:14px;height:1px}` is dead CSS
+for an element that cannot exist. Nothing throws and nothing looks broken,
+which is why three audits of this rail missed it. **It is flagged and not
+fixed**: restoring the numbers changes how the rail reads, and that is a
+visual decision the owner makes in front of it rather than a repair. The
+fix, when it is wanted, is to give the label its own node — `<em>01</em>
+<b data-t="r0"></b> <i></i>` — so the translation lands on the word and
+leaves the device alone.
+
+### What the owner's copy changed, and the fan at twice the rate
+
+**Fold two's explanation is the owner's**, replacing the session's:
+`Look at this before and after and check if those look the same to you.
+The first test is clarity, not meaning. A mark is a statement perceived
+before explained. Most people are numb to nuance.` The Norwegian and
+Finnish are this session's, which is the standing caveat; `avstumpet for
+nyanser` and `turtuneita vivahteille` are the ordinary ways to say numb to
+nuance in each.
+
+**The `BEFORE` and `AFTER` labels stand further off their plates**, at the
+owner's instruction: `clamp(20px,3.4vh,42px)` against a flat 12px, which
+measures 31px at 1440, 40px at 820 and 29px at 390. **A label that close to
+a lockup reads as part of the drawing rather than as a caption on it.**
+
+**Rule 01 is `The synthesis`**, from `The vector`, in all three languages —
+`Syntesen` and `Synteesi`. The cell beside it still shows the supplied
+lockup, which is what a synthesis of a brief looks like when it is drawn.
+
+**The close reads `A brand built to last takes more, but it happens once.
+If that is the arithmetic you already do, we will get on.`** The second
+sentence is unchanged, which is the part that was already the owner's.
+
+**The footer carries the six section links**, built in JS from the rail's
+own anchors rather than typed a second time, because **a section list
+written in two places is the class of bug this page has already paid for
+three times** and nothing throws when one side moves. They take the rail's
+`data-t` keys and not `data-rail`: the rail's observer maps anchors to
+sections by index, and a second set of six would put that mapping out by
+six. They are built above the language bootstrap so the single `setLang`
+call fills them with everything else. **The rail is hidden below 980px**,
+so on a phone and on an iPad in portrait this is the only wayfinding the
+page has.
+
+**On `lab/max-home/` the document fan opens twice as fast**, at the
+owner's instruction. The window inside the pinned section ran `raw 0.12`
+to `0.68` and now runs `0.12` to `0.40`. Measured at 1440 the pile's span
+goes 295px at raw 0.12, 762 at 0.28, and its full **981px at 0.40**, held
+from there to the end of the pin. The start is unchanged, because what was
+asked for is the rate rather than the moment it begins, and the remaining
+0.60 of the pin is the open pile simply held — which is the thing the fold
+wants a reader to look at.
+
+Verified: six folds at exactly one screen at 1440, 820 and 390 with the
+footer's new row in place; no horizontal scroll and no page errors; all
+fifteen gallery captions carry the supplied name, year and sector with two
+em dash years; the viewer reads `2014 · Software · Deep water`; the six
+footer links resolve to the six section ids; the fan holds at 981px from
+raw 0.40.
+
 Verified: six folds at exactly one screen at 1440, 1180, 820 and 390; snap
 `y mandatory` at all four and `none` under reduced motion; fold tops at 0,
 900, 1800, 2700, 3600, 4500; 21 of 21 reveals after a jump to the end; all
