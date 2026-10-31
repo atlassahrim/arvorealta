@@ -274,7 +274,11 @@ html.rv [data-rv].in{opacity:1;transform:none}
 .void .lbl{color:var(--bone-faint)}
 .void h2{margin:0;font-size:var(--t-head);line-height:1.02;max-width:11ch;text-wrap:balance}
 .void p{margin:0;max-width:46ch;color:var(--bone-dim)}
-.void p b{font-weight:400;color:var(--bone)}
+/* nowrap because the emphasis is a PHRASE, not a word. With the shorter copy
+   `Not here.` landed on a line boundary at 1440 and set as `Not` / `here.`,
+   which reads as two emphases rather than one. All three languages are two
+   words here and all three are short enough that nothing can overflow. */
+.void p b{font-weight:400;color:var(--bone);white-space:nowrap}
 
 /* ══ THE TWO-COLUMN FOLD ═══════════════════════════════════════════════
    Folds two and three are the same template at the owner's instruction:
@@ -560,9 +564,9 @@ html.rv [data-rv].in{opacity:1;transform:none}
   </div>
   <div class="inner">
     <p class="lbl" data-t="kicker">Brands for decision makers</p>
-    <h1 class="disp"><span data-t="h1a"><em>You</em> set the brand,</span> <span data-t="h1b">not your audience.</span></h1>
+    <h1 class="disp"><span data-t="h1a"><em>You</em> set direction.</span></h1>
     <div class="foot">
-      <p class="sub" data-t="sub">Most marks fade away within five years, made for the short term and perceived wind direction. Winds change. We do not negotiate direction. We pick the winds to ride.</p>
+      <p class="sub" data-t="sub">Most projects are made for the short term and perceived wind direction. Winds change. We do not negotiate direction. We pick the winds we ride.</p>
     </div>
   </div>
 </section>
@@ -588,8 +592,8 @@ html.rv [data-rv].in{opacity:1;transform:none}
     </div>
     <div class="duo-text">
       <p class="eyebrow" data-rv data-t="e2">Alignment</p>
-      <h2 class="disp" data-rv data-t="h2a">Can you see the difference?</h2>
-      <p class="say" data-rv data-t="vsSay">A mark is a statement read before it is explained. The test is clarity, not meaning. It is impact in the second before you think.</p>
+      <h2 class="disp" data-rv data-t="h2a">First, can you see the difference?</h2>
+      <p class="say" data-rv data-t="vsSay">Look at this “before and after” and check if those look the same to you. Most people are numb to nuance.</p>
       <p class="sort disp" data-rv data-t="vsSort">If the difference is not obvious to you, nothing written here will make it so.</p>
     </div>
   </div>
@@ -639,7 +643,7 @@ html.rv [data-rv].in{opacity:1;transform:none}
 <section class="void" id="direction" aria-label="Direction">
   <p class="lbl" data-rv data-t="e3">Direction</p>
   <h2 class="disp" data-rv data-t="h3a">You are the compass.</h2>
-  <p data-rv data-t="dirSay">Most designers will ask you to kneel to whichever audience was easiest for them to describe. <b>Not here.</b> Clarity is how we get you where you are already pointing.</p>
+  <p data-rv data-t="dirSay">Most designers abide by whichever audience is easy to see. <b>Not here.</b> We pick the audience as a sailor picks winds.</p>
 </section>
 
 <!-- ACT IV ─ THE SYSTEM. four rules, four shapes, never four cards ───── -->
@@ -995,15 +999,15 @@ const LANG = {
     cta:"Start a project",
     r0:"Open", r1:"Alignment", r2:"Direction", r3:"System", r4:"Work", r5:"Start",
     kicker:"Brands for decision makers",
-    h1a:"<em>You</em> set the direction,", h1b:"not the audience.",
-    sub:"Most marks fade away within five years, made for the short term and perceived wind direction. Winds change. We do not negotiate direction. We pick the winds to ride.",
+    h1a:"<em>You</em> set direction.",
+    sub:"Most projects are made for the short term and perceived wind direction. Winds change. We do not negotiate direction. We pick the winds we ride.",
     scroll:"Scroll",
-    e2:"Alignment", h2a:"Can you see the difference?",
+    e2:"Alignment", h2a:"First, can you see the difference?",
     vsA:"Before", vsB:"After",
-    vsSay:"Look at this before and after and check if those look the same to you. The first test is clarity, not meaning. A mark is a statement perceived before explained. Most people are numb to nuance.",
+    vsSay:"Look at this \u201cbefore and after\u201d and check if those look the same to you. Most people are numb to nuance.",
     vsSort:"If the difference is not obvious to you, nothing written here will make it so.",
     e3:"Direction", h3a:"You are the compass.",
-    dirSay:"Most designers will ask you to kneel to whichever audience was easiest for them to describe. <b>Not here.</b> Clarity is how we get you where you are already pointing.",
+    dirSay:"Most designers abide by whichever audience is easy to see. <b>Not here.</b> We pick the audience as a sailor picks winds.",
     e4:"The system", h4a:"Tools are the easy part.",
     sysSay:"Direction is often mistaken for micromanagement. We need clean vectors, not 30 page ruling documents.",
     _real:"supplied",
@@ -1044,15 +1048,15 @@ const LANG = {
     cta:"Start et prosjekt",
     r0:"\u00c5pning", r1:"Innretting", r2:"Retning", r3:"System", r4:"Arbeid", r5:"Start",
     kicker:"Merkevarer for beslutningstakere",
-    h1a:"<em>Du</em> setter retningen,", h1b:"ikke publikummet.",
-    sub:"De fleste merker falmer bort innen fem \u00e5r, laget for kort sikt og for en antatt vindretning. Vinden snur. Vi forhandler ikke om retning. Vi velger vinden vi rir p\u00e5.",
+    h1a:"<em>Du</em> setter retningen.",
+    sub:"De fleste prosjekter er laget for kort sikt og for en antatt vindretning. Vinden snur. Vi forhandler ikke om retning. Vi velger vinden vi rir p\u00e5.",
     scroll:"Rull",
-    e2:"Innretting", h2a:"Ser du forskjellen?",
+    e2:"Innretting", h2a:"F\u00f8rst, ser du forskjellen?",
     vsA:"F\u00f8r", vsB:"Etter",
-    vsSay:"Se p\u00e5 dette f\u00f8r og etter, og sjekk om de ser like ut for deg. Den f\u00f8rste testen er klarhet, ikke mening. Et merke er et utsagn som oppfattes f\u00f8r det forklares. De fleste er avstumpet for nyanser.",
+    vsSay:"Se p\u00e5 dette \u00abf\u00f8r og etter\u00bb og sjekk om de ser like ut for deg. De fleste er avstumpet for nyanser.",
     vsSort:"Er ikke forskjellen \u00e5penbar for deg, er det ingenting her som gj\u00f8r den det.",
     e3:"Retning", h3a:"Du er kompasset.",
-    dirSay:"De fleste designere vil be deg knele for det publikummet som var lettest for dem \u00e5 beskrive. <b>Ikke her.</b> Klarhet er m\u00e5ten vi f\u00e5r deg dit du allerede peker.",
+    dirSay:"De fleste designere retter seg etter det publikummet som er lettest \u00e5 se. <b>Ikke her.</b> Vi velger publikum slik en seiler velger vind.",
     e4:"Systemet", h4a:"Verkt\u00f8yene er den enkle delen.",
     sysSay:"Retning blir ofte forvekslet med detaljstyring. Vi trenger rene vektorer, ikke 30 siders regelverk.",
     _real:"levert",
@@ -1093,15 +1097,15 @@ const LANG = {
     cta:"Aloita projekti",
     r0:"Avaus", r1:"Linjaus", r2:"Suunta", r3:"J\u00e4rjestelm\u00e4", r4:"Ty\u00f6t", r5:"Aloita",
     kicker:"Br\u00e4ndej\u00e4 p\u00e4\u00e4tt\u00e4jille",
-    h1a:"<em>Sin\u00e4</em> asetat suunnan,", h1b:"ei yleis\u00f6.",
-    sub:"Useimmat merkit haipuvat viidess\u00e4 vuodessa, tehtyin\u00e4 lyhyelle aikav\u00e4lille ja oletetulle tuulensuunnalle. Tuulet k\u00e4\u00e4ntyv\u00e4t. Me emme neuvottele suunnasta. Me valitsemme tuulen, jolla purjehdimme.",
+    h1a:"<em>Sin\u00e4</em> asetat suunnan.",
+    sub:"Useimmat projektit on tehty lyhyelle aikav\u00e4lille ja oletetulle tuulensuunnalle. Tuulet k\u00e4\u00e4ntyv\u00e4t. Me emme neuvottele suunnasta. Me valitsemme tuulen, jolla purjehdimme.",
     scroll:"Vierit\u00e4",
-    e2:"Linjaus", h2a:"N\u00e4etk\u00f6 eron?",
+    e2:"Linjaus", h2a:"Ensin, n\u00e4etk\u00f6 eron?",
     vsA:"Ennen", vsB:"J\u00e4lkeen",
-    vsSay:"Katso t\u00e4t\u00e4 ennen ja j\u00e4lkeen ja tarkista, n\u00e4ytt\u00e4v\u00e4tk\u00f6 ne sinusta samalta. Ensimm\u00e4inen testi on selkeys, ei merkitys. Merkki on v\u00e4ite, joka havaitaan ennen kuin se selitet\u00e4\u00e4n. Useimmat ovat turtuneita vivahteille.",
+    vsSay:"Katso t\u00e4t\u00e4 \u201dennen ja j\u00e4lkeen\u201d ja tarkista, n\u00e4ytt\u00e4v\u00e4tk\u00f6 ne sinusta samalta. Useimmat ovat turtuneita vivahteille.",
     vsSort:"Jos ero ei ole sinulle ilmeinen, mik\u00e4\u00e4n t\u00e4ss\u00e4 kirjoitettu ei tee siit\u00e4 ilmeist\u00e4.",
     e3:"Suunta", h3a:"Sin\u00e4 olet kompassi.",
-    dirSay:"Useimmat suunnittelijat pyyt\u00e4v\u00e4t sinua polvistumaan sille yleis\u00f6lle, joka oli heille helpoin kuvata. <b>Ei t\u00e4\u00e4ll\u00e4.</b> Selkeys on tapa, jolla viemme sinut sinne, minne jo osoitat.",
+    dirSay:"Useimmat suunnittelijat mukautuvat siihen yleis\u00f6\u00f6n, joka on helpoin n\u00e4hd\u00e4. <b>Ei t\u00e4\u00e4ll\u00e4.</b> Me valitsemme yleis\u00f6n kuten merimies valitsee tuulet.",
     e4:"J\u00e4rjestelm\u00e4", h4a:"Ty\u00f6kalut ovat helppo osa.",
     sysSay:"Suunta sekoitetaan usein mikromanageeraukseen. Tarvitsemme selkei\u00e4 vektoreita, emme 30-sivuisia s\u00e4\u00e4nt\u00f6kirjoja.",
     _real:"toimitettu",

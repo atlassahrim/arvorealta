@@ -902,9 +902,15 @@ The rule is not followed literally here and the reasoning is the three
 languages: five headlines in three languages is fifteen sets of line
 endings, the Norwegian and Finnish are not a native speaker's, and a break
 in the wrong place there is worse than a balanced wrap. `balance` is the
-decision instead, and the decision is that no language gets an orphan. The
-hero keeps its own hard breaks. **If the Nordic text is ever checked by a
-native speaker, hand-break them then and this paragraph comes out.**
+decision instead, and the decision is that no language gets an orphan. **If
+the Nordic text is ever checked by a native speaker, hand-break them then
+and this paragraph comes out.**
+
+**The hero does not keep hard breaks either, and this file said it did.**
+Measured on the live page: `.open h1` carries `max-width:14ch` and
+`text-wrap:balance`, and the markup holds zero `<br>`. What looked like a
+break was two `<span data-t>` joined by a space, which are translation
+units rather than line endings. Six headlines, one mechanism.
 
 ### The work was never at scale, which is why it still looked wrong
 
@@ -1632,6 +1638,66 @@ fifteen stage frames and all fifteen thumbnails on water; the tenth thumb
 reads `Offrire / — / Hospitais`; the viewer opens from the stage on the
 water frame with its 51-frame strip, holds the page still, and closes on
 Escape; no horizontal scroll and no page errors anywhere.
+
+### Folds one, two and four are the owner's copy now
+
+Three folds rewritten on `/brand/` after the promotion, all his words, all
+three languages. What the page lost is worth naming, because none of it is
+visible in a diff of the rendered text.
+
+**Fold one is one line.** `You set the direction, not the audience.` is
+`You set direction.` The headline was two `<span data-t>` on one line,
+`h1a` and `h1b`, which were translation units rather than a break; it is
+one span now and **`h1b` is deleted from the markup and from all three
+languages** rather than left as a key no node reads. `<em>You</em>` is
+intact, so the italic-not-colour rule is unchanged. Measured at 1440 the
+English sets on one line of the 14ch measure and the Nordic on two, broken
+by `balance` at the only place either can break.
+
+The standfirst drops the five-year claim: `Most marks fade away within five
+years` is now `Most projects are made for the short term`. **That removes
+the page's one unsourced statistic**, which is a gain rather than a loss —
+nothing on the page had to carry it.
+
+**Fold two opens with `First,`** and the explanation is cut to two
+sentences from four. What went is `The first test is clarity, not meaning.`
+and `A mark is a statement perceived before explained.` **That second
+sentence is the one this file names as the page's organising idea** — every
+fold opens on the picture and the words arrive second. The structure it
+produced is untouched and the sentence that stated it is gone, which is
+exactly the kind of change that is invisible in a screenshot.
+
+The quoted phrase takes each language's own marks: `“before and after”`,
+`«før og etter»`, `”ennen ja jälkeen”`. A quotation on this page
+otherwise means a string taken from another document; this one is the
+owner's own emphasis and is set as ordinary quotation rather than in mono.
+
+**Fold four keeps its headline and replaces its reasoning.** `Most
+designers will ask you to kneel to whichever audience was easiest for them
+to describe` is `Most designers abide by whichever audience is easy to
+see`, and the close goes from `Clarity is how we get you where you are
+already pointing` to `We pick the audience as a sailor picks winds` —
+which ties the fold back to the hero's own wind, where the previous line
+did not.
+
+**Two full stops are mine and not his.** He wrote `You set direction` and
+`You are the compass` without them in a list; every headline on the page
+carries terminal punctuation and fold four already shipped its stop, so
+dropping them on two of six would have been a new inconsistency rather
+than a decision. **Say the word and they come off.**
+
+**`white-space:nowrap` on `.void p b`, and the reason is general.** The
+emphasis there is a phrase and not a word. With the shorter copy, `Not
+here.` landed on a line boundary at 1440 and set as `Not` / `here.`, which
+reads as two emphases instead of one. Measured after, in all three
+languages at 1440, 1180, 820 and 390: one client rect each. **An
+emphasised phrase that can break is an emphasis that will break, and the
+width it breaks at is a property of the copy around it** — this one had
+been safe for the length of the old sentence and failed on the first edit.
+
+Verified: six folds at exactly one screen at all four viewports, snap
+`y mandatory`, zero em-dashes, zero empty `[data-t]` nodes, no horizontal
+scroll and no page errors in any of the three languages.
 
 ### `lab/max-home/` — the offer page at that standard, and the language bar
 
