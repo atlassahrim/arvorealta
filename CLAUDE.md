@@ -39,8 +39,9 @@ removes**, since the text is still in the PDF; and **a factual claim about a
 live procurement**, since the page is read by the people running it. Flag
 those, then proceed on a clear answer like anything else.
 
-**A sandbox is exempt from all of it.** `lab/` is deleted because it won and
-its whole contents are the offer page now, but the exemption is the standing
+**A sandbox is exempt from all of it.** `lab/` is deleted for the second
+time because it won, and its three pages are `/` and `/brand/` now, but the
+exemption is the standing
 rule rather than a fact about that folder: a sandbox exists to try what the
 rules forbid, nothing in it needs permission, and nothing in it is evidence
 that the live page should change — that is still a decision, made here, in
@@ -64,6 +65,66 @@ Tailwind, no compiled stylesheet, no vendored runtime, no build step: open
 the file and everything the page is, is in it. `video/index.html` is the one
 page still on the compiled stylesheet, and it is the only reason
 `_tw.src.css` and `_build-css.sh` still exist.
+
+## What is open, and what this file would still get wrong
+
+Swept on 31 October 2026 by reading the repo rather than the file. Eleven
+claims were false and are fixed in place above; what follows is what is
+genuinely unresolved. **Nothing here is a bug to go and fix on your own
+initiative — each is a decision, and the figure is given so it can be made
+without re-deriving it.**
+
+**The domain serves two pricing ladders and this file documented one.**
+`/proposta-motorhome/` is live, `noindex`, Portuguese, on the retired
+editorial theme, and carries R$ 20.000 through R$ 300.000 with its own
+credit mechanic. It was last touched on 25 September and nothing in this
+file knew it existed. Stays, moves behind the underscore, or gets rebuilt
+on the current identity: the owner's call.
+
+**`--ink-soft` is two values.** `index.html` ships `#4C5B54` at 4.99:1 on
+paper; `assets/themes/arvorealta.css` still carries `#5A6B63` at 3.93:1,
+under what small text needs, and that is what every deck and annex renders.
+One line in one file closes it, and it moves the temperature of every
+printed output at once.
+
+**The column and the type scale are each stated three times and enforced
+nowhere.** 82rem / 20px / 32px, and 96 · 67 · 52 · 42 · 28 · 19 at 1440,
+live in `/`, in `/brand/` and in the compiled stylesheet. That is the cost
+the promotion bought. It is the first thing to check when the pages stop
+looking like one site.
+
+**Both social cards are stale and are rendered images, so a page edit does
+not update them.** `assets/_og/index.html` reads `Stop losing points you
+already earned.` against a page whose line is now `Written once. Right every
+time.`, and `assets/_og/brand.html` reads `Twelve marks, three grounds`
+against a page that shows **seventeen**. Both are set in Cinzel and Playfair,
+which is the identity the site retired. `assets/_og/render.sh` redraws them
+and needs Chrome plus a Google Fonts request.
+
+**`/brand/`'s rail draws no numbers and no markers**, and never has. Six
+`.rail a`, zero `.rail a i`. The fix is three characters and it changes how
+the rail reads, which is why it is the owner's and not a repair. The offer
+page's rail is built the other way and measures five of each.
+
+**Two full stops on `/brand/` are this session's, not the owner's.** He
+wrote `You set direction` and `You are the compass` without them.
+
+**2.5 MB is referenced by nothing.** `assets/marks/` at 2.2 MB and
+`assets/vendor/runtime.js` at 324 KB, both orphaned by the promotion. Kept
+rather than deleted on a session's own initiative; one `git rm` closes it.
+
+**The Nordic prose is not a native speaker's and is now indexed on two
+pages.** The procurement vocabulary on `/` came off the page it replaced and
+is the safe half; everything on `/brand/` was written here.
+
+**Three things cannot be verified from this container, and never could.**
+Vimeo on `/video/` and the Basin endpoint both fail on the proxy's
+certificate, and there is no H.264, so the hero video always falls back to
+the photograph here. **Check a real browser after deploying.**
+
+**Two projects on `/brand/` still carry an em dash year** — `Dantas &
+Martins` and `Amazônia Store` — and `Érica Evangelista` is on the owner's
+list with no frames in `assets/land/`, so she is not on the page.
 
 ## Not published
 
@@ -99,13 +160,33 @@ are not obliged to.
 **Use the underscore for anything whose content would be a problem in the
 open**, which is research, client material, unredacted annexes and working
 drafts. **Use `noindex` for a page that has to be opened on a real device at a
-real URL and should not compete with the site**, which today is `reference/`
-alone. It is a near-copy of the offer page, so without `noindex` it would be
-a second `index.html` bidding against the first for the same terms. It is not
-linked from anywhere. A rebuilt sandbox takes the same label for the same
-reason.
+real URL and should not compete with the site.** A rebuilt sandbox takes the
+same label for the same reason.
 
-`reference/` is the first offer page, kept for the owner.
+**Five pages carry `noindex` today, and this file said it was `reference/`
+alone.** Checked against every published page's own tag:
+
+| path | tag | what it is |
+|---|---|---|
+| `reference/` | `noindex` | the first offer page, kept for the owner |
+| `branding/` | `noindex, follow` | the stub for the one-day `/branding/` path |
+| `home/` | `noindex, follow` | a stub redirecting `/home/` to `/` |
+| `proposta-motorhome/` | `noindex` | a Portuguese offer page, its own prices |
+| `templates/` | `noindex` | belt and braces: it is also swept by `pages.yml` |
+
+`reference/` is the near-copy, so without the label it would be a second
+`index.html` bidding against the first for the same terms.
+
+**`/proposta-motorhome/` is the one worth a second look.** It is live at HTTP
+200, it is in Portuguese for a different market, and **it carries its own
+four-tier ladder in BRL — R$ 20.000 through R$ 300.000 — with its own credit
+mechanic.** It is on the retired editorial theme, loads Google Fonts and
+`system.css`, and was last touched on 25 September. Nothing in this file
+knew it existed, which means **the pricing section below has been describing
+one ladder while the domain serves two.** It is a published offer page
+rather than a client's document, so it is not an underscore problem; it is a
+drift problem, and the decision about whether it stays, moves behind the
+underscore or gets rebuilt is the owner's.
 
 **`lab/` is deleted for the second time, and for the second time because it
 won.** The first one tested the skip link, the page's own focus ring,
@@ -2131,6 +2212,12 @@ unlocks.
 
 ## The pricing ladder
 
+**There are two ladders on this domain and this section is the euro one.**
+`/proposta-motorhome/` carries a separate four-tier ladder in BRL for a
+different market; it shares the credit-walks-up mechanic and shares no
+figure. Changing one does not change the other, and nothing checks them
+against each other.
+
 Three tiers on `index.html` and a free step that is not one.
 **Free** one page scored · **€600** one document · **€2,400** the full
 document standard · **€8,000** identity system.
@@ -2181,12 +2268,19 @@ document agreed before the work starts, not listed on the page.
 ```
 index.html              offer page. One self-contained file, hand-written
                         CSS, vanilla JS, no build step and no Tailwind.
-                        Light. Five folds, three languages, the intake form
-                        and the tender clock
+                        Light. SIX sections — five folds that carry an
+                        eyebrow, plus the gate strip under the hero, which
+                        carries none. Three languages, the intake form and
+                        the tender clock
 brand/index.html        brand portfolio. Same shape of file. Dark, with a
                         paper close. Six folds locked to the viewport by
                         scroll snap, three languages
 branding/index.html     a noindex stub redirecting to /brand/
+home/index.html         a noindex stub redirecting /home/ to /
+proposta-motorhome/index.html
+                        a Portuguese offer page on the retired editorial
+                        theme, noindex, with its own four-tier BRL ladder.
+                        Not the same file as annex/proposta-motorhome/
 video/index.html        video portfolio — the one page still on the
                         compiled Tailwind stylesheet
 reference/index.html    the first offer page, kept for reference — noindex.
@@ -2302,24 +2396,39 @@ hard:
   luminance and share a hue family. Read together they look like a printing
   inconsistency rather than two decisions
 
-One use on the offer page: the eyebrows on the light grounds — `.eyebrow`,
-`.tag`, `.step` and the label on `.heroqual`. The recommended tier used to
-take the mark as its ground and now takes the price gradient instead.
+On the offer page the brick carries the eyebrows on the light grounds, the
+tier card's `.step`, the ladder bullets' dashes and the tender card's own
+marker — five places, checked in the file. **`.tag`, `.vocab` and
+`.heroqual` are gone**: they belonged to the Tailwind page and no live page
+defines them. The recommended tier used to take the mark as its ground and
+now takes the price gradient instead.
 
-**`.heroqual` is a label over the line it names**, which is the annex field
-move brought across: a small mark eyebrow that is found, and under it a
-sentence in ink that is read. It carries the hero's audience gate, which was
-set in the notes' size and grey while doing a different job. Caps and a
-contour were the obvious fix and the wrong one — the line runs to 58
-characters, past where tracked capitals stop reading, and a single box
-repeats the `.vocab` strip's own language a fold above the strip.
+**`.heroqual` no longer exists on any live page**, and the reasoning is kept
+because the move is reusable: a label over the line it names, which is the
+annex field brought across — a small mark eyebrow that is found, and under
+it a sentence in ink that is read. It carried the hero's audience gate,
+which had been set in the notes' size and grey while doing a different job.
+Caps and a contour were the obvious fix and the wrong one, because the line
+runs to 58 characters, past where tracked capitals stop reading. **On the
+rebuilt offer page that gate is the `.gate` strip under the hero**, which is
+the same answer by a different route: out of the hero, into the strip.
 
 **`--ink-soft` measures 3.93:1 on paper, under the 4.5:1 small text needs.**
 It carries the standfirst, every hero note, the figure captions and the
-second line of the document caption, so this is the one contrast on the page
-that does not clear. Darkening the token to about `#4C5B54` fixes all of them
-at once and changes nothing structural. It has not been done because it
-shifts the whole page's temperature, which is a decision rather than a fix.
+second line of the document caption, so this was the one contrast on the
+offer page that did not clear. Darkening the token to about `#4C5B54` fixes
+all of them at once and changes nothing structural. It was not done for a
+long time because it shifts the whole page's temperature, which is a
+decision rather than a fix.
+
+**It is now done on one page and not in the theme, and the two disagree.**
+Measured in the files: `index.html` ships `--ink-soft:#4C5B54` at 4.99:1 on
+paper and 6.18:1 on paper-3; `assets/themes/arvorealta.css` still carries
+`#5A6B63` at 3.93:1, and that is what `reference/`, the decks, the annexes
+and `/proposta-motorhome/` render. **The darkened value won on the page that
+was rebuilt and nothing carried it back to the theme.** Taking it is one
+line in one file; the reason to pause is that it moves the temperature of
+every deck and annex at once, which no one has looked at.
 
 On the ink ground the same value measures 2.35:1 and is unusable. Anything
 crossing into `.inv` takes `rgba(233,231,228,.75)` at 6.73:1, and an eyebrow
@@ -2402,10 +2511,12 @@ with a corrected `min-height` arrived on the owner's screen with no
 session a fix was reported as still broken when the fix was live and the
 stylesheet beside it was not.
 
-Run `sh _build-css.sh` after any change to `index.html` or `_tw.src.css`. It
-compiles, hashes the output, names the file after the hash, repoints the page
-and deletes the previous one. Never hand-edit the compiled CSS and never
-rename it by hand.
+Run `sh _build-css.sh` after any change to **`video/index.html`** or
+`_tw.src.css`. It compiles, hashes the output, names the file after the
+hash, repoints the page and deletes the previous one. Never hand-edit the
+compiled CSS and never rename it by hand. **It used to say `index.html`
+here, and that is now wrong in a way that would waste a session**: the offer
+page has no `<link>` to rewrite and no class for the compiler to find.
 
 **Every file the page links to carries a version in its name, not only the
 photographs.** GitHub Pages serves `max-age=600` with an ETag, so a file whose
@@ -2884,16 +2995,23 @@ change.
 
 **One content column, and it is the site's only width.** 82rem as the outer
 box, with 20px of gutter inside it below 640 and 32px from 640 up, so the
-measure is 1248px at 1440 and the text starts at 96. `index.html`, `/brand/`
-and `/video/` have always carried it as
-`mx-auto w-full max-w-[82rem] px-5 sm:px-8`, **the top bar included**, which
-is why a wordmark sits on the same left edge as the headline under it. The
-two sandboxes wrote their own figures and drifted: `max(20px,2vw)` on one and
-`max(18px,2vw)` with no max-width at all on the other, so above 1312px the
-brand page's headline ran to the screen edge while its own gallery did not.
+measure is 1248px at 1440 and the text starts at 96. **`/video/` is the only
+page that still writes it as `mx-auto w-full max-w-[82rem] px-5 sm:px-8`**,
+which is where the figure comes from; `index.html` carries that string in a
+comment and nothing else. The rule it protects is unchanged — **the top bar
+is inside the column too**, which is why a wordmark sits on the same left
+edge as the headline under it.
 
-Both now declare the standard as tokens, `--col`, `--gut` and `--pad`, and
-nothing writes a width figure of its own. **`--pad` is the same column
+The two pages that are now `/` and `/brand/` wrote their own figures while
+they were sandboxes and drifted: `max(20px,2vw)` on one and `max(18px,2vw)`
+with no max-width at all on the other, so above 1312px the brand page's
+headline ran to the screen edge while its own gallery did not.
+
+Both declare the standard as tokens now, `--col`, `--gut` and `--pad`, and
+nothing writes a width figure of its own. **So the column is stated three
+ways across three files and nothing enforces it**, which is the same trade
+the type scale carries and the same place to look first when the pages stop
+lining up. **`--pad` is the same column
 expressed as padding**, for a section that bleeds full width and only wants
 its content inset:
 `max(var(--gut), calc((100% - var(--col)) / 2 + var(--gut)))`. The
@@ -2926,6 +3044,12 @@ vocabulary chips, the comparison headings, the nav, the footer headings and
 the form's own labels. A label found at one weight and read at another is two
 systems. The wordmark is the exception: it is the mark itself, not a label,
 and it keeps 400.
+
+**The three rules below govern `system.css` and the pages that load it**,
+which is `reference/`, the decks, the annexes and `/proposta-motorhome/`.
+`/` and `/brand/` carry their own six-token scale, their own hero and no
+`--gap` at all, so a session editing those two should read this as the
+reasoning rather than as the mechanism.
 
 **Three type sizes.** Display 96, body 24, label 17 — that is the whole scale.
 An intermediate Playfair was tried and retired: giving the headline a wider
@@ -2961,8 +3085,15 @@ padding is exactly what pushed the hero's action off the screen.
 The nine section tags read `01` through `09` in order, so a reader can follow
 them and they are one device used nine times. An unnumbered eyebrow above a
 headline is an independent decision each time, and those multiply until every
-fold opens the same way. The offer page runs three. **Keep the numbered spine
-unbroken and keep the unnumbered ones under about one per three folds.**
+fold opens the same way. **The offer page runs five**, one per fold, and the
+sixth section — the gate strip under the hero — carries none, which is what
+keeps it a strip rather than a fold. **Keep the numbered spine unbroken and
+keep the unnumbered ones under about one per three folds.**
+
+**The second rung of that spine is not a constant.** It reads `Open now`
+while the tender is open and `Closed` once it shuts, because the clock
+derives both from the same two timestamps. A spine that names where a reader
+is has to be allowed to say the place is shut.
 
 **The site has no dark MODE, and that is the rule. It is no longer light
 only, and that was the owner's decision.** `/brand/` is a dark page: five
@@ -3338,11 +3469,14 @@ looking.
 are a spine rather than a tic.** Read down the page they go
 `Industrial manufacturer bids` · `Open now` · `How it is scored` ·
 `What it costs` · `Where to start`, which is a reader's own route through the
-argument and matches the three nav links. That is more than the one-per-three
-the taste skill allows, and it is the owner's call: an eyebrow that names
-where you are is wayfinding, and an eyebrow that decorates a headline is the
-thing the rule is actually against. **If a sixth fold arrives, it joins the
-spine or it gets none.**
+argument. **It used to match three nav links and there are none**: `nav` is
+a dead key in `STR`, rendered by nothing, and the wayfinding is the
+five-row rail instead — the same five, in the same order. That is more than
+the one-per-three the taste skill allows, and it is the owner's call: an
+eyebrow that names where you are is wayfinding, and an eyebrow that
+decorates a headline is the thing the rule is actually against. **If a
+seventh section arrives, it joins the spine or it gets none**, which is what
+the gate strip already does by carrying no eyebrow at all.
 
 **A proof fold was tried and removed.** The pattern this page is built on
 puts proof second and this page has none — no logos, no case studies, no
@@ -3518,8 +3652,9 @@ them will suggest things this site has decided against:
   and no runtime dependency it does not vendor itself.** Its script
   `shadcn_add.py` shells out to `npx shadcn add`; read what it is installing
   before running it here, and prefer not to
-- Several of them treat **dark mode** as a default to implement. The site is
-  light only and the reasoning is above
+- Several of them treat **dark mode** as a default to implement. The site
+  has no dark mode and the reasoning is above — but note it is a mode that
+  is barred, not a dark page: `/brand/` is dark for every reader
 - They carry their own palettes, type scales and token architectures. The
   editorial and technical systems above are the brief; a vendored palette is
   something to read, never to apply
