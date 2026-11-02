@@ -110,9 +110,15 @@ page's rail is built the other way and measures five of each.
 `You are the compass` without it. The hero's stop is his now: on 2
 November he supplied `You set the direction.` with it.
 
-**2.5 MB is referenced by nothing.** `assets/marks/` at 2.2 MB and
-`assets/vendor/runtime.js` at 324 KB, both orphaned by the promotion. Kept
-rather than deleted on a session's own initiative; one `git rm` closes it.
+**The orphans are deleted, at the owner's word, on 2 November.** That was
+6.4 MB that no published page referenced: `assets/marks/` (2.2 MB), the
+runtime at `assets/vendor/runtime.js`, the three synthetic
+`ground-*-1-1080` loops with their posters (3.9 MB), and five Turvatikas
+crops from the lab builds. Each was checked against every published page
+first. **`assets/land/` looks unreferenced to a plain grep and is not**:
+`/brand/` builds all 102 paths in script from slug, ground and width. The
+document plates `assets/img/doc-*` stay, kept on purpose for the paused
+fold. The history still carries all of it, so the pack is about 25 MB.
 
 **The Nordic prose is not a native speaker's and is now indexed on two
 pages.** The procurement vocabulary on `/` came off the page it replaced and
@@ -274,7 +280,8 @@ promotion with `/video/` alone: 62,553 bytes to 52,359.
 
 The offer page needed React for the language switcher and the intake dialog
 until it was rebuilt; it does neither with a runtime now, and **no page on
-the site loads one.** `assets/vendor/runtime.js` is referenced by nothing.
+the site loads one.** The bundle that used to sit at
+`assets/vendor/runtime.js` is deleted.
 The reveal is about thirty lines of vanilla JS and the header state is one
 sentinel, on every page that has them.
 
@@ -857,8 +864,9 @@ the difference between a diagnosis and an afternoon.
 still: `ground-water-2-720.mp4` and `ground-paper-2-720.mp4`. Neither looped, so
 the tail is crossfaded into the head and the file is shortened by that much.
 Measured at the wrap against an unrelated pair: water 4.05 against 21.52 of 255,
-paper 1.01 against 7.51. **Real motion beats a synthetic move**, and the
-synthetic `ground-*-1-1080.mp4` set is kept only for the ground with no footage.
+paper 1.01 against 7.51. **Real motion beats a synthetic move.** The synthetic
+`ground-*-1-1080.mp4` set is deleted, since nothing referenced it.
+`_tools/portfolio/ground-loop.py` can rebuild it if it is ever wanted.
 
 ### The second audit, and what the skills were actually worth
 
@@ -2393,22 +2401,14 @@ assets/
   img/                  photography, as webp + jpg at the widths the source
                         actually holds — the name carries a version:
                         after-1-<width>.<ext>
-  marks/                2.2 MB, REFERENCED BY NOTHING. The previous brand
-                        page's tiles, cut 4:5 from the portrait frames. Kept
-                        rather than deleted with the page they served
   land/                 the brand page's 51 landscape frames, 17 marks on
                         three grounds — <slug>-<ground>-<ver>-<width>.webp
-  video/                the hero clip; the synthetic ground loops
-                        ground-<ground>-1-1080.{mp4,jpg}, built by
-                        _tools/portfolio/ground-loop.py; and the owner's own
-                        footage, ground-{water,paper}-2-720.{mp4,jpg}; and
+  video/                the hero clip; the owner's own footage,
+                        ground-{water,paper}-2-720.{mp4,jpg}; and
                         ground-dew-1-720.{mp4,jpg}, the direction fold's
                         bed, generated and supplied by the owner
   vedlegg-5/            the open tender's example PDF and fillable Word file
   fonts/                Geist, Geist Mono and EB Garamond, self-hosted woff2
-  vendor/runtime.js     324 KB, REFERENCED BY NOTHING. React, react-dom,
-                        Motion and htm, bundled once for the offer page
-                        before it was rebuilt without a runtime
   tw-<hash>.css         /video/'s compiled Tailwind, built by _build-css.sh
   themes/arvorealta.css tokens for the editorial system
   themes/technical.css  tokens for the technical system
