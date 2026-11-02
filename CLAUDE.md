@@ -1909,6 +1909,19 @@ fine*.
   looks better designed?`. It is split into the eyebrow `Alignment` and the
   headline `First of all, which one of these looks better designed?`
 
+**v2, on the owner's corrections.** The headline is his: `Which one of
+these looks better designed?`. **The three answers are now one small card
+each, all the same size**: 223 × 161 at 1440, 196 × 141 at 1194, and
+280 × 118 stacked on a phone. The lockups are drawn 152px wide, against
+401px in v1. **The rays are gone.** They were the calendar reference's
+dial, and on this fold they stood for nothing, which the owner noticed
+before anyone said so. The HUD left is only what a selection needs:
+brackets that open on hover and close round the choice, a numbered
+readout, a ruler, and an amber scan. **At 152px the new lockup's tracked
+wordmark is about 6px tall**, the smallest text on the fold. That is the
+size the owner asked for, and it is recorded here so the next session
+does not re-derive it.
+
 **It is one self-contained file**, with no shared stylesheet, `noindex,
 nofollow` and English only. That is the pattern this file asks a rebuilt
 sandbox to repeat. The fold after it is a stub, there only so the `We will
