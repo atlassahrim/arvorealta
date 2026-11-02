@@ -180,6 +180,7 @@ alone.** Checked against every published page's own tag:
 | `home/` | `noindex, follow` | a stub redirecting `/home/` to `/` |
 | `proposta-motorhome/` | `noindex` | a Portuguese offer page, its own prices |
 | `templates/` | `noindex` | belt and braces: it is also swept by `pages.yml` |
+| `lab/alignment/` | `noindex, nofollow` | a sandbox: `/brand/`'s fold two rebuilt as a test |
 
 `reference/` is the near-copy, so without the label it would be a second
 `index.html` bidding against the first for the same terms.
@@ -1882,6 +1883,42 @@ Verified: six folds at one screen at 1440, 820 and 390; no page errors;
 no horizontal scroll; the video element is removed under reduced motion.
 **Playback itself cannot be verified here**, because this container's
 Chromium has no H.264 and shows the poster. Check a real browser.
+
+### `lab/alignment/` — fold two as a test, a sandbox
+
+**On 2 November the owner asked for fold two rebuilt in a lab**, because it
+still looked weak on `/brand/`. Two references set the brief. One is a
+calendar dial: thin rays fanning from one point, numbered ends, mono labels.
+The other is a suit HUD: reticles, brackets, a scan, readouts. **The fold is
+a question now, not a caption.** It asks *Which one of these looks better
+designed?* and offers three answers: the two lockups and *Either looks
+fine*.
+
+- **The two lockups swap sides at random on each load**, and neither carries
+  a label. Their accessible names are `Lockup A` and `Lockup B`, so the
+  answer cannot be read off the position, the label or the alt text
+- **Picking the old lockup or `Either looks fine`** replaces the options
+  with `You don't need a brand yet.` for 4 seconds, then brings them back.
+  **Picking the new one** shows `We will get along.` for 3 seconds, then
+  scrolls to the next fold. Both durations are the owner's. A hairline
+  counts each one down. Clicks during a message are ignored
+- **The fold states that the test is fair**: `Same ink #BD9059 · Same stock
+  · Only the drawing differs`. That is the measured fact recorded in the
+  alignment section above, set as a readout rather than as an argument
+- The owner's question was `alignment, first of all, which one of these
+  looks better designed?`. It is split into the eyebrow `Alignment` and the
+  headline `First of all, which one of these looks better designed?`
+
+**It is one self-contained file**, with no shared stylesheet, `noindex,
+nofollow` and English only. That is the pattern this file asks a rebuilt
+sandbox to repeat. The fold after it is a stub, there only so the `We will
+get along.` path has somewhere to land. **Promoting it means three
+languages**, and the order of folds on `/brand/` decides what that stub is.
+Verified: one screen at 1440, 1194 and 390; no horizontal scroll; no page
+errors. All three paths were timed. The verdict cleared at about 4.46 s and
+3.47 s, which is the 360ms lock beat plus the owner's 4 s and 3 s, and the
+3 s path landed exactly on the next fold. Keyboard order matches the
+visual order on the phone, and reduced motion stops the spin and the scan.
 
 ### `lab/max-home/` — the offer page at that standard, and the language bar
 
