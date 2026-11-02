@@ -1817,6 +1817,51 @@ compound is `før-og-etter-eksempelet`. The Finnish takes the hyphenated
 1.04 and 1.03, which it measured before this change too. `Not here.` is
 still one rect, and there are no page errors.
 
+### The direction fold carries a picture now
+
+**On 2 November the owner supplied a ten second loop for the direction
+fold's background**: grass with dew, soft leaves, a pale sun. That fold
+was built as the page's one void, and this file argued that a fold between
+two surfaces covered in work is strongest when it shows nothing. **That
+argument is overruled by the owner's instruction**, and the paragraphs
+above that make it are kept as history.
+
+**The clip is generated, and the rule on generation allows it.** Nothing
+in it is a client's mark or reads as delivered work. It is an abstract
+ground, which is the one use this file permits. It loops on its own: the
+jump across the wrap is 2.00 of 255, against 1.87 between neighbouring
+frames. **The white streaks around two seconds are dew falling**, not an
+artefact, and they are kept. Re-encoded without its audio track to
+`ground-dew-1-720.mp4`, at 820 KB from 3.3 MB, with frame 0 as the
+poster. It loads like the close's loop: `preload="none"`, mounted by an
+observer 600px ahead of the fold, and never mounted under reduced motion.
+
+**The type needed a wash, and the wash is measured.** The loop's middle
+is a mid-tone and its top edge holds the sun. Measured across ten frames,
+with the text hidden so the strips sample the picture, at the brightest
+2 per cent:
+
+| | flat ink before | no change over video | as shipped |
+|---|---|---|---|
+| label | 2.57:1 at bone 32% | 2.21 | **5.46** at bone 72% |
+| headline, bone | 16.63 | 8.29 | **9.23** |
+| paragraph | 6.33 at bone 60% | 3.51 | **5.38** at bone 80% |
+
+What ships: a radial scrim of ink from .62 at the centre to .40 at the
+edges, plus a band from .72 to clear over the top 180px. **The band is
+there for the fixed bar, not for the fold.** Without it the wordmark read
+3.88:1 at 390 and the action 3.81, because the sun sits at the top of
+the frame on a phone. With it, the wordmark, the current language and the
+action read 7.29 to 13.2 at 390, 820 and 1440. **The two unselected
+language chips read about 3:1 there**, against roughly 3.6 on flat ink.
+They are dim by design on every fold, and this fold costs them a little
+more.
+
+Verified: six folds at one screen at 1440, 820 and 390; no page errors;
+no horizontal scroll; the video element is removed under reduced motion.
+**Playback itself cannot be verified here**, because this container's
+Chromium has no H.264 and shows the poster. Check a real browser.
+
 ### `lab/max-home/` — the offer page at that standard, and the language bar
 
 The owner's call on `lab/max-brand/` was to use it, with the language control added
@@ -2343,7 +2388,9 @@ assets/
   video/                the hero clip; the synthetic ground loops
                         ground-<ground>-1-1080.{mp4,jpg}, built by
                         _tools/portfolio/ground-loop.py; and the owner's own
-                        footage, ground-{water,paper}-2-720.{mp4,jpg}
+                        footage, ground-{water,paper}-2-720.{mp4,jpg}; and
+                        ground-dew-1-720.{mp4,jpg}, the direction fold's
+                        bed, generated and supplied by the owner
   vedlegg-5/            the open tender's example PDF and fillable Word file
   fonts/                Geist, Geist Mono and EB Garamond, self-hosted woff2
   vendor/runtime.js     324 KB, REFERENCED BY NOTHING. React, react-dom,

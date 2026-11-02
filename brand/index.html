@@ -262,23 +262,29 @@ html.rv [data-rv].in{opacity:1;transform:none}
    sorting line on its own ink band, which made two ink folds in a row.
    One ground, and the plates are the composition.                      */
 /* ══ ACT III — DIRECTION ═══════════════════════════════════════════════
-   The page's one void. No picture, no chrome, nothing to look at. It
-   sits between a surface covered in work and a surface covered in work,
-   so the strongest thing available to it is to show nothing. Centred is
-   banned for a section headline and allowed for a line whose content is
-   the design, which is the distinction worth keeping.                   */
-.void{background:var(--ink);min-height:100svh;display:grid;align-content:center;
+   Built as the page's one void, with no picture and nothing to look at,
+   between two surfaces covered in work. It carries the owner's dew loop
+   now, at his instruction. The ink stays as the floor and as the scrim:
+   the loop is a mid-tone with a pale sun at its top edge, so bone type
+   is legible over it only through a measured wash. The top band is there
+   for the fixed bar. Figures in CLAUDE.md. Centred is banned for a
+   section headline and allowed for a line whose content is the design. */
+.void{position:relative;isolation:isolate;overflow:hidden;
+  background:var(--ink);min-height:100svh;display:grid;align-content:center;
   justify-items:center;text-align:center;gap:clamp(22px,4vh,44px);
   padding:clamp(80px,14vh,170px) var(--pad);
   border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
-.void .lbl{color:var(--bone-faint)}
+.void .lbl{color:rgba(239,236,231,.72)}
 .void h2{margin:0;font-size:var(--t-head);line-height:1.02;max-width:11ch;text-wrap:balance}
-.void p{margin:0;max-width:46ch;color:var(--bone-dim)}
+.void p{margin:0;max-width:46ch;color:rgba(239,236,231,.80)}
 /* nowrap because the emphasis is a PHRASE, not a word. With the shorter copy
    `Not here.` landed on a line boundary at 1440 and set as `Not` / `here.`,
    which reads as two emphases rather than one. All three languages are two
    words here and all three are short enough that nothing can overflow. */
 .void p b{font-weight:400;color:var(--bone);white-space:nowrap}
+.void .bed::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(7,13,11,.72),rgba(7,13,11,0) 180px),
+    radial-gradient(ellipse 70% 60% at 50% 50%,rgba(7,13,11,var(--scrim-in,.62)),rgba(7,13,11,var(--scrim-out,.40)))}
 
 /* ══ THE TWO-COLUMN FOLD ═══════════════════════════════════════════════
    Folds two and three are the same template at the owner's instruction:
@@ -641,6 +647,12 @@ html.rv [data-rv].in{opacity:1;transform:none}
 
 <!-- ACT III ─ DIRECTION, the page's one void ─────────────────────────── -->
 <section class="void" id="direction" aria-label="Direction">
+  <div class="bed" aria-hidden="true">
+    <img src="/assets/video/ground-dew-1-720.jpg" alt="" width="1280" height="720" loading="lazy">
+    <video id="dirv" muted playsinline loop preload="none" poster="/assets/video/ground-dew-1-720.jpg">
+      <source src="/assets/video/ground-dew-1-720.mp4" type="video/mp4">
+    </video>
+  </div>
   <p class="lbl" data-rv data-t="e3">Direction</p>
   <h2 class="disp" data-rv data-t="h3a">You are the compass.</h2>
   <p data-rv data-t="dirSay">Most designers abide by whichever audience is easy to see. <b>Not here.</b> We pick your audiences the way a sailor picks the wind.</p>
@@ -850,6 +862,15 @@ function mountVideo(v){
   evs.forEach(e => addEventListener(e, retry, { passive:true }));
 }
 mountVideo($("#bedv"));
+
+/* the dew loop is 0.8 MB and only matters at the direction fold */
+const dirv = $("#dirv");
+if (dirv && !reduce) {
+  const io = new IntersectionObserver(es => {
+    if (es.some(e => e.isIntersecting)) { dirv.preload = "auto"; mountVideo(dirv); io.disconnect(); }
+  }, { rootMargin: "600px" });
+  io.observe($("#direction"));
+} else if (dirv) dirv.remove();
 
 /* the close video is 1.4 MB of paper and only matters at the bottom */
 const closev = $("#closev");
