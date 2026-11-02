@@ -1422,22 +1422,6 @@ and the Turvatikas reading is gone from the page entirely. That is a
 content decision rather than a fault, and it is recorded because it is
 invisible in a screenshot.
 
-**On `/brand/` that gap is closed, by the second audit's one fix.** Two
-audits on 1 November, run separately, found the same break at rung 08 of
-the copy ladder: the page has a problem mechanism (designers chase the
-audience that is easy to see) and the system fold, which should state the
-solution, spent its one sentence answering an objection nobody had raised
-yet. The four rule bodies that held the causal line, `p1b` to `p4b`, are
-not rendered. So `sysSay` now reads `A mark lasts when everything around it
-agrees with it. These four rules are that agreement. Not micromanagement.
-Not a 30 page ruling document.` The first sentence is `p4b`'s own claim,
-which was dead in `STR`, moved up. The owner's micromanagement and
-rulebook objection is kept, word for word where it could be, and now
-answers that claim. **`We need clean vectors` is the one phrase that
-went**; rule 01 is `The synthesis` and says it. The fold measures 1.00
-screens at 1440, 1180, 820 and 390 in all three languages. The Nordic is
-this session's. `_research/brand/audit-v2.md` has the read.
-
 **Ten strings in `STR` are dead and are kept on purpose.** `_ph`, `_php`,
 the culture stack's six and `_galNote` and `_typeMeta` are rendered
 nowhere — verified by grepping every `data-t` against the object — and they
