@@ -1894,7 +1894,7 @@ a question now, not a caption.** It asks *Which one of these looks better
 designed?* and offers three answers: the two lockups and *Either looks
 fine*.
 
-- **The two lockups swap sides at random on each load**, and neither carries
+- **The two lockups swapped sides at random on each load (fixed since v4)**, and neither carries
   a label. Their accessible names are `Lockup A` and `Lockup B`, so the
   answer cannot be read off the position, the label or the alt text
 - **Picking the old lockup or `Either looks fine`** replaces the options
@@ -1949,6 +1949,38 @@ the panel's height**, which is how v3's first render grew a 260px grey
 void under the cells, so the long fairness line went to the foot strip.
 Cells: 216 × 177 at 1440, 190 × 156 at 1194, 300 × 132 stacked on a
 phone.
+
+**v4, on the owner's six corrections.** Each item in the v3 list above
+that changed is marked here; the rest stand.
+- **The cut corner is on the frame now**, at the bottom left and the top
+  right, all the time. In v3 it appeared only on hover. Each corner is an
+  18px paper triangle with a hairline along its edge, so the border seems
+  to turn the corner.
+- **The `02` is gone.** The left column carries only `Alignment test`, set
+  at its foot.
+- **Every word inside the panel is one size**: 10px Geist Mono, tracked
+  capitals. `Either looks fine` was 1.2rem EB Garamond and is now a
+  readout like the rest, in full ink. The verdict message is the one
+  exception. It replaces the cells rather than sitting in one.
+- **The order is fixed: before, after, either**, as options 01, 02 and 03.
+  `Order dealt at random` is gone from the strip. **This gives up what
+  the random deal was for.** A reader who comes back, or who is told
+  where the answer is, finds it in the same place. The owner's call. The
+  lockups still carry no label, and their accessible names are still
+  `Lockup A` and `Lockup B`.
+- **The chosen cell fills with `--paper-ink` `#171412`, not `--ink`
+  `#070D0B`.** The page's green-black read as a third colour on a fold
+  that holds only paper and its warm black. The text is set in that warm
+  black, so the fill now matches it. The light values in the cell are
+  the paper's own. The fill also switches instantly instead of fading
+  through the hover ground, which passed through a muddy mid-tone. The
+  amber lockup on it is about 6:1.
+- **The grid is half as strong**: 3.5 per cent ink, from 7. On a chosen
+  cell it is 9 per cent paper, from bone at 22.
+
+Re-verified: one screen at 1440, 1194 and 390 (the phone was 1.04 in
+v3); all three paths at 4.54 s, 4.51 s and 3.51 s, with the after path
+landing on the next fold; no page errors.
 
 **It is one self-contained file**, with no shared stylesheet, `noindex,
 nofollow` and English only. That is the pattern this file asks a rebuilt

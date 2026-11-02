@@ -30,7 +30,8 @@
   --ink:#070D0B; --paper:#EFEAE1; --paper-2:#E5DED2; --paper-ink:#171412;
   --bone:#EFECE7; --bone-dim:rgba(239,236,231,.72); --bone-faint:rgba(239,236,231,.22);
   --ink-dim:rgba(23,20,18,.66); --ink-faint:rgba(23,20,18,.38);
-  --hair:rgba(23,20,18,.22); --grid:rgba(23,20,18,.07);
+  --hair:rgba(23,20,18,.22); --grid:rgba(23,20,18,.035);
+  --paper-dim:rgba(239,234,225,.72); --paper-faint:rgba(239,234,225,.09);
   --amber:#BD9059; --brick:#8E4A45;
   --ease:cubic-bezier(.16,1,.3,1);
   --col:82rem; --gut:20px;
@@ -54,7 +55,10 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 :focus-visible{outline-style:solid;outline-width:2px;outline-color:var(--paper-ink);outline-offset:3px}
 
 .lbl{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase}
-.ro{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim)}
+/* one size for every word inside the panel, the readouts and the third
+   answer alike: the owner's call, so nothing in the instrument outranks
+   anything else in it */
+.ro{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim)}
 
 /* ── chrome ─────────────────────────────────────────────────────────── */
 .bar{position:fixed;inset:0 0 auto;z-index:20;display:flex;align-items:center;gap:22px;
@@ -71,18 +75,26 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .q h2{margin:0;font:400 var(--t-head)/1.04 var(--serif);letter-spacing:-.01em;max-width:22ch;text-wrap:balance}
 
 /* ── the panel: a ticket ruled into five cells by hairlines ─────────── */
-.panel{display:grid;grid-template-columns:var(--sw) auto var(--sw);gap:1px;background:var(--hair);
+.panel{position:relative;display:grid;grid-template-columns:var(--sw) auto var(--sw);gap:1px;background:var(--hair);
   border:1px solid var(--hair);text-align:left;
   opacity:0;transform:translateY(10px);transition:opacity .9s var(--ease) .15s,transform .9s var(--ease) .15s}
 .on .panel{opacity:1;transform:none}
+/* two cut corners, bottom left and top right: the cell's hover diagonal,
+   made permanent on the frame. A paper triangle over the corner and one
+   hairline along its edge, so the border appears to turn the corner */
+.panel::before,.panel::after{content:"";position:absolute;z-index:3;width:18px;height:18px;pointer-events:none}
+.panel::before{top:-1px;right:-1px;
+  background:linear-gradient(to bottom left,var(--paper) calc(50% - .5px),var(--hair) calc(50% - .5px) calc(50% + .5px),transparent calc(50% + .5px))}
+.panel::after{bottom:-1px;left:-1px;
+  background:linear-gradient(to top right,var(--paper) calc(50% - .5px),var(--hair) calc(50% - .5px) calc(50% + .5px),transparent calc(50% + .5px))}
 .side{background:var(--paper);display:flex;flex-direction:column;align-items:center;
   justify-content:space-between;padding:14px 0}
-.side .num{font:300 2.3rem/1 var(--sans);letter-spacing:-.04em;color:var(--paper-ink)}
 .side .vt{writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap}
 .side.r .vt{transform:none}
 /* the triangle that closes the right column, from the first reference */
 .side.r::after{content:"";width:0;height:0;border-left:7px solid transparent;border-bottom:7px solid var(--paper-ink)}
 .side.r{justify-content:space-between}
+.side.l{justify-content:flex-end}
 /* the ink sample: the one value both lockups share, as a swatch */
 .side .sw{width:12px;height:12px;background:var(--amber)}
 /* the foot strip, the ticket's bottom row */
@@ -119,7 +131,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .plate i:nth-child(1){top:-4px;left:-4px}.plate i:nth-child(2){top:-4px;right:-4px}
 .plate i:nth-child(3){bottom:-4px;left:-4px}.plate i:nth-child(4){bottom:-4px;right:-4px}
 .plate img{width:74%;height:auto;transition:transform .6s var(--ease)}
-.plate b{font:400 1.2rem/1.1 var(--serif);text-align:center;max-width:9ch}
+.plate b{font-weight:500;color:var(--paper-ink);text-align:center}
 .opt:hover .plate img,.opt:focus-visible .plate img{transform:scale(1.04)}
 
 /* the tick scale, the reference's ruler */
@@ -129,13 +141,17 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
     repeating-linear-gradient(90deg,var(--ink-faint) 0 1px,transparent 1px 25px) bottom/100% 6px no-repeat}
 .opt .ft span{order:1}
 
-/* lock: the chosen cell fills with ink, the reference's filled cell */
-.opt.lock{color:var(--bone)}
-.opt.lock::before{opacity:1;background:var(--ink)}
-.opt.lock .ro{color:var(--bone-dim)}
-.opt.lock .tab{background:var(--bone)}
-.opt.lock .plate{--grid:var(--bone-faint)}
-.opt.lock .plate i::before,.opt.lock .plate i::after{background:var(--bone-dim)}
+/* lock: the chosen cell fills with the page's own warm black, the one
+   every word on the panel is set in, with the paper as its light value.
+   It was the green ink of the dark pages, which read as a third colour
+   on a fold that holds only paper and its ink */
+.opt.lock{color:var(--paper)}
+.opt.lock::before{opacity:1;background:var(--paper-ink);transition:opacity .2s var(--ease)}
+.opt.lock .ro{color:var(--paper-dim)}
+.opt.lock .plate .ro{color:var(--paper)}
+.opt.lock .tab{background:var(--paper)}
+.opt.lock .plate{--grid:var(--paper-faint)}
+.opt.lock .plate i::before,.opt.lock .plate i::after{background:var(--paper-dim)}
 .opt.lock .ft::before{filter:invert(1)}
 .opt:focus-visible{outline-offset:-3px}
 
@@ -167,7 +183,6 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   :root{--cw:min(300px,calc(100vw - 2 * var(--gut) - 2px));--ch:calc(var(--cw) * .44)}
   .panel{grid-template-columns:var(--cw)}
   .side{flex-direction:row;padding:10px 14px}
-  .side .num{font-size:1.6rem}
   .side .vt,.side.r .vt{writing-mode:horizontal-tb;transform:none;white-space:normal;text-align:left}
   .side.r{display:none}
   .strip{flex-direction:column;gap:4px}
@@ -201,27 +216,26 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 
   <div class="panel">
     <div class="side l" aria-hidden="true">
-      <span class="num">02</span>
       <span class="ro vt">Alignment test</span>
     </div>
 
     <div class="cells" id="opts" role="group" aria-label="Choose one">
-      <!-- The two lockups swap slots at random on every load, and neither
-           carries a label, so the answer is never readable from position. -->
-      <button class="opt" data-slot="a">
+      <!-- Fixed order, the owner's: before, after, either. Neither lockup
+           carries a label, so the answer is not written on the cell. -->
+      <button class="opt" data-pick="before" aria-label="Lockup A">
         <span class="hd ro"><span class="id"><span class="tab"></span>Option 01</span><span class="sel">Select</span></span>
-        <span class="plate"><i></i><i></i><i></i><i></i><img alt="" width="1400" height="312"></span>
+        <span class="plate"><i></i><i></i><i></i><i></i><img alt="" width="1400" height="312" src="/assets/img/turva-old-2-700.webp" srcset="/assets/img/turva-old-2-700.webp 700w, /assets/img/turva-old-2-1400.webp 1400w" sizes="180px"></span>
         <span class="ft ro"><span>A</span></span>
       </button>
-      <button class="opt" data-pick="either" aria-label="Either looks fine">
+      <button class="opt" data-pick="after" aria-label="Lockup B">
         <span class="hd ro"><span class="id"><span class="tab"></span>Option 02</span><span class="sel">Select</span></span>
-        <span class="plate"><i></i><i></i><i></i><i></i><b>Either looks fine</b></span>
-        <span class="ft ro"><span>A = B</span></span>
-      </button>
-      <button class="opt" data-slot="b">
-        <span class="hd ro"><span class="id"><span class="tab"></span>Option 03</span><span class="sel">Select</span></span>
-        <span class="plate"><i></i><i></i><i></i><i></i><img alt="" width="1400" height="312"></span>
+        <span class="plate"><i></i><i></i><i></i><i></i><img alt="" width="1400" height="250" src="/assets/img/turva-new-2-700.webp" srcset="/assets/img/turva-new-2-700.webp 700w, /assets/img/turva-new-2-1400.webp 1400w" sizes="180px"></span>
         <span class="ft ro"><span>B</span></span>
+      </button>
+      <button class="opt" data-pick="either" aria-label="Either looks fine">
+        <span class="hd ro"><span class="id"><span class="tab"></span>Option 03</span><span class="sel">Select</span></span>
+        <span class="plate"><i></i><i></i><i></i><i></i><b class="ro">Either looks fine</b></span>
+        <span class="ft ro"><span>A = B</span></span>
       </button>
 
       <div class="verdict" id="verdict" role="status" aria-live="polite" tabindex="-1">
@@ -236,7 +250,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
       <span class="ro vt">Ink #BD9059</span>
     </div>
 
-    <p class="strip ro"><span>Same ink · Same stock · Only the drawing differs</span><span>Order dealt at random</span></p>
+    <p class="strip ro"><span>Same ink · Same stock · Only the drawing differs</span></p>
   </div>
 
   <p class="note">Most people are numb to nuance. If the difference is not obvious to you, nothing written here will make it so.</p>
@@ -257,19 +271,6 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   const verdict = document.getElementById("verdict");
   const vmsg = document.getElementById("vmsg");
   const buttons = [...opts.querySelectorAll("button")];
-
-  /* the two lockups, dealt to the two slots at random */
-  const L = {
-    before:{ src:"/assets/img/turva-old-2-700.webp", set:"/assets/img/turva-old-2-700.webp 700w, /assets/img/turva-old-2-1400.webp 1400w", h:312 },
-    after: { src:"/assets/img/turva-new-2-700.webp", set:"/assets/img/turva-new-2-700.webp 700w, /assets/img/turva-new-2-1400.webp 1400w", h:250 }
-  };
-  const order = Math.random() < .5 ? ["before","after"] : ["after","before"];
-  ["a","b"].forEach((slot,i) => {
-    const btn = opts.querySelector('[data-slot="'+slot+'"]'), img = btn.querySelector("img"), k = order[i];
-    btn.dataset.pick = k;
-    img.src = L[k].src; img.srcset = L[k].set; img.height = L[k].h; img.sizes = "180px";
-    btn.setAttribute("aria-label", "Lockup " + slot.toUpperCase());
-  });
 
   requestAnimationFrame(() => requestAnimationFrame(() => fold.classList.add("on")));
 
