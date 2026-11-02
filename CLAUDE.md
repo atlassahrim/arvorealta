@@ -1857,6 +1857,19 @@ language chips read about 3:1 there**, against roughly 3.6 on flat ink.
 They are dim by design on every fold, and this fold costs them a little
 more.
 
+**The wash is off, at the owner's instruction**: he judged the clean video
+readable on his own device. The brighter quiet lines stay, at bone 72 and
+80 per cent. Measured clean, at the brightest 2 per cent: label **2.38**,
+headline **3.38**, paragraph **2.51**. The medians are 2.47, 4.66 and 3.72.
+The headline still clears the 3:1 that display type needs. The two small
+lines do not reach 4.5. **The bar is the larger cost.** Over this fold on a
+phone, the wordmark reads 1.59:1 and the action 1.75, because the pale sun
+sits under the bar's own row. At 1440 they read 3.23 and 2.24. **If the
+bar ever needs to come back, the top band alone fixes it**:
+`linear-gradient(to bottom,rgba(7,13,11,.72),rgba(7,13,11,0) 180px)` on
+`.void .bed::after`. That band measured 7.29 to 13.2 and leaves the
+middle of the frame untouched.
+
 Verified: six folds at one screen at 1440, 820 and 390; no page errors;
 no horizontal scroll; the video element is removed under reduced motion.
 **Playback itself cannot be verified here**, because this container's
