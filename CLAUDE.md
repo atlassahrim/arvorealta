@@ -1922,6 +1922,34 @@ wordmark is about 6px tall**, the smallest text on the fold. That is the
 size the owner asked for, and it is recorded here so the next session
 does not re-derive it.
 
+**v3, on the owner's five HUD references.** They share one grammar:
+- a panel ruled into cells by hairlines, like a ticket or a spec sheet
+- micro labels in mono, some set on their side
+- one big thin numeral
+- a cut corner or a filled cell marking the selection
+- crosshairs and tick scales
+
+That is the technical annex's own language of fields and rules, which is
+why it fits this firm. **The three answers are three equal cells of one
+panel**:
+- a left column carries the fold's numeral `02` and `Alignment test` on
+  its side
+- a right column carries a swatch of the shared ink and `Ink #BD9059`
+- a foot strip reads `Same ink · Same stock · Only the drawing differs`
+  and `Order dealt at random`
+- each cell has a slanted tab, a numbered readout, an alignment grid with
+  crosshair corners under the lockup, and a tick scale
+- hover fills the cell with a cut corner; a choice fills it with ink
+- the verdict replaces the three cells inside the same frame, with the
+  tick scale as its countdown
+
+**The grid behind each lockup is the one background on the fold, and it
+has a job**: the fold is called Alignment. **A side column's text sets
+the panel's height**, which is how v3's first render grew a 260px grey
+void under the cells, so the long fairness line went to the foot strip.
+Cells: 216 × 177 at 1440, 190 × 156 at 1194, 300 × 132 stacked on a
+phone.
+
 **It is one self-contained file**, with no shared stylesheet, `noindex,
 nofollow` and English only. That is the pattern this file asks a rebuilt
 sandbox to repeat. The fold after it is a stub, there only so the `We will
