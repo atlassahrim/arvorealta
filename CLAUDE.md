@@ -106,8 +106,9 @@ and needs Chrome plus a Google Fonts request.
 the rail reads, which is why it is the owner's and not a repair. The offer
 page's rail is built the other way and measures five of each.
 
-**Two full stops on `/brand/` are this session's, not the owner's.** He
-wrote `You set direction` and `You are the compass` without them.
+**One full stop on `/brand/` is a session's, not the owner's.** He wrote
+`You are the compass` without it. The hero's stop is his now: on 2
+November he supplied `You set the direction.` with it.
 
 **2.5 MB is referenced by nothing.** `assets/marks/` at 2.2 MB and
 `assets/vendor/runtime.js` at 324 KB, both orphaned by the promotion. Kept
@@ -1779,6 +1780,42 @@ been safe for the length of the old sentence and failed on the first edit.
 Verified: six folds at exactly one screen at all four viewports, snap
 `y mandatory`, zero em-dashes, zero empty `[data-t]` nodes, no horizontal
 scroll and no page errors in any of the three languages.
+
+### Five lines of the owner's, checked for English before they shipped
+
+On 2 November the owner sent five replacements for `/brand/` and asked
+for the English to be checked before anything went live. Two were correct
+as written. Three had faults, and he approved the corrected versions:
+
+- `h1a` reads `You set the direction.`, as he wrote it
+- `sub` reads `We do not negotiate your direction.` He wrote `the
+  owner's`. That is correct, but the headline above it says `you`, and
+  third person there turns the reader into someone else
+- `vsSay` reads `Look at this before-and-after example and check whether
+  the two look the same to you.` His version said `this … example` and
+  then `those`, so the number did not agree. With `example` added, the
+  quote marks had nothing left to do
+- `sysSay` reads `Direction is often mistaken for micromanagement. We
+  keep it actionable by keeping it simple: clean vectors, not 30-page
+  rulebooks.` The fixes: the idiom is `mistaken for`, not `mistaken
+  with`; `actionable by simplicity` is not English; `direction` came
+  three times in three sentences; and `ruling documents` became
+  `rulebooks`
+- `dirSay` ends `We pick your audiences the way a sailor picks the
+  wind.` His version had `for you` mid-comparison and a gendered sailor
+
+**The previous day's `sysSay` rewrite was reverted at the owner's word.**
+It had gone live without being shown to him first. **Copy on a live page
+is shown as before and after, and approved, before it is pushed.** That
+was true already. It is written here because a session broke it.
+
+The Norwegian and Finnish are a session's and carry the standing caveat.
+The Norwegian quotation marks went with the English ones, so the
+compound is `før-og-etter-eksempelet`. The Finnish takes the hyphenated
+`ennen ja jälkeen -esimerkkiä`. Verified: six folds at one screen at 1440,
+1180, 820 and 390 in all three languages, except the Norwegian close at
+1.04 and 1.03, which it measured before this change too. `Not here.` is
+still one rect, and there are no page errors.
 
 ### `lab/max-home/` — the offer page at that standard, and the language bar
 
