@@ -1982,6 +1982,37 @@ Re-verified: one screen at 1440, 1194 and 390 (the phone was 1.04 in
 v3); all three paths at 4.54 s, 4.51 s and 3.51 s, with the after path
 landing on the next fold; no page errors.
 
+**v5, the selection is paper and the verdict grows out of it.** The v4
+warm black lasted one turn. The owner asked for a darker paper, not black.
+- **The chosen cell fills with `--paper-deep` `#D9CFBE`.** That is one
+  step past the hover ground `#E5DED2`, and every word in the cell stays
+  ink. So the v4 notes above on the fill and on the grid of a chosen cell
+  no longer describe the page. The amber lockup reads about 1.9:1 on it.
+  A logotype is exempt from the floor, and the selection lasts 420ms
+  before the circle covers it.
+- **A circle grows from the chosen cell's centre until it holds the whole
+  box**, in that same deep paper. It is `clip-path: circle()` over 0.8 s.
+  The script writes the centre and the radius to the farthest corner, so
+  the circle closes exactly on the box at every width. **Move the closed
+  circle with transitions off.** The hidden state carries a delayed snap,
+  so the first build's circle slid in from the box's middle while it
+  grew. The fix is `transition:none`, a reflow, then the class.
+- **The message is italic and fills the box.** A binary search sets the
+  largest size at which the line fits the box's width and height, breaking
+  only between words. That is 58px on one line at 1440, and 73px on three
+  lines in the 300 × 398 box on a phone. `Result` is gone. The countdown
+  is a 2px ink line along the foot of the box.
+- **The italic is EB Garamond's own**, `assets/fonts/ebgaramond-italic-latin.woff2`,
+  42 KB, OFL. It is declared in the lab page only. **`/brand/`'s hero
+  `<em>You</em>` has no italic file and renders a slanted upright**, which
+  is a fake. Adding this face to `ebgaramond.css`, with a latin-ext twin
+  for the Nordic text, would fix it. That changes a live page, so it is
+  the owner's call.
+
+Re-verified: one screen at all three widths; all three paths at 4.53 s,
+4.53 s and 3.49 s, with the after path landing on the next fold; no page
+errors.
+
 **It is one self-contained file**, with no shared stylesheet, `noindex,
 nofollow` and English only. That is the pattern this file asks a rebuilt
 sandbox to repeat. The fold after it is a stub, there only so the `We will

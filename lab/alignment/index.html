@@ -18,6 +18,13 @@
 <link rel="stylesheet" href="/assets/fonts/geist.css">
 <script>document.documentElement.classList.remove("no-js")</script>
 <style>
+/* EB Garamond's real italic, latin only, declared here and not in the
+   shared ebgaramond.css so no live page changes with it. OFL 1.1, the same
+   family the upright files come from. Without it the browser slants the
+   upright, which is a fake. */
+@font-face{font-family:"EB Garamond";font-style:italic;font-weight:400 500;font-display:swap;
+  src:url("/assets/fonts/ebgaramond-italic-latin.woff2") format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD}
 /* ══ LAB · ALIGNMENT, v3 ═══════════════════════════════════════════════
    Built on the owner's five HUD references, which share one grammar:
    a panel ruled into cells by hairlines, like a ticket or a spec sheet;
@@ -27,11 +34,10 @@
    rules, so the instrument reads as the firm's rather than as a film's.
    The three answers are three equal cells of one panel.               */
 :root{
-  --ink:#070D0B; --paper:#EFEAE1; --paper-2:#E5DED2; --paper-ink:#171412;
+  --ink:#070D0B; --paper:#EFEAE1; --paper-2:#E5DED2; --paper-ink:#171412; --paper-deep:#D9CFBE;
   --bone:#EFECE7; --bone-dim:rgba(239,236,231,.72); --bone-faint:rgba(239,236,231,.22);
   --ink-dim:rgba(23,20,18,.66); --ink-faint:rgba(23,20,18,.38);
   --hair:rgba(23,20,18,.22); --grid:rgba(23,20,18,.035);
-  --paper-dim:rgba(239,234,225,.72); --paper-faint:rgba(239,234,225,.09);
   --amber:#BD9059; --brick:#8E4A45;
   --ease:cubic-bezier(.16,1,.3,1);
   --col:82rem; --gut:20px;
@@ -141,31 +147,30 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
     repeating-linear-gradient(90deg,var(--ink-faint) 0 1px,transparent 1px 25px) bottom/100% 6px no-repeat}
 .opt .ft span{order:1}
 
-/* lock: the chosen cell fills with the page's own warm black, the one
-   every word on the panel is set in, with the paper as its light value.
-   It was the green ink of the dark pages, which read as a third colour
-   on a fold that holds only paper and its ink */
-.opt.lock{color:var(--paper)}
-.opt.lock::before{opacity:1;background:var(--paper-ink);transition:opacity .2s var(--ease)}
-.opt.lock .ro{color:var(--paper-dim)}
-.opt.lock .plate .ro{color:var(--paper)}
-.opt.lock .tab{background:var(--paper)}
-.opt.lock .plate{--grid:var(--paper-faint)}
-.opt.lock .plate i::before,.opt.lock .plate i::after{background:var(--paper-dim)}
-.opt.lock .ft::before{filter:invert(1)}
+/* lock: the chosen cell fills with a deeper paper, a step past the
+   hover ground, and every word in it stays ink. The owner's call: not
+   black. It is the same ground the verdict circle grows in */
+.opt.lock::before{opacity:1;background:var(--paper-deep);transition:opacity .2s var(--ease)}
+.opt.lock .tab{background:var(--paper-ink);height:18px}
 .opt:focus-visible{outline-offset:-3px}
 
 /* ── the verdict: replaces the three cells inside the same frame ────── */
-.verdict{position:absolute;inset:0;z-index:2;background:var(--paper);display:grid;place-items:center;
-  align-content:center;gap:16px;text-align:center;opacity:0;pointer-events:none;transition:opacity .4s var(--ease)}
-.verdict.in{opacity:1}
-.verdict p{margin:0;font:400 var(--t-value)/1.06 var(--serif)}
-.verdict .clock{width:min(300px,62%);height:6px;position:relative;
-  background:
-    repeating-linear-gradient(90deg,var(--ink-faint) 0 1px,transparent 1px 5px) bottom/100% 3px no-repeat,
-    repeating-linear-gradient(90deg,var(--ink-faint) 0 1px,transparent 1px 25px) bottom/100% 6px no-repeat}
-.verdict .clock i{position:absolute;left:0;right:0;bottom:-3px;height:1px;background:var(--paper-ink);
-  transform-origin:left;transform:scaleX(1)}
+.verdict{position:absolute;inset:0;z-index:2;background:var(--paper-deep);display:grid;place-items:center;
+  padding:clamp(14px,2vw,22px) clamp(18px,2.6vw,30px) clamp(26px,3vw,34px);text-align:center;pointer-events:none;
+  /* a circle that grows out of the chosen cell until it holds the whole box.
+     --cx, --cy and --r are written by the script from the cell's centre and
+     the farthest corner, so the circle always closes exactly on the box */
+  clip-path:circle(0px at var(--cx,50%) var(--cy,50%));opacity:0;
+  transition:opacity .35s var(--ease),clip-path 0s linear .35s}
+.verdict.in{opacity:1;clip-path:circle(var(--r,100%) at var(--cx,50%) var(--cy,50%));
+  transition:clip-path .8s cubic-bezier(.65,0,.35,1),opacity 0s}
+/* the message: italic, sized by the script to fill the box */
+.verdict p{margin:0;width:100%;font:italic 400 40px/1.02 var(--serif);letter-spacing:-.015em;
+  text-wrap:balance;opacity:0;transform:translateY(6px);transition:opacity .3s var(--ease),transform .3s var(--ease)}
+.verdict.in p{opacity:1;transform:none;transition:opacity .6s var(--ease) .45s,transform .8s var(--ease) .45s}
+/* the countdown: one hairline along the foot of the box */
+.verdict .clock{position:absolute;left:0;right:0;bottom:0;height:2px}
+.verdict .clock i{position:absolute;inset:0;background:var(--paper-ink);transform-origin:left;transform:scaleX(1)}
 .verdict.in .clock i{transition:transform var(--t,4000ms) linear;transform:scaleX(0)}
 
 /* ── the explanation, small ─────────────────────────────────────────── */
@@ -239,7 +244,6 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
       </button>
 
       <div class="verdict" id="verdict" role="status" aria-live="polite" tabindex="-1">
-        <span class="ro">Result</span>
         <p id="vmsg"></p>
         <span class="clock" aria-hidden="true"><i></i></span>
       </div>
@@ -280,6 +284,22 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
     either:{ msg:"You don’t need a brand yet.", ms:4000, next:false },
     after: { msg:"We will get along.",               ms:3000, next:true  }
   };
+  /* size the message to the box: the largest size at which it fits the
+     box's width and height, whole words only */
+  function fit(){
+    const cs = getComputedStyle(verdict);
+    const w = verdict.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    const h = verdict.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+    let lo = 12, hi = 240;
+    while (hi - lo > .5) {
+      const m = (lo + hi) / 2;
+      vmsg.style.fontSize = m + "px";
+      (vmsg.scrollWidth <= w + 1 && vmsg.scrollHeight <= h + 1) ? lo = m : hi = m;
+    }
+    vmsg.style.fontSize = Math.floor(lo) + "px";
+  }
+  addEventListener("resize", () => { if (verdict.classList.contains("in")) fit(); });
+
   const beat = reduce ? 0 : 420;
   let busy = false;
   opts.addEventListener("click", e => {
@@ -292,6 +312,20 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
       buttons.forEach(b => { b.tabIndex = -1; b.setAttribute("aria-hidden","true"); });
       vmsg.textContent = v.msg;
       verdict.style.setProperty("--t", v.ms + "ms");
+      /* the circle starts at the chosen cell's centre and ends on the
+         farthest corner of the box */
+      const box = opts.getBoundingClientRect(), c = btn.getBoundingClientRect();
+      const cx = c.left + c.width / 2 - box.left, cy = c.top + c.height / 2 - box.top;
+      const r = Math.hypot(Math.max(cx, box.width - cx), Math.max(cy, box.height - cy));
+      /* move the closed circle to the cell with no transition, or it slides
+         in from wherever the last one closed while it grows */
+      verdict.style.transition = "none";
+      verdict.style.setProperty("--cx", cx + "px");
+      verdict.style.setProperty("--cy", cy + "px");
+      verdict.style.setProperty("--r", Math.ceil(r) + 1 + "px");
+      fit();
+      void verdict.offsetWidth;
+      verdict.style.transition = "";
       verdict.classList.remove("in"); void verdict.offsetWidth;
       verdict.classList.add("in");
       verdict.focus({ preventScroll:true });
