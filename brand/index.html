@@ -24,6 +24,7 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ebgaramond-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ebgaramond-italic-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/geist-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/geist-mono-latin.woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/ebgaramond.css">
@@ -313,31 +314,105 @@ html.rv [data-rv].in{opacity:1;transform:none}
 .duo-text .say{margin:0;max-width:44ch;font-size:var(--t-body);line-height:1.62;color:var(--bone-dim)}
 .duo-media{display:grid;gap:clamp(22px,3.5vh,44px);min-width:0}
 
-/* ── ACT II — alignment. The plates stack, same left edge, same width,
-   which for an object five times wider than it is tall is the directer
-   comparison: the eye runs down one edge rather than across a gutter. */
-.align{background:var(--paper);color:var(--paper-ink)}
-.align .duo-text .say{color:var(--ink-dim)}
-/* 49% of the column, which is 70% twice, at the owner's instruction. The
-   cap is on the plate rather than on the image so the rule under each
-   caption shortens with its mark instead of running on past it. The pair
-   is centred rather than flush left, which is the white space the owner
-   asked for: at 70% all of the slack sat on one side and the plates read
-   as pushed against the text column. Centring does not cost the shared
-   left edge that is the reason they stack at all, because both images are
-   1400px wide and take the same cap, so they still begin and end on the
-   same two pixels. */
-/* the gap is the distance from the mark to the word that labels it, and
-   it is the owner's call that 12px read as cramped: a label sitting that
-   close to a lockup reads as part of the drawing rather than as a caption
-   on it */
-.plate{display:grid;gap:clamp(20px,3.4vh,42px);margin:0;max-width:49%;justify-self:center}
-.plate img{width:100%;height:auto}
-.plate figcaption{display:flex;align-items:center;gap:14px;color:var(--ink-faint)}
-.plate figcaption::after{content:"";flex:1;height:1px;background:var(--rule-ink)}
-.sort{margin:clamp(10px,2vh,22px) 0 0;padding-top:clamp(18px,3vh,32px);
-  border-top:1px solid var(--rule-ink);font-size:var(--t-value);line-height:1.12;
-  max-width:24ch;text-wrap:balance}
+/* ── ACT II — alignment, a test rather than a caption ────────────────────
+   Promoted from lab/alignment on 3 November. The fold asks one question and
+   offers three answers in one ruled panel, the technical annex's own
+   grammar of fields and hairlines: the two lockups and `Either looks fine`,
+   in a fixed order. Picking the old one or `either` answers that the reader
+   does not need a brand yet; picking the new one answers that we will get
+   along, then moves to the next fold. The verdict grows out of the chosen
+   cell as a circle until it fills the box, and is set in italic at the
+   largest size that fits. Every rule here is scoped to `.align`, because
+   `.q` and `.plate` already meant something else on this page. */
+.align{--hair:rgba(23,20,18,.22);--grid:rgba(23,20,18,.035);--paper-deep:#D9CFBE;
+  --cw:clamp(190px,15vw,220px);--ch:calc(var(--cw) * .82);--sw:clamp(56px,4.6vw,68px);
+  background:var(--paper);color:var(--paper-ink);min-height:100svh;display:grid;align-content:center;
+  justify-items:center;gap:clamp(34px,5.5vh,60px);text-align:center;
+  padding:clamp(84px,12vh,120px) var(--pad) clamp(40px,7vh,72px)}
+.align .ro{font-family:"Geist Mono",ui-monospace,monospace;font-size:10px;font-weight:400;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim)}
+.align .ask{display:grid;justify-items:center;gap:clamp(12px,2vh,20px)}
+.align .ask h2{margin:0;font-size:var(--t-head);line-height:1.04;max-width:22ch;text-wrap:balance}
+/* the panel: a ticket ruled into cells by hairlines */
+.align .panel{position:relative;display:grid;grid-template-columns:var(--sw) auto var(--sw);gap:1px;
+  background:var(--hair);border:1px solid var(--hair);text-align:left}
+/* two cut corners on the frame, bottom left and top right */
+.align .panel::before,.align .panel::after{content:"";position:absolute;z-index:3;width:18px;height:18px;pointer-events:none}
+.align .panel::before{top:-1px;right:-1px;
+  background:linear-gradient(to bottom left,var(--paper) calc(50% - .5px),var(--hair) calc(50% - .5px) calc(50% + .5px),transparent calc(50% + .5px))}
+.align .panel::after{bottom:-1px;left:-1px;
+  background:linear-gradient(to top right,var(--paper) calc(50% - .5px),var(--hair) calc(50% - .5px) calc(50% + .5px),transparent calc(50% + .5px))}
+.align .side{background:var(--paper);display:flex;flex-direction:column;align-items:center;
+  justify-content:space-between;padding:14px 0}
+.align .side.l{justify-content:flex-end}
+.align .side .vt{writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap}
+.align .side.r .vt{transform:none}
+.align .side.r::after{content:"";width:0;height:0;border-left:7px solid transparent;border-bottom:7px solid var(--paper-ink)}
+.align .side .sw{width:12px;height:12px;background:var(--amber)}
+.align .strip{grid-column:1/-1;margin:0;background:var(--paper);display:flex;gap:18px;padding:9px 14px}
+.align .strip span{color:var(--paper-ink)}
+.align .cells{position:relative;display:grid;grid-template-columns:repeat(3,var(--cw));gap:1px;background:var(--hair)}
+/* a cell: tab, readouts, a gridded plate, a tick scale */
+.align .opt{position:relative;width:var(--cw);height:var(--ch);display:grid;grid-template-rows:auto 1fr auto;gap:8px;
+  padding:12px 14px;background:var(--paper);text-align:left;isolation:isolate;overflow:hidden;color:inherit}
+.align .opt::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--paper-2);
+  clip-path:polygon(0 0,100% 0,100% 100%,22px 100%,0 calc(100% - 22px));opacity:0;transition:opacity .35s var(--ease)}
+.align .opt:hover::before,.align .opt:focus-visible::before{opacity:1}
+.align .opt .hd,.align .opt .ft{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.align .opt .id{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.align .tab{width:3px;height:14px;background:var(--ink-faint);transform:skewY(-30deg);transition:background .3s,height .3s var(--ease)}
+.align .opt:hover .tab,.align .opt:focus-visible .tab{background:var(--paper-ink);height:18px}
+.align .opt .sel{opacity:0;transition:opacity .3s var(--ease)}
+.align .opt:hover .sel,.align .opt:focus-visible .sel{opacity:1}
+.align .pl{position:relative;display:grid;place-items:center;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:12px 12px;background-position:center}
+.align .pl i{position:absolute;width:9px;height:9px}
+.align .pl i::before,.align .pl i::after{content:"";position:absolute;background:var(--ink-faint)}
+.align .pl i::before{left:4px;top:0;width:1px;height:9px}
+.align .pl i::after{top:4px;left:0;width:9px;height:1px}
+.align .pl i:nth-child(1){top:-4px;left:-4px}.align .pl i:nth-child(2){top:-4px;right:-4px}
+.align .pl i:nth-child(3){bottom:-4px;left:-4px}.align .pl i:nth-child(4){bottom:-4px;right:-4px}
+.align .pl img{width:74%;height:auto;transition:transform .6s var(--ease)}
+.align .pl b{font-weight:500;color:var(--paper-ink);text-align:center}
+.align .opt:hover .pl img,.align .opt:focus-visible .pl img{transform:scale(1.04)}
+.align .opt .ft::before{content:"";flex:1;height:6px;
+  background:
+    repeating-linear-gradient(90deg,var(--ink-faint) 0 1px,transparent 1px 5px) bottom/100% 3px no-repeat,
+    repeating-linear-gradient(90deg,var(--ink-faint) 0 1px,transparent 1px 25px) bottom/100% 6px no-repeat}
+.align .opt:focus-visible{outline-offset:-3px}
+/* lock: a deeper paper, one step past the hover ground; words stay ink */
+.align .opt.lock::before{opacity:1;background:var(--paper-deep);transition:opacity .2s var(--ease)}
+.align .opt.lock .tab{background:var(--paper-ink);height:18px}
+/* the verdict: a circle grows from the chosen cell until it holds the box */
+.align .verdict{position:absolute;inset:0;z-index:2;background:var(--paper-deep);display:grid;place-items:center;
+  padding:clamp(14px,2vw,22px) clamp(18px,2.6vw,30px) clamp(26px,3vw,34px);text-align:center;pointer-events:none;
+  clip-path:circle(0px at var(--cx,50%) var(--cy,50%));opacity:0;
+  transition:opacity .35s var(--ease),clip-path 0s linear .35s}
+.align .verdict.in{opacity:1;clip-path:circle(var(--r,100%) at var(--cx,50%) var(--cy,50%));
+  transition:clip-path .8s cubic-bezier(.65,0,.35,1),opacity 0s}
+.align .verdict p{margin:0;width:100%;font:italic 400 40px/1.02 "EB Garamond",Georgia,serif;letter-spacing:-.015em;
+  text-wrap:balance;opacity:0;transform:translateY(6px);transition:opacity .3s var(--ease),transform .3s var(--ease)}
+.align .verdict.in p{opacity:1;transform:none;transition:opacity .6s var(--ease) .45s,transform .8s var(--ease) .45s}
+.align .verdict .clock{position:absolute;left:0;right:0;bottom:0;height:2px}
+.align .verdict .clock i{position:absolute;inset:0;background:var(--paper-ink);transform-origin:left;transform:scaleX(1)}
+.align .verdict.in .clock i{transition:transform var(--t,4000ms) linear;transform:scaleX(0)}
+.align .note{margin:0;max-width:48ch;font-size:13px;line-height:1.6;color:var(--ink-dim)}
+/* phone: the panel turns upright and the left column becomes a strip */
+@media (max-width:760px){
+  .align{--cw:min(300px,calc(100vw - 2 * var(--gut) - 2px));--ch:calc(var(--cw) * .44);gap:26px}
+  .align .panel{grid-template-columns:var(--cw)}
+  .align .side{flex-direction:row;padding:10px 14px}
+  .align .side .vt,.align .side.r .vt{writing-mode:horizontal-tb;transform:none;white-space:normal;text-align:left}
+  .align .side.r{display:none}
+  .align .cells{grid-template-columns:var(--cw)}
+  .align .opt{padding:10px 14px}
+  .align .opt .ft{display:none}
+  .align .pl img{width:56%}
+}
+@media (prefers-reduced-motion:reduce){
+  .align .verdict.in .clock i{transition:transform var(--t,4000ms) linear!important}
+}
 
 /* ── ACT III — the system. Four rules as a numbered list, and the grid is
    the specification rather than decoration: the vector, the proportion
@@ -575,31 +650,51 @@ html.rv [data-rv].in{opacity:1;transform:none}
 </section>
 
 <!-- ACT II ─ ALIGNMENT ───────────────────────────────────────────────── -->
-<section class="align duo flip" id="alignment" aria-label="The alignment test">
-  <div class="duo-in">
-    <div class="duo-media">
-      <figure class="plate" data-rv>
-        <img src="/assets/img/turva-old-2-1400.webp" width="1400" height="312" loading="lazy"
-             sizes="(min-width:980px) 44vw, 86vw"
-             srcset="/assets/img/turva-old-2-700.webp 700w, /assets/img/turva-old-2-1400.webp 1400w"
-             alt="The previous Turvatikas lockup: a hook pictogram beside a heavy stencilled wordmark">
-        <figcaption class="lbl" data-t="vsA">Before</figcaption>
-      </figure>
-      <figure class="plate" data-rv>
-        <img src="/assets/img/turva-new-2-1400.webp" width="1400" height="250" loading="lazy"
-             sizes="(min-width:980px) 44vw, 86vw"
-             srcset="/assets/img/turva-new-2-700.webp 700w, /assets/img/turva-new-2-1400.webp 1400w"
-             alt="The Turvatikas lockup as drawn now: three rungs beside tracked serif capitals">
-        <figcaption class="lbl" data-t="vsB">After</figcaption>
-      </figure>
-    </div>
-    <div class="duo-text">
-      <p class="eyebrow" data-rv data-t="e2">Alignment</p>
-      <h2 class="disp" data-rv data-t="h2a">First, can you see the difference?</h2>
-      <p class="say" data-rv data-t="vsSay">Look at this before-and-after example and check whether the two look the same to you. Most people are numb to nuance.</p>
-      <p class="sort disp" data-rv data-t="vsSort">If the difference is not obvious to you, nothing written here will make it so.</p>
-    </div>
+<section class="align" id="alignment" aria-labelledby="alignQ">
+  <div class="ask" data-rv>
+    <p class="eyebrow" data-t="e2">Alignment</p>
+    <h2 class="disp" id="alignQ" data-t="h2a">Which one of these looks better designed?</h2>
   </div>
+
+  <div class="panel" data-rv>
+    <div class="side l" aria-hidden="true">
+      <span class="ro vt" data-t="aTest">Alignment test</span>
+    </div>
+
+    <div class="cells" id="alignOpts" role="group" data-ta="aGroup" aria-label="Choose one">
+      <!-- Fixed order, the owner's: before, after, either. Neither lockup
+           carries a label, so the answer is not written on the cell. -->
+      <button type="button" class="opt" data-pick="before" data-ta="aLockA" aria-label="Lockup A">
+        <span class="hd ro"><span class="id"><span class="tab"></span><span data-t="aOpt">Option</span>&nbsp;01</span><span class="sel" data-t="aSel">Select</span></span>
+        <span class="pl"><i></i><i></i><i></i><i></i><img alt="" width="1400" height="312" loading="lazy" src="/assets/img/turva-old-2-700.webp" srcset="/assets/img/turva-old-2-700.webp 700w, /assets/img/turva-old-2-1400.webp 1400w" sizes="180px"></span>
+        <span class="ft ro"><span>A</span></span>
+      </button>
+      <button type="button" class="opt" data-pick="after" data-ta="aLockB" aria-label="Lockup B">
+        <span class="hd ro"><span class="id"><span class="tab"></span><span data-t="aOpt">Option</span>&nbsp;02</span><span class="sel" data-t="aSel">Select</span></span>
+        <span class="pl"><i></i><i></i><i></i><i></i><img alt="" width="1400" height="250" loading="lazy" src="/assets/img/turva-new-2-700.webp" srcset="/assets/img/turva-new-2-700.webp 700w, /assets/img/turva-new-2-1400.webp 1400w" sizes="180px"></span>
+        <span class="ft ro"><span>B</span></span>
+      </button>
+      <button type="button" class="opt" data-pick="either">
+        <span class="hd ro" aria-hidden="true"><span class="id"><span class="tab"></span><span data-t="aOpt">Option</span>&nbsp;03</span><span class="sel" data-t="aSel">Select</span></span>
+        <span class="pl"><i></i><i></i><i></i><i></i><b class="ro" data-t="aEither">Either looks fine</b></span>
+        <span class="ft ro" aria-hidden="true"><span>A = B</span></span>
+      </button>
+
+      <div class="verdict" id="alignVerdict" role="status" aria-live="polite" tabindex="-1">
+        <p id="alignMsg"></p>
+        <span class="clock" aria-hidden="true"><i></i></span>
+      </div>
+    </div>
+
+    <div class="side r" aria-hidden="true">
+      <span class="sw"></span>
+      <span class="ro vt" data-t="aInk">Ink #BD9059</span>
+    </div>
+
+    <p class="strip ro"><span data-t="aStrip">Same ink · Same stock · Only the drawing differs</span></p>
+  </div>
+
+  <p class="note" data-rv data-t="aNote">Most people are numb to nuance. If the difference is not obvious to you, nothing written here will make it so.</p>
 </section>
 
 <section class="spec duo flip" id="system" aria-label="The system">
@@ -1020,10 +1115,12 @@ const LANG = {
     h1a:"<em>You</em> set the direction.",
     sub:"Most projects are made for the short term and perceived wind direction. Winds change. We do not negotiate your direction. We pick the winds we ride.",
     scroll:"Scroll",
-    e2:"Alignment", h2a:"First, can you see the difference?",
-    vsA:"Before", vsB:"After",
-    vsSay:"Look at this before-and-after example and check whether the two look the same to you. Most people are numb to nuance.",
-    vsSort:"If the difference is not obvious to you, nothing written here will make it so.",
+    e2:"Alignment", h2a:"Which one of these looks better designed?",
+    aTest:"Alignment test", aOpt:"Option", aSel:"Select", aEither:"Either looks fine",
+    aInk:"Ink #BD9059", aStrip:"Same ink \u00b7 Same stock \u00b7 Only the drawing differs",
+    aGroup:"Choose one", aLockA:"Lockup A", aLockB:"Lockup B",
+    aNo:"You don\u2019t need a brand yet.", aYes:"We will get along.",
+    aNote:"Most people are numb to nuance. If the difference is not obvious to you, nothing written here will make it so.",
     e3:"Direction", h3a:"You are the compass.",
     dirSay:"Most designers abide by whichever audience is easy to see. <b>Not here.</b> We pick your audiences the way a sailor picks the wind.",
     e4:"The system", h4a:"Tools are the easy part.",
@@ -1069,10 +1166,12 @@ const LANG = {
     h1a:"<em>Du</em> setter retningen.",
     sub:"De fleste prosjekter er laget for kort sikt og for en antatt vindretning. Vinden snur. Vi forhandler ikke om din retning. Vi velger vinden vi rir p\u00e5.",
     scroll:"Rull",
-    e2:"Innretting", h2a:"F\u00f8rst, ser du forskjellen?",
-    vsA:"F\u00f8r", vsB:"Etter",
-    vsSay:"Se p\u00e5 dette f\u00f8r-og-etter-eksempelet og sjekk om de to ser like ut for deg. De fleste er avstumpet for nyanser.",
-    vsSort:"Er ikke forskjellen \u00e5penbar for deg, er det ingenting her som gj\u00f8r den det.",
+    e2:"Innretting", h2a:"Hvilken av disse ser best designet ut?",
+    aTest:"Innrettingstest", aOpt:"Valg", aSel:"Velg", aEither:"Begge ser fine ut",
+    aInk:"Blekk #BD9059", aStrip:"Samme blekk \u00b7 Samme papir \u00b7 Bare tegningen er ulik",
+    aGroup:"Velg ett", aLockA:"Logo A", aLockB:"Logo B",
+    aNo:"Du trenger ikke en merkevare enn\u00e5.", aYes:"Vi kommer godt overens.",
+    aNote:"De fleste er avstumpet for nyanser. Er ikke forskjellen \u00e5penbar for deg, er det ingenting her som gj\u00f8r den det.",
     e3:"Retning", h3a:"Du er kompasset.",
     dirSay:"De fleste designere retter seg etter det publikummet som er lettest \u00e5 se. <b>Ikke her.</b> Vi velger publikum for deg slik en seiler velger vinden.",
     e4:"Systemet", h4a:"Verkt\u00f8yene er den enkle delen.",
@@ -1118,10 +1217,12 @@ const LANG = {
     h1a:"<em>Sin\u00e4</em> asetat suunnan.",
     sub:"Useimmat projektit on tehty lyhyelle aikav\u00e4lille ja oletetulle tuulensuunnalle. Tuulet k\u00e4\u00e4ntyv\u00e4t. Me emme neuvottele sinun suunnastasi. Me valitsemme tuulen, jolla purjehdimme.",
     scroll:"Vierit\u00e4",
-    e2:"Linjaus", h2a:"Ensin, n\u00e4etk\u00f6 eron?",
-    vsA:"Ennen", vsB:"J\u00e4lkeen",
-    vsSay:"Katso t\u00e4t\u00e4 ennen ja j\u00e4lkeen -esimerkki\u00e4 ja tarkista, n\u00e4ytt\u00e4v\u00e4tk\u00f6 ne kaksi sinusta samalta. Useimmat ovat turtuneita vivahteille.",
-    vsSort:"Jos ero ei ole sinulle ilmeinen, mik\u00e4\u00e4n t\u00e4ss\u00e4 kirjoitettu ei tee siit\u00e4 ilmeist\u00e4.",
+    e2:"Linjaus", h2a:"Mik\u00e4 n\u00e4ist\u00e4 n\u00e4ytt\u00e4\u00e4 paremmin suunnitellulta?",
+    aTest:"Linjaustesti", aOpt:"Valinta", aSel:"Valitse", aEither:"Kumpi tahansa k\u00e4y",
+    aInk:"Muste #BD9059", aStrip:"Sama muste \u00b7 Sama paperi \u00b7 Vain piirros eroaa",
+    aGroup:"Valitse yksi", aLockA:"Logo A", aLockB:"Logo B",
+    aNo:"Et tarvitse br\u00e4ndi\u00e4 viel\u00e4.", aYes:"Tulemme toimeen.",
+    aNote:"Useimmat ovat turtuneita vivahteille. Jos ero ei ole sinulle ilmeinen, mik\u00e4\u00e4n t\u00e4ss\u00e4 kirjoitettu ei tee siit\u00e4 ilmeist\u00e4.",
     e3:"Suunta", h3a:"Sin\u00e4 olet kompassi.",
     dirSay:"Useimmat suunnittelijat mukautuvat siihen yleis\u00f6\u00f6n, joka on helpoin n\u00e4hd\u00e4. <b>Ei t\u00e4\u00e4ll\u00e4.</b> Me valitsemme yleis\u00f6si niin kuin merimies valitsee tuulen.",
     e4:"J\u00e4rjestelm\u00e4", h4a:"Ty\u00f6kalut ovat helppo osa.",
@@ -1171,6 +1272,11 @@ function setLang(code, remember){
   for (const el of document.querySelectorAll("[data-t]")) {
     const v = t[el.dataset.t];
     if (v != null) el.innerHTML = v;
+  }
+  /* accessible names, which innerHTML cannot reach */
+  for (const el of document.querySelectorAll("[data-ta]")) {
+    const v = t[el.dataset.ta];
+    if (v != null) el.setAttribute("aria-label", v);
   }
   /* the prewritten mail is the path that always works, and it is filled in
      the reader's own language. encodeURIComponent, not escape: the body
@@ -1286,6 +1392,66 @@ addEventListener("load", () => {
   const el = location.hash.length > 1 && document.getElementById(location.hash.slice(1));
   if (el) jumpTo(el, null);
 });
+
+/* ══ the alignment test ══════════════════════════════════════════════════
+   The owner's two answers and his two durations. The verdict grows out of
+   the chosen cell as a circle, then the message is set at the largest
+   italic size the box can hold. The circle is moved to the cell with
+   transitions off, or it slides in from wherever the last one closed. */
+(() => {
+  const opts = $("#alignOpts"), verdict = $("#alignVerdict"), msg = $("#alignMsg");
+  if (!opts) return;
+  const buttons = [...opts.querySelectorAll("button")];
+  const V = { before:["aNo",4000,false], either:["aNo",4000,false], after:["aYes",3000,true] };
+  function fit(){
+    const cs = getComputedStyle(verdict);
+    const w = verdict.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    const h = verdict.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+    let lo = 12, hi = 240;
+    while (hi - lo > .5) {
+      const m = (lo + hi) / 2;
+      msg.style.fontSize = m + "px";
+      (msg.scrollWidth <= w + 1 && msg.scrollHeight <= h + 1) ? lo = m : hi = m;
+    }
+    msg.style.fontSize = Math.floor(lo) + "px";
+  }
+  addEventListener("resize", () => { if (verdict.classList.contains("in")) fit(); });
+  const beat = reduce ? 0 : 420;
+  let busy = false;
+  opts.addEventListener("click", e => {
+    const btn = e.target.closest("[data-pick]");
+    if (!btn || busy) return;
+    busy = true;
+    const [key, ms, next] = V[btn.dataset.pick];
+    btn.classList.add("lock");
+    setTimeout(() => {
+      buttons.forEach(b => { b.tabIndex = -1; b.setAttribute("aria-hidden", "true"); });
+      msg.textContent = (LANG[curLang] || LANG.en)[key];
+      verdict.style.setProperty("--t", ms + "ms");
+      const box = opts.getBoundingClientRect(), c = btn.getBoundingClientRect();
+      const cx = c.left + c.width / 2 - box.left, cy = c.top + c.height / 2 - box.top;
+      const r = Math.hypot(Math.max(cx, box.width - cx), Math.max(cy, box.height - cy));
+      verdict.style.transition = "none";
+      verdict.style.setProperty("--cx", cx + "px");
+      verdict.style.setProperty("--cy", cy + "px");
+      verdict.style.setProperty("--r", Math.ceil(r) + 1 + "px");
+      fit();
+      void verdict.offsetWidth;
+      verdict.style.transition = "";
+      verdict.classList.remove("in"); void verdict.offsetWidth;
+      verdict.classList.add("in");
+      verdict.focus({ preventScroll: true });
+    }, beat);
+    setTimeout(() => {
+      if (next) jumpTo($("#system"), null);
+      verdict.classList.remove("in");
+      buttons.forEach(b => { b.tabIndex = 0; b.removeAttribute("aria-hidden"); });
+      btn.classList.remove("lock");
+      if (!next) btn.focus({ preventScroll: true });
+      busy = false;
+    }, beat + ms);
+  });
+})();
 
 /* ══ one loop ══════════════════════════════════════════════════════════ */
 const hero = $("#open"), heroInner = hero.querySelector(".inner"), bed = hero.querySelector(".bed");

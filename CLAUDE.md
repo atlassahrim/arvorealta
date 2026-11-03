@@ -180,7 +180,6 @@ alone.** Checked against every published page's own tag:
 | `home/` | `noindex, follow` | a stub redirecting `/home/` to `/` |
 | `proposta-motorhome/` | `noindex` | a Portuguese offer page, its own prices |
 | `templates/` | `noindex` | belt and braces: it is also swept by `pages.yml` |
-| `lab/alignment/` | `noindex, nofollow` | a sandbox: `/brand/`'s fold two rebuilt as a test |
 
 `reference/` is the near-copy, so without the label it would be a second
 `index.html` bidding against the first for the same terms.
@@ -1884,7 +1883,54 @@ no horizontal scroll; the video element is removed under reduced motion.
 **Playback itself cannot be verified here**, because this container's
 Chromium has no H.264 and shows the poster. Check a real browser.
 
-### `lab/alignment/` — fold two as a test, a sandbox
+### Fold two is the alignment test, promoted on 3 November
+
+**`lab/alignment/` won and is deleted**, the third sandbox to go that way.
+Its fold replaced `/brand/`'s alignment fold whole: the question, the
+ruled panel of three answers in a fixed order, the deeper-paper selection,
+the circle and the italic verdict. Everything in the lab section below
+describes that fold under its lab path, and it is kept as the record of
+why each part is what it is. The live fold is `section.align#alignment`.
+Three things changed on the way across:
+
+- **Three languages.** Twelve new keys per language: `aTest`, `aOpt`,
+  `aSel`, `aEither`, `aInk`, `aStrip`, `aGroup`, `aLockA`, `aLockB`, `aNo`,
+  `aYes` and `aNote`. `h2a` now holds the question. **The Norwegian and
+  Finnish are a session's** and carry the standing caveat:
+  `Hvilken av disse ser best designet ut?`,
+  `Du trenger ikke en merkevare ennå.`, `Vi kommer godt overens.`,
+  `Mikä näistä näyttää paremmin suunnitellulta?`,
+  `Et tarvitse brändiä vielä.`, `Tulemme toimeen.`. `aNote` joins the
+  two Nordic sentences the page already carried. The Finnish option label
+  is `Valinta`, not `Vaihtoehto`, because the longer word crowded the
+  cell's header at 1180.
+- **Accessible names translate.** `setLang` writes `innerHTML`, which
+  cannot reach an attribute. So an element carrying `data-ta` takes its
+  `aria-label` from the same object, and the two lockups read `Lockup A`
+  and `Logo A`.
+- **Every rule is scoped to `.align`.** `.q` was already the system
+  fold's quad and `.plate` the old alignment plates, and this page has
+  three silent class collisions on record. The question block is `.ask`
+  and the gridded plate is `.pl`. The old `.plate`, `.sort` and
+  `.align .duo-text` rules are deleted with the markup they styled. The
+  `We will get along.` path calls the page's own `jumpTo`, so it does
+  not fight the scroll snap.
+
+**What left the page with the old fold**: the headline
+`First, can you see the difference?`, the `Before` and `After` labels,
+and `Look at this before-and-after example and check whether the two look
+the same to you.` (the `vsSay` the owner approved on 2 November). The plates no longer
+carry a before or after label at all, which is the point of the test.
+`Most people are numb to nuance.` and the sorting line survive as the
+note under the panel.
+
+Verified at 1440, 1180, 820 and 390, in all three languages: six folds at
+one screen, except the Norwegian close at 1.04 and 1.03, which it measured
+before; no horizontal scroll and no page errors; no header overflows in
+any cell; the verdict fits at 52 to 85px; the after path lands on
+`#system` at 1800 with the snap back on `y mandatory`.
+
+### `lab/alignment/` — fold two as a test, a sandbox (deleted, promoted)
 
 **On 2 November the owner asked for fold two rebuilt in a lab**, because it
 still looked weak on `/brand/`. Two references set the brief. One is a
@@ -2005,9 +2051,9 @@ warm black lasted one turn. The owner asked for a darker paper, not black.
 - **The italic is EB Garamond's own**, `assets/fonts/ebgaramond-italic-latin.woff2`,
   42 KB, OFL. It is declared in the lab page only. **`/brand/`'s hero
   `<em>You</em>` has no italic file and renders a slanted upright**, which
-  is a fake. Adding this face to `ebgaramond.css`, with a latin-ext twin
-  for the Nordic text, would fix it. That changes a live page, so it is
-  the owner's call.
+  was a fake. **Fixed at the promotion**: both italic files are in
+  `ebgaramond.css` now, latin and latin-ext, and `/brand/` preloads the
+  latin one because the hero spends it above the fold.
 
 Re-verified: one screen at all three widths; all three paths at 4.53 s,
 4.53 s and 3.49 s, with the after path landing on the next fold; no page
@@ -2549,7 +2595,8 @@ assets/
                         ground-dew-1-720.{mp4,jpg}, the direction fold's
                         bed, generated and supplied by the owner
   vedlegg-5/            the open tender's example PDF and fillable Word file
-  fonts/                Geist, Geist Mono and EB Garamond, self-hosted woff2
+  fonts/                Geist, Geist Mono and EB Garamond upright and
+                        italic, self-hosted woff2
   tw-<hash>.css         /video/'s compiled Tailwind, built by _build-css.sh
   themes/arvorealta.css tokens for the editorial system
   themes/technical.css  tokens for the technical system
@@ -3400,7 +3447,10 @@ differently:
 The page sets **EB Garamond** for display type — headlines and prices only —
 with **Geist** for body and UI and **Geist Mono** for every label and figure.
 Self-hosted at `assets/fonts/ebgaramond*.woff2`, OFL, 44 KB latin and 114 KB
-latin-ext, so the no-third-party-request rule still holds.
+latin-ext, so the no-third-party-request rule still holds. **The italic
+arrived on 3 November**, at 42 KB and 91 KB, from the fontsource-variable
+build. Until then every italic EB Garamond on the site was the upright
+slanted by the browser.
 
 It is not a decorative reach. The page set everything in one sans at four
 sizes for a while, which is why it read as a software landing page rather
