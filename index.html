@@ -511,8 +511,15 @@ ul{padding:0;list-style:none}
 /* bottom aligned, at the owner's instruction, and the same on both pages:
    a close that sits in the middle of its own band reads as another section,
    and a close that sits on the floor reads as the end of the page. */
-.close{position:relative;min-height:88svh;display:grid;align-items:end;
+.close{position:relative;min-height:88svh;display:grid;align-items:end;isolation:isolate;overflow:hidden;
   background:var(--paper-3);padding:clamp(70px,12vh,150px) 0 clamp(40px,7vh,80px)}
+/* the paper loop under the close, the same footage /brand/ closes on, so
+   the two pages end on one ground. The still is the floor; the loop fades
+   in over it on `playing`, and is never mounted under reduced motion. */
+.close .bed{position:absolute;inset:0;z-index:-1}
+.close .bed img,.close .bed video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.close .bed video{opacity:0;transition:opacity 1.4s ease}
+.close .bed video.on{opacity:1}
 .close h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.034em;
   font-size:var(--t-display);line-height:.96;max-width:14ch;margin:18px 0 24px}
 /* :not(.eyebrow) because `.close p` is (0,1,1) and `.eyebrow` is (0,1,0),
@@ -527,6 +534,12 @@ ul{padding:0;list-style:none}
   text-transform:uppercase;color:var(--ink-soft)}
 .close .ft a{transition:color .25s ease}
 .close .ft a:hover{color:var(--ink)}
+/* over the loop the quiet lines take full ink, which is this site's rule
+   for type on a photograph: --ink-soft over the leaf shadows measured
+   3.51:1 at its median on the footer at 390, under the 4.5 small text
+   needs. It sits after the rules it overrides, at the same specificity.
+   The eyebrow keeps the brick, at 5.07 to 5.35 median. */
+.close p:not(.eyebrow),.close .ft{color:var(--ink)}
 
 /* ══ the intake ═════════════════════════════════════════════════════════ */
 dialog{border:0;padding:0;background:transparent;max-width:none;max-height:none;width:100%}
@@ -712,6 +725,12 @@ dialog::backdrop{background:rgba(11,24,20,.72);backdrop-filter:blur(4px)}
 
 <!-- ACT VI ──────────────────────────────────────────────────────────── -->
 <section class="close" id="start" data-tone="light">
+  <div class="bed" aria-hidden="true">
+    <img src="/assets/video/ground-paper-2-720.jpg" alt="" width="1280" height="720" loading="lazy">
+    <video id="closev" muted playsinline loop preload="none" poster="/assets/video/ground-paper-2-720.jpg">
+      <source src="/assets/video/ground-paper-2-720.mp4" type="video/mp4">
+    </video>
+  </div>
   <div class="wrap">
     <p class="eyebrow rv" data-t="close.eyebrow">Where to start</p>
     <h2 class="rv" data-t="close.h2">Find out what it cost you. For nothing.</h2>
@@ -1262,8 +1281,7 @@ $("#langs").addEventListener("click", e => {
    React is not here to drop muted/playsinline/autoplay, but the autoplay
    policy still is. Gated on `playing` rather than canplaythrough, which
    iOS throttles hard enough that it frequently never fires.              */
-(function mountVideo(){
-  const v = $("#herov");
+function mountVideo(v){
   if (!v) return;
   if (reduce) { v.remove(); return; }
   v.muted = true; v.defaultMuted = true; v.playsInline = true; v.loop = true;
@@ -1277,6 +1295,17 @@ $("#langs").addEventListener("click", e => {
   const evs = ["pointerdown","touchstart","touchend","click","keydown","visibilitychange"];
   const retry = () => { if (v.classList.contains("on")) { evs.forEach(e => removeEventListener(e, retry)); return; } ask(); };
   evs.forEach(e => addEventListener(e, retry, { passive:true }));
+}
+mountVideo($("#herov"));
+/* the close's paper loop is 1.4 MB and only matters at the bottom */
+(() => {
+  const v = $("#closev");
+  if (!v) return;
+  if (reduce) { v.remove(); return; }
+  const io = new IntersectionObserver(es => {
+    if (es.some(e => e.isIntersecting)) { v.preload = "auto"; mountVideo(v); io.disconnect(); }
+  }, { rootMargin: "600px" });
+  io.observe($("#start"));
 })();
 
 /* ══ the bar's isolation, by mouse and by keyboard alike ═══════════════ */
