@@ -627,7 +627,7 @@ html.rv [data-rv].in{opacity:1;transform:none}
   <a href="#open"      data-rail data-t="r0"><em>01</em> Open <i></i></a>
   <a href="#alignment" data-rail data-t="r1"><em>02</em> Alignment <i></i></a>
   <a href="#system"    data-rail data-t="r3"><em>03</em> System <i></i></a>
-  <a href="#direction" data-rail data-t="r2"><em>04</em> Direction <i></i></a>
+  <a href="#direction" data-rail data-t="r2"><em>04</em> Result <i></i></a>
   <a href="#marks"     data-rail data-t="r4"><em>05</em> Work <i></i></a>
   <a href="#start"     data-rail data-t="r5"><em>06</em> Start <i></i></a>
 </nav>
@@ -738,16 +738,16 @@ html.rv [data-rv].in{opacity:1;transform:none}
 </section>
 
 <!-- ACT III ─ DIRECTION, the page's one void ─────────────────────────── -->
-<section class="void" id="direction" aria-label="Direction">
+<section class="void" id="direction" aria-label="The result">
   <div class="bed" aria-hidden="true">
     <img src="/assets/video/ground-dew-1-720.jpg" alt="" width="1280" height="720" loading="lazy">
     <video id="dirv" muted playsinline loop preload="none" poster="/assets/video/ground-dew-1-720.jpg">
       <source src="/assets/video/ground-dew-1-720.mp4" type="video/mp4">
     </video>
   </div>
-  <p class="lbl" data-rv data-t="e3">Direction</p>
-  <h2 class="disp" data-rv data-t="h3a">You are the compass.</h2>
-  <p data-rv data-t="dirSay">Most designers abide by whichever audience is easy to see. <b>Not here.</b> We pick your audiences the way a sailor picks the wind.</p>
+  <p class="lbl" data-rv data-t="e3">The result</p>
+  <h2 class="disp" data-rv data-t="h3a">Be one of a kind.</h2>
+  <p data-rv data-t="dirSay">With one clean vector, your intent travels far beyond your own reach. That is how, together, we protect your energy and everyone else&rsquo;s. Decisions that scale, not orders that trickle down. Nobody else can copy a direction this clear.</p>
 </section>
 
 <!-- ACT IV ─ THE SYSTEM. four rules, four shapes, never four cards ───── -->
@@ -1110,7 +1110,7 @@ view.addEventListener("touchend", e => {
 const LANG = {
   en: { _n:"English", _s:"EN", _l:"en",
     cta:"Start a project",
-    r0:"Open", r1:"Alignment", r2:"Direction", r3:"System", r4:"Work", r5:"Start",
+    r0:"Open", r1:"Alignment", r2:"Result", r3:"System", r4:"Work", r5:"Start",
     kicker:"Brands for decision makers",
     h1a:"<em>You</em> set the direction.",
     sub:"Most projects are made for the short term and perceived wind direction. Winds change. We do not negotiate your direction. We pick the winds we ride.",
@@ -1121,8 +1121,8 @@ const LANG = {
     aGroup:"Choose one", aLockA:"Lockup A", aLockB:"Lockup B",
     aNo:"You don\u2019t need a brand yet.", aYes:"We will get along.",
     aNote:"Most people are numb to nuance. If the difference is not obvious to you, nothing written here will make it so.",
-    e3:"Direction", h3a:"You are the compass.",
-    dirSay:"Most designers abide by whichever audience is easy to see. <b>Not here.</b> We pick your audiences the way a sailor picks the wind.",
+    e3:"The result", h3a:"Be one of a kind.",
+    dirSay:"With one clean vector, your intent travels far beyond your own reach. That is how, together, we protect your energy and everyone else\u2019s. Decisions that scale, not orders that trickle down. Nobody else can copy a direction this clear.",
     e4:"The system", h4a:"Tools are the easy part.",
     sysSay:"Direction is often mistaken for micromanagement. We keep it actionable by keeping it simple: clean vectors, not 30-page rulebooks.",
     _real:"supplied",
@@ -1161,7 +1161,7 @@ const LANG = {
 
   nb: { _n:"Norsk", _s:"NO", _l:"nb",
     cta:"Start et prosjekt",
-    r0:"\u00c5pning", r1:"Innretting", r2:"Retning", r3:"System", r4:"Arbeid", r5:"Start",
+    r0:"\u00c5pning", r1:"Innretting", r2:"Resultat", r3:"System", r4:"Arbeid", r5:"Start",
     kicker:"Merkevarer for beslutningstakere",
     h1a:"<em>Du</em> setter retningen.",
     sub:"De fleste prosjekter er laget for kort sikt og for en antatt vindretning. Vinden snur. Vi forhandler ikke om din retning. Vi velger vinden vi rir p\u00e5.",
@@ -1172,8 +1172,8 @@ const LANG = {
     aGroup:"Velg ett", aLockA:"Logo A", aLockB:"Logo B",
     aNo:"Du trenger ikke en merkevare enn\u00e5.", aYes:"Vi kommer godt overens.",
     aNote:"De fleste er avstumpet for nyanser. Er ikke forskjellen \u00e5penbar for deg, er det ingenting her som gj\u00f8r den det.",
-    e3:"Retning", h3a:"Du er kompasset.",
-    dirSay:"De fleste designere retter seg etter det publikummet som er lettest \u00e5 se. <b>Ikke her.</b> Vi velger publikum for deg slik en seiler velger vinden.",
+    e3:"Resultatet", h3a:"V\u00e6r unik.",
+    dirSay:"Med \u00e9n ren vektor n\u00e5r intensjonen din langt forbi din egen rekkevidde. Slik beskytter vi sammen din energi og alle andres. Beslutninger som skalerer, ikke ordre som siver nedover. Ingen andre kan kopiere en retning s\u00e5 klar.",
     e4:"Systemet", h4a:"Verkt\u00f8yene er den enkle delen.",
     sysSay:"Retning blir ofte forvekslet med detaljstyring. Vi holder den gjennomf\u00f8rbar ved \u00e5 holde den enkel: rene vektorer, ikke 30 siders regelverk.",
     _real:"levert",
@@ -1212,7 +1212,7 @@ const LANG = {
 
   fi: { _n:"Suomi", _s:"FI", _l:"fi",
     cta:"Aloita projekti",
-    r0:"Avaus", r1:"Linjaus", r2:"Suunta", r3:"J\u00e4rjestelm\u00e4", r4:"Ty\u00f6t", r5:"Aloita",
+    r0:"Avaus", r1:"Linjaus", r2:"Tulos", r3:"J\u00e4rjestelm\u00e4", r4:"Ty\u00f6t", r5:"Aloita",
     kicker:"Br\u00e4ndej\u00e4 p\u00e4\u00e4tt\u00e4jille",
     h1a:"<em>Sin\u00e4</em> asetat suunnan.",
     sub:"Useimmat projektit on tehty lyhyelle aikav\u00e4lille ja oletetulle tuulensuunnalle. Tuulet k\u00e4\u00e4ntyv\u00e4t. Me emme neuvottele sinun suunnastasi. Me valitsemme tuulen, jolla purjehdimme.",
@@ -1223,8 +1223,8 @@ const LANG = {
     aGroup:"Valitse yksi", aLockA:"Logo A", aLockB:"Logo B",
     aNo:"Et tarvitse br\u00e4ndi\u00e4 viel\u00e4.", aYes:"Tulemme toimeen.",
     aNote:"Useimmat ovat turtuneita vivahteille. Jos ero ei ole sinulle ilmeinen, mik\u00e4\u00e4n t\u00e4ss\u00e4 kirjoitettu ei tee siit\u00e4 ilmeist\u00e4.",
-    e3:"Suunta", h3a:"Sin\u00e4 olet kompassi.",
-    dirSay:"Useimmat suunnittelijat mukautuvat siihen yleis\u00f6\u00f6n, joka on helpoin n\u00e4hd\u00e4. <b>Ei t\u00e4\u00e4ll\u00e4.</b> Me valitsemme yleis\u00f6si niin kuin merimies valitsee tuulen.",
+    e3:"Tulos", h3a:"Ole ainutlaatuinen.",
+    dirSay:"Yhdell\u00e4 selke\u00e4ll\u00e4 vektorilla aikomuksesi ulottuu paljon omaa ulottuvuuttasi pidemm\u00e4lle. N\u00e4in suojaamme yhdess\u00e4 sinun energiasi ja kaikkien muiden. P\u00e4\u00e4t\u00f6ksi\u00e4, jotka skaalautuvat, ei k\u00e4skyj\u00e4, jotka valuvat alas. Kukaan muu ei voi kopioida n\u00e4in selke\u00e4\u00e4 suuntaa.",
     e4:"J\u00e4rjestelm\u00e4", h4a:"Ty\u00f6kalut ovat helppo osa.",
     sysSay:"Suunta sekoitetaan usein mikromanageeraukseen. Pid\u00e4mme sen toteutettavana pit\u00e4m\u00e4ll\u00e4 sen yksinkertaisena: selkeit\u00e4 vektoreita, ei 30-sivuisia s\u00e4\u00e4nt\u00f6kirjoja.",
     _real:"toimitettu",

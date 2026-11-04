@@ -106,9 +106,10 @@ and needs Chrome plus a Google Fonts request.
 the rail reads, which is why it is the owner's and not a repair. The offer
 page's rail is built the other way and measures five of each.
 
-**One full stop on `/brand/` is a session's, not the owner's.** He wrote
-`You are the compass` without it. The hero's stop is his now: on 2
-November he supplied `You set the direction.` with it.
+**Every headline stop on `/brand/` is the owner's now.** `You are the
+compass` was the last one he wrote without a stop, and that line left the
+page on 4 November. The hero's stop is his: on 2 November he supplied
+`You set the direction.` with it.
 
 **The orphans are deleted, at the owner's word, on 2 November.** That was
 6.4 MB that no published page referenced: `assets/marks/` (2.2 MB), the
@@ -1882,6 +1883,39 @@ Verified: six folds at one screen at 1440, 820 and 390; no page errors;
 no horizontal scroll; the video element is removed under reduced motion.
 **Playback itself cannot be verified here**, because this container's
 Chromium has no H.264 and shows the poster. Check a real browser.
+
+### Fold four is `The result`, on 4 November
+
+**The owner's call: the direction fold broke the conversation.** Fold three
+ends on `clean vectors, not 30-page rulebooks`, and fold four turned to
+designers and audiences. So fold four now says what a clean vector gets
+the owner. He wrote the copy, it was checked for English, and he approved
+this version before it went live:
+
+- `e3` reads `The result`, and the rail's `r2` reads `Result`
+- `h3a` reads `Be one of a kind.`
+- `dirSay` reads `With one clean vector, your intent travels far beyond
+  your own reach. That is how, together, we protect your energy and
+  everyone else's. Decisions that scale, not orders that trickle down.
+  Nobody else can copy a direction this clear.`
+
+The fixes to his draft: `reach` was used twice, there was a stray capital
+and a stray space, and `condescending leaks` became `orders that trickle
+down`. The last sentence was proposed here so the headline has a reason.
+
+**What left the page:** `You are the compass.`, the audience paragraph
+and the sailor line, which was the hero's wind brought back. The bold
+`Not here.` went with it, so `.void p b` now matches nothing. That CSS is
+kept in case an emphasis returns.
+
+The section keeps `id="direction"`, because the rail and any sent link
+point at it. Its `aria-label` reads `The result`. The dew video is
+unchanged. **The Norwegian and Finnish are a session's:** `Resultatet` /
+`Vær unik.` and `Tulos` / `Ole ainutlaatuinen.`.
+
+Verified at 1440, 1180, 820 and 390 in all three languages: six folds at
+one screen, except the Norwegian close at its recorded 1.04 and 1.03; no
+horizontal scroll; no page errors.
 
 ### Fold two is the alignment test, promoted on 3 November
 
