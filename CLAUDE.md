@@ -1917,6 +1917,40 @@ Verified at 1440, 1180, 820 and 390 in all three languages: six folds at
 one screen, except the Norwegian close at its recorded 1.04 and 1.03; no
 horizontal scroll; no page errors.
 
+### Fold five is `The record`, and the homepage closes on the paper loop
+
+**Both on 4 November, both approved by the owner before they went live.**
+
+On `/brand/`, the work fold's copy now follows fold four. Fold four says
+`Be one of a kind.`, and the gallery underneath is the proof:
+
+- `e5` reads `The record` (was `History`), and the rail's `r4` reads
+  `Record` (was `Work`)
+- `more` reads `Each one of a kind.` (was `The high end standard.`)
+
+**The headline names no count, on purpose.** `Fifteen of a kind` would go
+stale the day a project is added, which is exactly what happened to the
+social card that still says twelve marks. **The Norwegian and Finnish are
+a session's:** `Arkivet` / `Hver enkelt unik.` / `Arkiv`, and `Arkisto` /
+`Jokainen ainutlaatuinen.` / `Arkisto`. The `#marks` id is unchanged.
+
+**The offer page's close now has a video background**: the same
+`ground-paper-2-720` loop `/brand/` closes on, so the two pages end on one
+ground. It loads the way the brand close does. `preload="none"`, it is
+mounted by an observer 600px ahead of the fold, the still is the floor,
+the loop fades in on `playing`, and it is removed under reduced motion.
+The hero's `mountVideo` became a plain function so both videos share it.
+
+**Over the loop, the quiet lines take full ink**, which is this file's
+rule for type on a photograph. Measured with the type hidden, `--ink-soft`
+on the footer read **3.51:1** at its median at 390, where the leaf
+shadows pass, against the 4.5 small text needs. In full ink the paragraph
+reads 9.66 to 9.88 and the footer 6.59 to 9.54. The headline reads 9.6
+to 10.1, and the brick eyebrow keeps its colour at 5.00 to 5.35. **The
+override sits after the rules it beats, at the same specificity.** The
+first build put it inside the `.bed` block, above them, and it lost to
+them without an error.
+
 ### Fold two is the alignment test, promoted on 3 November
 
 **`lab/alignment/` won and is deleted**, the third sandbox to go that way.

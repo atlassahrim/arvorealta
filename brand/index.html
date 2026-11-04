@@ -628,7 +628,7 @@ html.rv [data-rv].in{opacity:1;transform:none}
   <a href="#alignment" data-rail data-t="r1"><em>02</em> Alignment <i></i></a>
   <a href="#system"    data-rail data-t="r3"><em>03</em> System <i></i></a>
   <a href="#direction" data-rail data-t="r2"><em>04</em> Result <i></i></a>
-  <a href="#marks"     data-rail data-t="r4"><em>05</em> Work <i></i></a>
+  <a href="#marks"     data-rail data-t="r4"><em>05</em> Record <i></i></a>
   <a href="#start"     data-rail data-t="r5"><em>06</em> Start <i></i></a>
 </nav>
 
@@ -757,8 +757,8 @@ html.rv [data-rv].in{opacity:1;transform:none}
 <section class="work" id="marks">
   <div class="gal">
     <div class="galhead">
-      <p class="eyebrow" data-rv data-t="e5">History</p>
-      <h2 class="disp" data-rv data-t="more">The high end standard.</h2>
+      <p class="eyebrow" data-rv data-t="e5">The record</p>
+      <h2 class="disp" data-rv data-t="more">Each one of a kind.</h2>
     </div>
     <div class="shot" id="cloud"></div>
     <div class="galfoot">
@@ -1110,7 +1110,7 @@ view.addEventListener("touchend", e => {
 const LANG = {
   en: { _n:"English", _s:"EN", _l:"en",
     cta:"Start a project",
-    r0:"Open", r1:"Alignment", r2:"Result", r3:"System", r4:"Work", r5:"Start",
+    r0:"Open", r1:"Alignment", r2:"Result", r3:"System", r4:"Record", r5:"Start",
     kicker:"Brands for decision makers",
     h1a:"<em>You</em> set the direction.",
     sub:"Most projects are made for the short term and perceived wind direction. Winds change. We do not negotiate your direction. We pick the winds we ride.",
@@ -1140,7 +1140,7 @@ const LANG = {
     _cw:"Wardrobe", _cwp:"Placeholder. What the people wear when they arrive on site.",
     _cm:"Music", _cmp:"Placeholder. What plays in the film, the stand and the waiting room.",
     _ca:"Art", _cap:"Placeholder. The references a photographer is given before they start.",
-    e5:"History", more:"The high end standard.", moreMeta:"Open any one &nbsp;/&nbsp; 45 frames behind them",
+    e5:"The record", more:"Each one of a kind.", moreMeta:"Open any one &nbsp;/&nbsp; 45 frames behind them",
     _galNote:"Year and sector are placeholders until they are supplied. A sector is shown only where the lockup itself states one.",
     e6:"Where to start", closeH:"Win with <em>class</em>.",
     fHome:"Documents and tenders", fVideo:"Video",
@@ -1161,7 +1161,7 @@ const LANG = {
 
   nb: { _n:"Norsk", _s:"NO", _l:"nb",
     cta:"Start et prosjekt",
-    r0:"\u00c5pning", r1:"Innretting", r2:"Resultat", r3:"System", r4:"Arbeid", r5:"Start",
+    r0:"\u00c5pning", r1:"Innretting", r2:"Resultat", r3:"System", r4:"Arkiv", r5:"Start",
     kicker:"Merkevarer for beslutningstakere",
     h1a:"<em>Du</em> setter retningen.",
     sub:"De fleste prosjekter er laget for kort sikt og for en antatt vindretning. Vinden snur. Vi forhandler ikke om din retning. Vi velger vinden vi rir p\u00e5.",
@@ -1191,7 +1191,7 @@ const LANG = {
     _cw:"Garderobe", _cwp:"Plassholder. Hva folkene har p\u00e5 seg n\u00e5r de kommer ut p\u00e5 anlegget.",
     _cm:"Musikk", _cmp:"Plassholder. Hva som spilles i filmen, p\u00e5 standen og i venterommet.",
     _ca:"Kunst", _cap:"Plassholder. Referansene en fotograf f\u00e5r f\u00f8r de begynner.",
-    e5:"Historikk", more:"Den h\u00f8ye standarden.", moreMeta:"\u00c5pne hvilken som helst &nbsp;/&nbsp; 45 bilder bak",
+    e5:"Arkivet", more:"Hver enkelt unik.", moreMeta:"\u00c5pne hvilken som helst &nbsp;/&nbsp; 45 bilder bak",
     _galNote:"\u00c5r og bransje er plassholdere til de er levert. Bransje vises bare der merket selv oppgir en.",
     e6:"Hvor du begynner", closeH:"Vinn med <em>klasse</em>.",
     fHome:"Dokumenter og anbud", fVideo:"Video",
@@ -1212,7 +1212,7 @@ const LANG = {
 
   fi: { _n:"Suomi", _s:"FI", _l:"fi",
     cta:"Aloita projekti",
-    r0:"Avaus", r1:"Linjaus", r2:"Tulos", r3:"J\u00e4rjestelm\u00e4", r4:"Ty\u00f6t", r5:"Aloita",
+    r0:"Avaus", r1:"Linjaus", r2:"Tulos", r3:"J\u00e4rjestelm\u00e4", r4:"Arkisto", r5:"Aloita",
     kicker:"Br\u00e4ndej\u00e4 p\u00e4\u00e4tt\u00e4jille",
     h1a:"<em>Sin\u00e4</em> asetat suunnan.",
     sub:"Useimmat projektit on tehty lyhyelle aikav\u00e4lille ja oletetulle tuulensuunnalle. Tuulet k\u00e4\u00e4ntyv\u00e4t. Me emme neuvottele sinun suunnastasi. Me valitsemme tuulen, jolla purjehdimme.",
@@ -1242,7 +1242,7 @@ const LANG = {
     _cw:"Vaatetus", _cwp:"Paikanvaraaja. Mit\u00e4 ihmiset pit\u00e4v\u00e4t p\u00e4\u00e4ll\u00e4\u00e4n saapuessaan ty\u00f6maalle.",
     _cm:"Musiikki", _cmp:"Paikanvaraaja. Mit\u00e4 soi elokuvassa, messuosastolla ja odotushuoneessa.",
     _ca:"Taide", _cap:"Paikanvaraaja. Viitteet, jotka valokuvaaja saa ennen aloittamista.",
-    e5:"Historia", more:"Korkean luokan standardi.", moreMeta:"Avaa mik\u00e4 tahansa &nbsp;/&nbsp; 45 kuvaa takana",
+    e5:"Arkisto", more:"Jokainen ainutlaatuinen.", moreMeta:"Avaa mik\u00e4 tahansa &nbsp;/&nbsp; 45 kuvaa takana",
     _galNote:"Vuosi ja toimiala ovat paikanvaraajia kunnes ne toimitetaan. Toimiala n\u00e4ytet\u00e4\u00e4n vain siell\u00e4, miss\u00e4 merkki itse ilmoittaa sellaisen.",
     e6:"Mist\u00e4 aloittaa", closeH:"Voita <em>tyylill\u00e4</em>.",
     fHome:"Asiakirjat ja tarjouskilpailut", fVideo:"Video",
