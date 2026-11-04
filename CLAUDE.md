@@ -1951,6 +1951,20 @@ override sits after the rules it beats, at the same specificity.** The
 first build put it inside the `.bed` block, above them, and it lost to
 them without an error.
 
+### The footer line is the same on both pages
+
+**On 4 November the owner asked for `/brand/`'s footer to match the offer
+page's.** It is one row of three now: `Arvorealta / Atlas Sahrim`, the
+other two pages, then the mail address. It is 9.5px Geist Mono at 600,
+`.2em` of tracking, with a hairline above it, in full ink over the paper
+loop. Before, the two links took a whole line of their own above the
+other two items, at 10px in faint ink. Each page links the other two:
+the offer page reads `Brand and identity / Video`, and `/brand/` reads
+`Documents and tenders / Video`. Each is in its own page's ink, `#17352C`
+on `/` and `#171412` on `/brand/`. The brand links keep 6px of padding
+for the 24px target. All six folds still fit one screen at all four
+widths, with the Norwegian close at its recorded 1.04.
+
 ### Fold two is the alignment test, promoted on 3 November
 
 **`lab/alignment/` won and is deleted**, the third sandbox to go that way.

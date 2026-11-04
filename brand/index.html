@@ -519,17 +519,16 @@ html.rv [data-rv].in{opacity:1;transform:none}
 .close h2 em{font-style:italic}
 .close .say{margin:0;max-width:46ch;color:var(--ink-dim)}
 .close .act{align-self:start;justify-self:start;margin-top:4px}
-.close footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;
-  border-top:1px solid var(--rule-ink);padding-top:16px;margin-top:clamp(20px,4vh,44px);
-  font-family:"Geist Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--ink-faint)}
-/* the two site links take the whole first line, so the identity row below
-   keeps the space-between it already had rather than becoming three
-   cramped items at 10px */
-.close footer>span:first-child{flex:1 0 100%;margin-bottom:clamp(6px,1.4vh,14px)}
-.close footer a{color:var(--paper-ink);text-decoration:none;opacity:.72;
-  padding:6px 0;transition:opacity .25s var(--ease)}
-.close footer a:hover,.close footer a:focus-visible{opacity:1}
+/* the offer page's footer line, the same on both pages at the owner's
+   instruction: one row of three, name / the other two pages / mail, 9.5px
+   mono at 600, full ink over the paper loop. The links keep 6px of padding
+   so each target clears 24px. */
+.close footer{display:flex;flex-wrap:wrap;gap:14px 30px;justify-content:space-between;align-items:center;
+  border-top:1px solid var(--rule-ink);padding-top:20px;margin-top:clamp(40px,8vh,90px);
+  font-family:"Geist Mono",ui-monospace,monospace;font-size:9.5px;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--paper-ink)}
+.close footer a{color:inherit;text-decoration:none;padding:6px 0;transition:opacity .25s var(--ease)}
+.close footer a:hover,.close footer a:focus-visible{opacity:.7}
 
 /* ══ THE INTAKE ════════════════════════════════════════════════════════
    A native <dialog> with showModal, because the focus trap, the inert
@@ -801,9 +800,9 @@ html.rv [data-rv].in{opacity:1;transform:none}
          as one site rather than three. The rail above is the wayfinding
          inside this page and this is the wayfinding out of it. -->
     <footer data-rv>
+      <span>Arvorealta &nbsp;/&nbsp; Atlas Sahrim</span>
       <span><a href="/" data-t="fHome">Documents and tenders</a>
         &nbsp;/&nbsp; <a href="/video/" data-t="fVideo">Video</a></span>
-      <span>Arvorealta &nbsp;/&nbsp; Atlas Sahrim</span>
       <span><a href="mailto:atlas@arvorealta.com">atlas@arvorealta.com</a></span>
     </footer>
   </div>
