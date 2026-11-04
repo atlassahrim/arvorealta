@@ -181,6 +181,8 @@ alone.** Checked against every published page's own tag:
 | `home/` | `noindex, follow` | a stub redirecting `/home/` to `/` |
 | `proposta-motorhome/` | `noindex` | a Portuguese offer page, its own prices |
 | `templates/` | `noindex` | belt and braces: it is also swept by `pages.yml` |
+| `lab/home/` | `noindex, nofollow` | a sandbox: the offer page on `/brand/`'s interface |
+| `lab/video/` | `noindex, nofollow` | a sandbox: the video page on `/brand/`'s interface |
 
 `reference/` is the near-copy, so without the label it would be a second
 `index.html` bidding against the first for the same terms.
@@ -1950,6 +1952,70 @@ to 10.1, and the brick eyebrow keeps its colour at 5.00 to 5.35. **The
 override sits after the rules it beats, at the same specificity.** The
 first build put it inside the `.bed` block, above them, and it lost to
 them without an error.
+
+### `lab/home/` and `lab/video/` — the other two pages on the brand interface
+
+**On 4 November the owner asked for the offer page and the video page
+rebuilt in a lab, taking `/brand/`'s visual interface as the template.**
+Both are sandboxes, so the rules above do not bind them, and nothing in
+them is evidence that a live page should change until the owner says so.
+
+**`lab/home/` is the offer page itself with a layer over it**, not a
+rewrite. It is a copy of `index.html` with a block of CSS appended last,
+so every string, price, clock, credit line, language and the intake form
+are the live page's own code. What the layer changes:
+
+- **The grounds are `/brand/`'s.** Ink `#070D0B`, ink-2 `#0B1512`, and
+  the paper `#EFEAE1` with its warm black `#171412`, instead of the offer
+  page's greige and green. Each section re-states the tokens it reads
+  (`--ink`, `--ink-soft`, `--rule`, `--paper-3`), so the live rules still
+  apply and only the values move. The fold order is: the hero on its video,
+  the tender on paper, the weights on ink, the ladder on ink-2, and the
+  close on the paper loop.
+- **Every fold is one screen, locked by scroll snap, from 980px up.**
+  Measured `[1,1,1,1,1]` at 1440 × 900 and 1180 × 820. **Below 980px the
+  lock is off.** The ladder stacks to 2.59 screens on a phone, and this
+  file records that a mandatory snap point taller than the screen traps
+  the reader. The brand page's `jumpTo` is ported, so the rail lands on
+  its fold with the snap back on.
+- **The gate strip moved into the hero's foot**, because a strip cannot be
+  a one-screen fold.
+- **The weights fold plays its curtain once, on arrival, over 1.8s**,
+  instead of being scrubbed through 270vh of pinned scroll. That pin and
+  a snapped page are incompatible.
+- **The ladder's cards turn dark.** Amber step labels and bullets replace
+  the brick, which is barred on ink. The prices are in bone, because the
+  gradient's stops fail on ink, and the hover is a faint lift instead of
+  the ink fill. The cards are tighter from 980px up so the fold fits; no
+  line of copy is dropped.
+- **Chrome and actions are `/brand/`'s.** The bar is transparent and the
+  actions are outline pills in mono with a dot. The grain and the scroll
+  cue are gone, and the close carries the signature mark.
+
+**This crosses the argument recorded in the `lab/max-home/` section**: the
+offer page is light first because it emulates print, and taking
+`/brand/`'s palette was said to make the site look like two firms. The
+lab exists to put that argument in front of the other one; promoting it
+would be the decision.
+
+**`lab/video/` is a new self-contained file**, because `/video/` is the
+last page on the compiled stylesheet and a layer over Tailwind classes is
+not a template. It has four folds: the open on the water loop, the three
+Vimeo reels at 9:16 on ink, `Elsewhere` on paper as three ruled columns,
+and the close on the paper loop with the signature and the full footer.
+It is English only, as `/video/` is, so it has no language control. **Two
+lines are the session's and are flagged.** `The rest of the practice.` is
+a new headline for the `Elsewhere` fold. The Brand line reads `Every mark
+on the three grounds it has to survive.`, because the live page's
+`Twelve marks` is stale against seventeen. The phone lock is off for the
+same reason as on the home lab.
+
+Verified: no horizontal scroll and no page errors at 1440, 1180, 820 and
+390 on both; on the home lab the rail lands on `#weigh` at 1800 with the
+snap back on, the curtain finishes and the dimension line draws,
+Norwegian switches, and the dialog opens with focus in the email field.
+**The Vimeo players and the video beds cannot play in this container.**
+Check a real browser.
 
 ### The footer line is the same on both pages
 
