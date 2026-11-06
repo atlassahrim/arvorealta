@@ -20,10 +20,12 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#D9D7D4">
+<meta name="description" content="Public buyers score the documents you hand in. Document standards for industrial manufacturers bidding into Nordic public tenders.">
+<meta name="theme-color" content="#07100D">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ebgaramond-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ebgaramond-italic-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ebgaramond-latin-ext.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/geist-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/geist-mono-latin.woff2" crossorigin>
@@ -577,6 +579,105 @@ dialog::backdrop{background:rgba(11,24,20,.72);backdrop-filter:blur(4px)}
   .rv{opacity:1;transform:none}
   .grain{animation:none}
 }
+
+/* ══ THE BRAND INTERFACE ════════════════════════════════════════════════
+   This file is the offer page, every string, price, clock and form intact,
+   dressed in /brand/'s interface: its two grounds sampled off the owner's
+   frames (ink #070D0B, paper #EFEAE1 with its warm black), folds of exactly
+   one screen locked by scroll snap, a transparent bar, outline actions in
+   mono with a dot, the signature at the close, no grain and no scroll cue.
+   It is a layer over the offer page's own rules, written last so it wins at
+   equal specificity, and every section re-states the tokens it reads, so
+   nothing reaches a rule above that this block did not mean to touch.
+   Built in lab/home/ and promoted on 6 November at the owner's word, over
+   CLAUDE.md's older argument that the offer page is light because it
+   emulates print. That argument is kept there as history. */
+:root{--b-ink:#070D0B;--b-ink2:#0B1512;--b-ink3:#121D19;--b-paper:#EFEAE1;--b-paper2:#E5DED2;
+  --b-pink:#171412;--b-bone:#EFECE7;--b-bone-dim:rgba(239,236,231,.66);--b-amber:#BD9059}
+html{background:var(--b-ink);scroll-snap-type:y mandatory;scroll-behavior:auto}
+@media (prefers-reduced-motion:reduce){html{scroll-snap-type:none}}
+main>section{scroll-snap-align:start;scroll-snap-stop:normal}
+body{background:var(--b-ink)}
+.grain,.cue{display:none}
+
+/* actions: the brand page's outline pill, mono, with a dot */
+.act-grad,.act-line{background:none;border:1px solid currentColor;color:inherit;
+  font-family:"Geist Mono",ui-monospace,monospace;font-size:10.5px;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;padding:13px 22px;gap:10px;filter:none}
+.act-grad::after{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.55}
+.act-grad:hover,.act-line:hover{filter:none;background:color-mix(in srgb,currentColor 12%,transparent)}
+.on-ink .act-line{border-color:color-mix(in srgb,currentColor 45%,transparent)}
+.bar .act{padding:11px 20px;font-size:10.5px}
+@media (max-width:560px){.bar .act{padding:9px 12px;font-size:9.5px;letter-spacing:.14em}}
+
+/* I · the hero, with the gate at its foot */
+.hero{color:var(--b-bone)}
+.hero .gate{background:none;padding:0;margin-top:clamp(10px,3vh,40px)}
+.hero .gate .row{border-top:1px solid rgba(239,236,231,.2);padding-top:clamp(14px,2.4vh,24px)}
+.hero .gate h3{color:rgba(239,236,231,.72)}
+.hero .gate p{color:rgba(239,236,231,.86);font-size:15px}
+@media (min-width:1100px){.hero .inner>.gate{max-width:min(100%,62rem)}}
+
+/* II · the tender, on the brand page's paper */
+.open{--ink:var(--b-pink);--ink-soft:#5B554F;--rule:rgba(23,20,18,.16);--paper-3:var(--b-paper2);
+  --paper-2:#DCD3C4;background:var(--b-paper);color:var(--ink);
+  min-height:100svh;display:grid;align-content:center;padding:clamp(80px,11vh,120px) 0 clamp(36px,6vh,70px)}
+
+/* III · the weights, on the brand page's ink, one screen, played once */
+.weigh{--ink:var(--b-ink);background:var(--b-ink);height:auto;min-height:100svh;display:grid}
+.weigh .stick{position:relative;min-height:100svh}
+
+/* IV · the ladder, on ink-2, the cards turned out of the paper */
+.ladder{--ink:var(--b-ink2);--rule:rgba(239,236,231,.13);--ink-soft:var(--b-bone-dim);
+  background:var(--b-ink2);color:var(--b-bone);min-height:100svh;display:grid;align-content:center;
+  padding:clamp(80px,11vh,120px) 0 clamp(36px,6vh,70px)}
+.ladder .eyebrow{color:rgba(239,236,231,.6)}
+.ladder .lede,.ladder .cmp p{color:var(--b-bone-dim)}
+.ladder .rung{background:var(--b-ink3);border-color:rgba(239,236,231,.13);color:var(--b-bone)}
+.ladder .rung[data-lead]{border-color:var(--b-bone)}
+.ladder .rung::before{background:rgba(239,236,231,.05)}
+.ladder .rung .step{color:var(--b-amber)}
+.ladder .rung li::before{background:var(--b-amber)}
+.ladder .rung .terms,.ladder .rung .when,.ladder .rung .note{color:var(--b-bone-dim)}
+.ladder .rung .cost::before{background:rgba(239,236,231,.2)}
+.ladder .rung .pr{background:none;-webkit-text-fill-color:var(--b-bone);color:var(--b-bone)}
+
+/* V · the close, the brand page's paper loop and its signature */
+.close{--ink:var(--b-pink);--ink-soft:#5B554F;--rule:rgba(23,20,18,.16);--paper-3:var(--b-paper);
+  min-height:100svh;color:var(--ink)}
+.close .sig{display:grid;place-items:center;margin-bottom:clamp(14px,3vh,40px)}
+.close .sig img{width:clamp(150px,22vw,340px);height:auto}
+
+/* fitting the ladder to one screen. The cards keep every line; what gives
+   is the air: tighter card padding and rhythm, the headline on one line,
+   and the two closing lines beside each other instead of stacked */
+@media (min-width:980px){
+  .ladder h2{max-width:none;margin:12px 0 8px}
+  .ladder .rung{padding:clamp(20px,2vw,28px) clamp(20px,2vw,30px);gap:clamp(10px,1.6vh,16px)}
+  .ladder .rung ul{gap:5px}
+  .ladder .rung li{font-size:14px;line-height:1.45}
+  .ladder .rung .col{gap:8px}
+  .ladder #rungs{padding-top:22px}
+  .ladder .cmp{margin-top:clamp(18px,3vh,30px);grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);align-items:center;gap:14px 40px}
+  .ladder .cmp p{font-size:13.5px;line-height:1.55}
+  .ladder .freeline{flex-wrap:nowrap;gap:24px}
+  .ladder .freeline p{font-size:14.5px}
+  .open,.ladder{padding-top:clamp(72px,9vh,100px);padding-bottom:clamp(20px,4vh,48px)}
+  .open .tender{padding:clamp(20px,2.4vw,34px);gap:clamp(14px,2.2vh,24px)}
+  .close .sig img{width:clamp(130px,16vw,260px)}
+}
+/* the lock is a desktop promise. Below 980px the ladder stacks to three
+   cards and runs past two screens on a phone, and a mandatory snap point
+   taller than the screen traps the reader inside it, so the phone scrolls
+   freely, as /brand/'s own reasoning requires. */
+@media (max-width:979px){html{scroll-snap-type:none}}
+/* a laptop's shorter screen: the last few pixels come out of the cards */
+@media (min-width:980px) and (max-height:860px){
+  .ladder .rung .terms{font-size:14px;line-height:1.5}
+  .ladder .rung li{font-size:13.5px}
+  .ladder #rungs{padding-top:18px}
+  .ladder .cmp{margin-top:14px}
+}
 </style>
 </head>
 <body>
@@ -627,17 +728,14 @@ dialog::backdrop{background:rgba(11,24,20,.72);backdrop-filter:blur(4px)}
       <button class="act act-grad" data-cta data-t="cta">Get your page scored</button>
       <a class="act act-line" href="#open" data-t="hero.second">See the open tender</a>
     </div>
-    <div class="cue"><i></i><span data-t="_scroll">Scroll</span></div>
+    <!-- the gate strip lives at the foot of the hero, because every
+         fold here is one screen and a strip cannot be a fold -->
+    <div class="gate"><div class="row" id="gate" data-render="gate"></div></div>
   </div>
 </section>
 
-<!-- ACT II ──────────────────────────────────────────────────────────── -->
-<section class="gate" data-tone="light">
-  <div class="wrap"><div class="row" id="gate" data-render="gate"></div></div>
-</section>
-
 <!-- ACT III ─────────────────────────────────────────────────────────── -->
-<section class="open" id="open" data-tone="light" style="scroll-margin-top:76px">
+<section class="open" id="open" data-tone="light">
   <div class="wrap">
     <p class="eyebrow rv" id="openEyebrow" data-t="open.eyebrow">Open now</p>
     <h2 class="rv" id="openH2" data-t="open.h2">If you are bidding on this one, the hard attachment is already written.</h2>
@@ -682,7 +780,7 @@ dialog::backdrop{background:rgba(11,24,20,.72);backdrop-filter:blur(4px)}
 
 <!-- ACT III-b ───────────────────────────────────────────────────────── -->
 <!-- ACT IV ──────────────────────────────────────────────────────────── -->
-<section class="weigh on-ink" id="weigh" data-tone="dark" style="scroll-margin-top:0">
+<section class="weigh on-ink" id="weigh" data-tone="dark">
   <div class="stick">
     <div class="wrap">
       <p class="eyebrow" data-t="weigh.eyebrow">How it is scored</p>
@@ -707,7 +805,7 @@ dialog::backdrop{background:rgba(11,24,20,.72);backdrop-filter:blur(4px)}
 </section>
 
 <!-- ACT V ───────────────────────────────────────────────────────────── -->
-<section class="ladder" id="price" data-tone="light" style="scroll-margin-top:76px">
+<section class="ladder on-ink" id="price" data-tone="dark">
   <div class="wrap">
     <p class="eyebrow rv" data-t="ladder.eyebrow">What it costs</p>
     <h2 class="rv" data-t="ladder.h2">Then make it a system.</h2>
@@ -732,6 +830,13 @@ dialog::backdrop{background:rgba(11,24,20,.72);backdrop-filter:blur(4px)}
     </video>
   </div>
   <div class="wrap">
+    <!-- the brand close's signature, once, at size -->
+    <div class="sig rv">
+      <img src="/assets/img/arvo-mark-1-1200.webp" width="1200" height="443" loading="lazy"
+           sizes="(min-width:1100px) 340px, 44vw"
+           srcset="/assets/img/arvo-mark-1-600.webp 600w, /assets/img/arvo-mark-1-1200.webp 1200w"
+           alt="The Arvorealta mark">
+    </div>
     <p class="eyebrow rv" data-t="close.eyebrow">Where to start</p>
     <h2 class="rv" data-t="close.h2">Find out what it cost you. For nothing.</h2>
     <p class="rv" data-t="close.body">Send one page from a tender you lost.</p>
@@ -1405,13 +1510,67 @@ let chromeTone = null;
 function setChrome(tone){
   if (tone === chromeTone) return;
   chromeTone = tone;
-  document.documentElement.style.setProperty("--chrome", tone === "dark" ? "#E9E7E4" : "#17352C");
+  document.documentElement.style.setProperty("--chrome", tone === "dark" ? "#EFECE7" : "#171412");
 }
+
+/* ══ in-page jumps, and the fight with mandatory snap ═══════════════
+   Ported whole from /brand/: the snap comes off for the length of a jump
+   and goes back on once the scroll has stopped, because WebKit re-runs the
+   snap while a smooth scroll is still in flight. */
+const rootEl = document.documentElement;
+let jumpToken = 0;
+function jumpTo(el, hash){
+  if (!el) return;
+  rootEl.style.scrollSnapType = "none";
+  const t0 = performance.now(), mine = ++jumpToken;
+  scrollTo({ top: Math.round(el.getBoundingClientRect().top + scrollY), behavior: reduce ? "auto" : "smooth" });
+  if (hash) history.replaceState(null, "", hash);
+  let last = -1, still = 0;
+  (function quiet(){
+    if (mine !== jumpToken) return;
+    const y = Math.round(scrollY);
+    if (y === last) still++; else { still = 0; last = y; }
+    if (still >= 6 || performance.now() - t0 > 1600) { rootEl.style.scrollSnapType = ""; return; }
+    requestAnimationFrame(quiet);
+  })();
+}
+addEventListener("click", e => {
+  const a = e.target.closest && e.target.closest('a[href^="#"]');
+  if (!a) return;
+  const hash = a.getAttribute("href");
+  const el = hash.length > 1 && document.getElementById(hash.slice(1));
+  if (!el) return;
+  e.preventDefault();
+  jumpTo(el, hash);
+  el.setAttribute("tabindex", "-1");
+  el.focus({ preventScroll: true });
+});
 
 /* ══ one loop ══════════════════════════════════════════════════════════ */
 const hero = $(".hero"), bed = hero.querySelector(".bed"), heroInner = hero.querySelector(".inner");
 const weigh = $("#weigh");
 let ticking = false;
+let weighPlayed = false;
+function weighAt(p){
+  const curtain = $("#curtain");
+  if (curtain) curtain.style.transform = "scaleX(" + (1 - p).toFixed(4) + ")";
+  const segs = T().weigh.segs, total = segs.reduce((n, [, q]) => n + q, 0);
+  let run = 0;
+  $$("#names span").forEach((n, i) => {
+    run += segs[i][1];
+    n.classList.toggle("on", p >= (run / total) - 0.04);
+  });
+  $("#dim").classList.toggle("on", p > 0.97);
+}
+function playWeigh(){
+  weighPlayed = true;
+  if (reduce) { weighAt(1); return; }
+  const t0 = performance.now(), dur = 1800;
+  (function step(t){
+    const k = Math.min(1, (t - t0) / dur), e = k < .5 ? 2*k*k : 1 - Math.pow(-2*k + 2, 2) / 2;
+    weighAt(e); if (k < 1) requestAnimationFrame(step);
+  })(t0);
+}
 
 function frame(){
   ticking = false;
@@ -1440,21 +1599,10 @@ function frame(){
      element that starts outside its own box never being seen by whatever is
      watching it, because the curtain starts covering the bar and is
      therefore always in view. */
+  /* a one-screen fold cannot be scrubbed, so the curtain plays once
+     when the fold has arrived, over the same geometry as before */
   const wr = weigh.getBoundingClientRect();
-  if (wr.top < vh && wr.bottom > 0) {
-    const span = weigh.offsetHeight - vh;
-    const raw = clamp01((-wr.top) / Math.max(1, span));
-    const p = clamp01((raw - 0.10) / 0.62);          /* a beat of hold at each end */
-    const curtain = $("#curtain");
-    if (curtain) curtain.style.transform = "scaleX(" + (1 - p).toFixed(4) + ")";
-    const segs = T().weigh.segs, total = segs.reduce((n, [, q]) => n + q, 0);
-    let run = 0;
-    $$("#names span").forEach((n, i) => {
-      run += segs[i][1];
-      n.classList.toggle("on", p >= (run / total) - 0.04);
-    });
-    $("#dim").classList.toggle("on", p > 0.97);      /* the dimension line draws last */
-  }
+  if (!weighPlayed && wr.top < vh * .45 && wr.bottom > vh * .55) playWeigh();
 }
 addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(frame) } }, { passive:true });
 addEventListener("resize", () => { if (!ticking) { ticking = true; requestAnimationFrame(frame) } }, { passive:true });

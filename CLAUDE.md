@@ -62,9 +62,15 @@ asked.** Copy changes are fine; layout surgery is not.
 
 **`index.html` and `brand/index.html` are single self-contained files.** No
 Tailwind, no compiled stylesheet, no vendored runtime, no build step: open
-the file and everything the page is, is in it. `video/index.html` is the one
-page still on the compiled stylesheet, and it is the only reason
-`_tw.src.css` and `_build-css.sh` still exist.
+the file and everything the page is, is in it. **Since 6 November that is
+true of `video/index.html` too**, so no page on the site uses Tailwind any
+more. `_tw.src.css`, `_build-css.sh` and `assets/tw-430c50f5.css` are
+deleted with the last page that needed them; git has all three.
+
+**All three pages wear `/brand/`'s interface since 6 November**: its two
+grounds, one-screen folds locked by scroll snap from 980px up, its bar and
+actions, and the paper loop with the signature at the close. See *The site
+on one interface* below.
 
 ## What is open, and what this file would still get wrong
 
@@ -89,7 +95,7 @@ printed output at once.
 
 **The column and the type scale are each stated three times and enforced
 nowhere.** 82rem / 20px / 32px, and 96 · 67 · 52 · 42 · 28 · 19 at 1440,
-live in `/`, in `/brand/` and in the compiled stylesheet. That is the cost
+live in `/`, in `/brand/` and in `/video/`, each hand-written. That is the cost
 the promotion bought. It is the first thing to check when the pages stop
 looking like one site.
 
@@ -181,8 +187,6 @@ alone.** Checked against every published page's own tag:
 | `home/` | `noindex, follow` | a stub redirecting `/home/` to `/` |
 | `proposta-motorhome/` | `noindex` | a Portuguese offer page, its own prices |
 | `templates/` | `noindex` | belt and braces: it is also swept by `pages.yml` |
-| `lab/home/` | `noindex, nofollow` | a sandbox: the offer page on `/brand/`'s interface |
-| `lab/video/` | `noindex, nofollow` | a sandbox: the video page on `/brand/`'s interface |
 
 `reference/` is the near-copy, so without the label it would be a second
 `index.html` bidding against the first for the same terms.
@@ -249,10 +253,8 @@ one: the homepage is the template, and a portfolio in a second identity
 makes the site look like two firms.
 
 **What is shared is now the SCALE rather than a stylesheet**, and that is a
-weaker guarantee than it reads. `/` and `/brand/` are single hand-written
-files and `/video/` is the compiled one, so the six type tokens that run
-96 · 67 · 52 · 42 · 28 · 19 at 1440 are written out in two files and
-compiled in a third. Nothing enforces them. **A token changed on one page
+weaker guarantee than it reads. All three are single hand-written files
+since 6 November, so the type tokens are written out three times. Nothing enforces them. **A token changed on one page
 has to be changed on the other, in the same commit**, which is the cost the
 promotion bought and the thing to check first when the two pages stop
 looking like one site.
@@ -262,7 +264,12 @@ looking like one site.
 under it — because a public path stays public and the link may already have
 been sent. Delete it only when something says nobody is holding it.
 
-### One stylesheet, one page
+### One stylesheet, one page (history: deleted on 6 November)
+
+**Nothing below describes the site any more.** `/video/` left Tailwind on
+6 November and the stylesheet, its source and its build script went with
+it. It is kept because a session that brings a utility compiler back will
+meet the same trap.
 
 `assets/tw-<hash>.css` is `/video/`'s now and nothing else links it. It
 carried all three for as long as all three were Tailwind, and that was the
@@ -1953,7 +1960,45 @@ override sits after the rules it beats, at the same specificity.** The
 first build put it inside the `.bed` block, above them, and it lost to
 them without an error.
 
-### `lab/home/` and `lab/video/` — the other two pages on the brand interface
+### The site on one interface, 6 November
+
+**The owner looked at both labs on real devices and promoted them**, so
+`lab/home/` is `index.html` and `lab/video/` is `video/index.html`, and
+`lab/` is deleted for the fourth time because it won. What changed on the
+way across:
+
+- **The search head is the live pages' own.** Each kept its previous
+  `<title>`, description, canonical, Open Graph and Twitter tags, and
+  `noindex, nofollow` came off. The theme colour is the brand page's
+  `#07100D` on both.
+- **No copy moved on the offer page.** Every string in three languages is
+  the page it replaced; only the gate strip moved into the hero's foot.
+- **Copy moved on the video page, and it was flagged before promotion**:
+  the `Elsewhere` fold gained the headline `The rest of the practice.`, and
+  the Brand line reads `Every mark on the three grounds it has to
+  survive.` instead of the stale `Twelve marks`. The live page's em dashes
+  in prose became a colon and plain sentences. The reel titles keep
+  theirs, because they are titles.
+- **The offer page is no longer light first.** The argument in the
+  `lab/max-home/` section, that it emulates print and that `/brand/`'s
+  palette would make the site look like two firms, is overruled by the
+  owner and kept as history. **The opposite now holds: three pages in one
+  interface.** The documents themselves, decks and annexes, are untouched
+  and stay on their own two systems.
+- **`--ink-soft` on `/` is now scoped per section**, so the old note that
+  `index.html` ships `#4C5B54` describes only the folds the layer does not
+  restate. The theme file still carries `#5A6B63` for decks and annexes.
+- **The social cards are staler than before**: `assets/og.png` and
+  `og-video.png` show the old identity and the old pages. They are
+  rendered images, so redrawing them is a separate job.
+
+Verified on the real paths at 1440, 1180, 820 and 390: no horizontal
+scroll and no page errors on either page; folds measure `[1,1,1,1,1]` and
+`[1,1,1,1]` from 1180 up; the rail lands on `#weigh` with the snap back on,
+the curtain finishes, Norwegian switches, and the dialog opens with focus
+in the email field. **Vimeo and the video beds still cannot play here.**
+
+### `lab/home/` and `lab/video/` — the other two pages on the brand interface (promoted, deleted)
 
 **On 4 November the owner asked for the offer page and the video page
 rebuilt in a lab, taking `/brand/`'s visual interface as the template.**
@@ -2706,10 +2751,9 @@ document agreed before the work starts, not listed on the page.
 ```
 index.html              offer page. One self-contained file, hand-written
                         CSS, vanilla JS, no build step and no Tailwind.
-                        Light. SIX sections — five folds that carry an
-                        eyebrow, plus the gate strip under the hero, which
-                        carries none. Three languages, the intake form and
-                        the tender clock
+                        On /brand/'s interface since 6 November: five
+                        one-screen folds, the gate inside the hero. Three
+                        languages, the intake form and the tender clock
 brand/index.html        brand portfolio. Same shape of file. Dark, with a
                         paper close. Six folds locked to the viewport by
                         scroll snap, three languages
@@ -2719,12 +2763,10 @@ proposta-motorhome/index.html
                         a Portuguese offer page on the retired editorial
                         theme, noindex, with its own four-tier BRL ladder.
                         Not the same file as annex/proposta-motorhome/
-video/index.html        video portfolio — the one page still on the
-                        compiled Tailwind stylesheet
+video/index.html        video portfolio. One self-contained file on
+                        /brand/'s interface since 6 November; English only
 reference/index.html    the first offer page, kept for reference — noindex.
                         Still where the original ladder copy lives
-_tw.src.css             /video/'s Tailwind source, compiled by
-                        _build-css.sh into assets/tw-<hash>.css
 templates/index.html    index of every template
 deck/<slug>/index.html  one deck per folder
 annex/<slug>/index.html one A4 annex per folder
@@ -2745,7 +2787,6 @@ assets/
   vedlegg-5/            the open tender's example PDF and fillable Word file
   fonts/                Geist, Geist Mono and EB Garamond upright and
                         italic, self-hosted woff2
-  tw-<hash>.css         /video/'s compiled Tailwind, built by _build-css.sh
   themes/arvorealta.css tokens for the editorial system
   themes/technical.css  tokens for the technical system
   system.css            structure only — no colour, no typefaces
@@ -2944,8 +2985,9 @@ with a corrected `min-height` arrived on the owner's screen with no
 session a fix was reported as still broken when the fix was live and the
 stylesheet beside it was not.
 
-Run `sh _build-css.sh` after any change to **`video/index.html`** or
-`_tw.src.css`. It compiles, hashes the output, names the file after the
+**History: the build script and the stylesheet are deleted.** Run
+`sh _build-css.sh` after any change to **`video/index.html`** or
+`_tw.src.css` was the rule while they existed. It compiles, hashes the output, names the file after the
 hash, repoints the page and deletes the previous one. Never hand-edit the
 compiled CSS and never rename it by hand. **It used to say `index.html`
 here, and that is now wrong in a way that would waste a session**: the offer
@@ -3545,8 +3587,8 @@ an ink statement fold. **Do not add a mode as a courtesy.**
 
 Checked on all three live pages at 1440: under `prefers-color-scheme: dark`
 every one of them renders the identical computed `background-color` and
-`color` as under light. `/` and `/video/` stay `#D9D7D4` on `#17352C`;
-`/brand/` stays `#070D0B` on `#EFECE7`.
+`color` as under light. Since 6 November all three are dark pages with
+paper folds, not modes: one rendering for every reader.
 
 The offer page carried a real mode for a while, as a toggle in the nav, and
 it is gone. Two things killed it. The page is three greens — paper ground,

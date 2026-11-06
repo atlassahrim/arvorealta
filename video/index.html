@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- The video portfolio on /brand/'s interface, promoted from lab/video/
+     on 6 November: one self-contained file, no compiled stylesheet, no
+     build step. English only, as it always was. -->
 <title>Video work — Atlas Sahrim</title>
 <meta name="description" content="Vertical video editing for social by Atlas Sahrim — cuts, pacing, type and sound. Selected reels.">
 <link rel="canonical" href="https://arvorealta.com/video/">
@@ -14,249 +17,375 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#07100D">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-<meta name="theme-color" content="#17352C">
-
-<!-- Self-hosted, exactly as the offer page does it: no third-party request
-     for type, and nothing outside this repo can change what renders. -->
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ebgaramond-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/geist-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/geist-mono-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/ebgaramond-latin.woff2" crossorigin>
-<link rel="stylesheet" href="/assets/fonts/geist.css">
 <link rel="stylesheet" href="/assets/fonts/ebgaramond.css">
-
-<link rel="stylesheet" href="/assets/tw-430c50f5.css">
-
+<link rel="stylesheet" href="/assets/fonts/geist.css">
+<script>(function(){var h=document.documentElement;h.classList.remove('no-js');
+ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){h.classList.add('rv');
+   setTimeout(function(){h.classList.remove('rv')},4000);}})();</script>
 <style>
-/* The reveal, without the runtime. The offer page animates with Motion
-   because it needs React anyway for the language switcher and the intake
-   dialog; these pages need neither, so they carry no runtime at all.
+/* ══ VIDEO, ON THE BRAND INTERFACE ═════════════════════════════════
+   /brand/ is the template: its tokens, its chrome, its reveal, its one-
+   screen folds locked by scroll snap, its close on the paper loop. Four
+   folds: the open on the water loop, the reels on ink, the other places
+   the work lives on paper, and the close. The reels keep their 9:16 frame,
+   which is the live page's own rule: a vertical edit cropped to a
+   landscape tile is a different piece of work. */
+:root{
+  --ink:#070D0B; --ink-2:#0B1512; --ink-3:#121D19;
+  --paper:#EFEAE1; --paper-2:#E5DED2; --paper-ink:#171412;
+  --bone:#EFECE7; --bone-dim:rgba(239,236,231,.60); --bone-faint:rgba(239,236,231,.32);
+  --ink-dim:rgba(23,20,18,.62); --ink-faint:rgba(23,20,18,.34);
+  --amber:#BD9059; --brick:#8E4A45;
+  --rule:rgba(239,236,231,.13); --rule-ink:rgba(23,20,18,.16);
+  --ease:cubic-bezier(.16,1,.3,1);
+  --col:82rem; --gut:20px;
+  --pad:max(var(--gut),calc((100% - var(--col)) / 2 + var(--gut)));
+  --t-display:clamp(2.7rem,1.32rem + 5.2vw,6rem);
+  --t-head:clamp(1.85rem,1.17rem + 2.3vw,3.4rem);
+  --t-sub:clamp(1.25rem,1.05rem + .8vw,1.85rem);
+  --t-body:clamp(1rem,.95rem + .3vw,1.2rem);
+}
+@media (min-width:640px){:root{--gut:32px}}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--ink);-webkit-text-size-adjust:100%;scroll-snap-type:y mandatory}
+/* the lock is a desktop promise: on a phone the three reels stack past one
+   screen, and a mandatory snap point taller than the screen traps the
+   reader inside it */
+@media (max-width:979px),(prefers-reduced-motion:reduce){html{scroll-snap-type:none}}
+main>section{scroll-snap-align:start}
+body{margin:0;background:var(--ink);color:var(--bone);
+  font-family:Geist,system-ui,sans-serif;font-weight:380;font-size:var(--t-body);
+  line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video,iframe{display:block;max-width:100%}
+h1,h2,h3,p,figure{margin:0}
+a{color:inherit}
+::selection{background:var(--amber);color:var(--ink)}
+:focus-visible{outline-width:2px;outline-style:solid;outline-color:currentColor;outline-offset:3px}
 
-   Three failsafes, because a block stuck at opacity 0 is worse than no
-   animation at all. `.no-js` covers scripting off. `.rv-off` is a four
-   second deadline set in the head: if the script at the foot of the page
-   never runs, everything shows. And reduced motion opts out entirely. */
-.rv{opacity:0;transform:translateY(14px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
-.rv.in{opacity:1;transform:none}
-.no-js .rv,.rv-off .rv{opacity:1;transform:none;transition:none}
-@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+.wrap{width:100%;max-width:var(--col);margin-inline:auto;padding-inline:var(--gut)}
+.eyebrow{font-family:"Geist Mono",ui-monospace,monospace;font-size:11px;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--bone-dim)}
+.lbl{font-family:"Geist Mono",ui-monospace,monospace;font-size:11px;font-weight:600;
+  letter-spacing:.26em;text-transform:uppercase}
+.disp{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.022em}
+.skip{position:fixed;left:-999px;top:0;z-index:200;background:var(--bone);color:var(--ink);padding:12px 18px}
+.skip:focus{left:12px;top:12px}
+
+/* ── chrome: the brand page's bar and rail, two stated colours ────────── */
+.bar{position:fixed;inset:0 0 auto;z-index:80;display:flex;align-items:center;gap:clamp(10px,2vw,28px);
+  padding:20px var(--pad);pointer-events:none;color:var(--chrome,var(--bone));transition:color .5s var(--ease)}
+.bar>*{pointer-events:auto}
+.bar .wm{font-family:"Geist Mono",ui-monospace,monospace;font-size:10.5px;font-weight:500;
+  letter-spacing:.3em;text-transform:uppercase;text-decoration:none;margin-right:auto}
+.act{display:inline-flex;align-items:center;gap:10px;
+  font-family:"Geist Mono",ui-monospace,monospace;font-size:10.5px;font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;padding:11px 20px;border-radius:999px;
+  border:1px solid currentColor;color:inherit;text-decoration:none;
+  transition:background .4s var(--ease)}
+.act:hover{background:color-mix(in srgb,currentColor 12%,transparent)}
+.act::after{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.55}
+.act.line{border-color:color-mix(in srgb,currentColor 45%,transparent)}
+.act.line::after{display:none}
+.rail{position:fixed;right:max(16px,1.6vw);top:50%;transform:translateY(-50%);z-index:78;
+  display:grid;gap:3px;justify-items:end;color:var(--chrome-rail,var(--bone));transition:color .5s var(--ease)}
+.rail a{display:flex;align-items:center;gap:10px;font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;
+  padding:6px 0;opacity:var(--rail-dim,.36);transition:opacity .4s var(--ease)}
+.rail a i{display:block;width:14px;height:1px;background:currentColor;transition:width .5s var(--ease)}
+.rail a[aria-current="true"]{opacity:1}
+.rail a[aria-current="true"] i{width:40px}
+@media (max-width:1100px){.rail{display:none}}
+@media (max-width:620px){
+  .bar{padding:16px var(--gut)}
+  .bar .wm{font-size:9px;letter-spacing:.16em}
+  .act{font-size:9px;letter-spacing:.1em;padding:10px 13px;gap:7px}
+}
+
+/* ── the reveal: a sweep, never an observer ───────────────────────────── */
+html.rv [data-rv]{opacity:0;transform:translate3d(0,14px,0);
+  transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0ms)}
+html.rv [data-rv].in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html.rv [data-rv]{opacity:1!important;transform:none!important}}
+
+/* ── a video bed: the still is the floor, the loop fades in over it ─────── */
+.bed{position:absolute;inset:0;z-index:-1}
+.bed img,.bed video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.bed video{opacity:0;transition:opacity 1.1s var(--ease)}
+.bed video.on{opacity:1}
+
+/* ══ I · OPEN ════════════════════════════════════════════════════════════ */
+.open{position:relative;isolation:isolate;min-height:100svh;display:grid;align-content:center;
+  padding:clamp(96px,14vh,150px) var(--pad) clamp(40px,8vh,90px);overflow:hidden}
+.open .inner{max-width:min(100%,46rem);display:grid;gap:clamp(16px,2.6vh,30px)}
+.open .lbl{color:var(--bone-dim)}
+.open h1{font-size:var(--t-display);line-height:1.04;max-width:14ch;text-wrap:balance}
+.open .sub{max-width:44ch;color:rgba(239,236,231,.8)}
+.open .acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:4px}
+
+/* ══ II · THE REELS ══════════════════════════════════════════════════════ */
+.reels{background:var(--ink);min-height:100svh;display:grid;align-content:center;
+  padding:clamp(84px,11vh,120px) 0 clamp(30px,5vh,60px)}
+.reels .wrap{display:grid;gap:clamp(18px,3vh,34px)}
+.reels .head{display:grid;gap:12px}
+.reels h2{font-size:var(--t-head);line-height:1.04;max-width:18ch}
+.row{display:grid;gap:clamp(18px,2.4vw,40px)}
+@media (min-width:980px){.row{grid-template-columns:repeat(3,auto);justify-content:space-between}}
+.reel{display:grid;gap:14px;justify-items:start}
+/* each frame is sized by the screen's height, so all three fit one fold */
+.frame{position:relative;aspect-ratio:9/16;height:min(58svh,620px);border-radius:3px;overflow:hidden;
+  background:var(--ink-3);border:1px solid var(--rule)}
+@media (max-width:979px){.frame{height:auto;width:min(100%,360px)}}
+.frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.reel figcaption{display:grid;gap:4px;max-width:min(100%,34ch)}
+.reel h3{font-family:"EB Garamond",Georgia,serif;font-weight:400;font-size:var(--t-sub);line-height:1.1;letter-spacing:-.01em}
+.reel p{font-family:"Geist Mono",ui-monospace,monospace;font-size:9.5px;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;line-height:1.7;color:var(--bone-dim)}
+
+/* ══ III · ELSEWHERE, on paper ═══════════════════════════════════════════ */
+.else{background:var(--paper);color:var(--paper-ink);min-height:100svh;display:grid;align-content:center;
+  padding:clamp(84px,11vh,120px) 0 clamp(30px,5vh,60px)}
+.else .eyebrow{color:var(--brick)}
+.else h2{font-size:var(--t-head);line-height:1.04;margin:12px 0 clamp(28px,6vh,64px);max-width:18ch}
+.places{display:grid;border-top:1px solid var(--rule-ink)}
+@media (min-width:820px){.places{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.place{display:grid;gap:12px;align-content:start;padding:clamp(20px,3vh,32px) clamp(0px,2vw,30px) clamp(20px,3vh,32px) 0;
+  border-bottom:1px solid var(--rule-ink);text-decoration:none;transition:background .4s var(--ease)}
+@media (min-width:820px){.place{border-bottom:0;padding-left:clamp(0px,2vw,30px)}
+  .place+.place{border-left:1px solid var(--rule-ink)}.place:first-child{padding-left:0}}
+.place b{font-family:"Geist Mono",ui-monospace,monospace;font-size:9.5px;font-weight:600;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--ink-dim)}
+.place h3{font-family:"EB Garamond",Georgia,serif;font-weight:400;font-size:var(--t-head);line-height:1;letter-spacing:-.02em}
+.place p{max-width:30ch;color:#4F4A45}
+.place span{font-family:"Geist Mono",ui-monospace,monospace;font-size:10px;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;margin-top:6px;display:inline-flex;gap:8px;align-items:center}
+.place span::after{content:"\2192";transition:transform .4s var(--ease)}
+.place:hover span::after{transform:translateX(4px)}
+
+/* ══ IV · CLOSE, the brand page's paper loop and its signature ═══════════ */
+.close{position:relative;isolation:isolate;min-height:100svh;display:grid;align-items:end;
+  background:var(--paper);color:var(--paper-ink);overflow:hidden}
+.close .inner{position:relative;z-index:2;width:100%;max-width:var(--col);margin-inline:auto;
+  padding:clamp(80px,13vh,150px) var(--gut) clamp(30px,6vh,64px);display:grid;gap:clamp(14px,2.4vh,28px)}
+.sig{justify-self:center;display:grid;place-items:center;margin-bottom:clamp(10px,3vh,40px)}
+.sig img{width:clamp(150px,20vw,300px);height:auto}
+.close .lbl{color:var(--brick)}
+.close h2{font-size:var(--t-display);line-height:1.04;max-width:12ch;text-wrap:balance}
+.close .say{max-width:52ch;color:var(--paper-ink)}
+.close .act{justify-self:start;margin-top:4px}
+.close footer{display:flex;flex-wrap:wrap;gap:14px 30px;justify-content:space-between;align-items:center;
+  border-top:1px solid var(--rule-ink);padding-top:20px;margin-top:clamp(30px,6vh,80px);
+  font-family:"Geist Mono",ui-monospace,monospace;font-size:9.5px;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--paper-ink)}
+.close footer a{text-decoration:none;padding:6px 0;transition:opacity .25s var(--ease)}
+.close footer a:hover{opacity:.7}
 </style>
-<script>
-/* Marks scripting as available, then hands the reveal a deadline. The offer
-   page carries the same four seconds for the same reason: show everything
-   rather than nothing if the script never arrives. */
-(function(h){h.className=h.className.replace(/\bno-js\b/,"").trim()+" js";
-setTimeout(function(){if(!h.classList.contains("rv-ready"))h.classList.add("rv-off")},4000)})(document.documentElement);
-</script>
 </head>
+<body>
+<a class="skip" href="#work">Skip to the work</a>
 
-<body class="font-sans antialiased bg-paper text-ink">
-
-<a href="#work" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-[14px] focus:text-bone">Skip to the work</a>
-
-<!-- Fixed, and bone while it is over the ink band, exactly as the offer
-     page's header is bone while it is over the photograph. A sentinel at the
-     foot of the hero flips it rather than a scroll handler, so nothing runs
-     on every frame. -->
-<header id="bar" class="on-ink fixed inset-x-0 top-0 z-40 border-b border-transparent text-bone transition-colors">
-  <div class="mx-auto flex h-[68px] w-full max-w-[82rem] items-center justify-between gap-5 px-5 sm:px-8">
-    <a href="/" class="-my-1 py-1 font-mono text-[13px] uppercase tracking-[.22em]">Arvorealta</a>
-    <nav class="flex items-center gap-5 sm:gap-7">
-      <a href="/" class="-my-1 py-1 text-[14px] opacity-75 transition-opacity hover:opacity-100">the offer</a>
-      <a href="/brand/" class="-my-1 py-1 text-[14px] opacity-75 transition-opacity hover:opacity-100">brand</a>
-      <a href="/video/" aria-current="page" class="-my-1 border-b border-current py-1 text-[14px]">video</a>
-    </nav>
-    <a href="mailto:atlas@arvorealta.com"
-       class="hidden rounded-full bg-bone px-5 py-2.5 text-[14px] font-medium text-ink transition-colors hover:bg-bone/90 sm:inline-flex">Start a project</a>
-  </div>
+<header class="bar">
+  <a class="wm" href="/">Arvorealta</a>
+  <a class="act" href="mailto:atlas@arvorealta.com">Start a project</a>
 </header>
 
-<main>
+<nav class="rail" aria-label="Sections">
+  <a href="#open">Open <i></i></a>
+  <a href="#work">Reels <i></i></a>
+  <a href="#elsewhere">Elsewhere <i></i></a>
+  <a href="#start">Start <i></i></a>
+</nav>
 
-<section class="on-ink bg-ink text-bone">
-  <div class="mx-auto w-full max-w-[82rem] px-5 pb-20 pt-[8.5rem] sm:px-8 sm:pb-28 sm:pt-[10rem]">
-    <p class="rv font-mono text-[11px] uppercase tracking-[.18em] text-bone/75">Video work</p>
-    <h1 class="rv mt-7 max-w-[16ch] font-display text-[clamp(2.6rem,1rem+5vw,5.2rem)] font-normal leading-[1.02] tracking-[-.02em]">
-      Cut for the scroll.<br>Built to survive it.
-    </h1>
-    <p class="rv mt-8 max-w-[46ch] text-[clamp(1.05rem,.98rem+.35vw,1.25rem)] leading-[1.6] text-bone/80">
-      Vertical edits for social: pacing, type, sound and colour. The same
-      discipline as the print work — decide what matters, then remove
-      everything competing with it.
-    </p>
-    <div class="rv mt-10 flex flex-wrap items-center gap-3">
-      <a href="#work" class="inline-flex items-center justify-center rounded-full bg-bone px-6 py-3 text-[15px] font-medium text-ink transition-colors hover:bg-bone/90">See the reels</a>
-      <a href="/brand/" class="inline-flex items-center justify-center rounded-full border border-bone/30 px-6 py-3 text-[15px] font-medium transition-colors hover:border-bone/70">Brand and identity</a>
+<main>
+<section class="open" id="open" data-tone="dark">
+  <div class="bed" aria-hidden="true">
+    <img src="/assets/video/ground-water-2-720.jpg" alt="" width="1280" height="720" fetchpriority="high">
+    <video id="bedv" muted playsinline loop preload="metadata" poster="/assets/video/ground-water-2-720.jpg">
+      <source src="/assets/video/ground-water-2-720.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="inner">
+    <p class="lbl" data-rv>Video work</p>
+    <h1 class="disp" data-rv>Cut for the scroll.<br>Built to survive it.</h1>
+    <p class="sub" data-rv>Vertical edits for social: pacing, type, sound and colour. The same discipline as the print work: decide what matters, then remove everything competing with it.</p>
+    <div class="acts" data-rv>
+      <a class="act" href="#work">See the reels</a>
+      <a class="act line" href="/brand/">Brand and identity</a>
     </div>
   </div>
-  <div id="sentinel" aria-hidden="true" class="h-px"></div>
 </section>
 
-<!-- The reels keep their 9:16 frame rather than being cropped to the grid.
-     A vertical edit cut to a landscape tile is a different piece of work,
-     and the shape is half of what is being shown. -->
-<section id="work" class="mx-auto w-full max-w-[82rem] scroll-mt-[92px] px-5 py-20 sm:px-8 sm:py-28">
-  <p class="rv font-mono text-[11px] uppercase tracking-[.18em] text-brick"><b class="font-semibold tabular-nums">01</b> &nbsp;Selected video work</p>
-
-  <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
-    <figure class="rv">
-      <div class="relative overflow-hidden rounded-2xl border border-ink/15 bg-ink pt-[177.78%]">
-        <iframe class="absolute inset-0 h-full w-full border-0"
+<section class="reels" id="work" data-tone="dark">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow" data-rv>Selected video work</p>
+    </div>
+    <div class="row">
+      <figure class="reel" data-rv>
+        <div class="frame"><iframe
           src="https://player.vimeo.com/video/1218554775?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1"
           allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          title="VSL — Magna Cúrcuma" loading="lazy"></iframe>
-      </div>
-      <figcaption class="mt-4 border-t border-ink/15 pt-3.5">
-        <h3 class="font-display text-[1.45rem] leading-tight">VSL — Magna Cúrcuma</h3>
-        <p class="mt-1 font-mono text-[11px] uppercase tracking-[.14em] text-ink/75">Creative direction · Concept · Copywriting · Video editing</p>
-      </figcaption>
-    </figure>
-    <figure class="rv">
-      <div class="relative overflow-hidden rounded-2xl border border-ink/15 bg-ink pt-[177.78%]">
-        <iframe class="absolute inset-0 h-full w-full border-0"
+          referrerpolicy="strict-origin-when-cross-origin" title="VSL — Magna Cúrcuma" loading="lazy"></iframe></div>
+        <figcaption><h3>VSL — Magna Cúrcuma</h3>
+          <p>Creative direction · Concept · Copywriting · Video editing</p></figcaption>
+      </figure>
+      <figure class="reel" data-rv style="--d:90ms">
+        <div class="frame"><iframe
           src="https://player.vimeo.com/video/1218441540?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1"
           allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          title="Reel — Brand" loading="lazy"></iframe>
-      </div>
-      <figcaption class="mt-4 border-t border-ink/15 pt-3.5">
-        <h3 class="font-display text-[1.45rem] leading-tight">Reel — Brand</h3>
-        <p class="mt-1 font-mono text-[11px] uppercase tracking-[.14em] text-ink/75">Creative direction · Concept · Art direction · Graphic design · Copywriting · Video editing · Motion design · Retouching · Post-production</p>
-      </figcaption>
-    </figure>
-    <figure class="rv">
-      <div class="relative overflow-hidden rounded-2xl border border-ink/15 bg-ink pt-[177.78%]">
-        <iframe class="absolute inset-0 h-full w-full border-0"
+          referrerpolicy="strict-origin-when-cross-origin" title="Reel — Brand" loading="lazy"></iframe></div>
+        <figcaption><h3>Reel — Brand</h3>
+          <p>Creative direction · Concept · Art direction · Graphic design · Copywriting · Video editing · Motion design · Retouching · Post-production</p></figcaption>
+      </figure>
+      <figure class="reel" data-rv style="--d:180ms">
+        <div class="frame"><iframe
           src="https://player.vimeo.com/video/1218349876?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1"
           allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          title="Reel — Fashion Industry" loading="lazy"></iframe>
-      </div>
-      <figcaption class="mt-4 border-t border-ink/15 pt-3.5">
-        <h3 class="font-display text-[1.45rem] leading-tight">Reel — Fashion Industry</h3>
-        <p class="mt-1 font-mono text-[11px] uppercase tracking-[.14em] text-ink/75">Creative direction · Concept · Art direction · Copywriting · Video editing · Motion design · Retouching · Post-production</p>
-      </figcaption>
-    </figure>
-  </div>
-</section>
-
-<section class="mx-auto w-full max-w-[82rem] border-t border-ink/10 px-5 py-20 sm:px-8 sm:py-28">
-  <p class="rv font-mono text-[11px] uppercase tracking-[.18em] text-brick"><b class="font-semibold tabular-nums">02</b> &nbsp;Elsewhere</p>
-
-  <div class="mt-10 grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-3">
-    <div class="rv border-t border-ink/15 pt-6">
-      <h3 class="font-display text-[1.6rem] leading-tight">Brand</h3>
-      <p class="mt-3 max-w-[32ch] text-[.95rem] leading-[1.65] text-ink/75">Twelve marks, each on the three grounds it has to survive.</p>
-      <a href="/brand/" class="mt-4 inline-block font-mono text-[12px] uppercase tracking-[.14em] underline decoration-ink/30 underline-offset-4 transition-colors hover:decoration-ink">arvorealta.com/brand</a>
-    </div>
-    <div class="rv border-t border-ink/15 pt-6">
-      <h3 class="font-display text-[1.6rem] leading-tight">Behance</h3>
-      <p class="mt-3 max-w-[32ch] text-[.95rem] leading-[1.65] text-ink/75">The full case studies behind each piece.</p>
-      <a href="https://www.behance.net/arvorealta" class="mt-4 inline-block font-mono text-[12px] uppercase tracking-[.14em] underline decoration-ink/30 underline-offset-4 transition-colors hover:decoration-ink">behance.net/arvorealta</a>
-    </div>
-    <div class="rv border-t border-ink/15 pt-6">
-      <h3 class="font-display text-[1.6rem] leading-tight">Documents</h3>
-      <p class="mt-3 max-w-[32ch] text-[.95rem] leading-[1.65] text-ink/75">The other half of the practice: document standards for public tenders.</p>
-      <a href="/" class="mt-4 inline-block font-mono text-[12px] uppercase tracking-[.14em] underline decoration-ink/30 underline-offset-4 transition-colors hover:decoration-ink">arvorealta.com</a>
+          referrerpolicy="strict-origin-when-cross-origin" title="Reel — Fashion Industry" loading="lazy"></iframe></div>
+        <figcaption><h3>Reel — Fashion Industry</h3>
+          <p>Creative direction · Concept · Art direction · Copywriting · Video editing · Motion design · Retouching · Post-production</p></figcaption>
+      </figure>
     </div>
   </div>
 </section>
 
-<section class="on-ink bg-ink text-bone">
-  <div class="mx-auto w-full max-w-[82rem] px-5 py-20 sm:px-8 sm:py-28">
-    <p class="rv font-mono text-[11px] uppercase tracking-[.18em] text-bone/75">Start a project</p>
-    <h2 class="rv mt-7 max-w-[22ch] font-display text-[clamp(2rem,1.2rem+2.4vw,3.4rem)] font-normal leading-[1.06] tracking-[-.015em]">
-      Tell me where it<br>has to play.
-    </h2>
-    <p class="rv mt-7 max-w-[48ch] leading-[1.7] text-bone/80">
-      A feed, a paid placement and a screen above a trade stand are three
-      different cuts of the same footage. Knowing which one it is decides the
-      pacing, the type size and whether the sound matters at all.
-    </p>
-    <div class="rv mt-10">
-      <a href="mailto:atlas@arvorealta.com" class="inline-flex items-center justify-center rounded-full bg-bone px-6 py-3 text-[15px] font-medium text-ink transition-colors hover:bg-bone/90">atlas@arvorealta.com</a>
+<section class="else" id="elsewhere" data-tone="light">
+  <div class="wrap">
+    <p class="eyebrow" data-rv>Elsewhere</p>
+    <h2 class="disp" data-rv>The rest of the practice.</h2>
+    <div class="places">
+      <a class="place" href="/brand/" data-rv>
+        <b>01</b><h3>Brand</h3>
+        <p>Every mark on the three grounds it has to survive.</p>
+        <span>arvorealta.com/brand</span>
+      </a>
+      <a class="place" href="https://www.behance.net/arvorealta" data-rv style="--d:90ms">
+        <b>02</b><h3>Behance</h3>
+        <p>The full case studies behind each piece.</p>
+        <span>behance.net/arvorealta</span>
+      </a>
+      <a class="place" href="/" data-rv style="--d:180ms">
+        <b>03</b><h3>Documents</h3>
+        <p>The other half of the practice: document standards for public tenders.</p>
+        <span>arvorealta.com</span>
+      </a>
     </div>
   </div>
 </section>
 
+<section class="close" id="start" data-tone="light">
+  <div class="bed" aria-hidden="true">
+    <img src="/assets/video/ground-paper-2-720.jpg" alt="" width="1280" height="720" loading="lazy">
+    <video id="closev" muted playsinline loop preload="none" poster="/assets/video/ground-paper-2-720.jpg">
+      <source src="/assets/video/ground-paper-2-720.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="inner">
+    <div class="sig" data-rv>
+      <img src="/assets/img/arvo-mark-1-1200.webp" width="1200" height="443" loading="lazy"
+           sizes="(min-width:1100px) 300px, 44vw"
+           srcset="/assets/img/arvo-mark-1-600.webp 600w, /assets/img/arvo-mark-1-1200.webp 1200w"
+           alt="The Arvorealta mark">
+    </div>
+    <p class="lbl" data-rv>Start a project</p>
+    <h2 class="disp" data-rv>Tell me where it has to play.</h2>
+    <p class="say" data-rv>A feed, a paid placement and a screen above a trade stand are three different cuts of the same footage. Knowing which one it is decides the pacing, the type size and whether the sound matters at all.</p>
+    <a class="act" href="mailto:atlas@arvorealta.com" data-rv>atlas@arvorealta.com</a>
+    <footer data-rv>
+      <span>Arvorealta &nbsp;/&nbsp; Atlas Sahrim</span>
+      <span><a href="/">Documents and tenders</a> &nbsp;/&nbsp; <a href="/brand/">Brand and identity</a>
+        &nbsp;/&nbsp; <a href="https://www.behance.net/arvorealta">Behance</a>
+        &nbsp;/&nbsp; <a href="https://www.linkedin.com/in/atlassahrim">LinkedIn</a></span>
+      <span><a href="mailto:atlas@arvorealta.com">atlas@arvorealta.com</a></span>
+    </footer>
+  </div>
+</section>
 </main>
 
-<footer class="border-t border-ink/10 py-10">
-  <div class="mx-auto flex w-full max-w-[82rem] flex-wrap items-center justify-between gap-x-8 gap-y-4 px-5 font-mono text-[11px] uppercase tracking-[.18em] text-ink/75 sm:px-8">
-    <span>Arvorealta</span>
-    <nav class="flex flex-wrap items-center gap-x-7 gap-y-2">
-      <a href="/" class="-my-1.5 py-1.5 transition-colors hover:text-ink">The offer</a>
-      <a href="/brand/" class="-my-1.5 py-1.5 transition-colors hover:text-ink">Brand</a>
-      <a href="/video/" class="-my-1.5 py-1.5 transition-colors hover:text-ink">Video</a>
-      <a href="https://www.behance.net/arvorealta" class="-my-1.5 py-1.5 transition-colors hover:text-ink">Behance</a>
-      <a href="https://www.linkedin.com/in/atlassahrim" class="-my-1.5 py-1.5 transition-colors hover:text-ink">LinkedIn</a>
-    </nav>
-    <a href="mailto:atlas@arvorealta.com" class="-my-1.5 py-1.5 transition-colors hover:text-ink">atlas@arvorealta.com</a>
-  </div>
-</footer>
-
 <script>
-/* The reveal is a sweep, and an IntersectionObserver is the wrong tool for
-   it. An observer only reports a CHANGE in intersection, so a jump that
-   crosses a block without ever painting it — the hero's own "See the work"
-   anchor, a restored scroll position, Cmd+End — takes the block from "below
-   the fold" to "above the fold" with ratio 0 at both ends, fires nothing,
-   and leaves it at opacity 0 for the life of the page. Measured: jumping
-   straight to 1600px left the first row of work permanently invisible.
+(() => {
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const root = document.documentElement;
 
-   This is the trap CLAUDE.md records twice in the award fold, in its other
-   form: an element that hides itself cannot be the thing you observe.
+/* the picture is the floor; the loop arrives over it, gated on `playing`,
+   with a gesture retry that stays until playback has actually started */
+function mountVideo(v){
+  if (!v) return;
+  if (reduce) { v.remove(); return; }
+  v.muted = true; v.defaultMuted = true; v.playsInline = true; v.loop = true;
+  const on = () => v.classList.add("on");
+  v.addEventListener("playing", on);
+  v.addEventListener("timeupdate", () => { if (v.currentTime > 0) on(); });
+  v.addEventListener("error", () => v.remove());
+  const ask = () => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+  ask();
+  const evs = ["pointerdown","touchstart","touchend","click","keydown","visibilitychange"];
+  const retry = () => { if (v.classList.contains("on")) { evs.forEach(e => removeEventListener(e, retry)); return; } ask(); };
+  evs.forEach(e => addEventListener(e, retry, { passive:true }));
+}
+mountVideo($("#bedv"));
+const closev = $("#closev");
+if (closev && !reduce) {
+  const io = new IntersectionObserver(es => {
+    if (es.some(e => e.isIntersecting)) { closev.preload = "auto"; mountVideo(closev); io.disconnect(); }
+  }, { rootMargin:"600px" });
+  io.observe($("#start"));
+} else if (closev) closev.remove();
 
-   So the page measures instead, on a rAF-throttled passive scroll, and
-   reveals anything whose top has reached the lower eighth of the screen OR
-   is already above it. The list only shrinks, and the listeners take
-   themselves off once it is empty, so nothing survives the arrival. */
-(function () {
-  document.documentElement.classList.add("rv-ready");
-  var left = [].slice.call(document.querySelectorAll(".rv")), tick = 0;
+/* in-page jumps take the snap off for their length, as on /brand/ */
+let jumpToken = 0;
+function jumpTo(el, hash){
+  root.style.scrollSnapType = "none";
+  const t0 = performance.now(), mine = ++jumpToken;
+  scrollTo({ top: Math.round(el.getBoundingClientRect().top + scrollY), behavior: reduce ? "auto" : "smooth" });
+  if (hash) history.replaceState(null, "", hash);
+  let last = -1, still = 0;
+  (function quiet(){
+    if (mine !== jumpToken) return;
+    const y = Math.round(scrollY);
+    if (y === last) still++; else { still = 0; last = y; }
+    if (still >= 6 || performance.now() - t0 > 1600) { root.style.scrollSnapType = ""; return; }
+    requestAnimationFrame(quiet);
+  })();
+}
+addEventListener("click", e => {
+  const a = e.target.closest && e.target.closest('a[href^="#"]');
+  if (!a) return;
+  const hash = a.getAttribute("href"), el = hash.length > 1 && document.getElementById(hash.slice(1));
+  if (!el) return;
+  e.preventDefault(); jumpTo(el, hash);
+  el.setAttribute("tabindex", "-1"); el.focus({ preventScroll:true });
+});
 
-  function sweep() {
-    tick = 0;
-    var vh = innerHeight, shown = 0, rest = [];
-    for (var i = 0; i < left.length; i++) {
-      var el = left[i];
-      if (el.getBoundingClientRect().top < vh * 0.92) {
-        /* The stagger is per batch, not per document. Indexing globally
-           means everything below the fourth element arrives with the same
-           delay, which is no stagger at all. */
-        el.style.transitionDelay = Math.min(shown++, 4) * 60 + "ms";
-        el.classList.add("in");
-      } else rest.push(el);
-    }
-    left = rest;
-    if (!left.length) {
-      removeEventListener("scroll", onScroll);
-      removeEventListener("resize", sweep);
-    }
-  }
-  function onScroll() { if (!tick) tick = requestAnimationFrame(sweep) }
-
-  addEventListener("scroll", onScroll, { passive: true });
-  addEventListener("resize", sweep);
-  /* One frame late, so the opacity:0 start state is painted and the first
-     blocks animate in rather than appearing already arrived. */
-  requestAnimationFrame(sweep);
-
-  /* The header is a sentinel rather than a measurement: its state changes
-     once, at a known place, and an observer reports that crossing in both
-     directions including on a jump, because the sentinel's own intersection
-     genuinely changes. */
-
-  var bar = document.getElementById("bar"), s = document.getElementById("sentinel");
-  if (!bar || !s) return;
-  var OVER = ["on-ink", "text-bone", "border-transparent"];
-  var PAST = ["border-ink/10", "bg-paper/85", "backdrop-blur-md"];
-  new IntersectionObserver(function (es) {
-    var over = es[0].isIntersecting;
-    OVER.forEach(function (c) { bar.classList.toggle(c, over) });
-    PAST.forEach(function (c) { bar.classList.toggle(c, !over) });
-  }, { threshold: 0 }).observe(s);
+/* one loop: the reveal sweep, the chrome's two colours, the rail */
+const toned = $$("[data-tone]"), rails = $$(".rail a"),
+      secs = rails.map(a => document.getElementById(a.getAttribute("href").slice(1)));
+let pending = $$("[data-rv]"), ticking = false;
+function setChrome(light, prop){ root.style.setProperty(prop, light ? "#171412" : "#EFECE7"); }
+function frame(){
+  ticking = false;
+  const vh = innerHeight, atEnd = scrollY + vh >= document.documentElement.scrollHeight - 4;
+  if (pending.length) pending = pending.filter(el => {
+    const t = el.getBoundingClientRect().top;
+    if (t < vh * .875 || atEnd) { el.classList.add("in"); return false; } return true;
+  });
+  const tone = y => { for (const el of toned) { const r = el.getBoundingClientRect();
+    if (r.top <= y && r.bottom > y) return el.dataset.tone === "light"; } return false; };
+  setChrome(tone(40), "--chrome");
+  setChrome(tone(vh / 2), "--chrome-rail");
+  root.style.setProperty("--rail-dim", tone(vh / 2) ? ".62" : ".36");
+  let cur = 0; secs.forEach((s, i) => { if (s && s.getBoundingClientRect().top <= vh / 2) cur = i; });
+  rails.forEach((a, i) => a.setAttribute("aria-current", i === cur ? "true" : "false"));
+}
+const kick = () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } };
+addEventListener("scroll", kick, { passive:true });
+addEventListener("resize", kick);
+frame();
 })();
 </script>
 </body>
