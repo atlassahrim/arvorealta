@@ -1,0 +1,323 @@
+<title>Where to Meet the Buyer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: one reading column on Arvorealta's paper, wide tables scroll inside their own frame. */
+:root{
+  --bg:#EFEAE1; --bg2:#E5DED2; --fg:#171412; --soft:#5B554F; --rule:rgba(23,20,18,.16);
+  --accent:#7A5A2E; --mark:#BD9059; --win:rgba(189,144,89,.18);
+  --t-ver:#2F5D46; --t-inf:#4F5A63; --t-gue:#7A5A2E; --t-mis:#8E4A45; --t-cli:#171412;
+  --f-disp:"EB Garamond",Garamond,"Times New Roman",serif;
+  --f-body:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"Geist Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#070D0B; --bg2:#0B1512; --fg:#EFECE7; --soft:rgba(239,236,231,.68); --rule:rgba(239,236,231,.14);
+  --accent:#D3AA74; --mark:#BD9059; --win:rgba(189,144,89,.14);
+  --t-ver:#8FC4A6; --t-inf:#A9B4BC; --t-gue:#D3AA74; --t-mis:#D9938C; --t-cli:#EFECE7; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#070D0B; --bg2:#0B1512; --fg:#EFECE7; --soft:rgba(239,236,231,.68); --rule:rgba(239,236,231,.14);
+  --accent:#D3AA74; --mark:#BD9059; --win:rgba(189,144,89,.14);
+  --t-ver:#8FC4A6; --t-inf:#A9B4BC; --t-gue:#D3AA74; --t-mis:#D9938C; --t-cli:#EFECE7; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased}
+.wrap{max-width:46rem;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:40px 72px}
+.wide{max-width:64rem}
+.eyebrow{font:600 11px/1.4 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--soft)}
+h1{font:400 clamp(2.4rem,1.6rem + 3.6vw,3.6rem)/1.04 var(--f-disp);letter-spacing:-.01em;margin:10px 0 12px;text-wrap:balance}
+h2{font:400 clamp(1.7rem,1.3rem + 1.6vw,2.3rem)/1.1 var(--f-disp);margin:0 0 14px;text-wrap:balance}
+h3{font:600 13px/1.4 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;margin:30px 0 10px;color:var(--fg)}
+p,li{max-width:65ch}
+p{margin:0 0 14px}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+strong{font-weight:600}
+code{font:500 .86em var(--f-mono);background:var(--bg2);padding:1px 5px;border-radius:4px;overflow-wrap:anywhere}
+section{border-top:1px solid var(--rule);padding-top:34px;margin-top:40px}
+.meta{color:var(--soft);font-size:14px;margin:0}
+.answer{font:400 clamp(1.18rem,1.05rem + .5vw,1.34rem)/1.5 var(--f-disp);margin:26px 0 0;padding:22px 0 0;border-top:2px solid var(--fg)}
+.answer p{max-width:60ch}
+.answer strong{font-weight:500}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0;padding:0;list-style:none}
+.tags li{font-size:13px;color:var(--soft)}
+.t{display:inline-block;font:600 10px/1 var(--f-mono);letter-spacing:.08em;padding:3px 6px 2px;border-radius:3px;border:1px solid currentColor;vertical-align:1px;white-space:nowrap}
+.t.v{color:var(--t-ver)}.t.i{color:var(--t-inf)}.t.g{color:var(--t-gue)}.t.m{color:var(--t-mis)}.t.c{color:var(--t-cli)}
+ul,ol{padding-left:1.2em;margin:0 0 14px;display:grid;gap:8px}
+.verdict{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));margin:22px 0 0}
+.verdict div{border:1px solid var(--rule);border-radius:10px;padding:14px 16px;min-width:0}
+.verdict div.lead{border-color:var(--fg)}
+.verdict b{display:block;font:600 10.5px/1.4 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--soft);margin-bottom:6px}
+.verdict span{font:400 1.2rem/1.25 var(--f-disp)}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:8px 0 6px;border:1px solid var(--rule);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font:600 10.5px/1.3 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--soft);white-space:nowrap;background:var(--bg2)}
+table.score td:nth-child(n+3){text-align:center;white-space:nowrap}
+table.score th:nth-child(n+3){text-align:center}
+table.score td:nth-child(2){min-width:15rem}
+table.score tr.win td{background:var(--win)}
+table.score tr.win td:nth-child(2){font-weight:600}
+td.tot{font:600 15px var(--f-mono)}
+td.tot i{display:block;height:3px;margin:5px auto 0;background:var(--mark);border-radius:2px}
+table.path td:first-child,table.plan td:first-child{white-space:nowrap;font:600 12px/1.6 var(--f-mono)}
+table.plan td:nth-child(2){font:600 12px/1.6 var(--f-mono);text-align:center}
+.key{font-size:13px;color:var(--soft);margin-top:10px}
+.notes{margin-top:14px}
+.mail{background:var(--bg2);border-radius:10px;padding:18px 20px;margin:12px 0 18px;font-size:15px;line-height:1.65}
+.mail p{margin:0 0 10px}
+.mail .subj{font:600 12px/1.5 var(--f-mono);letter-spacing:.04em}
+.mail .ph{color:var(--accent)}
+.signal{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.signal li{border-left:2px solid var(--rule);padding:2px 0 2px 14px}
+.signal li.ok{border-color:var(--t-ver)}.signal li.bad{border-color:var(--t-mis)}
+.signal b{font:600 11px/1.4 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;display:block;color:var(--soft)}
+details{border-top:1px solid var(--rule);padding:12px 0}
+summary{cursor:pointer;font:600 12px/1.5 var(--f-mono);letter-spacing:.1em;text-transform:uppercase}
+.src li{font-size:14px;overflow-wrap:anywhere}
+.synth{margin-top:48px;padding:22px 20px;border:1px solid var(--fg);border-radius:12px}
+.synth h2{font-size:1.6rem}
+@media (max-width:560px){th,td{padding:8px 8px}table{font-size:13.5px}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">Arvorealta · go to market · 6 November 2026</p>
+  <h1>Where to meet the buyer first</h1>
+  <p class="meta">Three solutions, one question: which single point of contact, and which venue, would have the most impact, and where should ten hours a week go first?</p>
+
+  <div class="answer">
+    <p>Spend the first two weeks on <strong>brand</strong>. The buyer reaches the identity question when the website is about to be built. At that point they ask someone they trust: <em>who can do our brand?</em> The person they ask is most often the small web or marketing studio building the site, so <strong>that studio is the venue</strong>.</p>
+    <p>Become the identity partner for three to five studios in Tallinn, Helsinki and Oslo. Offer a fixed €8,000 scope, a clean spec they can build from, and 10% of the fee for any introduction that signs. It scores highest because it borrows trust you do not yet have in these markets, costs nothing but time, can repeat, and carries video too.</p>
+    <p><strong>Fix the mail first.</strong> <code>arvorealta.com</code> has no DMARC record and no DKIM key at Google's default selector <span class="t v">VERIFIED</span>. The four October reviews went out from that domain with PDFs attached, so the silence may mean they were never seen <span class="t i">INFERRED</span>.</p>
+    <p>Pause the tender reviews for 14 days, and sell video only inside an identity launch. Do not buy listings, ads or tickets, and do not bid on public identity tenders yet.</p>
+  </div>
+
+  <ul class="tags" aria-label="Tag key">
+    <li><span class="t v">VERIFIED</span> checked at source</li>
+    <li><span class="t i">INFERRED</span> reasoned from verified material</li>
+    <li><span class="t g">GUESS</span> hypothesis to test</li>
+    <li><span class="t m">MISSING</span> not found</li>
+    <li><span class="t c">CLIENT</span> your statement or decision</li>
+  </ul>
+
+  <div class="verdict" aria-label="Primary point of contact per solution">
+    <div class="lead"><b>Brand · priority</b><span>Partner studios, at the moment a site needs a brand</span></div>
+    <div><b>Tender documents</b><span>Losing bidders, right after the award notice. Paused 14 days</span></div>
+    <div><b>Video</b><span>Inside each identity launch, sold to the same buyer</span></div>
+    <div><b>Shared venue</b><span>The partner studio: brand and video</span></div>
+  </div>
+</div>
+
+<div class="wrap">
+<section id="buyer">
+  <p class="eyebrow">1 · The buyer</p>
+  <h2>Who buys an €8,000 identity</h2>
+  <p><strong>Who.</strong> The founder or MD of a company of 10 to 100 people in Norway, Finland, Sweden or Estonia. The company works in English or tolerates it, and something has just changed: its name, owner, market or website <span class="t g">GUESS</span>.</p>
+  <p><strong>Who pays.</strong> The same person, who can sign alone below about €10,000 <span class="t g">GUESS</span>. The €10,000 line comes from this repo's pricing note about manufacturers <span class="t c">CLIENT</span>, not from this buyer.</p>
+  <p><strong>What others charge.</strong> European bands put a full identity with a guide at €2,500 to €8,000 at a boutique studio and €12,000 to €40,000 at a mid-size agency. These are studios selling identity, so it is seller language. €8,000 sits at the top of boutique and under agency, with room for a partner's fee <span class="t i">INFERRED</span>.</p>
+
+  <h3>Shared buyers</h3>
+  <ul>
+    <li><strong>Brand and documents share a role.</strong> The manufacturer MD in <code>profile.md</code> can enter at either end, because the ladder's top rung is the same €8,000 identity <span class="t c">CLIENT</span>. That buyer has answered zero of four approaches so far <span class="t v">VERIFIED</span>.</li>
+    <li><strong>Brand and video share the buyer and the moment.</strong> A new identity has to be launched, and the launch is social video <span class="t i">INFERRED</span>.</li>
+  </ul>
+
+  <h3>The path, for brand</h3>
+  <div class="scroll"><table class="path">
+    <thead><tr><th>Stage</th><th>What happens</th></tr></thead>
+    <tbody>
+      <tr><td>Trigger</td><td>A rename, merger, new owner, funding round, new market or website rebuild. The rebuild is where an unsettled brand becomes a blocker <span class="t i">INFERRED</span></td></tr>
+      <tr><td>Searching</td><td>They ask people they trust before they search. In Hinge's professional-services studies, referrals lead discovery: 71% against 11% for search in an older study, and under 60% asking, with search at about one in five, in a later one <span class="t v">VERIFIED</span>, from secondary write-ups</td></tr>
+      <tr><td>Comparing</td><td>Two to four portfolios, perhaps one reference call <span class="t g">GUESS</span>, from vendor guides only</td></tr>
+      <tr><td>Deciding</td><td>The founder alone, on craft and trust <span class="t g">GUESS</span></td></tr>
+      <tr><td>Buying</td><td>A fixed-scope proposal, then a deposit <span class="t i">INFERRED</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="notes"><strong>The one place: the searching stage, inside the conversation with the studio about to build their site.</strong> That studio already has the founder's trust and a deadline that depends on the brand, and it sees the problem before the founder starts looking <span class="t i">INFERRED</span>.</p>
+</section>
+</div>
+
+<div class="wrap wide">
+<section id="scores">
+  <p class="eyebrow">2 · The scoring</p>
+  <h2>Ten venues for brand, nine for documents, eight for video</h2>
+  <p class="key">Each criterion is scored 1 to 5, and 5 is always best: Proximity to the pain · Reach to the decider · Cost per real conversation (5 is cheapest) · Cycle (5 is shortest) · Ladder fit · Repeatability · Evidence. The total is out of 35. The scores are judgement on the tagged facts, not measurements.</p>
+
+  <h3>Brand identity · €8,000 · the priority</h3>
+  <div class="scroll"><table class="score">
+    <thead><tr><th></th><th>Point of contact and venue</th><th>Prox</th><th>Reach</th><th>Cost</th><th>Cycle</th><th>Ladder</th><th>Repeat</th><th>Evid</th><th>Total</th></tr></thead>
+    <tbody>
+      <tr class="win"><td>A</td><td>Partner studios: web, product and marketing studios with no identity practice</td><td>4</td><td>4</td><td>4</td><td>3</td><td>4</td><td>5</td><td>3</td><td class="tot">27<i style="width:77%"></i></td></tr>
+      <tr><td>B</td><td>Company-register name changes in Brønnøysund, PRH and Äriregister, with a note to the MD</td><td>5</td><td>4</td><td>2</td><td>3</td><td>4</td><td>5</td><td>2</td><td class="tot">25<i style="width:71%"></i></td></tr>
+      <tr><td>C</td><td>Introductions from existing clients, mostly in Brazil</td><td>3</td><td>4</td><td>5</td><td>4</td><td>4</td><td>2</td><td>3</td><td class="tot">25<i style="width:71%"></i></td></tr>
+      <tr><td>D</td><td>Funding announcements in Estonia, Finland and Norway</td><td>3</td><td>4</td><td>3</td><td>3</td><td>3</td><td>3</td><td>2</td><td class="tot">21<i style="width:60%"></i></td></tr>
+      <tr><td>E</td><td>Public tenders for a visual identity on Doffin, Hilma and TED</td><td>5</td><td>5</td><td>1</td><td>2</td><td>3</td><td>2</td><td>3</td><td class="tot">21<i style="width:60%"></i></td></tr>
+      <tr><td>G</td><td>Directories: Clutch, Behance, Contra</td><td>3</td><td>3</td><td>2</td><td>3</td><td>2</td><td>3</td><td>2</td><td class="tot">18<i style="width:51%"></i></td></tr>
+      <tr><td>F</td><td>Accelerator perks and office hours</td><td>2</td><td>3</td><td>3</td><td>2</td><td>2</td><td>4</td><td>1</td><td class="tot">17<i style="width:49%"></i></td></tr>
+      <tr><td>J</td><td>Manufacturers, through the document ladder's top rung</td><td>1</td><td>4</td><td>2</td><td>1</td><td>5</td><td>3</td><td>1</td><td class="tot">17<i style="width:49%"></i></td></tr>
+      <tr><td>I</td><td>LinkedIn posting and search traffic to <code>/brand/</code></td><td>2</td><td>2</td><td>2</td><td>1</td><td>3</td><td>4</td><td>1</td><td class="tot">15<i style="width:43%"></i></td></tr>
+      <tr><td>H</td><td>Events: Latitude59, Slush, Oslo Innovation Week</td><td>2</td><td>3</td><td>1</td><td>2</td><td>3</td><td>2</td><td>1</td><td class="tot">14<i style="width:40%"></i></td></tr>
+    </tbody>
+  </table></div>
+  <ul class="notes">
+    <li><strong>B is a real feed.</strong> Brønnøysund's update API is open and keyless, and returns field-level patches. On 2 November 2026 it carried 117 name changes, six of them limited companies with five or more staff: a fish farm, a haulier, a school and three others <span class="t v">VERIFIED</span>, queried for this answer. It is weak on timing: nobody knows whether a renamed firm already has its identity <span class="t m">MISSING</span>. A cold note from a stranger is also the approach that is 0 for 4.</li>
+    <li><strong>C scores well and misses the brief.</strong> You named the four Nordic and Baltic markets <span class="t c">CLIENT</span>. If the first €8,000 can come from anywhere, C goes first.</li>
+    <li><strong>E is the closest to the pain.</strong> A public body publishes its need, budget and date. Arendal kommune tendered a new visual identity at an estimated 300,000 NOK in 2024 <span class="t v">VERIFIED</span>. No 2026 municipal identity tender was found in Norway or Finland <span class="t m">MISSING</span>, and each bid is a full document in the local language.</li>
+    <li><strong>D is small.</strong> Estonia had 58 rounds across 53 startups in 2025 <span class="t v">VERIFIED</span>, mostly seed and pre-seed, where €8,000 is a large share of the money <span class="t i">INFERRED</span>.</li>
+  </ul>
+
+  <h3>Document standards for public tenders · free → €600 → €2,400 → €8,000</h3>
+  <div class="scroll"><table class="score">
+    <thead><tr><th></th><th>Point of contact and venue</th><th>Prox</th><th>Reach</th><th>Cost</th><th>Cycle</th><th>Ladder</th><th>Repeat</th><th>Evid</th><th>Total</th></tr></thead>
+    <tbody>
+      <tr class="win"><td>A</td><td>Losing bidders after the award: the result notice names every tenderer, then email the MD</td><td>5</td><td>4</td><td>3</td><td>2</td><td>5</td><td>4</td><td>3</td><td class="tot">26<i style="width:74%"></i></td></tr>
+      <tr><td>C</td><td>Bid consultancies as subcontract partners (Tender as a Service, Anbudspartner)</td><td>3</td><td>2</td><td>4</td><td>3</td><td>3</td><td>4</td><td>2</td><td class="tot">21<i style="width:60%"></i></td></tr>
+      <tr><td>D</td><td>Distributors that bid for the makers they carry, such as Strømbergs</td><td>4</td><td>3</td><td>3</td><td>2</td><td>4</td><td>3</td><td>2</td><td class="tot">21<i style="width:60%"></i></td></tr>
+      <tr><td>E</td><td>Register name changes among manufacturers (shared with brand B)</td><td>2</td><td>4</td><td>3</td><td>3</td><td>4</td><td>4</td><td>1</td><td class="tot">21<i style="width:60%"></i></td></tr>
+      <tr><td>B</td><td>Open tenders before the deadline, as done in October</td><td>3</td><td>4</td><td>2</td><td>2</td><td>4</td><td>4</td><td>1</td><td class="tot">20<i style="width:57%"></i></td></tr>
+      <tr><td>F</td><td>EPD consultants as partners</td><td>3</td><td>2</td><td>4</td><td>3</td><td>3</td><td>3</td><td>1</td><td class="tot">19<i style="width:54%"></i></td></tr>
+      <tr><td>G</td><td>Buyers' supplier days and market dialogue meetings</td><td>4</td><td>3</td><td>1</td><td>2</td><td>3</td><td>2</td><td>2</td><td class="tot">17<i style="width:49%"></i></td></tr>
+      <tr><td>H</td><td>Industry associations: Norsk Industri, Teknologiateollisuus, Teknikföretagen</td><td>2</td><td>3</td><td>2</td><td>1</td><td>3</td><td>4</td><td>1</td><td class="tot">16<i style="width:46%"></i></td></tr>
+      <tr><td>I</td><td>LinkedIn posting aimed at bid managers</td><td>2</td><td>2</td><td>2</td><td>1</td><td>3</td><td>4</td><td>1</td><td class="tot">15<i style="width:43%"></i></td></tr>
+    </tbody>
+  </table></div>
+  <p class="notes">A loser has just been told the score, and the buyer's evaluation shows where the points went. TED result notices name every tenderer <span class="t v">VERIFIED</span>. B is what was tried, and it hit the deadline crunch: four sent, no replies <span class="t v">VERIFIED</span>. <strong>Paused for 14 days</strong>, because brand is the priority <span class="t c">CLIENT</span> and the mail has to be proven first.</p>
+
+  <h3>Video for social · unpriced</h3>
+  <div class="scroll"><table class="score">
+    <thead><tr><th></th><th>Point of contact and venue</th><th>Prox</th><th>Reach</th><th>Cost</th><th>Cycle</th><th>Ladder</th><th>Repeat</th><th>Evid</th><th>Total</th></tr></thead>
+    <tbody>
+      <tr class="win"><td>A</td><td>Inside each identity launch, sold to the same buyer with the brand</td><td>4</td><td>5</td><td>5</td><td>4</td><td>5</td><td>3</td><td>2</td><td class="tot">28<i style="width:80%"></i></td></tr>
+      <tr><td>B</td><td>The same partner studios (shared with brand A)</td><td>3</td><td>4</td><td>4</td><td>3</td><td>3</td><td>4</td><td>2</td><td class="tot">23<i style="width:66%"></i></td></tr>
+      <tr><td>C</td><td>Social and content agencies short of production</td><td>3</td><td>3</td><td>3</td><td>3</td><td>2</td><td>4</td><td>2</td><td class="tot">20<i style="width:57%"></i></td></tr>
+      <tr><td>D</td><td>Startups after a round, for a launch film</td><td>3</td><td>4</td><td>3</td><td>3</td><td>2</td><td>3</td><td>1</td><td class="tot">19<i style="width:54%"></i></td></tr>
+      <tr><td>E</td><td>Manufacturers, for product films for trade fairs and tenders</td><td>2</td><td>4</td><td>2</td><td>2</td><td>3</td><td>3</td><td>1</td><td class="tot">17<i style="width:49%"></i></td></tr>
+      <tr><td>F</td><td>Hospitality and property, for social content</td><td>3</td><td>3</td><td>3</td><td>3</td><td>1</td><td>3</td><td>1</td><td class="tot">17<i style="width:49%"></i></td></tr>
+      <tr><td>G</td><td>Marketplaces: Upwork, Contra</td><td>2</td><td>3</td><td>2</td><td>3</td><td>1</td><td>3</td><td>2</td><td class="tot">16<i style="width:46%"></i></td></tr>
+      <tr><td>H</td><td>Event organisers and side events</td><td>2</td><td>3</td><td>2</td><td>2</td><td>1</td><td>2</td><td>1</td><td class="tot">13<i style="width:37%"></i></td></tr>
+    </tbody>
+  </table></div>
+  <p class="notes">Video has no price and no ladder of its own <span class="t c">CLIENT</span>, so it cannot be sold to a stranger alone yet <span class="t i">INFERRED</span>. Before the first partner call, price it as an add-on to the identity, for example a launch set of three films. That price is your decision.</p>
+</section>
+</div>
+
+<div class="wrap">
+<section id="plan">
+  <p class="eyebrow">3 · The first 14 days</p>
+  <h2>About 18 hours, €0</h2>
+  <p>The overall winner is the partner studio. The fee to a partner is paid only out of a signed job.</p>
+  <div class="scroll"><table class="plan">
+    <thead><tr><th>Date</th><th>Hrs</th><th>Work</th></tr></thead>
+    <tbody>
+      <tr><td>Mon 9 Nov</td><td>2</td><td><strong>Fix the mail.</strong> In Google Admin, generate and publish the DKIM key. Add <code>_dmarc.arvorealta.com</code> with <code>v=DMARC1; p=none; rua=mailto:</code> plus your own address. Send one test each to a Gmail and an Outlook address you own, and confirm that SPF, DKIM and DMARC all read pass. Check the October sent folder for bounces.</td></tr>
+      <tr><td>Tue 10 Nov</td><td>2</td><td><strong>Build the list.</strong> 40 studios of 2 to 20 people in Tallinn, Helsinki and Oslo, from Clutch's web-design pages, Google Maps and LinkedIn. Keep only studios that do not sell brand identity, or sell only "logo design". Record the founder and one project.</td></tr>
+      <tr><td>Wed 11 Nov</td><td>2</td><td>Cut the list to 30. Write one specific first line for each, about something real in the named project.</td></tr>
+      <tr><td>Thu 12 Nov</td><td>1</td><td><strong>Send 10.</strong> One at a time, from your own mailbox, with no attachment.</td></tr>
+      <tr><td>Fri 13 Nov</td><td>1.5</td><td>Send 10. Ask each existing brand client for one introduction to anyone in Europe.</td></tr>
+      <tr><td>Mon 16 Nov</td><td>1</td><td>Send the last 10. Answer replies the same day.</td></tr>
+      <tr><td>Tue 17 Nov</td><td>1</td><td>Follow up on Thursday's batch: one line, in the same thread.</td></tr>
+      <tr><td>Wed 18 Nov</td><td>2</td><td>Follow up on Friday's batch. Take calls.</td></tr>
+      <tr><td>Thu 19 Nov</td><td>2</td><td>Follow up on Monday's batch. Write a one-page partner sheet only if a call asks for it.</td></tr>
+      <tr><td>Fri 20 Nov</td><td>2</td><td>Calls. Count delivered, replied and booked.</td></tr>
+      <tr><td>21–22 Nov</td><td>1</td><td>Decide, using the signals below.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Who, where, what is attached</h3>
+  <p><strong>Who:</strong> the studio's founder. <strong>Where:</strong> their own email address, from yours, once DKIM and DMARC pass, or their contact form if that is all there is. <strong>Attachment:</strong> none. A stranger's attachment is what a cautious reader does not open, as <code>DR-001-NO.pdf</code> already taught <span class="t v">VERIFIED</span>, and it costs deliverability <span class="t i">INFERRED</span>.</p>
+
+  <h3>The message</h3>
+  <div class="mail">
+    <p class="subj">Subject: When a client needs a brand before the site</p>
+    <p>Hi <span class="ph">[first name]</span>,</p>
+    <p><span class="ph">[One sentence about one real project of theirs: what it does well.]</span></p>
+    <p>I'm Atlas Sahrim. I design identity systems: one mark, three colours in a fixed proportion, one typeface, and rules a web team can build from. The scope is fixed at €8,000 and takes <span class="ph">[weeks]</span>. Seventeen are at arvorealta.com/brand/</p>
+    <p>Sometimes a client's site cannot start because the brand is not settled. When that happens I can take the identity off your plate and hand you a clean spec to build on. The client and the site stay yours, and any introduction that signs earns 10% of the fee.</p>
+    <p>Would 20 minutes next week be useful?</p>
+    <p>Atlas</p>
+  </div>
+  <p><strong>Your decisions before sending:</strong> the 10% fee, the number of weeks, and a floor price if a studio would rather white-label the work <span class="t c">CLIENT</span>.</p>
+  <p><strong>On the call, ask three things.</strong> How often does a client arrive without a settled brand? What do you do then? Who at the client signs for it?</p>
+
+  <h3>Signals</h3>
+  <ul class="signal">
+    <li><b>Proof the mail works</b>DKIM and DMARC read pass on 9 November. If not, nothing else in this plan can be measured.</li>
+    <li class="ok"><b>Success</b>By 22 November: 30 delivered, three or more replies, at least one call booked.</li>
+    <li class="ok"><b>Strong success</b>A studio names a current client who needs a brand.</li>
+    <li class="bad"><b>Failure → switch</b>Fewer than two replies from 30. Move the next 14 days to the Brønnøysund feed: ten notes a week to renamed limited companies with five or more staff, measured the same way.</li>
+  </ul>
+</section>
+
+<section id="not">
+  <p class="eyebrow">4 · What not to do</p>
+  <h2>Five things to leave alone</h2>
+  <ul>
+    <li><strong>More tender reviews now.</strong> Four went out with no replies <span class="t v">VERIFIED</span>, each costs hours of scoring, and brand is the priority <span class="t c">CLIENT</span>.</li>
+    <li><strong>Clutch placement, ads or conference tickets.</strong> €50 a month buys none of them at a useful level, and a directory sets €8,000 against €2,500 studios <span class="t i">INFERRED</span>.</li>
+    <li><strong>Public identity tenders.</strong> Each bid is a full document in Norwegian or Finnish and asks for local references you do not have yet <span class="t i">INFERRED</span>. Revisit after the first Nordic client.</li>
+    <li><strong>LinkedIn posting as the plan.</strong> It is the slowest venue on the list, and it spends the ten hours on reach rather than conversations <span class="t i">INFERRED</span>.</li>
+    <li><strong>Video on its own before it has a price.</strong> A conversation that ends in "what does it cost?" with no answer is lost.</li>
+  </ul>
+</section>
+
+<section id="risks">
+  <p class="eyebrow">5 · Risks</p>
+  <h2>What could break this</h2>
+  <ol>
+    <li><strong>Deliverability is unproven.</strong> The missing records are a fact <span class="t v">VERIFIED</span>; whether they caused the silence is not known <span class="t m">MISSING</span>.</li>
+    <li><strong>There is a proof gap.</strong> Most of the seventeen marks are for Brazilian clients. A studio judges craft first, but its end client may ask for local proof <span class="t i">INFERRED</span>.</li>
+    <li><strong>Delivery competes with selling.</strong> At ten hours a week, one signed job stops outreach. Keep one hour a week of follow-ups running during any job.</li>
+    <li><strong>Partners can stall.</strong> A partner can say yes and send no one. Five lukewarm partners beat one keen one <span class="t g">GUESS</span>.</li>
+    <li><strong>The offer can compete with the partner.</strong> A studio that sells identity itself, even badly, will see you as a rival, which is why the list filters those out.</li>
+    <li><strong>The language is limited.</strong> Studios take English. A Norwegian or Finnish end client may want the brand guidelines in their own language <span class="t i">INFERRED</span>.</li>
+  </ol>
+</section>
+
+<section id="facts">
+  <p class="eyebrow">6 · Three facts</p>
+  <h2>What would change this answer</h2>
+  <ol>
+    <li><strong>Did the October emails reach the inbox?</strong> If they did and still drew nothing, cold mail to strangers is the weak point, partner emails will do worse than hoped, and warm routes rise. You can check this on 9 November with test sends.</li>
+    <li><strong>Do you have any warm network in the four countries?</strong> Former colleagues, a studio you know, a co-working space. One warm Nordic introduction beats every cold venue in these tables.</li>
+    <li><strong>Is the market negotiable for the first €8,000?</strong> If a Brazilian client's introduction to a company that can pay in euros counts, C wins brand and goes first.</li>
+  </ol>
+</section>
+
+<section id="questions">
+  <p class="eyebrow">7 · Five questions</p>
+  <h2>For a founder or MD who bought an identity in the last two years</h2>
+  <ol>
+    <li>What happened in the month before you decided the brand had to change?</li>
+    <li>Who was the first person you asked, and what did they tell you?</li>
+    <li>How did you find each studio you considered, and how many did you look at?</li>
+    <li>What made you drop the ones you dropped?</li>
+    <li>What did it cost, who approved it, and how many weeks passed from the first call to the signature?</li>
+  </ol>
+</section>
+
+<section id="sources">
+  <details>
+    <summary>Sources</summary>
+    <ul class="src">
+      <li>Hinge, professional-services buyer studies, from secondary write-ups: <a href="https://hingemarketing.com/library/article/new_study_highlights_how_buyers_buy_professional_services">study highlights</a>, <a href="https://hingemarketing.com/blog/story/new-research-study-shows-significant-changes-in-professional-services-buyer-behavior">changes in buyer behaviour</a>, <a href="https://www.lexisnexis.com/en-us/products/interaction/blog/Inside-the-Buyers-Brain-Client-relationships-are-evolving-how-to-keep-up.page">LexisNexis summary</a></li>
+      <li><a href="https://data.brreg.no/enhetsregisteret/api/oppdateringer/enheter">Brønnøysund update API</a>, queried 6 November 2026 · <a href="https://data.norge.no/en/datasets/68d08f28-a16d-4fab-a953-ed4ab08ce2e2/central-coordinating-register-for-legal-entities">catalogue entry</a></li>
+      <li><a href="https://avoindata.prh.fi/opendata-ytj-api/v3/companies">PRH open data API</a>, queried 6 November 2026</li>
+      <li><a href="https://www.doffin.no/notices/2024-104836">Doffin 2024-104836</a>, Arendal kommune, "Ny visuell identitet"</li>
+      <li><a href="https://funding.tech.eu/geographies/estonia/2025">funding.tech.eu, Estonia 2025</a></li>
+      <li>Price bands, seller language: <a href="https://nudstudio.co/brand-identity-design-cost-europe/">nudstudio</a>, <a href="https://viralistic.nl/blog/en/brand-identity-agency">viralistic</a></li>
+      <li><a href="https://eis.ee/en/services/start-up-grant/">EIS start-up grant</a>: there is no fixed list of eligible costs, and contracts signed before the application are ineligible. This is a possible lever for Estonian clients, not verified for identity work.</li>
+      <li>DNS via dns.google, 6 November 2026: SPF <code>include:_spf.google.com -all</code>, MX on Google, no <code>_dmarc</code> record, no <code>google._domainkey</code></li>
+      <li>From the repo: <code>approach-log.md</code>, <code>nordic-manufacturers/profile.md</code>, <code>losers.md</code>, <code>next-target.md</code>, <code>CLAUDE.md</code></li>
+    </ul>
+  </details>
+</section>
+
+<div class="synth">
+  <p class="eyebrow">In short</p>
+  <h2>Find the people your buyers already trust</h2>
+  <p>People who want a new brand usually ask someone they trust first, and that is often the team building their website. So spend two weeks making friends with 30 small website studios in Tallinn, Helsinki and Oslo, and offer to do the brand part for their clients.</p>
+  <p>Before that, fix the email settings, because your last four emails may never have arrived. Leave the tender reviews and stand-alone video alone for now.</p>
+</div>
+</div>
