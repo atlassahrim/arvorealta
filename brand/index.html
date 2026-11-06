@@ -605,6 +605,36 @@ html.rv [data-rv].in{opacity:1;transform:none}
 </head>
 <body>
 <script>
+/* A fresh visit starts on the first fold. Reported on the owner's device:
+   following the offer page's footer link to /brand/ landed on the LAST
+   fold. Chromium here lands on the first every time, so the fault is the
+   engine's, WebKit restoring or re-snapping to an offset the new page never
+   asked for, and the fix does not depend on which. The browser's own scroll
+   restoration is off, and until the reader touches anything, a visit with
+   no hash is held at the top through parse, load and the fonts. A hash
+   still lands where it points, and back and forward are left alone. */
+(() => {
+  try { if ("scrollRestoration" in history) history.scrollRestoration = "manual"; } catch (e) {}
+  if (location.hash.length > 1) return;
+  const nav = performance.getEntriesByType ? performance.getEntriesByType("navigation")[0] : null;
+  if (nav && nav.type === "back_forward") return;
+  const root = document.documentElement, t0 = performance.now();
+  let touched = false;
+  ["wheel", "touchstart", "keydown", "pointerdown"].forEach(t =>
+    addEventListener(t, () => { touched = true; }, { once: true, passive: true, capture: true }));
+  const pin = () => {
+    if (touched || Math.round(scrollY) === 0) return;
+    root.style.scrollSnapType = "none";
+    scrollTo(0, 0);
+    requestAnimationFrame(() => { root.style.scrollSnapType = ""; });
+  };
+  addEventListener("DOMContentLoaded", pin);
+  addEventListener("load", pin);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(pin);
+  (function hold(){ pin(); if (!touched && performance.now() - t0 < 3000) requestAnimationFrame(hold); })();
+})();
+</script>
+<script>
 /* Reveals are armed above every element they touch, so nothing is painted
    visible and then hidden. The deadline is the failsafe: a block stuck at
    zero is worse than no animation, so after four seconds the arming class

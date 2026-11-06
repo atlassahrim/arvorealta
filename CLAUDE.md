@@ -1998,6 +1998,50 @@ scroll and no page errors on either page; folds measure `[1,1,1,1,1]` and
 the curtain finishes, Norwegian switches, and the dialog opens with focus
 in the email field. **Vimeo and the video beds still cannot play here.**
 
+### Two bugs the owner found on a real device, 6 November
+
+**Following the offer page's footer link to `/brand/` landed on the last
+fold.** It does not reproduce in this container's Chromium. Chromium lands
+on the first fold after the same click, with the snap on and off. So the
+fault is WebKit's: it restores, or re-snaps to, an offset the new page
+never asked for. **The fix does not depend on which.** All three pages
+now open `<body>` with one guard:
+
+- `history.scrollRestoration` is `manual`.
+- A visit with no hash is held at the top through parse, `load` and
+  `document.fonts.ready`, for up to 3 seconds.
+- The guard stops at the reader's first wheel, touch, key or pointer, so
+  it never fights a real scroll.
+- A hash still lands where it points, and back and forward are left
+  alone.
+
+Verified at 1180 and 390:
+
+- **A forced jump to the bottom is undone.** An injected scroll to the
+  bottom after `DOMContentLoaded` ends at 0 on all three pages.
+- **Hashes and the rail still land.** `/brand/#system` lands on its fold,
+  and the home rail lands on `#weigh` with the snap back on.
+- **An early scroll is kept.** A wheel 300ms in stays where it went.
+
+**Check it on the iPad after deploying.** This container cannot run
+WebKit.
+
+**The offer page's hero ran past its own fold.** The fold is `100svh`, and
+its air was written in `vh`. On iOS Safari `vh` is the large viewport, the
+one with the toolbars hidden, so the spacing grew past the fold. The gate
+at its foot went under the bottom edge, and above 980px the snap kept it
+there.
+
+Every vertical measure in the hero is in `svh` now. Below 720px of height
+the air comes down further and the headline is capped at `10.5svh`; no
+copy goes.
+
+Measured, the last line of the gate now sits inside the fold at every size
+tried, from 1440 × 900 down to 375 × 548, which is an iPhone SE with
+Safari's bars showing. At 375 × 560 it had run 2px past the fold and
+grown the section to 626px. **This is general: size a fold's contents in
+the unit the fold is sized in.**
+
 ### `lab/home/` and `lab/video/` — the other two pages on the brand interface (promoted, deleted)
 
 **On 4 November the owner asked for the offer page and the video page
