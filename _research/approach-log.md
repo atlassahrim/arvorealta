@@ -90,3 +90,19 @@ That is not a coincidence and it is the single most valuable thing this
 project has learned. **It is the product.** A supplier cannot see it because
 each of them only reads their own document; it is visible only from where
 three have been read side by side.
+
+## Mail authentication, fixed 7 November
+
+**The four October emails went out with no DKIM and no DMARC.** They came
+from `arvorealta.com` with PDF attachments and drew no replies. That may be
+why: they may never have reached an inbox.
+
+**Since 7 November all three records are published**, checked through
+Google's and Cloudflare's own resolvers:
+
+- **SPF:** `v=spf1 include:_spf.google.com -all`
+- **DKIM:** `google._domainkey`, a complete 2048-bit RSA key
+- **DMARC:** `v=DMARC1; p=none; rua=mailto:awe@arvorealta.com`
+
+**Anything sent before 7 November cannot be judged on its replies.**
+Re-sending to the same people is a fair test, not a nag.
