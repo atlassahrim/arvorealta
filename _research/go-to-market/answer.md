@@ -374,3 +374,27 @@ identity in the last two years:
 [nudstudio]: https://nudstudio.co/brand-identity-design-cost-europe/
 [viralistic]: https://viralistic.nl/blog/en/brand-identity-agency
 [eis]: https://eis.ee/en/services/start-up-grant/
+
+## Update, 11 November: the owner changed the plan
+
+**Partner studios are dropped, on the owner's experience.** Studios usually
+have someone in-house who draws logos. They do not see the need for a
+better identity, and they are the readers least likely to value his work.
+`studios.md` is kept as a list and is not being worked.
+
+**The new priority is any income now, from the owner directly.** Today it
+is zero, so the goal is no longer the €8,000 identity.
+
+**The route is direct to companies.** Public posts in local and expat
+business groups, starting on Facebook, offer a free short review of a
+website or logo, the same mechanic as the free tender review.
+
+- **Every review ends with one small fixed-price offer.**
+- **At most one full project is done free**, chosen for how good it will
+  look shown as a before and after, not for how much the owner needs it.
+- **Discount with an end date, not a permanent half price.** Instead of
+  half price for everyone, a "first three clients" price runs until a
+  stated date. A standing half price sets what the work is worth at half.
+
+**Warm contacts come first, the same day.** Past clients and anyone who
+already knows the work are the fastest money there is.
