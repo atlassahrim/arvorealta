@@ -163,6 +163,37 @@ the step prints any underscore path still standing afterwards so a miss fails
 loudly instead of quietly shipping. **If you add a private area, give it a
 leading underscore and nothing else is needed.**
 
+### The repository is public, so the underscore hides nothing on GitHub
+
+**The underscore keeps a file off the website. It does not keep it off
+GitHub.** This repository is public, because GitHub's free plan only
+publishes a site from a public one. So every underscore file here can be
+read by anyone at `github.com/atlassahrim/arvorealta`.
+
+**On 12 November 2026 the owner moved what names people, companies and
+plans to his private repository**, `atlassahrim/Professional`, under
+`arvorealta/`:
+
+- `_research/`, whole: the approach log, the named contacts and the
+  go-to-market plan.
+- The six scored reviews: `annex/_enviropac-review`, `_namdal-review` and
+  `_strombergs-review`, each with its `-nb` edition.
+- Copies of `annex.css`, `system.css` and `themes/technical.css`, so the
+  reviews still render there, and a copy of `_tools/review/`.
+
+**Every path in this file that begins `_research/` or names one of those
+six folders now means that place.** The paragraphs that cite them are kept
+as written, because the reasoning still holds.
+
+**The old versions are still in this repository's history**, and in its
+closed pull requests. Erasing them needs a forced push, which the session
+that moved the files was not permitted to make.
+
+**The rule from here: nothing that names a prospect, a contact or a plan
+is committed to this repository.** It goes to `Professional/arvorealta/`.
+The review templates, `annex/_vkr-beholdere` and the tools stay here; they
+name no person.
+
 ## Published but unlisted
 
 The underscore is the lock and `noindex` is the label, and they answer two
@@ -2814,10 +2845,11 @@ reference/index.html    the first offer page, kept for reference — noindex.
 templates/index.html    index of every template
 deck/<slug>/index.html  one deck per folder
 annex/<slug>/index.html one A4 annex per folder
-annex/_enviropac-review/
-annex/_enviropac-review-nb/
-                        a scored document review, English and Norwegian —
-                        two sheets each, private
+annex/_review-template/
+annex/_review-template-nb/
+                        the template for a scored document review, English
+                        and Norwegian. The six real reviews moved to the
+                        private Professional repository on 12 November
 assets/
   img/                  photography, as webp + jpg at the widths the source
                         actually holds — the name carries a version:
