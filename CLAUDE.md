@@ -2145,6 +2145,12 @@ title there a second time, so `Win with class.` stayed for a day until he
 chose this one. It carries no `<em>`. The Norwegian and Finnish are a
 session's: `Hev standarden.` and `Nosta tasoa.`
 
+**The title's measure went from 12ch to 18ch.** At 12ch the new title set
+on two lines, and the close measured 793px on a 720px screen and 832px on
+a 768px one. Under a mandatory snap that hides the footer. At 18ch it sets
+on one line at every size tried, and all six folds measure exactly one
+screen in all three languages, the Norwegian close included.
+
 **What left the page:** `You set the direction.`, the wind in the hero,
 `Be one of a kind.` and the clean-vector paragraph. The gallery's `Each
 one of a kind.` stays, unchanged at his word; it no longer echoes fold

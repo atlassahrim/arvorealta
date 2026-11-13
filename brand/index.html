@@ -514,8 +514,10 @@ html.rv [data-rv].in{opacity:1;transform:none}
   margin-bottom:clamp(14px,4vh,48px)}
 .sig img{width:clamp(180px,27vw,400px);height:auto}
 .close .lbl{color:var(--amber)}
+/* 18ch, not 12: `Raise the standard.` set on two lines at 12ch, which made
+   this fold 73px taller than a 720px laptop screen under a mandatory snap */
 .close h2{margin:0;font-size:var(--t-display);line-height:1.08;padding-bottom:.06em;
-  max-width:12ch;text-wrap:balance}
+  max-width:18ch;text-wrap:balance}
 .close h2 em{font-style:italic}
 .close .say{margin:0;max-width:46ch;color:var(--ink-dim)}
 .close .act{align-self:start;justify-self:start;margin-top:4px}
