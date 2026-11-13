@@ -1782,5 +1782,43 @@ sendBtn.addEventListener("click", async () => {
 })();
 })();
 </script>
+<script>
+/* Leave from the top. Reported twice on the owner's device: a link from one
+   page of the site to another opens the new page on the fold the old page
+   was on. The footer of /video/ sits on its fourth fold, and /brand/ opened
+   on its fourth. So WebKit carries the snapped position across the
+   navigation, and the guard at the top of <body> on the arriving page did
+   not hold against it. This removes what is carried: the page fades, goes
+   to its own first fold with the snap put back, and only then navigates.
+   Only the three site pages take this route; files, decks and annexes are
+   left alone. Coming back restores the page as it was shown. */
+(() => {
+  const PAGES = ["/", "/brand/", "/video/"], root = document.documentElement;
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let leaving = false;
+  const show = () => { leaving = false; document.body.style.transition = ""; document.body.style.opacity = ""; };
+  addEventListener("click", e => {
+    if (leaving || e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const a = e.target.closest && e.target.closest("a[href]");
+    if (!a || a.target === "_blank" || a.hasAttribute("download")) return;
+    let u; try { u = new URL(a.href, location.href); } catch (err) { return; }
+    if (u.origin !== location.origin || u.pathname === location.pathname || !PAGES.includes(u.pathname)) return;
+    if (Math.round(scrollY) === 0) return;
+    e.preventDefault(); leaving = true;
+    document.body.style.transition = still ? "none" : "opacity .12s linear";
+    document.body.style.opacity = "0";
+    setTimeout(() => {
+      root.style.scrollBehavior = "auto"; root.style.scrollSnapType = "none";
+      scrollTo(0, 0);
+      requestAnimationFrame(() => {
+        root.style.scrollSnapType = ""; root.style.scrollBehavior = "";
+        setTimeout(() => { location.href = u.href; }, 80);
+      });
+    }, still ? 0 : 130);
+    setTimeout(show, 2500);
+  });
+  addEventListener("pageshow", e => { if (e.persisted) show(); });
+})();
+</script>
 </body>
 </html>

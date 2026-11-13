@@ -821,7 +821,7 @@ html.rv [data-rv].in{opacity:1;transform:none}
            alt="The Arvorealta mark">
     </div>
     <p class="lbl" data-rv data-t="e6">Where to start</p>
-    <h2 class="disp" data-rv data-t="closeH">Win with <em>class</em>.</h2>
+    <h2 class="disp" data-rv data-t="closeH">Raise the standard.</h2>
     <p class="say" data-rv data-t="closeB">When the mark is exact, sloppy work next to it shows. The mark raises the standard quietly.</p>
     <button type="button" class="act" data-rv data-cta data-t="cta">Start a project</button>
     <!-- The two links are to the OTHER pages of the site, not to this
@@ -1171,7 +1171,7 @@ const LANG = {
     _ca:"Art", _cap:"Placeholder. The references a photographer is given before they start.",
     e5:"The record", more:"Each one of a kind.", moreMeta:"Open any one &nbsp;/&nbsp; 45 frames behind them",
     _galNote:"Year and sector are placeholders until they are supplied. A sector is shown only where the lockup itself states one.",
-    e6:"Where to start", closeH:"Win with <em>class</em>.",
+    e6:"Where to start", closeH:"Raise the standard.",
     fHome:"Documents and tenders", fVideo:"Video",
     closeB:"When the mark is exact, sloppy work next to it shows. The mark raises the standard quietly.",
     fT:"Start a project",
@@ -1222,7 +1222,7 @@ const LANG = {
     _ca:"Kunst", _cap:"Plassholder. Referansene en fotograf f\u00e5r f\u00f8r de begynner.",
     e5:"Arkivet", more:"Hver enkelt unik.", moreMeta:"\u00c5pne hvilken som helst &nbsp;/&nbsp; 45 bilder bak",
     _galNote:"\u00c5r og bransje er plassholdere til de er levert. Bransje vises bare der merket selv oppgir en.",
-    e6:"Hvor du begynner", closeH:"Vinn med <em>klasse</em>.",
+    e6:"Hvor du begynner", closeH:"Hev standarden.",
     fHome:"Dokumenter og anbud", fVideo:"Video",
     closeB:"N\u00e5r merket er presist, synes slurv ved siden av det. Merket hever standarden i det stille.",
     fT:"Start et prosjekt",
@@ -1273,7 +1273,7 @@ const LANG = {
     _ca:"Taide", _cap:"Paikanvaraaja. Viitteet, jotka valokuvaaja saa ennen aloittamista.",
     e5:"Arkisto", more:"Jokainen ainutlaatuinen.", moreMeta:"Avaa mik\u00e4 tahansa &nbsp;/&nbsp; 45 kuvaa takana",
     _galNote:"Vuosi ja toimiala ovat paikanvaraajia kunnes ne toimitetaan. Toimiala n\u00e4ytet\u00e4\u00e4n vain siell\u00e4, miss\u00e4 merkki itse ilmoittaa sellaisen.",
-    e6:"Mist\u00e4 aloittaa", closeH:"Voita <em>tyylill\u00e4</em>.",
+    e6:"Mist\u00e4 aloittaa", closeH:"Nosta tasoa.",
     fHome:"Asiakirjat ja tarjouskilpailut", fVideo:"Video",
     closeB:"Kun merkki on tarkka, huolimaton ty\u00f6 sen vieress\u00e4 n\u00e4kyy. Merkki nostaa tasoa hiljaa.",
     fT:"Aloita projekti",
@@ -1710,6 +1710,44 @@ if (location.hash.length > 1) {
   const i = FRAMES.findIndex(f => f.slug + "-" + f.g === k);
   if (i > -1) open(i);
 }
+})();
+</script>
+<script>
+/* Leave from the top. Reported twice on the owner's device: a link from one
+   page of the site to another opens the new page on the fold the old page
+   was on. The footer of /video/ sits on its fourth fold, and /brand/ opened
+   on its fourth. So WebKit carries the snapped position across the
+   navigation, and the guard at the top of <body> on the arriving page did
+   not hold against it. This removes what is carried: the page fades, goes
+   to its own first fold with the snap put back, and only then navigates.
+   Only the three site pages take this route; files, decks and annexes are
+   left alone. Coming back restores the page as it was shown. */
+(() => {
+  const PAGES = ["/", "/brand/", "/video/"], root = document.documentElement;
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let leaving = false;
+  const show = () => { leaving = false; document.body.style.transition = ""; document.body.style.opacity = ""; };
+  addEventListener("click", e => {
+    if (leaving || e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const a = e.target.closest && e.target.closest("a[href]");
+    if (!a || a.target === "_blank" || a.hasAttribute("download")) return;
+    let u; try { u = new URL(a.href, location.href); } catch (err) { return; }
+    if (u.origin !== location.origin || u.pathname === location.pathname || !PAGES.includes(u.pathname)) return;
+    if (Math.round(scrollY) === 0) return;
+    e.preventDefault(); leaving = true;
+    document.body.style.transition = still ? "none" : "opacity .12s linear";
+    document.body.style.opacity = "0";
+    setTimeout(() => {
+      root.style.scrollBehavior = "auto"; root.style.scrollSnapType = "none";
+      scrollTo(0, 0);
+      requestAnimationFrame(() => {
+        root.style.scrollSnapType = ""; root.style.scrollBehavior = "";
+        setTimeout(() => { location.href = u.href; }, 80);
+      });
+    }, still ? 0 : 130);
+    setTimeout(show, 2500);
+  });
+  addEventListener("pageshow", e => { if (e.persisted) show(); });
 })();
 </script>
 </body>

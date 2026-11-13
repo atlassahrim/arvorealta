@@ -2073,6 +2073,40 @@ Safari's bars showing. At 375 × 560 it had run 2px past the fold and
 grown the section to 626px. **This is general: size a fold's contents in
 the unit the fold is sized in.**
 
+### A link between pages opened on the wrong fold a second time, 13 November
+
+**Reported on the owner's device: the footer link from `/video/` to
+`/brand/` opened `/brand/` on its fourth fold.** The link is a plain
+`href="/brand/"`, and the footer of `/video/` sits on that page's fourth
+fold. So the fold is carried across the navigation. The arrival guard of
+6 November did not hold against it.
+
+**The reading, which this container cannot test:** WebKit keeps the
+snapped position of the page being left and applies it to the page that
+loads. It fits both reports. It is not verified.
+
+**The fix removes what is carried.** All three pages end with one handler
+for links between `/`, `/brand/` and `/video/`:
+
+- the page fades over 120ms, or at once under reduced motion;
+- it goes to its own first fold, with the snap off for the jump and back
+  on after it;
+- 80ms later it navigates.
+
+A link clicked from the first fold is left alone, and so is every link to
+a file, a deck or an annex.
+
+**It costs one thing.** Back returns to the top of the page that was left,
+not to the fold the reader was on. `pageshow` puts the page's opacity back
+if the browser restores it from its cache, and a 2.5 second timer does the
+same if the navigation never happens.
+
+Verified in Chromium at 1180 and 390, in all four directions: the new page
+opens at 0 with the snap as that page sets it, about 300ms after the
+click, and Back shows the old page at full opacity. **Chromium never had
+the bug, so this proves the handler works and not that the bug is gone.
+Check it on the iPad.**
+
 ### `/brand/` argues trust, on 13 November
 
 **The owner rewrote four folds, the English was checked, and he approved
@@ -2106,8 +2140,10 @@ something to belong to, and raises the standard of the work beside it.
 - **`who you belonged to` became `which house`**, and `hand over` became
   `hand out`.
 
-**The close keeps `Win with class.`** His draft carried fold four's title
-there a second time, and he chose no replacement.
+**The close reads `Raise the standard.`** His draft carried fold four's
+title there a second time, so `Win with class.` stayed for a day until he
+chose this one. It carries no `<em>`. The Norwegian and Finnish are a
+session's: `Hev standarden.` and `Nosta tasoa.`
 
 **What left the page:** `You set the direction.`, the wind in the hero,
 `Be one of a kind.` and the clean-vector paragraph. The gallery's `Each
