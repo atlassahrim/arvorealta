@@ -2073,6 +2073,56 @@ Safari's bars showing. At 375 × 560 it had run 2px past the fold and
 grown the section to 626px. **This is general: size a fold's contents in
 the unit the fold is sized in.**
 
+### `/brand/` argues trust, on 13 November
+
+**The owner rewrote four folds, the English was checked, and he approved
+the corrected table before it went live.** The page now makes one case in
+three steps: a mark earns trust outside the company, gives the staff
+something to belong to, and raises the standard of the work beside it.
+
+- **Hero.** `h1a` reads `Trust before proof.` and carries no `<em>`. `sub`
+  reads `A hallmark told a buyer the metal was good before anyone tested
+  it. A well-drawn mark does the same. It tells people a company is
+  established and accountable before they have read a word.`
+- **Alignment.** `aNote` opens `Some people are numb to nuance.` It read
+  `Most people`.
+- **The result.** `h3a` reads `Something to stand behind.` `dirSay` reads
+  `A kamon, the Japanese family crest, told everyone which house you
+  belonged to. A company's mark does that for its people. Staff who are
+  proud of it wear it, hand out the card and defend the standard.`
+- **The close.** `closeB` reads `When the mark is exact, sloppy work next
+  to it shows. The mark raises the standard quietly.`
+
+**The fixes to his draft:**
+
+- **`weighed` became `tested`.** A hallmark certifies purity, and purity
+  is tested, not weighed.
+- **`look established` became `tells people a company is established`.**
+  `Look` suggests appearance without substance.
+- **`in denial to nuance` went back to `numb to nuance`.** The phrase is
+  `in denial about`, and it accuses a reader of refusing to see.
+- **`kamon` gained its four-word gloss**, and a bridge sentence joins the
+  crest to the client's staff.
+- **`who you belonged to` became `which house`**, and `hand over` became
+  `hand out`.
+
+**The close keeps `Win with class.`** His draft carried fold four's title
+there a second time, and he chose no replacement.
+
+**What left the page:** `You set the direction.`, the wind in the hero,
+`Be one of a kind.` and the clean-vector paragraph. The gallery's `Each
+one of a kind.` stays, unchanged at his word; it no longer echoes fold
+four. The system fold and the gallery fold did not change.
+
+**The Norwegian and Finnish are a session's**: `Tillit før bevis.` /
+`Noe å stå inne for.` and `Luottamus ennen näyttöä.` / `Jotain, jonka
+takana seistä.` `Kontrollstempel` and `tarkastusleima` stand for
+hallmark, and `etterrettelig` and `vastuullinen` for accountable.
+
+Verified at 1440, 1180, 820 and 390 in all three languages: six folds at
+one screen, with the Norwegian close at 1.01 at 1440; no horizontal
+scroll; no page errors; no empty strings.
+
 ### `lab/home/` and `lab/video/` — the other two pages on the brand interface (promoted, deleted)
 
 **On 4 November the owner asked for the offer page and the video page
