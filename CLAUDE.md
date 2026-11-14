@@ -2399,6 +2399,23 @@ screen. All 45 answers match the button's family, size, tracking and case,
 sit centred inside their area, and every text block on the fold computes
 `text-align:center`, with no page error.
 
+**Three more, the same day:**
+
+- **The lockups are another 20 per cent smaller**: 192px wide at most,
+  from 240, and their row 6.4svh from 8. On a phone they are 64 per cent
+  of the column at most. `Either looks fine` still keeps its size, so it
+  is now the largest of the three answers; matching it is one rule.
+- **The `Option A / B / C` labels are gone** from the markup. `aOpt`
+  stays in `STR` for its three languages and is rendered nowhere.
+- **The answer draws no box at all.** It still takes focus when it
+  arrives, so a screen reader announces it, and it carries
+  `outline:none`. The faint ring on the three buttons is unchanged, and
+  that is the one a keyboard user needs.
+
+Verified at the same nine sizes in three languages: six folds at one
+screen; logos 192px at 1440 and 114 / 143px at 390; 18 answers with no
+outline on the answer, no option labels and no page error.
+
 ### `lab/home/` and `lab/video/` — the other two pages on the brand interface (promoted, deleted)
 
 **On 4 November the owner asked for the offer page and the video page

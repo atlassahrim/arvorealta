@@ -679,8 +679,8 @@ html.rv [data-rv].in{opacity:1;transform:none}
 .op{display:grid;grid-template-rows:auto auto auto;justify-items:center;gap:clamp(10px,1.8svh,18px);
   background:none;border:0;padding:6px;color:inherit;text-align:center;
   transition:opacity .45s var(--ease),transform .45s var(--ease)}
-.op-art{display:grid;place-items:center;width:100%;height:clamp(42px,8svh,83px)}
-.op-art img{width:min(80%,240px);height:auto;max-height:100%;object-fit:contain;
+.op-art{display:grid;place-items:center;width:100%;height:clamp(34px,6.4svh,66px)}
+.op-art img{width:min(64%,192px);height:auto;max-height:100%;object-fit:contain;
   transition:transform .6s var(--ease)}
 .op-word{font-family:"EB Garamond",Georgia,serif;font-size:clamp(24px,2.5vw,38px);line-height:1;
   letter-spacing:-.015em;color:var(--paper-ink)}
@@ -695,8 +695,10 @@ html.rv [data-rv].in{opacity:1;transform:none}
 .op:hover .op-act,.op:focus-visible .op-act,.op.lock .op-act{background:rgba(126,82,40,.08)}
 .op:hover .op-act b,.op:focus-visible .op-act b{transform:translateX(3px)}
 /* the focus ring stays for the keyboard, close to the paper */
-.align .op:focus-visible,.align .verdict:focus,.align .verdict:focus-visible{
-  outline:1px solid rgba(23,20,18,.08);outline-offset:6px}
+.align .op:focus-visible{outline:1px solid rgba(23,20,18,.08);outline-offset:6px}
+/* the answer is a status, not a control: it takes focus for screen readers
+   and draws no box */
+.align .verdict:focus,.align .verdict:focus-visible{outline:none}
 /* on a choice all three leave, and the answer arrives in their place */
 .lp-opts:has(.verdict.in) .op{opacity:0;transform:translateY(8px);pointer-events:none}
 .lp-opts .verdict{background:none;box-shadow:none;border-radius:0;padding:0 8px;clip-path:none;
@@ -714,8 +716,8 @@ html.rv [data-rv].in{opacity:1;transform:none}
 @media (max-width:600px){
   .lp-opts{grid-template-columns:1fr;gap:clamp(12px,3svh,26px);padding-block:clamp(4px,2svh,18px)}
   .op{gap:clamp(6px,1.2svh,10px);padding:2px 0}
-  .op-art{height:clamp(24px,4.8svh,38px)}
-  .op-art img{width:auto;max-width:80%;height:clamp(24px,4.8svh,38px);max-height:none}
+  .op-art{height:clamp(19px,3.84svh,30px)}
+  .op-art img{width:auto;max-width:64%;height:clamp(19px,3.84svh,30px);max-height:none}
   .op-word{font-size:var(--t-sub)}
   .op-act{padding:8px 13px}
 }
@@ -817,17 +819,14 @@ html.rv [data-rv].in{opacity:1;transform:none}
     <div class="lp-opts" id="alignOpts" role="group" data-ta="aGroup" aria-label="Choose one" data-rv>
       <button type="button" class="op" data-pick="before" data-ta="aLockA" aria-label="Lockup A">
         <span class="op-art"><img alt="" width="1400" height="312" loading="lazy" src="/assets/img/turva-old-2-700.webp" srcset="/assets/img/turva-old-2-700.webp 700w, /assets/img/turva-old-2-1400.webp 1400w" sizes="(max-width:600px) 60vw, 320px"></span>
-        <span class="op-lbl" aria-hidden="true"><span data-t="aOpt">Option</span> A</span>
         <span class="op-act" aria-hidden="true"><span data-t="aSel">Select</span><b>&rarr;</b></span>
       </button>
       <button type="button" class="op" data-pick="after" data-ta="aLockB" aria-label="Lockup B">
         <span class="op-art"><img alt="" width="1400" height="250" loading="lazy" src="/assets/img/turva-new-2-700.webp" srcset="/assets/img/turva-new-2-700.webp 700w, /assets/img/turva-new-2-1400.webp 1400w" sizes="(max-width:600px) 60vw, 320px"></span>
-        <span class="op-lbl" aria-hidden="true"><span data-t="aOpt">Option</span> B</span>
         <span class="op-act" aria-hidden="true"><span data-t="aSel">Select</span><b>&rarr;</b></span>
       </button>
       <button type="button" class="op" data-pick="either">
         <span class="op-art"><span class="op-word" data-t="aEither">Either looks fine</span></span>
-        <span class="op-lbl" aria-hidden="true"><span data-t="aOpt">Option</span> C</span>
         <span class="op-act" aria-hidden="true"><span data-t="aSel">Select</span><b>&rarr;</b></span>
       </button>
 
