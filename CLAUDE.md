@@ -2221,17 +2221,52 @@ kaikki näkevät.`
 instruction, with `can see.` alone on the last. It measures exactly three
 lines at every size tried, and the hero still fits one screen everywhere.
 
-**Folds two and three overflow a 375 × 667 screen, and they did before
-this day's changes.** That is an iPhone SE. Measured there: the alignment
-fold at 1.21 screens and the system fold at 1.11 (1.14 in Finnish),
-against 1.21 and 1.07 two commits earlier. Under the mandatory snap the
-foot of each can be hard to reach on that phone. Every other size tried
-fits. It is recorded rather than fixed, because the fix is layout on the
-folds and not copy.
+**Folds two and three overflowed on phones, and they had before this day's
+changes. Fixed for short phone screens only, at the owner's word.** The
+first measurement was taken at 375 × 667, the full screen, and it
+understated the problem: Safari shows the small viewport with its bars
+out, so the real heights are shorter. Measured there before the fix:
 
-Verified at 1440 × 900, 1280 × 720, 1180 × 820, 820 × 1180 and 390 × 844,
-in all three languages: six folds at exactly one screen; no horizontal
-scroll; no page errors; no empty strings.
+| screen as Safari shows it | alignment | system | close |
+|---|---|---|---|
+| iPhone SE, 375 × 548 | 1.46 | 1.34 | 1.09 |
+| Android, 360 × 640 | 1.29 | 1.14 | 1.00 |
+| iPhone 13–15, 390 × 664 | 1.21 | 1.12 | 1.00 |
+| Pro Max, 430 × 740 | 1.10 | 1.02 | 1.00 |
+
+**Every one of them is 1.00 now, in all three languages.** The fix is
+`@media (max-width:760px) and (max-height:800px)`: a phone width AND a
+short screen, so a tablet, a desktop and a tall phone screen keep the
+layout they had. Inside it every value scales in `svh` and stops at what
+the bar (69px) and legibility need. What changed on those screens:
+
+- **Alignment.** Less air above, below and between; the three answer cells
+  shorter, with the lockup scaled to the cell; and **the `Alignment test`
+  strip is hidden**, because it repeats the eyebrow `Alignment` above it.
+- **System.** Less air, tighter rule rows, and the four pictures shorter.
+  **On the shortest screens, 640px tall or less, the four pictures sit in
+  one row** instead of two. That is the one change of shape, and it is
+  what lets the iPhone SE fit.
+- **The close.** Less air above the signature and above the footer, and a
+  smaller signature. Its override sits after the close's own rules,
+  because the first attempt sat above them and lost at the same
+  specificity, which is the trap recorded on the offer page.
+
+**Still over, and left:** the close at 320 × 568, the first iPhone SE of
+2016, at 1.06 in English. **iPads in portrait in Safari overflow the
+system fold** — 1.05 at 768 × 950, 1.03 at 810 × 1010 and 834 × 1040 —
+and did before (1.06 and 1.04). That is a tablet, outside the phone-only
+scope. The one tablet case this day caused, 1.03 at 768 × 1024 from the
+longer English system line, is fixed by a scaled trim at 761–979px.
+
+**The last word of the headline is italic**: `can <em>see</em>.`, `kan
+<em>se</em>.` and `<em>näkevät</em>.` It is EB Garamond's own italic,
+checked loaded, not a slanted upright.
+
+Verified at 1440 × 900, 1280 × 720, 1180 × 720, 820 × 1180, 768 × 1024,
+390 × 844 and the phone sizes above, in all three languages: six folds at
+exactly one screen; no horizontal scroll; no page errors; no empty
+strings.
 
 ### `lab/home/` and `lab/video/` — the other two pages on the brand interface (promoted, deleted)
 
