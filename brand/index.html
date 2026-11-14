@@ -653,6 +653,75 @@ html.rv [data-rv].in{opacity:1;transform:none}
 .view .vf button[aria-current="true"]{opacity:1;outline:1px solid var(--bone);outline-offset:1px}
 .view .vf img{width:100%;height:100%;object-fit:cover}
 
+
+/* ══ FOLD TWO: the alignment test, on paper ═══════════════════════════
+   Promoted from lab/alignment/ on 14 November. Three answers side by side
+   with no ground: the old lockup, the new one and `Either looks fine`, one
+   word to a line at the lockups' size, each over a quiet Select pill. On a
+   choice all three leave and the answer arrives in the button's type over
+   a loading line. The ground is the close's paper loop under a veil and a
+   soft diagonal light. This block is last in the sheet and overrides the
+   ticket panel's rules above it, which still stand and match little. */
+.align{position:relative;isolation:isolate;overflow:hidden;background:var(--paper);
+  justify-items:stretch;text-align:left;
+  --emb-d:rgba(23,20,18,.075);--emb-l:rgba(255,255,255,.68);--press:rgba(23,20,18,.36);
+  --paper-deep:#E3DACB;--copper:#7E5228}
+@media (min-width:980px){.align{padding-right:calc(var(--pad) + 86px)}}
+.align .bed::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(112deg,rgba(239,234,225,.58) 0 32%,rgba(255,250,240,.30) 46%,rgba(239,234,225,.58) 62%)}
+.lp{width:100%;max-width:1120px;margin-inline:auto;display:grid;gap:clamp(14px,3svh,34px)}
+.lp-head{display:grid;justify-items:center;text-align:center}
+.lp-head .eyebrow{margin:0 0 clamp(8px,1.4svh,14px)}
+.lp-head h2{margin:0;font-size:var(--t-head);line-height:1.04;color:var(--paper-ink)}
+.lp-head .lp-sub{margin:clamp(10px,1.8svh,18px) 0 0;max-width:none;font-size:15px;line-height:1.5;color:rgba(23,20,18,.66)}
+/* the three answers: no ground, side by side, a faint label and the pill */
+.lp-opts{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(20px,4vw,72px);padding-block:clamp(16px,6svh,72px)}
+.op{display:grid;grid-template-rows:auto auto auto;justify-items:center;gap:clamp(10px,1.8svh,18px);
+  background:none;border:0;padding:6px;color:inherit;text-align:center;
+  transition:opacity .45s var(--ease),transform .45s var(--ease)}
+.op-art{display:grid;place-items:center;width:100%;height:clamp(34px,6.4svh,66px)}
+.op-art img{width:min(64%,192px);height:auto;max-height:100%;object-fit:contain;
+  transition:transform .6s var(--ease)}
+.op-word{display:inline-block;width:min-content;font-family:"EB Garamond",Georgia,serif;
+  font-size:clamp(12px,1.05vw,16px);line-height:1.05;letter-spacing:0;color:var(--paper-ink)}
+.op:hover .op-art img,.op:focus-visible .op-art img{transform:scale(1.03)}
+.op-act{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:999px;
+  font:400 10px/1 "Geist Mono",ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(126,82,40,.5);box-shadow:inset 0 0 0 1px rgba(126,82,40,.16);
+  transition:background .3s var(--ease),color .3s var(--ease),box-shadow .3s var(--ease)}
+.op-act b{font-weight:400;letter-spacing:0;transition:transform .35s var(--ease)}
+.op:hover .op-act,.op:focus-visible .op-act,.op.lock .op-act{background:rgba(126,82,40,.05);
+  color:rgba(126,82,40,.75);box-shadow:inset 0 0 0 1px rgba(126,82,40,.3)}
+.op:hover .op-act b,.op:focus-visible .op-act b{transform:translateX(3px)}
+/* the focus ring stays for the keyboard, close to the paper */
+.align .op:focus-visible{outline:1px solid rgba(23,20,18,.08);outline-offset:6px}
+/* the answer is a status, not a control: it takes focus for screen readers
+   and draws no box */
+.align .verdict:focus,.align .verdict:focus-visible{outline:none}
+/* on a choice all three leave, and the answer arrives in their place */
+.lp-opts:has(.verdict.in) .op{opacity:0;transform:translateY(8px);pointer-events:none}
+.lp-opts .verdict{background:none;box-shadow:none;border-radius:0;padding:0 8px;clip-path:none;
+  display:grid;align-content:center;justify-items:center;gap:clamp(18px,3svh,30px);
+  opacity:0;transition:opacity .45s var(--ease)}
+.lp-opts .verdict.in{clip-path:none;opacity:1;transition:opacity .6s var(--ease) .3s}
+/* the button's face, sans and unboxed, at the title's size */
+.lp-opts .verdict p{font:400 10px/1.6 "Geist Mono",ui-monospace,monospace;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--paper-ink);max-width:none}
+/* the loading line, under the answer rather than along a box */
+.lp-opts .verdict .clock{position:relative;left:auto;right:auto;bottom:auto;width:min(200px,50%);height:1px;
+  background:rgba(23,20,18,.08)}
+.lp .note{margin:0 auto;max-width:56ch;font-size:13px;line-height:1.6;color:rgba(23,20,18,.66);text-align:center}
+/* a phone is too narrow for three lockups abreast: each answer is a row */
+@media (max-width:600px){
+  .lp-opts{grid-template-columns:1fr;gap:clamp(12px,3svh,26px);padding-block:clamp(4px,2svh,18px)}
+  .op{gap:clamp(6px,1.2svh,10px);padding:2px 0}
+  .op-art{height:clamp(19px,3.84svh,30px)}
+  .op-art img{width:auto;max-width:64%;height:clamp(19px,3.84svh,30px);max-height:none}
+  .op-art:has(.op-word){height:auto}
+  .op-word{font-size:clamp(10px,1.7svh,13px)}
+  .op-act{padding:8px 13px}
+}
 </style>
 </head>
 <body>
@@ -732,33 +801,35 @@ html.rv [data-rv].in{opacity:1;transform:none}
 
 <!-- ACT II ─ ALIGNMENT ───────────────────────────────────────────────── -->
 <section class="align" id="alignment" aria-labelledby="alignQ">
-  <div class="ask" data-rv>
-    <p class="eyebrow" data-t="e2">Alignment</p>
-    <h2 class="disp" id="alignQ" data-t="h2a">Which one of these looks better designed?</h2>
+  <div class="bed" aria-hidden="true">
+    <img src="/assets/video/ground-paper-2-720.jpg" alt="" width="1280" height="720" loading="lazy">
+    <video id="alignv" muted playsinline loop preload="none" poster="/assets/video/ground-paper-2-720.jpg">
+      <source src="/assets/video/ground-paper-2-720.mp4" type="video/mp4">
+    </video>
   </div>
+  <div class="lp">
+    <header class="lp-head" data-rv>
+      <div>
+        <p class="eyebrow" data-t="e2">Alignment</p>
+        <h2 class="disp" id="alignQ" data-t="h2a">Can you see it?</h2>
+        <p class="lp-sub" data-t="aAsk">Select the best one below.</p>
+      </div>
+    </header>
 
-  <div class="panel" data-rv>
-    <div class="side l" aria-hidden="true">
-      <span class="ro vt" data-t="aTest">Alignment test</span>
-    </div>
-
-    <div class="cells" id="alignOpts" role="group" data-ta="aGroup" aria-label="Choose one">
-      <!-- Fixed order, the owner's: before, after, either. Neither lockup
-           carries a label, so the answer is not written on the cell. -->
-      <button type="button" class="opt" data-pick="before" data-ta="aLockA" aria-label="Lockup A">
-        <span class="hd ro"><span class="id"><span class="tab"></span><span data-t="aOpt">Option</span>&nbsp;01</span><span class="sel" data-t="aSel">Select</span></span>
-        <span class="pl"><i></i><i></i><i></i><i></i><img alt="" width="1400" height="312" loading="lazy" src="/assets/img/turva-old-2-700.webp" srcset="/assets/img/turva-old-2-700.webp 700w, /assets/img/turva-old-2-1400.webp 1400w" sizes="180px"></span>
-        <span class="ft ro"><span>A</span></span>
+    <!-- Fixed order, the owner's: before, after, either. Neither lockup
+         carries a label, so the answer is not written under it. -->
+    <div class="lp-opts" id="alignOpts" role="group" data-ta="aGroup" aria-label="Choose one" data-rv>
+      <button type="button" class="op" data-pick="before" data-ta="aLockA" aria-label="Lockup A">
+        <span class="op-art"><img alt="" width="1400" height="312" loading="lazy" src="/assets/img/turva-old-2-700.webp" srcset="/assets/img/turva-old-2-700.webp 700w, /assets/img/turva-old-2-1400.webp 1400w" sizes="(max-width:600px) 60vw, 320px"></span>
+        <span class="op-act" aria-hidden="true"><span data-t="aSel">Select</span><b>&rarr;</b></span>
       </button>
-      <button type="button" class="opt" data-pick="after" data-ta="aLockB" aria-label="Lockup B">
-        <span class="hd ro"><span class="id"><span class="tab"></span><span data-t="aOpt">Option</span>&nbsp;02</span><span class="sel" data-t="aSel">Select</span></span>
-        <span class="pl"><i></i><i></i><i></i><i></i><img alt="" width="1400" height="250" loading="lazy" src="/assets/img/turva-new-2-700.webp" srcset="/assets/img/turva-new-2-700.webp 700w, /assets/img/turva-new-2-1400.webp 1400w" sizes="180px"></span>
-        <span class="ft ro"><span>B</span></span>
+      <button type="button" class="op" data-pick="after" data-ta="aLockB" aria-label="Lockup B">
+        <span class="op-art"><img alt="" width="1400" height="250" loading="lazy" src="/assets/img/turva-new-2-700.webp" srcset="/assets/img/turva-new-2-700.webp 700w, /assets/img/turva-new-2-1400.webp 1400w" sizes="(max-width:600px) 60vw, 320px"></span>
+        <span class="op-act" aria-hidden="true"><span data-t="aSel">Select</span><b>&rarr;</b></span>
       </button>
-      <button type="button" class="opt" data-pick="either">
-        <span class="hd ro" aria-hidden="true"><span class="id"><span class="tab"></span><span data-t="aOpt">Option</span>&nbsp;03</span><span class="sel" data-t="aSel">Select</span></span>
-        <span class="pl"><i></i><i></i><i></i><i></i><b class="ro" data-t="aEither">Either looks fine</b></span>
-        <span class="ft ro" aria-hidden="true"><span>A = B</span></span>
+      <button type="button" class="op" data-pick="either">
+        <span class="op-art"><span class="op-word" data-t="aEither">Either looks fine</span></span>
+        <span class="op-act" aria-hidden="true"><span data-t="aSel">Select</span><b>&rarr;</b></span>
       </button>
 
       <div class="verdict" id="alignVerdict" role="status" aria-live="polite" tabindex="-1">
@@ -767,15 +838,8 @@ html.rv [data-rv].in{opacity:1;transform:none}
       </div>
     </div>
 
-    <div class="side r" aria-hidden="true">
-      <span class="sw"></span>
-      <span class="ro vt" data-t="aInk">Ink #BD9059</span>
-    </div>
-
-    <p class="strip ro"><span data-t="aStrip">Same ink · Same stock · Only the drawing differs</span></p>
+    <p class="note" data-rv data-t="aNote">Competence shows in the drawing. If the difference is not obvious to you, nothing written here will make it so.</p>
   </div>
-
-  <p class="note" data-rv data-t="aNote">Competence shows in the drawing. If the difference is not obvious to you, nothing written here will make it so.</p>
 </section>
 
 <section class="spec duo flip" id="system" aria-label="The system">
@@ -1045,6 +1109,15 @@ if (dirv && !reduce) {
   io.observe($("#direction"));
 } else if (dirv) dirv.remove();
 
+/* lab: the same paper loop under the alignment fold */
+const alignv = $("#alignv");
+if (alignv && !reduce) {
+  const io = new IntersectionObserver(es => {
+    if (es.some(e => e.isIntersecting)) { alignv.preload = "auto"; mountVideo(alignv); io.disconnect(); }
+  }, { rootMargin: "600px" });
+  io.observe($("#alignment"));
+} else if (alignv) alignv.remove();
+
 /* the close video is 1.4 MB of paper and only matters at the bottom */
 const closev = $("#closev");
 if (closev && !reduce) {
@@ -1196,7 +1269,7 @@ const LANG = {
     h1a:"Competence<br>everyone<br>can <em>see</em>.",
     sub:"A hallmark told a buyer the metal was good before anyone tested it. A well-drawn mark does the same. It shows people a company knows what it is doing before they have read a word.",
     scroll:"Scroll",
-    e2:"Alignment", h2a:"Which one of these looks better designed?",
+    e2:"Alignment", h2a:"Can you see it?", aAsk:"Select the best one below.",
     aTest:"Alignment test", aOpt:"Option", aSel:"Select", aEither:"Either looks fine",
     aInk:"Ink #BD9059", aStrip:"Same ink \u00b7 Same stock \u00b7 Only the drawing differs",
     aGroup:"Choose one", aLockA:"Lockup A", aLockB:"Lockup B",
@@ -1247,8 +1320,8 @@ const LANG = {
     h1a:"Kompetanse<br>alle<br>kan <em>se</em>.",
     sub:"Et kontrollstempel fortalte kj\u00f8peren at metallet var godt f\u00f8r noen hadde testet det. Et godt tegnet merke gj\u00f8r det samme. Det viser folk at et selskap vet hva det gj\u00f8r, f\u00f8r de har lest et ord.",
     scroll:"Rull",
-    e2:"Innretting", h2a:"Hvilken av disse ser best designet ut?",
-    aTest:"Innrettingstest", aOpt:"Valg", aSel:"Velg", aEither:"Begge ser fine ut",
+    e2:"Innretting", h2a:"Ser du det?", aAsk:"Velg den beste nedenfor.",
+    aTest:"Innrettingstest", aOpt:"Valg", aSel:"Velg", aEither:"Begge er fine",
     aInk:"Blekk #BD9059", aStrip:"Samme blekk \u00b7 Samme papir \u00b7 Bare tegningen er ulik",
     aGroup:"Velg ett", aLockA:"Logo A", aLockB:"Logo B",
     aNo:"Du trenger ikke en merkevare enn\u00e5.", aYes:"Vi kommer godt overens.",
@@ -1298,7 +1371,7 @@ const LANG = {
     h1a:"Osaamista,<br>jonka kaikki<br><em>n\u00e4kev\u00e4t</em>.",
     sub:"Tarkastusleima kertoi ostajalle, ett\u00e4 metalli oli hyv\u00e4\u00e4, ennen kuin kukaan oli testannut sit\u00e4. Hyvin piirretty merkki tekee saman. Se n\u00e4ytt\u00e4\u00e4 ihmisille, ett\u00e4 yritys tiet\u00e4\u00e4, mit\u00e4 tekee, ennen kuin he ovat lukeneet sanaakaan.",
     scroll:"Vierit\u00e4",
-    e2:"Linjaus", h2a:"Mik\u00e4 n\u00e4ist\u00e4 n\u00e4ytt\u00e4\u00e4 paremmin suunnitellulta?",
+    e2:"Linjaus", h2a:"N\u00e4etk\u00f6 sen?", aAsk:"Valitse paras alta.",
     aTest:"Linjaustesti", aOpt:"Valinta", aSel:"Valitse", aEither:"Kumpi tahansa k\u00e4y",
     aInk:"Muste #BD9059", aStrip:"Sama muste \u00b7 Sama paperi \u00b7 Vain piirros eroaa",
     aGroup:"Valitse yksi", aLockA:"Logo A", aLockB:"Logo B",
@@ -1484,7 +1557,8 @@ addEventListener("load", () => {
   if (!opts) return;
   const buttons = [...opts.querySelectorAll("button")];
   const V = { before:["aNo",4000,false], either:["aNo",4000,false], after:["aYes",3000,true] };
-  function fit(){
+  function fit(){ msg.style.fontSize = ""; }
+  function fitOld(){
     const cs = getComputedStyle(verdict);
     const w = verdict.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
     const h = verdict.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);

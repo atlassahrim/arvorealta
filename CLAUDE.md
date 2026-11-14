@@ -218,7 +218,6 @@ alone.** Checked against every published page's own tag:
 | `home/` | `noindex, follow` | a stub redirecting `/home/` to `/` |
 | `proposta-motorhome/` | `noindex` | a Portuguese offer page, its own prices |
 | `templates/` | `noindex` | belt and braces: it is also swept by `pages.yml` |
-| `lab/alignment/` | `noindex, nofollow` | sandbox: fold two, three answers side by side, 14 November |
 
 `reference/` is the near-copy, so without the label it would be a second
 `index.html` bidding against the first for the same terms.
@@ -2269,7 +2268,45 @@ Verified at 1440 × 900, 1280 × 720, 1180 × 720, 820 × 1180, 768 × 1024,
 exactly one screen; no horizontal scroll; no page errors; no empty
 strings.
 
-### `lab/alignment/` — fold two as letterpress, a sandbox (14 November)
+### Fold two is the quiet test, promoted on 14 November
+
+**`lab/alignment/` won a second time and is deleted.** The owner looked at
+it and said promote. `/brand/` hadn't moved since the lab was copied from
+it, so the lab file went across whole, with three things changed:
+
+- **The head is the live page's**: its title and its canonical are back,
+  and `noindex, nofollow` is off. The first thirty lines are identical
+  to the page it replaced.
+- **The block's comment describes the fold as it is**, not the strips it
+  was first written for, and the dead `.op-lbl` rule is gone.
+- **Nothing else.** Every string, the paper loop and the script are the
+  lab's own.
+
+**The ticket panel's rules are still in the sheet**, above the new block,
+which overrides them. Most of them match nothing now: `.pl`, `.ask`, the
+cut corners, the circle, and their short-phone trims. They were left
+because removing them by hand is where this page has broken before, and
+nothing shows. **If a rule on fold two seems to do nothing, it is one of
+those.**
+
+**What the live page now carries that this file used to flag:**
+
+- **The fairness strip is gone.** `Same ink · Same stock · Only the
+  drawing differs` is no longer on the page in any form, so the fold no
+  longer says the test is fair. `aStrip` stays in `STR`.
+- **The `Select →` pill measures 2.13:1**, under the 4.5:1 small text
+  needs, by the owner's choice. The whole option is the button, so the
+  pill is not the only way in.
+- **The new `Begge er fine`** replaces `Begge ser fine ut` in Norwegian.
+
+Verified on `/brand/` at 1440 × 900, 1280 × 720, 1180 × 720, 820 × 1180,
+768 × 1024, 390 × 844, 390 × 664, 430 × 740, 375 × 548 and 360 × 640, in
+three languages: six folds at one screen. 27 answers at three sizes all
+show the answer, the after path lands on `#system` with the snap back on
+`y mandatory`, with no empty string, no sideways scroll and no page error.
+**The paper loop cannot play in this container.** Check a real browser.
+
+### `lab/alignment/` — fold two as letterpress, a sandbox (14 November, promoted, deleted)
 
 **The owner asked for fold two rebuilt in a lab, with an image of blind-
 embossed paper as the reference.** What he named in it is the very subtle
