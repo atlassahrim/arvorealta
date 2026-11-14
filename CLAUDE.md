@@ -1043,6 +1043,14 @@ Measured on the live page: `.open h1` carries `max-width:14ch` and
 break was two `<span data-t>` joined by a space, which are translation
 units rather than line endings. Six headlines, one mechanism.
 
+**Since 14 November the hero does keep hard breaks, at the owner's
+word.** `Competence everyone can see.` is set as `Competence` /
+`everyone` / `can see.`, with `<br>` inside the `h1a` string in all three
+languages, because `setLang` writes `innerHTML` and a break in the string
+survives it. The Nordic breaks follow the same shape, with the verb on the
+last line: `Kompetanse` / `alle` / `kan se.` and `Osaamista,` / `jonka
+kaikki` / `näkevät.` The other five headlines still use `balance`.
+
 ### The work was never at scale, which is why it still looked wrong
 
 Three passes fixed the frame and none of them touched the pictures. Asked
@@ -2208,6 +2216,18 @@ screen and not only on the English.
 The Norwegian and Finnish are a session's: `Merkevareidentitet` /
 `Kompetanse alle kan se.` and `Brändi-identiteetti` / `Osaamista, jonka
 kaikki näkevät.`
+
+**The headline was then hand-broken into three lines**, at the owner's
+instruction, with `can see.` alone on the last. It measures exactly three
+lines at every size tried, and the hero still fits one screen everywhere.
+
+**Folds two and three overflow a 375 × 667 screen, and they did before
+this day's changes.** That is an iPhone SE. Measured there: the alignment
+fold at 1.21 screens and the system fold at 1.11 (1.14 in Finnish),
+against 1.21 and 1.07 two commits earlier. Under the mandatory snap the
+foot of each can be hard to reach on that phone. Every other size tried
+fits. It is recorded rather than fixed, because the fix is layout on the
+folds and not copy.
 
 Verified at 1440 × 900, 1280 × 720, 1180 × 820, 820 × 1180 and 390 × 844,
 in all three languages: six folds at exactly one screen; no horizontal
