@@ -218,6 +218,7 @@ alone.** Checked against every published page's own tag:
 | `home/` | `noindex, follow` | a stub redirecting `/home/` to `/` |
 | `proposta-motorhome/` | `noindex` | a Portuguese offer page, its own prices |
 | `templates/` | `noindex` | belt and braces: it is also swept by `pages.yml` |
+| `lab/alignment/` | `noindex, nofollow` | sandbox: fold two as letterpress, 14 November |
 
 `reference/` is the near-copy, so without the label it would be a second
 `index.html` bidding against the first for the same terms.
@@ -2267,6 +2268,53 @@ Verified at 1440 × 900, 1280 × 720, 1180 × 720, 820 × 1180, 768 × 1024,
 390 × 844 and the phone sizes above, in all three languages: six folds at
 exactly one screen; no horizontal scroll; no page errors; no empty
 strings.
+
+### `lab/alignment/` — fold two as letterpress, a sandbox (14 November)
+
+**The owner asked for fold two rebuilt in a lab, with an image of blind-
+embossed paper as the reference.** What he named in it is the very subtle
+contrast on everything that is not the images or the options. It is a
+sandbox, so nothing here binds it, and nothing in it is evidence that
+`/brand/` should change until he promotes it.
+
+**It is a whole copy of `/brand/` with one fold changed**, so the fold is
+judged between the hero and the system fold rather than alone. It carries
+`noindex, nofollow` and no canonical, and its title reads `Lab: alignment`.
+Everything outside `.align` is the live page's own code, so **a copy
+change on `/brand/` does not reach the lab**, and the lab falls behind the
+day the live page moves. Delete it then, or when it wins.
+
+What changed, all in one block appended last to the stylesheet:
+
+- **The title is `Select the best below.`**, the owner's line, with
+  `Velg den beste nedenfor.` and `Valitse paras alta.` (a session's).
+- **The answer is set at the title's size**, `var(--t-head)`, in place of
+  the binary search that filled the box (58 to 85px). Checked: all 24
+  answers, both paths in three languages at four sizes, fit their box.
+- **The ground is the close's paper loop**, `ground-paper-2-720`, with a
+  38 per cent paper veil over it, mounted 600px ahead of the fold and
+  removed under reduced motion, like every other bed.
+- **The panel is a raised card and its cells are pressed into it.** Lines
+  are a shadow and a highlight rather than a stroke, the cut corners are
+  gone, and the foot strip carries the reference's fluted rail.
+- **Every label is pressed, not printed**: ink at 34 per cent with a white
+  highlight under it, which measures **2.15:1** on its card. That is the
+  look asked for and it is under the 4.5:1 small text needs. The labels it
+  covers say `Option 01`, `Select`, `Alignment test`, the ink swatch and
+  the fairness strip; none of them is needed to answer the question. **If
+  this is promoted, the fairness strip is the one to weigh**, because it
+  is the fold's claim that the test is fair.
+- **Full contrast is spent only on what is being judged**: the two
+  lockups and `Either looks fine`. The note reads 5.47:1.
+- **The selection and the answer are one step softer**, `#E3DACB` against
+  the live `#D9CFBE`, because at the live value the answer box was the
+  heaviest block on a fold that is otherwise tone on tone. The owner chose
+  `#D9CFBE` on 2 November; restoring it is one line.
+
+Verified at 1440 × 900, 1280 × 720, 1180 × 720, 820 × 1180, 768 × 1024,
+390 × 844, 390 × 664, 375 × 548 and 360 × 640 in three languages: six
+folds at one screen, no page errors. **The paper loop cannot play in this
+container**, which has no H.264; the still was what was checked.
 
 ### `lab/home/` and `lab/video/` — the other two pages on the brand interface (promoted, deleted)
 
