@@ -2119,7 +2119,7 @@ the corrected table before it went live.** The page now makes one case in
 three steps: a mark earns trust outside the company, gives the staff
 something to belong to, and raises the standard of the work beside it.
 
-- **Hero.** `h1a` reads `Trust before proof.` and carries no `<em>`. `sub`
+- **Hero.** `h1a` read `Trust before proof.` (replaced on 14 November, below) and carries no `<em>`. `sub`
   reads `A hallmark told a buyer the metal was good before anyone tested
   it. A well-drawn mark does the same. It tells people a company is
   established and accountable before they have read a word.`
@@ -2168,6 +2168,49 @@ hallmark, and `etterrettelig` and `vastuullinen` for accountable.
 
 Verified at 1440, 1180, 820 and 390 in all three languages: six folds at
 one screen, with the Norwegian close at 1.01 at 1440; no horizontal
+scroll; no page errors; no empty strings.
+
+### `/brand/` leads on competence, on 14 November
+
+**The owner set a new headline and asked for the page to run from it to
+the close in one line.** He approved the table, with his own changes,
+before it went live. The hero's hallmark now proves competence rather
+than trust, and every later fold carries the same word forward.
+
+- **Eyebrow.** `kicker` reads `Brand identity`. It was `Brands for
+  decision makers`. An eyebrow names the subject and the headline makes
+  the claim, and `Competence everyone can see.` never says what is sold.
+  `Brands with class` was the owner's draft and was argued down, because
+  it makes a claim the reader cannot check.
+- **Hero.** `h1a` reads `Competence everyone can see.` The last sentence
+  of `sub` reads `It shows people a company knows what it is doing before
+  they have read a word.`
+- **Alignment.** `aNote` opens `Competence shows in the drawing.`, which
+  replaces `Some people are numb to nuance.`
+- **System.** `sysSay` is the owner's: `Matching your look to your
+  competence takes consistency, and consistency is built on direction
+  people can follow. We keep it actionable by keeping it simple: clean
+  vectors, not 30-page rulebooks.` His draft had `with your competence`
+  and a comma between the subject and its verb.
+- **Close.** `closeB` ends `quietly, for everyone.`, which picks up the
+  headline's `everyone`.
+
+The result fold and the gallery did not change.
+
+**The Finnish system line was shortened to fit.** The first translation
+put the system fold at 1.04 screens at 1280 × 720 and 1.02 at 1180 × 720,
+which a mandatory snap turns into a trap. The shipped Finnish says that
+simplicity makes it actionable, in place of the longer we-keep-it
+construction. **A translation is part of the layout**: Finnish runs about
+40 per cent longer than English, so measure it on the shortest laptop
+screen and not only on the English.
+
+The Norwegian and Finnish are a session's: `Merkevareidentitet` /
+`Kompetanse alle kan se.` and `Brändi-identiteetti` / `Osaamista, jonka
+kaikki näkevät.`
+
+Verified at 1440 × 900, 1280 × 720, 1180 × 820, 820 × 1180 and 390 × 844,
+in all three languages: six folds at exactly one screen; no horizontal
 scroll; no page errors; no empty strings.
 
 ### `lab/home/` and `lab/video/` — the other two pages on the brand interface (promoted, deleted)
