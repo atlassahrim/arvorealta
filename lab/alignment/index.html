@@ -676,61 +676,51 @@ html.rv [data-rv].in{opacity:1;transform:none}
 .lp-pill{margin:0;padding:9px 16px;border-radius:999px;font:400 10px/1.2 "Geist Mono",ui-monospace,monospace;
   letter-spacing:.16em;text-transform:uppercase;color:var(--press);text-shadow:0 1px 0 var(--emb-l);
   box-shadow:inset 0 0 0 1px var(--emb-d),0 1px 0 var(--emb-l)}
-.lp-rows{position:relative;display:grid;gap:clamp(8px,1.4svh,14px)}
-/* a strip: raised from the paper, its rail along the foot */
-.tk{position:relative;display:grid;grid-template-columns:minmax(0,1.4fr) auto minmax(0,1fr) auto;
-  align-items:center;gap:clamp(16px,2.4vw,40px);height:clamp(84px,14svh,148px);
-  padding:0 clamp(16px,2.2vw,30px) 10px;text-align:left;color:inherit;border-radius:3px;
-  background:linear-gradient(180deg,#F7F3EB,#F1ECE2);
-  box-shadow:inset 0 1px 0 var(--emb-l),inset 0 0 0 1px var(--emb-d),0 1px 0 var(--emb-l),
-    0 14px 24px -20px rgba(70,50,25,.45);
-  transition:transform .45s var(--ease),box-shadow .45s var(--ease),background .3s var(--ease)}
-.tk::after{content:"";position:absolute;left:1px;right:1px;bottom:1px;height:9px;border-radius:0 0 3px 3px;
-  background:repeating-linear-gradient(90deg,rgba(23,20,18,.11) 0 1px,rgba(255,255,255,.72) 1px 2px,rgba(23,20,18,.025) 2px 4px);
-  box-shadow:inset 0 1px 0 rgba(23,20,18,.08),inset 0 2px 2px rgba(23,20,18,.05)}
-.tk:hover,.tk:focus-visible{transform:translateY(-2px);
-  box-shadow:inset 0 1px 0 var(--emb-l),inset 0 0 0 1px var(--emb-d),0 1px 0 var(--emb-l),
-    0 22px 30px -20px rgba(70,50,25,.55)}
-.tk:focus-visible{outline-offset:3px}
-.tk-lead{display:grid;gap:clamp(6px,1.2svh,14px);align-content:center;min-width:0}
-.tk-lbl{font:400 10px/1 "Geist Mono",ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--press);text-shadow:0 1px 0 var(--emb-l);white-space:nowrap}
-/* what is being judged: full contrast, at the size the strip allows */
-.tk-lead img{height:clamp(24px,5.2svh,52px);width:auto;max-width:100%;object-fit:contain;object-position:left center}
-.tk-word{font-family:"EB Garamond",Georgia,serif;font-size:var(--t-value);line-height:1;letter-spacing:-.015em;
-  color:var(--paper-ink)}
-/* the recessed window: the one ink both drawings share, lit from inside */
-.tk-win{width:clamp(24px,2.4vw,38px);height:clamp(38px,7svh,62px);border-radius:2px;
-  background:linear-gradient(160deg,#E7C690 0%,#BD9059 48%,#8C6235 100%);
-  box-shadow:inset 0 2px 5px rgba(60,35,10,.55),inset 0 -1px 0 rgba(255,236,204,.5),
-    0 1px 0 var(--emb-l),0 0 0 4px rgba(23,20,18,.035)}
-.tk-mid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px 16px;align-items:end;min-width:0}
-.tk-mid .tk-lbl{grid-column:1/-1}
-.tk-rule{height:7px;align-self:center;background:
-  repeating-linear-gradient(90deg,rgba(23,20,18,.14) 0 1px,transparent 1px 6px) bottom/100% 3px no-repeat,
-  repeating-linear-gradient(90deg,rgba(23,20,18,.14) 0 1px,transparent 1px 30px) bottom/100% 7px no-repeat}
-.tk-key{font:italic 400 22px/1 "EB Garamond",Georgia,serif;color:var(--press);white-space:nowrap}
-/* the action is an option too, so it keeps its contrast */
-.tk-act{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:999px;
+/* the three answers: no ground, side by side, a faint label and the pill */
+.lp-opts{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(20px,4vw,72px);padding-block:clamp(16px,6svh,72px)}
+.op{display:grid;grid-template-rows:auto auto auto;justify-items:center;gap:clamp(10px,1.8svh,18px);
+  background:none;border:0;padding:6px;color:inherit;text-align:center;
+  transition:opacity .45s var(--ease),transform .45s var(--ease)}
+.op-art{display:grid;place-items:center;width:100%;height:clamp(52px,10svh,104px)}
+.op-art img{width:min(100%,300px);height:auto;max-height:100%;object-fit:contain;
+  transition:transform .6s var(--ease)}
+.op-word{font-family:"EB Garamond",Georgia,serif;font-size:clamp(24px,2.5vw,38px);line-height:1;
+  letter-spacing:-.015em;color:var(--paper-ink)}
+.op:hover .op-art img,.op:focus-visible .op-art img{transform:scale(1.03)}
+/* the smallest text on the fold, close to the paper */
+.op-lbl{font:400 9px/1 "Geist Mono",ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(23,20,18,.3);white-space:nowrap}
+.op-act{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:999px;
   font:400 10px/1 "Geist Mono",ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--copper);box-shadow:inset 0 0 0 1px rgba(126,82,40,.5),0 1px 0 var(--emb-l);
-  transition:background .3s var(--ease)}
-.tk-act b{font-weight:400;letter-spacing:0;transition:transform .35s var(--ease)}
-.tk:hover .tk-act,.tk:focus-visible .tk-act{background:rgba(126,82,40,.08)}
-.tk:hover .tk-act b,.tk:focus-visible .tk-act b{transform:translateX(3px)}
-/* chosen: pressed into the paper */
-.tk.lock{transform:none;background:var(--paper-deep);
-  box-shadow:inset 0 2px 6px rgba(60,44,24,.22),inset 0 0 0 1px var(--emb-d),0 1px 0 var(--emb-l)}
-/* the answer covers the strips, at the title's own size */
-.lp-rows .verdict{border-radius:3px;background:var(--paper-deep);box-shadow:inset 0 2px 8px rgba(60,44,24,.16)}
-.align .verdict p{font-size:var(--t-head);line-height:1.04}
+  color:var(--copper);box-shadow:inset 0 0 0 1px rgba(126,82,40,.5);transition:background .3s var(--ease)}
+.op-act b{font-weight:400;letter-spacing:0;transition:transform .35s var(--ease)}
+.op:hover .op-act,.op:focus-visible .op-act,.op.lock .op-act{background:rgba(126,82,40,.08)}
+.op:hover .op-act b,.op:focus-visible .op-act b{transform:translateX(3px)}
+.op:focus-visible{outline-offset:4px}
+/* on a choice all three leave, and the answer arrives in their place */
+.lp-opts:has(.verdict.in) .op{opacity:0;transform:translateY(8px);pointer-events:none}
+.lp-opts .verdict{background:none;box-shadow:none;border-radius:0;padding:0 8px;clip-path:none;
+  display:grid;align-content:center;justify-items:center;gap:clamp(18px,3svh,30px);
+  opacity:0;transition:opacity .45s var(--ease)}
+.lp-opts .verdict.in{clip-path:none;opacity:1;transition:opacity .6s var(--ease) .3s}
+/* the button's face, sans and unboxed, at the title's size */
+.lp-opts .verdict p{font:400 var(--t-head)/1.08 "Geist Mono",ui-monospace,monospace;letter-spacing:-.035em;
+  color:var(--paper-ink);max-width:24ch}
+/* the loading line, under the answer rather than along a box */
+.lp-opts .verdict .clock{position:relative;left:auto;right:auto;bottom:auto;width:min(340px,60%);height:2px;
+  background:rgba(23,20,18,.08)}
 .lp .note{margin:0;max-width:56ch;font-size:13px;line-height:1.6;color:rgba(23,20,18,.66);text-align:left}
-@media (max-width:760px){
-  .tk{grid-template-columns:minmax(0,1fr) auto;height:clamp(74px,13svh,112px);padding:0 14px 9px;gap:12px}
-  .tk-win,.tk-mid{display:none}
-  .tk-act{padding:9px 13px}
-  .tk-lead img{height:clamp(22px,4.4svh,36px)}
-  .tk-word{font-size:var(--t-sub)}
+/* a phone is too narrow for three lockups abreast: each answer is a row */
+@media (max-width:600px){
+  .lp-opts{grid-template-columns:1fr;gap:clamp(10px,2.4svh,22px);padding-block:clamp(4px,2svh,18px)}
+  .op{grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;justify-items:start;
+    align-items:center;column-gap:14px;row-gap:8px;text-align:left;padding:4px 0}
+  .op-art{grid-row:1;grid-column:1;height:clamp(30px,6svh,48px);justify-content:start}
+  .op-art img{width:auto;max-width:100%;height:clamp(30px,6svh,48px);max-height:none;object-position:left center}
+  .op-word{font-size:var(--t-sub)}
+  .op-lbl{grid-row:2;grid-column:1}
+  .op-act{grid-row:1/3;grid-column:2;padding:9px 13px}
   .lp-pill{padding:7px 12px;font-size:9px}
 }
 @media (max-width:760px) and (max-height:640px){ .lp-pill{display:none} }
@@ -829,43 +819,22 @@ html.rv [data-rv].in{opacity:1;transform:none}
     </header>
 
     <!-- Fixed order, the owner's: before, after, either. Neither lockup
-         carries a label, so the answer is not written on the strip. -->
-    <div class="lp-rows" id="alignOpts" role="group" data-ta="aGroup" aria-label="Choose one" data-rv>
-      <button type="button" class="tk" data-pick="before" data-ta="aLockA" aria-label="Lockup A">
-        <span class="tk-lead">
-          <span class="tk-lbl" aria-hidden="true"><span data-t="aOpt">Option</span> · 01</span>
-          <img alt="" width="1400" height="312" loading="lazy" src="/assets/img/turva-old-2-700.webp" srcset="/assets/img/turva-old-2-700.webp 700w, /assets/img/turva-old-2-1400.webp 1400w" sizes="(max-width:760px) 60vw, 360px">
-        </span>
-        <span class="tk-win" aria-hidden="true"></span>
-        <span class="tk-mid" aria-hidden="true">
-          <span class="tk-lbl" data-t="aInk">Ink #BD9059</span>
-          <span class="tk-rule"></span><span class="tk-key">A</span>
-        </span>
-        <span class="tk-act" aria-hidden="true"><span data-t="aSel">Select</span><b>&rarr;</b></span>
+         carries a label, so the answer is not written under it. -->
+    <div class="lp-opts" id="alignOpts" role="group" data-ta="aGroup" aria-label="Choose one" data-rv>
+      <button type="button" class="op" data-pick="before" data-ta="aLockA" aria-label="Lockup A">
+        <span class="op-art"><img alt="" width="1400" height="312" loading="lazy" src="/assets/img/turva-old-2-700.webp" srcset="/assets/img/turva-old-2-700.webp 700w, /assets/img/turva-old-2-1400.webp 1400w" sizes="(max-width:600px) 60vw, 320px"></span>
+        <span class="op-lbl" aria-hidden="true"><span data-t="aOpt">Option</span> A</span>
+        <span class="op-act" aria-hidden="true"><span data-t="aSel">Select</span><b>&rarr;</b></span>
       </button>
-      <button type="button" class="tk" data-pick="after" data-ta="aLockB" aria-label="Lockup B">
-        <span class="tk-lead">
-          <span class="tk-lbl" aria-hidden="true"><span data-t="aOpt">Option</span> · 02</span>
-          <img alt="" width="1400" height="250" loading="lazy" src="/assets/img/turva-new-2-700.webp" srcset="/assets/img/turva-new-2-700.webp 700w, /assets/img/turva-new-2-1400.webp 1400w" sizes="(max-width:760px) 60vw, 360px">
-        </span>
-        <span class="tk-win" aria-hidden="true"></span>
-        <span class="tk-mid" aria-hidden="true">
-          <span class="tk-lbl" data-t="aInk">Ink #BD9059</span>
-          <span class="tk-rule"></span><span class="tk-key">B</span>
-        </span>
-        <span class="tk-act" aria-hidden="true"><span data-t="aSel">Select</span><b>&rarr;</b></span>
+      <button type="button" class="op" data-pick="after" data-ta="aLockB" aria-label="Lockup B">
+        <span class="op-art"><img alt="" width="1400" height="250" loading="lazy" src="/assets/img/turva-new-2-700.webp" srcset="/assets/img/turva-new-2-700.webp 700w, /assets/img/turva-new-2-1400.webp 1400w" sizes="(max-width:600px) 60vw, 320px"></span>
+        <span class="op-lbl" aria-hidden="true"><span data-t="aOpt">Option</span> B</span>
+        <span class="op-act" aria-hidden="true"><span data-t="aSel">Select</span><b>&rarr;</b></span>
       </button>
-      <button type="button" class="tk" data-pick="either">
-        <span class="tk-lead">
-          <span class="tk-lbl" aria-hidden="true"><span data-t="aOpt">Option</span> · 03</span>
-          <span class="tk-word" data-t="aEither">Either looks fine</span>
-        </span>
-        <span class="tk-win" aria-hidden="true"></span>
-        <span class="tk-mid" aria-hidden="true">
-          <span class="tk-lbl" data-t="aInk">Ink #BD9059</span>
-          <span class="tk-rule"></span><span class="tk-key">A = B</span>
-        </span>
-        <span class="tk-act" aria-hidden="true"><span data-t="aSel">Select</span><b>&rarr;</b></span>
+      <button type="button" class="op" data-pick="either">
+        <span class="op-art"><span class="op-word" data-t="aEither">Either looks fine</span></span>
+        <span class="op-lbl" aria-hidden="true"><span data-t="aOpt">Option</span> C</span>
+        <span class="op-act" aria-hidden="true"><span data-t="aSel">Select</span><b>&rarr;</b></span>
       </button>
 
       <div class="verdict" id="alignVerdict" role="status" aria-live="polite" tabindex="-1">

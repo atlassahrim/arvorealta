@@ -218,7 +218,7 @@ alone.** Checked against every published page's own tag:
 | `home/` | `noindex, follow` | a stub redirecting `/home/` to `/` |
 | `proposta-motorhome/` | `noindex` | a Portuguese offer page, its own prices |
 | `templates/` | `noindex` | belt and braces: it is also swept by `pages.yml` |
-| `lab/alignment/` | `noindex, nofollow` | sandbox: fold two rebuilt from a letterpress reference, 14 November |
+| `lab/alignment/` | `noindex, nofollow` | sandbox: fold two, three answers side by side, 14 November |
 
 `reference/` is the near-copy, so without the label it would be a second
 `index.html` bidding against the first for the same terms.
@@ -2347,6 +2347,31 @@ Verified at 1440 × 900, 1280 × 720, 1180 × 720, 1024 × 768, 820 × 1180,
 languages: six folds at one screen. All 36 answers, three paths in three
 languages at four sizes, fit their box at the title's size, with no
 clipped label and no page error.
+
+**Then the strips went too, at the owner's instruction, the same day.**
+The bullets on strips, windows and rails above describe the second build.
+The fold now holds:
+
+- **The three answers side by side with no ground at all**: the old
+  lockup, the new one and `Either looks fine`, each at up to 300px wide.
+- **Under each, the smallest text on the fold**: `Option A`, `Option B`,
+  `Option C`, 9px mono at ink 30 per cent, which measures **1.92:1**. It
+  is meant to be close to the paper, and it names nothing a reader needs
+  to answer.
+- **Under that, the same copper `Select →` pill**, at 5.87:1.
+- **On a choice all three fade away and the answer arrives in their
+  place**, centred, in Geist Mono, the button's face, at the title's size,
+  with no background and no circle. The loading line stays, 2px under the
+  answer on a faint track, 340px wide at most.
+- **On a phone the three sit one above another**, each a row of lockup,
+  label and pill, because three lockups abreast at 390px would draw each
+  about 100px wide, too small to judge. Side by side holds from 601px up.
+
+Verified at the same ten sizes in three languages: six folds at one
+screen; all 45 answers, three paths in three languages at five sizes,
+leave the options at opacity 0 and set the answer inside its area in
+Geist Mono at the title's size, with no background, no overlap and no
+page error.
 
 ### `lab/home/` and `lab/video/` — the other two pages on the brand interface (promoted, deleted)
 
