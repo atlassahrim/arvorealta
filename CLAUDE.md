@@ -2098,8 +2098,12 @@ the browser's own scroll view, follows the reader's swipes, and is not
 changed by a scripted scroll. If so, no script fixes it. **The fix that
 cannot fail is to switch the mandatory snap off on touch devices**, which
 leaves every fold one screen tall and unlocked there. That reverses the
-owner's lock-in for those devices, so it is his decision and has not been
-made.
+owner's lock-in for those devices, so it was his decision.
+
+**He decided on 14 November: leave it.** He confirmed that the link does
+navigate and that `/brand/` still opens on its fourth fold, and said that
+if it is an iPad matter it stays. The lock is kept on every device and
+the wrong fold on iPad is accepted. Do not reopen it unless he does.
 
 **This container can run desktop WebKit, and this file said it could
 not.** `apt-get install webkit2gtk-driver xvfb` and `pip install selenium`
