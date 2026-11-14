@@ -2373,6 +2373,32 @@ leave the options at opacity 0 and set the answer inside its area in
 Geist Mono at the title's size, with no background, no overlap and no
 page error.
 
+**Five more corrections from the owner, the same day:**
+
+- **The answer is the button's type exactly**: Geist Mono at 10px, `.16em`
+  of tracking, capitals, in full ink. The title's size is gone from it, so
+  the bullet above saying otherwise is history. The loading line under it
+  shrank with it, to 1px and 200px at most.
+- **All text is centred**: the eyebrow, the title, each answer and the
+  note. On a phone each answer is stacked and centred too: lockup, label,
+  pill.
+- **The fairness pill is removed**, markup and rules. `Same ink · Same
+  stock · Only the drawing differs` is no longer on the fold in any form;
+  `aStrip` stays in `STR` for its three languages.
+- **The lockups are 20 per cent smaller**: 240px wide at most from 300,
+  and their row 8svh from 10. `Either looks fine` keeps its size.
+- **The focus ring is close to the paper**: the page's own ring is 2px of
+  `currentColor`, and it drew a dark box round the whole answer area
+  whenever the answer took focus. On this fold it is 1px of ink at 8 per
+  cent, offset 6px, on the answers and on the answer area. **It still
+  exists, and that matters**: a keyboard user needs to see where focus is,
+  and at this strength it is barely there.
+
+Verified at the same ten sizes in three languages: six folds at one
+screen. All 45 answers match the button's family, size, tracking and case,
+sit centred inside their area, and every text block on the fold computes
+`text-align:center`, with no page error.
+
 ### `lab/home/` and `lab/video/` — the other two pages on the brand interface (promoted, deleted)
 
 **On 4 November the owner asked for the offer page and the video page
