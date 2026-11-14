@@ -218,7 +218,7 @@ alone.** Checked against every published page's own tag:
 | `home/` | `noindex, follow` | a stub redirecting `/home/` to `/` |
 | `proposta-motorhome/` | `noindex` | a Portuguese offer page, its own prices |
 | `templates/` | `noindex` | belt and braces: it is also swept by `pages.yml` |
-| `lab/alignment/` | `noindex, nofollow` | sandbox: fold two as letterpress, 14 November |
+| `lab/alignment/` | `noindex, nofollow` | sandbox: fold two rebuilt from a letterpress reference, 14 November |
 
 `reference/` is the near-copy, so without the label it would be a second
 `index.html` bidding against the first for the same terms.
@@ -2315,6 +2315,38 @@ Verified at 1440 × 900, 1280 × 720, 1180 × 720, 820 × 1180, 768 × 1024,
 390 × 844, 390 × 664, 375 × 548 and 360 × 640 in three languages: six
 folds at one screen, no page errors. **The paper loop cannot play in this
 container**, which has no H.264; the still was what was checked.
+
+**The same day it was rebuilt from the reference, not restyled.** The
+owner's note was that the first build stayed bound to the old panel, and it
+had: it was the live ticket with its lines softened. The fold now takes the
+reference's own composition, and the bullets above on the panel, its cells
+and its foot strip describe the first build only:
+
+- **Three long paper strips, one per answer**, stacked down the column.
+  Each is raised from the paper, carries a fluted rail along its foot, and
+  sinks into the paper when chosen.
+- **The large dark object on each strip is what is being judged**, in the
+  place the reference gives its big numerals: the old lockup, the new one,
+  and `Either looks fine` set in EB Garamond at `--t-value`.
+- **A recessed window on each strip shows the one ink both drawings share**,
+  `#BD9059`, lit from inside. Beside it a pressed `Ink #BD9059`, a tick
+  ruler and the strip's letter, `A`, `B` or `A = B`.
+- **`Select →` is a copper pill**, `#7E5228`, at 5.87:1, because the
+  action is part of the option and keeps its contrast.
+- **The fairness line is a pressed pill beside the title**, which is where
+  the reference puts its one pill.
+- **The heading is left-aligned with the strips**, and the fold gives back
+  the rail's width on the right from 980px up, as `.duo` does.
+- **On a phone each strip is the label, the lockup and the pill**; the
+  window and the readouts drop. On screens 640px tall or less the
+  fairness pill drops too.
+- **No string was added.** Every word on the fold is an existing key.
+
+Verified at 1440 × 900, 1280 × 720, 1180 × 720, 1024 × 768, 820 × 1180,
+768 × 1024, 390 × 844, 390 × 664, 375 × 548 and 360 × 640, in three
+languages: six folds at one screen. All 36 answers, three paths in three
+languages at four sizes, fit their box at the title's size, with no
+clipped label and no page error.
 
 ### `lab/home/` and `lab/video/` — the other two pages on the brand interface (promoted, deleted)
 
