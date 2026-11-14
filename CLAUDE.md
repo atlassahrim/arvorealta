@@ -2085,27 +2085,28 @@ fold. So the fold is carried across the navigation. The arrival guard of
 snapped position of the page being left and applies it to the page that
 loads. It fits both reports. It is not verified.
 
-**The fix removes what is carried.** All three pages end with one handler
-for links between `/`, `/brand/` and `/video/`:
+**A handler that left from the top was tried for one day and is removed.**
+On a link between `/`, `/brand/` and `/video/` the page faded, went to its
+own first fold and then navigated. On 14 November the owner reported the
+footer link on `/video/` as not working, so the links are plain `<a>`
+again. A link that always navigates matters more than where it lands.
 
-- the page fades over 120ms, or at once under reduced motion;
-- it goes to its own first fold, with the snap off for the jump and back
-  on after it;
-- 80ms later it navigates.
+**Two fixes have now failed on his device: the arrival guard of
+6 November and this one.** Both moved the page with script. What that
+suggests, and it is still a reading: on iOS the snapped fold is held by
+the browser's own scroll view, follows the reader's swipes, and is not
+changed by a scripted scroll. If so, no script fixes it. **The fix that
+cannot fail is to switch the mandatory snap off on touch devices**, which
+leaves every fold one screen tall and unlocked there. That reverses the
+owner's lock-in for those devices, so it is his decision and has not been
+made.
 
-A link clicked from the first fold is left alone, and so is every link to
-a file, a deck or an annex.
-
-**It costs one thing.** Back returns to the top of the page that was left,
-not to the fold the reader was on. `pageshow` puts the page's opacity back
-if the browser restores it from its cache, and a 2.5 second timer does the
-same if the navigation never happens.
-
-Verified in Chromium at 1180 and 390, in all four directions: the new page
-opens at 0 with the snap as that page sets it, about 300ms after the
-click, and Back shows the old page at full opacity. **Chromium never had
-the bug, so this proves the handler works and not that the bug is gone.
-Check it on the iPad.**
+**This container can run desktop WebKit, and this file said it could
+not.** `apt-get install webkit2gtk-driver xvfb` and `pip install selenium`
+give WebKitGTK 2.52 under a virtual display. **It does not reproduce the
+bug**: every link between the pages opens the new page at the top there,
+on the current site and on the site as it stood before either fix. So
+the bug belongs to iOS Safari, not to WebKit as such.
 
 ### `/brand/` argues trust, on 13 November
 
