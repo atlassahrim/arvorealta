@@ -673,6 +673,7 @@ html.rv [data-rv].in{opacity:1;transform:none}
 .lp-head{display:grid;justify-items:center;text-align:center}
 .lp-head .eyebrow{margin:0 0 clamp(8px,1.4svh,14px)}
 .lp-head h2{margin:0;font-size:var(--t-head);line-height:1.04;color:var(--paper-ink)}
+.lp-head .lp-sub{margin:clamp(10px,1.8svh,18px) 0 0;max-width:none;font-size:15px;line-height:1.5;color:rgba(23,20,18,.66)}
 /* the three answers: no ground, side by side, a faint label and the pill */
 .lp-opts{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
   gap:clamp(20px,4vw,72px);padding-block:clamp(16px,6svh,72px)}
@@ -682,17 +683,19 @@ html.rv [data-rv].in{opacity:1;transform:none}
 .op-art{display:grid;place-items:center;width:100%;height:clamp(34px,6.4svh,66px)}
 .op-art img{width:min(64%,192px);height:auto;max-height:100%;object-fit:contain;
   transition:transform .6s var(--ease)}
-.op-word{font-family:"EB Garamond",Georgia,serif;font-size:clamp(24px,2.5vw,38px);line-height:1;
-  letter-spacing:-.015em;color:var(--paper-ink)}
+.op-word{display:inline-block;width:min-content;font-family:"EB Garamond",Georgia,serif;
+  font-size:clamp(12px,1.05vw,16px);line-height:1.05;letter-spacing:0;color:var(--paper-ink)}
 .op:hover .op-art img,.op:focus-visible .op-art img{transform:scale(1.03)}
 /* the smallest text on the fold, close to the paper */
 .op-lbl{font:400 9px/1 "Geist Mono",ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;
   color:rgba(23,20,18,.3);white-space:nowrap}
 .op-act{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:999px;
   font:400 10px/1 "Geist Mono",ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--copper);box-shadow:inset 0 0 0 1px rgba(126,82,40,.5);transition:background .3s var(--ease)}
+  color:rgba(126,82,40,.5);box-shadow:inset 0 0 0 1px rgba(126,82,40,.16);
+  transition:background .3s var(--ease),color .3s var(--ease),box-shadow .3s var(--ease)}
 .op-act b{font-weight:400;letter-spacing:0;transition:transform .35s var(--ease)}
-.op:hover .op-act,.op:focus-visible .op-act,.op.lock .op-act{background:rgba(126,82,40,.08)}
+.op:hover .op-act,.op:focus-visible .op-act,.op.lock .op-act{background:rgba(126,82,40,.05);
+  color:rgba(126,82,40,.75);box-shadow:inset 0 0 0 1px rgba(126,82,40,.3)}
 .op:hover .op-act b,.op:focus-visible .op-act b{transform:translateX(3px)}
 /* the focus ring stays for the keyboard, close to the paper */
 .align .op:focus-visible{outline:1px solid rgba(23,20,18,.08);outline-offset:6px}
@@ -718,7 +721,8 @@ html.rv [data-rv].in{opacity:1;transform:none}
   .op{gap:clamp(6px,1.2svh,10px);padding:2px 0}
   .op-art{height:clamp(19px,3.84svh,30px)}
   .op-art img{width:auto;max-width:64%;height:clamp(19px,3.84svh,30px);max-height:none}
-  .op-word{font-size:var(--t-sub)}
+  .op-art:has(.op-word){height:auto}
+  .op-word{font-size:clamp(10px,1.7svh,13px)}
   .op-act{padding:8px 13px}
 }
 </style>
@@ -810,7 +814,8 @@ html.rv [data-rv].in{opacity:1;transform:none}
     <header class="lp-head" data-rv>
       <div>
         <p class="eyebrow" data-t="e2">Alignment</p>
-        <h2 class="disp" id="alignQ" data-t="h2a">Select the best below.</h2>
+        <h2 class="disp" id="alignQ" data-t="h2a">Can you see it?</h2>
+        <p class="lp-sub" data-t="aAsk">Select the best one below.</p>
       </div>
     </header>
 
@@ -1267,7 +1272,7 @@ const LANG = {
     h1a:"Competence<br>everyone<br>can <em>see</em>.",
     sub:"A hallmark told a buyer the metal was good before anyone tested it. A well-drawn mark does the same. It shows people a company knows what it is doing before they have read a word.",
     scroll:"Scroll",
-    e2:"Alignment", h2a:"Select the best below.",
+    e2:"Alignment", h2a:"Can you see it?", aAsk:"Select the best one below.",
     aTest:"Alignment test", aOpt:"Option", aSel:"Select", aEither:"Either looks fine",
     aInk:"Ink #BD9059", aStrip:"Same ink \u00b7 Same stock \u00b7 Only the drawing differs",
     aGroup:"Choose one", aLockA:"Lockup A", aLockB:"Lockup B",
@@ -1318,8 +1323,8 @@ const LANG = {
     h1a:"Kompetanse<br>alle<br>kan <em>se</em>.",
     sub:"Et kontrollstempel fortalte kj\u00f8peren at metallet var godt f\u00f8r noen hadde testet det. Et godt tegnet merke gj\u00f8r det samme. Det viser folk at et selskap vet hva det gj\u00f8r, f\u00f8r de har lest et ord.",
     scroll:"Rull",
-    e2:"Innretting", h2a:"Velg den beste nedenfor.",
-    aTest:"Innrettingstest", aOpt:"Valg", aSel:"Velg", aEither:"Begge ser fine ut",
+    e2:"Innretting", h2a:"Ser du det?", aAsk:"Velg den beste nedenfor.",
+    aTest:"Innrettingstest", aOpt:"Valg", aSel:"Velg", aEither:"Begge er fine",
     aInk:"Blekk #BD9059", aStrip:"Samme blekk \u00b7 Samme papir \u00b7 Bare tegningen er ulik",
     aGroup:"Velg ett", aLockA:"Logo A", aLockB:"Logo B",
     aNo:"Du trenger ikke en merkevare enn\u00e5.", aYes:"Vi kommer godt overens.",
@@ -1369,7 +1374,7 @@ const LANG = {
     h1a:"Osaamista,<br>jonka kaikki<br><em>n\u00e4kev\u00e4t</em>.",
     sub:"Tarkastusleima kertoi ostajalle, ett\u00e4 metalli oli hyv\u00e4\u00e4, ennen kuin kukaan oli testannut sit\u00e4. Hyvin piirretty merkki tekee saman. Se n\u00e4ytt\u00e4\u00e4 ihmisille, ett\u00e4 yritys tiet\u00e4\u00e4, mit\u00e4 tekee, ennen kuin he ovat lukeneet sanaakaan.",
     scroll:"Vierit\u00e4",
-    e2:"Linjaus", h2a:"Valitse paras alta.",
+    e2:"Linjaus", h2a:"N\u00e4etk\u00f6 sen?", aAsk:"Valitse paras alta.",
     aTest:"Linjaustesti", aOpt:"Valinta", aSel:"Valitse", aEither:"Kumpi tahansa k\u00e4y",
     aInk:"Muste #BD9059", aStrip:"Sama muste \u00b7 Sama paperi \u00b7 Vain piirros eroaa",
     aGroup:"Valitse yksi", aLockA:"Logo A", aLockB:"Logo B",

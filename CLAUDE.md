@@ -2416,6 +2416,27 @@ Verified at the same nine sizes in three languages: six folds at one
 screen; logos 192px at 1440 and 114 / 143px at 390; 18 answers with no
 outline on the answer, no option labels and no page error.
 
+**Four more, the same day:**
+
+- **The title is `Can you see it?`**, with `Select the best one below.`
+  under it at 15px, ink at 66 per cent. `Ser du det?` / `Velg den beste
+  nedenfor.` and `Näetkö sen?` / `Valitse paras alta.` are a session's.
+  The line under the title is a new key, `aAsk`.
+- **`Either looks fine` is set at the lockups' size, one word to a
+  line**: `width:min-content`, 15px at 1440 and 11px on a phone, so the
+  block is 48px tall against lockups of 43 and 34px. The Norwegian
+  became `Begge er fine`, three words like the other two, because the
+  four-word `Begge ser fine ut` stood 64px tall.
+- **The `Select →` pill is close to the paper**: copper at 50 per cent
+  with a hairline at 16 per cent, measuring **2.13:1**, rising to 3.37:1
+  on hover and focus. That is under the 4.5:1 small text needs, which is
+  the look asked for; the lockup above each pill is what a reader clicks
+  for, and the whole option is the button.
+
+Verified at the same nine sizes in three languages: six folds at one
+screen; the answer on three lines in all three languages; 18 answers
+shown with no page error.
+
 ### `lab/home/` and `lab/video/` — the other two pages on the brand interface (promoted, deleted)
 
 **On 4 November the owner asked for the offer page and the video page
