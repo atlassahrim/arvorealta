@@ -2442,6 +2442,22 @@ live page's own figures and are unchanged. **Carry the new lists to
 `index.html` and `reference/index.html` together when promoting**, since
 the reference page is where the ladder copy lives.
 
+**Two more, the same day.** The hairlines between the columns are gone
+too, so the three are held apart by their air alone. The identity system
+gains a fifth row, `Full document standard` (`Hele dokumentstandarden`,
+`Koko asiakirjastandardi`, a session's), which says in the list what the
+terms line already says.
+
+**The close's headline is two lines by hand**: `Find out what it cost
+you.` / `For nothing.`, with `<br>` in the string in all three languages.
+The 14ch measure came off, because at 14ch the first line alone took two
+lines. On phones the size is capped by the width, at `/ 9.4` of the
+column and `/ 10.6` for the Finnish, whose first line is the longest at
+10.3em. So the first line never wraps, down to 320px. **That also fixed
+the close's overflow on short laptops**: the three-line headline was what
+ran it to 1.03 to 1.11, and it measures 1.00 at every desktop size now,
+in three languages. The live page still has both problems.
+
 ### Fold two's question and third answer, and a tighter hero, 15 November
 
 **Both lines approved by the owner before they went live.**

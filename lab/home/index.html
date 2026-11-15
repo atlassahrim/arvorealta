@@ -801,7 +801,7 @@ body{background:var(--b-ink)}
 .ladder.calm .rung,.ladder.calm .rung[data-lead]{background:none;border:0;border-radius:0;box-shadow:none;
   padding:0 clamp(16px,1.6vw,22px);overflow:visible}
 .ladder.calm .rung::before{display:none}
-.ladder.calm .rung+.rung{border-left:1px solid var(--b-line)}
+.ladder.calm .rung+.rung{border-left:0}
 @media (min-width:980px){.ladder.calm .rung[data-lead]{margin-block:0}
   /* the rail is fixed at the right; its widest label, the Finnish, starts
      about 136px in from the edge, and the columns stop 24px short of it,
@@ -842,6 +842,11 @@ body{background:var(--b-ink)}
   .ladder.calm .rung li{padding:4px 0;line-height:1.4}
   .ladder.calm .cmp{margin-top:12px}
 }
+/* the close's headline is two lines by hand, at the owner's word: the
+   measure comes off, and the size is capped by the width so the longest
+   line, the Finnish, never wraps into a third */
+.close h2{max-width:none;font-size:min(var(--t-display),calc((100vw - 2 * var(--gut)) / 9.4))}
+:root[lang="fi"] .close h2{font-size:min(var(--t-display),calc((100vw - 2 * var(--gut)) / 10.6))}
 /* below 980px the three stack: the hairline goes on top instead */
 @media (max-width:979px){
   .ladder.calm .rung{padding:0}
@@ -1036,7 +1041,7 @@ body{background:var(--b-ink)}
            alt="The Arvorealta mark">
     </div>
     <p class="eyebrow rv" data-t="close.eyebrow">Where to start</p>
-    <h2 class="rv" data-t="close.h2">Find out what it cost you. For nothing.</h2>
+    <h2 class="rv" data-t="close.h2">Find out what it cost you.<br>For nothing.</h2>
     <p class="rv" data-t="close.body">Send one page from a tender you lost.</p>
     <div class="rv"><button class="act act-grad" data-cta data-t="cta">Get your page scored</button></div>
     <div class="ft">
@@ -1190,7 +1195,8 @@ const STR = {
             "Wordmark or mark",
             "Colour and typographic system",
             "Signage, vehicles, trade fair stands, labels",
-            "Written guidelines your people can work from"
+            "Written guidelines your people can work from",
+            "Full document standard"
           ],
           note: "Take it once the document standard has proved itself. Your €2,400 credited." }
       ],
@@ -1200,7 +1206,7 @@ const STR = {
 
     close: {
       eyebrow: "Where to start",
-      h2: "Find out what it cost you. For nothing.",
+      h2: "Find out what it cost you.<br>For nothing.",
       body: "Send one page from a past tender. It comes back scored against the criteria it was judged on and a note on what the next one should carry. At zero cost."
     },
     langLabel: "Language"
@@ -1294,7 +1300,8 @@ const STR = {
             "Ordmerke eller symbol",
             "Farge- og typografisystem",
             "Skilt, biler, messestands, etiketter",
-            "Skriftlige retningslinjer dine egne folk kan arbeide etter"
+            "Skriftlige retningslinjer dine egne folk kan arbeide etter",
+            "Hele dokumentstandarden"
           ],
           note: "Ta det når dokumentstandarden har bevist seg. Dine €2 400 kreditert." }
       ],
@@ -1304,7 +1311,7 @@ const STR = {
 
     close: {
       eyebrow: "Hvor du begynner",
-      h2: "Finn ut hva det kostet deg. Gratis.",
+      h2: "Finn ut hva det kostet deg.<br>Gratis.",
       body: "Send én side fra et tidligere anbud. Den kommer tilbake vurdert mot kriteriene den ble bedømt etter, og med en merknad om hva den neste bør inneholde. Uten kostnad."
     },
     langLabel: "Språk"
@@ -1398,7 +1405,8 @@ const STR = {
             "Sanamerkki tai tunnus",
             "Väri- ja typografiajärjestelmä",
             "Opasteet, ajoneuvot, messuosastot, etiketit",
-            "Kirjalliset ohjeet, joiden mukaan oma väkesi voi työskennellä"
+            "Kirjalliset ohjeet, joiden mukaan oma väkesi voi työskennellä",
+            "Koko asiakirjastandardi"
           ],
           note: "Ota se, kun asiakirjastandardi on osoittanut arvonsa. 2 400 € hyvitetty." }
       ],
@@ -1408,7 +1416,7 @@ const STR = {
 
     close: {
       eyebrow: "Mistä aloittaa",
-      h2: "Selvitä, mitä se maksoi sinulle. Ilmaiseksi.",
+      h2: "Selvitä, mitä se maksoi sinulle.<br>Ilmaiseksi.",
       body: "Lähetä yksi sivu aiemmasta tarjouksesta. Se palaa pisteytettynä niitä perusteita vasten, joilla se arvioitiin, ja mukana on merkintä siitä, mitä seuraavan tulisi sisältää. Veloituksetta."
     },
     langLabel: "Kieli"
