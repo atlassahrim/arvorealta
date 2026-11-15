@@ -2306,6 +2306,30 @@ show the answer, the after path lands on `#system` with the snap back on
 `y mandatory`, with no empty string, no sideways scroll and no page error.
 **The paper loop cannot play in this container.** Check a real browser.
 
+### The lockups in a darker ink, 15 November
+
+**The owner supplied both Turvatikas lockups again in a darker ink**, as
+3508 × 2481 sheets on white. Both are drawn in exactly **`#8A6941`**,
+read off the ink pixels of each file, so the claim this file makes about
+the old files still holds with a new value: **same ink, only the drawing
+differs.** Every mention above of `#BD9059` or `rgb(190,145,89)` describes
+the files that were replaced.
+
+- **Cut to the same boxes as before**: transparent webp at 1400 and 700
+  wide, the alpha taken from the blue channel against the ink, the colour
+  held at the ink. Old 1400 × 312, new 1400 × 250, so no `width` or
+  `height` in the markup moved.
+- **New names, `turva-old-3-*` and `turva-new-3-*`**, because a new
+  picture gets a new filename. The `-2` set is deleted. The system fold's
+  first cell uses the new lockup too, so it changed with it.
+- **`Either looks fine` is a little larger and may take two lines**: 18px
+  at 1440 from 15, 13px on a phone from 11, inside an 11ch measure with
+  `balance`. English and Finnish set on two lines; `Begge er fine` fits
+  on one.
+
+Verified at ten sizes in three languages: six folds at one screen, all
+four images load, no page error.
+
 ### `lab/alignment/` — fold two as letterpress, a sandbox (14 November, promoted, deleted)
 
 **The owner asked for fold two rebuilt in a lab, with an image of blind-

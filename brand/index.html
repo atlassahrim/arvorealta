@@ -683,8 +683,8 @@ html.rv [data-rv].in{opacity:1;transform:none}
 .op-art{display:grid;place-items:center;width:100%;height:clamp(34px,6.4svh,66px)}
 .op-art img{width:min(64%,192px);height:auto;max-height:100%;object-fit:contain;
   transition:transform .6s var(--ease)}
-.op-word{display:inline-block;width:min-content;font-family:"EB Garamond",Georgia,serif;
-  font-size:clamp(12px,1.05vw,16px);line-height:1.05;letter-spacing:0;color:var(--paper-ink)}
+.op-word{display:inline-block;max-width:11ch;text-wrap:balance;font-family:"EB Garamond",Georgia,serif;
+  font-size:clamp(14px,1.25vw,19px);line-height:1.08;letter-spacing:0;color:var(--paper-ink)}
 .op:hover .op-art img,.op:focus-visible .op-art img{transform:scale(1.03)}
 .op-act{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:999px;
   font:400 10px/1 "Geist Mono",ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;
@@ -719,7 +719,7 @@ html.rv [data-rv].in{opacity:1;transform:none}
   .op-art{height:clamp(19px,3.84svh,30px)}
   .op-art img{width:auto;max-width:64%;height:clamp(19px,3.84svh,30px);max-height:none}
   .op-art:has(.op-word){height:auto}
-  .op-word{font-size:clamp(10px,1.7svh,13px)}
+  .op-word{font-size:clamp(12px,2svh,15px)}
   .op-act{padding:8px 13px}
 }
 </style>
@@ -820,11 +820,11 @@ html.rv [data-rv].in{opacity:1;transform:none}
          carries a label, so the answer is not written under it. -->
     <div class="lp-opts" id="alignOpts" role="group" data-ta="aGroup" aria-label="Choose one" data-rv>
       <button type="button" class="op" data-pick="before" data-ta="aLockA" aria-label="Lockup A">
-        <span class="op-art"><img alt="" width="1400" height="312" loading="lazy" src="/assets/img/turva-old-2-700.webp" srcset="/assets/img/turva-old-2-700.webp 700w, /assets/img/turva-old-2-1400.webp 1400w" sizes="(max-width:600px) 60vw, 320px"></span>
+        <span class="op-art"><img alt="" width="1400" height="312" loading="lazy" src="/assets/img/turva-old-3-700.webp" srcset="/assets/img/turva-old-3-700.webp 700w, /assets/img/turva-old-3-1400.webp 1400w" sizes="(max-width:600px) 60vw, 320px"></span>
         <span class="op-act" aria-hidden="true"><span data-t="aSel">Select</span><b>&rarr;</b></span>
       </button>
       <button type="button" class="op" data-pick="after" data-ta="aLockB" aria-label="Lockup B">
-        <span class="op-art"><img alt="" width="1400" height="250" loading="lazy" src="/assets/img/turva-new-2-700.webp" srcset="/assets/img/turva-new-2-700.webp 700w, /assets/img/turva-new-2-1400.webp 1400w" sizes="(max-width:600px) 60vw, 320px"></span>
+        <span class="op-art"><img alt="" width="1400" height="250" loading="lazy" src="/assets/img/turva-new-3-700.webp" srcset="/assets/img/turva-new-3-700.webp 700w, /assets/img/turva-new-3-1400.webp 1400w" sizes="(max-width:600px) 60vw, 320px"></span>
         <span class="op-act" aria-hidden="true"><span data-t="aSel">Select</span><b>&rarr;</b></span>
       </button>
       <button type="button" class="op" data-pick="either">
@@ -861,9 +861,9 @@ html.rv [data-rv].in{opacity:1;transform:none}
            and the mark carried on two of its three grounds -->
       <div class="quad" data-rv>
         <figure class="q paper">
-          <img src="/assets/img/turva-new-2-1400.webp" width="1400" height="250" loading="lazy"
+          <img src="/assets/img/turva-new-3-1400.webp" width="1400" height="250" loading="lazy"
                sizes="(min-width:980px) 22vw, 43vw"
-               srcset="/assets/img/turva-new-2-700.webp 700w, /assets/img/turva-new-2-1400.webp 1400w"
+               srcset="/assets/img/turva-new-3-700.webp 700w, /assets/img/turva-new-3-1400.webp 1400w"
                alt="The Turvatikas lockup on its own stock">
         </figure>
         <figure class="q band" aria-label="Ten, twenty, seventy">
