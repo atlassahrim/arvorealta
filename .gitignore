@@ -1,4 +1,5 @@
 _build/
+_shots/
 
 # the search tool compiles on first run
 __pycache__/
