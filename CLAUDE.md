@@ -3377,6 +3377,37 @@ the dialog opens, focus lands on the field rather than the close button, the
 body locks, the two validation messages fire in order, Escape closes and
 unlocks.
 
+## The brand book, two editions (15 November)
+
+**The brand book is not in this repository**, because the repository is
+public and the working edition is closed. It lives as two private
+claude.ai artifacts: the **working book** (`Arvorealta Working Book`,
+near black and white, every section with its state: Ready, Proposed,
+To supply, Draft) and the **public book** (`Arvorealta Brand Book`, on
+ink, only what is ready). The owner's call: the working book is the
+source of intel, and a section reaches the public book when it is
+useful to someone making media for him.
+
+**The public edition is generated, never edited.** One source file
+carries both: every block wrapped in `<!--M-->…<!--/M-->` is removed,
+every `<!--P:…:P-->` is uncommented, `body.master` becomes
+`body.public`, and the section and index numbers are renumbered so the
+public book never skips one. Removed, not hidden: anyone can read a
+page's source, so unfinished work has to be absent from the public file.
+
+**It is a guideline, not a description of the site.** No spacing
+values, no full type scale. Its backbone is the owner's four rules,
+the same as `/brand/`'s system fold: message, colour at 70 / 20 / 10,
+typeface, culture stack. It is also the template for a client's book,
+published at `arvorealta.com/<client>` with the client's permission;
+the owner's suggestion is a contract line granting it.
+
+**What waits for the owner:** the other versions of the mark (only the
+gold fan is on file), print values for the colours, the wardrobe and
+music parts of the culture stack, redrawn social cards, and approval
+of the proposed clear space (half the fan's height) and minimum size
+(96 px, 20 mm). The old Design System artifact is superseded.
+
 ## The pricing ladder
 
 **There are two ladders on this domain and this section is the euro one.**
