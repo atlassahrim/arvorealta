@@ -2386,6 +2386,31 @@ live page before promoting, as the 14 November note says.
   live page's 1.07 to 1.12. The close's 1.08 to 1.11 on those screens is
   the live page's own and untouched.
 
+**Then the cards went, the same day, at the owner's word.** The price
+cards have no ground, no border and no corner: three columns held apart by
+margins and one hairline between them, the lead column marked only by its
+amber label at full strength. The 16px lift went with the card, because a
+lift with no edge reads as a misalignment.
+
+- **The list has no dashes.** Each deliverable is a row with a hairline
+  above it and one under the last, the annex's own field rows.
+- **Every English row is one line from 1366px up.** The rows size the
+  columns (`auto` tracks; the paragraphs carry `contain: inline-size` so
+  they take the width rather than set it), and the row size comes from the
+  row of columns' own width in `cqw`, 12.75px at most and 12px at least.
+  Below 12px a row wraps rather than shrinking. Measured, English: one line
+  at 1920, 1536, 1440 and 1366; one row wraps at 1280. Norwegian wraps one
+  or two rows and Finnish two at desktop widths, because their rows are
+  longer; a shorter wording is the only way to one line there.
+- **The columns stop short of the rail.** The rail is fixed at the right
+  and its labels start 106 to 136px in, the Finnish widest, so the columns
+  give back up to 130px in English and 160px otherwise, which is nothing
+  above about 1630px wide. Measured clearance 5 to 57px at every size from
+  1024 to 1920 in all three languages. **The live page's cards have the
+  same overlap with the rail and always have**, about 10px at 1440.
+- **The terms are 3, 7 and 14 days**, on the live page too; see the
+  pricing ladder.
+
 ### Fold two's question and third answer, and a tighter hero, 15 November
 
 **Both lines approved by the owner before they went live.**
@@ -3318,6 +3343,12 @@ crosses the threshold. Break the credit and the price logic goes with it.
 
 Do not simplify the mechanic and do not round the numbers. If a price looks
 wrong, say so and give the reasoning. Changing one is not a copy edit.
+
+**The terms are 3 days, 7 days and 14 days**, at the owner's word on
+15 November, in place of `3 to 4 days`, `two weeks` and `six weeks`. They
+changed on `index.html`, `lab/home/` and `reference/index.html` together,
+in all three languages: `3 dager` / `7 dager` / `14 dager` and `3 päivää`
+/ `7 päivää` / `14 päivää`.
 
 €2,400 includes one revision round. Past that it is a new agreement at a new
 budget, never an extension. What €8,000 excludes is settled in the scope
