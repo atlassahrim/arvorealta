@@ -3411,6 +3411,43 @@ music parts of the culture stack, redrawn social cards, and approval
 of the proposed clear space (half the fan's height) and minimum size
 (96 px, 20 mm). The old Design System artifact is superseded.
 
+**On 15 November it became the design system template**, at the owner's
+three answers: client-neutral with Arvorealta as the worked example, one
+document system for our own documents, and Affinity Designer for masters.
+Four parts were added, all marked Proposed in the working book:
+
+- **The mark, in depth.** Its anatomy (point, pleats, crown, span, 2.7:1),
+  five versions each with one job, and a size test that shows the render
+  as an outline. **The primary mark is a render of a metal object, not a
+  drawing**, so it cannot be embossed, stamped or printed in one colour,
+  and it stops reading below about 96 px. The flat symbol is the first
+  version to draw. The meaning of the fan stays out of the public book
+  until the owner states it.
+- **Space and shape.** One 8 px unit with steps of 8 · 16 · 24 · 40 · 64 ·
+  104, a live measure (45 to 75 characters, 62 as the aim), two rule
+  weights and four radii: square for print, 3 px for media, 16 px for
+  surfaces, a pill for actions.
+- **Documents.** Letters, proposals, reviews and decks on EB Garamond,
+  Geist and Geist Mono. A4 at 20 mm top and sides and 23 mm foot, the
+  annex's 12 × 10.5 mm grid, a 15 pt baseline of 48 lines, labels hanging
+  in columns 1 to 3 and reading text in columns 5 to 12 (112 mm, about
+  62 characters). Print on white. The deck keeps the 1920 × 1080 geometry.
+  **This reverses the two-systems rule for our own documents only, and
+  only once the templates exist**: until then `deck/` and `annex/` stay
+  as they are, and *Two systems, kept apart* is rewritten when the first
+  template replaces them. An annex under a client's name keeps the
+  client's brand.
+- **Files and Drive.** One folder per brand, numbered in the book's order,
+  names as `client_asset_variant_colour_size.ext`, lower case and no
+  accents, **no version or date in a live file's name** so a Drive link
+  survives a new version, with replaced files in `99 Archive` as `_v01`.
+  That is the opposite of the website's new-file-new-name rule, and both
+  are right: a URL has to change to beat a cache, and a shared Drive link
+  has to stay the same. A live name builder applies the rules.
+
+The working book also carries a master-only section on making a client's
+book: which parts stay the same and which are the client's.
+
 ## The pricing ladder
 
 **There are two ladders on this domain and this section is the euro one.**
