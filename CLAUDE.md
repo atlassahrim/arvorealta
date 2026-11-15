@@ -2282,6 +2282,14 @@ it, so the lab file went across whole, with three things changed:
 - **Nothing else.** Every string, the paper loop and the script are the
   lab's own.
 
+**That was wrong, and it shipped a regression for a day.** The lab had
+been copied from `/brand/` before the hero's hand breaks, its italic `see`
+and the shortened Finnish `sysSay` landed. The check compared commit
+order, not content, and the diff it printed listed those lines as
+differences that were read as fold two's. Fixed on 15 November.
+**Before promoting a lab, diff it against the live page and account for
+every hunk outside the fold being promoted.**
+
 **The ticket panel's rules are still in the sheet**, above the new block,
 which overrides them. Most of them match nothing now: `.pl`, `.ask`, the
 cut corners, the circle, and their short-phone trims. They were left
