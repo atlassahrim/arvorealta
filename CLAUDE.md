@@ -2330,6 +2330,27 @@ the files that were replaced.
 Verified at ten sizes in three languages: six folds at one screen, all
 four images load, no page error.
 
+### Fold two's question and third answer, and a tighter hero, 15 November
+
+**Both lines approved by the owner before they went live.**
+
+- **`h2a` reads `Can you see the difference?`**, from `Can you see it?`.
+  `Ser du forskjellen?` and `Näetkö eron?` are a session's.
+- **`aEither` reads `They look` / `the same`**, from `Either looks fine`,
+  hand-broken with `<br>` in the string. The old line was a judgement that
+  both are acceptable; the title asks whether the reader sees a difference,
+  and this is the answer of one who does not, which `You don't need a
+  brand yet.` then follows. `De ser` / `like ut` and `Ne näyttävät` /
+  `samalta` are a session's.
+- **The hero's line height is `.98`, from 1.08**, at the owner's word: the
+  three lines read apart. Checked in all three languages at 1440: no
+  descender touches the line below, the `p` of `Kompetanse` over `alle`
+  included. The hero still fits one screen at every size tried.
+
+Verified at ten sizes in three languages: six folds at one screen; the
+question on one line, the third answer on two, the hero on three; no page
+error.
+
 ### `lab/alignment/` — fold two as letterpress, a sandbox (14 November, promoted, deleted)
 
 **The owner asked for fold two rebuilt in a lab, with an image of blind-

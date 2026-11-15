@@ -246,10 +246,11 @@ html.rv [data-rv].in{opacity:1;transform:none}
    CLAUDE.md and the left column is the part of this frame that is safe */
 .open .inner{max-width:min(100%,46rem);display:grid;gap:clamp(16px,2.6vh,30px)}
 .open .lbl{color:var(--bone-dim)}
-.open h1{margin:0;font-size:var(--t-display);line-height:1.08;padding-bottom:.08em;
+.open h1{margin:0;font-size:var(--t-display);line-height:.98;padding-bottom:.08em;
   max-width:14ch;text-wrap:balance}
 /* italic for emphasis, never a second family and never a second colour.
-   `You` carries a descender, so the line keeps 1.08 and a reserve. */
+   .98 since 15 November, the owner's: at 1.08 the three lines read apart.
+   Checked in three languages, no descender touches the line below. */
 .open h1 em{font-style:italic}
 .open .sub{margin:0;max-width:40ch;color:var(--bone-dim);font-size:var(--t-body)}
 .open .foot{display:flex;flex-wrap:wrap;align-items:baseline;gap:14px 26px;
@@ -811,7 +812,7 @@ html.rv [data-rv].in{opacity:1;transform:none}
     <header class="lp-head" data-rv>
       <div>
         <p class="eyebrow" data-t="e2">Alignment</p>
-        <h2 class="disp" id="alignQ" data-t="h2a">Can you see it?</h2>
+        <h2 class="disp" id="alignQ" data-t="h2a">Can you see the difference?</h2>
         <p class="lp-sub" data-t="aAsk">Select the best one below.</p>
       </div>
     </header>
@@ -828,7 +829,7 @@ html.rv [data-rv].in{opacity:1;transform:none}
         <span class="op-act" aria-hidden="true"><span data-t="aSel">Select</span><b>&rarr;</b></span>
       </button>
       <button type="button" class="op" data-pick="either">
-        <span class="op-art"><span class="op-word" data-t="aEither">Either looks fine</span></span>
+        <span class="op-art"><span class="op-word" data-t="aEither">They look<br>the same</span></span>
         <span class="op-act" aria-hidden="true"><span data-t="aSel">Select</span><b>&rarr;</b></span>
       </button>
 
@@ -1269,8 +1270,8 @@ const LANG = {
     h1a:"Competence<br>everyone<br>can <em>see</em>.",
     sub:"A hallmark told a buyer the metal was good before anyone tested it. A well-drawn mark does the same. It shows people a company knows what it is doing before they have read a word.",
     scroll:"Scroll",
-    e2:"Alignment", h2a:"Can you see it?", aAsk:"Select the best one below.",
-    aTest:"Alignment test", aOpt:"Option", aSel:"Select", aEither:"Either looks fine",
+    e2:"Alignment", h2a:"Can you see the difference?", aAsk:"Select the best one below.",
+    aTest:"Alignment test", aOpt:"Option", aSel:"Select", aEither:"They look<br>the same",
     aInk:"Ink #BD9059", aStrip:"Same ink \u00b7 Same stock \u00b7 Only the drawing differs",
     aGroup:"Choose one", aLockA:"Lockup A", aLockB:"Lockup B",
     aNo:"You don\u2019t need a brand yet.", aYes:"We will get along.",
@@ -1320,8 +1321,8 @@ const LANG = {
     h1a:"Kompetanse<br>alle<br>kan <em>se</em>.",
     sub:"Et kontrollstempel fortalte kj\u00f8peren at metallet var godt f\u00f8r noen hadde testet det. Et godt tegnet merke gj\u00f8r det samme. Det viser folk at et selskap vet hva det gj\u00f8r, f\u00f8r de har lest et ord.",
     scroll:"Rull",
-    e2:"Innretting", h2a:"Ser du det?", aAsk:"Velg den beste nedenfor.",
-    aTest:"Innrettingstest", aOpt:"Valg", aSel:"Velg", aEither:"Begge er fine",
+    e2:"Innretting", h2a:"Ser du forskjellen?", aAsk:"Velg den beste nedenfor.",
+    aTest:"Innrettingstest", aOpt:"Valg", aSel:"Velg", aEither:"De ser<br>like ut",
     aInk:"Blekk #BD9059", aStrip:"Samme blekk \u00b7 Samme papir \u00b7 Bare tegningen er ulik",
     aGroup:"Velg ett", aLockA:"Logo A", aLockB:"Logo B",
     aNo:"Du trenger ikke en merkevare enn\u00e5.", aYes:"Vi kommer godt overens.",
@@ -1371,8 +1372,8 @@ const LANG = {
     h1a:"Osaamista,<br>jonka kaikki<br><em>n\u00e4kev\u00e4t</em>.",
     sub:"Tarkastusleima kertoi ostajalle, ett\u00e4 metalli oli hyv\u00e4\u00e4, ennen kuin kukaan oli testannut sit\u00e4. Hyvin piirretty merkki tekee saman. Se n\u00e4ytt\u00e4\u00e4 ihmisille, ett\u00e4 yritys tiet\u00e4\u00e4, mit\u00e4 tekee, ennen kuin he ovat lukeneet sanaakaan.",
     scroll:"Vierit\u00e4",
-    e2:"Linjaus", h2a:"N\u00e4etk\u00f6 sen?", aAsk:"Valitse paras alta.",
-    aTest:"Linjaustesti", aOpt:"Valinta", aSel:"Valitse", aEither:"Kumpi tahansa k\u00e4y",
+    e2:"Linjaus", h2a:"N\u00e4etk\u00f6 eron?", aAsk:"Valitse paras alta.",
+    aTest:"Linjaustesti", aOpt:"Valinta", aSel:"Valitse", aEither:"Ne n\u00e4ytt\u00e4v\u00e4t<br>samalta",
     aInk:"Muste #BD9059", aStrip:"Sama muste \u00b7 Sama paperi \u00b7 Vain piirros eroaa",
     aGroup:"Valitse yksi", aLockA:"Logo A", aLockB:"Logo B",
     aNo:"Et tarvitse br\u00e4ndi\u00e4 viel\u00e4.", aYes:"Tulemme toimeen.",
