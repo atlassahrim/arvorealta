@@ -2475,6 +2475,24 @@ distance under the last tier. The lead tier had kept its desktop side
 padding on a phone, because `.rung[data-lead]` outranked the phone's
 reset, so it sat 18px in from the other two; the reset names both now.
 
+### Fold two's buttons stand off their logos on a phone, 15 November
+
+**At the owner's word, the logo takes the air, not the button.** Below
+600px each answer is a stack of logo and `Select →`, and they sat 7 to
+10px apart. `.op-art` now carries `margin-bottom:clamp(10px,2.2svh,18px)`
+inside the phone block, so logo to button measures 19px on a 568px-tall
+screen, 23px on 664 and 28px on 844. Desktop is untouched.
+
+**The 320px phone paid for it and got it back.** At 320 × 568 the extra
+put fold two at 1.07 in English and 1.02 in the Nordic, because the
+narrow screen wraps the text more. A rule at 340px and below takes the
+gap between the three answers down to 6px and the list's own padding to
+zero, so the air under each logo stays. Measured after, at 320 × 568,
+360 × 640, 375 × 548, 390 × 664, 390 × 844, 430 × 740 and 600 × 900 in
+three languages: fold two at one screen everywhere. The close at
+320 × 568 (1.06 English, 1.01 Finnish) and the system fold at 600 × 900
+(1.02) are figures they had before.
+
 ### Fold two's question and third answer, and a tighter hero, 15 November
 
 **Both lines approved by the owner before they went live.**

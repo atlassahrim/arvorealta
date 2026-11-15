@@ -717,11 +717,18 @@ html.rv [data-rv].in{opacity:1;transform:none}
 @media (max-width:600px){
   .lp-opts{grid-template-columns:1fr;gap:clamp(12px,3svh,26px);padding-block:clamp(4px,2svh,18px)}
   .op{gap:clamp(6px,1.2svh,10px);padding:2px 0}
-  .op-art{height:clamp(19px,3.84svh,30px)}
+  /* the logo takes air under it, so the button does not crowd it: about
+     18px on a short phone and 28px on a tall one, logo to button */
+  .op-art{height:clamp(19px,3.84svh,30px);margin-bottom:clamp(10px,2.2svh,18px)}
   .op-art img{width:auto;max-width:64%;height:clamp(19px,3.84svh,30px);max-height:none}
   .op-art:has(.op-word){height:auto}
   .op-word{font-size:clamp(12px,2svh,15px)}
   .op-act{padding:8px 13px}
+}
+/* the narrowest phone, 320px: its text wraps more, so the air between the
+   three answers comes in rather than the air under each logo */
+@media (max-width:340px){
+  .lp-opts{gap:6px;padding-block:0}
 }
 </style>
 </head>
