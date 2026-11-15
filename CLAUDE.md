@@ -2458,6 +2458,14 @@ the close's overflow on short laptops**: the three-line headline was what
 ran it to 1.03 to 1.11, and it measures 1.00 at every desktop size now,
 in three languages. The live page still has both problems.
 
+**Stacked, below 980px, the tiers lose their line too**, at the owner's
+word: the hairline between them had come back on top with 28px above it.
+The air now scales with the width, `clamp(56px,14vw,104px)`, which is
+56px on a phone and 104px on a tablet, and the free step sits the same
+distance under the last tier. The lead tier had kept its desktop side
+padding on a phone, because `.rung[data-lead]` outranked the phone's
+reset, so it sat 18px in from the other two; the reset names both now.
+
 ### Fold two's question and third answer, and a tighter hero, 15 November
 
 **Both lines approved by the owner before they went live.**

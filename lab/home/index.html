@@ -847,10 +847,15 @@ body{background:var(--b-ink)}
    line, the Finnish, never wraps into a third */
 .close h2{max-width:none;font-size:min(var(--t-display),calc((100vw - 2 * var(--gut)) / 9.4))}
 :root[lang="fi"] .close h2{font-size:min(var(--t-display),calc((100vw - 2 * var(--gut)) / 10.6))}
-/* below 980px the three stack: the hairline goes on top instead */
+/* below 980px the three stack with no line between them either: the air
+   alone holds them apart, and it scales with the width the way the
+   columns' air does on a desktop, 56px on a phone to 104px on a tablet.
+   The free step sits the same distance under the last tier. */
 @media (max-width:979px){
-  .ladder.calm .rung{padding:0}
-  .ladder.calm .rung+.rung{border-left:0;border-top:1px solid var(--b-line);padding-top:28px}
+  .ladder.calm .rung,.ladder.calm .rung[data-lead]{padding:0}
+  .ladder.calm .rung+.rung{border:0}
+  .ladder.calm #rungs{row-gap:clamp(56px,14vw,104px)}
+  .ladder.calm .cmp{margin-top:clamp(56px,14vw,104px)}
 }
 </style>
 </head>
