@@ -15,3 +15,12 @@ words in 46 seconds, roughly 2.4 words a second: an unhurried read.
 
 Direction: low, close and dry. Read it like a statement, not an advert, and
 let the pauses carry the alignment and record scenes.
+
+## v2, as recorded (15 November)
+
+Read by Kokoro `bm_george` at 0.9 speed, generated here, offline. The film's
+holds were stretched to fit the voice, so it runs 57.2 s, not 46. The lines
+start at 0.9 · 6.3 · 11.4 · 15.6 · 20.0 · 23.6 · 34.2 · 41.8 · 50.8 · 53.0 s.
+The name is spelled `Arvo-ree-alta` for the voice, because written normally
+it was read as "Arvorelta". A Whisper transcript of the mix matches the
+script word for word. Loudness: -16.1 LUFS.

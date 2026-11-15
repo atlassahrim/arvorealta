@@ -110,7 +110,11 @@ em{font-style:italic}
 
 <script>
 const SC=[["s1",0,6.2],["s2",5.8,12.2],["s3",11.8,20.2],["s4",19.8,27.2],["s5",26.8,35.2],["s6",34.8,40.2],["s7",39.8,47]];
-const END=46;
+// holds stretched to fit the narration: [film time, seconds added]
+const WARP=[[10.2,2.6],[25.0,3.2],[38.4,3.4],[45.0,2.0]];
+const fwd=F=>F+WARP.reduce((s,[a,d])=>s+(F>a?d:0),0);
+const inv=T=>{let o=0;for(const [a,d] of WARP){if(T<=a+o)break;if(T<a+o+d)return a;o+=d}return T-o};
+const END=46+WARP.reduce((s,w)=>s+w[1],0);
 const cl=(x)=>Math.max(0,Math.min(1,x)), seg=(t,a,b)=>cl((t-a)/(b-a));
 const eo=(x)=>1-Math.pow(1-x,3), eio=(x)=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
 const WORK=[["turvatikas","Turvatikas","Industrial manufacturers","2018"],["remedios","Ilha dos Remédios","Healthcare","2023"],
@@ -120,10 +124,10 @@ const WORK=[["turvatikas","Turvatikas","Industrial manufacturers","2018"],["reme
 const R0=28.2, RD=0.85, reel=document.getElementById("reel");
 WORK.forEach(w=>{const d=document.createElement("div");d.className="bg";d.style.backgroundImage=`url(../../assets/land/${w[0]}-w-1-1400.webp)`;reel.appendChild(d)});
 const frames=[...reel.children];
-function seek(t){
+function seek(T){ const t=inv(T);
   for(const [id,a,b] of SC){const el=document.getElementById(id);
     const o=Math.min(seg(t,a,a+.4), 1-seg(t,b-.4,b)); el.style.opacity=(a===0?Math.min(1,1-seg(t,b-.4,b)):o);
-    const bg=el.querySelector(":scope>.bg"); if(bg) bg.style.transform=`scale(${1.07-.07*seg(t,a,b)})`;}
+    const bg=el.querySelector(":scope>.bg"); if(bg) bg.style.transform=`scale(${1.07-.07*seg(T,fwd(a),fwd(b))})`;}
   document.querySelectorAll(".rise").forEach(e=>{const s=+e.dataset.in,p=eo(seg(t,s,s+.9));
     e.style.opacity=p; e.style.transform=(e.tagName==="IMG"?"":"")+`translateY(${(1-p)*14}px)`;});
   // alignment
