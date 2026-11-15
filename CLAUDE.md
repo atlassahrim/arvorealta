@@ -2411,6 +2411,37 @@ lift with no edge reads as a misalignment.
 - **The terms are 3, 7 and 14 days**, on the live page too; see the
   pricing ladder.
 
+**Then the columns went further apart, the same day, at the owner's word.**
+The one-line rule above is history: the three columns share the row
+equally, with up to 56px of air either side of each hairline, and a row
+wraps. The rows are 13px. Four more changes, all in the lab only:
+
+- **The price has no rule beside it** and keeps its inset.
+- **The lists are the owner's.** The document standard reads `Templates
+  for capability statements, reference sheets and tender annexes` / `The
+  custom document template end to end, plus file structure and naming` /
+  `The pipeline plan. Every project, by client and year, ready at the next
+  bid`. **`One revision round` is off the card**, though the pricing
+  section still says the tier includes one. The identity system reads
+  `Wordmark or mark` / `Colour and typographic system` / `Signage,
+  vehicles, trade fair stands, labels` / `Written guidelines your people
+  can work from`, in that order. His trailing full stops are dropped,
+  because no other row on the page carries one. The Norwegian and Finnish
+  are a session's.
+- **The Swedish consultancy comparison is off the fold.** `ladder.foot`
+  stays in `STR` for its three languages.
+- **The free step is centred under the columns**, line over pill, with no
+  hairline above it.
+
+Measured: the ladder is 1.00 at every desktop size tried, from 1920 ×
+1080 down to 1024 × 768, in three languages. A short-screen trim at 800px
+tall and below tightens the rows, which is what keeps the Finnish at one
+screen. The live page's ladder runs 1.01 to 1.15 on the same screens.
+The close (1.03 to 1.11) and the tender's 1.02 at 1280 × 720 are the
+live page's own figures and are unchanged. **Carry the new lists to
+`index.html` and `reference/index.html` together when promoting**, since
+the reference page is where the ladder copy lives.
+
 ### Fold two's question and third answer, and a tighter hero, 15 November
 
 **Both lines approved by the owner before they went live.**

@@ -795,10 +795,9 @@ body{background:var(--b-ink)}
 /* ── the ladder without cards (15 November, the owner's) ──────────────
    No ground, no border, no corner: three columns held apart by margins and
    one hairline between them. The list loses its dashes and becomes rows, a
-   hairline above each, which is the annex's own field rows. From 1200px up
-   every English row sits on one line: the columns size to their longest
-   row, and the paragraphs take the width they are given
-   rather than setting it (contain: inline-size). */
+   hairline above each, which is the annex's own field rows. The columns
+   were sized to keep every English row on one line for a while; they are
+   equal and further apart now, and a row wraps (see below). */
 .ladder.calm .rung,.ladder.calm .rung[data-lead]{background:none;border:0;border-radius:0;box-shadow:none;
   padding:0 clamp(16px,1.6vw,22px);overflow:visible}
 .ladder.calm .rung::before{display:none}
@@ -820,15 +819,28 @@ body{background:var(--b-ink)}
 .ladder.calm .rung li::before{display:none}
 .ladder.calm .rung .terms,.ladder.calm .rung .note{max-width:none}
 .ladder.calm .rung:hover li,.ladder.calm .rung:focus-within li{color:var(--b-bone)}
-@media (min-width:1200px){
-  .ladder.calm #rungs{grid-template-columns:auto auto auto;justify-content:space-between;column-gap:0;
-    container-type:inline-size}
-  .ladder.calm .rung .terms,.ladder.calm .rung .note{contain:inline-size}
-  /* sized from the row of columns' own width (cqw), so the longest English
-     row fits; it stops at 12px, and below that a row wraps rather than
-     shrinking further. A longer language wraps rather than pushing the page
-     wider. */
-  .ladder.calm .rung li{font-size:clamp(12px,calc(1.1223cqw - .99px),12.75px)}
+/* wider apart, at the owner's word: the columns share the row equally and
+   the air either side of each hairline doubles, so a row may wrap now */
+@media (min-width:980px){
+  .ladder.calm #rungs{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:0}
+  .ladder.calm .rung,.ladder.calm .rung[data-lead]{padding-inline:clamp(28px,3.4vw,56px)}
+  .ladder.calm .rung:first-child{padding-left:0}
+  .ladder.calm .rung:last-child{padding-right:0}
+  .ladder.calm .rung li{font-size:13px;line-height:1.45}
+}
+/* the price keeps its inset and loses its rule */
+.ladder.calm .rung .cost::before{display:none}
+/* the Swedish comparison is off the fold, and the free step is centred
+   under the three columns as the one action */
+.ladder.calm .cmp{grid-template-columns:1fr;justify-items:center;text-align:center;margin-top:clamp(28px,5vh,52px)}
+.ladder.calm .freeline{flex-direction:column;justify-content:center;align-items:center;gap:16px;
+  border-top:0;padding-top:0}
+.ladder.calm .freeline p{max-width:46ch}
+/* a short laptop screen: the rows come in a little, which is what lets the
+   Finnish, the longest, keep the fold at one screen at 1180 x 720 */
+@media (min-width:980px) and (max-height:800px){
+  .ladder.calm .rung li{padding:4px 0;line-height:1.4}
+  .ladder.calm .cmp{margin-top:12px}
 }
 /* below 980px the three stack: the hairline goes on top instead */
 @media (max-width:979px){
@@ -999,7 +1011,6 @@ body{background:var(--b-ink)}
     <p class="lede rv" data-t="ladder.lede">Every tier credits into the one above it. Credits never expire.</p>
     <div id="rungs" data-render="tiers"></div>
     <div class="cmp">
-      <p class="rv" data-t="ladder.foot">A Swedish bid consultancy publishes 15,000 kr excluding VAT for a single draft of a single bid.</p>
       <div class="freeline rv">
         <p data-t="ladder.free">The first step is free, and it is the one the whole page is asking for.</p>
         <button class="act act-grad" data-cta data-t="cta">Get your page scored</button>
@@ -1169,18 +1180,17 @@ const STR = {
           terms: "Every document that decides a bid, on one system your own people run.",
           points: [
             "Templates for capability statements, reference sheets and tender annexes",
-            "One document built end to end, plus file structure and naming",
-            "The index. Every project, by client and year, ready at the next bid",
-            "One revision round"
+            "The custom document template end to end, plus file structure and naming",
+            "The pipeline plan. Every project, by client and year, ready at the next bid"
           ],
           note: "All source files, yours to keep. Runs without a designer after handoff. Your €600 credited." },
         { step: "Beyond documents", name: "Identity system", price: "€8,000", time: "14 days",
           terms: "The document standard applied across the company.",
           points: [
-            "Colour and typographic system for print, screen and product",
-            "Signage, vehicles, trade fair stands, product marking",
-            "Written guidelines your suppliers can work from",
-            "Wordmark or mark"
+            "Wordmark or mark",
+            "Colour and typographic system",
+            "Signage, vehicles, trade fair stands, labels",
+            "Written guidelines your people can work from"
           ],
           note: "Take it once the document standard has proved itself. Your €2,400 credited." }
       ],
@@ -1274,18 +1284,17 @@ const STR = {
           terms: "Hvert dokument som avgjør et tilbud, på ett system dine egne folk kjører.",
           points: [
             "Maler for kapasitetsbeskrivelser, referanseark og tilbudsvedlegg",
-            "Ett dokument bygget fra ende til ende, pluss filstruktur og navngiving",
-            "Registeret. Hvert prosjekt, etter kunde og år, klart til neste tilbud",
-            "Én revisjonsrunde"
+            "Den skreddersydde dokumentmalen fra ende til ende, pluss filstruktur og navngiving",
+            "Tilbudsplanen. Hvert prosjekt, etter kunde og år, klart til neste tilbud"
           ],
           note: "Alle kildefiler er dine. Går uten designer etter overlevering. Dine €600 kreditert." },
         { step: "Utover dokumenter", name: "Identitetssystem", price: "€8 000", time: "14 dager",
           terms: "Dokumentstandarden anvendt i hele selskapet.",
           points: [
-            "Farge- og typografisystem for trykk, skjerm og produkt",
-            "Skilt, biler, messestands, produktmerking",
-            "Skriftlige retningslinjer leverandørene dine kan arbeide etter",
-            "Ordmerke eller symbol"
+            "Ordmerke eller symbol",
+            "Farge- og typografisystem",
+            "Skilt, biler, messestands, etiketter",
+            "Skriftlige retningslinjer dine egne folk kan arbeide etter"
           ],
           note: "Ta det når dokumentstandarden har bevist seg. Dine €2 400 kreditert." }
       ],
@@ -1379,18 +1388,17 @@ const STR = {
           terms: "Jokainen tarjouksen ratkaiseva asiakirja yhdellä järjestelmällä, jota oma väkesi ajaa.",
           points: [
             "Mallit kapasiteettikuvauksiin, referenssisivuihin ja tarjouksen liitteisiin",
-            "Yksi asiakirja alusta loppuun, lisäksi tiedostorakenne ja nimeäminen",
-            "Hakemisto. Jokainen projekti asiakkaittain ja vuosittain, valmiina seuraavaan tarjoukseen",
-            "Yksi korjauskierros"
+            "Räätälöity asiakirjapohja alusta loppuun, lisäksi tiedostorakenne ja nimeäminen",
+            "Tarjoussuunnitelma. Jokainen projekti asiakkaittain ja vuosittain, valmiina seuraavaan tarjoukseen"
           ],
           note: "Kaikki lähdetiedostot ovat sinun. Toimii ilman suunnittelijaa luovutuksen jälkeen. 600 € hyvitetty." },
         { step: "Asiakirjojen yli", name: "Identiteettijärjestelmä", price: "8 000 €", time: "14 päivää",
           terms: "Asiakirjastandardi sovellettuna koko yritykseen.",
           points: [
-            "Väri- ja typografiajärjestelmä painoon, näytölle ja tuotteeseen",
-            "Opasteet, ajoneuvot, messuosastot, tuotemerkinnät",
-            "Kirjalliset ohjeet, joiden mukaan toimittajasi voivat työskennellä",
-            "Sanamerkki tai tunnus"
+            "Sanamerkki tai tunnus",
+            "Väri- ja typografiajärjestelmä",
+            "Opasteet, ajoneuvot, messuosastot, etiketit",
+            "Kirjalliset ohjeet, joiden mukaan oma väkesi voi työskennellä"
           ],
           note: "Ota se, kun asiakirjastandardi on osoittanut arvonsa. 2 400 € hyvitetty." }
       ],
