@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Brand explainer</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="../../assets/fonts/ebgaramond.css">
+<link rel="stylesheet" href="../../assets/fonts/geist.css">
+<style>
+:root{--ink:#070D0B;--ink-2:#0B1512;--paper:#EFEAE1;--paper-ink:#171412;--bone:#EFECE7;--amber:#BD9059;
+  --serif:"EB Garamond",Georgia,serif;--sans:"Geist",system-ui,sans-serif;--mono:"Geist Mono",ui-monospace,monospace}
+html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:var(--ink)}
+.sc{position:absolute;inset:0;opacity:0;overflow:hidden}
+.bg{position:absolute;inset:-2%;background-size:cover;background-position:center}
+.scrim{position:absolute;inset:0}
+.col{position:absolute;left:160px;right:160px}
+.eye{font:600 15px/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--amber);margin:0}
+.h{font:400 112px/.92 var(--serif);letter-spacing:-.012em;margin:0}
+.h2{font:400 84px/1 var(--serif);letter-spacing:-.01em;margin:0}
+.p{font:400 30px/1.45 var(--sans);margin:0;max-width:26em}
+.mono{font:600 14px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase}
+.rise{display:block;will-change:transform,opacity}
+em{font-style:italic}
+.on-ink{color:var(--bone)} .on-paper{color:var(--paper-ink)}
+</style></head><body>
+
+<!-- 1 · open -->
+<section class="sc on-ink" id="s1">
+  <div class="bg" style="background-image:url(../../assets/video/ground-water-2-720.jpg)"></div>
+  <div class="scrim" style="background:linear-gradient(90deg,rgba(7,13,11,.78),rgba(7,13,11,.25))"></div>
+  <div class="col" style="top:250px">
+    <p class="eye rise" data-in="0.4">Brand identity</p>
+    <h1 class="h" style="margin-top:44px;font-size:150px;line-height:.9">
+      <span class="rise" data-in="0.9">Competence</span>
+      <span class="rise" data-in="1.4">everyone</span>
+      <span class="rise" data-in="1.9">can <em>see</em>.</span></h1>
+  </div>
+</section>
+
+<!-- 2 · hallmark -->
+<section class="sc on-paper" id="s2">
+  <div class="bg" style="background-image:url(../../assets/video/ground-paper-2-720.jpg)"></div>
+  <div class="scrim" style="background:rgba(239,234,225,.35)"></div>
+  <div class="col" style="top:330px">
+    <p class="h2 rise" data-in="6.5">A hallmark told a buyer the metal was good</p>
+    <p class="h2 rise" data-in="7.1">before anyone tested it.</p>
+    <p class="h2 rise" data-in="9.0" style="margin-top:70px"><em>A well-drawn mark does the same.</em></p>
+  </div>
+</section>
+
+<!-- 3 · alignment -->
+<section class="sc on-paper" id="s3" style="background:var(--paper)">
+  <div class="col" style="top:120px;text-align:center">
+    <p class="eye rise" data-in="12.4" style="color:#7E5228">Alignment</p>
+    <p class="h2 rise" data-in="12.8" style="margin-top:28px">Can you see the difference?</p>
+  </div>
+  <img id="old" src="../../assets/img/turva-old-3-1400.webp" style="position:absolute;left:50%;top:420px;width:760px;transform:translateX(-50%)">
+  <img id="new" src="../../assets/img/turva-new-3-1400.webp" style="position:absolute;left:50%;top:660px;width:760px;transform:translateX(-50%)">
+  <p class="p rise" data-in="17.2" style="position:absolute;left:0;right:0;bottom:90px;margin:auto;text-align:center;font-size:26px;color:rgba(23,20,18,.72)">Competence shows in the drawing.</p>
+</section>
+
+<!-- 4 · system -->
+<section class="sc on-ink" id="s4" style="background:var(--ink-2)">
+  <div class="col" style="top:300px;right:auto;width:860px">
+    <p class="eye rise" data-in="20.4">The system</p>
+    <p class="h2 rise" data-in="20.8" style="margin-top:32px;font-size:96px">Tools are the<br>easy part.</p>
+    <p class="p rise" data-in="23.6" style="margin-top:48px;color:rgba(239,236,231,.8)">Clean vectors,<br>not 30-page rulebooks.</p>
+  </div>
+  <div id="band" style="position:absolute;right:160px;top:160px;width:620px;height:760px;display:grid;grid-template-rows:10fr 20fr 70fr;gap:3px">
+    <div class="sw" style="background:#BD9059"><span class="mono">Mark · 10</span></div>
+    <div class="sw" style="background:#954D13"><span class="mono">Accent · 20</span></div>
+    <div class="sw" style="background:#5A200A"><span class="mono">Ground · 70</span></div>
+  </div>
+  <style>.sw{transform-origin:top;position:relative}.sw span{position:absolute;left:22px;bottom:16px;color:rgba(239,236,231,.9)}</style>
+</section>
+
+<!-- 5 · record -->
+<section class="sc on-ink" id="s5">
+  <div id="reel"></div>
+  <div class="scrim" style="background:linear-gradient(0deg,rgba(7,13,11,.8),rgba(7,13,11,0) 40%),linear-gradient(180deg,rgba(7,13,11,.55),rgba(7,13,11,0) 30%)"></div>
+  <div class="col" style="top:110px">
+    <p class="eye rise" data-in="27.4">The record</p>
+    <p class="h2 rise" data-in="27.8" style="margin-top:24px;color:var(--bone)">Each one of a kind.</p>
+  </div>
+  <div class="col" style="bottom:100px;color:var(--bone)">
+    <p id="capN" style="font:400 44px/1 var(--serif);margin:0"></p>
+    <p id="capM" class="mono" style="margin-top:16px;color:rgba(239,236,231,.72)"></p>
+  </div>
+</section>
+
+<!-- 6 · result -->
+<section class="sc on-ink" id="s6">
+  <div class="bg" style="background-image:url(../../assets/video/ground-dew-1-720.jpg)"></div>
+  <div class="scrim" style="background:radial-gradient(ellipse at center,rgba(7,13,11,.6),rgba(7,13,11,.4))"></div>
+  <div class="col" style="top:330px;text-align:center">
+    <p class="eye rise" data-in="35.4" style="color:rgba(239,236,231,.8)">The result</p>
+    <p class="h2 rise" data-in="35.8" style="margin-top:30px;font-size:100px">Something to stand behind.</p>
+    <p class="p rise" data-in="37.0" style="margin:40px auto 0;color:rgba(239,236,231,.9)">Staff who are proud of it wear it, hand out the card and defend the standard.</p>
+  </div>
+</section>
+
+<!-- 7 · close -->
+<section class="sc on-paper" id="s7">
+  <div class="bg" style="background-image:url(../../assets/video/ground-paper-2-720.jpg)"></div>
+  <div class="scrim" style="background:rgba(239,234,225,.3)"></div>
+  <img class="rise" data-in="40.6" src="../../assets/img/arvo-mark-1-1200.webp" style="position:absolute;left:50%;top:250px;width:460px;margin-left:-230px">
+  <div class="col" style="top:560px;text-align:center">
+    <p class="h2 rise" data-in="41.4" style="font-size:104px">Raise the standard.</p>
+    <p class="mono rise" data-in="42.4" style="margin-top:44px;font-size:17px">arvorealta.com/brand</p>
+  </div>
+</section>
+
+<script>
+const SC=[["s1",0,6.2],["s2",5.8,12.2],["s3",11.8,20.2],["s4",19.8,27.2],["s5",26.8,35.2],["s6",34.8,40.2],["s7",39.8,47]];
+const END=46;
+const cl=(x)=>Math.max(0,Math.min(1,x)), seg=(t,a,b)=>cl((t-a)/(b-a));
+const eo=(x)=>1-Math.pow(1-x,3), eio=(x)=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const WORK=[["turvatikas","Turvatikas","Industrial manufacturers","2018"],["remedios","Ilha dos Remédios","Healthcare","2023"],
+ ["venner","Venner Advice","Accounting","2016"],["demillion","Demillion Landscapes","Architecture","2023"],
+ ["boaventura","Boaventura Noleto Souza Souto","Lawyers","2021"],["offrire","Offrire","Healthcare","2016"],
+ ["soledad","Soledad Molina","Architecture","2018"],["autotrack","Autotrac","Software","2014"]];
+const R0=28.2, RD=0.85, reel=document.getElementById("reel");
+WORK.forEach(w=>{const d=document.createElement("div");d.className="bg";d.style.backgroundImage=`url(../../assets/land/${w[0]}-w-1-1400.webp)`;reel.appendChild(d)});
+const frames=[...reel.children];
+function seek(t){
+  for(const [id,a,b] of SC){const el=document.getElementById(id);
+    const o=Math.min(seg(t,a,a+.4), 1-seg(t,b-.4,b)); el.style.opacity=(a===0?Math.min(1,1-seg(t,b-.4,b)):o);
+    const bg=el.querySelector(":scope>.bg"); if(bg) bg.style.transform=`scale(${1.07-.07*seg(t,a,b)})`;}
+  document.querySelectorAll(".rise").forEach(e=>{const s=+e.dataset.in,p=eo(seg(t,s,s+.9));
+    e.style.opacity=p; e.style.transform=(e.tagName==="IMG"?"":"")+`translateY(${(1-p)*14}px)`;});
+  // alignment
+  const o=document.getElementById("old"),n=document.getElementById("new");
+  const po=eo(seg(t,13.6,14.4)),pn=eo(seg(t,14.6,15.4)),dim=eio(seg(t,16.2,17.0));
+  o.style.opacity=po*(1-dim); n.style.opacity=pn;
+  n.style.transform=`translateX(-50%) translateY(${-dim*150}px) scale(${1+.12*dim})`;
+  o.style.transform=`translateX(-50%) translateY(${-dim*40}px)`;
+  // band grows in sequence
+  document.querySelectorAll(".sw").forEach((s,i)=>{const p=eio(seg(t,21.2+i*.5,22.2+i*.5));s.style.transform=`scaleY(${p})`;s.firstChild.style.opacity=seg(t,22+i*.5,22.6+i*.5)});
+  // reel
+  let k=Math.floor((t-R0-.12)/RD); k=Math.max(0,Math.min(WORK.length-1,k));
+  frames.forEach((f,i)=>{const s=R0+i*RD; f.style.opacity=i===0?1:eio(seg(t,s,s+.25)); f.style.transform=`scale(${1.05-.05*seg(t,s,s+RD+.3)})`;});
+  document.getElementById("capN").textContent=WORK[k][1];
+  document.getElementById("capM").textContent=WORK[k][2]+"  ·  "+WORK[k][3];
+  document.getElementById("capN").style.opacity=document.getElementById("capM").style.opacity=seg(t,R0,R0+.3);
+}
+window.ready=Promise.all(WORK.map(w=>new Promise(r=>{const i=new Image();i.onload=i.onerror=r;i.src=`../../assets/land/${w[0]}-w-1-1400.webp`})));
+window.seek=seek; window.END=END;
+if(!/render/.test(location.search)){const t0=performance.now();(function f(){seek(((performance.now()-t0)/1000)%END);requestAnimationFrame(f)})()}
+</script></body></html>
