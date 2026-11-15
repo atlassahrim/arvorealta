@@ -2338,6 +2338,40 @@ the files that were replaced.
 Verified at ten sizes in three languages: six folds at one screen, all
 four images load, no page error.
 
+### The offer page's folds three and four on paper, 15 November
+
+**The owner's call: the weights and the ladder read bulky and dark, and
+`/brand/`'s fold two is the language to take.** Both sections carry
+`.quiet` and `data-tone="light"` now, and one block appended last to the
+stylesheet dresses them. Every string, price, term and credit line is
+unchanged.
+
+- **The ground is `--b-paper`** with fold two's soft diagonal light, so
+  the page runs ink, then paper from the tender to the close. **That
+  ends the offer page's inverted moments under the hero**, which this
+  file argued for at length; the owner has overruled that argument
+  before, and it is kept as history.
+- **Headings and the lede are centred**; the cards keep their text left,
+  because a list of deliverables is read down its own edge.
+- **The weights** are three tones of paper, `#E2DACB` to `#F1ECE4`, with
+  the figures in the warm black and the names at ink 62 and 45 per cent.
+  The curtain is paper. The `65` steps down to `--t-value`.
+- **The ladder's cards** are a hairline at ink 10 per cent on a faint
+  lift, the lead card's border at 30 per cent instead of solid bone. The
+  ink fill on hover is gone; a card only lifts. **Prices are the warm
+  black in EB Garamond at 28 to 36px, from 42, with no gradient.** The
+  middle card is still wider and still lifted 16px.
+- **The action in the ladder is the brand page's faint copper pill**, at
+  about 2.6:1, rising on hover. The bar's own `Get your page scored`
+  keeps full contrast on every fold, so the page's one action is never
+  only faint.
+
+**Still over one screen, and over before this change**: the ladder at
+1.07 on 1280 × 720 and 1.06 on 1180 × 720 (1.11 and 1.09 before), the
+Finnish at 1.12, and the close at 1.11 on 1280 × 720 in English and
+Finnish. On a laptop that short the snap holds the fold, so the bottom of
+the ladder is the part at risk.
+
 ### Fold two's question and third answer, and a tighter hero, 15 November
 
 **Both lines approved by the owner before they went live.**
