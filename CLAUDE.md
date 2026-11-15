@@ -218,6 +218,7 @@ alone.** Checked against every published page's own tag:
 | `home/` | `noindex, follow` | a stub redirecting `/home/` to `/` |
 | `proposta-motorhome/` | `noindex` | a Portuguese offer page, its own prices |
 | `templates/` | `noindex` | belt and braces: it is also swept by `pages.yml` |
+| `lab/home/` | `noindex, nofollow` | sandbox: folds three and four on green, quiet and retyped, 15 November |
 
 `reference/` is the near-copy, so without the label it would be a second
 `index.html` bidding against the first for the same terms.
@@ -2337,6 +2338,53 @@ the files that were replaced.
 
 Verified at ten sizes in three languages: six folds at one screen, all
 four images load, no page error.
+
+### Folds three and four went to paper and came back, 15 November
+
+**The offer page's weights and ladder spent part of a day on paper**, in
+`/brand/` fold two's quiet language, at the owner's word. He judged them
+better on green, so the commit is reverted and the live page is as it was
+before. What he wants tested is the quiet language and better type on the
+green, and that is `lab/home/`.
+
+### `lab/home/` — folds three and four on green, quiet and retyped (15 November)
+
+**A whole copy of `index.html` with one block appended last**, scoped to a
+`.calm` class on the two sections, plus one change in the render: the
+currency mark is wrapped in `<span class="cur">` wherever the locale puts
+it. `noindex, nofollow`, no canonical, title `Lab: home`. Every string,
+price and credit line is the live page's own. **It falls behind the day the
+live page moves**; delete it then, or promote it, and diff it against the
+live page before promoting, as the 14 November note says.
+
+- **The grounds stay ink and ink-2.** The language is fold two's in bone:
+  headings and lede centred, full contrast only on the figures and the
+  prices, every other line one step quieter (bone at 62 and 46 per cent),
+  eyebrows in the amber at 78 per cent, and the quiet pill as the action.
+  The bar's own action keeps full contrast.
+- **The weights** are three greens, `#203530`, `#172823`, `#101D19`, a step
+  apart in lightness, with the figures in bone, a hairline round the bar
+  and the names in light mono.
+- **The type, four changes:**
+  - **One size per role** in the cards: the label at 10px mono, the name in
+    EB Garamond at 21 to 26px, body at 14px, the price at 30 to 44px. It
+    had eight sizes across one card.
+  - **The three cards share one grid.** Each spans three rows of a
+    `subgrid`, so the names, the prices and the lists start on one line
+    across all three. Measured at 1440: prices at 429 and lists at 568 in
+    all three cards. The middle card keeps its 16px lift.
+  - **The currency mark is set small and high**, half size, raised, at 70
+    per cent bone, so the figure reads first. The subset fonts carry no
+    oldstyle figures and no small caps, checked with fontTools, so the type
+    can only be improved through structure, sizes and space.
+  - **Measures under sixty characters** for the lede, the note and the
+    terms.
+- **The shared grid costs height**, because each row takes the tallest
+  card's line, so a trim runs at 920px tall and below. Measured on the
+  ladder: 1.00 at 1920 × 1080, 1440 × 900, 1366 × 768 and 1280 × 800 in
+  three languages; 1.01 to 1.04 at 1280 × 720 and 1180 × 720, against the
+  live page's 1.07 to 1.12. The close's 1.08 to 1.11 on those screens is
+  the live page's own and untouched.
 
 ### Fold two's question and third answer, and a tighter hero, 15 November
 
