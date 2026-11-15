@@ -1,0 +1,33 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Brand mind map</title>
+<link rel="stylesheet" href="../../assets/fonts/ebgaramond.css"><link rel="stylesheet" href="../../assets/fonts/geist.css">
+<style>html,body{margin:0;background:#070D0B}svg{display:block}
+.h{font-family:"EB Garamond";fill:#EFECE7}.m{font-family:"Geist Mono";font-weight:600;letter-spacing:.2em;fill:#BD9059}
+.s{font-family:"Geist";fill:rgba(239,236,231,.7)}</style></head><body>
+<svg id="map" width="1920" height="1080" viewBox="0 0 1920 1080"></svg>
+<script>
+const C={x:960,y:540};
+const B=[
+ {a:-150,eye:"01 · Outside",t:"Before a word is read",s:["A hallmark, before the test","Knows what it is doing"]},
+ {a:-90,eye:"02 · Alignment",t:"The drawing",s:["Same ink, same stock","Only the drawing differs"]},
+ {a:-30,eye:"03 · System",t:"Clean vectors",s:["One synthesis","10 · 20 · 70","One typeface","The culture stack"]},
+ {a:30,eye:"04 · Inside",t:"Something to stand behind",s:["The kamon: which house","Staff wear it, defend it"]},
+ {a:90,eye:"05 · Standard",t:"Raise the standard",s:["Sloppy work beside it shows","Quietly, for everyone"]},
+ {a:150,eye:"06 · Record",t:"Each one of a kind",s:["Seventeen marks","Three grounds each"]}];
+const svg=document.getElementById("map"),NS="http://www.w3.org/2000/svg";
+const el=(n,a,txt)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);if(txt)e.textContent=txt;svg.appendChild(e);return e};
+el("circle",{cx:C.x,cy:C.y,r:300,fill:"none",stroke:"rgba(239,236,231,.08)"});
+el("circle",{cx:C.x,cy:C.y,r:118,fill:"#0B1512",stroke:"#BD9059","stroke-width":1.2});
+B.forEach(b=>{const r=b.a*Math.PI/180,R=330,x=C.x+Math.cos(r)*R*1.55,y=C.y+Math.sin(r)*R;
+  const x0=C.x+Math.cos(r)*118,y0=C.y+Math.sin(r)*118,mx=C.x+Math.cos(r)*230,my=C.y+Math.sin(r)*200;
+  el("path",{d:`M${x0},${y0} Q${mx},${my} ${x},${y}`,fill:"none",stroke:"rgba(189,144,89,.55)","stroke-width":1.2});
+  el("circle",{cx:x,cy:y,r:4,fill:"#BD9059"});
+  const right=Math.cos(r)>0.1,left=Math.cos(r)<-0.1,anc=right?"start":left?"end":"middle",dx=right?18:left?-18:0;
+  const up=Math.sin(r)<-0.5,base=up?y-112:Math.sin(r)>0.5?y+36:y-10;
+  el("text",{x:x+dx,y:base,"text-anchor":anc,class:"m","font-size":12},b.eye.toUpperCase());
+  el("text",{x:x+dx,y:base+36,"text-anchor":anc,class:"h","font-size":30},b.t);
+  b.s.forEach((s,i)=>el("text",{x:x+dx,y:base+66+i*24,"text-anchor":anc,class:"s","font-size":16},s));
+});
+el("text",{x:C.x,y:C.y-34,"text-anchor":"middle",class:"m","font-size":11},"ARVOREALTA · BRAND");
+el("text",{x:C.x,y:C.y+4,"text-anchor":"middle",class:"h","font-size":30},"Competence");
+el("text",{x:C.x,y:C.y+38,"text-anchor":"middle",class:"h","font-size":30,"font-style":"italic"},"everyone can see");
+</script></body></html>
