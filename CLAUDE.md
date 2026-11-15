@@ -218,7 +218,6 @@ alone.** Checked against every published page's own tag:
 | `home/` | `noindex, follow` | a stub redirecting `/home/` to `/` |
 | `proposta-motorhome/` | `noindex` | a Portuguese offer page, its own prices |
 | `templates/` | `noindex` | belt and braces: it is also swept by `pages.yml` |
-| `lab/home/` | `noindex, nofollow` | sandbox: folds three and four on green, quiet and retyped, 15 November |
 
 `reference/` is the near-copy, so without the label it would be a second
 `index.html` bidding against the first for the same terms.
@@ -2347,7 +2346,17 @@ better on green, so the commit is reverted and the live page is as it was
 before. What he wants tested is the quiet language and better type on the
 green, and that is `lab/home/`.
 
-### `lab/home/` — folds three and four on green, quiet and retyped (15 November)
+### `lab/home/` — folds three and four on green, quiet and retyped (15 November, promoted, deleted)
+
+**Promoted the same day, at the owner's word.** `index.html` is the lab
+file with the live head put back: its title and canonical, and `noindex,
+nofollow` off. The diff was read hunk by hunk first, and every difference
+belonged to folds three, four or five, so nothing else on the page moved.
+The new lists went to `reference/index.html` too, which is where the
+ladder copy lives. Its Swedish comparison stays there, because that page
+is the record of the first offer page. `lab/` is deleted for the fifth
+time because it won. Everything below describes the live offer page
+under its lab path.
 
 **A whole copy of `index.html` with one block appended last**, scoped to a
 `.calm` class on the two sections, plus one change in the render: the
@@ -3401,9 +3410,14 @@ wrong, say so and give the reasoning. Changing one is not a copy edit.
 
 **The terms are 3 days, 7 days and 14 days**, at the owner's word on
 15 November, in place of `3 to 4 days`, `two weeks` and `six weeks`. They
-changed on `index.html`, `lab/home/` and `reference/index.html` together,
+changed on `index.html`, the lab and `reference/index.html` together,
 in all three languages: `3 dager` / `7 dager` / `14 dager` and `3 päivää`
 / `7 päivää` / `14 päivää`.
+
+**Since 15 November the ladder's lists are the owner's**, and `One
+revision round` is no longer on the €2,400 card; the term below still
+holds. The identity system ends on `Full document standard`, and the
+Swedish comparison under the row is gone. See the `lab/home/` section.
 
 €2,400 includes one revision round. Past that it is a new agreement at a new
 budget, never an extension. What €8,000 excludes is settled in the scope

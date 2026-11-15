@@ -696,6 +696,167 @@ body{background:var(--b-ink)}
   .hero .sub{line-height:1.5}
   .hero .gate p{font-size:14px;line-height:1.5}
 }
+/* ══ Folds three and four, green and quiet, with the type reworked ═══════
+   Tried in lab/home/ on 15 November and promoted the same day. The owner:
+   the paper version lost the green, and the typography could be better. So the two folds keep their ink grounds and
+   take /brand/ fold two's quiet language in bone: headings centred, full
+   contrast spent only on what is being judged, faint pill actions. The type
+   is reworked on four points: one size per role, the three price cards on
+   one grid so their lines align across, the currency mark set small and
+   high, and measures kept under sixty characters. */
+.calm{--b-line:rgba(239,236,231,.10);--b-line2:rgba(239,236,231,.22);--b-q:rgba(239,236,231,.62);
+  --b-qq:rgba(239,236,231,.46);--b-amber-q:rgba(189,144,89,.78)}
+.calm .eyebrow{color:var(--b-amber-q);letter-spacing:.26em}
+.calm h2{text-wrap:balance;font-feature-settings:"kern","liga";letter-spacing:-.022em}
+.calm :focus-visible{outline:1px solid rgba(239,236,231,.3);outline-offset:6px}
+/* the action: the brand page's quiet pill, in bone */
+.calm .act-grad{border:0;box-shadow:inset 0 0 0 1px rgba(239,236,231,.2);color:rgba(239,236,231,.66);
+  font-size:10px;font-weight:400;letter-spacing:.18em;padding:12px 22px}
+.calm .act-grad::after{opacity:.45}
+.calm .act-grad:hover,.calm .act-grad:focus-visible{background:rgba(239,236,231,.04);color:rgba(239,236,231,.92);
+  box-shadow:inset 0 0 0 1px rgba(239,236,231,.4)}
+
+/* III · the weights */
+.weigh.calm .stick>.wrap:first-child{display:grid;justify-items:center;text-align:center}
+.weigh.calm h2{max-width:20ch;margin-inline:auto;font-size:var(--t-head);line-height:1.02}
+.weigh.calm .chart{width:100%;max-width:1040px;margin-inline:auto}
+.weigh.calm .dim .ruleL,.weigh.calm .dim .ruleR{background:var(--b-line2)}
+.weigh.calm .dim .span::before,.weigh.calm .dim .span::after{background:rgba(239,236,231,.34)}
+.weigh.calm .dim .fig{font-size:var(--t-value);font-variant-numeric:lining-nums proportional-nums}
+.weigh.calm .dim .of{color:var(--b-qq);font-size:10px}
+.weigh.calm .segs{gap:1px;background:var(--b-line);border-radius:12px;box-shadow:inset 0 0 0 1px var(--b-line)}
+.weigh.calm .segs .s{min-height:clamp(64px,9vh,96px);background:none}
+.weigh.calm .segs .s:nth-child(1){background:#203530}
+.weigh.calm .segs .s:nth-child(2){background:#172823}
+.weigh.calm .segs .s:nth-child(3){background:#101D19}
+.weigh.calm .segs .s b{color:var(--b-bone);font-size:var(--t-sub);font-variant-numeric:lining-nums}
+.weigh.calm .curtain{background:var(--b-ink)}
+.weigh.calm .names span{font-size:10px;font-weight:400;letter-spacing:.18em}
+.weigh.calm .names span:nth-child(1),.weigh.calm .names span:nth-child(2){color:var(--b-q)}
+.weigh.calm .names span:nth-child(3){color:var(--b-qq)}
+.weigh.calm .note{color:var(--b-q);font-size:13.5px;line-height:1.6;max-width:58ch;margin-inline:auto;text-align:center}
+
+/* IV · the ladder */
+.ladder.calm .wrap>.eyebrow,.ladder.calm .wrap>h2,.ladder.calm .wrap>.lede{text-align:center;margin-inline:auto}
+.ladder.calm h2{max-width:none;line-height:1.02}
+.ladder.calm .lede{color:var(--b-q);font-size:15px;max-width:52ch}
+/* one grid for three cards: each card spans the same three rows, so the
+   names, the prices and the lists start on one line across all three */
+@media (min-width:980px){
+  .ladder.calm #rungs{grid-template-rows:auto auto auto;row-gap:0}
+  .ladder.calm .rung{grid-row:span 3;display:grid;grid-template-rows:subgrid;row-gap:clamp(14px,2.2vh,22px)}
+}
+.ladder.calm .rung{background:none;border-color:var(--b-line);color:var(--b-bone)}
+.ladder.calm .rung[data-lead]{border-color:var(--b-line2);background:rgba(239,236,231,.025)}
+.ladder.calm .rung::before{background:rgba(239,236,231,.03)}
+.ladder.calm .rung .step{color:var(--b-amber-q);font-size:10px;letter-spacing:.24em}
+.ladder.calm .rung .nm{font-size:clamp(21px,1.75vw,26px);line-height:1.1;letter-spacing:-.018em}
+.ladder.calm .rung .terms{color:var(--b-q);font-size:14px;line-height:1.55;max-width:34ch}
+.ladder.calm .rung .cost::before{background:var(--b-line2)}
+.ladder.calm .rung .pr{font-size:clamp(34px,3vw,44px);line-height:1;letter-spacing:-.03em;
+  font-variant-numeric:lining-nums proportional-nums}
+.ladder.calm .rung .pr .cur{font-size:.5em;vertical-align:.62em;margin-inline:.06em .08em;letter-spacing:0;
+  color:rgba(239,236,231,.7);-webkit-text-fill-color:rgba(239,236,231,.7)}
+.ladder.calm .rung .when{color:var(--b-qq);font-size:10px;letter-spacing:.2em}
+.ladder.calm .rung .note{color:var(--b-qq);font-size:13px;line-height:1.5}
+.ladder.calm .rung ul{gap:8px;align-content:start}
+.ladder.calm .rung li{font-size:14px;line-height:1.45;color:rgba(239,236,231,.86)}
+.ladder.calm .rung li::before{background:rgba(189,144,89,.5)}
+.ladder.calm .rung:hover,.ladder.calm .rung:focus-within{color:var(--b-bone)}
+.ladder.calm .rung:hover .step,.ladder.calm .rung:focus-within .step{color:var(--b-amber)}
+.ladder.calm .rung:hover .terms,.ladder.calm .rung:focus-within .terms{color:rgba(239,236,231,.74)}
+.ladder.calm .rung:hover .when,.ladder.calm .rung:focus-within .when,
+.ladder.calm .rung:hover .note,.ladder.calm .rung:focus-within .note{color:var(--b-q)}
+.ladder.calm .rung:hover li::before,.ladder.calm .rung:focus-within li::before{background:var(--b-amber)}
+.ladder.calm .rung:hover .cost::before,.ladder.calm .rung:focus-within .cost::before{background:rgba(239,236,231,.32)}
+.ladder.calm .rung:hover[data-lead],.ladder.calm .rung:focus-within[data-lead]{border-color:rgba(239,236,231,.38)}
+.ladder.calm .cmp p{color:var(--b-qq);font-size:13px}
+.ladder.calm .freeline p{color:var(--b-q)}
+/* the shared rows cost height, because each row takes the tallest card's
+   line. On a short laptop it comes back out of the air and the sizes */
+@media (min-width:980px){
+  .ladder.calm .rung{row-gap:clamp(10px,1.7vh,18px)}
+  .ladder.calm .rung .col{gap:7px}
+}
+@media (min-width:980px) and (max-height:920px){
+  .ladder.calm{padding-top:clamp(60px,8vh,80px)}
+  .ladder.calm h2{margin:8px 0 6px}
+  .ladder.calm #rungs{padding-top:12px}
+  .ladder.calm .rung{padding:18px 22px;row-gap:10px}
+  .ladder.calm .rung .terms{font-size:13px;line-height:1.45}
+  .ladder.calm .rung .pr{font-size:30px}
+  .ladder.calm .rung .note{font-size:12px;line-height:1.4}
+  .ladder.calm .rung ul{gap:4px}
+  .ladder.calm .rung li{font-size:13px;line-height:1.38}
+  .ladder.calm .cmp{margin-top:10px}
+  .ladder.calm .cmp p{font-size:12.5px;line-height:1.45}
+}
+
+/* ── the ladder without cards (15 November, the owner's) ──────────────
+   No ground, no border, no corner: three columns held apart by margins and
+   one hairline between them. The list loses its dashes and becomes rows, a
+   hairline above each, which is the annex's own field rows. The columns
+   were sized to keep every English row on one line for a while; they are
+   equal and further apart now, and a row wraps (see below). */
+.ladder.calm .rung,.ladder.calm .rung[data-lead]{background:none;border:0;border-radius:0;box-shadow:none;
+  padding:0 clamp(16px,1.6vw,22px);overflow:visible}
+.ladder.calm .rung::before{display:none}
+.ladder.calm .rung+.rung{border-left:0}
+@media (min-width:980px){.ladder.calm .rung[data-lead]{margin-block:0}
+  /* the rail is fixed at the right; its widest label, the Finnish, starts
+     about 136px in from the edge, and the columns stop 24px short of it,
+     which costs nothing above about 1630px wide */
+  .ladder.calm #rungs{margin-right:max(0px,calc(160px - max(32px,(100vw - 82rem) / 2 + 32px)))}
+  /* the English rail is narrower, so English gets the 30px back */
+  :root[lang="en"] .ladder.calm #rungs{margin-right:max(0px,calc(130px - max(32px,(100vw - 82rem) / 2 + 32px)))}}
+.ladder.calm .rung:first-child{padding-left:0}
+.ladder.calm .rung:last-child{padding-right:0}
+.ladder.calm .rung .step{color:rgba(189,144,89,.7)}
+.ladder.calm .rung[data-lead] .step{color:var(--b-amber)}
+.ladder.calm .rung ul{gap:0;margin-top:0}
+.ladder.calm .rung li{padding:7px 0;max-width:none;border-top:1px solid var(--b-line)}
+.ladder.calm .rung li:last-child{border-bottom:1px solid var(--b-line)}
+.ladder.calm .rung li::before{display:none}
+.ladder.calm .rung .terms,.ladder.calm .rung .note{max-width:none}
+.ladder.calm .rung:hover li,.ladder.calm .rung:focus-within li{color:var(--b-bone)}
+/* wider apart, at the owner's word: the columns share the row equally and
+   the air either side of each hairline doubles, so a row may wrap now */
+@media (min-width:980px){
+  .ladder.calm #rungs{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:0}
+  .ladder.calm .rung,.ladder.calm .rung[data-lead]{padding-inline:clamp(28px,3.4vw,56px)}
+  .ladder.calm .rung:first-child{padding-left:0}
+  .ladder.calm .rung:last-child{padding-right:0}
+  .ladder.calm .rung li{font-size:13px;line-height:1.45}
+}
+/* the price keeps its inset and loses its rule */
+.ladder.calm .rung .cost::before{display:none}
+/* the Swedish comparison is off the fold, and the free step is centred
+   under the three columns as the one action */
+.ladder.calm .cmp{grid-template-columns:1fr;justify-items:center;text-align:center;margin-top:clamp(28px,5vh,52px)}
+.ladder.calm .freeline{flex-direction:column;justify-content:center;align-items:center;gap:16px;
+  border-top:0;padding-top:0}
+.ladder.calm .freeline p{max-width:46ch}
+/* a short laptop screen: the rows come in a little, which is what lets the
+   Finnish, the longest, keep the fold at one screen at 1180 x 720 */
+@media (min-width:980px) and (max-height:800px){
+  .ladder.calm .rung li{padding:4px 0;line-height:1.4}
+  .ladder.calm .cmp{margin-top:12px}
+}
+/* the close's headline is two lines by hand, at the owner's word: the
+   measure comes off, and the size is capped by the width so the longest
+   line, the Finnish, never wraps into a third */
+.close h2{max-width:none;font-size:min(var(--t-display),calc((100vw - 2 * var(--gut)) / 9.4))}
+:root[lang="fi"] .close h2{font-size:min(var(--t-display),calc((100vw - 2 * var(--gut)) / 10.6))}
+/* below 980px the three stack with no line between them either: the air
+   alone holds them apart, and it scales with the width the way the
+   columns' air does on a desktop, 56px on a phone to 104px on a tablet.
+   The free step sits the same distance under the last tier. */
+@media (max-width:979px){
+  .ladder.calm .rung,.ladder.calm .rung[data-lead]{padding:0}
+  .ladder.calm .rung+.rung{border:0}
+  .ladder.calm #rungs{row-gap:clamp(56px,14vw,104px)}
+  .ladder.calm .cmp{margin-top:clamp(56px,14vw,104px)}
+}
 </style>
 </head>
 <body>
@@ -828,7 +989,7 @@ body{background:var(--b-ink)}
 
 <!-- ACT III-b ───────────────────────────────────────────────────────── -->
 <!-- ACT IV ──────────────────────────────────────────────────────────── -->
-<section class="weigh on-ink" id="weigh" data-tone="dark">
+<section class="weigh on-ink calm" id="weigh" data-tone="dark">
   <div class="stick">
     <div class="wrap">
       <p class="eyebrow" data-t="weigh.eyebrow">How it is scored</p>
@@ -853,14 +1014,13 @@ body{background:var(--b-ink)}
 </section>
 
 <!-- ACT V ───────────────────────────────────────────────────────────── -->
-<section class="ladder on-ink" id="price" data-tone="dark">
+<section class="ladder on-ink calm" id="price" data-tone="dark">
   <div class="wrap">
     <p class="eyebrow rv" data-t="ladder.eyebrow">What it costs</p>
     <h2 class="rv" data-t="ladder.h2">Then make it a system.</h2>
     <p class="lede rv" data-t="ladder.lede">Every tier credits into the one above it. Credits never expire.</p>
     <div id="rungs" data-render="tiers"></div>
     <div class="cmp">
-      <p class="rv" data-t="ladder.foot">A Swedish bid consultancy publishes 15,000 kr excluding VAT for a single draft of a single bid.</p>
       <div class="freeline rv">
         <p data-t="ladder.free">The first step is free, and it is the one the whole page is asking for.</p>
         <button class="act act-grad" data-cta data-t="cta">Get your page scored</button>
@@ -886,7 +1046,7 @@ body{background:var(--b-ink)}
            alt="The Arvorealta mark">
     </div>
     <p class="eyebrow rv" data-t="close.eyebrow">Where to start</p>
-    <h2 class="rv" data-t="close.h2">Find out what it cost you. For nothing.</h2>
+    <h2 class="rv" data-t="close.h2">Find out what it cost you.<br>For nothing.</h2>
     <p class="rv" data-t="close.body">Send one page from a tender you lost.</p>
     <div class="rv"><button class="act act-grad" data-cta data-t="cta">Get your page scored</button></div>
     <div class="ft">
@@ -1030,18 +1190,18 @@ const STR = {
           terms: "Every document that decides a bid, on one system your own people run.",
           points: [
             "Templates for capability statements, reference sheets and tender annexes",
-            "One document built end to end, plus file structure and naming",
-            "The index. Every project, by client and year, ready at the next bid",
-            "One revision round"
+            "The custom document template end to end, plus file structure and naming",
+            "The pipeline plan. Every project, by client and year, ready at the next bid"
           ],
           note: "All source files, yours to keep. Runs without a designer after handoff. Your €600 credited." },
         { step: "Beyond documents", name: "Identity system", price: "€8,000", time: "14 days",
           terms: "The document standard applied across the company.",
           points: [
-            "Colour and typographic system for print, screen and product",
-            "Signage, vehicles, trade fair stands, product marking",
-            "Written guidelines your suppliers can work from",
-            "Wordmark or mark"
+            "Wordmark or mark",
+            "Colour and typographic system",
+            "Signage, vehicles, trade fair stands, labels",
+            "Written guidelines your people can work from",
+            "Full document standard"
           ],
           note: "Take it once the document standard has proved itself. Your €2,400 credited." }
       ],
@@ -1051,7 +1211,7 @@ const STR = {
 
     close: {
       eyebrow: "Where to start",
-      h2: "Find out what it cost you. For nothing.",
+      h2: "Find out what it cost you.<br>For nothing.",
       body: "Send one page from a past tender. It comes back scored against the criteria it was judged on and a note on what the next one should carry. At zero cost."
     },
     langLabel: "Language"
@@ -1135,18 +1295,18 @@ const STR = {
           terms: "Hvert dokument som avgjør et tilbud, på ett system dine egne folk kjører.",
           points: [
             "Maler for kapasitetsbeskrivelser, referanseark og tilbudsvedlegg",
-            "Ett dokument bygget fra ende til ende, pluss filstruktur og navngiving",
-            "Registeret. Hvert prosjekt, etter kunde og år, klart til neste tilbud",
-            "Én revisjonsrunde"
+            "Den skreddersydde dokumentmalen fra ende til ende, pluss filstruktur og navngiving",
+            "Tilbudsplanen. Hvert prosjekt, etter kunde og år, klart til neste tilbud"
           ],
           note: "Alle kildefiler er dine. Går uten designer etter overlevering. Dine €600 kreditert." },
         { step: "Utover dokumenter", name: "Identitetssystem", price: "€8 000", time: "14 dager",
           terms: "Dokumentstandarden anvendt i hele selskapet.",
           points: [
-            "Farge- og typografisystem for trykk, skjerm og produkt",
-            "Skilt, biler, messestands, produktmerking",
-            "Skriftlige retningslinjer leverandørene dine kan arbeide etter",
-            "Ordmerke eller symbol"
+            "Ordmerke eller symbol",
+            "Farge- og typografisystem",
+            "Skilt, biler, messestands, etiketter",
+            "Skriftlige retningslinjer dine egne folk kan arbeide etter",
+            "Hele dokumentstandarden"
           ],
           note: "Ta det når dokumentstandarden har bevist seg. Dine €2 400 kreditert." }
       ],
@@ -1156,7 +1316,7 @@ const STR = {
 
     close: {
       eyebrow: "Hvor du begynner",
-      h2: "Finn ut hva det kostet deg. Gratis.",
+      h2: "Finn ut hva det kostet deg.<br>Gratis.",
       body: "Send én side fra et tidligere anbud. Den kommer tilbake vurdert mot kriteriene den ble bedømt etter, og med en merknad om hva den neste bør inneholde. Uten kostnad."
     },
     langLabel: "Språk"
@@ -1240,18 +1400,18 @@ const STR = {
           terms: "Jokainen tarjouksen ratkaiseva asiakirja yhdellä järjestelmällä, jota oma väkesi ajaa.",
           points: [
             "Mallit kapasiteettikuvauksiin, referenssisivuihin ja tarjouksen liitteisiin",
-            "Yksi asiakirja alusta loppuun, lisäksi tiedostorakenne ja nimeäminen",
-            "Hakemisto. Jokainen projekti asiakkaittain ja vuosittain, valmiina seuraavaan tarjoukseen",
-            "Yksi korjauskierros"
+            "Räätälöity asiakirjapohja alusta loppuun, lisäksi tiedostorakenne ja nimeäminen",
+            "Tarjoussuunnitelma. Jokainen projekti asiakkaittain ja vuosittain, valmiina seuraavaan tarjoukseen"
           ],
           note: "Kaikki lähdetiedostot ovat sinun. Toimii ilman suunnittelijaa luovutuksen jälkeen. 600 € hyvitetty." },
         { step: "Asiakirjojen yli", name: "Identiteettijärjestelmä", price: "8 000 €", time: "14 päivää",
           terms: "Asiakirjastandardi sovellettuna koko yritykseen.",
           points: [
-            "Väri- ja typografiajärjestelmä painoon, näytölle ja tuotteeseen",
-            "Opasteet, ajoneuvot, messuosastot, tuotemerkinnät",
-            "Kirjalliset ohjeet, joiden mukaan toimittajasi voivat työskennellä",
-            "Sanamerkki tai tunnus"
+            "Sanamerkki tai tunnus",
+            "Väri- ja typografiajärjestelmä",
+            "Opasteet, ajoneuvot, messuosastot, etiketit",
+            "Kirjalliset ohjeet, joiden mukaan oma väkesi voi työskennellä",
+            "Koko asiakirjastandardi"
           ],
           note: "Ota se, kun asiakirjastandardi on osoittanut arvonsa. 2 400 € hyvitetty." }
       ],
@@ -1261,7 +1421,7 @@ const STR = {
 
     close: {
       eyebrow: "Mistä aloittaa",
-      h2: "Selvitä, mitä se maksoi sinulle. Ilmaiseksi.",
+      h2: "Selvitä, mitä se maksoi sinulle.<br>Ilmaiseksi.",
       body: "Lähetä yksi sivu aiemmasta tarjouksesta. Se palaa pisteytettynä niitä perusteita vasten, joilla se arvioitiin, ja mukana on merkintä siitä, mitä seuraavan tulisi sisältää. Veloituksetta."
     },
     langLabel: "Kieli"
@@ -1376,7 +1536,7 @@ function renderLists(){
         <p class="terms">${esc(x.terms)}</p>
       </div>
       <div class="col cost">
-        <p class="pr">${esc(x.price)}</p>
+        <p class="pr">${esc(x.price).replace("€","<span class=\"cur\">€</span>")}</p>
         <p class="when">${esc(x.time)}</p>
         <p class="note">${esc(x.note)}</p>
       </div>
