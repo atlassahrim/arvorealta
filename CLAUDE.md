@@ -3382,9 +3382,12 @@ unlocks.
 **The brand book is not in this repository**, because the repository is
 public and the working edition is closed. It lives as two private
 claude.ai artifacts: the **working book** (`Arvorealta Working Book`,
-near black and white, every section with its state: Ready, Proposed,
-To supply, Draft) and the **public book** (`Arvorealta Brand Book`, on
-ink, only what is ready). The owner's call: the working book is the
+dark and near black and white, every section with its state: Ready,
+Proposed, To supply, Draft) and the **public book** (`Arvorealta Brand
+Book`, on paper, only what is ready). The grounds were the other way
+round for one version; the owner swapped them. On paper the quiet ink
+runs at 68 and 62 per cent (5.9:1 and 4.8:1) and numbers take the
+brick, because amber measures 2.4:1 there. The owner's call: the working book is the
 source of intel, and a section reaches the public book when it is
 useful to someone making media for him.
 
