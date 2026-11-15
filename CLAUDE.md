@@ -2342,8 +2342,8 @@ four images load, no page error.
   and this is the answer of one who does not, which `You don't need a
   brand yet.` then follows. `De ser` / `like ut` and `Ne näyttävät` /
   `samalta` are a session's.
-- **The hero's line height is `.98`, from 1.08**, at the owner's word: the
-  three lines read apart. Checked in all three languages at 1440: no
+- **The hero's line height is `.88`, from 1.08**, in two steps of ten per
+  cent at the owner's word: the three lines read apart. Checked in all three languages at 1440: no
   descender touches the line below, the `p` of `Kompetanse` over `alle`
   included. The hero still fits one screen at every size tried.
 
