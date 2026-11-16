@@ -13,5 +13,5 @@ and every phrase closes its own thought.
 8. A crest told you whose house you were in.
 9. So we drew ours properly.
 10. Same work. Same people.
-11. Now everyone can see it.
+11. Now the mark tells the story.
 12. Competence everyone can see.
