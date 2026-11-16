@@ -598,4 +598,135 @@ if (F === 10) { // the opening, animated: harbour on line one, Sami zipping over
     return true;
   };
 }
+if (F === 20) { // The Same Water: the full film, one shot per phrase
+  Object.values(X).forEach(clipFrame);
+  const snap = () => Object.fromEntries(Object.entries(B).map(([k, v]) => { const cc = mk(); cc.getContext('2d').drawImage(v, 0, 0); return [k, cc]; }));
+  const clear = () => Object.values(X).forEach(x => x.clearRect(0, 0, W, H));
+  const restore = S => { clear(); for (const k in S) B[k].getContext('2d').drawImage(S[k], 0, 0); };
+  const ease = t => t < 0 ? 0 : t > 1 ? 1 : t * t * (3 - 2 * t);
+  const rect = (x0, y0, w, h) => [[x0, y0], [x0 + w, y0], [x0 + w, y0 + h], [x0, y0 + h]];
+  const rain = (t, n = 420, a = .45, x0 = FR.x0, y0 = FR.y0, x1 = FR.x1, y1 = FR.y1) => { const rr = mulberry(Math.floor(t * 12) + 5); X.key.strokeStyle = rgba(P.sumi, a); X.key.lineWidth = 1.1;
+    for (let i = 0; i < n; i++) { const px = x0 + rr() * (x1 - x0 + 200) - 100, py = y0 + rr() * (y1 - y0), L = 50 + rr() * 100; X.key.beginPath(); X.key.moveTo(px, py); X.key.lineTo(px + .2 * L, py + L); X.key.stroke(); } };
+  // a document: paper, ruled lines; grey when nobody can read whose it is, navy with the crest once they can
+  function doc(x0, y0, w, h, { crest = false, grey = true, rot = 0 } = {}) {
+    const cx = x0 + w / 2, cy = y0 + h / 2, ca = Math.cos(rot), sa = Math.sin(rot), T = ([u, v]) => [cx + (u - cx) * ca - (v - cy) * sa, cy + (u - cx) * sa + (v - cy) * ca];
+    const p = rect(x0, y0, w, h).map(T); knock(['blue', 'pale', 'gold', 'red'], xx => poly(xx, p)); spoly(p, { w: 2.4, jit: 1, over: 4, seed: x0 * .1 + y0 }, true);
+    const col = grey ? P.greyL || '#9a9a94' : P.ind;
+    for (let i = 0; i < 9; i++) { const yy = y0 + h * (.3 + i * .07), xe = x0 + w * (i % 3 === 2 ? .62 : .86); X.pale.strokeStyle = col; X.pale.lineWidth = h * .012; X.pale.beginPath(); X.pale.moveTo(...T([x0 + w * .12, yy])); X.pale.lineTo(...T([xe, yy])); X.pale.stroke(); }
+    if (crest) { const d = [[cx, y0 + h * .08], [cx + w * .07, y0 + h * .15], [cx, y0 + h * .22], [cx - w * .07, y0 + h * .15]].map(T); flat('gold', d, P.gold, [0, 0]); spoly(d, { w: 2.4, jit: .6, over: 2, seed: 9 }, true);
+      X.blue.strokeStyle = P.ind; X.blue.lineWidth = h * .02; X.blue.beginPath(); X.blue.moveTo(...T([x0 + w * .3, y0 + h * .26])); X.blue.lineTo(...T([x0 + w * .7, y0 + h * .26])); X.blue.stroke(); }
+    else { X.pale.fillStyle = col; X.pale.beginPath(); poly(X.pale, rect(x0 + w * .12, y0 + h * .1, w * .5, h * .08).map(T)); X.pale.fill(); } }
+
+  // ── static sets ──
+  // A: the harbour
+  sky(560, true); knock(['blue'], x => x.arc(1450, 300, 46, 0, TAU)); X.red.fillStyle = P.orange; X.red.beginPath(); X.red.arc(1450, 300, 46, 0, TAU); X.red.fill();
+  X.pale.fillStyle = P.paleL; X.pale.beginPath(); X.pale.moveTo(FR.x0, 470); for (let px = FR.x0; px <= FR.x1; px += 20) X.pale.lineTo(px, 430 - 60 * Math.sin(px / 380) - 25 * Math.sin(px / 97)); X.pale.lineTo(FR.x1, 520); X.pale.lineTo(FR.x0, 520); X.pale.fill();
+  roofs(120, 560, 7, 64, mix(P.pale, P.paper, .4)); roofs(1180, 560, 6, 58, mix(P.pale, P.paper, .4));
+  X.pale.fillStyle = mix(P.pale, P.blue, .35); X.pale.fillRect(640, 470, 470, 90); X.pale.fillRect(1030, 330, 34, 140); X.gold.fillStyle = P.gold; X.gold.fillRect(630, 452, 490, 20);
+  line(X.key, [[630, 452], [1120, 452], [1120, 472], [630, 472], [630, 452]], 2.2); line(X.key, [[640, 472], [640, 560], [1110, 560], [1110, 472]], 1.8); line(X.key, [[1030, 452], [1030, 330], [1064, 330], [1064, 452]], 1.8);
+  for (let i = 0; i < 9; i++) { X.key.fillStyle = rgba(P.sumi, .8); X.key.fillRect(670 + i * 48, 500, 22, 30); }
+  X.gold.fillStyle = P.goldD; X.gold.fillRect(FR.x0, 560, FR.x1 - FR.x0, 18); line(X.key, [[FR.x0, 560], [FR.x1, 560]], 2.6); line(X.key, [[FR.x0, 578], [FR.x1, 578]], 1.6);
+  sea(578, FR.y1); const SA = snap(); clear();
+  // Y: the yard, a ladder against the hall wall
+  bokashi(X.blue, FR.x0, FR.y0, FR.x1, 260, P.sumiL, .85, 0, { rough: 28, seed: 31 });
+  X.pale.fillStyle = mix(P.pale, P.paper, .25); X.pale.fillRect(FR.x0, 150, FR.x1 - FR.x0, 770);
+  for (let i = 0; i < 22; i++) line(X.key, [[FR.x0 + 40 + i * 86, 160], [FR.x0 + 40 + i * 86, 912]], 1.2, rgba(P.sumi, .4));
+  line(X.key, [[FR.x0, 150], [FR.x1, 150]], 2.6); X.gold.fillStyle = mix(P.goldD, P.paper, .55); X.gold.fillRect(FR.x0, 920, FR.x1 - FR.x0, FR.y1 - 920); line(X.key, [[FR.x0, 920], [FR.x1, 920]], 2.4);
+  const lad = (x0, x1) => { const r1 = [[x0, 922], [x0 + 70, 330]], r2 = [[x0 + 74, 922], [x0 + 144, 330]];
+    knock(['pale'], xx => { poly(xx, [r1[0], [r1[0][0] + 14, 922], [r1[1][0] + 12, 330], r1[1]]); poly(xx, [r2[0], [r2[0][0] + 14, 922], [r2[1][0] + 12, 330], r2[1]]); });
+    for (const r of [r1, r2]) { shape('blue', [r[0], [r[0][0] + 14, r[0][1]], [r[1][0] + 12, r[1][1]], r[1]], P.mid); sline(r[0], r[1], { w: 2.6, seed: r[0][0] }); sline([r[0][0] + 14, r[0][1]], [r[1][0] + 12, r[1][1]], { w: 2, seed: r[0][0] + 1 }); }
+    for (let k = 1; k < 9; k++) { const t = k / 9, a = [lerp(x0 + 10, x0 + 78, t), lerp(922, 330, t)], b = [a[0] + 78, a[1]]; sline(a, b, { w: 3, seed: k + x0 }); } };
+  lad(1340); const SY = snap(); clear();
+  // O: an office in another city: window in rain, a desk with the pile
+  X.pale.fillStyle = mix(P.paleL, P.paper, .4); X.pale.fillRect(FR.x0, FR.y0, FR.x1 - FR.x0, 880 - FR.y0);
+  const win = rect(1080, 150, 620, 470); knock(['pale'], xx => poly(xx, win)); bokashi(X.blue, 1080, 150, 1700, 620, P.sumiL, .7, .2, { rough: 10, seed: 41 }); spoly(win, { w: 3, seed: 3 }, true);
+  sline([1390, 150], [1390, 620], { w: 2.4, seed: 4 }); sline([1080, 385], [1700, 385], { w: 2.4, seed: 5 });
+  for (let i = 0; i < 6; i++) { const bx = 1100 + i * 100, bh = 120 + (i * 53) % 140; X.blue.fillStyle = rgba(P.ind, .5); X.blue.fillRect(bx, 620 - bh, 70, bh); }
+  X.gold.fillStyle = mix(P.goldD, P.paper, .5); X.gold.fillRect(FR.x0, 880, FR.x1 - FR.x0, FR.y1 - 880); sline([FR.x0, 880], [FR.x1, 880], { w: 2.4, seed: 6 });
+  const desk = [[560, 690], [1240, 690], [1270, 712], [530, 712]]; flat('gold', desk, P.goldD, [0, 0]); spoly(desk, { w: 2.6, seed: 7 }, true);
+  for (const [a, b] of [[[560, 712], [575, 960]], [[1240, 712], [1225, 960]]]) sline(a, b, { w: 3, seed: a[0] });
+  for (let k = 0; k < 7; k++) { const p = rect(900 + (k % 2) * 6, 670 - k * 9, 260, 20); knock(['pale', 'gold'], xx => poly(xx, p)); spoly(p, { w: 1.6, seed: k + 20 }, true); }
+  const SO = snap(); clear();
+  // D: the desk, close: a pile, the one sheet on top
+  X.gold.fillStyle = mix(P.goldD, P.paper, .3); X.gold.fillRect(FR.x0, FR.y0, FR.x1 - FR.x0, FR.y1 - FR.y0);
+  for (let i = 0; i < 26; i++) line(X.key, [[FR.x0, FR.y0 + 40 + i * 38], [FR.x1, FR.y0 + 30 + i * 38]], 1, rgba(P.goldD, .55));
+  for (let k = 0; k < 6; k++) { const p = rect(170 + k * 7, 240 + k * 6, 360, 470); knock(['gold'], xx => poly(xx, p)); spoly(p, { w: 1.6, seed: k + 40 }, true); }
+  const SD = snap(); clear();
+  // H: the assayer's bench, a bar of metal
+  X.blue.fillStyle = P.indD; X.blue.fillRect(FR.x0, FR.y0, FR.x1 - FR.x0, FR.y1 - FR.y0); bokashi(X.pale, FR.x0, 300, FR.x1, FR.y1, P.mid, 0, .5, { rough: 24, seed: 51 });
+  const bench = [[FR.x0, 760], [FR.x1, 760], [FR.x1, FR.y1], [FR.x0, FR.y1]]; flat('gold', bench, P.goldD, [0, 0]); sline([FR.x0, 760], [FR.x1, 760], { w: 3, seed: 52 });
+  const bar = [[620, 640], [1300, 640], [1360, 760], [560, 760]]; flat('gold', bar, P.goldL, [0, 0]); spoly(bar, { w: 3, seed: 53 }, true);
+  sline([640, 660], [1290, 660], { w: 1.4, seed: 54 }); shatch(bar, { gap: 9, ang: 1.25, w: 1.4, seed: 55, x0: 1180, x1: 1370 });
+  const SH = snap(); clear();
+  // G: the works by day, the crest on the gable
+  sky(520, false); X.pale.fillStyle = mix(P.pale, P.paper, .25); X.pale.fillRect(360, 420, 1200, 470);
+  knock(['blue'], x => { x.moveTo(330, 420); x.lineTo(960, 230); x.lineTo(1590, 420); x.rect(360, 420, 1200, 470); }); X.gold.fillStyle = P.gold; X.gold.beginPath(); X.gold.moveTo(330, 420); X.gold.lineTo(960, 230); X.gold.lineTo(1590, 420); X.gold.fill();
+  spoly([[330, 420], [960, 230], [1590, 420]], { w: 3, seed: 61 }, true); spoly([[360, 420], [360, 890], [1560, 890], [1560, 420]], { w: 2.6, seed: 62 });
+  for (let i = 0; i < 14; i++) line(X.key, [[400 + i * 84, 430], [400 + i * 84, 880]], 1.2, rgba(P.sumi, .45));
+  const door = rect(820, 600, 280, 290); knock(['pale'], xx => poly(xx, door)); X.red.fillStyle = P.orangeL; X.red.beginPath(); poly(X.red, door); X.red.fill(); spoly(door, { w: 2.6, seed: 63 });
+  const crestG = [[960, 280], [1030, 345], [960, 410], [890, 345]]; flat('blue', crestG, P.ind, [0, 0]); const crestI = [[960, 305], [1005, 345], [960, 385], [915, 345]]; knock(['blue'], xx => poly(xx, crestI)); flat('gold', crestI, P.goldL, [0, 0]);
+  spoly(crestG, { w: 3, seed: 64 }, true); spoly(crestI, { w: 2, seed: 65 }, true);
+  X.gold.fillStyle = mix(P.goldD, P.paper, .55); X.gold.fillRect(FR.x0, 890, FR.x1 - FR.x0, FR.y1 - 890); sline([FR.x0, 890], [FR.x1, 890], { w: 2.4, seed: 66 });
+  const SG = snap(); clear();
+  // W: under the water
+  X.blue.fillStyle = P.blue; X.blue.fillRect(0, 0, W, H); bokashi(X.blue, 0, FR.y0, W, FR.y1, P.indD, .1, .95, { rough: 30, seed: 8 });
+  for (let k = 0; k < 6; k++) { X.pale.fillStyle = rgba(P.pale, .2); X.pale.beginPath(); const x0 = 200 + k * 260; X.pale.moveTo(x0, FR.y0); X.pale.lineTo(x0 + 90, FR.y0); X.pale.lineTo(x0 - 140, FR.y1); X.pale.lineTo(x0 - 260, FR.y1); X.pale.fill(); }
+  const SW = snap(); clear();
+  const SC = snap();
+  const markImg = new Image(); markImg.src = '../../../assets/img/arvo-mark-1-1200.webp'; await markImg.decode();
+
+  const stroke9 = [[1520, 110], [1660, 330], [1700, 560], [1640, 800], [1460, 1000]];
+  const CUTS = [0, 2.98, 4.95, 6.96, 10.72, 12.77, 14.69, 17.41, 20.67, 21.97, 24.33, 25.98];
+  window.END = 30.5;
+  const tmp = mk(), tx = tmp.getContext('2d');
+  const SHOTS = [
+    (u, t) => { restore(SA); // 1 every morning, I look at the same water
+      const sw = (x0, v, w = 1700) => FR.x0 - 300 + ((x0 + v * t - FR.x0 + 300) % w + w) % w;
+      fish(sw(900, -38), 720, 360, .06, 1); fish(sw(300, 30), 860, 340, -.05, -1); fish(sw(1300, -24), 960, 320, .1, 1); fish(sw(700, 46), 1000, 300, .0, -1);
+      const jet = [[FR.x0, 790], [560, 760], [600, 800], [FR.x0, 840]]; knock(['blue', 'pale'], xx => poly(xx, jet)); shape('gold', jet, P.goldD); outline(jet, 2.6);
+      for (const px of [120, 330, 540]) { const pile = [[px, 820], [px + 22, 818], [px + 22, 980], [px, 980]]; knock(['blue', 'pale'], xx => poly(xx, pile)); shape('gold', pile, P.goldD); outline(pile, 2); }
+      henrikSharp(330, 800, 400, { t }); mist(700 + t * 14, 455, 1100, 46); mist(1500 - t * 10, 500, 700, 36);
+      return x => { const e = slip(x, 1800, 70, 'THE SAME WATER', 'Monday, 05:40'); }; },
+    (u, t) => { restore(SY); // 2 my people do perfect work: Sami at the ladder, sparks
+      samiSharp(1080, 1000, 600, { stride: .2, seed: 2, lean: .02 });
+      const rr = mulberry(Math.floor(t * 18)); for (let i = 0; i < 16; i++) { const a = -Math.PI * (.15 + rr() * .7), L = 20 + rr() * 70, x0 = 1400, y0 = 610; sline([x0, y0], [x0 + Math.cos(a) * L * (rr() < .5 ? -1 : 1), y0 + Math.sin(a) * L], { w: 2.2, over: 0, seed: i + t }); }
+      const fl = [[1392, 598], [1410, 604], [1404, 620], [1388, 614]]; flat('red', fl, P.orangeL, [0, 0]); rain(t, 240, .35); },
+    (u, t) => { restore(SY); // 3 then they zip their jackets over the name
+      samiSharp(1080, 1000, 600, { stride: .2, zip: ease((u - .5) / 1.1), helmet: false, seed: 2, lean: .02 }); rain(t, 240, .35); },
+    (u, t) => { restore(SO); // 4 somewhere, a stranger opens my tender
+      evaluatorSharp(720, 960, 520, { dir: 1, seed: 3 }); doc(900, 560 - ease((u - .8) / 1) * 30, 240, 110, { rot: -.05 }); rain(t, 160, .4, 1080, 150, 1700, 620); },
+    (u, t) => { restore(SD); // 5 four seconds. that's all I get
+      const slide = ease((u - 2.4) / .9); doc(200 + 40 - slide * 900, 260, 360, 470, { rot: -.03 - slide * .3 });
+      for (let k = 0; k < 4; k++) if (u > .45 + k * .42) { const x0 = 1100 + k * 70; sline([x0, 380], [x0 + 12, 600], { w: 7, seed: k * 3 }); }
+      if (u > 2.05) sline([1060, 560], [1360, 420], { w: 7, seed: 13 }); },
+    (u, t) => { restore(SH); // 6 a hallmark used to settle that
+      const hit = 1.0, dn = ease(u / hit), py = lerp(120, 560, dn);
+      const punch = [[930, py - 380], [990, py - 380], [985, py], [935, py]]; X.key.fillStyle = P.sumi; X.key.beginPath(); poly(X.key, punch); X.key.fill();
+      if (u > hit) { const m = [[940, 680], [980, 680], [980, 720], [940, 720]]; flat('red', m, P.orange, [0, 0]); spoly(m, { w: 2, seed: 71 }, true); }
+      if (u > hit && u < hit + .4) { const k = (u - hit) / .4; for (let i = 0; i < 10; i++) { const a = -Math.PI + i * Math.PI / 9; sline([960 + Math.cos(a) * 60, 700 + Math.sin(a) * 60], [960 + Math.cos(a) * (60 + 120 * k), 700 + Math.sin(a) * (60 + 120 * k)], { w: 3, over: 0, seed: i + 70 }); } } },
+    (u, t) => { restore(SH); // 7 you saw the mark, you trusted the metal
+      const m = [[940, 680], [980, 680], [980, 720], [940, 720]]; flat('red', m, P.orange, [0, 0]); spoly(m, { w: 2, seed: 71 }, true);
+      const sx = lerp(500, 1400, ease(u / 2)); knock(['gold'], xx => poly(xx, [[sx, 640], [sx + 40, 640], [sx - 20, 760], [sx - 60, 760]])); },
+    (u, t) => { restore(SG); mist(560 + u * 20, 520, 700, 40); mist(1480 - u * 16, 600, 520, 32); }, // 8 a crest told you whose house you were in
+    (u, t) => { restore(SW); // 9 so we drew ours properly
+      const g = ease(u / 1.1), pts = stroke9.slice(0, 2 + Math.floor(g * 3)); const last = pts.length - 1;
+      if (g < 1) { const a = stroke9[last - 1] || stroke9[0], b = stroke9[last], f = (g * 3) % 1 || 1; pts[last] = [lerp(a[0], b[0], f), lerp(a[1], b[1], f)]; }
+      const tk = mk(), tkx = tk.getContext('2d'); carve(tkx, pts, 46, { col: '#000', taper: [.12, .3], jit: .3, seed: 5 }); X.blue.save(); X.blue.globalCompositeOperation = 'destination-out'; X.blue.drawImage(tk, 0, 0); X.blue.restore();
+      carve(X.gold, pts, 46, { col: P.gold, taper: [.12, .3], jit: .3, seed: 5 }); carve(X.gold, pts.map(([a, b]) => [a - 8, b - 4]), 16, { col: P.goldL, taper: [.2, .4], seed: 6 });
+      const tn = ease(u / 1.2); fish(1100, 330, 400, lerp(.5, -.05, tn), -1, .1); fish(1040, 580, 440, lerp(-.6, 0, tn), -1, .08); fish(1100, 830, 400, lerp(.7, .06, tn), -1, .1); fish(500, 450, 340, lerp(2.4, .2, tn), -1, .4); },
+    (u, t) => { restore(SY); samiSharp(900, 1000, 600, { stride: .2, seed: 2, lean: .02 }); henrikSharp(560, 1000, 640, { t, dir: 1 }); }, // 10 same work. same people
+    (u, t) => { restore(SD); doc(240, 260, 360, 470, { crest: true, grey: false, rot: -.03 }); }, // 11 now the mark tells the story
+    (u, t) => { restore(SC); return x => { // 12 competence everyone can see
+      x.save(); x.globalAlpha = ease(u / .6); x.drawImage(markImg, 960 - 260, 300, 520, 520 * markImg.height / markImg.width);
+      x.fillStyle = P.sumi; x.textAlign = 'center'; x.font = '400 64px "EB Garamond"'; x.fillText('Competence everyone can see.', 960, 640);
+      x.font = 'italic 400 28px "EB Garamond"'; x.fillText('arvorealta.com', 960, 720); x.restore(); seal(x, 'A', 960, 820, 52); }; },
+  ];
+  window.seek = t => {
+    R = mulberry(77); let i = 0; while (i + 1 < CUTS.length && t >= CUTS[i + 1]) i++;
+    const u = t - CUTS[i], dur = (CUTS[i + 1] || window.END) - CUTS[i];
+    const extra = SHOTS[i](u, t); compose(extra);
+    const k = 1 + .03 * (u / dur); tx.clearRect(0, 0, W, H); tx.drawImage(c, 0, 0); out.save(); out.translate(W / 2, H / 2); out.scale(k, k); out.drawImage(tmp, -W / 2, -H / 2); out.restore();
+    return i;
+  };
+}
 document.title = 'done';
