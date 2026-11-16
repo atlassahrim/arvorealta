@@ -231,7 +231,7 @@ function henrikSharp(x, y, s, o = {}) {
   // arms as triangles
   spoly(armB, opt(11), true); spoly(armU, opt(12), true); spoly(armF, opt(13), true);
   const cup = Q([[.13, -.865], [.162, -.867], [.156, -.826], [.134, -.826]]); flat('red', cup, P.orangeL); spoly(cup, { ...opt(14), w: W * .7 }, true);
-  spoly(Q([[.144, -.88], [.152, -.905], [.142, -.93], [.152, -.955]]), { ...opt(15), w: W * .5, over: 2 }); // steam, as zigzag
+  const tt = o.t || 0; spoly(Q([0, 1, 2, 3].map(i => [.148 + (i % 2 ? .005 : -.004) + .006 * Math.sin(tt * 2.6 + i * 1.3), -.88 - i * .025 - .01 * ((tt * .8) % 1)])), { ...opt(15), w: W * .5, over: 2, seed: sd + 15 + Math.floor(tt * 6) * .01 }); // steam, as zigzag, rising
   // legs as triangles, the far one hatched dark
   spoly(legL, opt(16), true); spoly(legR, opt(17), true);
   shatch(legR, { gap: s * .006, ang: 1.35, w: s * .002, seed: sd + 2 });
@@ -246,27 +246,27 @@ function sharpKit(x, y, s, o) {
 }
 function samiSharp(x, y, s, o = {}) { // the welder: beanie, short open jacket, crest, helmet under the arm, mid-stride
   const { q, Q, sd, W, opt, ink } = sharpKit(x, y, s, { lean: .06, ...o });
-  const C = { head: P.gold, body: P.mid, legs: P.goldD };
+  const C = { head: P.gold, body: P.mid, legs: P.goldD }; const z = o.zip || 0, hw = lerp(.015, .001, z), pull = lerp(-.6, -.85, z);
   const head = Q([[.004, -.975], [.032, -.94], [.006, -.902], [-.022, -.938]]);
   const cap = Q([[-.03, -.955], [.04, -.962], [.03, -.995], [-.012, -1.0]]);
   const jacket = Q([[-.046, -.872], [.048, -.876], [.062, -.72], [.078, -.6], [-.07, -.596], [-.058, -.72]]);
-  const shirt = Q([[-.012, -.872], [.016, -.874], [.012, -.6], [-.01, -.598]]);
-  const legL = Q([[-.064, -.596], [-.006, -.598], [-.07, .0]]), legR = Q([[.004, -.598], [.072, -.6], [.07, .004]]); // mid-stride: the triangles splay
+  const shirt = Q([[-hw + .002, -.872], [hw + .002, -.874], [hw, -.6], [-hw, -.598]]);
+  const sp = o.stride ?? 1, legL = Q([[-.064, -.596], [-.006, -.598], [-.03 - .04 * sp, .0]]), legR = Q([[.004, -.598], [.072, -.6], [.03 + .04 * sp, .004]]); // mid-stride: the triangles splay
   const armB = Q([[-.048, -.87], [-.028, -.85], [-.09, -.62]]);
-  const armF = Q([[.046, -.874], [.066, -.85], [.1, -.66]]);
+  const armF = o.zip !== undefined ? Q([[.046, -.874], [.07, -.84], [.004, pull]]) : Q([[.046, -.874], [.066, -.85], [.1, -.66]]);
   const helmet = Q([[.07, -.7], [.13, -.705], [.138, -.62], [.11, -.6], [.075, -.61]]);
   flat('gold', [...head], C.head); flat('blue', jacket, C.body); flat('gold', [...legL, ...legR], C.legs); flat('blue', armB, mix(C.body, P.blue, .4)); flat('blue', armF, C.body);
   knock(['blue', 'gold'], xx => poly(xx, shirt)); // the open jacket shows paper
   ink(cap); sline(...Q([[-.035, -.955], [.045, -.963]]), { ...opt(1), w: W * 1.2 });
   spoly(head, opt(2), true); sline(...Q([[.003, -.902], [-.002, -.876]]), opt(3));
   spoly(Q([[-.046, -.872], [-.058, -.72], [-.07, -.596]]), opt(4)); spoly(Q([[.048, -.876], [.062, -.72], [.078, -.6]]), opt(5)); sline(...Q([[-.07, -.596], [.078, -.6]]), opt(6)); sline(...Q([[-.046, -.872], [.048, -.876]]), opt(7));
-  sline(...Q([[-.012, -.872], [-.01, -.598]]), { ...opt(8), w: W * .8 }); sline(...Q([[.016, -.874], [.012, -.6]]), { ...opt(9), w: W * .8 });
+  sline(...Q([[-hw + .002, -.872], [-hw, -.598]]), { ...opt(8), w: W * .8 }); sline(...Q([[hw + .002, -.874], [hw, -.6]]), { ...opt(9), w: W * .8 });
   sline(...Q([[-.07, -.66], [-.012, -.66]]), { ...opt(10), w: W * .6 }); sline(...Q([[.014, -.662], [.074, -.662]]), { ...opt(11), w: W * .6 }); // reflective band
-  const crest = Q([[.002, -.8], [.012, -.785], [.002, -.77], [-.008, -.785]]); flat('gold', crest, P.goldL, [0, 0]); spoly(crest, { ...opt(12), w: W * .6, over: 1 }, true); // the crest, worn: a diamond
+  if (z < .55) { const crest = Q([[.002, -.8], [.012, -.785], [.002, -.77], [-.008, -.785]]); flat('gold', crest, P.goldL, [0, 0]); spoly(crest, { ...opt(12), w: W * .6, over: 1 }, true); } // the crest, worn: a diamond, hidden as the zip passes it
   shatch(jacket, { gap: s * .008, ang: 1.25, w: s * .0022, seed: sd + 1, x0: q(.035, -.75)[0], x1: q(.1, -.75)[0] });
   spoly(armB, opt(13), true); spoly(armF, opt(14), true);
-  ink(helmet); sline(...Q([[.085, -.68], [.125, -.682]]), { ...opt(15), w: W * .5 }); // the welding helmet, its visor slit left as paper
-  X.key.save(); X.key.globalCompositeOperation = 'destination-out'; X.key.beginPath(); poly(X.key, Q([[.088, -.675], [.124, -.677], [.122, -.66], [.09, -.658]])); X.key.fill(); X.key.restore();
+  if (o.helmet !== false) { ink(helmet); sline(...Q([[.085, -.68], [.125, -.682]]), { ...opt(15), w: W * .5 }); // the welding helmet, its visor slit left as paper
+  X.key.save(); X.key.globalCompositeOperation = 'destination-out'; X.key.beginPath(); poly(X.key, Q([[.088, -.675], [.124, -.677], [.122, -.66], [.09, -.658]])); X.key.fill(); X.key.restore(); }
   spoly(legL, opt(16), true); spoly(legR, opt(17), true);
   shatch(legR, { gap: s * .006, ang: 1.3, w: s * .002, seed: sd + 2 });
 }
@@ -550,5 +550,52 @@ if (F === 5) { // one character, finished: Henrik in line
   Object.values(X).forEach(clipFrame);
   henrikSharp(900, 1000, 900);
   compose(x => { x.fillStyle = P.sumi; x.font = 'italic 400 30px "EB Garamond"'; x.textAlign = 'center'; const e = slip(x, 1800, 70, 'HENRIK', 'The Same Water'); seal(x, 'A', 1800, e + 46, 52); });
+}
+if (F === 10) { // the opening, animated: harbour on line one, Sami zipping over the crest on line two
+  Object.values(X).forEach(clipFrame);
+  const snap = () => Object.fromEntries(Object.entries(B).map(([k, v]) => { const cc = mk(); cc.getContext('2d').drawImage(v, 0, 0); return [k, cc]; }));
+  const clear = () => Object.values(X).forEach(x => x.clearRect(0, 0, W, H));
+  // scene A, static: sky, sun, hills, town, works, quay, sea, mist
+  sky(560, true);
+  knock(['blue'], x => x.arc(1450, 300, 46, 0, TAU)); X.red.fillStyle = P.orange; X.red.beginPath(); X.red.arc(1450, 300, 46, 0, TAU); X.red.fill();
+  X.pale.fillStyle = P.paleL; X.pale.beginPath(); X.pale.moveTo(FR.x0, 470); for (let px = FR.x0; px <= FR.x1; px += 20) X.pale.lineTo(px, 430 - 60 * Math.sin(px / 380) - 25 * Math.sin(px / 97)); X.pale.lineTo(FR.x1, 520); X.pale.lineTo(FR.x0, 520); X.pale.fill();
+  roofs(120, 560, 7, 64, mix(P.pale, P.paper, .4)); roofs(1180, 560, 6, 58, mix(P.pale, P.paper, .4));
+  X.pale.fillStyle = mix(P.pale, P.blue, .35); X.pale.fillRect(640, 470, 470, 90); X.pale.fillRect(1030, 330, 34, 140); X.gold.fillStyle = P.gold; X.gold.fillRect(630, 452, 490, 20);
+  line(X.key, [[630, 452], [1120, 452], [1120, 472], [630, 472], [630, 452]], 2.2, P.sumi); line(X.key, [[640, 472], [640, 560], [1110, 560], [1110, 472]], 1.8, P.sumi); line(X.key, [[1030, 452], [1030, 330], [1064, 330], [1064, 452]], 1.8, P.sumi);
+  for (let i = 0; i < 9; i++) { X.key.fillStyle = rgba(P.sumi, .8); X.key.fillRect(670 + i * 48, 500, 22, 30); }
+  X.gold.fillStyle = P.goldD; X.gold.fillRect(FR.x0, 560, FR.x1 - FR.x0, 18); line(X.key, [[FR.x0, 560], [FR.x1, 560]], 2.6, P.sumi); line(X.key, [[FR.x0, 578], [FR.x1, 578]], 1.6, P.sumi);
+  sea(578, FR.y1);
+  const SA = snap(); clear();
+  // scene B, static: the hall wall in the rain, the yard
+  bokashi(X.blue, FR.x0, FR.y0, FR.x1, 300, P.sumiL, .9, 0, { rough: 28, seed: 31 });
+  X.pale.fillStyle = mix(P.pale, P.paper, .25); X.pale.fillRect(FR.x0, 160, FR.x1 - FR.x0, 760);
+  for (let i = 0; i < 22; i++) line(X.key, [[FR.x0 + 40 + i * 86, 170], [FR.x0 + 40 + i * 86, 910]], 1.3, rgba(P.sumi, .45));
+  line(X.key, [[FR.x0, 160], [FR.x1, 160]], 2.6); X.gold.fillStyle = mix(P.goldD, P.paper, .55); X.gold.fillRect(FR.x0, 920, FR.x1 - FR.x0, FR.y1 - 920); line(X.key, [[FR.x0, 920], [FR.x1, 920]], 2.4);
+  const SB = snap(); clear();
+  const restore = S => { clear(); for (const k in S) B[k].getContext('2d').drawImage(S[k], 0, 0); };
+  const ease = t => t < 0 ? 0 : t > 1 ? 1 : t * t * (3 - 2 * t);
+  const tmp = mk(), tx = tmp.getContext('2d');
+  window.seek = t => {
+    R = mulberry(77);
+    if (t < 3.1) { // A: every morning, the same water
+      restore(SA);
+      const sw = (x0, v, w = 1700) => FR.x0 - 300 + ((x0 + v * t - FR.x0 + 300) % w + w) % w;
+      fish(sw(900, -38), 720, 400, .06, 1); fish(sw(300, 30), 860, 380, -.05, -1); fish(sw(1300, -24), 960, 360, .1, 1); fish(sw(700, 46), 1000, 330, .0, -1);
+      const jet = [[FR.x0, 790], [560, 760], [600, 800], [FR.x0, 840]]; knock(['blue', 'pale'], xx => poly(xx, jet)); shape('gold', jet, P.goldD); outline(jet, 2.6);
+      for (const px of [120, 330, 540]) { const pile = [[px, 820], [px + 22, 818], [px + 22, 980], [px, 980]]; knock(['blue', 'pale'], xx => poly(xx, pile)); shape('gold', pile, P.goldD); outline(pile, 2); }
+      henrikSharp(330, 800, 520, { t });
+      mist(700 + t * 14, 455, 1100, 46); mist(1500 - t * 10, 500, 700, 36);
+      compose(x => { const e = slip(x, 1800, 70, 'THE SAME WATER', 'Monday, 05:40'); seal(x, 'A', 1800, e + 46, 52); });
+      const k = 1 + .025 * (t / 3.1); tx.drawImage(c, 0, 0); out.save(); out.translate(W / 2, H / 2); out.scale(k, k); out.drawImage(tmp, -W / 2, -H / 2); out.restore();
+    } else { // B: my people do perfect work, and they hide the name it is done under
+      const u = t - 3.1; restore(SB);
+      const walkIn = ease(u / 1.4), zip = ease((u - 2.3) / 1.8);
+      samiSharp(lerp(560, 860, walkIn), 1460, 1320, { stride: lerp(1, .15, walkIn), zip, helmet: false, seed: 1, lean: .03 });
+      const rr = mulberry(Math.floor(t * 12)); X.key.strokeStyle = rgba(P.sumi, .5); X.key.lineWidth = 1.1;
+      for (let i = 0; i < 520; i++) { const x0 = FR.x0 + rr() * (FR.x1 - FR.x0 + 300) - 150, y0 = FR.y0 + rr() * (FR.y1 - FR.y0), L = 60 + rr() * 110; X.key.beginPath(); X.key.moveTo(x0, y0); X.key.lineTo(x0 + Math.sin(.2) * L, y0 + Math.cos(.2) * L); X.key.stroke(); }
+      compose(x => { slip(x, 110, 70, 'MY PEOPLE', 'the yard, 06:10'); });
+    }
+    return true;
+  };
 }
 document.title = 'done';
