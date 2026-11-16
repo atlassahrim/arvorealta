@@ -309,6 +309,86 @@ function isoPerson(Pj, a0, b0, z0, c, scale = 1) {
   const sh = [Q(-.2, .12, 0), Q(.2, .12, 0), Q(.75, .5, 0), Q(.35, .5, 0)]; X.blue.save(); X.blue.globalAlpha = .35; X.blue.fillStyle = P.indD; X.blue.beginPath(); poly(X.blue, sh); X.blue.fill(); X.blue.restore();
 }
 
+// the works as an isometric woodblock model, drawn at any camera: k pixels per unit, (ox, oy) the screen origin
+function drawModel(k, ox, oy, drift = 0) { // the works as an isometric woodblock model: the establishing map
+  const C30 = Math.cos(Math.PI / 6), S30 = .5;
+  const P = (x, y, z = 0) => [ox + (x - y) * C30 * k, oy + (x + y) * S30 * k - z * k];
+  const PP = a => a.map(p => P(...p));
+  const face = (pts, block, col, { hatchIt = false, lineW = 2.2, seed = 1 } = {}) => { const p = PP(pts); knock(['key'], xx => poly(xx, p)); flat(block, p, col, [0, 0]); if (hatchIt) shatch(p, { gap: 7, ang: 1.15, w: 1.1, seed }); spoly(p, { w: lineW, jit: .8, over: 3, seed }, true); return p; };
+  const box = (x, y, z, w, d, h, c, sd = 1) => { // top, the face toward the viewer on y, the face toward the viewer on x
+    face([[x, y + d, z], [x + w, y + d, z], [x + w, y + d, z + h], [x, y + d, z + h]], 'pale', c.left, { seed: sd });
+    face([[x + w, y, z], [x + w, y + d, z], [x + w, y + d, z + h], [x + w, y, z + h]], 'blue', c.right, { hatchIt: true, seed: sd + 1 });
+    face([[x, y, z + h], [x + w, y, z + h], [x + w, y + d, z + h], [x, y + d, z + h]], 'gold', c.top, { seed: sd + 2 }); };
+  const house = (x, y, w, d, h, rh, c, sd) => { // a box with a gable roof running along x
+    face([[x, y + d, 0], [x + w, y + d, 0], [x + w, y + d, h], [x, y + d, h]], 'pale', c.left, { seed: sd });
+    face([[x + w, y, 0], [x + w, y + d, 0], [x + w, y + d, h], [x + w, y + d / 2, h + rh], [x + w, y, h]], 'blue', c.right, { hatchIt: true, seed: sd + 1 });
+    face([[x, y, h], [x + w, y, h], [x + w, y + d / 2, h + rh], [x, y + d / 2, h + rh]], 'gold', mix(c.roof, PAL_.goldD, .25), { seed: sd + 2 });
+    face([[x, y + d, h], [x + w, y + d, h], [x + w, y + d / 2, h + rh], [x, y + d / 2, h + rh]], 'gold', c.roof, { seed: sd + 3 }); };
+  
+  const wall = { left: mix(PAL_.pale, PAL_.paper, .3), right: mix(PAL_.pale, PAL_.blue, .3), top: PAL_.paper, roof: PAL_.gold };
+  // the sea, in front of the quay, banded
+  const sea = PP([[-90, 12, -.8], [130, 12, -.8], [130, 90, -.8], [-90, 90, -.8]]); flat('blue', sea, PAL_.blue, [0, 0]);
+  for (let i = 0; i < 70; i++) { const y = 12.6 + i * .55; const a = P(-90, y, -.8), b = P(130, y, -.8); sline(a, b, { w: 1.4, jit: 1.2, over: 0, seed: i + 300 }); X.pale.strokeStyle = rgba(PAL_.mid, .7); X.pale.lineWidth = 5; X.pale.beginPath(); X.pale.moveTo(a[0], a[1] + 4); X.pale.lineTo(b[0], b[1] + 4); X.pale.stroke(); }
+  bokashi(X.blue, FR.x0, FR.y0, FR.x1, 380, PAL_.sumiL, .55, 0, { rough: 26, seed: 33 });
+  // the land plate and its quay wall
+  face([[-90, 12, -.8], [130, 12, -.8], [130, 12, 0], [-90, 12, 0]], 'pale', mix(PAL_.goldD, PAL_.paper, .3), { seed: 11 });
+  face([[-90, -110, 0], [130, -110, 0], [130, 12, 0], [-90, 12, 0]], 'gold', mix(PAL_.goldD, PAL_.paper, .55), { seed: 13 });
+  for (let i = -40; i < 12; i += 2) sline(P(-90, i, 0), P(130, i, 0), { w: .6, jit: .6, over: 0, seed: 400 + i, passes: 1 }); // the yard's paving lines
+  // fishermen's houses along the back
+  for (let i = 0; i < 4; i++) house(.5 + i * 2.3, .6, 1.8, 2.4, 1.6, .9, wall, 20 + i * 5);
+  // the hall, the chimney, the crest on the gable end and the door
+  face([[21.2, .6, 0], [22.2, .6, 0], [22.2, .6, 9], [21.2, .6, 9]], 'pale', wall.left, { seed: 50 });
+  box(21.2, -.4, 0, 1, 1, 9, { left: wall.left, right: wall.right, top: PAL_.goldD }, 51);
+  house(10, 2, 12, 6, 5, 2.2, wall, 60);
+  for (let i = 0; i < 9; i++) { const x0 = 11 + i * 1.2; face([[x0, 8, 2.6], [x0 + .6, 8, 2.6], [x0 + .6, 8, 3.6], [x0, 8, 3.6]], 'key', PAL_.sumi, { seed: 70 + i, lineW: 1 }); }
+  face([[22, 3.5, 0], [22, 6.5, 0], [22, 6.5, 3.2], [22, 3.5, 3.2]], 'red', PAL_.orangeL, { seed: 80 }); // the door, open, warm inside
+  const cy = 5, cz = 5.9, r = 1.05; face([[22, cy - r, cz], [22, cy, cz + r], [22, cy + r, cz], [22, cy, cz - r]], 'blue', PAL_.ind, { seed: 81 });
+  face([[22, cy - r * .55, cz], [22, cy, cz + r * .55], [22, cy + r * .55, cz], [22, cy, cz - r * .55]], 'gold', PAL_.goldL, { seed: 82 });
+  // the yard: a stack of steel and a ladder against the hall
+  for (let j = 0; j < 3; j++) box(17, 9.2 + j * .05, j * .35, 3.6, .9, .35, { left: PAL_.mid, right: PAL_.blue, top: PAL_.paleL }, 90 + j * 3);
+  const L1 = [[13.2, 9.4, 0], [13.2, 8.05, 4.2]], L2 = [[14.2, 9.4, 0], [14.2, 8.05, 4.2]];
+  for (const Lr of [L1, L2]) sline(P(...Lr[0]), P(...Lr[1]), { w: 3, seed: Lr[0][0] });
+  for (let i = 1; i < 8; i++) { const t = i / 8; sline(P(13.2, lerp(9.4, 8.05, t), lerp(0, 4.2, t)), P(14.2, lerp(9.4, 8.05, t), lerp(0, 4.2, t)), { w: 2.4, over: 1, seed: 100 + i }); }
+  // the jetty, out over the water, on piles
+  for (const [x, y] of [[3.2, 14], [4.6, 14], [3.2, 17], [4.6, 17], [3.2, 19.5], [4.6, 19.5]]) box(x, y, -.8, .25, .25, .65, { left: PAL_.goldD, right: PAL_.goldD, top: PAL_.goldD }, x * 10 + y);
+  box(3, 12, -.15, 2, 8, .15, { left: PAL_.goldD, right: mix(PAL_.goldD, PAL_.sumi, .2), top: mix(PAL_.goldD, PAL_.paper, .35) }, 120);
+  // the people, at true scale: about 1.8 units tall
+  isoPerson(P, 4, 19.2, 0, { head: PAL_.orange, body: mix(PAL_.goldL, PAL_.paper, .2), legs: PAL_.ind }); // Henrik, at the end of the jetty
+  isoPerson(P, 15.6, 10.4, 0, { head: PAL_.gold, body: PAL_.mid, legs: PAL_.goldD }); // Sami, in the yard
+  mist(520 + drift, 300, 760, 40); mist(1380 - drift * .7, 230, 620, 34); mist(700 + drift * .5, 980, 900, 44);
+  return { P };
+}
+if (F === 31) { // small people for the isometric map: four options, true size with a 4x zoom
+  Object.values(X).forEach(clipFrame);
+  const CAST = [{ head: P.orange, body: mix(P.goldL, P.paper, .2), legs: P.ind }, { head: P.gold, body: P.mid, legs: P.goldD }, { head: P.goldL, body: P.pale, legs: P.ind }];
+  const C30 = .866;
+  const fill = (block, p, col) => { knock(['blue', 'pale', 'gold', 'red', 'key'].filter(b => b !== block), xx => poly(xx, p)); X[block].fillStyle = col; X[block].beginPath(); poly(X[block], p); X[block].fill(); };
+  const parts = (x, y, h) => { const q = (u, v) => [x + u * h, y + v * h]; // a kite head, a body widening to the hem, two triangle legs
+    return { head: [q(0, -1), q(.05, -.94), q(0, -.88), q(-.05, -.94)], body: [q(-.06, -.86), q(.06, -.86), q(.1, -.5), q(-.1, -.5)], legL: [q(-.08, -.5), q(-.01, -.5), q(-.04, 0)], legR: [q(.01, -.5), q(.08, -.5), q(.04, 0)] }; };
+  // A: ink silhouette, the head alone in colour (an architect's scale figure)
+  const A = (x, y, h, c) => { const p = parts(x, y, h); for (const k of ['body', 'legL', 'legR']) fill('key', p[k], P.sumi); fill('red', p.head, c.head); };
+  // B: colour by zone, no outline: a token
+  const Bf = (x, y, h, c) => { const p = parts(x, y, h); fill('gold', p.head, c.head); fill('blue', p.body, c.body); fill('pale', [...p.legL], c.legs); fill('pale', p.legR, mix(c.legs, P.sumi, .3)); };
+  // C: the token with a long morning shadow along the iso grid, so it reads from far away
+  const Cf = (x, y, h, c) => { const sh = [[x - h * .08, y], [x + h * .08, y], [x + h * .08 + h * 1.4 * C30, y + h * 1.4 * .5], [x - h * .08 + h * 1.4 * C30, y + h * 1.4 * .5]]; X.blue.save(); X.blue.globalAlpha = .55; X.blue.fillStyle = P.indD; X.blue.beginPath(); poly(X.blue, sh); X.blue.fill(); X.blue.restore(); Bf(x, y, h, c); };
+  // D: isometric blocks: legs, body and head as small boxes, three faces each
+  const Df = (x, y, h, c) => { const u = h / 1.8, Pj = (a, b, z) => [x + (a - b) * C30 * u, y + (a + b) * .5 * u - z * u]; return isoPerson(Pj, 0, 0, 0, c);
+    const box = (a, b, z, w, d, hh, col) => { const L = [Pj(a, b + d, z), Pj(a + w, b + d, z), Pj(a + w, b + d, z + hh), Pj(a, b + d, z + hh)], Rr = [Pj(a + w, b, z), Pj(a + w, b + d, z), Pj(a + w, b + d, z + hh), Pj(a + w, b, z + hh)], T = [Pj(a, b, z + hh), Pj(a + w, b, z + hh), Pj(a + w, b + d, z + hh), Pj(a, b + d, z + hh)];
+      fill('pale', L, col); fill('blue', Rr, mix(col, P.sumi, .35)); fill('gold', T, mix(col, P.paper, .35)); };
+    box(-.15, -.12, 0, .3, .24, .85, c.legs); box(-.2, -.15, .85, .4, .3, .65, c.body); box(-.11, -.11, 1.52, .22, .22, .26, c.head); };
+  const opts = [['A', 'Ink silhouette', A], ['B', 'Colour token', Bf], ['C', 'Token and shadow', Cf], ['D', 'Iso blocks', Df]];
+  const k = 30, small = 1.85 * k; // the map's scale: 1.85 units at 30 px
+  opts.forEach(([id, name, fn], i) => { const cx = 260 + i * 400;
+    const g = [[cx - 170, 980], [cx + 170, 980], [cx + 170, 1000], [cx - 170, 1000]]; // a strip of the yard
+    const big = [[cx - 170, 520], [cx + 170, 520], [cx + 170, 540], [cx - 170, 540]];
+    for (const strip of [g, big]) { X.gold.fillStyle = mix(P.goldD, P.paper, .55); X.gold.beginPath(); poly(X.gold, strip); X.gold.fill(); }
+    CAST.forEach((c, j) => { fn(cx - 110 + j * 110, 520, small * 4 * .55, c); fn(cx - 60 + j * 60, 980, small, c); });
+  });
+  compose(x => { x.fillStyle = P.sumi; x.textAlign = 'center';
+    opts.forEach(([id, name], i) => { const cx = 260 + i * 400; x.font = '400 34px "EB Garamond"'; x.fillText(id + '  ·  ' + name, cx, 600); x.font = 'italic 400 22px "EB Garamond"'; x.fillText('true map size', cx, 1028); });
+    x.font = 'italic 400 24px "EB Garamond"'; x.fillText('Each option shows Henrik, Sami and the evaluator, enlarged above and at true map size below.', 960, 110); });
+}
+
 // —— the cast: three people built from garment pieces, drawn in the sketch sheet's hand ——
 // local units: u right, v up (feet at 0, crown at -1); dir 1 faces right
 function person(x, y, s, who, o = {}) {
@@ -745,83 +825,27 @@ if (F === 20) { // The Same Water: the full film, one shot per phrase
     return i;
   };
 }
-if (F === 30) { // the works as an isometric woodblock model: the establishing map
+if (F === 30) {
   Object.values(X).forEach(clipFrame);
-  const k = 30, ox = 960 - 2 * k * .866, oy = 330, C30 = Math.cos(Math.PI / 6), S30 = .5;
-  const P = (x, y, z = 0) => [ox + (x - y) * C30 * k, oy + (x + y) * S30 * k - z * k];
-  const PP = a => a.map(p => P(...p));
-  const face = (pts, block, col, { hatchIt = false, lineW = 2.2, seed = 1 } = {}) => { const p = PP(pts); knock(['key'], xx => poly(xx, p)); flat(block, p, col, [0, 0]); if (hatchIt) shatch(p, { gap: 7, ang: 1.15, w: 1.1, seed }); spoly(p, { w: lineW, jit: .8, over: 3, seed }, true); return p; };
-  const box = (x, y, z, w, d, h, c, sd = 1) => { // top, the face toward the viewer on y, the face toward the viewer on x
-    face([[x, y + d, z], [x + w, y + d, z], [x + w, y + d, z + h], [x, y + d, z + h]], 'pale', c.left, { seed: sd });
-    face([[x + w, y, z], [x + w, y + d, z], [x + w, y + d, z + h], [x + w, y, z + h]], 'blue', c.right, { hatchIt: true, seed: sd + 1 });
-    face([[x, y, z + h], [x + w, y, z + h], [x + w, y + d, z + h], [x, y + d, z + h]], 'gold', c.top, { seed: sd + 2 }); };
-  const house = (x, y, w, d, h, rh, c, sd) => { // a box with a gable roof running along x
-    face([[x, y + d, 0], [x + w, y + d, 0], [x + w, y + d, h], [x, y + d, h]], 'pale', c.left, { seed: sd });
-    face([[x + w, y, 0], [x + w, y + d, 0], [x + w, y + d, h], [x + w, y + d / 2, h + rh], [x + w, y, h]], 'blue', c.right, { hatchIt: true, seed: sd + 1 });
-    face([[x, y, h], [x + w, y, h], [x + w, y + d / 2, h + rh], [x, y + d / 2, h + rh]], 'gold', mix(c.roof, PAL_.goldD, .25), { seed: sd + 2 });
-    face([[x, y + d, h], [x + w, y + d, h], [x + w, y + d / 2, h + rh], [x, y + d / 2, h + rh]], 'gold', c.roof, { seed: sd + 3 }); };
-  
-  const wall = { left: mix(PAL_.pale, PAL_.paper, .3), right: mix(PAL_.pale, PAL_.blue, .3), top: PAL_.paper, roof: PAL_.gold };
-  // the sea, in front of the quay, banded
-  const sea = PP([[-30, 12, -.8], [60, 12, -.8], [60, 40, -.8], [-30, 40, -.8]]); flat('blue', sea, PAL_.blue, [0, 0]);
-  for (let i = 0; i < 40; i++) { const y = 12.6 + i * .55; const a = P(-30, y, -.8), b = P(60, y, -.8); sline(a, b, { w: 1.4, jit: 1.2, over: 0, seed: i + 300 }); X.pale.strokeStyle = rgba(PAL_.mid, .7); X.pale.lineWidth = 5; X.pale.beginPath(); X.pale.moveTo(a[0], a[1] + 4); X.pale.lineTo(b[0], b[1] + 4); X.pale.stroke(); }
-  bokashi(X.blue, FR.x0, FR.y0, FR.x1, 380, PAL_.sumiL, .55, 0, { rough: 26, seed: 33 });
-  // the land plate and its quay wall
-  face([[-30, 12, -.8], [60, 12, -.8], [60, 12, 0], [-30, 12, 0]], 'pale', mix(PAL_.goldD, PAL_.paper, .3), { seed: 11 });
-  face([[-30, -40, 0], [60, -40, 0], [60, 12, 0], [-30, 12, 0]], 'gold', mix(PAL_.goldD, PAL_.paper, .55), { seed: 13 });
-  for (let i = -14; i < 12; i += 2) sline(P(-30, i, 0), P(60, i, 0), { w: .6, jit: .6, over: 0, seed: 400 + i, passes: 1 }); // the yard's paving lines
-  // fishermen's houses along the back
-  for (let i = 0; i < 4; i++) house(.5 + i * 2.3, .6, 1.8, 2.4, 1.6, .9, wall, 20 + i * 5);
-  // the hall, the chimney, the crest on the gable end and the door
-  face([[21.2, .6, 0], [22.2, .6, 0], [22.2, .6, 9], [21.2, .6, 9]], 'pale', wall.left, { seed: 50 });
-  box(21.2, -.4, 0, 1, 1, 9, { left: wall.left, right: wall.right, top: PAL_.goldD }, 51);
-  house(10, 2, 12, 6, 5, 2.2, wall, 60);
-  for (let i = 0; i < 9; i++) { const x0 = 11 + i * 1.2; face([[x0, 8, 2.6], [x0 + .6, 8, 2.6], [x0 + .6, 8, 3.6], [x0, 8, 3.6]], 'key', PAL_.sumi, { seed: 70 + i, lineW: 1 }); }
-  face([[22, 3.5, 0], [22, 6.5, 0], [22, 6.5, 3.2], [22, 3.5, 3.2]], 'red', PAL_.orangeL, { seed: 80 }); // the door, open, warm inside
-  const cy = 5, cz = 5.9, r = 1.05; face([[22, cy - r, cz], [22, cy, cz + r], [22, cy + r, cz], [22, cy, cz - r]], 'blue', PAL_.ind, { seed: 81 });
-  face([[22, cy - r * .55, cz], [22, cy, cz + r * .55], [22, cy + r * .55, cz], [22, cy, cz - r * .55]], 'gold', PAL_.goldL, { seed: 82 });
-  // the yard: a stack of steel and a ladder against the hall
-  for (let j = 0; j < 3; j++) box(17, 9.2 + j * .05, j * .35, 3.6, .9, .35, { left: PAL_.mid, right: PAL_.blue, top: PAL_.paleL }, 90 + j * 3);
-  const L1 = [[13.2, 9.4, 0], [13.2, 8.05, 4.2]], L2 = [[14.2, 9.4, 0], [14.2, 8.05, 4.2]];
-  for (const Lr of [L1, L2]) sline(P(...Lr[0]), P(...Lr[1]), { w: 3, seed: Lr[0][0] });
-  for (let i = 1; i < 8; i++) { const t = i / 8; sline(P(13.2, lerp(9.4, 8.05, t), lerp(0, 4.2, t)), P(14.2, lerp(9.4, 8.05, t), lerp(0, 4.2, t)), { w: 2.4, over: 1, seed: 100 + i }); }
-  // the jetty, out over the water, on piles
-  for (const [x, y] of [[3.2, 14], [4.6, 14], [3.2, 17], [4.6, 17], [3.2, 19.5], [4.6, 19.5]]) box(x, y, -.8, .25, .25, .65, { left: PAL_.goldD, right: PAL_.goldD, top: PAL_.goldD }, x * 10 + y);
-  box(3, 12, -.15, 2, 8, .15, { left: PAL_.goldD, right: mix(PAL_.goldD, PAL_.sumi, .2), top: mix(PAL_.goldD, PAL_.paper, .35) }, 120);
-  // the people, at true scale: about 1.8 units tall
-  isoPerson(P, 4, 19.2, 0, { head: PAL_.orange, body: mix(PAL_.goldL, PAL_.paper, .2), legs: PAL_.ind }); // Henrik, at the end of the jetty
-  isoPerson(P, 15.6, 10.4, 0, { head: PAL_.gold, body: PAL_.mid, legs: PAL_.goldD }); // Sami, in the yard
-  mist(520, 300, 760, 40); mist(1380, 230, 620, 34); mist(700, 980, 900, 44);
+  drawModel(30, 960 - 2 * 30 * .866, 330);
   compose(x => { const e = slip(x, 1800, 70, 'THE WORKS', 'from above'); seal(x, 'A', 1800, e + 46, 52); });
 }
-if (F === 31) { // small people for the isometric map: four options, true size with a 4x zoom
+if (F === 40) { // the opening: the camera glides across the model and settles on Henrik
   Object.values(X).forEach(clipFrame);
-  const CAST = [{ head: P.orange, body: mix(P.goldL, P.paper, .2), legs: P.ind }, { head: P.gold, body: P.mid, legs: P.goldD }, { head: P.goldL, body: P.pale, legs: P.ind }];
-  const C30 = .866;
-  const fill = (block, p, col) => { knock(['blue', 'pale', 'gold', 'red', 'key'].filter(b => b !== block), xx => poly(xx, p)); X[block].fillStyle = col; X[block].beginPath(); poly(X[block], p); X[block].fill(); };
-  const parts = (x, y, h) => { const q = (u, v) => [x + u * h, y + v * h]; // a kite head, a body widening to the hem, two triangle legs
-    return { head: [q(0, -1), q(.05, -.94), q(0, -.88), q(-.05, -.94)], body: [q(-.06, -.86), q(.06, -.86), q(.1, -.5), q(-.1, -.5)], legL: [q(-.08, -.5), q(-.01, -.5), q(-.04, 0)], legR: [q(.01, -.5), q(.08, -.5), q(.04, 0)] }; };
-  // A: ink silhouette, the head alone in colour (an architect's scale figure)
-  const A = (x, y, h, c) => { const p = parts(x, y, h); for (const k of ['body', 'legL', 'legR']) fill('key', p[k], P.sumi); fill('red', p.head, c.head); };
-  // B: colour by zone, no outline: a token
-  const Bf = (x, y, h, c) => { const p = parts(x, y, h); fill('gold', p.head, c.head); fill('blue', p.body, c.body); fill('pale', [...p.legL], c.legs); fill('pale', p.legR, mix(c.legs, P.sumi, .3)); };
-  // C: the token with a long morning shadow along the iso grid, so it reads from far away
-  const Cf = (x, y, h, c) => { const sh = [[x - h * .08, y], [x + h * .08, y], [x + h * .08 + h * 1.4 * C30, y + h * 1.4 * .5], [x - h * .08 + h * 1.4 * C30, y + h * 1.4 * .5]]; X.blue.save(); X.blue.globalAlpha = .55; X.blue.fillStyle = P.indD; X.blue.beginPath(); poly(X.blue, sh); X.blue.fill(); X.blue.restore(); Bf(x, y, h, c); };
-  // D: isometric blocks: legs, body and head as small boxes, three faces each
-  const Df = (x, y, h, c) => { const u = h / 1.8, Pj = (a, b, z) => [x + (a - b) * C30 * u, y + (a + b) * .5 * u - z * u]; return isoPerson(Pj, 0, 0, 0, c);
-    const box = (a, b, z, w, d, hh, col) => { const L = [Pj(a, b + d, z), Pj(a + w, b + d, z), Pj(a + w, b + d, z + hh), Pj(a, b + d, z + hh)], Rr = [Pj(a + w, b, z), Pj(a + w, b + d, z), Pj(a + w, b + d, z + hh), Pj(a + w, b, z + hh)], T = [Pj(a, b, z + hh), Pj(a + w, b, z + hh), Pj(a + w, b + d, z + hh), Pj(a, b + d, z + hh)];
-      fill('pale', L, col); fill('blue', Rr, mix(col, P.sumi, .35)); fill('gold', T, mix(col, P.paper, .35)); };
-    box(-.15, -.12, 0, .3, .24, .85, c.legs); box(-.2, -.15, .85, .4, .3, .65, c.body); box(-.11, -.11, 1.52, .22, .22, .26, c.head); };
-  const opts = [['A', 'Ink silhouette', A], ['B', 'Colour token', Bf], ['C', 'Token and shadow', Cf], ['D', 'Iso blocks', Df]];
-  const k = 30, small = 1.85 * k; // the map's scale: 1.85 units at 30 px
-  opts.forEach(([id, name, fn], i) => { const cx = 260 + i * 400;
-    const g = [[cx - 170, 980], [cx + 170, 980], [cx + 170, 1000], [cx - 170, 1000]]; // a strip of the yard
-    const big = [[cx - 170, 520], [cx + 170, 520], [cx + 170, 540], [cx - 170, 540]];
-    for (const strip of [g, big]) { X.gold.fillStyle = mix(P.goldD, P.paper, .55); X.gold.beginPath(); poly(X.gold, strip); X.gold.fill(); }
-    CAST.forEach((c, j) => { fn(cx - 110 + j * 110, 520, small * 4 * .55, c); fn(cx - 60 + j * 60, 980, small, c); });
-  });
-  compose(x => { x.fillStyle = P.sumi; x.textAlign = 'center';
-    opts.forEach(([id, name], i) => { const cx = 260 + i * 400; x.font = '400 34px "EB Garamond"'; x.fillText(id + '  ·  ' + name, cx, 600); x.font = 'italic 400 22px "EB Garamond"'; x.fillText('true map size', cx, 1028); });
-    x.font = 'italic 400 24px "EB Garamond"'; x.fillText('Each option shows Henrik, Sami and the evaluator, enlarged above and at true map size below.', 960, 110); });
+  const clear = () => Object.values(X).forEach(x => x.clearRect(0, 0, W, H));
+  const e3 = t => t < 0 ? 0 : t > 1 ? 1 : t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  const C30 = Math.cos(Math.PI / 6);
+  // camera keys: [time, zoom (px per unit), world x, world y, world z at the centre of the screen]
+  const KEYS = [[0, 20, 24, 2, 3], [2.2, 30, 15, 8, 2], [5.0, 92, 4.2, 19, 1.1]];
+  window.END = 5.0;
+  window.seek = t => {
+    let i = 0; while (i + 2 < KEYS.length && t >= KEYS[i + 1][0]) i++;
+    const [t0, ...A] = KEYS[i], [t1, ...Bk] = KEYS[i + 1], f = e3((t - t0) / (t1 - t0));
+    const k = A[0] * Math.pow(Bk[0] / A[0], f), wx = lerp(A[1], Bk[1], f), wy = lerp(A[2], Bk[2], f), wz = lerp(A[3], Bk[3], f);
+    const ox = 960 - (wx - wy) * C30 * k, oy = 540 - (wx + wy) * .5 * k + wz * k;
+    clear(); drawModel(k, ox, oy, t * 18); compose();
+    if (t < .6) { out.save(); out.globalAlpha = 1 - t / .6; out.drawImage(TX.paper, 0, 0); out.restore(); } // the print arrives out of the paper
+    return k;
+  };
 }
 document.title = 'done';
