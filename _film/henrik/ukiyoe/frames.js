@@ -295,7 +295,7 @@ function evaluatorSharp(x, y, s, o = {}) { // the reader in another city: hair u
 
 
 // a person built from three iso boxes (legs, body, head), all on one block so no seam opens between the faces
-function isoPerson(Pj, a0, b0, z0, c, scale = 1) {
+function isoPerson(Pj, a0, b0, z0, c, scale = 1, fr = {}) {
   const u = scale, Q = (a, b, z) => Pj(a0 + a * u, b0 + b * u, z0 + z * u), all = [];
   const faces = (a, b, z, w, d, h, col) => [
     [[Q(a, b + d, z), Q(a + w, b + d, z), Q(a + w, b + d, z + h), Q(a, b + d, z + h)], col],
@@ -305,12 +305,63 @@ function isoPerson(Pj, a0, b0, z0, c, scale = 1) {
   knock(['blue', 'pale', 'red', 'key'], xx => all.forEach(([p]) => poly(xx, p)));
   const x = X.gold; x.lineJoin = 'round';
   for (const [p, col] of all) { x.fillStyle = col; x.strokeStyle = col; x.lineWidth = 1.2; x.beginPath(); poly(x, p); x.fill(); x.stroke(); } // a hairline of its own colour closes the seams
+  if (fr.open > 0) { const hw = .075 * fr.open, yy = .15 + .002; // the jacket open on a paper shirt, the crest on it
+    const strip = [Q(-hw, yy, .88), Q(hw, yy, .88), Q(hw, yy, 1.49), Q(-hw, yy, 1.49)]; x.fillStyle = P.paper; x.beginPath(); poly(x, strip); x.fill();
+    if (fr.crest && fr.open > .55) { const cr = .055 * Math.min(1, (fr.open - .55) / .3), d = [Q(-cr, yy, 1.3), Q(0, yy, 1.3 + cr), Q(cr, yy, 1.3), Q(0, yy, 1.3 - cr)]; x.fillStyle = P.gold; x.beginPath(); poly(x, d); x.fill(); } }
   // a soft shadow on the ground, so the figure stands on it
   const sh = [Q(-.2, .12, 0), Q(.2, .12, 0), Q(.75, .5, 0), Q(.35, .5, 0)]; X.blue.save(); X.blue.globalAlpha = .35; X.blue.fillStyle = P.indD; X.blue.beginPath(); poly(X.blue, sh); X.blue.fill(); X.blue.restore();
 }
 
+const HENRIK = { head: '#d9591e', body: '#dfc49a', legs: '#0f2b55' }, SAMI = { head: '#bd9059', body: '#3c7ec3', legs: '#7a5a2e' }, EVAL = { head: '#dcb984', body: '#9cc7e6', legs: '#0f2b55' };
+function isoKit(k, ox, oy) {
+  const C30 = Math.cos(Math.PI / 6), P_ = (x, y, z = 0) => [ox + (x - y) * C30 * k, oy + (x + y) * .5 * k - z * k], PP = a => a.map(p => P_(...p));
+  const face = (pts, block, col, { hatchIt = false, lineW = 2.2, seed = 1, line = true } = {}) => { const p = PP(pts); knock(['key'], xx => poly(xx, p)); flat(block, p, col, [0, 0]); if (hatchIt) shatch(p, { gap: 7, ang: 1.15, w: 1.1, seed }); if (line) spoly(p, { w: lineW, jit: .8, over: 3, seed }, true); return p; };
+  const box = (x, y, z, w, d, h, c, sd = 1, hatchIt = true) => { face([[x, y + d, z], [x + w, y + d, z], [x + w, y + d, z + h], [x, y + d, z + h]], 'pale', c.left, { seed: sd }); face([[x + w, y, z], [x + w, y + d, z], [x + w, y + d, z + h], [x + w, y, z + h]], 'blue', c.right, { hatchIt, seed: sd + 1 }); face([[x, y, z + h], [x + w, y, z + h], [x + w, y + d, z + h], [x, y + d, z + h]], 'gold', c.top, { seed: sd + 2 }); };
+  return { P: P_, PP, face, box };
+}
+const camAt = (k, wx, wy, wz) => [960 - (wx - wy) * Math.cos(Math.PI / 6) * k, 540 - (wx + wy) * .5 * k + wz * k];
+// the evaluator's office, another city: two walls, a rainy window, the desk, the pile, the one document
+function drawOffice(k, ox, oy, o = {}) {
+  const { P, PP, face, box } = isoKit(k, ox, oy), t = o.t || 0;
+  face([[0, 0, 0], [0, 7, 0], [0, 7, 3.4], [0, 0, 3.4]], 'blue', mix(PAL_.pale, PAL_.blue, .25), { seed: 200 }); // the wall on x
+  face([[0, 0, 0], [9, 0, 0], [9, 0, 3.4], [0, 0, 3.4]], 'pale', mix(PAL_.paleL, PAL_.paper, .3), { seed: 201 }); // the wall on y, with the window
+  const win = [[4.6, .01, 1.0], [7.6, .01, 1.0], [7.6, .01, 2.9], [4.6, .01, 2.9]]; face(win, 'blue', PAL_.sumiL, { seed: 202, lineW: 3 });
+  for (let i = 0; i < 5; i++) face([[4.8 + i * .55, .02, 1.0], [5.15 + i * .55, .02, 1.0], [5.15 + i * .55, .02, 1.5 + (i * .37) % .9], [4.8 + i * .55, .02, 1.5 + (i * .37) % .9]], 'blue', rgba(PAL_.ind, .9), { seed: 203 + i, line: false }); // the city
+  const rr = mulberry(Math.floor(t * 12) + 2); X.key.save(); X.key.beginPath(); poly(X.key, PP(win)); X.key.clip(); X.key.strokeStyle = rgba(PAL_.paleL, .7); X.key.lineWidth = 1.2;
+  for (let i = 0; i < 70; i++) { const a = P(4.6 + rr() * 3, .02, 1 + rr() * 2.2); X.key.beginPath(); X.key.moveTo(...a); X.key.lineTo(a[0] + 3, a[1] + k * .35); X.key.stroke(); } X.key.restore();
+  sline(P(6.1, .02, 1), P(6.1, .02, 2.9), { w: 3, seed: 208 }); sline(P(4.6, .02, 1.95), P(7.6, .02, 1.95), { w: 3, seed: 209 });
+  face([[0, 0, 0], [9, 0, 0], [9, 7, 0], [0, 7, 0]], 'gold', mix(PAL_.goldD, PAL_.paper, .45), { seed: 210 }); // the floor
+  for (let i = 1; i < 9; i++) sline(P(i, 0, 0), P(i, 7, 0), { w: .7, jit: .5, over: 0, seed: 211 + i, passes: 1 });
+  const wood = { left: PAL_.goldD, right: mix(PAL_.goldD, PAL_.sumi, .25), top: mix(PAL_.goldD, PAL_.paper, .3) };
+  for (const [lx, ly] of [[2.6, 2.6], [5.3, 2.6], [2.6, 3.8], [5.3, 3.8]]) box(lx, ly, 0, .1, .1, 1.0, wood, 220 + lx);
+  box(2.5, 2.5, 1.0, 3, 1.5, .08, wood, 230, false);
+  for (let j = 0; j < 7; j++) box(4.3, 2.75, 1.08 + j * .03, .75, .95, .03, { left: PAL_.paper, right: PAL_.paperD || '#e2d3b0', top: PAL_.paper }, 240 + j, false);
+  // the one document, lying on the desk top: grey when nobody can read whose it is, navy with the crest when they can
+  const sl = o.slide || 0, dx = 2.85 - sl * 2.6, dz = 1.081 - Math.max(0, sl - .55) * 2.4, doc = [[dx, 2.8, dz], [dx + .75, 2.8, dz], [dx + .75, 3.75, dz], [dx, 3.75, dz]];
+  if (dz > -.2) { face(doc, 'gold', PAL_.paper, { seed: 250, lineW: 1.6 }); const col = o.crest ? PAL_.ind : '#9a9a94';
+    for (let i = 0; i < 7; i++) { const yy = 3.05 + i * .09, xe = dx + (i % 3 === 2 ? .45 : .62); X.pale.strokeStyle = col; X.pale.lineWidth = Math.max(1.5, k * .012); X.pale.beginPath(); X.pale.moveTo(...P(dx + .12, yy, dz)); X.pale.lineTo(...P(xe, yy, dz)); X.pale.stroke(); }
+    if (o.crest) { const c = [[dx + .375, 2.86, dz], [dx + .46, 2.93, dz], [dx + .375, 3.0, dz], [dx + .29, 2.93, dz]]; face(c, 'gold', PAL_.gold, { seed: 251, lineW: 1.4 }); }
+    else { X.pale.fillStyle = col; X.pale.beginPath(); poly(X.pale, PP([[dx + .12, 2.88, dz], [dx + .5, 2.88, dz], [dx + .5, 2.96, dz], [dx + .12, 2.96, dz]])); X.pale.fill(); } }
+  for (let i = 0; i < (o.tally || 0); i++) { const x0 = 3.75 + i * .1; sline(P(x0, 2.75, 1.081), P(x0 + .02, 3.15, 1.081), { w: Math.max(3, k * .02), seed: 260 + i }); } // four strokes for four seconds
+  if (o.strike) sline(P(3.68, 3.2, 1.081), P(4.18, 2.72, 1.081), { w: Math.max(3, k * .02), seed: 265 });
+  if (o.person !== false) isoPerson(P, 4.0, 4.7, 0, EVAL);
+}
+// the assayer's bench: a bar of metal, a punch, the hallmark
+function drawBench(k, ox, oy, o = {}) {
+  const { P, PP, face, box } = isoKit(k, ox, oy);
+  face([[0, 0, 0], [0, 4, 0], [0, 4, 3], [0, 0, 3]], 'blue', PAL_.indD, { seed: 300 }); face([[0, 0, 0], [6, 0, 0], [6, 0, 3], [0, 0, 3]], 'blue', mix(PAL_.ind, PAL_.indD, .5), { seed: 301 });
+  face([[0, 0, 0], [6, 0, 0], [6, 4, 0], [0, 4, 0]], 'gold', mix(PAL_.goldD, PAL_.sumi, .2), { seed: 302 });
+  box(1, 1, 0, 4, 1.6, 1.0, { left: PAL_.goldD, right: mix(PAL_.goldD, PAL_.sumi, .3), top: mix(PAL_.goldD, PAL_.paper, .2) }, 303);
+  box(2, 1.4, 1.0, 2, .8, .3, { left: PAL_.gold, right: mix(PAL_.gold, PAL_.sumi, .3), top: PAL_.goldL }, 306);
+  const mark = [[2.9, 1.8, 1.301], [3.0, 1.72, 1.301], [3.1, 1.8, 1.301], [3.0, 1.88, 1.301]];
+  if (o.marked) face(mark, 'red', PAL_.orange, { seed: 310, lineW: 1.6 });
+  if (o.punch !== undefined) box(2.92, 1.72, 1.3 + o.punch * 1.8, .16, .16, 1.6, { left: PAL_.sumi, right: PAL_.sumi, top: PAL_.sumiL }, 311, false);
+  if (o.flash > 0) { const c = P(3, 1.8, 1.3); for (let i = 0; i < 10; i++) { const a = -Math.PI + i * Math.PI / 9, r0 = k * .35, r1 = r0 + k * .7 * o.flash; sline([c[0] + Math.cos(a) * r0, c[1] + Math.sin(a) * r0 * .6], [c[0] + Math.cos(a) * r1, c[1] + Math.sin(a) * r1 * .6], { w: 3, over: 0, seed: 320 + i }); } }
+  if (o.shine !== undefined) { const sx = lerp(1.9, 4.1, o.shine); knock(['gold'], xx => poly(xx, PP([[sx, 1.4, 1.3], [sx + .18, 1.4, 1.3], [sx + .02, 2.2, 1.3], [sx - .16, 2.2, 1.3]]))); }
+}
+
 // the works as an isometric woodblock model, drawn at any camera: k pixels per unit, (ox, oy) the screen origin
-function drawModel(k, ox, oy, drift = 0) { // the works as an isometric woodblock model: the establishing map
+function drawModel(k, ox, oy, drift = 0, opts = {}) { // the works as an isometric woodblock model: the establishing map
   const C30 = Math.cos(Math.PI / 6), S30 = .5;
   const P = (x, y, z = 0) => [ox + (x - y) * C30 * k, oy + (x + y) * S30 * k - z * k];
   const PP = a => a.map(p => P(...p));
@@ -330,20 +381,27 @@ function drawModel(k, ox, oy, drift = 0) { // the works as an isometric woodbloc
   const sea = PP([[-90, 12, -.8], [130, 12, -.8], [130, 90, -.8], [-90, 90, -.8]]); flat('blue', sea, PAL_.blue, [0, 0]);
   for (let i = 0; i < 70; i++) { const y = 12.6 + i * .55; const a = P(-90, y, -.8), b = P(130, y, -.8); sline(a, b, { w: 1.4, jit: 1.2, over: 0, seed: i + 300 }); X.pale.strokeStyle = rgba(PAL_.mid, .7); X.pale.lineWidth = 5; X.pale.beginPath(); X.pale.moveTo(a[0], a[1] + 4); X.pale.lineTo(b[0], b[1] + 4); X.pale.stroke(); }
   bokashi(X.blue, FR.x0, FR.y0, FR.x1, 380, PAL_.sumiL, .55, 0, { rough: 26, seed: 33 });
+  if (opts.fish !== undefined) for (let i = 0; i < 6; i++) { const fx = -4 + ((i * 7.3 + opts.fish * (i % 2 ? 1.1 : -.8)) % 26 + 26) % 26, fy = 14 + (i * 1.7) % 7, dd = i % 2 ? 1 : -1; // fish under the surface, darker diamonds moving
+    const fk = PP([[fx - .9 * dd, fy, -.8], [fx, fy - .22, -.8], [fx + .5 * dd, fy, -.8], [fx, fy + .22, -.8]]); X.blue.fillStyle = rgba(PAL_.indD, .8); X.blue.beginPath(); poly(X.blue, fk); X.blue.fill();
+    const tl = PP([[fx - .9 * dd, fy, -.8], [fx - 1.25 * dd, fy - .2, -.8], [fx - 1.25 * dd, fy + .2, -.8]]); X.blue.beginPath(); poly(X.blue, tl); X.blue.fill(); const ey = P(fx + .32 * dd, fy - .03, -.8); X.red.fillStyle = PAL_.orange; X.red.fillRect(ey[0] - 2, ey[1] - 2, 4, 4); }
   // the land plate and its quay wall
   face([[-90, 12, -.8], [130, 12, -.8], [130, 12, 0], [-90, 12, 0]], 'pale', mix(PAL_.goldD, PAL_.paper, .3), { seed: 11 });
   face([[-90, -110, 0], [130, -110, 0], [130, 12, 0], [-90, 12, 0]], 'gold', mix(PAL_.goldD, PAL_.paper, .55), { seed: 13 });
   for (let i = -40; i < 12; i += 2) sline(P(-90, i, 0), P(130, i, 0), { w: .6, jit: .6, over: 0, seed: 400 + i, passes: 1 }); // the yard's paving lines
   // fishermen's houses along the back
   for (let i = 0; i < 4; i++) house(.5 + i * 2.3, .6, 1.8, 2.4, 1.6, .9, wall, 20 + i * 5);
+  if (opts.houseCrest) { const yy = 3.01, xc = 1.4, zc = 1.05, rr = .38; face([[xc - rr, yy, zc], [xc, yy, zc + rr], [xc + rr, yy, zc], [xc, yy, zc - rr]], 'red', PAL_.orange, { seed: 140 }); // an old house, its crest over the door
+    face([[xc - .25, yy, 0], [xc + .25, yy, 0], [xc + .25, yy, .6], [xc - .25, yy, .6]], 'key', PAL_.sumi, { seed: 141, lineW: 1 }); }
   // the hall, the chimney, the crest on the gable end and the door
   face([[21.2, .6, 0], [22.2, .6, 0], [22.2, .6, 9], [21.2, .6, 9]], 'pale', wall.left, { seed: 50 });
   box(21.2, -.4, 0, 1, 1, 9, { left: wall.left, right: wall.right, top: PAL_.goldD }, 51);
   house(10, 2, 12, 6, 5, 2.2, wall, 60);
   for (let i = 0; i < 9; i++) { const x0 = 11 + i * 1.2; face([[x0, 8, 2.6], [x0 + .6, 8, 2.6], [x0 + .6, 8, 3.6], [x0, 8, 3.6]], 'key', PAL_.sumi, { seed: 70 + i, lineW: 1 }); }
   face([[22, 3.5, 0], [22, 6.5, 0], [22, 6.5, 3.2], [22, 3.5, 3.2]], 'red', PAL_.orangeL, { seed: 80 }); // the door, open, warm inside
-  const cy = 5, cz = 5.9, r = 1.05; face([[22, cy - r, cz], [22, cy, cz + r], [22, cy + r, cz], [22, cy, cz - r]], 'blue', PAL_.ind, { seed: 81 });
-  face([[22, cy - r * .55, cz], [22, cy, cz + r * .55], [22, cy + r * .55, cz], [22, cy, cz - r * .55]], 'gold', PAL_.goldL, { seed: 82 });
+  const cy = 5, cz = 5.9, r = 1.05, cg = opts.crest ?? 1; // the crest on the gable: drawn edge by edge when it is being made
+  const D = [[22, cy - r, cz], [22, cy, cz + r], [22, cy + r, cz], [22, cy, cz - r]];
+  if (cg >= .75) { face(D, 'blue', PAL_.ind, { seed: 81 }); if (cg >= .9) face([[22, cy - r * .55, cz], [22, cy, cz + r * .55], [22, cy + r * .55, cz], [22, cy, cz - r * .55]], 'gold', PAL_.goldL, { seed: 82 }); }
+  else if (cg > 0) { const n = cg / .75 * 4; for (let e = 0; e < Math.ceil(n); e++) { const f = Math.min(1, n - e), a = P(...D[e]), b = P(...D[(e + 1) % 4]); sline(a, [lerp(a[0], b[0], f), lerp(a[1], b[1], f)], { w: 5, over: 0, seed: 83 + e }); } }
   // the yard: a stack of steel and a ladder against the hall
   for (let j = 0; j < 3; j++) box(17, 9.2 + j * .05, j * .35, 3.6, .9, .35, { left: PAL_.mid, right: PAL_.blue, top: PAL_.paleL }, 90 + j * 3);
   const L1 = [[13.2, 9.4, 0], [13.2, 8.05, 4.2]], L2 = [[14.2, 9.4, 0], [14.2, 8.05, 4.2]];
@@ -353,8 +411,9 @@ function drawModel(k, ox, oy, drift = 0) { // the works as an isometric woodbloc
   for (const [x, y] of [[3.2, 14], [4.6, 14], [3.2, 17], [4.6, 17], [3.2, 19.5], [4.6, 19.5]]) box(x, y, -.8, .25, .25, .65, { left: PAL_.goldD, right: PAL_.goldD, top: PAL_.goldD }, x * 10 + y);
   box(3, 12, -.15, 2, 8, .15, { left: PAL_.goldD, right: mix(PAL_.goldD, PAL_.sumi, .2), top: mix(PAL_.goldD, PAL_.paper, .35) }, 120);
   // the people, at true scale: about 1.8 units tall
-  isoPerson(P, 4, 19.2, 0, { head: PAL_.orange, body: mix(PAL_.goldL, PAL_.paper, .2), legs: PAL_.ind }); // Henrik, at the end of the jetty
-  isoPerson(P, 15.6, 10.4, 0, { head: PAL_.gold, body: PAL_.mid, legs: PAL_.goldD }); // Sami, in the yard
+  if (opts.sparks !== undefined) { const rr = mulberry(Math.floor(opts.sparks * 20) + 1), o = P(17.1, 10.1, .75); X.red.strokeStyle = PAL_.orange; X.red.lineWidth = 2.4;
+    for (let i = 0; i < 14; i++) { const a = -Math.PI * (.05 + rr() * .9), L = k * (.2 + rr() * .7); X.red.beginPath(); X.red.moveTo(...o); X.red.lineTo(o[0] + Math.cos(a) * L * (rr() < .5 ? -1 : 1), o[1] + Math.sin(a) * L); X.red.stroke(); } }
+  for (const [x, y, c, fr] of (opts.people || [[4, 19.2, HENRIK], [15.6, 10.4, SAMI]])) isoPerson(P, x, y, 0, c, 1, fr || {});
   mist(520 + drift, 300, 760, 40); mist(1380 - drift * .7, 230, 620, 34); mist(700 + drift * .5, 980, 900, 44);
   return { P };
 }
@@ -846,6 +905,42 @@ if (F === 40) { // the opening: the camera glides across the model and settles o
     clear(); drawModel(k, ox, oy, t * 18); compose();
     if (t < .6) { out.save(); out.globalAlpha = 1 - t / .6; out.drawImage(TX.paper, 0, 0); out.restore(); } // the print arrives out of the paper
     return k;
+  };
+}
+if (F === 50) { // The Same Water, all isometric
+  Object.values(X).forEach(clipFrame);
+  const clear = () => Object.values(X).forEach(x => x.clearRect(0, 0, W, H));
+  const e3 = t => t < 0 ? 0 : t > 1 ? 1 : t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2, ease = t => t < 0 ? 0 : t > 1 ? 1 : t * t * (3 - 2 * t);
+  const OFF = 5.0, CUTS = [0, 2.98, 4.95, 6.96, 10.72, 12.77, 14.69, 17.41, 20.67, 21.97, 24.33, 25.98].map(c => c + OFF);
+  window.END = 30.5 + OFF;
+  const glide = (u, dur, a, b) => { const f = e3(u / dur); return [a[0] * Math.pow(b[0] / a[0], f), lerp(a[1], b[1], f), lerp(a[2], b[2], f), lerp(a[3], b[3], f)]; };
+  const model = (c, t, o) => { const [ox, oy] = camAt(c[0], c[1], c[2], c[3]); drawModel(c[0], ox, oy, t * 18, o); };
+  const markImg = new Image(); markImg.src = '../../../assets/img/arvo-mark-1-1200.webp'; await markImg.decode();
+  const SHOTS = [
+    (u, t, d) => model(glide(u, d, [92, 4.2, 19, 1.1], [104, 4.0, 18.6, 1.0]), t, { fish: t, crest: 0 }), // 1 every morning, I look at the same water
+    (u, t, d) => model(glide(u, d, [70, 15.6, 9.8, 1.2], [80, 16.2, 10.0, 1.0]), t, { crest: 0, sparks: t, people: [[4, 19.2, HENRIK], [16.4, 10.5, SAMI, { open: 1, crest: true }]] }), // 2 my people do perfect work
+    (u, t, d) => model(glide(u, d, [150, 16.4, 10.4, 1.1], [175, 16.4, 10.4, 1.1]), t, { crest: 0, people: [[16.4, 10.5, SAMI, { open: 1 - ease((u - .5) / 1.1), crest: true }]] }), // 3 then they zip their jackets over the name
+    (u, t, d) => { const c = glide(u, d, [105, 4.2, 3.4, 1.3], [118, 4.1, 3.4, 1.2]), [ox, oy] = camAt(...c); drawOffice(c[0], ox, oy, { t }); }, // 4 somewhere, a stranger opens my tender
+    (u, t, d) => { const c = glide(u, d, [240, 3.4, 3.2, 1.08], [262, 3.4, 3.2, 1.08]), [ox, oy] = camAt(...c); drawOffice(c[0], ox, oy, { t, tally: Math.min(4, Math.floor((u - .45) / .42) + 1), strike: u > 2.05, slide: ease((u - 2.4) / .9), person: false }); }, // 5 four seconds. that's all I get
+    (u, t, d) => { const c = glide(u, d, [150, 3, 1.8, 1.2], [165, 3, 1.8, 1.2]), [ox, oy] = camAt(...c), hit = 1.0; drawBench(c[0], ox, oy, { punch: 1 - ease(u / hit), marked: u > hit, flash: u > hit && u < hit + .4 ? (u - hit) / .4 : 0 }); }, // 6 a hallmark used to settle that
+    (u, t, d) => { const c = glide(u, d, [165, 3, 1.8, 1.2], [185, 3, 1.8, 1.25]), [ox, oy] = camAt(...c); drawBench(c[0], ox, oy, { marked: true, shine: ease(u / 2) }); }, // 7 you saw the mark, you trusted the metal
+    (u, t, d) => model(glide(u, d, [95, 2.2, 3.6, 1.1], [110, 1.8, 3.4, 1.0]), t, { crest: 0, houseCrest: true }), // 8 a crest told you whose house you were in
+    (u, t, d) => model(glide(u, d, [120, 22, 5, 5.6], [135, 22, 5, 5.8]), t, { crest: Math.min(1, u / 1.1) }), // 9 so we drew ours properly
+    (u, t, d) => model(glide(u, d, [80, 15.4, 10.2, 1.2], [92, 15.4, 10.2, 1.1]), t, { crest: 1, people: [[14.8, 10.6, HENRIK], [16.0, 10.4, SAMI, { open: 1, crest: true }]] }), // 10 same work. same people
+    (u, t, d) => { const c = glide(u, d, [262, 3.3, 3.2, 1.08], [290, 3.25, 3.25, 1.08]), [ox, oy] = camAt(...c); drawOffice(c[0], ox, oy, { t, crest: true, person: false }); }, // 11 now the mark tells the story
+    (u, t, d) => { if (u < 2.2) model(glide(u, 2.2, [120, 22, 5, 5.8], [22, 14, 6, 2]), t, { crest: 1, people: [[14.8, 10.6, HENRIK], [16.0, 10.4, SAMI, { open: 1, crest: true }]] }); return u; }, // 12 competence everyone can see: pull back, then the card
+  ];
+  window.seek = t => {
+    clear();
+    if (t < OFF) { const KEYS = [[0, 20, 24, 2, 3], [2.2, 30, 15, 8, 2], [OFF, 92, 4.2, 19, 1.1]]; let i = t >= 2.2 ? 1 : 0; const [t0, ...A] = KEYS[i], [t1, ...Bk] = KEYS[i + 1];
+      model(glide(t - t0, t1 - t0, A, Bk), t, { crest: 0 }); compose(); if (t < .6) { out.save(); out.globalAlpha = 1 - t / .6; out.drawImage(TX.paper, 0, 0); out.restore(); } return -1; }
+    let i = 0; while (i + 1 < CUTS.length && t >= CUTS[i + 1]) i++;
+    const u = t - CUTS[i], d = (CUTS[i + 1] || window.END) - CUTS[i];
+    SHOTS[i](u, t, d); compose();
+    if (i === 11) { const a = ease((u - 1.6) / .8); if (a > 0) { out.save(); out.globalAlpha = a; out.drawImage(TX.paper, 0, 0); out.globalAlpha = a;
+      out.drawImage(markImg, 960 - 260, 300, 520, 520 * markImg.height / markImg.width); out.fillStyle = P.sumi; out.textAlign = 'center'; out.font = '400 64px "EB Garamond"'; out.fillText('Competence everyone can see.', 960, 640);
+      out.font = 'italic 400 28px "EB Garamond"'; out.fillText('arvorealta.com', 960, 720); out.restore(); if (a >= 1) seal(out, 'A', 960, 820, 52); } }
+    return i;
   };
 }
 document.title = 'done';
