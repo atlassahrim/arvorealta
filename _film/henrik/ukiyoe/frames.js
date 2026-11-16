@@ -1,5 +1,5 @@
 // The Same Water: three ukiyo-e styleframes, coloured from the owner's fish reference.
-import { W, H, FR, mk, buildTextures, TX, inkify, carve, fillPath, bokashi, kasumi, wob, smooth, sealCanvas, rgba, mix } from './print.js';
+import { W, H, FR, mk, buildTextures, TX, inkify, carve, fillPath, bokashi, kasumi, wob, smooth, dense, sealCanvas, rgba, mix } from './print.js';
 import { mulberry, clamp, lerp, TAU } from './lib.js';
 const F = +(new URLSearchParams(location.search).get('f') || 1);
 // pigment set sampled by eye from the fish reference
@@ -106,6 +106,53 @@ function limb(pts, w0, w1) { // a tapered limb as a closed polygon along a polyl
 const poly = (x, p) => { p.forEach(([a, b], i) => i ? x.lineTo(a, b) : x.moveTo(a, b)); x.closePath(); };
 function shape(block, p, col) { const x = X[block]; x.fillStyle = col; x.beginPath(); poly(x, p); x.fill(); }
 function outline(p, w = 2.2) { carve(X.key, [...p, p[0]], w, { col: P.sumi, taper: [0, 0], jit: .15, per: 2, seed: p[0][0] }); }
+// —— people in a loose pen-sketch hand (the owner's reference): one wobbly line, tiny head, no face,
+// a long coat as one shape, thin legs; flat printed colour under it, slightly off the line ——
+function wobbly(pts, amp, seed, closed = false) { // densify and shake a path like a hand
+  const p = dense(closed ? [...pts, pts[0], pts[1]] : pts, 7); return p.map(([a, b], i) => [a + (vn(i * .23 + seed) - .5) * 2 * amp, b + (vn(i * .19 + seed * 3.7 + 40) - .5) * 2 * amp]); }
+const vn = t => { const i = Math.floor(t), f = t - i, u = f * f * (3 - 2 * f), h = n => { n = Math.sin(n * 127.1 + 311.7) * 43758.5453; return n - Math.floor(n); }; return h(i) + (h(i + 1) - h(i)) * u; };
+function pen(pts, { w = 2.2, amp = 1.6, seed = 1, closed = false, passes = 2, gap = .12 } = {}) {
+  const x = X.key; x.strokeStyle = P.sumi; x.lineCap = 'round'; x.lineJoin = 'round';
+  for (let k = 0; k < passes; k++) { const p = wobbly(pts, amp * (1 + k * .6), seed + k * 17, closed), n = p.length;
+    const skip0 = Math.floor(R() * n), skipL = R() < gap * 3 ? Math.floor(n * gap) : 0; // the pen lifts once, sometimes
+    x.lineWidth = w * (k ? .6 : 1);
+    for (let i = 1; i < n; i++) { if (i > skip0 && i < skip0 + skipL) continue; x.lineWidth = (k ? .6 : 1) * w * (.75 + .5 * vn(i * .3 + seed)); x.beginPath(); x.moveTo(p[i - 1][0], p[i - 1][1]); x.lineTo(p[i][0], p[i][1]); x.stroke(); } } }
+function sketchFigure(x, y, s, o = {}) {
+  const d = o.dir || 1, j = () => (R() - .5) * .03, q = (u, v) => [x + (u + j() * .5) * s * d, y + v * s], seed = x * .37 + y * .11;
+  const walk = o.walk ? .11 : .025, coatLen = o.short ? -.5 : -.38;
+  // legs: two thin tapering legs, the back one a touch shorter
+  const legs = [[-walk, .0], [walk, .0]].map(([fx], i) => { const hx = i ? .03 : -.03;
+    return { out: [q(hx - .028, coatLen + .02), q(fx * .6 + hx * .5 - .022, -.2), q(fx - .012, -.02)], inn: [q(hx + .022, coatLen + .02), q(fx * .6 + hx * .5 + .016, -.2), q(fx + .012, -.02)], foot: q(fx + .02 * d, -.006) }; });
+  const legP = legs.map(l => [...l.out, ...l.inn.slice().reverse()]);
+  knock(['blue', 'pale', 'red', 'key'], xx => legP.forEach(p => poly(xx, p)));
+  legP.forEach(p => shape('blue', p.map(([a, b]) => [a + 2, b + 2]), o.trousers || P.indD));
+  // the coat: one rounded shape, shoulders hunched, widest at the hip
+  const coat = [q(-.035, -.86), q(.035, -.86), q(.1 + j(), -.82), q(.13 + j(), -.7), q(.125 + j(), -.56), q(.11, coatLen), q(-.1, coatLen), q(-.125 + j(), -.56), q(-.13 + j(), -.7), q(-.1 + j(), -.82)];
+  knock(['blue', 'pale', 'red', 'gold', 'key'], xx => { xx.moveTo(...coat[0]); smooth(xx, coat, true); });
+  X.blue.fillStyle = o.coat || P.ind; X.blue.beginPath(); smooth(X.blue, coat.map(([a, b]) => [a + 3, b + 2.5]), true); X.blue.fill(); // colour sits off the line
+  if (o.hatch) { X.key.save(); X.key.beginPath(); smooth(X.key, coat, true); X.key.clip(); X.key.strokeStyle = rgba(P.sumi, .75); X.key.lineWidth = 1.1;
+    for (let k = -14; k < 14; k++) { const [a, b] = q(k * .022, -.86); X.key.beginPath(); X.key.moveTo(a, b); X.key.lineTo(a + s * .14 * d, b + s * .48); X.key.stroke(); } X.key.restore(); }
+  pen(coat, { closed: true, seed, w: s * .0055, amp: s * .007, passes: 3, gap: .2 });
+  // an arm folded into the coat, or held out with a cup
+  if (o.cup) { const sh = q(.1, -.78), el = q(.16, -.62), hd = q(.2, -.7); pen([sh, el, hd], { seed: seed + 3, w: s * .008, amp: s * .003 });
+    const cp = [[hd[0], hd[1] - s * .05], [hd[0] + s * .04 * d, hd[1] - s * .05], [hd[0] + s * .036 * d, hd[1] + s * .005], [hd[0] + s * .004 * d, hd[1] + s * .005]];
+    knock(['blue', 'gold'], xx => poly(xx, cp)); shape('red', cp, P.orangeL); pen(cp, { closed: true, seed: seed + 5, w: s * .006, amp: s * .002, passes: 1 });
+    for (let k = 0; k < 2; k++) { const st = []; for (let i = 0; i < 6; i++) st.push([hd[0] + s * (.02 + .012 * Math.sin(i * 1.3 + k * 2)) * d, hd[1] - s * (.07 + i * .02)]); pen(st, { seed: seed + 9 + k, w: s * .004, amp: s * .002, passes: 1 }); } }
+  else pen([q(.09, -.79), q(.1, -.64), q(.085, -.5)], { seed: seed + 3, w: s * .005, amp: s * .005, passes: 2 });
+  if (o.bag) { const b0 = q(-.2, -.5), bag = [b0, [b0[0] + s * .1 * d, b0[1]], [b0[0] + s * .11 * d, b0[1] + s * .1], [b0[0] - s * .01 * d, b0[1] + s * .1]]; knock(['blue', 'pale'], xx => poly(xx, bag)); shape('gold', bag, P.goldD); pen(bag, { closed: true, seed: seed + 11, w: s * .007, amp: s * .003 }); pen([q(-.12, -.66), [b0[0] + s * .05 * d, b0[1] - s * .02]], { seed: seed + 12, w: s * .006, amp: s * .003, passes: 1 }); }
+  // the one colour accent: a tie or a crest at the collar
+  if (o.tie) shape('red', [q(-.01, -.85), q(.012, -.85), q(.008, -.72), q(-.004, -.72)], P.orange);
+  if (o.crest) { const [cx2, cy2] = q(-.02, -.7); X.gold.strokeStyle = P.goldL; X.gold.lineWidth = s * .01; X.gold.beginPath(); X.gold.arc(cx2, cy2, s * .02, 0, TAU); X.gold.stroke(); }
+  pen([q(-.03, -.86), q(.0, -.8), q(.035, -.86)], { seed: seed + 4, w: s * .006, amp: s * .002, passes: 1 }); // collar
+  legs.forEach((l, i) => { pen(l.out, { seed: seed + 20 + i, w: s * .005, amp: s * .005, passes: 2 }); pen(l.inn, { seed: seed + 24 + i, w: s * .005, amp: s * .005, passes: 2 });
+    const f = l.foot; X.key.fillStyle = P.sumi; X.key.beginPath(); X.key.ellipse(f[0], f[1], s * .03, s * .012, 0, 0, TAU); X.key.fill(); });
+  // head: a small loop, no face; a hat sometimes
+  const hc = q(.005, -.915), hr = s * .045, head = []; for (let a = 0; a < TAU; a += .5) head.push([hc[0] + Math.cos(a) * hr * .85, hc[1] + Math.sin(a) * hr * 1.15]);
+  knock(['blue', 'pale', 'key'], xx => poly(xx, head)); shape('gold', head.map(([a, b]) => [a + 2, b + 1.5]), '#e9cfa3');
+  if (o.dark) shape('key', head.filter((_, i) => i < 3 || i > 9), P.sumi);
+  pen(head, { closed: true, seed: seed + 30, w: s * .005, amp: s * .004, passes: 2 });
+  if (o.hat) { pen([q(-.075, -.95), q(.08, -.95)], { seed: seed + 31, w: s * .009, amp: s * .002, passes: 1 }); const crown = [q(-.04, -.95), q(-.035, -1.0), q(.04, -1.0), q(.045, -.95)]; shape('key', crown, P.sumi); }
+}
 function figure(x, y, s, o = {}) {
   const d = o.dir || 1, q = (u, v) => [x + u * s * d, y + v * s];
   const coat = o.jacket || P.ind, trou = o.trousers || P.indD, skin = '#e9cfa3';
@@ -199,7 +246,7 @@ if (F === 1) { // the same water: a harbour town at first light, the school scat
   const jet = [[FR.x0, 790], [560, 760], [600, 800], [FR.x0, 840]]; knock(['blue', 'pale'], xx => poly(xx, jet)); shape('gold', jet, P.goldD); outline(jet, 2.6);
   for (let k = 0; k < 9; k++) line(X.key, [[FR.x0 + k * 62, 790 - k * 3.4], [FR.x0 + k * 62 + 8, 840 - k * 4.4]], 1.4, rgba(P.sumi, .7));
   for (const px of [120, 330, 540]) { const pile = [[px, 820], [px + 22, 818], [px + 22, 980], [px, 980]]; knock(['blue', 'pale'], xx => poly(xx, pile)); shape('gold', pile, P.goldD); outline(pile, 2); }
-  figure(330, 800, 360, { suit: true, cup: true, grey: true });
+  sketchFigure(330, 800, 360, { cup: true, tie: true, coat: mix(P.goldL, P.paper, .35), hat: true });
   compose(x => { const e = slip(x, 1800, 70, 'THE SAME WATER', 'Monday, 05:40'); seal(x, 'A', 1800, e + 46, 52); });
 }
 if (F === 2) { // the turn: underwater, a single gold stroke, the school turning to it
@@ -239,9 +286,9 @@ if (F === 3) { // Monday: the works under rain, its mark on the gable, the crew 
   X.gold.fillStyle = mix(P.goldD, P.paper, .55); X.gold.fillRect(FR.x0, 890, FR.x1 - FR.x0, FR.y1 - 890); line(X.key, [[FR.x0, 890], [FR.x1, 890]], 2.4, P.sumi);
   for (const [px, py, pw] of [[520, 960, 260], [1300, 990, 320], [980, 940, 140]]) { X.pale.fillStyle = P.pale; X.pale.beginPath(); X.pale.ellipse(px, py, pw / 2, 14, 0, 0, TAU); X.pale.fill(); }
   // the crew walking in, small and flat
-  figure(560, 1015, 250, { walk: true, cap: true, jacket: P.blue, trousers: P.goldD, phase: 1 }); figure(760, 1000, 230, { walk: true, open: true, jacket: P.blue, trousers: P.goldD });
-  figure(1240, 1010, 240, { walk: true, dir: -1, cap: true, jacket: P.blue, trousers: P.goldD }); figure(1420, 1020, 250, { walk: true, dir: -1, jacket: P.blue, trousers: P.goldD, open: true });
-  figure(1010, 905, 150, { suit: true, grey: true }); // Henrik at the door
+  sketchFigure(540, 1015, 250, { walk: true, coat: P.blue, short: true, bag: true }); sketchFigure(740, 1000, 235, { walk: true, coat: P.ind, crest: true, hatch: true });
+  sketchFigure(1250, 1010, 245, { walk: true, dir: -1, coat: P.mid, short: true, dark: true }); sketchFigure(1430, 1022, 255, { walk: true, dir: -1, coat: P.ind, crest: true });
+  sketchFigure(1010, 905, 160, { tie: true, coat: mix(P.goldL, P.paper, .35), hat: true }); // Henrik at the door
   mist(560, 520, 700, 40); mist(1500, 560, 560, 34);
   // rain: two sets of fine straight lines at slightly different angles
   const rain = (n, ang, col, wd) => { X.key.strokeStyle = col; X.key.lineWidth = wd; for (let i = 0; i < n; i++) { const x0 = FR.x0 + R() * (FR.x1 - FR.x0 + 400) - 200, y0 = FR.y0 + R() * (FR.y1 - FR.y0), L = 60 + R() * 120; X.key.beginPath(); X.key.moveTo(x0, y0); X.key.lineTo(x0 + Math.sin(ang) * L, y0 + Math.cos(ang) * L); X.key.stroke(); } };
