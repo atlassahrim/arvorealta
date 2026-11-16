@@ -3,9 +3,9 @@ import { W, H, FR, mk, buildTextures, TX, inkify, carve, fillPath, bokashi, kasu
 import { mulberry, clamp, lerp, TAU } from './lib.js';
 const F = +(new URLSearchParams(location.search).get('f') || 1);
 // pigment set sampled by eye from the fish reference
-const P = { paper:'#ece2ca', ind:'#0f2b55', indD:'#0a1f3f', blue:'#1d4c85', mid:'#3c7ec3', pale:'#9cc7e6', paleL:'#c9dfec',
+const PAL_ = {}; const P = { paper:'#ece2ca', ind:'#0f2b55', indD:'#0a1f3f', blue:'#1d4c85', mid:'#3c7ec3', pale:'#9cc7e6', paleL:'#c9dfec',
   gold:'#bd9059', goldL:'#dcb984', goldD:'#7a5a2e', orange:'#d9591e', orangeL:'#f0a060', sumi:'#14192a', sumiL:'#3a4152' };
-await document.fonts.load('400 40px "EB Garamond"'); await document.fonts.load('italic 400 40px "EB Garamond"');
+Object.assign(PAL_, P); await document.fonts.load('400 40px "EB Garamond"'); await document.fonts.load('italic 400 40px "EB Garamond"');
 buildTextures();
 const c = document.getElementById('c'), out = c.getContext('2d');
 // blocks: each colour group its own canvas, printed slightly out of register
@@ -459,7 +459,7 @@ function figure(x, y, s, o = {}) {
     for (let k = 0; k < 2; k++) { const st = []; for (let i = 0; i < 8; i++) st.push([hx + s * (.03 + .012 * Math.sin(i + k * 2)) * d, hy - s * (.07 + i * .018)]); carve(X.key, st, 1.4, { col: rgba(P.paleL, .8), seed: k }); } }
 }
 
-function mist(cx, cy, w, h) { knock(['blue', 'pale', 'red'], x => { x.moveTo(cx - w / 2 + h / 2, cy - h / 2); x.lineTo(cx + w / 2 - h / 2, cy - h / 2); x.arc(cx + w / 2 - h / 2, cy, h / 2, -Math.PI / 2, Math.PI / 2); x.lineTo(cx - w / 2 + h / 2, cy + h / 2); x.arc(cx - w / 2 + h / 2, cy, h / 2, Math.PI / 2, Math.PI * 1.5); }); }
+function mist(cx, cy, w, h) { knock(['blue', 'pale', 'red', 'key', 'gold'], x => { x.moveTo(cx - w / 2 + h / 2, cy - h / 2); x.lineTo(cx + w / 2 - h / 2, cy - h / 2); x.arc(cx + w / 2 - h / 2, cy, h / 2, -Math.PI / 2, Math.PI / 2); x.lineTo(cx - w / 2 + h / 2, cy + h / 2); x.arc(cx - w / 2 + h / 2, cy, h / 2, Math.PI / 2, Math.PI * 1.5); }); }
 function compose(stampSeal) {
   out.drawImage(TX.paper, 0, 0);
   inkify(B.pale, { speck: .3, grain: .1, baren: .3 }); inkify(B.blue, { speck: .3, grain: .16, baren: .38, gx: 30 });
@@ -728,5 +728,55 @@ if (F === 20) { // The Same Water: the full film, one shot per phrase
     const k = 1 + .03 * (u / dur); tx.clearRect(0, 0, W, H); tx.drawImage(c, 0, 0); out.save(); out.translate(W / 2, H / 2); out.scale(k, k); out.drawImage(tmp, -W / 2, -H / 2); out.restore();
     return i;
   };
+}
+if (F === 30) { // the works as an isometric woodblock model: the establishing map
+  Object.values(X).forEach(clipFrame);
+  const k = 30, ox = 960 - 2 * k * .866, oy = 330, C30 = Math.cos(Math.PI / 6), S30 = .5;
+  const P = (x, y, z = 0) => [ox + (x - y) * C30 * k, oy + (x + y) * S30 * k - z * k];
+  const PP = a => a.map(p => P(...p));
+  const face = (pts, block, col, { hatchIt = false, lineW = 2.2, seed = 1 } = {}) => { const p = PP(pts); knock(['key'], xx => poly(xx, p)); flat(block, p, col, [0, 0]); if (hatchIt) shatch(p, { gap: 7, ang: 1.15, w: 1.1, seed }); spoly(p, { w: lineW, jit: .8, over: 3, seed }, true); return p; };
+  const box = (x, y, z, w, d, h, c, sd = 1) => { // top, the face toward the viewer on y, the face toward the viewer on x
+    face([[x, y + d, z], [x + w, y + d, z], [x + w, y + d, z + h], [x, y + d, z + h]], 'pale', c.left, { seed: sd });
+    face([[x + w, y, z], [x + w, y + d, z], [x + w, y + d, z + h], [x + w, y, z + h]], 'blue', c.right, { hatchIt: true, seed: sd + 1 });
+    face([[x, y, z + h], [x + w, y, z + h], [x + w, y + d, z + h], [x, y + d, z + h]], 'gold', c.top, { seed: sd + 2 }); };
+  const house = (x, y, w, d, h, rh, c, sd) => { // a box with a gable roof running along x
+    face([[x, y + d, 0], [x + w, y + d, 0], [x + w, y + d, h], [x, y + d, h]], 'pale', c.left, { seed: sd });
+    face([[x + w, y, 0], [x + w, y + d, 0], [x + w, y + d, h], [x + w, y + d / 2, h + rh], [x + w, y, h]], 'blue', c.right, { hatchIt: true, seed: sd + 1 });
+    face([[x, y, h], [x + w, y, h], [x + w, y + d / 2, h + rh], [x, y + d / 2, h + rh]], 'gold', mix(c.roof, PAL_.goldD, .25), { seed: sd + 2 });
+    face([[x, y + d, h], [x + w, y + d, h], [x + w, y + d / 2, h + rh], [x, y + d / 2, h + rh]], 'gold', c.roof, { seed: sd + 3 }); };
+  
+  const wall = { left: mix(PAL_.pale, PAL_.paper, .3), right: mix(PAL_.pale, PAL_.blue, .3), top: PAL_.paper, roof: PAL_.gold };
+  // the sea, in front of the quay, banded
+  const sea = PP([[-30, 12, -.8], [60, 12, -.8], [60, 40, -.8], [-30, 40, -.8]]); flat('blue', sea, PAL_.blue, [0, 0]);
+  for (let i = 0; i < 40; i++) { const y = 12.6 + i * .55; const a = P(-30, y, -.8), b = P(60, y, -.8); sline(a, b, { w: 1.4, jit: 1.2, over: 0, seed: i + 300 }); X.pale.strokeStyle = rgba(PAL_.mid, .7); X.pale.lineWidth = 5; X.pale.beginPath(); X.pale.moveTo(a[0], a[1] + 4); X.pale.lineTo(b[0], b[1] + 4); X.pale.stroke(); }
+  bokashi(X.blue, FR.x0, FR.y0, FR.x1, 380, PAL_.sumiL, .55, 0, { rough: 26, seed: 33 });
+  // the land plate and its quay wall
+  face([[-30, 12, -.8], [60, 12, -.8], [60, 12, 0], [-30, 12, 0]], 'pale', mix(PAL_.goldD, PAL_.paper, .3), { seed: 11 });
+  face([[-30, -40, 0], [60, -40, 0], [60, 12, 0], [-30, 12, 0]], 'gold', mix(PAL_.goldD, PAL_.paper, .55), { seed: 13 });
+  for (let i = -14; i < 12; i += 2) sline(P(-30, i, 0), P(60, i, 0), { w: .6, jit: .6, over: 0, seed: 400 + i, passes: 1 }); // the yard's paving lines
+  // fishermen's houses along the back
+  for (let i = 0; i < 4; i++) house(.5 + i * 2.3, .6, 1.8, 2.4, 1.6, .9, wall, 20 + i * 5);
+  // the hall, the chimney, the crest on the gable end and the door
+  face([[21.2, .6, 0], [22.2, .6, 0], [22.2, .6, 9], [21.2, .6, 9]], 'pale', wall.left, { seed: 50 });
+  box(21.2, -.4, 0, 1, 1, 9, { left: wall.left, right: wall.right, top: PAL_.goldD }, 51);
+  house(10, 2, 12, 6, 5, 2.2, wall, 60);
+  for (let i = 0; i < 9; i++) { const x0 = 11 + i * 1.2; face([[x0, 8, 2.6], [x0 + .6, 8, 2.6], [x0 + .6, 8, 3.6], [x0, 8, 3.6]], 'key', PAL_.sumi, { seed: 70 + i, lineW: 1 }); }
+  face([[22, 3.5, 0], [22, 6.5, 0], [22, 6.5, 3.2], [22, 3.5, 3.2]], 'red', PAL_.orangeL, { seed: 80 }); // the door, open, warm inside
+  const cy = 5, cz = 5.9, r = 1.05; face([[22, cy - r, cz], [22, cy, cz + r], [22, cy + r, cz], [22, cy, cz - r]], 'blue', PAL_.ind, { seed: 81 });
+  face([[22, cy - r * .55, cz], [22, cy, cz + r * .55], [22, cy + r * .55, cz], [22, cy, cz - r * .55]], 'gold', PAL_.goldL, { seed: 82 });
+  // the yard: a stack of steel and a ladder against the hall
+  for (let j = 0; j < 3; j++) box(17, 9.2 + j * .05, j * .35, 3.6, .9, .35, { left: PAL_.mid, right: PAL_.blue, top: PAL_.paleL }, 90 + j * 3);
+  const L1 = [[13.2, 9.4, 0], [13.2, 8.05, 4.2]], L2 = [[14.2, 9.4, 0], [14.2, 8.05, 4.2]];
+  for (const Lr of [L1, L2]) sline(P(...Lr[0]), P(...Lr[1]), { w: 3, seed: Lr[0][0] });
+  for (let i = 1; i < 8; i++) { const t = i / 8; sline(P(13.2, lerp(9.4, 8.05, t), lerp(0, 4.2, t)), P(14.2, lerp(9.4, 8.05, t), lerp(0, 4.2, t)), { w: 2.4, over: 1, seed: 100 + i }); }
+  // the jetty, out over the water, on piles
+  for (const [x, y] of [[3.2, 14], [4.6, 14], [3.2, 17], [4.6, 17], [3.2, 19.5], [4.6, 19.5]]) box(x, y, -.8, .25, .25, .65, { left: PAL_.goldD, right: PAL_.goldD, top: PAL_.goldD }, x * 10 + y);
+  box(3, 12, -.15, 2, 8, .15, { left: PAL_.goldD, right: mix(PAL_.goldD, PAL_.sumi, .2), top: mix(PAL_.goldD, PAL_.paper, .35) }, 120);
+  // the people, at true scale: about 1.8 units tall
+  const person = (fn, x, y, z, o = {}) => { const [px, py] = P(x, y, z); fn(px, py, 1.85 * k, o); };
+  person(henrikSharp, 4, 19.2, 0);
+  person(samiSharp, 15.6, 10.4, 0, { stride: .3, seed: 4 });
+  mist(520, 300, 760, 40); mist(1380, 230, 620, 34); mist(700, 980, 900, 44);
+  compose(x => { const e = slip(x, 1800, 70, 'THE WORKS', 'from above'); seal(x, 'A', 1800, e + 46, 52); });
 }
 document.title = 'done';
