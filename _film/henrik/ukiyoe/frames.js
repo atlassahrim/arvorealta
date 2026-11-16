@@ -293,6 +293,22 @@ function evaluatorSharp(x, y, s, o = {}) { // the reader in another city: hair u
   spoly(legL, opt(18), true); spoly(legR, opt(19), true); shatch(legR, { gap: s * .006, ang: 1.3, w: s * .002, seed: sd + 2 });
 }
 
+
+// a person built from three iso boxes (legs, body, head), all on one block so no seam opens between the faces
+function isoPerson(Pj, a0, b0, z0, c, scale = 1) {
+  const u = scale, Q = (a, b, z) => Pj(a0 + a * u, b0 + b * u, z0 + z * u), all = [];
+  const faces = (a, b, z, w, d, h, col) => [
+    [[Q(a, b + d, z), Q(a + w, b + d, z), Q(a + w, b + d, z + h), Q(a, b + d, z + h)], col],
+    [[Q(a + w, b, z), Q(a + w, b + d, z), Q(a + w, b + d, z + h), Q(a + w, b, z + h)], mix(col, P.sumi, .35)],
+    [[Q(a, b, z + h), Q(a + w, b, z + h), Q(a + w, b + d, z + h), Q(a, b + d, z + h)], mix(col, P.paper, .35)]];
+  all.push(...faces(-.15, -.12, 0, .3, .24, .85, c.legs), ...faces(-.2, -.15, .85, .4, .3, .65, c.body), ...faces(-.11, -.11, 1.52, .22, .22, .26, c.head));
+  knock(['blue', 'pale', 'red', 'key'], xx => all.forEach(([p]) => poly(xx, p)));
+  const x = X.gold; x.lineJoin = 'round';
+  for (const [p, col] of all) { x.fillStyle = col; x.strokeStyle = col; x.lineWidth = 1.2; x.beginPath(); poly(x, p); x.fill(); x.stroke(); } // a hairline of its own colour closes the seams
+  // a soft shadow on the ground, so the figure stands on it
+  const sh = [Q(-.2, .12, 0), Q(.2, .12, 0), Q(.75, .5, 0), Q(.35, .5, 0)]; X.blue.save(); X.blue.globalAlpha = .35; X.blue.fillStyle = P.indD; X.blue.beginPath(); poly(X.blue, sh); X.blue.fill(); X.blue.restore();
+}
+
 // —— the cast: three people built from garment pieces, drawn in the sketch sheet's hand ——
 // local units: u right, v up (feet at 0, crown at -1); dir 1 faces right
 function person(x, y, s, who, o = {}) {
@@ -773,9 +789,8 @@ if (F === 30) { // the works as an isometric woodblock model: the establishing m
   for (const [x, y] of [[3.2, 14], [4.6, 14], [3.2, 17], [4.6, 17], [3.2, 19.5], [4.6, 19.5]]) box(x, y, -.8, .25, .25, .65, { left: PAL_.goldD, right: PAL_.goldD, top: PAL_.goldD }, x * 10 + y);
   box(3, 12, -.15, 2, 8, .15, { left: PAL_.goldD, right: mix(PAL_.goldD, PAL_.sumi, .2), top: mix(PAL_.goldD, PAL_.paper, .35) }, 120);
   // the people, at true scale: about 1.8 units tall
-  const person = (fn, x, y, z, o = {}) => { const [px, py] = P(x, y, z); fn(px, py, 1.85 * k, o); };
-  person(henrikSharp, 4, 19.2, 0);
-  person(samiSharp, 15.6, 10.4, 0, { stride: .3, seed: 4 });
+  isoPerson(P, 4, 19.2, 0, { head: PAL_.orange, body: mix(PAL_.goldL, PAL_.paper, .2), legs: PAL_.ind }); // Henrik, at the end of the jetty
+  isoPerson(P, 15.6, 10.4, 0, { head: PAL_.gold, body: PAL_.mid, legs: PAL_.goldD }); // Sami, in the yard
   mist(520, 300, 760, 40); mist(1380, 230, 620, 34); mist(700, 980, 900, 44);
   compose(x => { const e = slip(x, 1800, 70, 'THE WORKS', 'from above'); seal(x, 'A', 1800, e + 46, 52); });
 }
@@ -793,7 +808,7 @@ if (F === 31) { // small people for the isometric map: four options, true size w
   // C: the token with a long morning shadow along the iso grid, so it reads from far away
   const Cf = (x, y, h, c) => { const sh = [[x - h * .08, y], [x + h * .08, y], [x + h * .08 + h * 1.4 * C30, y + h * 1.4 * .5], [x - h * .08 + h * 1.4 * C30, y + h * 1.4 * .5]]; X.blue.save(); X.blue.globalAlpha = .55; X.blue.fillStyle = P.indD; X.blue.beginPath(); poly(X.blue, sh); X.blue.fill(); X.blue.restore(); Bf(x, y, h, c); };
   // D: isometric blocks: legs, body and head as small boxes, three faces each
-  const Df = (x, y, h, c) => { const u = h / 1.8, Pj = (a, b, z) => [x + (a - b) * C30 * u, y + (a + b) * .5 * u - z * u];
+  const Df = (x, y, h, c) => { const u = h / 1.8, Pj = (a, b, z) => [x + (a - b) * C30 * u, y + (a + b) * .5 * u - z * u]; return isoPerson(Pj, 0, 0, 0, c);
     const box = (a, b, z, w, d, hh, col) => { const L = [Pj(a, b + d, z), Pj(a + w, b + d, z), Pj(a + w, b + d, z + hh), Pj(a, b + d, z + hh)], Rr = [Pj(a + w, b, z), Pj(a + w, b + d, z), Pj(a + w, b + d, z + hh), Pj(a + w, b, z + hh)], T = [Pj(a, b, z + hh), Pj(a + w, b, z + hh), Pj(a + w, b + d, z + hh), Pj(a, b + d, z + hh)];
       fill('pale', L, col); fill('blue', Rr, mix(col, P.sumi, .35)); fill('gold', T, mix(col, P.paper, .35)); };
     box(-.15, -.12, 0, .3, .24, .85, c.legs); box(-.2, -.15, .85, .4, .3, .65, c.body); box(-.11, -.11, 1.52, .22, .22, .26, c.head); };
