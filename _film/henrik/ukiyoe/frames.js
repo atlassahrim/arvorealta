@@ -96,12 +96,75 @@ function roofs(x0, y, n, s, col) { // a row of flat-roofed fishermen's houses
     line(X.key, [[xx - 6, y - hh], [xx + s / 2, y - hh - s * .32], [xx + s + 6, y - hh]], 2.4, P.sumi);
     line(X.key, [[xx, y - hh], [xx, y], [xx + s, y], [xx + s, y - hh]], 1.6, P.sumi);
     X.key.fillStyle = rgba(P.sumi, .85); X.key.fillRect(xx + s * .35, y - hh * .55, s * .22, hh * .3); } }
-function figure(x, y, s, cup = false) { // a small flat figure, side view, in indigo work clothes
-  X.blue.fillStyle = P.ind; X.blue.beginPath(); X.blue.moveTo(x - s * .18, y); X.blue.lineTo(x - s * .14, y - s * .62); X.blue.lineTo(x + s * .16, y - s * .62); X.blue.lineTo(x + s * .2, y); X.blue.fill();
-  X.gold.fillStyle = '#e6cfa6'; X.gold.beginPath(); X.gold.arc(x + s * .02, y - s * .76, s * .12, 0, TAU); X.gold.fill();
-  X.key.fillStyle = P.sumi; X.key.beginPath(); X.key.arc(x - s * .01, y - s * .82, s * .12, Math.PI, TAU); X.key.fill(); // cap
-  line(X.key, [[x - s * .18, y], [x - s * .14, y - s * .62], [x + s * .16, y - s * .62], [x + s * .2, y]], 1.8, P.sumi);
-  if (cup) { X.red.fillStyle = P.orangeL; X.red.fillRect(x + s * .2, y - s * .52, s * .1, s * .1); line(X.key, [[x + s * .1, y - s * .5], [x + s * .22, y - s * .47]], 1.6, P.sumi); } }
+// —— a figure in the print's grammar: flat colour areas, carved outline, patterned cloth ——
+// (x, y) = between the feet; s = height; dir 1 faces right. o: { suit, walk, cup, open, cap, jacket, trousers }
+function limb(pts, w0, w1) { // a tapered limb as a closed polygon along a polyline
+  const n = pts.length, L = [], Rr = [];
+  for (let i = 0; i < n; i++) { const a = pts[Math.max(0, i - 1)], b = pts[Math.min(n - 1, i + 1)]; let dx = b[0] - a[0], dy = b[1] - a[1]; const d = Math.hypot(dx, dy) || 1; dx /= d; dy /= d;
+    const w = lerp(w0, w1, i / (n - 1)) / 2; L.push([pts[i][0] - dy * w, pts[i][1] + dx * w]); Rr.push([pts[i][0] + dy * w, pts[i][1] - dx * w]); }
+  return [...L, ...Rr.reverse()]; }
+const poly = (x, p) => { p.forEach(([a, b], i) => i ? x.lineTo(a, b) : x.moveTo(a, b)); x.closePath(); };
+function shape(block, p, col) { const x = X[block]; x.fillStyle = col; x.beginPath(); poly(x, p); x.fill(); }
+function outline(p, w = 2.2) { carve(X.key, [...p, p[0]], w, { col: P.sumi, taper: [0, 0], jit: .15, per: 2, seed: p[0][0] }); }
+function figure(x, y, s, o = {}) {
+  const d = o.dir || 1, q = (u, v) => [x + u * s * d, y + v * s];
+  const coat = o.jacket || P.ind, trou = o.trousers || P.indD, skin = '#e9cfa3';
+  const stride = o.walk ? .17 : .035, ph = o.phase || 0;
+  // legs: back leg first, then front; trousers with a crease line
+  const legs = [[-stride, .02 * ph], [stride, -.02 * ph]].map(([fx]) => [q(fx * .35, -.47), q(fx * .7 + .01, -.24), q(fx, -.035)]);
+  const legP = legs.map(l => limb(l, s * .085, s * .06));
+  knock(['blue', 'pale', 'red'], xx => legP.forEach(p => poly(xx, p)));
+  legP.forEach((p, i) => { shape('blue', p, i ? trou : mix(trou, P.sumi, .3)); outline(p, 2); });
+  legs.forEach(l => line(X.key, [[lerp(l[0][0], l[1][0], .2), lerp(l[0][1], l[1][1], .2)], l[1], l[2]], 1, rgba(P.paleL, .5)));
+  // shoes
+  legs.forEach(l => { const [fx, fy] = l[2]; const p = [[fx - s * .03 * d, fy - s * .012], [fx + s * .07 * d, fy - s * .008], [fx + s * .075 * d, fy + s * .03], [fx - s * .035 * d, fy + s * .03]]; shape('key', p, P.sumi); });
+  // back arm
+  const shL = q(-.05, -.77), shR = q(.06, -.77);
+  const backArm = limb([shL, q(-.09 - stride * .4, -.6), q(-.08 - stride * .6, -.46)], s * .07, s * .05);
+  knock(['blue', 'pale', 'red'], xx => poly(xx, backArm)); shape('blue', backArm, mix(coat, P.sumi, .3)); outline(backArm, 2);
+  shape('gold', [q(-.08 - stride * .6, -.46), q(-.05 - stride * .6, -.44), q(-.07 - stride * .6, -.41), q(-.1 - stride * .6, -.43)], skin);
+  // torso: jacket with hem, lapels and the shirt V
+  const torso = [q(-.075, -.805), q(.07, -.805), q(.118, -.77), q(.11, -.62), q(.095, -.42), q(-.095, -.42), q(-.105, -.62), q(-.118, -.77)];
+  knock(['blue', 'pale', 'red', 'gold'], xx => poly(xx, torso)); shape('blue', torso, coat);
+  // cloth pattern, the figure's version of the fish's scales: fine pinstripe or a printed dot
+  X.pale.save(); X.pale.beginPath(); poly(X.pale, torso); legP.forEach(p => poly(X.pale, p)); X.pale.clip();
+  if (o.suit) { X.pale.strokeStyle = rgba(P.pale, .45); X.pale.lineWidth = 1; for (let k = -20; k < 20; k++) { const px = x + k * s * .022; X.pale.beginPath(); X.pale.moveTo(px, y - s); X.pale.lineTo(px + s * .02, y); X.pale.stroke(); } }
+  else { X.pale.fillStyle = rgba(P.pale, .5); for (let i = 0; i < 160; i++) { const [px, py] = q(lerp(-.12, .12, R()), lerp(-.8, -.42, R())); X.pale.beginPath(); X.pale.arc(px, py, s * .004, 0, TAU); X.pale.fill(); } }
+  X.pale.restore();
+  if (o.suit) {
+    const v = [q(-.035, -.79), q(.04, -.79), q(.005, -.62)]; knock(['blue', 'pale'], xx => poly(xx, v)); // shirt is paper
+    shape('red', [q(-.004, -.775), q(.012, -.775), q(.016, -.66), q(.004, -.635), q(-.008, -.66)], P.orange); // tie
+    line(X.key, [q(-.035, -.79), q(-.06, -.7), q(.005, -.6)], 1.8); line(X.key, [q(.04, -.79), q(.07, -.7), q(.005, -.6)], 1.8); // lapels
+    line(X.key, [q(.005, -.6), q(.0, -.42)], 1.4); X.key.fillStyle = P.sumi; [[-.012, -.56], [-.012, -.5]].forEach(([u, v]) => { const [a, b] = q(u, v); X.key.beginPath(); X.key.arc(a, b, s * .006, 0, TAU); X.key.fill(); });
+    line(X.key, [q(.04, -.55), q(.09, -.55)], 1.4); // pocket
+  } else {
+    line(X.key, [q(.0, -.79), q(.0, -.42)], 1.6); // zip
+    if (o.open) { const v = [q(-.03, -.79), q(.03, -.79), q(.04, -.42), q(-.04, -.42)]; knock(['blue', 'pale'], xx => poly(xx, v)); const [cx2, cy2] = q(.0, -.66);
+      X.blue.fillStyle = P.ind; X.blue.beginPath(); X.blue.arc(cx2, cy2, s * .03, 0, TAU); X.blue.fill(); X.gold.strokeStyle = P.goldL; X.gold.lineWidth = 2; X.gold.beginPath(); X.gold.arc(cx2, cy2, s * .022, 0, TAU); X.gold.stroke(); // the crest, worn
+      line(X.key, [q(-.03, -.79), q(-.04, -.42)], 1.6); line(X.key, [q(.03, -.79), q(.04, -.42)], 1.6); }
+    line(X.key, [q(-.1, -.47), q(.1, -.47)], 1.4); // hem band
+  }
+  outline(torso, 2.4);
+  // neck and head: profile with ear, eye, brow, hair
+  shape('gold', [q(-.025, -.83), q(.03, -.83), q(.028, -.785), q(-.02, -.785)], skin);
+  const hc = q(.012, -.89), hr = s * .068;
+  const head = []; for (let a = 0; a < TAU; a += .25) { const r = hr * (1 + .08 * Math.cos(a * 2)); head.push([hc[0] + Math.cos(a) * r * .9 * d + (Math.cos(a) > .6 ? s * .008 * d : 0), hc[1] + Math.sin(a) * r * 1.08]); }
+  knock(['blue', 'pale'], xx => poly(xx, head)); shape('gold', head, skin);
+  const nose = [q(.07, -.895), q(.088, -.872), q(.068, -.868)]; shape('gold', nose, skin); line(X.key, nose, 1.5);
+  const hair = []; for (let a = Math.PI * .95; a < TAU * 1.02; a += .2) hair.push([hc[0] + Math.cos(a) * hr * .98 * d, hc[1] + Math.sin(a) * hr * 1.12]);
+  hair.push(q(-.03, -.86), q(-.05, -.865)); shape('key', hair, o.grey ? P.sumiL : P.sumi);
+  if (o.cap) shape('blue', [q(-.065, -.92), q(.06, -.95), q(.1, -.93), q(.06, -.915), q(-.06, -.9)], P.ind);
+  outline(head, 2); line(X.key, [q(.04, -.895), q(.06, -.893)], 1.8); line(X.key, [q(.038, -.912), q(.064, -.914)], 1.4); // eye, brow
+  const ear = q(-.005, -.88); X.key.strokeStyle = P.goldD; X.key.lineWidth = 1.6; X.key.beginPath(); X.key.ellipse(ear[0], ear[1], s * .01, s * .016, 0, 0, TAU); X.key.stroke();
+  line(X.key, [q(.04, -.852), q(.06, -.85)], 1.3); // mouth
+  // front arm, last, over the torso
+  const cup = o.cup;
+  const fa = cup ? [shR, q(.12, -.62), q(.15, -.7)] : [shR, q(.09 + stride * .4, -.6), q(.09 + stride * .7, -.46)];
+  const frontArm = limb(fa, s * .07, s * .05); knock(['blue', 'pale', 'red', 'gold'], xx => poly(xx, frontArm)); shape('blue', frontArm, mix(coat, P.blue, .15)); outline(frontArm, 2);
+  const [hx, hy] = fa[2]; shape('gold', [[hx - s * .02, hy - s * .015], [hx + s * .025 * d, hy - s * .02], [hx + s * .03 * d, hy + s * .02], [hx - s * .015, hy + s * .02]], skin);
+  if (cup) { const cp = [[hx + s * .01 * d, hy - s * .06], [hx + s * .055 * d, hy - s * .06], [hx + s * .05 * d, hy + s * .005], [hx + s * .015 * d, hy + s * .005]]; knock(['blue', 'gold'], xx => poly(xx, cp)); shape('red', cp, P.orangeL); outline(cp, 1.6);
+    for (let k = 0; k < 2; k++) { const st = []; for (let i = 0; i < 8; i++) st.push([hx + s * (.03 + .012 * Math.sin(i + k * 2)) * d, hy - s * (.07 + i * .018)]); carve(X.key, st, 1.4, { col: rgba(P.paleL, .8), seed: k }); } }
+}
 
 function mist(cx, cy, w, h) { knock(['blue', 'pale', 'red'], x => { x.moveTo(cx - w / 2 + h / 2, cy - h / 2); x.lineTo(cx + w / 2 - h / 2, cy - h / 2); x.arc(cx + w / 2 - h / 2, cy, h / 2, -Math.PI / 2, Math.PI / 2); x.lineTo(cx - w / 2 + h / 2, cy + h / 2); x.arc(cx - w / 2 + h / 2, cy, h / 2, Math.PI / 2, Math.PI * 1.5); }); }
 function compose(stampSeal) {
@@ -129,9 +192,14 @@ if (F === 1) { // the same water: a harbour town at first light, the school scat
   for (let i = 0; i < 9; i++) { X.key.fillStyle = rgba(P.sumi, .8); X.key.fillRect(670 + i * 48, 500, 22, 30); }
   // quay
   X.gold.fillStyle = P.goldD; X.gold.fillRect(FR.x0, 560, FR.x1 - FR.x0, 18); line(X.key, [[FR.x0, 560], [FR.x1, 560]], 2.6, P.sumi); line(X.key, [[FR.x0, 578], [FR.x1, 578]], 1.6, P.sumi);
-  figure(560, 560, 120, true); // Henrik, with his coffee
+ // Henrik, with his coffee
   sea(578, FR.y1);
-  fish(380, 760, 380, -.15, 1); fish(980, 700, 420, .08, -1); fish(1520, 800, 400, -.35, 1); fish(700, 930, 360, .25, -1); fish(1300, 960, 380, .05, 1);
+  fish(820, 900, 380, -.15, 1); fish(980, 700, 420, .08, -1); fish(1520, 800, 400, -.35, 1); fish(560, 1000, 300, .25, -1); fish(1300, 960, 380, .05, 1);
+  // a jetty in the foreground, so Henrik stands nearer than the town
+  const jet = [[FR.x0, 790], [560, 760], [600, 800], [FR.x0, 840]]; knock(['blue', 'pale'], xx => poly(xx, jet)); shape('gold', jet, P.goldD); outline(jet, 2.6);
+  for (let k = 0; k < 9; k++) line(X.key, [[FR.x0 + k * 62, 790 - k * 3.4], [FR.x0 + k * 62 + 8, 840 - k * 4.4]], 1.4, rgba(P.sumi, .7));
+  for (const px of [120, 330, 540]) { const pile = [[px, 820], [px + 22, 818], [px + 22, 980], [px, 980]]; knock(['blue', 'pale'], xx => poly(xx, pile)); shape('gold', pile, P.goldD); outline(pile, 2); }
+  figure(330, 800, 360, { suit: true, cup: true, grey: true });
   compose(x => { const e = slip(x, 1800, 70, 'THE SAME WATER', 'Monday, 05:40'); seal(x, 'A', 1800, e + 46, 52); });
 }
 if (F === 2) { // the turn: underwater, a single gold stroke, the school turning to it
@@ -171,7 +239,9 @@ if (F === 3) { // Monday: the works under rain, its mark on the gable, the crew 
   X.gold.fillStyle = mix(P.goldD, P.paper, .55); X.gold.fillRect(FR.x0, 890, FR.x1 - FR.x0, FR.y1 - 890); line(X.key, [[FR.x0, 890], [FR.x1, 890]], 2.4, P.sumi);
   for (const [px, py, pw] of [[520, 960, 260], [1300, 990, 320], [980, 940, 140]]) { X.pale.fillStyle = P.pale; X.pale.beginPath(); X.pale.ellipse(px, py, pw / 2, 14, 0, 0, TAU); X.pale.fill(); }
   // the crew walking in, small and flat
-  [[700, 905], [770, 915], [1180, 908], [1250, 920], [1330, 900]].forEach(([fx, fy]) => figure(fx, fy, 110));
+  figure(560, 1015, 250, { walk: true, cap: true, jacket: P.blue, trousers: P.goldD, phase: 1 }); figure(760, 1000, 230, { walk: true, open: true, jacket: P.blue, trousers: P.goldD });
+  figure(1240, 1010, 240, { walk: true, dir: -1, cap: true, jacket: P.blue, trousers: P.goldD }); figure(1420, 1020, 250, { walk: true, dir: -1, jacket: P.blue, trousers: P.goldD, open: true });
+  figure(1010, 905, 150, { suit: true, grey: true }); // Henrik at the door
   mist(560, 520, 700, 40); mist(1500, 560, 560, 34);
   // rain: two sets of fine straight lines at slightly different angles
   const rain = (n, ang, col, wd) => { X.key.strokeStyle = col; X.key.lineWidth = wd; for (let i = 0; i < n; i++) { const x0 = FR.x0 + R() * (FR.x1 - FR.x0 + 400) - 200, y0 = FR.y0 + R() * (FR.y1 - FR.y0), L = 60 + R() * 120; X.key.beginPath(); X.key.moveTo(x0, y0); X.key.lineTo(x0 + Math.sin(ang) * L, y0 + Math.cos(ang) * L); X.key.stroke(); } };
