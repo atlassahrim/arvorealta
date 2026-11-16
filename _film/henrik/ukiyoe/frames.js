@@ -117,6 +117,70 @@ function pen(pts, { w = 2.2, amp = 1.6, seed = 1, closed = false, passes = 2, ga
     const skip0 = Math.floor(R() * n), skipL = R() < gap * 3 ? Math.floor(n * gap) : 0; // the pen lifts once, sometimes
     x.lineWidth = w * (k ? .6 : 1);
     for (let i = 1; i < n; i++) { if (i > skip0 && i < skip0 + skipL) continue; x.lineWidth = (k ? .6 : 1) * w * (.75 + .5 * vn(i * .3 + seed)); x.beginPath(); x.moveTo(p[i - 1][0], p[i - 1][1]); x.lineTo(p[i][0], p[i][1]); x.stroke(); } } }
+
+// —— line-first figure: the owner's sketch sheet. The line defines everything; colour is a slip of wash and one accent ——
+function stroke(pts, { w = 2.2, amp = 2, seed = 1, closed = false, passes = 3, lifts = 2 } = {}) {
+  const x = X.key; x.strokeStyle = P.sumi; x.lineCap = 'round'; x.lineJoin = 'round';
+  const base = dense(closed ? [...pts, pts[0], pts[1]] : pts, 9), n = base.length;
+  for (let k = 0; k < passes; k++) {
+    const a = amp * (1 + k * .7), ww = w * [1, .62, .45, .4][k] || .4;
+    const p = base.map(([u, v], i) => [u + (vn(i * .17 + seed + k * 9) - .5) * 2 * a, v + (vn(i * .21 + seed * 2.3 + k * 13 + 50) - .5) * 2 * a]);
+    // the pen lifts: split into segments that overlap a little, and the later passes only re-trace part of the path
+    const from = k ? Math.floor(R() * n * .4) : 0, to = k ? Math.floor(n * (.6 + R() * .4)) : n;
+    const cuts = [from]; for (let c = 0; c < lifts; c++) cuts.push(Math.floor(lerp(from, to, (c + 1) / (lifts + 1)) + (R() - .5) * 6)); cuts.push(to);
+    for (let c = 0; c < cuts.length - 1; c++) { const s0 = Math.max(0, cuts[c] - 2), s1 = Math.min(n - 1, cuts[c + 1] + 2); if (s1 <= s0) continue;
+      for (let i = s0 + 1; i <= s1; i++) { x.lineWidth = ww * (.6 + .7 * vn(i * .4 + seed + k)); x.beginPath(); x.moveTo(p[i - 1][0], p[i - 1][1]); x.lineTo(p[i][0], p[i][1]); x.stroke(); } } } }
+function hatch(region, x0, y0, x1, y1, { gap = 9, ang = .9, w = 1.2, seed = 1 } = {}) { // diagonal shading inside a shape
+  const x = X.key; x.save(); x.beginPath(); poly(x, region); x.clip(); x.beginPath(); x.rect(Math.min(x0, x1), Math.min(y0, y1), Math.abs(x1 - x0), Math.abs(y1 - y0)); x.clip(); x.strokeStyle = P.sumi; x.lineCap = 'round';
+  const len = Math.hypot(x1 - x0, y1 - y0) * 1.5, dx = Math.cos(ang), dy = Math.sin(ang);
+  for (let t = -len; t < len; t += gap * (.8 + R() * .5)) { const cx = (x0 + x1) / 2 + t * dy, cy = (y0 + y1) / 2 - t * dx;
+    const pts = [[cx - dx * len, cy - dy * len], [cx + dx * len, cy + dy * len]]; x.lineWidth = w * (.6 + R() * .7);
+    const p = wobbly(pts, 1.2, seed + t); x.beginPath(); p.forEach(([a, b], i) => i ? x.lineTo(a, b) : x.moveTo(a, b)); x.stroke(); }
+  x.restore(); }
+function henrikLine(x, y, s, o = {}) {
+  const d = o.dir || 1, q = (u, v) => [x + u * s * d, y + v * s], Q = a => a.map(([u, v]) => q(u, v)), sd = x * .13 + y * .07;
+  const L = (pts, k = 1, opt = {}) => stroke(Q(pts), { w: s * .0042, amp: s * .0028, seed: sd + k * 7.7, ...opt });
+  const fine = (pts, k = 1) => stroke(Q(pts), { w: s * .0028, amp: s * .002, seed: sd + k * 5.3, passes: 2, lifts: 1 });
+  const wash = (pts, col, a = .8, off = [s * .008, s * .006]) => { const p = Q(pts).map(([u, v]) => [u + off[0], v + off[1]]); X.gold.globalAlpha = a; X.gold.fillStyle = col; X.gold.beginPath(); smooth(X.gold, p, true); X.gold.fill(); X.gold.globalAlpha = 1; };
+  const coatC = mix(P.goldL, P.paper, .25);
+  // colour 1 of 3: a loose slip of camel wash on the coat, off the line, not filling it
+  const coat = [[-.03, -.872], [.04, -.872], [.085, -.855], [.113, -.82], [.122, -.74], [.112, -.64], [.116, -.52], [.13, -.4], [.12, -.36], [.04, -.352], [-.05, -.355], [-.112, -.365], [-.118, -.45], [-.104, -.58], [-.112, -.72], [-.1, -.82], [-.07, -.855]];
+  wash(coat.map(([u, v]) => [u * .92, v * .99]), coatC, .9);
+  // colour 2 of 3: the orange tie and cup
+  X.red.fillStyle = P.orange; X.red.beginPath(); poly(X.red, Q([[-.006, -.862], [.009, -.862], [.012, -.73], [.002, -.712], [-.008, -.73]])); X.red.fill();
+  // colour 3 of 3 is the ink itself
+  // back arm, hand in pocket: contour, then the inner seam
+  L([[-.11, -.83], [-.138, -.72], [-.142, -.62], [-.12, -.54], [-.085, -.52]], 1); L([[-.1, -.75], [-.11, -.64], [-.09, -.56], [-.072, -.545]], 2); fine([[-.135, -.67], [-.118, -.66]], 3);
+  // coat: outline in several passes, lapels, front edge, pockets, buttons, folds
+  L(coat, 4, { closed: true, passes: 4, lifts: 3 });
+  L([[-.03, -.872], [-.062, -.79], [-.03, -.765], [-.014, -.62], [-.008, -.355]], 5); L([[.04, -.872], [.066, -.79], [.036, -.765], [.014, -.63]], 6);
+  fine([[-.03, -.872], [.0, -.83], [.04, -.872]], 7); // collar back
+  fine([[-.1, -.515], [-.045, -.51]], 8); fine([[.04, -.51], [.105, -.515]], 9);
+  [[.032, -.66], [.032, -.585], [.032, -.51]].forEach(([u, v], i) => { const p = []; for (let a = 0; a < TAU; a += .9) p.push([u + Math.cos(a) * .006, v + Math.sin(a) * .006]); fine(p, 20 + i); });
+  fine([[-.09, -.47], [-.1, -.37]], 10); fine([[-.05, -.45], [-.06, -.36]], 11); fine([[.075, -.47], [.09, -.37]], 12); fine([[.11, -.55], [.118, -.45]], 13); fine([[.095, -.8], [.11, -.7], [.1, -.62]], 14); // folds
+  // shadow side of the coat, hatched
+  const cr = Q(coat); hatch(cr, ...q(.07, -.8), ...q(.15, -.37), { gap: s * .011, ang: 1.05, w: s * .0022, seed: sd });
+  // legs: two lines a leg, crossing at the ankles; trousers break over the shoe
+  L([[-.07, -.355], [-.066, -.2], [-.062, -.03]], 15); L([[-.025, -.355], [-.03, -.2], [-.034, -.03]], 16);
+  L([[.02, -.355], [.03, -.2], [.042, -.03]], 17); L([[.068, -.36], [.074, -.2], [.074, -.03]], 18);
+  fine([[-.066, -.035], [-.048, -.025], [-.032, -.035]], 19); fine([[.042, -.035], [.058, -.025], [.075, -.035]], 25);
+  hatch(Q([[.02, -.355], [.068, -.36], [.074, -.03], [.042, -.03]]), ...q(.05, -.36), ...q(.08, -.03), { gap: s * .01, ang: 1.1, w: s * .002, seed: sd + 3 });
+  // shoes: a dark loop each
+  for (const [u, len] of [[-.07, .07], [.035, .075]]) { const sh = Q([[u - .005, -.03], [u + len * .7, -.02], [u + len, -.004], [u + len, .004], [u - .01, .005]]); X.key.fillStyle = P.sumi; X.key.beginPath(); poly(X.key, sh); X.key.fill(); stroke(sh, { w: s * .003, amp: s * .002, seed: sd + u * 99, closed: true, passes: 2 }); }
+  // front arm bent up, cup in hand
+  L([[.11, -.84], [.148, -.75], [.17, -.695], [.19, -.73], [.198, -.79]], 26); L([[.125, -.8], [.15, -.715], [.165, -.74], [.18, -.8]], 27);
+  fine([[.145, -.74], [.162, -.725]], 28); fine([[.15, -.76], [.168, -.745]], 29); // elbow creases
+  const hp = []; for (let a = 0; a < TAU; a += .8) hp.push([.19 + Math.cos(a) * .018, -.8 + Math.sin(a) * .02]); L(hp, 30, { closed: true, passes: 2 });
+  const cp = Q([[.178, -.858], [.224, -.858], [.219, -.8], [.183, -.8]]); X.red.fillStyle = P.orangeL; X.red.beginPath(); poly(X.red, cp.map(([a, b]) => [a + 3, b + 2])); X.red.fill(); stroke(cp, { w: s * .0035, amp: s * .002, seed: sd + 31, closed: true, passes: 2 });
+  for (let k = 0; k < 2; k++) { const st = []; for (let i = 0; i < 7; i++) st.push([.195 + k * .016 + .011 * Math.sin(i * 1.2 + k * 2), -.875 - i * .02]); fine(st, 40 + k); }
+  // head: an overshooting loop, a nose, the ear, the hat with a hatched crown
+  const hd = []; for (let a = -.4; a < TAU - .4; a += .4) hd.push([.003 + Math.cos(a) * .045, -.922 + Math.sin(a) * .057]); L(hd, 32, { closed: true, passes: 3 });
+  fine([[.04, -.93], [.054, -.913], [.04, -.905]], 33); fine([[-.03, -.93], [-.036, -.915], [-.028, -.9]], 34); fine([[-.02, -.872], [-.015, -.86]], 35); fine([[.025, -.872], [.02, -.86]], 36); // nose, ear, neck
+  const brim = Q([[-.095, -.958], [.1, -.962], [.098, -.95], [-.092, -.947]]), crown = Q([[-.052, -.958], [-.046, -1.03], [.05, -1.03], [.056, -.96]]);
+  stroke(brim, { w: s * .0045, amp: s * .002, seed: sd + 37, closed: true, passes: 3 }); stroke(crown, { w: s * .0045, amp: s * .0025, seed: sd + 38, closed: true, passes: 3 });
+  hatch(crown, ...q(-.06, -1.03), ...q(.06, -.958), { gap: s * .007, ang: .95, w: s * .0024, seed: sd + 5 }); fine([[-.05, -.975], [.055, -.977]], 39);
+}
+
 // —— the cast: three people built from garment pieces, drawn in the sketch sheet's hand ——
 // local units: u right, v up (feet at 0, crown at -1); dir 1 faces right
 function person(x, y, s, who, o = {}) {
@@ -369,5 +433,10 @@ if (F === 4) { // the cast, on one sheet, like a page of the sketchbook
   person(480, 960, 760, 'henrik'); person(1000, 960, 740, 'sami'); person(1460, 960, 720, 'evaluator');
   compose(x => { x.fillStyle = P.sumi; x.font = 'italic 400 30px "EB Garamond"'; x.textAlign = 'center';
     [['Henrik', 480], ['Sami', 1000], ['The evaluator', 1460]].forEach(([n, px]) => x.fillText(n, px, 1010)); const e = slip(x, 1800, 70, 'THE CAST', 'The Same Water'); seal(x, 'A', 1800, e + 46, 52); });
+}
+if (F === 5) { // one character, finished: Henrik in line
+  Object.values(X).forEach(clipFrame);
+  henrikLine(860, 1000, 900);
+  compose(x => { x.fillStyle = P.sumi; x.font = 'italic 400 30px "EB Garamond"'; x.textAlign = 'center'; const e = slip(x, 1800, 70, 'HENRIK', 'The Same Water'); seal(x, 'A', 1800, e + 46, 52); });
 }
 document.title = 'done';
