@@ -117,6 +117,76 @@ function pen(pts, { w = 2.2, amp = 1.6, seed = 1, closed = false, passes = 2, ga
     const skip0 = Math.floor(R() * n), skipL = R() < gap * 3 ? Math.floor(n * gap) : 0; // the pen lifts once, sometimes
     x.lineWidth = w * (k ? .6 : 1);
     for (let i = 1; i < n; i++) { if (i > skip0 && i < skip0 + skipL) continue; x.lineWidth = (k ? .6 : 1) * w * (.75 + .5 * vn(i * .3 + seed)); x.beginPath(); x.moveTo(p[i - 1][0], p[i - 1][1]); x.lineTo(p[i][0], p[i][1]); x.stroke(); } } }
+// —— the cast: three people built from garment pieces, drawn in the sketch sheet's hand ——
+// local units: u right, v up (feet at 0, crown at -1); dir 1 faces right
+function person(x, y, s, who, o = {}) {
+  const d = o.dir || 1, q = (u, v) => [x + u * s * d, y + v * s], Q = a => a.map(([u, v]) => q(u, v)), seed = x * .31 + y * .17 + who.length;
+  const W = { w: s * .0045, amp: s * .0045 }, Wd = { w: s * .0032, amp: s * .003, passes: 1 };
+  const part = (pts, col, block = 'blue', { line = true, closed = true, off = [2.5, 2] } = {}) => { const p = Q(pts);
+    if (col) { knock(['blue', 'pale', 'red', 'gold', 'key'].filter(k => k !== block || true), xx => poly(xx, p)); shape(block, p.map(([a, b]) => [a + off[0], b + off[1]]), col); }
+    if (line) pen(p, { ...W, closed, seed: seed + pts[0][0] * 50 + pts[0][1] * 30 }); return p; };
+  const det = (pts, k = 0) => pen(Q(pts), { ...Wd, seed: seed + 7 + k + pts[0][0] * 40 });
+  const skin = '#e9cfa3';
+  const hand = (u, v, r = .018) => { const p = []; for (let a = 0; a < TAU; a += .9) p.push([u + Math.cos(a) * r, v + Math.sin(a) * r * 1.2]); part(p, skin, 'gold'); };
+  const shoe = (u, v, len = .07, boot = false) => part([[u - .02, v - (boot ? .05 : .02)], [u + len * .6, v - .018], [u + len, v - .004], [u + len, v + .006], [u - .025, v + .006]], P.sumi, 'key', { line: false });
+  const leg = (top, knee, ank, w0, w1, col) => { const L = [], Rr = []; const pts = [top, knee, ank];
+    pts.forEach((p, i) => { const w = lerp(w0, w1, i / 2) / 2; L.push([p[0] - w, p[1]]); Rr.push([p[0] + w, p[1]]); }); return part([...L, ...Rr.reverse()], col); };
+  const head = (u, v, hair, style) => { const p = []; for (let a = 0; a < TAU; a += .45) p.push([u + Math.cos(a) * .046, v + Math.sin(a) * .058]);
+    part(p, skin, 'gold'); if (style === 'bun') { part([[u - .05, v - .005], [u - .045, v - .05], [u, v - .065], [u + .045, v - .05], [u + .05, v - .005], [u + .054, v + .03], [u + .035, v - .025], [u - .035, v - .025], [u - .056, v + .03]], hair, 'key', { off: [0, 0] }); const b = []; for (let a = 0; a < TAU; a += .8) b.push([u - .01 + Math.cos(a) * .025, v - .075 + Math.sin(a) * .022]); part(b, hair, 'key', { off: [0, 0] }); }
+    else if (style === 'beanie') { part([[u - .052, v - .005], [u - .05, v - .05], [u, v - .075], [u + .05, v - .05], [u + .052, v - .005]], P.ind, 'blue'); det([[u - .052, v - .015], [u + .052, v - .015]]); }
+    else part([[u - .048, v - .01], [u - .044, v - .045], [u, v - .06], [u + .044, v - .045], [u + .048, v - .01], [u + .03, v - .03], [u - .03, v - .03]], hair, 'key', { off: [0, 0] });
+    det([[u + .045 * .6, v + .005], [u + .052, v + .012], [u + .045 * .6, v + .02]], 3); }; // the nose, the sketch's only face mark
+
+  if (who === 'henrik') { // the owner: long camel overcoat, hat, orange tie, coffee
+    const coat = mix(P.goldL, P.paper, .3);
+    part([[-.11, -.84], [-.14, -.68], [-.13, -.56], [-.085, -.52], [-.07, -.55], [-.1, -.6], [-.095, -.72]], mix(coat, P.goldD, .2)); // back sleeve, hand in pocket
+    leg([-.045, -.37], [-.05, -.2], [-.055, -.02], .052, .04, P.indD); leg([.045, -.37], [.052, -.2], [.06, -.02], .052, .04, P.indD);
+    det([[-.05, -.36], [-.053, -.04]]); det([[.05, -.36], [.057, -.04]], 1);
+    shoe(-.075, 0, .07); shoe(.04, 0, .075);
+    part([[-.035, -.875], [.035, -.875], [.11, -.845], [.12, -.7], [.115, -.55], [.135, -.36], [-.125, -.36], [-.115, -.55], [-.118, -.7], [-.11, -.845]], coat);
+    part([[-.03, -.872], [.03, -.872], [.008, -.7]], P.paper, 'gold', { line: false }); // shirt
+    part([[-.006, -.865], [.008, -.865], [.012, -.72], [.002, -.7], [-.008, -.72]], P.orange, 'red', { line: false });
+    det([[-.035, -.875], [-.06, -.8], [-.03, -.77], [-.012, -.6], [-.005, -.36]]); det([[.035, -.875], [.062, -.8], [.035, -.77], [.012, -.62]], 2); // lapels and front edge
+    det([[-.095, -.52], [-.04, -.515]], 3); det([[.04, -.515], [.1, -.52]], 4); // pocket flaps
+    [[.03, -.66], [.03, -.58], [.03, -.5]].forEach(([u, v]) => { const [a, b] = q(u, v); X.key.fillStyle = P.sumi; X.key.beginPath(); X.key.arc(a, b, s * .005, 0, TAU); X.key.fill(); });
+    det([[-.08, -.45], [-.09, -.37]], 5); det([[.07, -.47], [.085, -.37]], 6); det([[-.02, -.44], [-.03, -.37]], 7); // hem folds
+    part([[.11, -.845], [.15, -.74], [.17, -.69], [.2, -.75], [.18, -.8], [.15, -.7], [.13, -.76], [.125, -.83]], mix(coat, P.paper, .15)); // front sleeve, bent
+    det([[.145, -.735], [.16, -.72]], 8); det([[.175, -.79], [.19, -.775]], 9);
+    hand(.195, -.775); const cp = [[.18, -.83], [.225, -.83], [.22, -.775], [.185, -.775]]; part(cp, P.orangeL, 'red');
+    for (let k = 0; k < 2; k++) { const st = []; for (let i = 0; i < 6; i++) st.push([.195 + k * .015 + .01 * Math.sin(i * 1.3 + k * 2), -.85 - i * .022]); det(st, 10 + k); }
+    head(.0, -.925, P.sumiL);
+    part([[-.09, -.965], [.09, -.97], [.095, -.958], [-.092, -.954]], P.sumi, 'key', { off: [0, 0] }); part([[-.05, -.967], [-.045, -1.03], [.047, -1.03], [.052, -.968]], P.sumi, 'key', { off: [0, 0] });
+    shape('red', Q([[-.047, -.985], [.05, -.985], [.05, -.972], [-.048, -.972]]), P.goldD);
+  }
+  if (who === 'sami') { // the welder: short work jacket open on the crest, cargo trousers, boots, helmet under the arm
+    const jacket = P.blue, trou = mix(P.goldD, P.sumi, .15), walk = o.walk ? .07 : .02;
+    part([[-.11, -.83], [-.145, -.66], [-.15, -.52], [-.12, -.5], [-.11, -.64], [-.095, -.74]], mix(jacket, P.sumi, .25)); hand(-.135, -.49, .02);
+    leg([-.05, -.5], [-.06 - walk * .5, -.26], [-.07 - walk, -.03], .07, .055, trou); leg([.05, -.5], [.06 + walk * .5, -.26], [.07 + walk, -.03], .07, .055, trou);
+    det([[-.085, -.36], [-.04 - walk * .3, -.36], [-.04 - walk * .3, -.29], [-.085, -.29]]); det([[-.08 - walk * .5, -.26], [-.04 - walk * .5, -.26]], 1); det([[.04 + walk * .5, -.26], [.085 + walk * .5, -.26]], 2); // cargo pocket, knee seams
+    shoe(-.1 - walk, 0, .085, true); shoe(.045 + walk, 0, .09, true);
+    part([[-.04, -.86], [.04, -.86], [.04, -.52], [-.04, -.52]], P.paper, 'gold'); // the T-shirt
+    const [cx2, cy2] = q(.0, -.72); X.blue.fillStyle = P.ind; X.blue.beginPath(); X.blue.arc(cx2, cy2, s * .022, 0, TAU); X.blue.fill(); X.blue.save(); X.blue.globalCompositeOperation = 'destination-out'; X.blue.lineWidth = s * .007; X.blue.beginPath(); X.blue.arc(cx2, cy2, s * .015, 0, TAU); X.blue.stroke(); X.blue.restore(); X.gold.strokeStyle = P.goldL; X.gold.lineWidth = s * .006; X.gold.beginPath(); X.gold.arc(cx2, cy2, s * .015, 0, TAU); X.gold.stroke(); // the crest, worn
+    part([[-.04, -.865], [-.115, -.835], [-.125, -.68], [-.12, -.5], [-.035, -.5], [-.03, -.7]], jacket); part([[.04, -.865], [.115, -.835], [.125, -.68], [.12, -.5], [.035, -.5], [.03, -.7]], jacket);
+    part([[-.12, -.62], [-.035, -.62], [-.035, -.6], [-.12, -.6]], P.paleL, 'pale', { line: false }); part([[.035, -.62], [.12, -.62], [.12, -.6], [.035, -.6]], P.paleL, 'pale', { line: false }); // reflective band
+    det([[-.04, -.865], [-.07, -.82], [-.045, -.8]]); det([[.04, -.865], [.07, -.82], [.045, -.8]], 1); det([[.06, -.78], [.105, -.78], [.105, -.73], [.06, -.73]], 2); det([[-.12, -.53], [-.035, -.53]], 3); det([[.035, -.53], [.12, -.53]], 4);
+    // front arm holding a welding helmet at the hip
+    part([[.115, -.835], [.15, -.7], [.16, -.6], [.13, -.58], [.125, -.68], [.1, -.76]], mix(jacket, P.blue, .1)); hand(.15, -.57, .02);
+    part([[.12, -.62], [.23, -.62], [.24, -.5], [.2, -.46], [.13, -.47], [.115, -.52]], P.ind, 'blue'); part([[.15, -.59], [.215, -.59], [.215, -.55], [.15, -.55]], P.sumi, 'key', { off: [0, 0] });
+    head(.0, -.915, P.sumi, 'beanie');
+  }
+  if (who === 'evaluator') { // the reader in another city: blazer, scarf, a folder held to the chest
+    const blz = P.mid;
+    part([[-.1, -.83], [-.13, -.68], [-.13, -.55], [-.105, -.54], [-.1, -.66], [-.085, -.74]], mix(blz, P.sumi, .25)); hand(-.118, -.53, .017);
+    leg([-.035, -.48], [-.04, -.24], [-.045, -.03], .045, .032, P.indD); leg([.035, -.48], [.04, -.24], [.045, -.03], .045, .032, P.indD);
+    shoe(-.065, 0, .06); shoe(.03, 0, .065);
+    part([[-.035, -.865], [.035, -.865], [.1, -.835], [.11, -.68], [.1, -.48], [-.1, -.48], [-.11, -.68], [-.1, -.835]], blz);
+    det([[-.035, -.865], [-.055, -.78], [-.02, -.72], [.0, -.48]]); det([[.035, -.865], [.055, -.78], [.02, -.72]], 1); det([[-.08, -.56], [-.035, -.56]], 2); det([[.035, -.56], [.08, -.56]], 3);
+    part([[-.04, -.87], [.04, -.87], [.03, -.82], [.012, -.66], [-.01, -.66], [-.03, -.82]], P.paleL, 'pale'); // scarf
+    part([[.02, -.78], [.13, -.77], [.13, -.6], [.02, -.61]], P.paper, 'gold'); det([[.04, -.75], [.11, -.745]], 4); det([[.04, -.72], [.11, -.715]], 5); det([[.04, -.69], [.09, -.686]], 6); // the folder
+    part([[.1, -.835], [.13, -.72], [.1, -.66], [.07, -.68], [.09, -.72], [.08, -.78]], mix(blz, P.paleL, .15)); hand(.075, -.67, .017);
+    head(.0, -.915, P.sumi, 'bun');
+  }
+}
 function sketchFigure(x, y, s, o = {}) {
   const d = o.dir || 1, j = () => (R() - .5) * .03, q = (u, v) => [x + (u + j() * .5) * s * d, y + v * s], seed = x * .37 + y * .11;
   const walk = o.walk ? .11 : .025, coatLen = o.short ? -.5 : -.38;
@@ -246,7 +316,7 @@ if (F === 1) { // the same water: a harbour town at first light, the school scat
   const jet = [[FR.x0, 790], [560, 760], [600, 800], [FR.x0, 840]]; knock(['blue', 'pale'], xx => poly(xx, jet)); shape('gold', jet, P.goldD); outline(jet, 2.6);
   for (let k = 0; k < 9; k++) line(X.key, [[FR.x0 + k * 62, 790 - k * 3.4], [FR.x0 + k * 62 + 8, 840 - k * 4.4]], 1.4, rgba(P.sumi, .7));
   for (const px of [120, 330, 540]) { const pile = [[px, 820], [px + 22, 818], [px + 22, 980], [px, 980]]; knock(['blue', 'pale'], xx => poly(xx, pile)); shape('gold', pile, P.goldD); outline(pile, 2); }
-  sketchFigure(330, 800, 360, { cup: true, tie: true, coat: mix(P.goldL, P.paper, .35), hat: true });
+  person(330, 800, 440, 'henrik');
   compose(x => { const e = slip(x, 1800, 70, 'THE SAME WATER', 'Monday, 05:40'); seal(x, 'A', 1800, e + 46, 52); });
 }
 if (F === 2) { // the turn: underwater, a single gold stroke, the school turning to it
@@ -286,13 +356,18 @@ if (F === 3) { // Monday: the works under rain, its mark on the gable, the crew 
   X.gold.fillStyle = mix(P.goldD, P.paper, .55); X.gold.fillRect(FR.x0, 890, FR.x1 - FR.x0, FR.y1 - 890); line(X.key, [[FR.x0, 890], [FR.x1, 890]], 2.4, P.sumi);
   for (const [px, py, pw] of [[520, 960, 260], [1300, 990, 320], [980, 940, 140]]) { X.pale.fillStyle = P.pale; X.pale.beginPath(); X.pale.ellipse(px, py, pw / 2, 14, 0, 0, TAU); X.pale.fill(); }
   // the crew walking in, small and flat
-  sketchFigure(540, 1015, 250, { walk: true, coat: P.blue, short: true, bag: true }); sketchFigure(740, 1000, 235, { walk: true, coat: P.ind, crest: true, hatch: true });
-  sketchFigure(1250, 1010, 245, { walk: true, dir: -1, coat: P.mid, short: true, dark: true }); sketchFigure(1430, 1022, 255, { walk: true, dir: -1, coat: P.ind, crest: true });
-  sketchFigure(1010, 905, 160, { tie: true, coat: mix(P.goldL, P.paper, .35), hat: true }); // Henrik at the door
+  person(720, 1020, 330, 'sami', { walk: true }); person(1010, 905, 190, 'henrik', { dir: -1 }); // Sami, jacket open on the crest; Henrik in the doorway
   mist(560, 520, 700, 40); mist(1500, 560, 560, 34);
   // rain: two sets of fine straight lines at slightly different angles
   const rain = (n, ang, col, wd) => { X.key.strokeStyle = col; X.key.lineWidth = wd; for (let i = 0; i < n; i++) { const x0 = FR.x0 + R() * (FR.x1 - FR.x0 + 400) - 200, y0 = FR.y0 + R() * (FR.y1 - FR.y0), L = 60 + R() * 120; X.key.beginPath(); X.key.moveTo(x0, y0); X.key.lineTo(x0 + Math.sin(ang) * L, y0 + Math.cos(ang) * L); X.key.stroke(); } };
   rain(900, .18, rgba(P.sumi, .55), 1.1); rain(600, .26, rgba(P.sumiL, .45), .9);
   compose(x => { const e = slip(x, 1800, 70, 'EVERYONE CAN SEE IT', 'the next Monday'); seal(x, 'A', 1800, e + 46, 52); });
+}
+if (F === 4) { // the cast, on one sheet, like a page of the sketchbook
+  Object.values(X).forEach(clipFrame);
+  bokashi(X.pale, FR.x0, FR.y0, FR.x1, 320, P.paleL, .6, 0, { rough: 24, seed: 21 });
+  person(480, 960, 760, 'henrik'); person(1000, 960, 740, 'sami'); person(1460, 960, 720, 'evaluator');
+  compose(x => { x.fillStyle = P.sumi; x.font = 'italic 400 30px "EB Garamond"'; x.textAlign = 'center';
+    [['Henrik', 480], ['Sami', 1000], ['The evaluator', 1460]].forEach(([n, px]) => x.fillText(n, px, 1010)); const e = slip(x, 1800, 70, 'THE CAST', 'The Same Water'); seal(x, 'A', 1800, e + 46, 52); });
 }
 document.title = 'done';
