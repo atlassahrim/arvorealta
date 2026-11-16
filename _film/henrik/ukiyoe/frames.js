@@ -779,4 +779,34 @@ if (F === 30) { // the works as an isometric woodblock model: the establishing m
   mist(520, 300, 760, 40); mist(1380, 230, 620, 34); mist(700, 980, 900, 44);
   compose(x => { const e = slip(x, 1800, 70, 'THE WORKS', 'from above'); seal(x, 'A', 1800, e + 46, 52); });
 }
+if (F === 31) { // small people for the isometric map: four options, true size with a 4x zoom
+  Object.values(X).forEach(clipFrame);
+  const CAST = [{ head: P.orange, body: mix(P.goldL, P.paper, .2), legs: P.ind }, { head: P.gold, body: P.mid, legs: P.goldD }, { head: P.goldL, body: P.pale, legs: P.ind }];
+  const C30 = .866;
+  const fill = (block, p, col) => { knock(['blue', 'pale', 'gold', 'red', 'key'].filter(b => b !== block), xx => poly(xx, p)); X[block].fillStyle = col; X[block].beginPath(); poly(X[block], p); X[block].fill(); };
+  const parts = (x, y, h) => { const q = (u, v) => [x + u * h, y + v * h]; // a kite head, a body widening to the hem, two triangle legs
+    return { head: [q(0, -1), q(.05, -.94), q(0, -.88), q(-.05, -.94)], body: [q(-.06, -.86), q(.06, -.86), q(.1, -.5), q(-.1, -.5)], legL: [q(-.08, -.5), q(-.01, -.5), q(-.04, 0)], legR: [q(.01, -.5), q(.08, -.5), q(.04, 0)] }; };
+  // A: ink silhouette, the head alone in colour (an architect's scale figure)
+  const A = (x, y, h, c) => { const p = parts(x, y, h); for (const k of ['body', 'legL', 'legR']) fill('key', p[k], P.sumi); fill('red', p.head, c.head); };
+  // B: colour by zone, no outline: a token
+  const Bf = (x, y, h, c) => { const p = parts(x, y, h); fill('gold', p.head, c.head); fill('blue', p.body, c.body); fill('pale', [...p.legL], c.legs); fill('pale', p.legR, mix(c.legs, P.sumi, .3)); };
+  // C: the token with a long morning shadow along the iso grid, so it reads from far away
+  const Cf = (x, y, h, c) => { const sh = [[x - h * .08, y], [x + h * .08, y], [x + h * .08 + h * 1.4 * C30, y + h * 1.4 * .5], [x - h * .08 + h * 1.4 * C30, y + h * 1.4 * .5]]; X.blue.save(); X.blue.globalAlpha = .55; X.blue.fillStyle = P.indD; X.blue.beginPath(); poly(X.blue, sh); X.blue.fill(); X.blue.restore(); Bf(x, y, h, c); };
+  // D: isometric blocks: legs, body and head as small boxes, three faces each
+  const Df = (x, y, h, c) => { const u = h / 1.8, Pj = (a, b, z) => [x + (a - b) * C30 * u, y + (a + b) * .5 * u - z * u];
+    const box = (a, b, z, w, d, hh, col) => { const L = [Pj(a, b + d, z), Pj(a + w, b + d, z), Pj(a + w, b + d, z + hh), Pj(a, b + d, z + hh)], Rr = [Pj(a + w, b, z), Pj(a + w, b + d, z), Pj(a + w, b + d, z + hh), Pj(a + w, b, z + hh)], T = [Pj(a, b, z + hh), Pj(a + w, b, z + hh), Pj(a + w, b + d, z + hh), Pj(a, b + d, z + hh)];
+      fill('pale', L, col); fill('blue', Rr, mix(col, P.sumi, .35)); fill('gold', T, mix(col, P.paper, .35)); };
+    box(-.15, -.12, 0, .3, .24, .85, c.legs); box(-.2, -.15, .85, .4, .3, .65, c.body); box(-.11, -.11, 1.52, .22, .22, .26, c.head); };
+  const opts = [['A', 'Ink silhouette', A], ['B', 'Colour token', Bf], ['C', 'Token and shadow', Cf], ['D', 'Iso blocks', Df]];
+  const k = 30, small = 1.85 * k; // the map's scale: 1.85 units at 30 px
+  opts.forEach(([id, name, fn], i) => { const cx = 260 + i * 400;
+    const g = [[cx - 170, 980], [cx + 170, 980], [cx + 170, 1000], [cx - 170, 1000]]; // a strip of the yard
+    const big = [[cx - 170, 520], [cx + 170, 520], [cx + 170, 540], [cx - 170, 540]];
+    for (const strip of [g, big]) { X.gold.fillStyle = mix(P.goldD, P.paper, .55); X.gold.beginPath(); poly(X.gold, strip); X.gold.fill(); }
+    CAST.forEach((c, j) => { fn(cx - 110 + j * 110, 520, small * 4 * .55, c); fn(cx - 60 + j * 60, 980, small, c); });
+  });
+  compose(x => { x.fillStyle = P.sumi; x.textAlign = 'center';
+    opts.forEach(([id, name], i) => { const cx = 260 + i * 400; x.font = '400 34px "EB Garamond"'; x.fillText(id + '  ·  ' + name, cx, 600); x.font = 'italic 400 22px "EB Garamond"'; x.fillText('true map size', cx, 1028); });
+    x.font = 'italic 400 24px "EB Garamond"'; x.fillText('Each option shows Henrik, Sami and the evaluator, enlarged above and at true map size below.', 960, 110); });
+}
 document.title = 'done';
