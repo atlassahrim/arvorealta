@@ -1,0 +1,178 @@
+<!doctype html><html><head><meta charset="utf-8"><title>The Same Water: frames</title>
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{margin:0;background:#000}canvas{display:block}</style></head><body>
+<canvas id="c" width="1920" height="1080"></canvas>
+<script>
+const F=+(new URLSearchParams(location.search).get('f')||1);
+const c=document.getElementById('c'),x=c.getContext('2d'),W=1920,H=1080;
+// deterministic random + value noise
+let seed=7+F*101;const R=()=>(seed=(seed*16807)%2147483647)/2147483647;
+const P=[...Array(512)].map(()=>R());
+const hsh=(i,j)=>P[((i*57+j*131)%512+512)%512];
+const sm=t=>t*t*(3-2*t);
+function noise(px,py){const i=Math.floor(px),j=Math.floor(py),u=sm(px-i),v=sm(py-j);
+ const a=hsh(i,j),b=hsh(i+1,j),cc=hsh(i,j+1),d=hsh(i+1,j+1);return a+(b-a)*u+(cc-a)*v+(a-b-cc+d)*u*v}
+const lerp=(a,b,t)=>a+(b-a)*t, cl=(v,a,b)=>Math.max(a,Math.min(b,v));
+const GOLD='#BD9059',GOLDL='#E3C48C',GOLDD='#6E4E24',BONE='#EDE3CF',ORANGE='#E8742A';
+
+// ── stitched water: streamlines through a swirling field ──
+function water(vort,base,tones,opts={}){
+ x.fillStyle=base;x.fillRect(0,0,W,H);
+ const field=(px,py)=>{let a=noise(px/420,py/420)*Math.PI*2+ (opts.drift||0);
+  let vx=Math.cos(a),vy=Math.sin(a);
+  for(const v of vort){const dx=px-v[0],dy=py-v[1],r2=dx*dx+dy*dy,k=v[2]*Math.exp(-r2/(v[3]*v[3]));
+   vx+= -dy/Math.sqrt(r2+1)*k*v[4]; vy+= dx/Math.sqrt(r2+1)*k*v[4];}
+  const m=Math.hypot(vx,vy)||1;return [vx/m,vy/m]};
+ x.lineCap='round';
+ for(let n=0;n<(opts.lines||2600);n++){
+  let px=R()*W,py=R()*H;const tone=tones[Math.floor(R()*tones.length)];
+  x.strokeStyle=tone;x.globalAlpha=lerp(.35,.9,R());x.lineWidth=lerp(.9,2.1,R());
+  x.setLineDash([lerp(4,9,R()),lerp(1.5,3,R())]);x.beginPath();x.moveTo(px,py);
+  const steps=60+R()*140;for(let s=0;s<steps;s++){const [vx,vy]=field(px,py);px+=vx*4;py+=vy*4;x.lineTo(px,py);
+   if(px<-20||px>W+20||py<-20||py>H+20)break}
+  x.stroke();}
+ x.setLineDash([]);x.globalAlpha=1;
+}
+
+// ── a stitched fish ── local u∈[0,1] nose→tail, v across (negative = back). dir 1 = head left, -1 = head right
+function fish(cx,cy,len,ang,bend,pal,dir=1){
+ const hw=len*0.14;
+ const w=u=>hw*Math.pow(Math.sin(Math.PI*Math.pow(cl(u*1.06,0,1),0.8)),0.85)*(u>0.84?lerp(1,.32,(u-.84)/.16):1);
+ const pt=(u,v)=>{v=v>0?v*.8:v;const lx=(u-.5)*len*dir,ly=v+bend*len*Math.pow(u-.3,2)*.3;
+  const ca=Math.cos(ang),sa=Math.sin(ang);return [cx+lx*ca-ly*sa,cy+lx*sa+ly*ca]};
+ const band=(v0,v1,u0=0,u1=1)=>{x.beginPath();for(let i=0;i<=80;i++){const u=lerp(u0,u1,i/80),[a,b]=pt(u,v0(u));i?x.lineTo(a,b):x.moveTo(a,b)}
+  for(let i=80;i>=0;i--){const u=lerp(u0,u1,i/80),[a,b]=pt(u,v1(u));x.lineTo(a,b)}x.closePath()};
+ const curve=(fn,u0,u1,n=80)=>{x.beginPath();for(let i=0;i<=n;i++){const u=lerp(u0,u1,i/n),[a,b]=pt(u,fn(u));i?x.lineTo(a,b):x.moveTo(a,b)}};
+ // echo quilting round the body, in the water's own tones
+ if(pal.echo){x.setLineDash([6,2.5]);for(let k=1;k<=5;k++){x.strokeStyle=pal.echo[k%pal.echo.length];x.globalAlpha=.75;x.lineWidth=1.3;
+   band(u=>-w(u)-k*9,u=>w(u)+k*9,-.03,1.05);x.stroke()}x.setLineDash([]);x.globalAlpha=1}
+ // fins behind the body
+ const fan=(u0,u1,side,reach,n=22)=>{for(let k=0;k<=n;k++){const t=k/n,u=lerp(u0,u1,t);const [a,b]=pt(u,side*w(u)*.85);
+   const [e,f]=pt(u+(u1-u0)*.8,side*(w(u)+reach*Math.sin(Math.PI*(t*.85+.1))));
+   x.strokeStyle=k%3?pal.fin:pal.finD;x.lineWidth=1.4;x.beginPath();x.moveTo(a,b);x.quadraticCurveTo((a+e)/2,(b+f)/2,e,f);x.stroke()}};
+ fan(.4,.56,-1,hw*1.3);fan(.52,.64,1,hw*.9);fan(.26,.36,1,hw*.85);fan(.74,.8,-1,hw*.5,10);fan(.74,.8,1,hw*.5,10);
+ for(let k=-18;k<=18;k++){const [a,b]=pt(.93,k*hw*.014);const [e,f]=pt(1.12+.05*Math.cos(k/5.5),k*hw*.075);
+  x.strokeStyle=k%3?pal.fin:pal.finD;x.lineWidth=1.5;x.beginPath();x.moveTo(a,b);x.lineTo(e,f);x.stroke()}
+ // base fills
+ band(u=>-w(u),u=>-w(u)*.05);x.fillStyle=pal.back;x.fill();
+ band(u=>-w(u)*.05,u=>w(u));x.fillStyle=pal.belly;x.fill();
+ x.save();band(u=>-w(u),u=>w(u));x.clip();
+ // back: dense stitched contours, shimmering blues
+ for(let k=0;k<30;k++){const t=k/30;x.strokeStyle=pal.backLines[(k*7)%pal.backLines.length];x.lineWidth=2;x.setLineDash([lerp(5,10,R()),2]);
+  curve(u=>-w(u)*(1-t*.95),.18,1);x.stroke()}
+ // lateral mosaic: small irregular tiles
+ x.setLineDash([]);
+ for(let r=0;r<3;r++)for(let i=0;i<90;i++){const u=lerp(.22,.93,(i+R()*.6)/90),v0=lerp(-.22,.18,r/3),v1=v0+.13;
+  const p=[pt(u,w(u)*v0),pt(u+.007,w(u)*v0),pt(u+.0075,w(u)*v1),pt(u-.001,w(u)*v1)];
+  x.fillStyle=pal.mosaic[Math.floor(R()*pal.mosaic.length)];x.beginPath();p.forEach((q,j)=>j?x.lineTo(q[0]+R()*1.5,q[1]+R()*1.5):x.moveTo(q[0],q[1]));x.fill()}
+ // belly: cream contours and a blue lace of dots
+ for(let k=0;k<14;k++){const t=.3+k/14*.7;x.strokeStyle=pal.bellyLines[k%2];x.lineWidth=1.5;x.setLineDash([6,2]);curve(u=>w(u)*t,.2,1);x.stroke()}
+ x.setLineDash([]);x.fillStyle=pal.lace;
+ for(let i=0;i<260;i++){const u=lerp(.24,.92,R()),t=lerp(.38,.92,R()),[a,b]=pt(u,w(u)*t);x.beginPath();x.arc(a,b,lerp(.8,2,R()),0,7);x.fill()}
+ // head: cream and gold, built from concentric stitched curves
+ band(u=>-w(u),u=>w(u),0,.24);x.fillStyle=pal.head;x.fill();
+ for(let k=0;k<16;k++){x.strokeStyle=k%4===0?GOLDD:(k%2?GOLD:GOLDL);x.lineWidth=k%4===0?2.2:1.4;x.setLineDash(k%4?[5,2]:[]);
+  const uc=.235-k*.0095;x.beginPath();for(let i=0;i<=30;i++){const t=lerp(-1,1,i/30),u=uc-.035*(1-t*t)*(1-k/22),[a,b]=pt(u,t*w(uc)*.98);i?x.lineTo(a,b):x.moveTo(a,b)}x.stroke()}
+ x.setLineDash([]);x.strokeStyle=GOLDD;x.lineWidth=1.2;
+ for(let k=0;k<7;k++){curve(u=>-w(u)*(.55-k*.07)+k*.6,.02,.13,20);x.stroke()}
+ x.restore();
+ // operculum edge, mouth
+ x.strokeStyle=GOLDD;x.lineWidth=3;x.beginPath();for(let i=0;i<=30;i++){const t=lerp(-1,1,i/30),u=.24-.04*(1-t*t),[a,b]=pt(u,t*w(.24)*.97);i?x.lineTo(a,b):x.moveTo(a,b)}x.stroke();
+ x.lineWidth=2;curve(u=>w(u)*.3,0,.075,10);x.stroke();
+ // eye
+ const [ex,ey]=pt(.082,-w(.082)*.12),er=len*.036;
+ x.fillStyle=GOLD;x.beginPath();x.arc(ex,ey,er*1.6,0,7);x.fill();
+ x.fillStyle='#0C2448';x.beginPath();x.arc(ex,ey,er*1.38,0,7);x.fill();
+ const eg=x.createRadialGradient(ex,ey,er*.2,ex,ey,er);eg.addColorStop(0,pal.eye2);eg.addColorStop(1,pal.eye);
+ x.fillStyle=eg;x.beginPath();x.arc(ex,ey,er,0,7);x.fill();
+ x.strokeStyle='rgba(255,225,180,.55)';x.lineWidth=1;for(let k=0;k<14;k++){const a=k/14*6.283;x.beginPath();x.moveTo(ex+Math.cos(a)*er*.5,ey+Math.sin(a)*er*.5);x.lineTo(ex+Math.cos(a)*er*.92,ey+Math.sin(a)*er*.92);x.stroke()}
+ x.fillStyle='#07122a';x.beginPath();x.arc(ex,ey,er*.42,0,7);x.fill();
+ x.fillStyle='rgba(255,255,255,.8)';x.beginPath();x.arc(ex-er*.28*dir,ey-er*.3,er*.13,0,7);x.fill();
+ band(u=>-w(u),u=>w(u));x.strokeStyle='rgba(6,16,36,.85)';x.lineWidth=1.8;x.stroke();
+}
+const BLUE={back:'#1D4C85',belly:'#E4DAC3',head:'#E7D7B4',backLines:['#3C7EC3','#79B1DE','#163F70','#A8CDEB','#2A63A6','#5596D0'],
+ mosaic:['#0F2C55','#E9DCC0','#3F7FBF','#1B4C8A','#D8C7A0'],bellyLines:['#D2C4A6','#EDE6D5'],lace:'rgba(48,96,150,.55)',
+ fin:'#C49A5E',finD:'#7A5A2E',eye:'#D9591E',eye2:'#F4A04A',echo:['#1B4C8A','#2A63A6','#163F70']};
+const GREY={...BLUE,back:'#4E5964',head:'#B9B2A3',belly:'#A6A398',backLines:['#6A757F','#87919A','#59636C'],mosaic:['#5c6670','#8a8f92','#707a82'],
+ bellyLines:['#9b988e','#b3b0a6'],lace:'rgba(80,90,100,.4)',fin:'#7B7263',finD:'#5d564b',eye:'#7d7468',eye2:'#9d958a'};
+
+function grain(a){const im=x.getImageData(0,0,W,H),d=im.data;for(let i=0;i<d.length;i+=4){const n=(R()-.5)*a;d[i]+=n;d[i+1]+=n;d[i+2]+=n}x.putImageData(im,0,0)}
+function vignette(s){const g=x.createRadialGradient(W/2,H/2,H*.3,W/2,H/2,H*.95);g.addColorStop(0,'rgba(0,0,0,0)');g.addColorStop(1,`rgba(2,6,14,${s})`);x.fillStyle=g;x.fillRect(0,0,W,H)}
+
+// ── velvet + deco gold ──
+function velvet(){x.fillStyle='#0E3523';x.fillRect(0,0,W,H);
+ for(let n=0;n<90000;n++){const px=R()*W,py=R()*H,l=noise(px/160,py/160);x.fillStyle=`rgba(${l>.5?60:4},${l>.5?110:30},${l>.5?75:18},.07)`;
+  x.fillRect(px,py,lerp(1,3,R()),lerp(4,10,R()))}}
+function goldStroke(draw,w){x.lineCap='round';x.lineJoin='round';
+ x.strokeStyle='rgba(0,0,0,.45)';x.lineWidth=w+4;x.save();x.translate(2,3);draw();x.stroke();x.restore();
+ x.strokeStyle=GOLDD;x.lineWidth=w;draw();x.stroke();
+ x.strokeStyle=GOLD;x.lineWidth=w*.62;draw();x.stroke();
+ x.strokeStyle=GOLDL;x.lineWidth=w*.18;x.save();x.translate(-w*.15,-w*.15);draw();x.stroke();x.restore()}
+function gingko(cx,cy,s){ // fan ornament
+ for(let k=-6;k<=6;k++){const a=-Math.PI/2+k*.16;x.save();x.translate(cx,cy);x.rotate(a+Math.PI/2);
+  const gr=x.createLinearGradient(0,0,0,-s);gr.addColorStop(0,GOLDD);gr.addColorStop(.5,GOLD);gr.addColorStop(1,GOLDL);
+  x.fillStyle=gr;x.beginPath();x.moveTo(0,0);x.quadraticCurveTo(-s*.13,-s*.6,-s*.07,-s*(.9+.08*Math.cos(k)));x.quadraticCurveTo(0,-s*1.02,s*.07,-s*(.9+.08*Math.cos(k)));x.quadraticCurveTo(s*.13,-s*.6,0,0);x.fill();
+  x.strokeStyle='rgba(80,50,15,.6)';x.lineWidth=1;x.beginPath();x.moveTo(0,-s*.1);x.lineTo(0,-s*.85);x.stroke();x.restore()}
+ x.fillStyle=GOLDD;x.beginPath();x.ellipse(cx,cy+s*.08,s*.12,s*.08,0,0,7);x.fill();
+ x.fillStyle=GOLD;x.beginPath();x.moveTo(cx-s*.06,cy+s*.1);x.lineTo(cx,cy+s*.42);x.lineTo(cx+s*.06,cy+s*.1);x.fill()}
+function arch(cx,base,r,inner=true){
+ // dark velvet inside with radiating pleats
+ x.save();x.beginPath();x.arc(cx,base,r,Math.PI,0);x.lineTo(cx+r,H+50);x.lineTo(cx-r,H+50);x.closePath();x.clip();
+ const g=x.createRadialGradient(cx,base,r*.1,cx,base,r);g.addColorStop(0,'rgba(0,0,0,.05)');g.addColorStop(1,'rgba(0,0,0,.4)');x.fillStyle=g;x.fillRect(cx-r,base-r,2*r,H);
+ if(inner)for(let k=1;k<12;k++){const a=Math.PI+k*Math.PI/12;
+  x.strokeStyle='rgba(0,0,0,.35)';x.lineWidth=5;x.beginPath();x.moveTo(cx,base);x.lineTo(cx+Math.cos(a)*r,base+Math.sin(a)*r);x.stroke();
+  x.strokeStyle='rgba(120,170,120,.10)';x.lineWidth=2;x.beginPath();x.moveTo(cx+3,base);x.lineTo(cx+Math.cos(a)*r+3,base+Math.sin(a)*r);x.stroke()}
+ x.restore();
+ goldStroke(()=>{x.beginPath();x.arc(cx,base,r,Math.PI,0);x.moveTo(cx-r,base);x.lineTo(cx-r,H+20);x.moveTo(cx+r,base);x.lineTo(cx+r,H+20)},10);
+ goldStroke(()=>{x.beginPath();x.arc(cx,base,r*.82,Math.PI,0)},3.5)}
+
+// ════ frames ════
+if(F===1){ // scenes 1–3: the same water, everyone their own way
+ water([[1560,220,1.8,300,1],[260,860,1.6,320,-1],[1080,640,1,300,1],[700,140,1.2,200,-1],[1750,900,1.4,240,-1]],'#0A1F3F',['#12376B','#1B4C8A','#0E2B55','#2A63A6','#091A36'],{lines:3200});
+ fish(520,250,640,-.18,.5,BLUE,1);
+ fish(1430,310,600,.12,-.4,BLUE,-1);
+ fish(1660,700,520,-1.25,.4,BLUE,1);
+ fish(330,690,560,.55,.4,BLUE,-1);
+ fish(980,560,760,.06,.25,GREY,1);       // the one nobody can read
+ fish(1000,930,620,-.12,.3,BLUE,-1);
+ vignette(.55);grain(12);
+}
+if(F===2){ // scene 5: the turn
+ water([[1460,560,1.4,560,1],[300,300,1.2,260,-1]],'#0A1F3F',['#12376B','#1B4C8A','#0E2B55','#24599A','#091A36'],{lines:2600});
+ const line=()=>{x.beginPath();x.moveTo(1520,90);x.bezierCurveTo(1760,380,1720,720,1440,1010)};
+ x.save();x.shadowColor='rgba(227,196,140,.95)';x.shadowBlur=80;goldStroke(line,22);x.restore();goldStroke(line,22);
+ x.setLineDash([12,7]);x.strokeStyle='rgba(255,242,214,.75)';x.lineWidth=2;line();x.stroke();x.setLineDash([]);
+ // the near ones have turned to it; the far ones are still turning
+ fish(1100,300,560,-.08,.12,BLUE,-1);
+ fish(1040,560,640,.0,.08,BLUE,-1);
+ fish(1110,830,560,.1,.12,BLUE,-1);
+ fish(480,250,460,-.55,.45,BLUE,-1);
+ fish(430,640,500,.35,.4,BLUE,-1);
+ fish(330,960,420,-.9,.5,BLUE,1);
+ vignette(.6);grain(12);
+}
+if(F===3){ // scene 8: one direction, under one arch
+ velvet();
+ arch(-140,520,360);arch(2060,520,360);
+ // water rising inside the main arch, with a wavy surface
+ x.save();x.beginPath();x.arc(960,560,592,Math.PI,0);x.lineTo(1552,H);x.lineTo(368,H);x.closePath();x.clip();
+ const g=x.createRadialGradient(960,560,100,960,560,620);g.addColorStop(0,'rgba(0,0,0,.05)');g.addColorStop(1,'rgba(0,0,0,.4)');x.fillStyle=g;x.fillRect(0,0,W,H);
+ for(let k=1;k<12;k++){const a=Math.PI+k*Math.PI/12;x.strokeStyle='rgba(0,0,0,.32)';x.lineWidth=5;x.beginPath();x.moveTo(960,560);x.lineTo(960+Math.cos(a)*600,560+Math.sin(a)*600);x.stroke()}
+ const surf=px=>600+Math.sin(px/70)*10+Math.sin(px/23)*3;
+ x.beginPath();x.moveTo(360,H);for(let px=360;px<=1560;px+=6)x.lineTo(px,surf(px));x.lineTo(1560,H);x.closePath();x.fillStyle='#0A1F3F';x.fill();
+ x.save();x.clip();x.setLineDash([7,2.5]);
+ for(let n=0;n<520;n++){const y0=lerp(600,H,n/520)+R()*4;x.strokeStyle=['#1B4C8A','#12376B','#2A63A6','#163F70'][n%4];x.globalAlpha=.75;x.lineWidth=1.5;
+  x.beginPath();for(let px=360;px<=1560;px+=14){const yy=y0+Math.sin(px/90+n*.07)*7*(1-(y0-600)/600)+Math.sin(px/31+n)*1.5;px===360?x.moveTo(px,yy):x.lineTo(px,yy)}x.stroke()}
+ x.setLineDash([]);x.globalAlpha=1;
+ [[700,720,400],[1180,730,420],[900,900,460],[1330,960,380],[560,1010,380]].forEach(f=>fish(f[0],f[1],f[2],-.04,.1,{...BLUE,echo:null},-1));
+ x.restore();
+ x.strokeStyle='rgba(255,240,210,.35)';x.lineWidth=1.5;x.beginPath();for(let px=368;px<=1552;px+=6)x.lineTo(px,surf(px));x.stroke();
+ x.restore();
+ goldStroke(()=>{x.beginPath();x.arc(960,560,600,Math.PI,0);x.moveTo(360,560);x.lineTo(360,H+20);x.moveTo(1560,560);x.lineTo(1560,H+20)},12);
+ goldStroke(()=>{x.beginPath();x.arc(960,560,520,Math.PI,0)},4);
+ for(let k=-4;k<=4;k++)goldStroke(()=>{x.beginPath();x.moveTo(960+k*20,60);x.lineTo(960+k*20,330)},3);
+ gingko(960,300,190);
+ vignette(.5);grain(9);
+}
+document.title='done';
+</script></body></html>
