@@ -237,6 +237,62 @@ function henrikSharp(x, y, s, o = {}) {
   shatch(legR, { gap: s * .006, ang: 1.35, w: s * .002, seed: sd + 2 });
 }
 
+
+// Sami and the evaluator, on Henrik's build: straight strokes, triangles for limbs, colour by zone
+function sharpKit(x, y, s, o) {
+  const d = o.dir || 1, lean = o.lean ?? .045, q = (u, v) => [x + (u * .82 - lean * v) * s * d, y + v * s], Q = a => a.map(([u, v]) => q(u, v)), sd = x * .11 + y * .05 + (o.seed || 0);
+  const W = s * .0048, opt = k => ({ w: W, jit: s * .0018, over: s * .008, seed: sd + k * 3.1 });
+  return { q, Q, sd, W, opt, ink: p => { X.key.fillStyle = P.sumi; X.key.beginPath(); poly(X.key, p); X.key.fill(); } };
+}
+function samiSharp(x, y, s, o = {}) { // the welder: beanie, short open jacket, crest, helmet under the arm, mid-stride
+  const { q, Q, sd, W, opt, ink } = sharpKit(x, y, s, { lean: .06, ...o });
+  const C = { head: P.gold, body: P.mid, legs: P.goldD };
+  const head = Q([[.004, -.975], [.032, -.94], [.006, -.902], [-.022, -.938]]);
+  const cap = Q([[-.03, -.955], [.04, -.962], [.03, -.995], [-.012, -1.0]]);
+  const jacket = Q([[-.046, -.872], [.048, -.876], [.062, -.72], [.078, -.6], [-.07, -.596], [-.058, -.72]]);
+  const shirt = Q([[-.012, -.872], [.016, -.874], [.012, -.6], [-.01, -.598]]);
+  const legL = Q([[-.064, -.596], [-.006, -.598], [-.07, .0]]), legR = Q([[.004, -.598], [.072, -.6], [.07, .004]]); // mid-stride: the triangles splay
+  const armB = Q([[-.048, -.87], [-.028, -.85], [-.09, -.62]]);
+  const armF = Q([[.046, -.874], [.066, -.85], [.1, -.66]]);
+  const helmet = Q([[.07, -.7], [.13, -.705], [.138, -.62], [.11, -.6], [.075, -.61]]);
+  flat('gold', [...head], C.head); flat('blue', jacket, C.body); flat('gold', [...legL, ...legR], C.legs); flat('blue', armB, mix(C.body, P.blue, .4)); flat('blue', armF, C.body);
+  knock(['blue', 'gold'], xx => poly(xx, shirt)); // the open jacket shows paper
+  ink(cap); sline(...Q([[-.035, -.955], [.045, -.963]]), { ...opt(1), w: W * 1.2 });
+  spoly(head, opt(2), true); sline(...Q([[.003, -.902], [-.002, -.876]]), opt(3));
+  spoly(Q([[-.046, -.872], [-.058, -.72], [-.07, -.596]]), opt(4)); spoly(Q([[.048, -.876], [.062, -.72], [.078, -.6]]), opt(5)); sline(...Q([[-.07, -.596], [.078, -.6]]), opt(6)); sline(...Q([[-.046, -.872], [.048, -.876]]), opt(7));
+  sline(...Q([[-.012, -.872], [-.01, -.598]]), { ...opt(8), w: W * .8 }); sline(...Q([[.016, -.874], [.012, -.6]]), { ...opt(9), w: W * .8 });
+  sline(...Q([[-.07, -.66], [-.012, -.66]]), { ...opt(10), w: W * .6 }); sline(...Q([[.014, -.662], [.074, -.662]]), { ...opt(11), w: W * .6 }); // reflective band
+  const crest = Q([[.002, -.8], [.012, -.785], [.002, -.77], [-.008, -.785]]); flat('gold', crest, P.goldL, [0, 0]); spoly(crest, { ...opt(12), w: W * .6, over: 1 }, true); // the crest, worn: a diamond
+  shatch(jacket, { gap: s * .008, ang: 1.25, w: s * .0022, seed: sd + 1, x0: q(.035, -.75)[0], x1: q(.1, -.75)[0] });
+  spoly(armB, opt(13), true); spoly(armF, opt(14), true);
+  ink(helmet); sline(...Q([[.085, -.68], [.125, -.682]]), { ...opt(15), w: W * .5 }); // the welding helmet, its visor slit left as paper
+  X.key.save(); X.key.globalCompositeOperation = 'destination-out'; X.key.beginPath(); poly(X.key, Q([[.088, -.675], [.124, -.677], [.122, -.66], [.09, -.658]])); X.key.fill(); X.key.restore();
+  spoly(legL, opt(16), true); spoly(legR, opt(17), true);
+  shatch(legR, { gap: s * .006, ang: 1.3, w: s * .002, seed: sd + 2 });
+}
+function evaluatorSharp(x, y, s, o = {}) { // the reader in another city: hair up, an A-line coat to the knee, a folder held to the chest
+  const { q, Q, sd, W, opt, ink } = sharpKit(x, y, s, { lean: .025, ...o });
+  const C = { head: P.goldL, body: P.pale, legs: P.ind };
+  const head = Q([[.004, -.97], [.03, -.935], [.006, -.9], [-.02, -.934]]);
+  const hair = Q([[-.024, -.93], [-.02, -.968], [.004, -.98], [.028, -.958], [.012, -.95], [-.006, -.925]]), bun = Q([[-.022, -.975], [-.004, -1.0], [.012, -.985], [-.004, -.97]]);
+  const coat = Q([[-.04, -.87], [.042, -.873], [.056, -.72], [.088, -.47], [-.08, -.466], [-.054, -.72]]); // A-line, to the knee
+  const legL = Q([[-.036, -.466], [-.008, -.467], [-.022, .0]]), legR = Q([[.006, -.467], [.036, -.468], [.022, .004]]); // thinner, under a longer coat
+  const armB = Q([[-.042, -.868], [-.024, -.85], [-.074, -.6]]);
+  const armU = Q([[.04, -.872], [.06, -.85], [.07, -.72]]), armF = Q([[.07, -.72], [.054, -.73], [.004, -.76]]); // folded across, holding the folder
+  const folder = Q([[-.004, -.83], [.07, -.832], [.072, -.7], [-.002, -.698]]);
+  flat('gold', head, C.head); flat('blue', coat, C.body); flat('blue', [...legL, ...legR], C.legs); flat('blue', armB, mix(C.body, P.mid, .35));
+  ink(hair); ink(bun);
+  spoly(head, opt(1), true); sline(...Q([[.003, -.9], [-.002, -.874]]), opt(2));
+  spoly(Q([[-.04, -.87], [-.054, -.72], [-.08, -.466]]), opt(3)); spoly(Q([[.042, -.873], [.056, -.72], [.088, -.47]]), opt(4)); sline(...Q([[-.08, -.466], [.088, -.47]]), opt(5)); sline(...Q([[-.04, -.87], [.042, -.873]]), opt(6));
+  spoly(Q([[-.016, -.871], [.004, -.79], [.0, -.467]]), { ...opt(7), w: W * .8 }); sline(...Q([[.02, -.872], [.004, -.79]]), { ...opt(8), w: W * .7 });
+  shatch(coat, { gap: s * .009, ang: 1.25, w: s * .002, seed: sd + 1, x0: q(.04, -.7)[0], x1: q(.11, -.7)[0] });
+  spoly(armB, opt(9), true);
+  knock(['blue', 'gold'], xx => poly(xx, folder)); spoly(folder, { ...opt(10), w: W * .8 }, true);
+  for (let k = 0; k < 4; k++) sline(...Q([[.012, -.81 + k * .028], [.06 - (k === 3 ? .02 : 0), -.811 + k * .028]]), { ...opt(11 + k), w: W * .4, over: 1 }); // lines of a submission
+  flat('blue', armU, C.body); flat('blue', armF, C.body); spoly(armU, opt(16), true); spoly(armF, opt(17), true);
+  spoly(legL, opt(18), true); spoly(legR, opt(19), true); shatch(legR, { gap: s * .006, ang: 1.3, w: s * .002, seed: sd + 2 });
+}
+
 // —— the cast: three people built from garment pieces, drawn in the sketch sheet's hand ——
 // local units: u right, v up (feet at 0, crown at -1); dir 1 faces right
 function person(x, y, s, who, o = {}) {
@@ -486,9 +542,9 @@ if (F === 3) { // Monday: the works under rain, its mark on the gable, the crew 
 if (F === 4) { // the cast, on one sheet, like a page of the sketchbook
   Object.values(X).forEach(clipFrame);
   bokashi(X.pale, FR.x0, FR.y0, FR.x1, 320, P.paleL, .6, 0, { rough: 24, seed: 21 });
-  person(480, 960, 760, 'henrik'); person(1000, 960, 740, 'sami'); person(1460, 960, 720, 'evaluator');
+  henrikSharp(470, 1000, 900); samiSharp(950, 1000, 860); evaluatorSharp(1400, 1000, 840);
   compose(x => { x.fillStyle = P.sumi; x.font = 'italic 400 30px "EB Garamond"'; x.textAlign = 'center';
-    [['Henrik', 480], ['Sami', 1000], ['The evaluator', 1460]].forEach(([n, px]) => x.fillText(n, px, 1010)); const e = slip(x, 1800, 70, 'THE CAST', 'The Same Water'); seal(x, 'A', 1800, e + 46, 52); });
+    const e = slip(x, 1800, 70, 'THE CAST', 'The Same Water'); seal(x, 'A', 1800, e + 46, 52); });
 }
 if (F === 5) { // one character, finished: Henrik in line
   Object.values(X).forEach(clipFrame);
