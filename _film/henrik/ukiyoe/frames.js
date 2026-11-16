@@ -209,12 +209,12 @@ function henrikSharp(x, y, s, o = {}) {
   const head = Q([[.004, -.985], [.032, -.95], [.006, -.912], [-.022, -.948]]);
   const hat = Q([[-.045, -.976], [.07, -.99], [.042, -1.025], [-.002, -1.03], [-.015, -.98]]);
   // the coat widens from the shoulder to the hem: the shoulder is never wider than the waist
-  const coat = Q([[-.05, -.882], [.052, -.886], [.068, -.7], [.09, -.42], [-.082, -.416], [-.064, -.7]]);
+  const coat = Q([[-.044, -.882], [.046, -.886], [.058, -.72], [.074, -.53], [-.068, -.526], [-.056, -.72]]);
   // legs: two inverted triangles, wide at the hem, a point at the ground; no shoes
-  const legL = Q([[-.058, -.416], [-.004, -.418], [-.026, .0]]), legR = Q([[.006, -.418], [.064, -.42], [.034, .004]]);
+  const legL = Q([[-.06, -.526], [-.004, -.528], [-.028, .0]]), legR = Q([[.006, -.528], [.066, -.53], [.036, .004]]);
   // arms: triangles too, wide at the shoulder and narrowing to the hand
-  const armB = Q([[-.052, -.88], [-.03, -.86], [-.098, -.57]]);
-  const armU = Q([[.05, -.884], [.07, -.86], [.122, -.725]]), armF = Q([[.122, -.725], [.104, -.742], [.152, -.84]]);
+  const armB = Q([[-.046, -.88], [-.026, -.86], [-.088, -.6]]);
+  const armU = Q([[.044, -.884], [.064, -.86], [.112, -.735]]), armF = Q([[.112, -.735], [.095, -.75], [.142, -.84]]);
   flat('red', [...head, ...hat], C.head); flat('gold', coat, C.body); flat('blue', [...legL, ...legR], C.legs);
   flat('gold', armB, mix(C.body, P.goldD, .25)); flat('gold', armU, C.body); flat('gold', armF, C.body);
   // head: a kite, the hat a dark wedge over a slanted brim
@@ -223,15 +223,15 @@ function henrikSharp(x, y, s, o = {}) {
   sline(...Q([[-.055, -.974], [.08, -.993]]), { ...opt(2), w: W * 1.3 });
   sline(...Q([[.002, -.912], [-.004, -.884]]), opt(3)); // neck
   // the coat, each edge its own stroke; front edge and lapel as straight cuts; the tie one heavy stroke
-  sline(...Q([[-.05, -.882], [.052, -.886]]), opt(4)); spoly(Q([[.052, -.886], [.068, -.7], [.09, -.42]]), opt(5)); spoly(Q([[-.05, -.882], [-.064, -.7], [-.082, -.416]]), opt(6));
-  sline(...Q([[-.082, -.416], [.09, -.42]]), opt(7));
-  spoly(Q([[-.016, -.884], [.01, -.79], [.004, -.418]]), { ...opt(8), w: W * .8 }); sline(...Q([[.026, -.885], [.01, -.79]]), { ...opt(9), w: W * .7 });
+  sline(...Q([[-.044, -.882], [.046, -.886]]), opt(4)); spoly(Q([[.046, -.886], [.058, -.72], [.074, -.53]]), opt(5)); spoly(Q([[-.044, -.882], [-.056, -.72], [-.068, -.526]]), opt(6));
+  sline(...Q([[-.068, -.526], [.074, -.53]]), opt(7));
+  spoly(Q([[-.014, -.884], [.009, -.8], [.004, -.528]]), { ...opt(8), w: W * .8 }); sline(...Q([[.022, -.885], [.009, -.8]]), { ...opt(9), w: W * .7 });
   sline(...Q([[-.003, -.878], [.003, -.82]]), { ...opt(10), w: W * 1.6 });
-  shatch(coat, { gap: s * .008, ang: 1.25, w: s * .0022, seed: sd + 1, x0: q(.035, -.6)[0], x1: q(.11, -.6)[0] });
+  shatch(coat, { gap: s * .008, ang: 1.25, w: s * .0022, seed: sd + 1, x0: q(.03, -.7)[0], x1: q(.1, -.7)[0] });
   // arms as triangles
   spoly(armB, opt(11), true); spoly(armU, opt(12), true); spoly(armF, opt(13), true);
-  const cup = Q([[.14, -.865], [.172, -.867], [.166, -.826], [.144, -.826]]); flat('red', cup, P.orangeL); spoly(cup, { ...opt(14), w: W * .7 }, true);
-  spoly(Q([[.154, -.88], [.162, -.905], [.152, -.93], [.162, -.955]]), { ...opt(15), w: W * .5, over: 2 }); // steam, as zigzag
+  const cup = Q([[.13, -.865], [.162, -.867], [.156, -.826], [.134, -.826]]); flat('red', cup, P.orangeL); spoly(cup, { ...opt(14), w: W * .7 }, true);
+  spoly(Q([[.144, -.88], [.152, -.905], [.142, -.93], [.152, -.955]]), { ...opt(15), w: W * .5, over: 2 }); // steam, as zigzag
   // legs as triangles, the far one hatched dark
   spoly(legL, opt(16), true); spoly(legR, opt(17), true);
   shatch(legR, { gap: s * .006, ang: 1.35, w: s * .002, seed: sd + 2 });
