@@ -208,32 +208,33 @@ function henrikSharp(x, y, s, o = {}) {
   // zones of flat colour, a little off the line
   const head = Q([[.004, -.985], [.032, -.95], [.006, -.912], [-.022, -.948]]);
   const hat = Q([[-.045, -.976], [.07, -.99], [.042, -1.025], [-.002, -1.03], [-.015, -.98]]);
-  const coat = Q([[-.075, -.875], [.07, -.882], [.1, -.8], [.085, -.6], [.07, -.4], [-.05, -.395], [-.075, -.6], [-.095, -.78]]);
-  const legs = Q([[-.04, -.4], [.055, -.4], [.03, -.2], [.032, -.0], [.02, -.0], [.006, -.22], [-.012, -.0], [-.024, -.0], [-.03, -.22]]);
-  flat('red', [...head, ...hat], C.head); flat('gold', coat, C.body); flat('blue', legs, C.legs);
+  // the coat widens from the shoulder to the hem: the shoulder is never wider than the waist
+  const coat = Q([[-.05, -.882], [.052, -.886], [.068, -.7], [.09, -.42], [-.082, -.416], [-.064, -.7]]);
+  // legs: two inverted triangles, wide at the hem, a point at the ground; no shoes
+  const legL = Q([[-.058, -.416], [-.004, -.418], [-.026, .0]]), legR = Q([[.006, -.418], [.064, -.42], [.034, .004]]);
+  // arms: triangles too, wide at the shoulder and narrowing to the hand
+  const armB = Q([[-.052, -.88], [-.03, -.86], [-.098, -.57]]);
+  const armU = Q([[.05, -.884], [.07, -.86], [.122, -.725]]), armF = Q([[.122, -.725], [.104, -.742], [.152, -.84]]);
+  flat('red', [...head, ...hat], C.head); flat('gold', coat, C.body); flat('blue', [...legL, ...legR], C.legs);
+  flat('gold', armB, mix(C.body, P.goldD, .25)); flat('gold', armU, C.body); flat('gold', armF, C.body);
   // head: a kite, the hat a dark wedge over a slanted brim
   spoly(head, opt(1), true);
   X.key.save(); X.key.fillStyle = P.sumi; X.key.beginPath(); poly(X.key, Q([[-.008, -.98], [.05, -.99], [.038, -1.025], [.0, -1.03]])); X.key.fill(); X.key.restore();
   sline(...Q([[-.055, -.974], [.08, -.993]]), { ...opt(2), w: W * 1.3 });
-  sline(...Q([[.002, -.912], [-.004, -.882]]), opt(3)); // neck
-  // coat: long, narrowing, every edge a separate stroke; the front edge and lapel as straight cuts
-  spoly(Q([[-.075, -.875], [.07, -.882]]), opt(4)); spoly(Q([[.07, -.882], [.1, -.8], [.085, -.6], [.07, -.4]]), opt(5)); spoly(Q([[-.075, -.875], [-.095, -.78], [-.075, -.6], [-.05, -.395]]), opt(6));
-  sline(...Q([[-.055, -.395], [.075, -.402]]), opt(7));
-  spoly(Q([[-.02, -.88], [.012, -.79], [.0, -.4]]), { ...opt(8), w: W * .8 }); spoly(Q([[.03, -.882], [.012, -.79]]), { ...opt(9), w: W * .7 });
-  sline(...Q([[-.005, -.875], [.002, -.82]]), { ...opt(10), w: W * 1.6 }); // the tie, a single heavy stroke
-  // shadow: dense straight hatching down the far side of the coat
-  shatch(coat, { gap: s * .008, ang: 1.25, w: s * .0022, seed: sd + 1, x0: q(.035, 0)[0], x1: q(.11, 0)[0] });
-  // arm bent up to the cup: three straight strokes and a hand tick
-  spoly(Q([[.07, -.87], [.12, -.74], [.14, -.8]]), opt(11)); spoly(Q([[.14, -.8], [.15, -.84]]), { ...opt(12), w: W * .7 });
-  const cup = Q([[.138, -.86], [.172, -.862], [.166, -.82], [.142, -.82]]); flat('red', cup, P.orangeL); spoly(cup, { ...opt(13), w: W * .7 }, true);
-  spoly(Q([[.152, -.875], [.16, -.9], [.15, -.925], [.16, -.95]]), { ...opt(14), w: W * .5, over: 2 }); // steam, as zigzag
-  // back arm hanging, into the pocket
-  spoly(Q([[-.08, -.86], [-.1, -.7], [-.07, -.6]]), opt(15));
-  // legs: long strokes tapering to points, one leg darkened with hatching
-  spoly(Q([[-.04, -.4], [-.03, -.22], [-.022, .0]]), opt(16)); spoly(Q([[.0, -.4], [.006, -.22], [-.01, .0]]), opt(17));
-  spoly(Q([[.015, -.4], [.008, -.22], [.022, .0]]), opt(18)); spoly(Q([[.055, -.4], [.03, -.2], [.032, .0]]), opt(19));
-  shatch(Q([[.015, -.4], [.055, -.4], [.03, -.2], [.032, .0], [.022, .0], [.008, -.22]]), { gap: s * .006, ang: 1.35, w: s * .002, seed: sd + 2 });
-  sline(...Q([[-.03, .0], [.0, .004]]), { ...opt(20), w: W * 1.4 }); sline(...Q([[.015, .002], [.05, .006]]), { ...opt(21), w: W * 1.4 }); // feet as two flat strokes
+  sline(...Q([[.002, -.912], [-.004, -.884]]), opt(3)); // neck
+  // the coat, each edge its own stroke; front edge and lapel as straight cuts; the tie one heavy stroke
+  sline(...Q([[-.05, -.882], [.052, -.886]]), opt(4)); spoly(Q([[.052, -.886], [.068, -.7], [.09, -.42]]), opt(5)); spoly(Q([[-.05, -.882], [-.064, -.7], [-.082, -.416]]), opt(6));
+  sline(...Q([[-.082, -.416], [.09, -.42]]), opt(7));
+  spoly(Q([[-.016, -.884], [.01, -.79], [.004, -.418]]), { ...opt(8), w: W * .8 }); sline(...Q([[.026, -.885], [.01, -.79]]), { ...opt(9), w: W * .7 });
+  sline(...Q([[-.003, -.878], [.003, -.82]]), { ...opt(10), w: W * 1.6 });
+  shatch(coat, { gap: s * .008, ang: 1.25, w: s * .0022, seed: sd + 1, x0: q(.035, -.6)[0], x1: q(.11, -.6)[0] });
+  // arms as triangles
+  spoly(armB, opt(11), true); spoly(armU, opt(12), true); spoly(armF, opt(13), true);
+  const cup = Q([[.14, -.865], [.172, -.867], [.166, -.826], [.144, -.826]]); flat('red', cup, P.orangeL); spoly(cup, { ...opt(14), w: W * .7 }, true);
+  spoly(Q([[.154, -.88], [.162, -.905], [.152, -.93], [.162, -.955]]), { ...opt(15), w: W * .5, over: 2 }); // steam, as zigzag
+  // legs as triangles, the far one hatched dark
+  spoly(legL, opt(16), true); spoly(legR, opt(17), true);
+  shatch(legR, { gap: s * .006, ang: 1.35, w: s * .002, seed: sd + 2 });
 }
 
 // —— the cast: three people built from garment pieces, drawn in the sketch sheet's hand ——
