@@ -181,6 +181,61 @@ function henrikLine(x, y, s, o = {}) {
   hatch(crown, ...q(-.06, -1.03), ...q(.06, -.958), { gap: s * .007, ang: .95, w: s * .0024, seed: sd + 5 }); fine([[-.05, -.975], [.055, -.977]], 39);
 }
 
+
+// —— angular sketch figure (the owner's second reference): straight strokes only, no curves or circles.
+// Colour by zone: one for the head, one for the body, one for the legs ——
+function sline(a, b, { w = 2.4, jit = 1.5, over = 6, seed = 1, passes = 2 } = {}) { // a quick straight pen stroke that overshoots its ends
+  const x = X.key; x.strokeStyle = P.sumi; x.lineCap = 'butt';
+  for (let k = 0; k < passes; k++) { const r = mulberry(Math.floor(seed * 1000) + k * 31), J = () => (r() - .5) * 2 * jit * (1 + k);
+    const dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy) || 1, ux = dx / L, uy = dy / L, o0 = over * (r() * .8 + .2) * (k ? .5 : 1), o1 = over * (r() * .8 + .2);
+    const p0 = [a[0] - ux * o0 + J(), a[1] - uy * o0 + J()], p1 = [b[0] + ux * o1 + J(), b[1] + uy * o1 + J()];
+    // pressure: heavy at the start, thinning out, drawn as a tapered quad
+    const w0 = w * (k ? .55 : 1) * (.8 + r() * .5), w1 = w0 * .35, nx = -uy, ny = ux;
+    x.fillStyle = P.sumi; x.beginPath(); x.moveTo(p0[0] + nx * w0 / 2, p0[1] + ny * w0 / 2); x.lineTo(p1[0] + nx * w1 / 2, p1[1] + ny * w1 / 2); x.lineTo(p1[0] - nx * w1 / 2, p1[1] - ny * w1 / 2); x.lineTo(p0[0] - nx * w0 / 2, p0[1] - ny * w0 / 2); x.closePath(); x.fill(); } }
+function spoly(pts, opt = {}, closed = false) { for (let i = 0; i < pts.length - (closed ? 0 : 1); i++) sline(pts[i], pts[(i + 1) % pts.length], { ...opt, seed: (opt.seed || 1) + i * 1.37 }); }
+function shatch(region, { gap = 6, ang = 1.2, w = 1.6, seed = 1, x0, x1, y0, y1 } = {}) { // straight, quick, dense hatching
+  const x = X.key; x.save(); x.beginPath(); poly(x, region); x.clip();
+  const xs = region.map(p => p[0]), ys = region.map(p => p[1]), a0 = x0 ?? Math.min(...xs), a1 = x1 ?? Math.max(...xs), b0 = y0 ?? Math.min(...ys), b1 = y1 ?? Math.max(...ys);
+  x.beginPath(); x.rect(a0, b0, a1 - a0, b1 - b0); x.clip(); const r = mulberry(Math.floor(seed * 777));
+  const dx = Math.cos(ang), dy = Math.sin(ang), L = Math.hypot(a1 - a0, b1 - b0);
+  for (let t = -L; t < L; t += gap * (.7 + r() * .6)) { const cx = (a0 + a1) / 2 - t * dy, cy = (b0 + b1) / 2 + t * dx; sline([cx - dx * L, cy - dy * L], [cx + dx * L, cy + dy * L], { w, jit: 1, over: 0, seed: t + seed, passes: 1 }); }
+  x.restore(); }
+function flat(block, pts, col, off = [3, 2]) { knock(['blue', 'pale', 'red', 'gold'].filter(k => k !== block), xx => poly(xx, pts)); X[block].fillStyle = col; X[block].beginPath(); poly(X[block], pts.map(([a, b]) => [a + off[0], b + off[1]])); X[block].fill(); }
+function henrikSharp(x, y, s, o = {}) {
+  const d = o.dir || 1, lean = o.lean ?? .045, q = (u, v) => [x + (u * .82 - lean * v) * s * d, y + v * s], Q = a => a.map(([u, v]) => q(u, v)), sd = x * .11 + y * .05;
+  const W = s * .0048, opt = k => ({ w: W, jit: s * .0018, over: s * .008, seed: sd + k * 3.1 });
+  const C = { head: P.orange, body: mix(P.goldL, P.paper, .2), legs: P.ind }; // three zones, three colours
+  // zones of flat colour, a little off the line
+  const head = Q([[.004, -.985], [.032, -.95], [.006, -.912], [-.022, -.948]]);
+  const hat = Q([[-.045, -.976], [.07, -.99], [.042, -1.025], [-.002, -1.03], [-.015, -.98]]);
+  const coat = Q([[-.075, -.875], [.07, -.882], [.1, -.8], [.085, -.6], [.07, -.4], [-.05, -.395], [-.075, -.6], [-.095, -.78]]);
+  const legs = Q([[-.04, -.4], [.055, -.4], [.03, -.2], [.032, -.0], [.02, -.0], [.006, -.22], [-.012, -.0], [-.024, -.0], [-.03, -.22]]);
+  flat('red', [...head, ...hat], C.head); flat('gold', coat, C.body); flat('blue', legs, C.legs);
+  // head: a kite, the hat a dark wedge over a slanted brim
+  spoly(head, opt(1), true);
+  X.key.save(); X.key.fillStyle = P.sumi; X.key.beginPath(); poly(X.key, Q([[-.008, -.98], [.05, -.99], [.038, -1.025], [.0, -1.03]])); X.key.fill(); X.key.restore();
+  sline(...Q([[-.055, -.974], [.08, -.993]]), { ...opt(2), w: W * 1.3 });
+  sline(...Q([[.002, -.912], [-.004, -.882]]), opt(3)); // neck
+  // coat: long, narrowing, every edge a separate stroke; the front edge and lapel as straight cuts
+  spoly(Q([[-.075, -.875], [.07, -.882]]), opt(4)); spoly(Q([[.07, -.882], [.1, -.8], [.085, -.6], [.07, -.4]]), opt(5)); spoly(Q([[-.075, -.875], [-.095, -.78], [-.075, -.6], [-.05, -.395]]), opt(6));
+  sline(...Q([[-.055, -.395], [.075, -.402]]), opt(7));
+  spoly(Q([[-.02, -.88], [.012, -.79], [.0, -.4]]), { ...opt(8), w: W * .8 }); spoly(Q([[.03, -.882], [.012, -.79]]), { ...opt(9), w: W * .7 });
+  sline(...Q([[-.005, -.875], [.002, -.82]]), { ...opt(10), w: W * 1.6 }); // the tie, a single heavy stroke
+  // shadow: dense straight hatching down the far side of the coat
+  shatch(coat, { gap: s * .008, ang: 1.25, w: s * .0022, seed: sd + 1, x0: q(.035, 0)[0], x1: q(.11, 0)[0] });
+  // arm bent up to the cup: three straight strokes and a hand tick
+  spoly(Q([[.07, -.87], [.12, -.74], [.14, -.8]]), opt(11)); spoly(Q([[.14, -.8], [.15, -.84]]), { ...opt(12), w: W * .7 });
+  const cup = Q([[.138, -.86], [.172, -.862], [.166, -.82], [.142, -.82]]); flat('red', cup, P.orangeL); spoly(cup, { ...opt(13), w: W * .7 }, true);
+  spoly(Q([[.152, -.875], [.16, -.9], [.15, -.925], [.16, -.95]]), { ...opt(14), w: W * .5, over: 2 }); // steam, as zigzag
+  // back arm hanging, into the pocket
+  spoly(Q([[-.08, -.86], [-.1, -.7], [-.07, -.6]]), opt(15));
+  // legs: long strokes tapering to points, one leg darkened with hatching
+  spoly(Q([[-.04, -.4], [-.03, -.22], [-.022, .0]]), opt(16)); spoly(Q([[.0, -.4], [.006, -.22], [-.01, .0]]), opt(17));
+  spoly(Q([[.015, -.4], [.008, -.22], [.022, .0]]), opt(18)); spoly(Q([[.055, -.4], [.03, -.2], [.032, .0]]), opt(19));
+  shatch(Q([[.015, -.4], [.055, -.4], [.03, -.2], [.032, .0], [.022, .0], [.008, -.22]]), { gap: s * .006, ang: 1.35, w: s * .002, seed: sd + 2 });
+  sline(...Q([[-.03, .0], [.0, .004]]), { ...opt(20), w: W * 1.4 }); sline(...Q([[.015, .002], [.05, .006]]), { ...opt(21), w: W * 1.4 }); // feet as two flat strokes
+}
+
 // —— the cast: three people built from garment pieces, drawn in the sketch sheet's hand ——
 // local units: u right, v up (feet at 0, crown at -1); dir 1 faces right
 function person(x, y, s, who, o = {}) {
@@ -436,7 +491,7 @@ if (F === 4) { // the cast, on one sheet, like a page of the sketchbook
 }
 if (F === 5) { // one character, finished: Henrik in line
   Object.values(X).forEach(clipFrame);
-  henrikLine(860, 1000, 900);
+  henrikSharp(900, 1000, 900);
   compose(x => { x.fillStyle = P.sumi; x.font = 'italic 400 30px "EB Garamond"'; x.textAlign = 'center'; const e = slip(x, 1800, 70, 'HENRIK', 'The Same Water'); seal(x, 'A', 1800, e + 46, 52); });
 }
 document.title = 'done';
