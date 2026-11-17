@@ -4879,28 +4879,30 @@ it is the part worth having checked before the page is used in an approach.
 
 ## Skills, and which one wins
 
-`.claude/skills/` holds six of ours, seven vendored from one upstream
-bundle, and three video skills vendored on 17 November from three sources.
+`.claude/skills/` holds six of ours, five vendored from one upstream
+bundle, and `ffmpeg-skill`, vendored on 17 November.
 `.claude/skills/VENDORED.md` carries the source, the commit, the licence and
 what was checked before installing each one.
 
 Ours: `audit`, `eu-tender-documents`, `plan`, `profile`, `research`,
 `taste-skill`.
 
-Vendored from `ui-ux-pro-max-skill`: `banner-design`, `brand`, `design`,
-`design-system`, `slides`, `ui-styling`, `ui-ux-pro-max`.
+Vendored from `ui-ux-pro-max-skill`: `banner-design`, `brand`,
+`design-system`, `slides`, `ui-ux-pro-max`.
 
-Vendored for video: `ffmpeg-skill`, `design-to-motion`, `voicestudio`.
-**`voicestudio` needs a VoiceStudio backend, and none runs here.**
+Vendored for video: `ffmpeg-skill`.
+
+**Removed on 17 November, at the owner's word:** `design` and `ui-styling`
+from the bundle, and `design-to-motion` and `voicestudio`, which had been
+installed earlier that day. `VENDORED.md` keeps where each came from.
 
 **This file outranks every one of them, and `taste-skill` outranks the
-vendored seven.** They are reference material, not a mandate, and several of
+vendored ones.** They are reference material, not a mandate, and several of
 them will suggest things this site has decided against:
 
-- `ui-styling` is built on shadcn/ui and Radix. **This page has no build step
-  and no runtime dependency it does not vendor itself.** Its script
-  `shadcn_add.py` shells out to `npx shadcn add`; read what it is installing
-  before running it here, and prefer not to
+- `ui-styling` was built on shadcn/ui and Radix, and it is removed. **This
+  site has no build step and no runtime dependency it does not vendor
+  itself**, which is still the reason not to bring it back
 - Several of them treat **dark mode** as a default to implement. The site
   has no dark mode and the reasoning is above — but note it is a mode that
   is barred, not a dark page: `/brand/` is dark for every reader
