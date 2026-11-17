@@ -4879,15 +4879,19 @@ it is the part worth having checked before the page is used in an approach.
 
 ## Skills, and which one wins
 
-`.claude/skills/` holds six of ours and seven vendored from one upstream
-bundle. `.claude/skills/VENDORED.md` carries the source, the commit, the
-licence and what was checked before installing.
+`.claude/skills/` holds six of ours, seven vendored from one upstream
+bundle, and three video skills vendored on 17 November from three sources.
+`.claude/skills/VENDORED.md` carries the source, the commit, the licence and
+what was checked before installing each one.
 
 Ours: `audit`, `eu-tender-documents`, `plan`, `profile`, `research`,
 `taste-skill`.
 
 Vendored from `ui-ux-pro-max-skill`: `banner-design`, `brand`, `design`,
 `design-system`, `slides`, `ui-styling`, `ui-ux-pro-max`.
+
+Vendored for video: `ffmpeg-skill`, `design-to-motion`, `voicestudio`.
+**`voicestudio` needs a VoiceStudio backend, and none runs here.**
 
 **This file outranks every one of them, and `taste-skill` outranks the
 vendored seven.** They are reference material, not a mandate, and several of
