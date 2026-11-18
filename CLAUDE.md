@@ -3448,6 +3448,18 @@ Four parts were added, all marked Proposed in the working book:
 The working book also carries a master-only section on making a client's
 book: which parts stay the same and which are the client's.
 
+**Documents are not made in Affinity, at the owner's word on 18
+November.** Affinity Designer makes the mark, the business cards and the
+social images, and nothing else. A template a client fills is a Word
+file (`.dotx`), because Word is what clients use; our decks stay pages on
+arvorealta.com, exported to PDF. **A Word template only looks right where
+EB Garamond, Geist and Geist Mono are installed or embedded**, so that
+goes with every template. The palette is
+`arvorealta_colour_palette.ase`, written here rather than exported from
+Affinity: five RGB swatches in one group, which Affinity and Adobe both
+import. Flat colour on a vector is named `amber`; `gold` means the metal
+render only.
+
 ## The pricing ladder
 
 **There are two ladders on this domain and this section is the euro one.**
