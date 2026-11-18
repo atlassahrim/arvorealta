@@ -3475,13 +3475,24 @@ sides: the symbol blind-embossed on the front, 40 mm wide, and the name,
 front first and its wordmark's strokes measured 0.22 mm, under the
 0.3 mm most emboss dies hold; the symbol's thinnest ray is 1.39 mm.
 
-**A palette without black is proposed, not applied.** Ink `#070D0B` and
-paper ink `#171412` measure 1.07:1 against each other, so the palette
-carried two blacks doing one job. The proposal is Forest `#1C3A2E` for
-both the ground and the type on paper (10.4:1), Paper, Amber, and Bronze
-`#7A5530` in place of the brick for labels on paper (5.5:1). It is in
-the working book beside the current palette; nothing else moves until
-the owner approves it.
+**The brand palette has no black, since 18 November, at the owner's
+word.** Ink `#070D0B` and paper ink `#171412` measured 1.07:1 against
+each other, so the palette carried two blacks doing one job. It is now
+four colours: **Forest `#102F27`** for the ground and for type on paper
+(12.0:1), **Paper `#EFEAE1`**, **Amber `#BD9059`** (5.0:1 on forest,
+never text on paper) and **Bronze `#7A5530`** for labels on paper
+(5.5:1, never on forest), in a 70 / 20 / 10 proportion with bronze
+outside it. The owner asked for a green darker than the first proposal,
+`#1C3A2E`; of the two he named, `#161B14` measures 1.05:1 against the
+old paper ink and reads as black, so `#102F27` was taken. It is applied
+in both brand books, the business card and
+`arvorealta_colour_palette.ase`.
+
+**The website keeps its own values: ink, brick and Geist**, by the
+owner's decision on 18 November. They are a site exception, not brand
+colours. Brick `#8E4A45` and bronze sit 1.01 apart in luminance and
+both clear 4.5:1 on paper, so they do the same job and read as one
+family; nothing new is made in brick.
 
 ## The pricing ladder
 
