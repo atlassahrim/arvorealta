@@ -3453,11 +3453,22 @@ November.** Affinity Designer makes the mark, the business cards and the
 social images, and nothing else. A template a client fills is a Word
 file (`.dotx`), because Word is what clients use; our decks stay pages on
 arvorealta.com, exported to PDF. **A Word template only looks right where
-EB Garamond, Geist and Geist Mono are installed or embedded**, so that
-goes with every template. The palette is
-`arvorealta_colour_palette.ase`, written here rather than exported from
-Affinity: five RGB swatches in one group, which Affinity and Adobe both
-import. Flat colour on a vector is named `amber`; `gold` means the metal
+its faces are installed or embedded**, so they go inside every template.
+The palette is `arvorealta_colour_palette.ase`, written here rather than
+exported from Affinity: four RGB swatches in one group, which Affinity
+and Adobe both import.
+
+**The letter and the proposal were built on 18 November** as
+`arvorealta_template_{letter,proposal}_a4.dotx`, outside this repository
+like the books. They are A4 on the book's grid: 20 mm top and sides,
+23 mm foot, a 15 pt baseline, and the reading column indented 58 mm so
+labels hang to its left. The heading style holds both parts of the
+section line, label then Tab then heading. Montserrat, Montserrat Medium,
+EB Garamond and Geist Mono Medium are embedded as static TrueType from
+Google Fonts. Two traps came out of the build. Word's schema wants the
+`fontKey` GUID in upper-case hex, and docx-js writes it in lower case.
+And `embedTrueTypeFonts` has to sit after `displayBackgroundShape` in
+`settings.xml`, or the file fails validation. Flat colour on a vector is named `amber`; `gold` means the metal
 render only.
 
 **On 18 November the brand system's reading face became Montserrat**, at
