@@ -97,3 +97,36 @@ candidates is a usable skill for a cloud session:
   trusted name.
 - `prince3626ezechiel-lang/…/free-claude-code` is one person's French notes
   for the proxy, with paths on their own server.
+
+## Design skills, 18 November 2026
+
+Checked at the owner's request. All three installed are markdown only and
+make no network request.
+
+| skill | source | commit | licence |
+|---|---|---|---|
+| `emil-design-eng` | https://github.com/emilkowalski/skills | `64eb3deb9a5fbfa041faf783e0bc3fd635872e9c`, 15 Nov 2026 | MIT |
+| `choreograph` | the same repo; `emil-design-eng` points to it for staggered entrances | same | MIT |
+| `web-design-guidelines` | https://github.com/vercel-labs/agent-skills, rules from https://github.com/vercel-labs/web-interface-guidelines | rules at `434b7f91364665f2f733b310ec54809bf8f37937` | MIT (the rules repo) |
+
+**`web-design-guidelines` is pinned, not fetched.** Vercel's original
+fetches its rules from GitHub at every run, so whoever controls that file
+controls what the skill tells a session to do. Here the rules are
+`rules.md` beside the skill, read once before install, and the skill
+text is rewritten to read them locally. Emil's other eighteen skills were
+not installed: most are for React, Swift or Expo apps, which this site
+does not have.
+
+**Already installed:** `ui-ux-pro-max`, from October. Upstream has moved
+since (last push 16 Nov), and updating it is a separate step.
+
+**Not installed: `extract-design-system`** (`arvindrk`, MIT). The skill
+runs `npx extract-design-system` unpinned, so it executes whatever npm
+serves that day. The published 0.1.11 does not match its own source: npm
+depends on `dembrandt ^0.7` and the repo on `^0.13`. It also runs
+`npx playwright install`, which this container's own notes forbid.
+
+**Not installed: "brand kit".** No single skill goes by that name. The
+best-known nearby one, `fatihaydost/brand-identity-skill` (MIT, 407 stars),
+downloads Python packages with `uv` on first use. The owner has not yet
+said which one is meant. `brand` from the vendored bundle is already here.

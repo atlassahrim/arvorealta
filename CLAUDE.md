@@ -4880,7 +4880,8 @@ it is the part worth having checked before the page is used in an approach.
 ## Skills, and which one wins
 
 `.claude/skills/` holds six of ours, five vendored from one upstream
-bundle, and `ffmpeg-skill`, vendored on 17 November.
+bundle, `ffmpeg-skill`, vendored on 17 November, and three design skills
+vendored on 18 November.
 `.claude/skills/VENDORED.md` carries the source, the commit, the licence and
 what was checked before installing each one.
 
@@ -4891,6 +4892,10 @@ Vendored from `ui-ux-pro-max-skill`: `banner-design`, `brand`,
 `design-system`, `slides`, `ui-ux-pro-max`.
 
 Vendored for video: `ffmpeg-skill`.
+
+Vendored for design: `emil-design-eng` and `choreograph` from Emil
+Kowalski, and Vercel's `web-design-guidelines`, whose rules are pinned in
+`rules.md` rather than fetched at every run.
 
 **Removed on 17 November, at the owner's word:** `design` and `ui-styling`
 from the bundle, and `design-to-motion` and `voicestudio`, which had been
