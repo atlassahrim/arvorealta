@@ -3460,6 +3460,20 @@ Affinity: five RGB swatches in one group, which Affinity and Adobe both
 import. Flat colour on a vector is named `amber`; `gold` means the metal
 render only.
 
+**On 18 November the brand system's reading face became Montserrat**, at
+the owner's word, in place of Geist. This file once recorded a
+Cormorant / Montserrat pairing as decided against; that was a skill's
+suggestion, and this is the owner's decision. EB Garamond and Geist Mono
+are unchanged. **It is in the brand books and on the business card only:
+`/`, `/brand/` and `/video/` still set Geist** until the owner says the
+site follows. The owner's mark files are in Drive, `Arvorealta Brand/01
+Mark`: the flat symbol (nine rays from one point), the lockup with a
+spaced wordmark, and the one-colour set. **The business card** is paper
+on both sides: the lockup blind-embossed on the front, 48 mm wide, and
+the name, `Designer` and the contact on the back. At 48 mm the
+wordmark's strokes are 0.22 mm, under the 0.3 mm most emboss dies hold,
+which is recorded in the working book with the two ways out.
+
 ## The pricing ladder
 
 **There are two ladders on this domain and this section is the euro one.**
