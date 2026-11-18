@@ -3464,15 +3464,24 @@ render only.
 the owner's word, in place of Geist. This file once recorded a
 Cormorant / Montserrat pairing as decided against; that was a skill's
 suggestion, and this is the owner's decision. EB Garamond and Geist Mono
-are unchanged. **It is in the brand books and on the business card only:
-`/`, `/brand/` and `/video/` still set Geist** until the owner says the
-site follows. The owner's mark files are in Drive, `Arvorealta Brand/01
-Mark`: the flat symbol (nine rays from one point), the lockup with a
-spaced wordmark, and the one-colour set. **The business card** is paper
-on both sides: the lockup blind-embossed on the front, 48 mm wide, and
-the name, `Designer` and the contact on the back. At 48 mm the
-wordmark's strokes are 0.22 mm, under the 0.3 mm most emboss dies hold,
-which is recorded in the working book with the two ways out.
+are unchanged. **It is in the brand books and on the business card only.
+`/`, `/brand/` and `/video/` keep Geist, by the owner's decision on
+18 November, for convenience.** The owner's mark files are in Drive,
+`Arvorealta Brand/01 Mark`: the flat symbol (nine rays from one point),
+the lockup with a spaced wordmark, and the one-colour set. **The
+business card is 85 × 45 mm**, the owner's height, and paper on both
+sides: the symbol blind-embossed on the front, 40 mm wide, and the name,
+`Designer` and the contact on the back. The lockup was tried on the
+front first and its wordmark's strokes measured 0.22 mm, under the
+0.3 mm most emboss dies hold; the symbol's thinnest ray is 1.39 mm.
+
+**A palette without black is proposed, not applied.** Ink `#070D0B` and
+paper ink `#171412` measure 1.07:1 against each other, so the palette
+carried two blacks doing one job. The proposal is Forest `#1C3A2E` for
+both the ground and the type on paper (10.4:1), Paper, Amber, and Bronze
+`#7A5530` in place of the brick for labels on paper (5.5:1). It is in
+the working book beside the current palette; nothing else moves until
+the owner approves it.
 
 ## The pricing ladder
 
