@@ -130,3 +130,13 @@ depends on `dembrandt ^0.7` and the repo on `^0.13`. It also runs
 best-known nearby one, `fatihaydost/brand-identity-skill` (MIT, 407 stars),
 downloads Python packages with `uv` on first use. The owner has not yet
 said which one is meant. `brand` from the vendored bundle is already here.
+
+**Not installed: `image-to-code`** (`Leonxlnx/imagegen-skills`, MIT,
+commit `beb16b0`, checked 18 November). It is safe, one markdown file with
+no code, and it does not do what its name says. It is written for Codex's
+built-in image generator: on any visual web task it *must* generate design
+images first and then build the page to match them. Here that would mean a
+paid generator on every design task, and generated pictures as the source
+of a page, which the rule on generation above allows only for abstract
+grounds. Turning a real screenshot into code needs no skill: a session
+reads the image directly.
