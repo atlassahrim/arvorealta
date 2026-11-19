@@ -3468,6 +3468,11 @@ the underscore: `reference-annex`, `reference-annex-sample`,
   `Arvorealta Brand` folder, which anyone with its link can read. **Drive
   does not update itself**: after a rebuild, upload the new file with
   Manage versions so its link survives, as the brand book's files do.
+  **A session cannot do that**: its Drive tool uploads a new file and
+  cannot add a version. On 19 November, at the owner's word, the five
+  `.docx` were replaced that way, as new files with new links, and the
+  old five went to the bin. The PDFs in the folder are the web pages'
+  own prints and did not change.
 
 Everything from here to the brand book is the lab's record, kept for its
 reasoning. Read `lab/annex/sample-b/` as `annex/sample/`, the lab
