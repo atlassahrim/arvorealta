@@ -110,16 +110,18 @@ def page(sample):
         <div class="cap"><b>2</b><p class="small soft">Installed unit, {"" if sample else "Norrvik, "}2024.</p></div>
       </div>
 
-      <div class="record">
-        <div><span class="label">Recipient<span class="required">*</span></span><span class="v">{R("City of Norrvik", "r12")}</span></div>
-        <div><span class="label">Delivered</span><span class="v">EUR {R("612,400", "r8")}</span></div>
-        <div><span class="label">Framework</span><span class="v">2023-2027</span></div>
-        <div><span class="label">Certificate</span><span class="v">Sheet 2</span></div>
-      </div>
-
       <div class="spacer"></div>
-      <hr class="foot-rule">
-      <p class="small soft note"><span class="required">*</span> Public or private. Dir. 2014/24/EU, Annex XII Part II(a).{ceiling} The figure shown is value delivered, which is the figure an evaluator scores.</p>
+      <div class="band">
+        <div class="band-grid">
+          <div><span class="label">Value delivered, 2023-2025</span><span class="figure"><span class="cur">EUR</span>{R("612,400", "r8")}</span></div>
+          <div class="facts">
+            <span class="label">Recipient<span class="required">*</span></span><span class="fv">{R("City of Norrvik", "r8")}</span>
+            <span class="label">Framework</span><span class="fv">2023-2027</span>
+            <span class="label">Certificate</span><span class="fv">Sheet 2</span>
+          </div>
+        </div>
+        <p class="small soft note"><span class="required">*</span> Public or private, per Dir. 2014/24/EU, Annex XII Part II(a).{ceiling}</p>
+      </div>
     </div>
     <div class="foot"><span>1322/2026</span><span>Sheet <span class="num"></span></span><span>{foot_right}</span></div>
   </section>
@@ -139,9 +141,9 @@ def page(sample):
         <div><span class="label">Supplier</span>{supplier}</div>
       </div>
 
-      <div class="cols">
-        <p class="small">Annex XII Part II(a) asks for a list of principal deliveries over the past three years, with values, dates and recipients, and evidence that they were delivered. This is the form to put in front of the recipient at handover. A signature obtained on the day is worth more than a request sent two years later.</p>
-        <div><span class="label">Variant</span><p class="small soft">For works rather than supplies, change the heading to satisfactory execution and the period to five years.</p></div>
+      <div class="std">
+        <p class="std-lede">Annex XII Part II(a) asks for a list of principal deliveries over the past three years, with values, dates and recipients, and evidence that they were delivered. Put this form in front of the recipient at handover: a signature obtained on the day is worth more than a request sent two years later.</p>
+        <p class="small soft"><span class="label" style="display:inline;margin-right:2mm">Variant</span>For works rather than supplies, change the heading to satisfactory execution and the period to five years.</p>
       </div>
 
       <div class="cols">
@@ -173,9 +175,10 @@ def page(sample):
       </div>
 
       <div class="spacer"></div>
-      <span class="label">Supplier</span>
-      {sign_supplier}
-      <hr class="foot-rule" style="margin-top:6mm">
+      <div class="band">
+        <span class="label">Supplier, completed by the supplier</span>
+        {sign_supplier}
+      </div>
     </div>
     <div class="foot"><span>1322/2026</span><span>Sheet <span class="num"></span></span><span>{foot_right}</span></div>
   </section>

@@ -78,7 +78,7 @@ img{display:block;max-width:100%}
 .sheet .quote + p{margin-top:2mm}
 
 /* two columns of content, no label column */
-.cols{display:grid;grid-template-columns:1fr 1fr;column-gap:10mm;margin-top:8mm;flex:none}
+.cols{display:grid;grid-template-columns:1fr 1fr;column-gap:10mm;margin-top:8mm;flex:none;align-items:start}
 .cols-61{grid-template-columns:1.35fr 1fr}
 
 /* tables: aligned, no rule per row */
@@ -114,10 +114,26 @@ img{display:block;max-width:100%}
 
 .spacer{flex:1}
 .foot-rule{border:0;height:.6mm;background:var(--heavy);margin:0;flex:none}
+
+/* the closing band: hangs from one heavy rule, the sheet's last word */
+.band{border-top:.6mm solid var(--heavy);padding-top:3mm;flex:none}
+.band{margin-top:5mm}
+.band-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:10mm;align-items:end}
+.figure{display:block;margin-top:1mm;font-size:32pt;line-height:11mm;font-weight:200;letter-spacing:-.04em;white-space:nowrap;font-feature-settings:"tnum"}
+.figure .cur{font:500 9pt/1 var(--mono);letter-spacing:.08em;vertical-align:.95em;margin-right:2mm;color:var(--soft)}
+.figure .redact{height:.62em;vertical-align:0}
+.facts{display:grid;grid-template-columns:auto 1fr;column-gap:6mm;row-gap:1.2mm;align-items:baseline;padding-bottom:1.2mm}
+.facts .label + *{margin-top:0}
+.facts .fv{font-size:11pt;line-height:4.6mm;text-align:right;white-space:nowrap;font-feature-settings:"tnum"}
+.band > .note{margin-top:3mm!important}
+.parties .blank{height:6mm}
+.std{margin-top:9mm;flex:none;max-width:140mm}
+.sheet .std-lede{font-size:11pt;line-height:5.6mm;letter-spacing:-.005em}
+.std-lede + p{margin-top:2.5mm!important}
 .note{margin-top:2.5mm!important;flex:none}
 
 /* declaration and write-in lines */
-.declare{border:.25mm solid var(--heavy);padding:5mm 6mm;margin-top:10mm;flex:none}
+.declare{background:var(--panel);padding:6mm 7mm;margin-top:8mm;flex:none}
 .declare .label{color:var(--ink)}
 .sign{display:grid;grid-template-columns:1fr 1fr;column-gap:8mm;margin-top:8mm}
 .sign > div{border-top:.25mm solid var(--heavy);padding-top:1mm}

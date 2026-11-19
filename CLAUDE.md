@@ -3458,6 +3458,25 @@ pages; `pdftotext` on the sample finds none of the redacted strings.
 The review's counts read `00` until filled, because `[[n]]` at 96 pt runs
 off the sheet.
 
+**Lab B, second pass, on the owner's note** that everything above the
+recipient held and what was below it, and sheet 2, did not.
+
+- **Sheet 1 closes on a band**: one heavy rule, then the value delivered
+  as the sheet's one figure (32 pt extra light, the currency small and
+  raised in mono), with recipient, framework and certificate as a
+  receipt-style list beside it. The label `Value delivered, 2023-2025`
+  now says what the footnote used to explain, so the footnote is one
+  line. Before, four values sat at one size directly on the closing rule.
+- **Sheet 2**: the purpose is a standfirst under the parties, with the
+  variant as one quiet line under it; the two tables no longer stretch
+  to different row heights (`.cols` aligns to the start); the
+  declaration is a pale panel rather than a ruled box; the supplier
+  block is a closing band like sheet 1's. Both sheets now end the same
+  way: a heavy rule, then the last thing to read.
+
+Measured: zero overflow on all six sheets, two A4 pages per PDF, no
+redacted string in the sample.
+
 **Body was 10 pt on 5 mm at first, not the 6 mm baseline**, so the annex spec's
 baseline figures describe the live sheets, not the lab. Delete the lab
 when it wins or falls behind.
