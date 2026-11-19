@@ -3378,6 +3378,35 @@ the dialog opens, focus lands on the field rather than the close button, the
 body locks, the two validation messages fire in order, Escape closes and
 unlocks.
 
+## The annex lab, 19 November (a sandbox)
+
+**The owner asked for the tender annexes redesigned at the brand book's
+standard**, with four references: a Bauhaus letter, an Eveo packaging
+page, a Cartier receipt and the RSC mission page. His answers: the A4
+template, the public sample and the document review; **neutral and
+unsigned**, white stock and IBM Plex, no mark of ours. The client-brand
+rule is unchanged.
+
+- `lab/annex/annex-lab.css`: one self-contained sheet, no `system.css`.
+  One row grammar: a hairline, the label hanging in a 40 mm left column,
+  the content on the right. The reference number is the largest object,
+  40 pt light, **in ink, not red**. Red is spent on the dot by the
+  document's label and on the required asterisk. That differs from the
+  live annex spec, where the accent carries the reference number and the
+  section labels; promotion is the decision.
+- `lab/annex/_build.py` writes `annex/_lab-template/` (full, private) and
+  `lab/annex/sample/` (redacted, public, `noindex, nofollow`) from **one
+  source**, and asserts that no redacted string reaches the sample.
+  Edit the build, not the two pages.
+- `annex/_lab-review/`: the review template on the same grammar. The
+  Norwegian edition follows on promotion, in the same commit.
+
+Measured: all six sheets fit at zero overflow, and print to two A4 pages
+each. `pdftotext` on the sample finds none of the redacted strings.
+**Body is 10 pt on 5 mm, not the 6 mm baseline**, so the annex spec's
+baseline figures describe the live sheets, not the lab. Delete the lab
+when it wins or falls behind.
+
 ## The brand book, two editions (15 November)
 
 **The public edition is on the site since 18 November, at

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab: document review DR-0NN</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="/lab/annex/annex-lab.css">
+</head>
+<body>
+
+<!-- LAB: the review template on the lab annex grammar. Same placeholders and
+     the same line budget as annex/_review-template: a quote is two lines and
+     a note is two lines. Measure the sheets before sending: the old
+     _tools/review/measure.py reads .sheet-body, which this keeps.
+     Promoting it means the Norwegian edition too, in the same commit. -->
+
+<main class="annex">
+
+  <!-- ============ sheet 1: the map ============ -->
+  <section class="sheet">
+    <div class="sheet-body">
+      <header class="mast">
+        <div><span class="label label-ink"><i class="dot"></i>Document review</span><span class="label">[[REVIEW DATE]]</span></div>
+        <p class="ref">DR-0NN</p>
+      </header>
+      <hr class="rule-heavy">
+
+      <div class="row row-title">
+        <h1 class="title">Product datasheet [[PRODUCT]],<br>read as a tender attachment.</h1>
+      </div>
+
+      <div class="row">
+        <div class="k"><span class="label n">01</span><span class="label">Scope</span></div>
+        <div class="v v-stack">
+          <p class="v-read">The current published datasheet for the [[PRODUCT]] was read against the requirement specification in Bilag 2, requirement by requirement. Nothing here is a score. The buyer scores.</p>
+          <div class="dl">
+            <div><span class="label">Document</span><span>[[PRODUCT]]</span></div>
+            <div><span class="label">File dated</span><span>[[YYYY]]</span></div>
+            <div><span class="label">Pages</span><span>[[N]]</span></div>
+            <div><span class="label">In scope</span><span>34 of 60</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="k"><span class="label n">02</span><span class="label">Method</span></div>
+        <div class="v v-read">
+          <p>Bilag 2 sets sixty numbered requirements. Twenty-six ask for a delivery plan, an option price or a complaints procedure, which no product datasheet answers. Thirty-four remain.</p>
+          <p><strong>Answered</strong> means the document states the thing the buyer asks for. <strong>Partial</strong> means close but off the point. <strong>Absent</strong> means there is nothing to point at.</p>
+          <p class="pull">[[Word]] of thirty-four can be answered.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="k"><span class="label n">03</span><span class="label">The count</span></div>
+        <div class="v fields of-3 count">
+          <div class="field"><span class="label">Answered</span><span class="value">[[n]]</span><p class="small soft">Krav [[list]]. [[What they cover, one phrase.]]</p></div>
+          <div class="field"><span class="label">Partial</span><span class="value">[[n]]</span><p class="small soft">Krav [[list]]. [[Why each is only partial.]]</p></div>
+          <div class="field"><span class="label">Absent</span><span class="value">[[n]]</span><p class="small soft">Krav [[list]]. [[The one thing worth saying.]]</p></div>
+        </div>
+      </div>
+
+      <div class="spacer"></div>
+      <div class="close">
+        <hr class="rule-heavy">
+        <div class="row row-first" style="padding-top:0">
+          <div class="k"><span class="label">Note</span></div>
+          <p class="small soft">Scored as one document. [[What the rest of the published set is, and whether the absences hold across it. Only sayable because the family was checked.]]</p>
+        </div>
+      </div>
+    </div>
+    <div class="sheet-foot"><span>DR-0NN</span><span>Sheet <span class="num"></span></span><span>Bilag 2 / Doffin [[notice]]</span></div>
+  </section>
+
+  <!-- ============ sheet 2: the findings ============ -->
+  <section class="sheet">
+    <div class="sheet-body">
+      <header class="mast">
+        <div><span class="label label-ink"><i class="dot"></i>Findings</span><span class="label">Review, sheet 2</span></div>
+        <p class="ref">DR-0NN</p>
+      </header>
+      <hr class="rule-heavy">
+
+      <div class="row row-title">
+        <h2 class="title">Four things an evaluator meets first.</h2>
+      </div>
+
+      <div class="row">
+        <div class="k"><span class="label n">Finding 01</span><span class="label">Krav [[n]]</span><span class="label">[[Weight of 100]]</span></div>
+        <div class="v v-find">
+          <div class="panel panel-doc"><img src="../_review-template/fig-01.png" alt="[[What the crop shows, for a reader who cannot see it.]]"></div>
+          <div>
+            <p class="heading">[[Claim, max 38 characters.]]</p>
+            <p class="quote" lang="nb">«[[The requirement, verbatim. Max 80 characters.]]»</p>
+            <p>[[What the document does about it. Max 90 characters.]]</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="k"><span class="label n">Finding 02</span><span class="label">Krav [[n]]</span><span class="label">[[Weight of 100]]</span></div>
+        <div class="v v-find">
+          <div class="panel panel-doc"><img src="../_review-template/fig-02.png" alt="[[What the crop shows, for a reader who cannot see it.]]"></div>
+          <div>
+            <p class="heading">[[Claim, max 38 characters.]]</p>
+            <p class="quote" lang="nb">«[[The requirement, verbatim. Max 80 characters.]]»</p>
+            <p>[[What the document does about it. Max 90 characters.]]</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="k"><span class="label n">Finding 03</span><span class="label">Krav [[n]]</span><span class="label">[[Weight of 100]]</span></div>
+        <div class="v v-find">
+          <div class="panel panel-doc"><img src="../_review-template/fig-03.png" alt="[[What the crop shows, for a reader who cannot see it.]]"></div>
+          <div>
+            <p class="heading">[[Claim, max 38 characters.]]</p>
+            <p class="quote" lang="nb">«[[The requirement, verbatim. Max 80 characters.]]»</p>
+            <p>[[What the document does about it. Max 90 characters.]]</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="k"><span class="label n">Finding 04</span><span class="label">Krav [[n]]</span><span class="label">[[Weight of 100]]</span></div>
+        <div class="v v-find">
+          <div class="panel panel-doc"><img src="../_review-template/fig-04.png" alt="[[What the crop shows, for a reader who cannot see it.]]"></div>
+          <div>
+            <p class="heading">[[Claim, max 38 characters.]]</p>
+            <p class="quote" lang="nb">«[[The requirement, verbatim. Max 80 characters.]]»</p>
+            <p>[[What the document does about it. Max 90 characters.]]</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="spacer"></div>
+      <div class="close">
+        <hr class="rule-heavy">
+        <div class="row row-first" style="padding-top:0">
+          <div class="k"><span class="label">Last word</span></div>
+          <p>[[One closing line. Something true that is not a finding.]]</p>
+        </div>
+      </div>
+    </div>
+    <div class="sheet-foot"><span>DR-0NN</span><span>Sheet <span class="num"></span></span><span>Arvorealta.com · Tier zero, free review</span></div>
+  </section>
+
+</main>
+</body>
+</html>
