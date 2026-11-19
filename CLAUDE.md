@@ -3378,7 +3378,44 @@ the dialog opens, focus lands on the field rather than the close button, the
 body locks, the two validation messages fire in order, Escape closes and
 unlocks.
 
-## The annex lab, 19 November (a sandbox)
+## The tender set, promoted on 19 November (it was the annex lab)
+
+**The owner said promote, and the lab is deleted.** What is live now:
+
+| document | file | stylesheet |
+|---|---|---|
+| reference annex, private | `annex/_template/` | `assets/annex-2.css` |
+| redacted sample, public | `annex/sample/` | `assets/annex-2.css` |
+| review, English and Norwegian | `annex/_review-template/`, `-nb/` | `assets/annex-2.css` |
+| VKR annex, five sheets | `annex/_vkr-beholdere/` | `assets/annex-2.css` |
+| technical deck | `deck/_technical/` | `assets/deck-technical-2.css` |
+
+- **`annex/_template/` and `annex/sample/` are written by
+  `_tools/annex/build.py`** from one source, with the leak assertion.
+  Edit the build, not the two pages.
+- **Each stylesheet is loaded alone**: no theme, no `system.css`. Inter
+  for everything read, IBM Plex Mono for everything found, both from
+  Google Fonts. White stock.
+- **Red is spent only on the required asterisk.** The reference number
+  is ink, not red, which reverses the accent rule in the annex spec
+  below for these documents.
+- **The sample keeps its old head**: indexed, no robots tag, as it was.
+  Its redaction set is unchanged.
+- `assets/deck-technical.css` and the deck's stock photograph are
+  deleted. **`assets/annex.css` and `themes/technical.css` stay, for
+  `annex/proposta-motorhome/` alone**, which is still on the old system.
+- `assets/img/doc-annex-1-520.webp` shows the old sample. No published
+  page uses it; redraw it if the paused document fold returns.
+
+**Word versions of the portrait documents** are made by
+`_tools/annex/docx.js` and kept in `annex/_word/`. See that section below.
+
+Everything from here to the brand book is the lab's record, kept for its
+reasoning. Read `lab/annex/sample-b/` as `annex/sample/`, the lab
+template and review folders as their live paths, and
+`lab/annex/annex-lab-b.css` as `assets/annex-2.css`.
+
+### The annex lab, 19 November (history)
 
 **The owner asked for the tender annexes redesigned at the brand book's
 standard**, with four references: a Bauhaus letter, an Eveo packaging
@@ -3508,11 +3545,7 @@ content** unless it is told not to: `.body > :not(.spacer)` carries
 `flex-shrink:0`. Write-in rows draw their rule on the `tr`, because
 empty cells measured narrower than their own table.
 
-**Promoting it is still the owner's decision**, and it means: replacing
-`annex.css` and `deck-technical.css` usage on these documents, the
-accent no longer carrying the reference number (red is spent only on
-the required asterisk), the annex spec above rewritten to the new
-sizes, and the labs deleted.
+**Promoted the same day.** See the top of this section.
 
 **Body was 10 pt on 5 mm at first, not the 6 mm baseline**, so the annex spec's
 baseline figures describe the live sheets, not the lab. Delete the lab
@@ -3845,8 +3878,9 @@ assets/
   themes/technical.css  tokens for the technical system
   system.css            structure only — no colour, no typefaces
   deck.css              editorial deck — slide geometry + print
-  deck-technical.css    technical deck — slide geometry + print
-  annex.css             A4 document geometry + print rules
+  deck-technical-2.css  technical deck, self-contained, since 19 November
+  annex-2.css           tender annexes, self-contained, since 19 November
+  annex.css             the old A4 system, annex/proposta-motorhome/ only
   site.js               live clocks, scroll reveal — reference/ only
 CNAME                   custom domain
 ```
@@ -4149,6 +4183,10 @@ is 1.75; display is 1.04. That contrast is the system's signature — keep it.
 
 ### Technical deck spec (1920 × 1080)
 
+**History since 19 November**: `deck/_technical/` is on
+`assets/deck-technical-2.css` now and `deck-technical.css` is deleted.
+The figures below describe the old sheet.
+
 `deck-technical.css` with `themes/technical.css`. Same canvas, margins, grid
 and baseline as the editorial deck, so a slide can move between them. What
 differs:
@@ -4167,6 +4205,14 @@ differs:
   belongs to the editorial system
 
 ### Annex spec (A4)
+
+**Since 19 November this describes `assets/annex.css`, which only
+`annex/proposta-motorhome/` still loads.** The tender annexes are on
+`assets/annex-2.css`: 20 mm sides, 16 mm head, 24 mm foot; title 40 pt
+on the cover and 30 pt on a section sheet; body 9.5 pt Inter on 4.9 mm;
+labels 7.5 pt Plex Mono; red only on the required asterisk. The rules
+below on redaction, page budget, no maker's mark and the review are
+unchanged and still govern.
 
 A deck is for presenting; an annex is for submitting, and the two obey
 different masters. The deck scales a 1920 × 1080 canvas with a `--px` unit.
