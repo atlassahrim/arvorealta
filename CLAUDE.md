@@ -3446,6 +3446,25 @@ the underscore: `reference-annex`, `reference-annex-sample`,
   own size, and air between blocks is `before` on a 1 pt empty
   paragraph. The page counts held: 2, 2, 2, 2 and 5. **Do not bring
   `LineRuleType.EXACT` back** to paragraph spacing.
+- **Built for Google Docs as well as Word, since 19 November.** The
+  owner opened the files from Drive in Google Docs on the iPad and three
+  things broke. The foot ran together, because Docs drops tab stops. It
+  read `Sheet 1 of 4`, because the page field counts pages and Docs
+  pushed each sheet onto a second page. And sheet 1's last line moved to
+  page 2. So:
+  - **The header and the foot are borderless one-row tables.**
+  - **The sheet number is written in** (`Sheet 1 of 2`), not a field.
+    Each section is one sheet.
+  - **Air is spacing on a real paragraph.** `gap()` only marks it, and
+    `flow()` hands it to the next paragraph as `before`, or to the one
+    before a table as `after`. An empty spacer paragraph becomes a full
+    line in an editor.
+  - **Every table carries zero cell margins at table level** as well as
+    per cell, because Docs otherwise pads each cell by 5 pt.
+  - **The fullest sheets have room to spare.** In LibreOffice, every
+    sheet has at least 17 mm free at its foot.
+  **Google Docs cannot be run from this container**, so the Docs view
+  is checked on the owner's device, not here.
 - **Inter and IBM Plex Mono are embedded**, five static TrueType files
   in `_tools/annex/fonts/` (OFL). `docx_fix.py` handles the two schema
   traps recorded from the 18 November templates, the upper-case

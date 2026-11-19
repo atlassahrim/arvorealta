@@ -60,18 +60,44 @@ const P = (children, o = {}) => {
   const kids = typeof children === 'string' ? [run(children, o)] : children;
   const big = kids.filter(k => k && k._h).sort((a, b) => b._h - a._h)[0];
   const mult = big ? Math.min(3, Math.max(0.85, (o.line || mm(4.9)) / (big._h * 20))) : 1;
-  return new Paragraph({
+  const para = new Paragraph({
     children: kids,
     spacing: { before: o.before || 0, after: o.after || 0, line: Math.round(240 * mult), lineRule: LineRuleType.AUTO },
     // the paragraph mark takes the line's own size, or a 9.5 pt mark sets the height of a 7.5 pt label
     run: big ? { font: big._font, size: pt(big._sz) } : undefined,
     alignment: o.align, keepNext: o.keepNext, keepLines: true, border: o.border, tabStops: o.tabs,
   });
+  para._args = [children, o];   // kept so flow() can rebuild it with more air
+  return para;
 };
 const small = (t, o = {}) => P(typeof t === 'string' ? [run(t, { size: 9, color: o.soft ? SOFT : INK })] : t, { line: mm(4.4), ...o });
 const label = (t, o = {}) => P([lab(t, o)], { line: mm(4), after: o.after ?? mm(1.5), before: o.before, keepNext: true });
-// air between blocks: an empty 1 pt paragraph whose space is all `before`, so nothing tall is left to click into
-const gap = h => P([run('', { size: 1 })], { before: Math.max(0, mm(h) - 29), line: 29 });
+/* Air between blocks is spacing on a real paragraph, not an empty one.
+   gap() only marks the air; flow() hands it to the next paragraph as
+   `before`, or, ahead of a table, to the previous one as `after`. An empty
+   spacer paragraph is what an editor turns into a full-height blank line:
+   Google Docs gave each one a line of body text and pushed sheets onto a
+   second page. A spacer is left only where neither neighbour can carry it,
+   and it holds a 1 pt space rather than nothing, so its height is its own. */
+const gap = h => ({ _gap: h });
+const spacer = tw => P([run(' ', { size: 1 })], { before: Math.max(0, tw - 29), line: 29 });
+const flow = items => {
+  const out = []; let pend = 0;
+  const give = () => {
+    const prev = out[out.length - 1];
+    if (prev && prev._args) { const [c, o] = prev._args; out[out.length - 1] = P(c, { ...o, after: (o.after || 0) + pend }); }
+    else out.push(spacer(pend));
+    pend = 0;
+  };
+  for (const it of [].concat(items)) {
+    if (it && it._gap !== undefined) { pend += mm(it._gap); continue; }
+    if (pend && it._args) { const [c, o] = it._args; out.push(P(c, { ...o, before: (o.before || 0) + pend })); pend = 0; continue; }
+    if (pend) give();
+    out.push(it);
+  }
+  if (pend) give();
+  return out;
+};
 const red = t => run(t, { color: RED });
 // a redaction: solid block glyphs, nothing underneath. Not spaces: a renderer
 // drops trailing spaces at the end of a line, shading and all.
@@ -82,7 +108,7 @@ const title = (arr, size = 40, before = 9) => P(lines(arr, { font: MED, size, x:
 
 /* ---------- tables ---------- */
 const cell = (children, w, o = {}) => new TableCell({
-  children: Array.isArray(children) ? children : [children], width: { size: w, type: WidthType.DXA },
+  children: flow(Array.isArray(children) ? children : [children]), width: { size: w, type: WidthType.DXA },
   borders: { top: o.top || NONE, bottom: o.bottom || NONE, left: NONE, right: NONE },
   margins: { top: o.mt ?? 0, bottom: o.mb ?? 0, left: o.ml ?? 0, right: o.mr ?? 0 },
   verticalAlign: o.va || VerticalAlign.TOP, shading: o.fill ? { type: ShadingType.CLEAR, color: 'auto', fill: o.fill } : undefined,
@@ -90,7 +116,8 @@ const cell = (children, w, o = {}) => new TableCell({
 });
 const table = (rows, widths, o = {}) => new Table({
   rows, width: { size: widths.reduce((a, b) => a + b, 0), type: WidthType.DXA }, columnWidths: widths,
-  borders: NOB, layout: TableLayoutType.FIXED, ...o,
+  // table-level cell margins as well as per cell: Google Docs reads these and otherwise pads every cell by 5 pt
+  borders: NOB, layout: TableLayoutType.FIXED, margins: { top: 0, bottom: 0, left: 0, right: 0 }, ...o,
 });
 const row = (cells, o = {}) => new TableRow({ children: cells, cantSplit: true,
   height: o.h ? { value: o.h, rule: o.exact ? HeightRule.EXACT : HeightRule.ATLEAST } : undefined, tableHeader: o.head });
@@ -129,26 +156,40 @@ const fields = (labels, ratios, o = {}) => {
   const widths = [], cells = [];
   labels.forEach((t, i) => {
     widths.push(ws[i]);
-    const filled = o.filled ? [P([redact(o.filled[i] || 18)], { line: mm(4.5), after: mm(1) })] : [gap(o.air || 9)];
+    const filled = o.filled ? [P([redact(o.filled[i] || 18)], { before: mm(3), line: mm(6), after: mm(1) })] : [gap(o.air || 9)];
     cells.push(cell([...filled, P([lab(t)], { line: mm(4), border: { top: { ...HAIRINK, space: 3 } } })], ws[i]));
     if (i < labels.length - 1) { widths.push(g); cells.push(cell(P(''), g)); }
   });
   return table([row(cells)], widths);
 };
 // a heavy rule a block hangs from
-const heavy = (before = 6) => P([run('', { size: 1 })], { before: mm(before), line: mm(1), border: { bottom: { ...HEAVY, space: 1 } } });
+const heavy = (before = 6) => P([run(' ', { size: 1 })], { before: mm(before), line: mm(1), border: { bottom: { ...HEAVY, space: 1 } } });
 
 /* ---------- sheets ---------- */
-const head = (left, ref) => new Header({ children: [P([lab(left, { color: INK }), new TextRun({ text: '\t' }), run(ref, { font: MONO, size: 10 })],
-  { line: mm(4.5), tabs: [{ type: TabStopType.RIGHT, position: W }], border: { bottom: { ...HEAVY, space: 6 } } })] });
-const foot = (left, right, word = 'Sheet', of = 'of', two = false) => new Footer({ children: [P([
-  lab(left), new TextRun({ text: two ? '  ·  ' : '\t' }),
-  ...[`${word} `, PageNumber.CURRENT, ` ${of} `, PageNumber.TOTAL_PAGES].map(c => new TextRun({ children: [c], font: MONOM, size: pt(7.5), color: SOFT, allCaps: true, characterSpacing: 18 })),
-  new TextRun({ text: '\t' }), lab(right)],
-  { line: mm(4), tabs: two ? [{ type: TabStopType.RIGHT, position: W }] : [{ type: TabStopType.CENTER, position: Math.round(W / 2) }, { type: TabStopType.RIGHT, position: W }] })] });
+/* The header and the foot are borderless one-row tables, not tab stops.
+   Google Docs, which is where a file in Drive opens, drops the tabs and runs
+   the three parts of the foot together. The sheet number is written in, not
+   a page field: each section is one sheet, and a field counts pages, which
+   reads "Sheet 1 of 4" wherever an editor reflows a sheet onto two pages. */
+const bar = (parts, aligns, o = {}) => {
+  const k = o.split || 0.7;
+  const ws = parts.length === 2 ? [Math.round(W * k), W - Math.round(W * k)] : [Math.round(W * 0.36), W - 2 * Math.round(W * 0.36), Math.round(W * 0.36)];
+  return table([row(parts.map((kids, i) => cell(P(kids, { align: aligns[i], line: o.line }), ws[i],
+    { bottom: o.rule, mb: o.rule ? mm(1.6) : 0 })))], ws);
+};
+const head = (left, ref) => new Header({ children: [
+  bar([[lab(left, { color: INK })], [run(ref, { font: MONO, size: 10 })]], [AlignmentType.LEFT, AlignmentType.RIGHT], { line: mm(4.5), rule: HEAVY }),
+  P([run(' ', { size: 1 })], { line: 29 })] });
+// returns a maker: doc() hands it the sheet's number and the count
+const foot = (left, right, word = 'Sheet', of = 'of', two = false) => (n, total) => {
+  const num = lab(`${word} ${n} ${of} ${total}`);
+  return new Footer({ children: [two
+    ? bar([[lab(left), lab('  ·  '), num], [lab(right)]], [AlignmentType.LEFT, AlignmentType.RIGHT], { line: mm(4), split: 0.3 })
+    : bar([[lab(left)], [num], [lab(right)]], [AlignmentType.LEFT, AlignmentType.CENTER, AlignmentType.RIGHT], { line: mm(4) })] });
+};
 const sheet = (h, f, children) => ({
   properties: { page: { size: { width: mm(210), height: mm(297) }, margin: { top: mm(28), bottom: mm(24), left: mm(20), right: mm(20), header: mm(14), footer: mm(11) } } },
-  headers: { default: h }, footers: { default: f }, children,
+  headers: { default: h }, _foot: f, children: flow(children),
 });
 const doc = (lang, sections, ttl) => new Document({
   creator: '', lastModifiedBy: '', title: ttl, description: '',
@@ -160,7 +201,7 @@ const doc = (lang, sections, ttl) => new Document({
     { name: MONOM, data: F('mono-500.ttf'), characterSet: '00' },
   ],
   styles: { default: { document: { run: { font: SANS, size: pt(9.5), color: INK, language: { value: lang } }, paragraph: { spacing: { line: 245, lineRule: LineRuleType.AUTO } } } } },
-  sections,
+  sections: sections.map(({ _foot, ...x }, i) => ({ ...x, footers: { default: _foot(i + 1, sections.length) } })),
 });
 const img = (file, wmm, hmm, type = 'jpg') => new ImageRun({ type, data: IMG(file), transformation: { width: Math.round(wmm * 3.7795), height: Math.round(hmm * 3.7795) } });
 const withheld = (what, wmm, hmm) => table([row([cell(P([lab(what)], { align: AlignmentType.CENTER, line: mm(4) }), mm(wmm), { fill: PANEL, va: VerticalAlign.CENTER })], { h: mm(hmm), exact: true })], [mm(wmm)]);
@@ -173,13 +214,13 @@ function annex(sample) {
   const f = foot('1322/2026', footR);
 
   const s1 = [
-    title(['Steel planter units.', 'Four year framework,', sample ? [redact(40, { size: 28, font: MED }), run('.', { font: MED, size: 40 })] : 'City of Norrvik.']),
-    gap(5),
+    title(['Steel planter units.', 'Four year framework,', sample ? [redact(40, { size: 28, font: MED }), run('.', { font: MED, size: 40 })] : 'City of Norrvik.'], 40, 6),
+    gap(4),
     cols([
       [P([run('Planter and planter-bench units in structural steel, bolted rather than welded on site, so a damaged panel is replaced as a single part without removing the frame or disturbing the planting.', { size: 13 })], { line: mm(6.4) })],
       [sample ? withheld('Drawing withheld', 98, 54) : P([img('_tools/annex/img/drawing.jpg', 98, 54)], { line: mm(54) })],
     ], [72 - 8, 98], 8),
-    gap(6),
+    gap(5),
     cols([
       [data(['Specification', 'Standard'], [['Structural steel S355J2', 'EN 10025-2'], ['CE marked fabrication, EXC2', 'EN 1090-1'], ['Welding quality', 'EN ISO 3834-2'], ['Hot dip galvanised', 'EN ISO 1461'], ['Powder coat finish', 'RAL 7024']], [mm(56), mm(36)])],
       [label('Case'), small(`A four year framework for street and park planters across ${sample ? 'a' : 'the'} city centre and three district parks, ordered in batches against a fixed catalogue. The award weighted whole life cost, corrosion protection and delivery reliability, which is certified on sheet 2.`),
@@ -187,13 +228,13 @@ function annex(sample) {
        table([['Framework', 'NRV-2023-0148', 13], ['TED', '2023/S 000-000000', 17], ['CPV', '34928400', 0]].map(([k, v, n]) => row([
          cell(P([lab(k)], { line: mm(4.4) }), mm(24)), cell(P([n && sample ? redact(n, { font: MONO, size: 8.5 }) : run(v, { font: MONO, size: 8.5 })], { line: mm(4.4) }), mm(44))])), [mm(24), mm(44)])],
     ], [92, 68], 10),
-    gap(5),
+    gap(4),
     sample ? withheld('Photograph withheld', 170, 30) : P([img('_tools/annex/img/photo.jpg', 170, 30)], { line: mm(30) }),
     cols([
       [small([run('1  ', { font: MONOM, size: 7.5 }), run('Unit geometry. Plate edges and bolted fixings.', { size: 9, color: SOFT })])],
       [small([run('2  ', { font: MONOM, size: 7.5 }), run(`Installed unit, ${sample ? '' : 'Norrvik, '}2024.`, { size: 9, color: SOFT })])],
     ], [1, 1], 10),
-    heavy(5),
+    heavy(4),
     cols([
       [label('Value delivered, 2023-2025', { before: mm(2) }), P([run('EUR ', { font: MONOM, size: 9, color: SOFT }), sample ? redact(20, { size: 20 }) : run('612,400', { font: LIGHT, size: 32 })], { line: mm(11) })],
       [gap(2), table([['Recipient', 'City of Norrvik', true], ['Framework', '2023-2027'], ['Certificate', 'Sheet 2']].map(([k, v, star]) => row([
@@ -208,26 +249,26 @@ function annex(sample) {
     : [fields(['Signed for the recipient', 'Name and position'], [1, 1], { inset: mm(14) }), gap(1), fields(['Date', 'Contact for verification'], [1, 2], { inset: mm(14), air: 7 })];
   const s2 = [
     title(['Certificate of', 'satisfactory delivery.']),
-    gap(9),
+    gap(7),
     table([row([['Framework', 'NRV-2023-0148', 14], ['Period', '2023-2025', 0], ['Recipient', 'City of Norrvik', 14], ['Supplier', '', -1]].map(([k, v, n], i) => cell([
       label(k), n === -1 ? (sample ? P([redact(14, { size: 12.5 })], { line: mm(6) }) : P([run('')], { line: mm(6), border: { bottom: { ...HAIRINK, space: 1 } } }))
         : P([n && sample ? redact(n, { size: 12.5 }) : run(v, { size: 12.5 })], { line: mm(6) })], i < 3 ? mm(42.5) : mm(42.5), { mr: i < 3 ? mm(5) : 0 })))],
       [mm(42.5), mm(42.5), mm(42.5), mm(42.5)]),
     P([run('Annex XII Part II(a) asks for a list of principal deliveries over the past three years, with values, dates and recipients, and evidence that they were delivered. Put this form in front of the recipient at handover: a signature obtained on the day is worth more than a request sent two years later.', { size: 11 })], { before: mm(9), line: mm(5.6) }),
     P([lab('Variant'), run('   For works rather than supplies, change the heading to satisfactory execution and the period to five years.', { size: 9, color: SOFT })], { before: mm(2.5), line: mm(4.4) }),
-    gap(8),
+    gap(6),
     cols([
       [data(['Batch', 'Year', 'Units', 'EUR'], [['01', '2023', '96', sample ? [redact(9)] : '172,800'], ['02', '2024', '128', sample ? [redact(9)] : '230,400'], ['03', '2025', '116', sample ? [redact(9)] : '209,200']],
         [mm(18), mm(20), mm(18), mm(24)], { right: [2, 3], total: ['Total', '', '340', sample ? [redact(9)] : '612,400'] })],
       [data(['Particulars', ''], [['Units delivered', '340'], ['Material', 'S355J2'], ['Galvanising', 'EN ISO 1461'], ['Coating', 'RAL 7024'], ['Delivery windows', '18 of 18']], [mm(40), mm(40)], { right: [1] })],
     ], [1, 1], 10),
-    gap(8),
+    gap(6),
     table([row([cell([
       label(sample ? 'Declaration, completed by the recipient' : 'Declaration, to be completed by the recipient', { color: INK }),
       P('We confirm that the deliveries listed above were made by the supplier named below, in the quantities and on the dates stated, and that they were accepted without outstanding defect.', { before: mm(1) }),
       ...sigR,
     ], W, { fill: PANEL, mt: mm(6), mb: mm(6), ml: mm(7), mr: mm(7) })])], [W]),
-    heavy(10),
+    heavy(8),
     label('Supplier, completed by the supplier', { before: mm(3) }),
     sample ? fields(['Company name', 'Address', 'Business ID', 'Contact'], null, { filled: [16, 16, 10, 10] }) : fields(['Company name', 'Address', 'Business ID', 'Contact'], null, { air: 7 }),
   ];
@@ -244,7 +285,7 @@ function review(L) {
   const s1 = [
     title(L.title),
     P([run(L.lede, { size: 13 })], { before: mm(9), line: mm(6.4) }),
-    P([run('', { size: 1 })], { before: mm(12), line: mm(1), border: { bottom: { ...HAIR, space: 1 } } }),
+    P([run(' ', { size: 1 })], { before: mm(12), line: mm(1), border: { bottom: { ...HAIR, space: 1 } } }),
     gap(3), count,
     gap(12),
     cols([
@@ -309,7 +350,7 @@ function vkr() {
     gap(8),
     cols([
       [P([run('Mal for vedlegg 5 i konkurransen om rammeavtale for avfallsbeholdere, Valdres Kommunale Renovasjon IKS. Dokumentet er bygd etter tildelingskriteriene i konkurransegrunnlaget punkt 4.1. Hver seksjon svarer til ett delkriterium og bærer vekten sin i marg.', { size: 13 })], { line: mm(6.4) })],
-      [P([run('', { size: 1 })], { line: mm(1), border: { bottom: { ...HAIR, space: 1 } } }), P([run('65', { font: LIGHT, size: 72, x: { characterSpacing: -60 } }), run(' %', { font: LIGHT, size: 28 })], { before: mm(2), line: mm(24) }),
+      [P([run(' ', { size: 1 })], { line: mm(1), border: { bottom: { ...HAIR, space: 1 } } }), P([run('65', { font: LIGHT, size: 72, x: { characterSpacing: -60 } }), run(' %', { font: LIGHT, size: 28 })], { before: mm(2), line: mm(24) }),
        small('av vekten ligger i vedlegg 5. Det betyr at 65 prosent av vekten hviler på et dokument oppdragsgiver ikke gir noen form for.', { before: mm(1) })],
     ], [1.35, 1], 10),
     gap(5),
