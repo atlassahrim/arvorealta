@@ -342,6 +342,8 @@ ul{padding:0;list-style:none}
 .file{display:grid;gap:2px;border:1px solid var(--rule);border-radius:12px;padding:13px 18px;
   transition:border-color .25s ease,background .25s ease}
 .file:hover{border-color:var(--ink);background:var(--paper-2)}
+.file.off{border-style:dashed;opacity:.5;cursor:not-allowed;user-select:none}
+.file.off:hover{border-color:var(--rule);background:none}
 .file b{font-weight:500;font-size:15px}
 .file i{font-style:normal;font-family:"Geist Mono",monospace;font-size:9.5px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--ink-soft)}
@@ -1507,10 +1509,12 @@ function renderLists(){
     `<div class="rv"><h3>${esc(h)}</h3><p>${esc(p)}</p></div>`).join(""));
 
   put("#openFiles",
-    `<a class="file" href="/assets/vedlegg-5/Vedlegg-5-eksempel.pdf" target="_blank" rel="noopener">
-       <b>${esc(t.open.seeEx)}</b><i>${esc(t.open.exMeta)}</i></a>
-     <a class="file" href="/assets/vedlegg-5/Vedlegg-5-Utfyllende-opplysninger.docx" download>
-       <b>${esc(t.open.getTpl)}</b><i>${esc(t.open.tplMeta)}</i></a>`);
+    /* unavailable since 19 November, at the owner's word: no href, so they
+       cannot be clicked, tabbed to or opened. The files stay in assets/ */
+    `<span class="file off" aria-disabled="true">
+       <b>${esc(t.open.seeEx)}</b><i>${esc(t.open.exMeta)}</i></span>
+     <span class="file off" aria-disabled="true">
+       <b>${esc(t.open.getTpl)}</b><i>${esc(t.open.tplMeta)}</i></span>`);
 
   /* the bar's track widths come from the data, and every track is
      minmax(0,Nfr): an fr track takes its min-content width as a floor, so a

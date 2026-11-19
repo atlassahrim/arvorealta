@@ -43,21 +43,39 @@ const HAIRINK = { style: BorderStyle.SINGLE, size: 4, color: INK };
 const HEAVY = { style: BorderStyle.SINGLE, size: 14, color: INK };
 
 /* ---------- type ---------- */
-const run = (text, o = {}) => new TextRun({ text, font: o.font || SANS, size: pt(o.size || 9.5), color: o.color || INK, ...o.x });
-const lab = (text, o = {}) => new TextRun({ text, font: MONOM, size: pt(7.5), color: o.color || SOFT, allCaps: true, characterSpacing: 18, ...o.x });
+/* Line spacing is MULTIPLE, never EXACT. Exact leading looks right in a PDF
+   and edits badly: new text keeps a fixed height whatever its size, larger
+   text clips, an empty spacer paragraph holds a tall cursor, and Google Docs
+   turns an exact value into a multiple of its own and opens every line wide.
+   So each run carries its size and face, and P() turns the leading the page
+   asks for (in twips) into a multiple of the face's single line, which in
+   Word is winAscent + winDescent: 1.43 em for Inter, 1.30 for IBM Plex Mono.
+   0.85 is the floor, where the glyphs still fit inside the line. */
+const SINGLE = { [SANS]: 1.43, [MED]: 1.43, [LIGHT]: 1.43, [MONO]: 1.3, [MONOM]: 1.3 };
+const tag = (r, size, font) => Object.assign(r, { _sz: size, _font: font, _h: size * (SINGLE[font] || 1.43) });
+const run = (text, o = {}) => tag(new TextRun({ text, font: o.font || SANS, size: pt(o.size || 9.5), color: o.color || INK, ...o.x }), o.size || 9.5, o.font || SANS);
+const lab = (text, o = {}) => tag(new TextRun({ text, font: MONOM, size: pt(7.5), color: o.color || SOFT, allCaps: true, characterSpacing: 18, ...o.x }), 7.5, MONOM);
 const lines = (arr, o) => arr.flatMap((t, i) => [i ? new TextRun({ break: 1 }) : null, ...(typeof t === 'string' ? [run(t, o)] : [].concat(t))].filter(Boolean));
-const P = (children, o = {}) => new Paragraph({
-  children: typeof children === 'string' ? [run(children, o)] : children,
-  spacing: { before: o.before || 0, after: o.after || 0, line: o.line || mm(4.9), lineRule: LineRuleType.EXACT },
-  alignment: o.align, keepNext: o.keepNext, keepLines: true, border: o.border, tabStops: o.tabs,
-});
+const P = (children, o = {}) => {
+  const kids = typeof children === 'string' ? [run(children, o)] : children;
+  const big = kids.filter(k => k && k._h).sort((a, b) => b._h - a._h)[0];
+  const mult = big ? Math.min(3, Math.max(0.85, (o.line || mm(4.9)) / (big._h * 20))) : 1;
+  return new Paragraph({
+    children: kids,
+    spacing: { before: o.before || 0, after: o.after || 0, line: Math.round(240 * mult), lineRule: LineRuleType.AUTO },
+    // the paragraph mark takes the line's own size, or a 9.5 pt mark sets the height of a 7.5 pt label
+    run: big ? { font: big._font, size: pt(big._sz) } : undefined,
+    alignment: o.align, keepNext: o.keepNext, keepLines: true, border: o.border, tabStops: o.tabs,
+  });
+};
 const small = (t, o = {}) => P(typeof t === 'string' ? [run(t, { size: 9, color: o.soft ? SOFT : INK })] : t, { line: mm(4.4), ...o });
 const label = (t, o = {}) => P([lab(t, o)], { line: mm(4), after: o.after ?? mm(1.5), before: o.before, keepNext: true });
-const gap = h => P([run('')], { line: mm(h) });
+// air between blocks: an empty 1 pt paragraph whose space is all `before`, so nothing tall is left to click into
+const gap = h => P([run('', { size: 1 })], { before: Math.max(0, mm(h) - 29), line: 29 });
 const red = t => run(t, { color: RED });
 // a redaction: solid block glyphs, nothing underneath. Not spaces: a renderer
 // drops trailing spaces at the end of a line, shading and all.
-const redact = (n, o = {}) => new TextRun({ text: '\u2588'.repeat(Math.max(1, Math.round(n * 0.42))), color: INK, font: o.font || SANS, size: pt(o.size || 9.5), shading: { type: ShadingType.CLEAR, color: 'auto', fill: INK } });
+const redact = (n, o = {}) => tag(new TextRun({ text: '\u2588'.repeat(Math.max(1, Math.round(n * 0.42))), color: INK, font: o.font || SANS, size: pt(o.size || 9.5), shading: { type: ShadingType.CLEAR, color: 'auto', fill: INK } }), o.size || 9.5, o.font || SANS);
 
 const title = (arr, size = 40, before = 9) => P(lines(arr, { font: MED, size, x: { characterSpacing: Math.round(-size * 0.8) } }),
   { before: mm(before), line: mm(size * 0.3625), keepNext: true });
@@ -118,7 +136,7 @@ const fields = (labels, ratios, o = {}) => {
   return table([row(cells)], widths);
 };
 // a heavy rule a block hangs from
-const heavy = (before = 6) => P([run('')], { before: mm(before), line: mm(1), border: { bottom: { ...HEAVY, space: 1 } } });
+const heavy = (before = 6) => P([run('', { size: 1 })], { before: mm(before), line: mm(1), border: { bottom: { ...HEAVY, space: 1 } } });
 
 /* ---------- sheets ---------- */
 const head = (left, ref) => new Header({ children: [P([lab(left, { color: INK }), new TextRun({ text: '\t' }), run(ref, { font: MONO, size: 10 })],
@@ -141,7 +159,7 @@ const doc = (lang, sections, ttl) => new Document({
     { name: MONO, data: F('mono-400.ttf'), characterSet: '00' },
     { name: MONOM, data: F('mono-500.ttf'), characterSet: '00' },
   ],
-  styles: { default: { document: { run: { font: SANS, size: pt(9.5), color: INK, language: { value: lang } }, paragraph: { spacing: { line: mm(4.9), lineRule: LineRuleType.EXACT } } } } },
+  styles: { default: { document: { run: { font: SANS, size: pt(9.5), color: INK, language: { value: lang } }, paragraph: { spacing: { line: 245, lineRule: LineRuleType.AUTO } } } } },
   sections,
 });
 const img = (file, wmm, hmm, type = 'jpg') => new ImageRun({ type, data: IMG(file), transformation: { width: Math.round(wmm * 3.7795), height: Math.round(hmm * 3.7795) } });
@@ -226,7 +244,7 @@ function review(L) {
   const s1 = [
     title(L.title),
     P([run(L.lede, { size: 13 })], { before: mm(9), line: mm(6.4) }),
-    P([run('')], { before: mm(12), line: mm(1), border: { bottom: { ...HAIR, space: 1 } } }),
+    P([run('', { size: 1 })], { before: mm(12), line: mm(1), border: { bottom: { ...HAIR, space: 1 } } }),
     gap(3), count,
     gap(12),
     cols([
@@ -291,7 +309,7 @@ function vkr() {
     gap(8),
     cols([
       [P([run('Mal for vedlegg 5 i konkurransen om rammeavtale for avfallsbeholdere, Valdres Kommunale Renovasjon IKS. Dokumentet er bygd etter tildelingskriteriene i konkurransegrunnlaget punkt 4.1. Hver seksjon svarer til ett delkriterium og bærer vekten sin i marg.', { size: 13 })], { line: mm(6.4) })],
-      [P([run('')], { line: mm(1), border: { bottom: { ...HAIR, space: 1 } } }), P([run('65', { font: LIGHT, size: 72, x: { characterSpacing: -60 } }), run(' %', { font: LIGHT, size: 28 })], { before: mm(2), line: mm(24) }),
+      [P([run('', { size: 1 })], { line: mm(1), border: { bottom: { ...HAIR, space: 1 } } }), P([run('65', { font: LIGHT, size: 72, x: { characterSpacing: -60 } }), run(' %', { font: LIGHT, size: 28 })], { before: mm(2), line: mm(24) }),
        small('av vekten ligger i vedlegg 5. Det betyr at 65 prosent av vekten hviler på et dokument oppdragsgiver ikke gir noen form for.', { before: mm(1) })],
     ], [1.35, 1], 10),
     gap(5),

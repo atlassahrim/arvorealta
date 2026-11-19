@@ -3308,6 +3308,15 @@ the far right by the languages' own `margin-right:auto`.
 
 ### The tender fold is a clock, and it is live now
 
+**The two file buttons are unavailable, since 19 November, at the
+owner's word.** `renderLists` writes them as `<span class="file off"
+aria-disabled="true">` with no `href`, dashed and at half strength, so
+they cannot be clicked or tabbed to. The labels are unchanged. **The
+files are still public** at `/assets/vedlegg-5/`, so anyone holding
+the old link can open them. The closed headline still says the
+attachment `is still here`, and nothing on the page explains the dimmed
+buttons.
+
 **On 28 October 2026 `index.html` carried `27 Oct 2026, 12:00` under an
 eyebrow reading `Open now`, and the deadline had passed the day before.**
 That is the third of the three things this file says to flag, because the page
@@ -3426,6 +3435,17 @@ the underscore: `reference-annex`, `reference-annex-sample`,
   the same page counts, checked by converting each file to PDF.
 - **The strings are copied into the script from the pages.** A change
   to a page belongs in `docx.js` in the same commit.
+- **Line spacing is a multiple, never exact, since 19 November.** The
+  first build set every paragraph to an exact leading copied from the
+  page, and the owner could not edit the files: new text kept a fixed
+  height, a spacer paragraph held a tall cursor, and Google Docs, which
+  has no exact spacing, opened every line wide. `P()` now turns the
+  leading the page asks for into a multiple of the face's single line
+  (1.43 em for Inter, 1.30 for IBM Plex Mono, read off the fonts' win
+  metrics), with 0.85 as the floor. Each paragraph mark takes its line's
+  own size, and air between blocks is `before` on a 1 pt empty
+  paragraph. The page counts held: 2, 2, 2, 2 and 5. **Do not bring
+  `LineRuleType.EXACT` back** to paragraph spacing.
 - **Inter and IBM Plex Mono are embedded**, five static TrueType files
   in `_tools/annex/fonts/` (OFL). `docx_fix.py` handles the two schema
   traps recorded from the 18 November templates, the upper-case
