@@ -863,33 +863,51 @@ body{background:var(--b-ink)}
 </head>
 <body>
 <script>
-/* A fresh visit starts on the first fold. Reported on the owner's device:
-   following the offer page's footer link to /brand/ landed on the LAST
-   fold. Chromium here lands on the first every time, so the fault is the
-   engine's, WebKit restoring or re-snapping to an offset the new page never
-   asked for, and the fix does not depend on which. The browser's own scroll
-   restoration is off, and until the reader touches anything, a visit with
-   no hash is held at the top through parse, load and the fonts. A hash
-   still lands where it points, and back and forward are left alone. */
+/* A fresh visit starts on the first fold. Reported on the owner's device,
+   three times: a link from another page of the site opened this one on a
+   later fold, the fold the reader had been on before. Chromium and desktop
+   WebKit here land on the first fold every time; iOS Safari does not.
+   The guard of 6 November turned the snap off, scrolled to the top and put
+   the snap back ONE FRAME later. That is the race the in-page jump fix of
+   2 November exists to avoid: WebKit re-runs the snap before a scripted
+   scroll has landed, and settles on the old offset. So this guard works
+   the way that fix does. On a fresh visit the snap is off from the first
+   line of the body, the page is held at the top through parse, load and
+   the fonts, and the snap comes back only at the reader's first wheel,
+   touch, key or pointer. If the page is somehow not at the top by then,
+   it is scrolled there first and the snap waits for six still frames,
+   with a 1600ms cap. A hash still lands where it points, and back and
+   forward are left alone. */
 (() => {
   try { if ("scrollRestoration" in history) history.scrollRestoration = "manual"; } catch (e) {}
   if (location.hash.length > 1) return;
   const nav = performance.getEntriesByType ? performance.getEntriesByType("navigation")[0] : null;
   if (nav && nav.type === "back_forward") return;
   const root = document.documentElement, t0 = performance.now();
-  let touched = false;
-  ["wheel", "touchstart", "keydown", "pointerdown"].forEach(t =>
-    addEventListener(t, () => { touched = true; }, { once: true, passive: true, capture: true }));
-  const pin = () => {
-    if (touched || Math.round(scrollY) === 0) return;
-    root.style.scrollSnapType = "none";
+  root.style.scrollSnapType = "none";
+  let held = true;
+  const pin = () => { if (held && Math.round(scrollY) !== 0) scrollTo(0, 0); };
+  const release = () => {
+    if (!held) return;
+    held = false;
+    if (Math.round(scrollY) === 0) { root.style.scrollSnapType = ""; return; }
     scrollTo(0, 0);
-    requestAnimationFrame(() => { root.style.scrollSnapType = ""; });
+    const t1 = performance.now();
+    let last = -1, still = 0;
+    (function quiet(){
+      const y = Math.round(scrollY);
+      if (y === last) still++; else { still = 0; last = y; }
+      if (still >= 6 || performance.now() - t1 > 1600) { root.style.scrollSnapType = ""; return; }
+      requestAnimationFrame(quiet);
+    })();
   };
+  ["wheel", "touchstart", "keydown", "pointerdown"].forEach(t =>
+    addEventListener(t, release, { once: true, passive: true, capture: true }));
   addEventListener("DOMContentLoaded", pin);
   addEventListener("load", pin);
+  addEventListener("pageshow", pin);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(pin);
-  (function hold(){ pin(); if (!touched && performance.now() - t0 < 3000) requestAnimationFrame(hold); })();
+  (function hold(){ pin(); if (held && performance.now() - t0 < 3000) requestAnimationFrame(hold); })();
 })();
 </script>
 <script>document.documentElement.classList.remove('no-js')</script>
@@ -1437,9 +1455,9 @@ const EXTRA = {
        _r0:"Bids", _r1:"Tender", _r2:"Documents", _r3:"Scored", _r4:"Cost", _r5:"Start",
        _uDays:"days", _uHours:"hours", _uMin:"minutes",
        _tlA:"Questions close", _tlB:"Tender deadline",
-       _left:"until the tender deadline", _shutEyebrow:"Closed",
+       _left:"until the tender deadline", _shutEyebrow:"Tenders to take part in",
        _shut:"Closed.", _shutWhen:"The deadline passed on",
-       _shutH2:"This one has closed. Wait for the next one.",
+       _shutH2:"This one has closed.<br>Watch for the next one.",
        _window:"The bidding window runs from the question deadline to the tender deadline.",
        _docH2:"One standard.<br>Every document a bid needs.",
        _docA:"Tender annex", _docB:"Proposal", _docC:"Deck",
@@ -1448,9 +1466,9 @@ const EXTRA = {
        _r0:"Tilbud", _r1:"Konkurranse", _r2:"Dokumenter", _r3:"Vekting", _r4:"Pris", _r5:"Start",
        _uDays:"dager", _uHours:"timer", _uMin:"minutter",
        _tlA:"Frist for spørsmål", _tlB:"Tilbudsfrist",
-       _left:"til tilbudsfristen", _shutEyebrow:"Lukket",
+       _left:"til tilbudsfristen", _shutEyebrow:"Anbud å delta i",
        _shut:"Lukket.", _shutWhen:"Fristen gikk ut",
-       _shutH2:"Denne er lukket. Vent på den neste.",
+       _shutH2:"Denne er lukket.<br>Følg med på den neste.",
        _window:"Tilbudsvinduet går fra spørsmålsfristen til tilbudsfristen.",
        _docH2:"Én standard.<br>Hvert dokument et tilbud trenger.",
        _docA:"Tilbudsvedlegg", _docB:"Tilbud", _docC:"Presentasjon",
@@ -1459,9 +1477,9 @@ const EXTRA = {
        _r0:"Tarjoukset", _r1:"Tarjouspyyntö", _r2:"Asiakirjat", _r3:"Pisteet", _r4:"Hinta", _r5:"Aloita",
        _uDays:"päivää", _uHours:"tuntia", _uMin:"minuuttia",
        _tlA:"Kysymysten määräaika", _tlB:"Tarjousten määräaika",
-       _left:"tarjousten määräaikaan", _shutEyebrow:"Suljettu",
+       _left:"tarjousten määräaikaan", _shutEyebrow:"Tarjouskilpailuja, joihin osallistua",
        _shut:"Suljettu.", _shutWhen:"Määräaika umpeutui",
-       _shutH2:"Tämä on sulkeutunut. Odota seuraavaa.",
+       _shutH2:"Tämä on sulkeutunut.<br>Pidä silmällä seuraavaa.",
        _window:"Tarjousikkuna kulkee kysymysten määräajasta tarjousten määräaikaan.",
        _docH2:"Yksi standardi.<br>Jokainen tarjouksen tarvitsema asiakirja.",
        _docA:"Tarjousliite", _docB:"Tarjous", _docC:"Esitys",
@@ -1657,7 +1675,7 @@ function tick(){
   const shut = now >= b;
 
   $("#openEyebrow").textContent = shut ? x._shutEyebrow : t.open.eyebrow;
-  $("#openH2").textContent = shut ? x._shutH2 : t.open.h2;
+  $("#openH2").innerHTML = shut ? x._shutH2 : t.open.h2;
   clock.classList.toggle("shut", shut);
   $("#tlAv").textContent = fmt(TENDER.questions);
   $("#tlBv").textContent = fmt(TENDER.deadline);
