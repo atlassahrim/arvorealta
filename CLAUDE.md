@@ -3438,11 +3438,14 @@ change here. A new file does need one**: its button gets the file's id
 and loses `off`.
 
 **The mark's fifth version card is `Icon`, since 19 November, at the
-owner's word**, and it was `One colour`. The card holds the one-colour
-symbol SVGs and the three app icon PNGs (32, 180, 512), which moved there
-from `Symbol`. Its description still says one flat colour. Its `For` line
-now starts with the app icon and favicon. The Drive file names did not
-change.
+owner's word**, and it was `One colour`. It holds only the three app icon
+PNGs (32, 180, 512). It reads `The symbol in amber on forest, square, for
+the app icon and the browser tab.`, with `For: App icon, favicon` and
+`Files: PNG, square`; the owner approved that copy. **`Symbol` holds the
+symbol's files**: the SVGs in amber, forest, paper and black, and its
+waiting print PDF. The one-colour sentence moved to the end of its
+description. That took out two duplicate buttons, so the book now has
+32 live buttons and 9 waiting. The Drive file names did not change.
 
 **Montserrat is self-hosted for the book only**: `assets/fonts/montserrat.css`,
 variable, latin and latin-ext. The book also needs Geist Mono at 600, which
