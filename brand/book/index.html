@@ -470,17 +470,19 @@ ol.legend b{font-weight:600}
    every other file opens its own Drive item. A file that does not exist
    yet keeps its button, dashed and not clickable. No button opens the
    folder. A pill, because a download is an action ── */
-.dls{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
-.dl{display:inline-flex;align-items:baseline;gap:7px;padding:8px 12px 7px;border:1px solid var(--fg);border-radius:999px;
+.dls{display:grid;gap:6px;margin-top:16px;max-width:340px}
+.dl{display:grid;grid-template-columns:4.2em minmax(0,1fr) auto;align-items:baseline;gap:8px;padding:9px 14px 8px;border:1px solid var(--fg);border-radius:999px;
   font:500 11px/1 var(--f-mono);letter-spacing:.04em;color:var(--fg);text-decoration:none;white-space:nowrap;transition:background .2s,color .2s}
 .dl b{font-weight:600;letter-spacing:.12em;text-transform:uppercase}
-.dl i{font-style:normal;color:var(--faint)}
+.dl i{font-style:normal;color:var(--faint);text-align:right}
 a.dl:hover,a.dl:focus-visible{background:var(--fg);color:var(--bg)}
 a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
 .dl.off{border:1px dashed var(--rule);color:var(--faint);cursor:not-allowed;user-select:none}
 .dl.off i::before{content:"· "}
 .ver .dls{margin-top:10px}
-.face .who .dls{margin-top:6px}
+.face .who .dls{margin-top:6px;max-width:220px}
+.dls[data-for]{margin-inline:auto}
+.dls[hidden]{display:none}
 @media (prefers-reduced-motion:reduce){.dl{transition:none}}
 </style>
 </head>
@@ -774,8 +776,8 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
     <div class="seg" role="group" aria-label="Guides" id="pgGuide"><button type="button" aria-pressed="false" data-g="g">Grid</button><button type="button" aria-pressed="false" data-g="b">Baseline</button></div>
   </div>
   <div class="desk" id="desk"></div>
+  <div class="dls" data-for="letter"><a class="dl" href="https://drive.google.com/file/d/1bDvKYl9OhfyW3eLp5CJwWMWcMSTF8DtV/view" target="_blank" rel="noopener"><b>DOTX</b>Letter<i>1.0 MB</i></a><a class="dl" href="https://drive.google.com/file/d/1fetKzXA-PphRh5VZ6idm98JTJrzj8YjB/view" target="_blank" rel="noopener"><b>PDF</b>Letter<i>46 KB</i></a></div><div class="dls" data-for="cover page"><a class="dl" href="https://drive.google.com/file/d/1U4GnfKzWWKJBcUB5LUZL63YsHz7HB7Y_/view" target="_blank" rel="noopener"><b>DOTX</b>Proposal<i>1.0 MB</i></a><a class="dl" href="https://drive.google.com/file/d/1rpeckfnJUXufqWikm5-GfhM6l2c8NBmZ/view" target="_blank" rel="noopener"><b>PDF</b>Proposal<i>76 KB</i></a></div><div class="dls" data-for="slide"><span class="dl off" aria-disabled="true" title="Not available yet"><b>PDF</b>Deck<i>Not yet</i></span></div><div class="dls" data-for="card"><span class="dl off" aria-disabled="true" title="Not available yet"><b>PDF</b>Card back<i>Not yet</i></span><span class="dl off" aria-disabled="true" title="Not available yet"><b>PDF</b>Card emboss<i>Not yet</i></span></div>
   <p class="note">Drawn to scale: inside the page one unit is one millimetre, or one pixel on the slide; the card is shown at its trim, so every figure below is the figure in the drawing. Switch on the grid and the baseline to see what the text is sitting on.</p>
-  <div class="dls"><a class="dl" href="https://drive.google.com/file/d/1bDvKYl9OhfyW3eLp5CJwWMWcMSTF8DtV/view" target="_blank" rel="noopener"><b>DOTX</b>Letter<i>1.0 MB</i></a><a class="dl" href="https://drive.google.com/file/d/1U4GnfKzWWKJBcUB5LUZL63YsHz7HB7Y_/view" target="_blank" rel="noopener"><b>DOTX</b>Proposal<i>1.0 MB</i></a><a class="dl" href="https://drive.google.com/file/d/1fetKzXA-PphRh5VZ6idm98JTJrzj8YjB/view" target="_blank" rel="noopener"><b>PDF</b>Letter<i>46 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1rpeckfnJUXufqWikm5-GfhM6l2c8NBmZ/view" target="_blank" rel="noopener"><b>PDF</b>Proposal<i>76 KB</i></a><span class="dl off" aria-disabled="true" title="Not available yet"><b>PDF</b>Deck<i>Not yet</i></span></div>
 
   <div class="block"><span class="lbl">The pages</span>
     <div class="tblw"><table class="tbl wide">
@@ -838,11 +840,10 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
   <div class="sh"><span class="sn">09</span><h2>Imagery and motion</h2></div>
   <p class="why">Our own footage, shown large, moving slowly. A picture is a ground the type has to be checked against.</p>
   <div class="imgs">
-    <figure><img src="img/ground-water-2-720.jpg" alt="Deep water ground" width="1280" height="720"><figcaption>Water: our own footage, looped.</figcaption></figure>
-    <figure><img src="img/ground-dew-1-720.jpg" alt="Dew on grass" width="1280" height="720"><figcaption>An abstract ground. It may be generated.</figcaption></figure>
-    <figure><img src="img/ground-paper-2-720.jpg" alt="Paper with leaf shadows" width="1280" height="720"><figcaption>Paper: the close of every page.</figcaption></figure>
+    <figure><img src="img/ground-water-2-720.jpg" alt="Deep water ground" width="1280" height="720"><figcaption>Water: our own footage, looped.</figcaption><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1e-CwjyUUsvxzAJIz1xORWRUqOfCYjssa/view" target="_blank" rel="noopener"><b>MP4</b>Water<i>1.3 MB</i></a><a class="dl" href="https://drive.google.com/file/d/1iL5dcgia9XpVBBjJUWOb4lKm85y60tyY/view" target="_blank" rel="noopener"><b>JPG</b>Water<i>39 KB</i></a><span class="dl off" aria-disabled="true" title="Not available yet"><b>MP4</b>1920x1080<i>Not yet</i></span></div></figure>
+    <figure><img src="img/ground-dew-1-720.jpg" alt="Dew on grass" width="1280" height="720"><figcaption>An abstract ground. It may be generated.</figcaption><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1UAodfZRRbo-YW9Bf0w_G6m1q8TtRLs56/view" target="_blank" rel="noopener"><b>MP4</b>Dew<i>820 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1toKDonI54bLDR2EEuu87pP9h9-gjFpG0/view" target="_blank" rel="noopener"><b>JPG</b>Dew<i>31 KB</i></a><span class="dl off" aria-disabled="true" title="Not available yet"><b>MP4</b>1920x1080<i>Not yet</i></span></div></figure>
+    <figure><img src="img/ground-paper-2-720.jpg" alt="Paper with leaf shadows" width="1280" height="720"><figcaption>Paper: the close of every page.</figcaption><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1-kc_OPh5C2gKjz-4VzCPQ78rou8NijcO/view" target="_blank" rel="noopener"><b>MP4</b>Paper<i>388 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1CIdUB9trYfA11gCJREmUjg_gLuyZ9L1S/view" target="_blank" rel="noopener"><b>JPG</b>Paper<i>14 KB</i></a><span class="dl off" aria-disabled="true" title="Not available yet"><b>MP4</b>1920x1080<i>Not yet</i></span></div></figure>
   </div>
-  <div class="dls"><a class="dl" href="https://drive.google.com/file/d/1e-CwjyUUsvxzAJIz1xORWRUqOfCYjssa/view" target="_blank" rel="noopener"><b>MP4</b>Water<i>1.3 MB</i></a><a class="dl" href="https://drive.google.com/file/d/1iL5dcgia9XpVBBjJUWOb4lKm85y60tyY/view" target="_blank" rel="noopener"><b>JPG</b>Water<i>39 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1UAodfZRRbo-YW9Bf0w_G6m1q8TtRLs56/view" target="_blank" rel="noopener"><b>MP4</b>Dew<i>820 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1toKDonI54bLDR2EEuu87pP9h9-gjFpG0/view" target="_blank" rel="noopener"><b>JPG</b>Dew<i>31 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1-kc_OPh5C2gKjz-4VzCPQ78rou8NijcO/view" target="_blank" rel="noopener"><b>MP4</b>Paper<i>388 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1CIdUB9trYfA11gCJREmUjg_gLuyZ9L1S/view" target="_blank" rel="noopener"><b>JPG</b>Paper<i>14 KB</i></a><span class="dl off" aria-disabled="true" title="Not available yet"><b>MP4</b>1920x1080<i>Not yet</i></span></div>
   <ol class="rules">
     <li><span><b>Real footage over a synthetic move.</b> Our own motion is the first choice.</span></li>
     <li><span><b>Never generate a client's work.</b> An abstract ground may be generated; a mark on a sign may not.</span></li>
@@ -915,7 +916,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
   <p class="why">Where the brand appears, and the two or three rules each surface adds.</p>
   <div class="apps">
     <div class="app"><div class="th"><img src="img/web-brand-720.webp" alt="The brand page on arvorealta.com" width="720" height="450"></div><h3>Web pages</h3>
-      <ul><li>One screen per section, on ink, closing on paper with the gold fan.</li><li>Three languages; every sentence in one of them.</li></ul></div>
+      <ul><li>One screen per section, on ink, closing on paper with the gold fan.</li><li>Three languages; every sentence in one of them.</li></ul><div class="dls"><span class="dl off" aria-disabled="true" title="Not available yet"><b>PNG</b>Social links<i>Not yet</i></span><span class="dl off" aria-disabled="true" title="Not available yet"><b>PNG</b>LinkedIn banner<i>Not yet</i></span></div></div>
     <div class="app"><div class="th"><img src="img/web-offer-720.webp" alt="The price section of the offer page" width="720" height="450"></div><h3>Offers and prices</h3>
       <ul><li>Prices are never rounded and never hidden.</li><li>The free step is the one action on the page.</li></ul></div>
     <div class="app"><div class="th" data-mini="cover"></div><h3>Letters and proposals</h3>
@@ -925,10 +926,9 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
     <div class="app"><div class="th doc"><img src="img/doc-annex-1-520.webp" alt="A redacted tender annex" width="520" height="735"></div><h3>Tender annexes</h3>
       <ul><li>Submitted under the client's name, in the client's brand, with no mark of ours.</li><li>If the client has no brand yet, the technical system: IBM Plex, two rule weights.</li></ul></div>
     <div class="app"><div class="th sig"><span class="n">Atlas Sahrim</span><span class="w">ARVOREALTA</span><span>arvorealta.com · atlas@arvorealta.com</span></div><h3>Email signature</h3>
-      <ul><li>Text only: image signatures are blocked by most mail clients.</li><li>Name, wordmark, one line of contact.</li></ul></div>
+      <ul><li>Text only: image signatures are blocked by most mail clients.</li><li>Name, wordmark, one line of contact.</li></ul><div class="dls"><span class="dl off" aria-disabled="true" title="Not available yet"><b>HTML</b>Signature<i>Not yet</i></span></div></div>
     
   </div>
-  <div class="dls"><span class="dl off" aria-disabled="true" title="Not available yet"><b>PDF</b>Card back<i>Not yet</i></span><span class="dl off" aria-disabled="true" title="Not available yet"><b>PDF</b>Card emboss<i>Not yet</i></span><span class="dl off" aria-disabled="true" title="Not available yet"><b>PNG</b>Social links<i>Not yet</i></span><span class="dl off" aria-disabled="true" title="Not available yet"><b>PNG</b>LinkedIn banner<i>Not yet</i></span><span class="dl off" aria-disabled="true" title="Not available yet"><b>HTML</b>Email signature<i>Not yet</i></span></div>
 </section>
 
 <!-- 13 ───────────────────────────────────────────── -->
@@ -1163,7 +1163,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
       C(6,28.4,73,"c-ct","+55 61 9.9984 5147<br>atlas@arvorealta.com<br>arvorealta.com")+'</div></div>';
   const pageEl=(k,mini)=>{if(k==="card")return CARD;const p=PAGES[k];return `<div class="pg${p.slide?" slide":""}" role="img" aria-label="${p.label}, drawn to scale">${mini?"":OV}${p.html}</div>`};
   const desk=$("#desk");
-  const showPage=k=>{desk.innerHTML=pageEl(k,false)};showPage("letter");
+  const showPage=k=>{desk.innerHTML=pageEl(k,false);$$("[data-for]").forEach(d=>{d.hidden=!d.dataset.for.split(" ").includes(k)})};showPage("letter");
   $$("#pgPick button").forEach(b=>b.addEventListener("click",()=>{$$("#pgPick button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));showPage(b.dataset.p)}));
   $$("#pgGuide button").forEach(b=>b.addEventListener("click",()=>{const on=b.getAttribute("aria-pressed")!=="true";b.setAttribute("aria-pressed",String(on));desk.classList.toggle(b.dataset.g,on)}));
   $$("[data-mini]").forEach(t=>{t.innerHTML=pageEl(t.dataset.mini,true)});

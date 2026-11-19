@@ -3447,6 +3447,17 @@ waiting print PDF. The one-colour sentence moved to the end of its
 description. That took out two duplicate buttons, so the book now has
 32 live buttons and 9 waiting. The Drive file names did not change.
 
+**Every file's button sits under the picture it downloads, one file per
+line, since 19 November, at the owner's word.** No section keeps a loose
+row of links any more. The mark cards, the three grounds, the colour
+swatches and the Drive tree each carry their own stack. **Documents
+shows the stack for the page in the picker only**: Letter, Proposal
+(cover and page), Deck, Business card. The social images go under `Web
+pages` and the signature under `Email signature`. Each ground gained a
+waiting `MP4 1920x1080`, so the book now has 32 live buttons and 11
+waiting. The stacks set `display:grid`, so they carry
+`.dls[hidden]{display:none}`, which is this file's `[hidden]` trap again.
+
 **Montserrat is self-hosted for the book only**: `assets/fonts/montserrat.css`,
 variable, latin and latin-ext. The book also needs Geist Mono at 600, which
 `geist.css` does not carry, so the page declares it itself. Neither file is
