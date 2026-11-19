@@ -2121,6 +2121,40 @@ bug**: every link between the pages opens the new page at the top there,
 on the current site and on the site as it stood before either fix. So
 the bug belongs to iOS Safari, not to WebKit as such.
 
+### The wrong fold, reopened by the owner on 19 November
+
+**Reported again: the offer page's footer link opens `/brand/` on the
+fold the reader was last on.** The owner asked for it fixed, which
+reopens the 14 November decision above.
+
+**The two failed guards and the rail fix differ in one way, and it is
+the likely cause.** The rail fix of 2 November, which does work on his
+iPad, turns the snap off, scrolls, and turns it back on only after six
+still frames. The arrival guard of 6 November turned it back on **one
+frame** after its scroll, and left the snap on while the page loaded,
+engaging only when it saw a non-zero `scrollY`. That is the race the
+rail fix was written to avoid: WebKit re-runs the snap before a scripted
+scroll has landed and settles on the old offset.
+
+**So the guard on all three pages now works the way the rail does.** On
+a fresh visit with no hash, the snap is off from the first line of the
+body. The page is held at the top through parse, `load`, `pageshow` and
+the fonts. The snap comes back at the reader's first wheel, touch, key
+or pointer. If the page is not at the top by then, it is scrolled there
+first and the snap waits for six still frames, capped at 1600ms. Hashes
+and back and forward are untouched, as before.
+
+Verified in Chromium at 1440, 1180 and 390: following the footer link
+with an offset forced in after arrival ends at 0 with the snap off; the
+first swipe then snaps a full fold with `y mandatory` back on; a full
+wheel advances 900 and a small one does not, exactly as before the
+change; a rail tap as the first action lands on `#marks` and `#weigh`
+with the snap restored; `/brand/#system` lands; no page errors.
+
+**This is still a reading, and iOS Safari is the only test.** If the
+iPad still opens on a later fold, the remaining fix is the one recorded
+above: no mandatory snap on touch devices, which is the owner's call.
+
 ### `/brand/` argues trust, on 13 November
 
 **The owner rewrote four folds, the English was checked, and he approved
