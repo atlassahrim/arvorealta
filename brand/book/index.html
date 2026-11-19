@@ -465,6 +465,23 @@ ol.legend b{font-weight:600}
 .namer .res{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding-top:16px;border-top:1px solid var(--rule)}
 .namer output{font:500 clamp(13px,1.6vw,16px)/1.4 var(--f-mono);word-break:break-all}
 .namer .hint{font-size:13px;color:var(--dim)}
+
+/* ── downloads: each button opens one file. Fonts open Google Fonts;
+   every other file opens its own Drive item. A file that does not exist
+   yet keeps its button, dashed and not clickable. No button opens the
+   folder. A pill, because a download is an action ── */
+.dls{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.dl{display:inline-flex;align-items:baseline;gap:7px;padding:8px 12px 7px;border:1px solid var(--fg);border-radius:999px;
+  font:500 11px/1 var(--f-mono);letter-spacing:.04em;color:var(--fg);text-decoration:none;white-space:nowrap;transition:background .2s,color .2s}
+.dl b{font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.dl i{font-style:normal;color:var(--faint)}
+a.dl:hover,a.dl:focus-visible{background:var(--fg);color:var(--bg)}
+a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
+.dl.off{border:1px dashed var(--rule);color:var(--faint);cursor:not-allowed;user-select:none}
+.dl.off i::before{content:"· "}
+.ver .dls{margin-top:10px}
+.face .who .dls{margin-top:6px}
+@media (prefers-reduced-motion:reduce){.dl{transition:none}}
 </style>
 </head>
 <body class="public">
@@ -587,19 +604,19 @@ ol.legend b{font-weight:600}
     <div class="vers">
       <div class="ver"><div class="tile t-ink"><img class="fan" src="img/arvo-mark-1-600.webp" alt="" width="600" height="222"></div>
         <div class="tx"><h3>Primary</h3><p>The gold fan, as rendered. The signature: covers, the close of a page, the hero.</p>
-          <dl><dt>Files</dt><dd>PNG, WebP</dd></dl></div></div>
+          <dl><dt>Files</dt><dd>PNG, WebP</dd></dl><div class="dls"><a class="dl" href="https://drive.google.com/file/d/13_E7Hs-Tuwfm6HNTC8-qPeCsY9JpdFfK/view" target="_blank" rel="noopener"><b>PNG</b>600w<i>175 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1M7syKGagKxULuaSyuInUwfqO2c45EvIN/view" target="_blank" rel="noopener"><b>PNG</b>1200w<i>611 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1-lCCfq3VGHD51cGNByFK1-6B2daNVN7o/view" target="_blank" rel="noopener"><b>PNG</b>2400w<i>1.9 MB</i></a><a class="dl" href="https://drive.google.com/file/d/17j9M8EBVeITsYeTo-TD_V0X8pOLU5dP2/view" target="_blank" rel="noopener"><b>PNG</b>4800w<i>5.3 MB</i></a></div></div></div>
       <div class="ver"><div class="tile t-paper"><img class="wmi" src="img/arvo-wordmark-forest-2.svg" alt="" width="3088" height="173"></div>
         <div class="tx"><h3>Wordmark</h3><p>The name in spaced capitals, drawn as outlines. Wherever the name has to be read on its own.</p>
-          <dl><dt>Files</dt><dd>SVG, forest and paper</dd></dl></div></div>
+          <dl><dt>Files</dt><dd>SVG, forest and paper</dd></dl><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1lJ45fRHQ2OXFVvZe_EpEVsKBl-4jLmE1/view" target="_blank" rel="noopener"><b>SVG</b>Forest<i>6 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1F_g35IwyZQ7jsks5KIHR-ikxTiPwXJws/view" target="_blank" rel="noopener"><b>SVG</b>Paper<i>6 KB</i></a></div></div></div>
       <div class="ver"><div class="tile t-paper"><img class="sv" src="img/arvo-symbol-forest-2.svg" alt="" width="3290" height="1214"></div>
         <div class="tx"><h3>Symbol</h3><p>The fan drawn flat: the point, the span and the crown, with the pleats reduced to nine rays. Everything the render cannot do.</p>
-          <dl><dt>For</dt><dd>Under 96 px, the app icon, stamps, embossing, one-colour print</dd><dt>Files</dt><dd>SVG</dd></dl></div></div>
+          <dl><dt>For</dt><dd>Under 96 px, the app icon, stamps, embossing, one-colour print</dd><dt>Files</dt><dd>SVG</dd></dl><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1_KphK6k5tiK7n3-G_WAfJnSpiLbwgnrT/view" target="_blank" rel="noopener"><b>SVG</b>Forest<i>2 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1wu5GzJRL7gE3h_eTkdKJsz-z2eoB5nCh/view" target="_blank" rel="noopener"><b>SVG</b>Paper<i>2 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1K3OIFxYl8ujIQShu6LA72nF_yfwBTFqP/view" target="_blank" rel="noopener"><b>PNG</b>Icon 32<i>1 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1gxrMLKaGI7LMOFQO00d-5CC6ZJ-geMxe/view" target="_blank" rel="noopener"><b>PNG</b>Icon 180<i>7 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1QZEymr4H1CIMy19-3NiggsxVHaDCnMNh/view" target="_blank" rel="noopener"><b>PNG</b>Icon 512<i>19 KB</i></a></div></div></div>
       <div class="ver"><div class="tile t-paper"><img class="sv" src="img/arvo-lockup-forest-2.svg" alt="" width="3290" height="1624" style="width:min(220px,52%)"></div>
         <div class="tx"><h3>Lockup</h3><p>The symbol above the wordmark, as one drawing. For the places the mark and the name travel together.</p>
-          <dl><dt>For</dt><dd>Business card, letterhead, signage</dd><dt>Files</dt><dd>SVG, forest and paper</dd></dl></div></div>
+          <dl><dt>For</dt><dd>Business card, letterhead, signage</dd><dt>Files</dt><dd>SVG, forest and paper</dd></dl><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1bu59PAu0DgsKE3x8lOaik5crovD7aaPM/view" target="_blank" rel="noopener"><b>SVG</b>Forest<i>7 KB</i></a><a class="dl" href="https://drive.google.com/file/d/17kBKtxlmorcdy6Nklz1Wvhy7oG8ylZ9B/view" target="_blank" rel="noopener"><b>SVG</b>Paper<i>8 KB</i></a><span class="dl off" aria-disabled="true" title="Not available yet"><b>PDF</b>Print<i>Not yet</i></span></div></div></div>
       <div class="ver"><div class="tile t-ink"><img class="sv" src="img/arvo-symbol-amber-2.svg" alt="" width="3290" height="1214"></div>
         <div class="tx"><h3>One colour</h3><p>The symbol in one flat colour: amber, forest, paper for dark grounds, or pure black when a printer has nothing else.</p>
-          <dl><dt>For</dt><dd>Stamps, engraving, newspaper, one-colour print</dd><dt>Files</dt><dd>SVG</dd></dl></div></div>
+          <dl><dt>For</dt><dd>Stamps, engraving, newspaper, one-colour print</dd><dt>Files</dt><dd>SVG</dd></dl><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1BhTamSiw9YsiYtfyOQREsvqnyvOtvxdF/view" target="_blank" rel="noopener"><b>SVG</b>Amber<i>2 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1_KphK6k5tiK7n3-G_WAfJnSpiLbwgnrT/view" target="_blank" rel="noopener"><b>SVG</b>Forest<i>2 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1wu5GzJRL7gE3h_eTkdKJsz-z2eoB5nCh/view" target="_blank" rel="noopener"><b>SVG</b>Paper<i>2 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1p6gpXIxrSM4QPgAGqJPkiraz5KEIrk-M/view" target="_blank" rel="noopener"><b>SVG</b>Black<i>2 KB</i></a><span class="dl off" aria-disabled="true" title="Not available yet"><b>PDF</b>Print<i>Not yet</i></span></div></div></div>
     </div>
     
   </div>
@@ -654,6 +671,7 @@ ol.legend b{font-weight:600}
     <div><div class="c" style="background:#BD9059"></div><h3>Amber</h3><p>The mark's flat colour. On forest it reads at 5:1, so it can carry figures and short lines.</p><button class="copy" data-v="#BD9059">#BD9059</button></div>
     <div><div class="c" style="background:#7A5530"></div><h3>Bronze</h3><p>Labels and accents on paper, where amber is too pale: 5.5:1.</p><button class="copy" data-v="#7A5530">#7A5530</button></div>
   </div>
+  <div class="dls"><a class="dl" href="https://drive.google.com/file/d/17JNHCOaWoxoNZHnwSzBOg334ynamuTj4/view" target="_blank" rel="noopener"><b>ASE</b>Palette<i>1 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1Nx45R6jarXhAXNJHStnYqsv_NvR6AYlI/view" target="_blank" rel="noopener"><b>TXT</b>Values<i>1 KB</i></a></div>
   
 
   <div class="block"><span class="lbl">Check a pairing</span>
@@ -679,9 +697,9 @@ ol.legend b{font-weight:600}
   <div class="sh"><span class="sn">05</span><h2>Typeface</h2></div>
   <p class="why">Three faces, one job each. All three are free, open-licensed fonts, so anyone working with us can install them.</p>
   <div class="faces">
-    <div class="face"><div class="who"><b>EB Garamond</b><span>Headlines and prices</span></div><p class="sp-d">Competence everyone can <em>see</em>.</p></div>
-    <div class="face"><div class="who"><b>Montserrat</b><span>Everything that is read</span></div><p class="sp-t">Public buyers score the documents you hand in. Not the plant, not the price list, not the twenty years.</p></div>
-    <div class="face"><div class="who"><b>Geist Mono</b><span>Labels and figures</span></div><p class="sp-m">What it costs · 14 days · Option 01</p></div>
+    <div class="face"><div class="who"><b>EB Garamond</b><span>Headlines and prices</span><div class="dls"><a class="dl" href="https://fonts.google.com/specimen/EB+Garamond" target="_blank" rel="noopener"><b>Font</b>Google Fonts</a></div></div><p class="sp-d">Competence everyone can <em>see</em>.</p></div>
+    <div class="face"><div class="who"><b>Montserrat</b><span>Everything that is read</span><div class="dls"><a class="dl" href="https://fonts.google.com/specimen/Montserrat" target="_blank" rel="noopener"><b>Font</b>Google Fonts</a></div></div><p class="sp-t">Public buyers score the documents you hand in. Not the plant, not the price list, not the twenty years.</p></div>
+    <div class="face"><div class="who"><b>Geist Mono</b><span>Labels and figures</span><div class="dls"><a class="dl" href="https://fonts.google.com/specimen/Geist+Mono" target="_blank" rel="noopener"><b>Font</b>Google Fonts</a></div></div><p class="sp-m">What it costs · 14 days · Option 01</p></div>
   </div>
   <div class="minis">
     <div class="mini"><span class="lbl">Emphasis is italic, never a colour</span><span class="ex">can <em>see</em>.</span></div>
@@ -757,6 +775,7 @@ ol.legend b{font-weight:600}
   </div>
   <div class="desk" id="desk"></div>
   <p class="note">Drawn to scale: inside the page one unit is one millimetre, or one pixel on the slide; the card is shown at its trim, so every figure below is the figure in the drawing. Switch on the grid and the baseline to see what the text is sitting on.</p>
+  <div class="dls"><a class="dl" href="https://drive.google.com/file/d/1bDvKYl9OhfyW3eLp5CJwWMWcMSTF8DtV/view" target="_blank" rel="noopener"><b>DOTX</b>Letter<i>1.0 MB</i></a><a class="dl" href="https://drive.google.com/file/d/1U4GnfKzWWKJBcUB5LUZL63YsHz7HB7Y_/view" target="_blank" rel="noopener"><b>DOTX</b>Proposal<i>1.0 MB</i></a><a class="dl" href="https://drive.google.com/file/d/1fetKzXA-PphRh5VZ6idm98JTJrzj8YjB/view" target="_blank" rel="noopener"><b>PDF</b>Letter<i>46 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1rpeckfnJUXufqWikm5-GfhM6l2c8NBmZ/view" target="_blank" rel="noopener"><b>PDF</b>Proposal<i>76 KB</i></a><span class="dl off" aria-disabled="true" title="Not available yet"><b>PDF</b>Deck<i>Not yet</i></span></div>
 
   <div class="block"><span class="lbl">The pages</span>
     <div class="tblw"><table class="tbl wide">
@@ -823,6 +842,7 @@ ol.legend b{font-weight:600}
     <figure><img src="img/ground-dew-1-720.jpg" alt="Dew on grass" width="1280" height="720"><figcaption>An abstract ground. It may be generated.</figcaption></figure>
     <figure><img src="img/ground-paper-2-720.jpg" alt="Paper with leaf shadows" width="1280" height="720"><figcaption>Paper: the close of every page.</figcaption></figure>
   </div>
+  <div class="dls"><a class="dl" href="https://drive.google.com/file/d/1e-CwjyUUsvxzAJIz1xORWRUqOfCYjssa/view" target="_blank" rel="noopener"><b>MP4</b>Water<i>1.3 MB</i></a><a class="dl" href="https://drive.google.com/file/d/1iL5dcgia9XpVBBjJUWOb4lKm85y60tyY/view" target="_blank" rel="noopener"><b>JPG</b>Water<i>39 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1UAodfZRRbo-YW9Bf0w_G6m1q8TtRLs56/view" target="_blank" rel="noopener"><b>MP4</b>Dew<i>820 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1toKDonI54bLDR2EEuu87pP9h9-gjFpG0/view" target="_blank" rel="noopener"><b>JPG</b>Dew<i>31 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1-kc_OPh5C2gKjz-4VzCPQ78rou8NijcO/view" target="_blank" rel="noopener"><b>MP4</b>Paper<i>388 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1CIdUB9trYfA11gCJREmUjg_gLuyZ9L1S/view" target="_blank" rel="noopener"><b>JPG</b>Paper<i>14 KB</i></a><span class="dl off" aria-disabled="true" title="Not available yet"><b>MP4</b>1920x1080<i>Not yet</i></span></div>
   <ol class="rules">
     <li><span><b>Real footage over a synthetic move.</b> Our own motion is the first choice.</span></li>
     <li><span><b>Never generate a client's work.</b> An abstract ground may be generated; a mark on a sign may not.</span></li>
@@ -908,6 +928,7 @@ ol.legend b{font-weight:600}
       <ul><li>Text only: image signatures are blocked by most mail clients.</li><li>Name, wordmark, one line of contact.</li></ul></div>
     
   </div>
+  <div class="dls"><span class="dl off" aria-disabled="true" title="Not available yet"><b>PDF</b>Card back<i>Not yet</i></span><span class="dl off" aria-disabled="true" title="Not available yet"><b>PDF</b>Card emboss<i>Not yet</i></span><span class="dl off" aria-disabled="true" title="Not available yet"><b>PNG</b>Social links<i>Not yet</i></span><span class="dl off" aria-disabled="true" title="Not available yet"><b>PNG</b>LinkedIn banner<i>Not yet</i></span><span class="dl off" aria-disabled="true" title="Not available yet"><b>HTML</b>Email signature<i>Not yet</i></span></div>
 </section>
 
 <!-- 13 ───────────────────────────────────────────── -->
@@ -951,6 +972,7 @@ ol.legend b{font-weight:600}
 │                                <span class="f">arvorealta_signature_email.html</span>
 └─ 99 Archive/                   <span class="f">{any file above}_v01</span></div>
     <p class="note">The folders follow the order of this book, numbered so they stay in that order. A master sits beside what it exports: in <span class="mono">01 Mark/Master</span>, or in the folder of its documents or applications. The mark's screen files go in <span class="mono">Screen</span> and its print files, those ending <span class="mono">_cmyk</span>, in <span class="mono">Print</span>. Everyone making media for the brand can view the folder; only the studio edits it. A client's folder is its own, never a subfolder of ours. A brace is shorthand for one file per word inside it, and is never part of a name: <span class="mono">_{forest,paper}.svg</span> is two files.</p>
+    <div class="dls"><a class="dl" href="https://drive.google.com/file/d/1KJ_rWJ63CZYjfezGgtG4On3N7kVLZOrb/view" target="_blank" rel="noopener"><b>TXT</b>Read me<i>1 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1DfGGlys2rxHKES-sg5g6cEDR-XDSXM-8/view" target="_blank" rel="noopener"><b>TXT</b>Versions<i>1 KB</i></a></div>
   </div>
 
   <div class="block"><span class="lbl">How files are named</span>
