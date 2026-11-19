@@ -214,6 +214,7 @@ alone.** Checked against every published page's own tag:
 | path | tag | what it is |
 |---|---|---|
 | `brand/book/` | `noindex, nofollow` | the public brand book, reached only by a link the owner sends |
+| `eliria/` | `noindex, nofollow` | a client's brand book, Eliria, reached only by a link the owner sends |
 | `reference/` | `noindex` | the first offer page, kept for the owner |
 | `branding/` | `noindex, follow` | the stub for the one-day `/branding/` path |
 | `home/` | `noindex, follow` | a stub redirecting `/home/` to `/` |
@@ -3859,6 +3860,36 @@ colours. Brick `#8E4A45` and bronze sit 1.01 apart in luminance and
 both clear 4.5:1 on paper, so they do the same job and read as one
 family; nothing new is made in brick.
 
+## The first client book: Eliria, 19 November
+
+**`eliria/index.html` is the first client book**, built at the owner's
+word from the brand book's template: one self-contained page, `noindex,
+nofollow`, linked from nowhere, in Portuguese because the client is
+Brazilian. Its pictures and fonts sit in `eliria/img/` and
+`eliria/fonts/`. Its sources are the client's own files in Drive
+(`Eliria BRAND`, with the old package in `99 Archive`) and the project
+deck.
+
+- **What is the client's**: the mark and lockups, the flat one-colour
+  symbol (read off `Eliria_Monogram_Monochrome.svg`), the bronze
+  `#8E7657`, the wordmark in Carla Sans with 1.4 em of tracking, the
+  message and the name's meaning, the eleven motifs, the four colour
+  names and the four cautions from `README_CAUTIONS.txt`.
+- **What is the studio's proposal, labelled `Sugestão` on the page**:
+  the hex values for azul marítimo, verde musgo and vermelho bordô, the
+  70 / 20 / 10 split, the type roles, clear space and minimum size, the
+  voice, the applications and the photography note. The old guidelines
+  PDF is images only and over Drive's 10 MB limit, so nothing could be
+  read from it.
+- **Carla Sans is not published.** Its files carry no licence. The
+  wordmark is drawn as outlines in `eliria-wordmark-*.svg`, and no font
+  file is served.
+- **The deck's people, prices, business model and strategy are not on
+  the page**, by this file's rule on prospects and plans. The repository
+  is public, so the page source names the brand and nothing else.
+- **Publishing a client's book needs the client's permission.** The owner
+  asked for this one to go live so he could see it.
+
 ## The pricing ladder
 
 **There are two ladders on this domain and this section is the euro one.**
@@ -3934,6 +3965,8 @@ index.html              offer page. One self-contained file, hand-written
 brand/index.html        brand portfolio. Same shape of file. Dark, with a
                         paper close. Six folds locked to the viewport by
                         scroll snap, three languages
+eliria/index.html       a client's brand book, Eliria, noindex, nofollow,
+                        linked from nowhere. Portuguese
 brand/book/index.html   the public brand book: noindex, nofollow, linked
                         from nowhere. The source since 19 November: change
                         it in a lab, then promote. Download buttons point
