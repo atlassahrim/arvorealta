@@ -3477,6 +3477,43 @@ recipient held and what was below it, and sheet 2, did not.
 Measured: zero overflow on all six sheets, two A4 pages per PDF, no
 redacted string in the sample.
 
+**Lab B is the direction, and on 19 November the owner chose to take it
+to the whole tender set: build everything privately, then promote in
+one commit.** Faces: **Inter** for everything read, **IBM Plex Mono**
+for everything found, both from Google Fonts. Built so far, all
+private and `noindex, nofollow`:
+
+- `annex/_lab-template-b/` and `lab/annex/sample-b/`, from
+  `lab/annex/_build_b.py`.
+- `annex/_lab-review-b/` and `annex/_lab-review-b-nb/`, the review in
+  both languages. **A change to one belongs in the other.**
+- `annex/_lab-vkr-b/`, all five sheets of the VKR annex. Every string
+  is the original's; the one addition is a `Sum 100 %` row, which the
+  original's figures already add up to. The 65 per cent is the cover's
+  one figure, beside the standfirst.
+- `deck/_lab-technical-b/` on `lab/deck/deck-lab-b.css`, the seven
+  technical slides at 1920 x 1080. **Two copy changes, flagged:** the
+  cover carries the project title instead of `The product is the
+  specification.`, which is a slogan made for one company, and the
+  specification slide gained the headline `Five standards, one
+  document.` so it has a focal point. The template's stock photograph
+  is replaced by the planter photograph from `annex/_template/`.
+
+**Two traps from the build.** A class name already in the sheet was
+reused: `.blank` is the record's write-in field and sets
+`display:block`, so `.tbl.fill.blank` turned five tables into blocks
+whose rows overlapped the text under them. They are `.tbl.fill.open`
+now. And **a table inside a fixed-height flex column shrinks below its
+content** unless it is told not to: `.body > :not(.spacer)` carries
+`flex-shrink:0`. Write-in rows draw their rule on the `tr`, because
+empty cells measured narrower than their own table.
+
+**Promoting it is still the owner's decision**, and it means: replacing
+`annex.css` and `deck-technical.css` usage on these documents, the
+accent no longer carrying the reference number (red is spent only on
+the required asterisk), the annex spec above rewritten to the new
+sizes, and the labs deleted.
+
 **Body was 10 pt on 5 mm at first, not the 6 mm baseline**, so the annex spec's
 baseline figures describe the live sheets, not the lab. Delete the lab
 when it wins or falls behind.

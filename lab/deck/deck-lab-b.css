@@ -1,0 +1,90 @@
+/* ==========================================================
+   LAB B, the technical deck. A sandbox beside deck/_technical.
+
+   The annex lab B grammar at 1920 x 1080: white stock, Inter for
+   everything read, IBM Plex Mono for everything found, one focal
+   object per slide, facts as tables and large light figures, a heavy
+   rule that opens the slide and one that closes the band. Neutral:
+   no mark of ours. Sizes are pixels on the 1920 canvas; on screen the
+   canvas is zoomed to the window, in print it is the page.
+   ========================================================== */
+
+:root{
+  --paper:#FFFFFF; --surround:#E6E6E3; --panel:#F1F1EE;
+  --ink:#121212; --soft:#5C5C5A; --faint:#8C8C89; --accent:#C7392F;
+  --rule:rgba(18,18,18,.16);
+  --sans:"Inter","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;
+  --z:1;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--surround)}
+img{display:block;max-width:100%}
+.deck{counter-reset:slide;display:flex;flex-direction:column;align-items:center;gap:calc(32px * var(--z));padding-block:calc(32px * var(--z))}
+.slide{counter-increment:slide;position:relative;width:1920px;height:1080px;flex:none;overflow:hidden;zoom:var(--z);
+  background:var(--paper);color:var(--ink);font-family:var(--sans);font-optical-sizing:auto;font-feature-settings:"cv11","ss01";
+  -webkit-font-smoothing:antialiased;box-shadow:0 2px 4px rgba(0,0,0,.08),0 18px 50px rgba(0,0,0,.12)}
+.body{position:absolute;left:120px;right:120px;top:84px;bottom:150px;display:flex;flex-direction:column}
+.body > :not(.spacer){flex-shrink:0}
+.spacer{flex:1}
+
+.slide p{margin:0;font-size:28px;line-height:44px}
+.slide p + p{margin-top:20px}
+.soft{color:var(--soft)}
+.label{display:block;font:500 17px/24px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+.label + *{margin-top:12px}
+
+.top{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:18px;border-bottom:4px solid var(--ink)}
+.top .label{color:var(--ink)}
+.top .ref{font:400 22px/24px var(--mono);letter-spacing:.04em}
+
+.title{margin:56px 0 0;font-size:104px;line-height:104px;font-weight:500;letter-spacing:-.045em}
+.title.xl{font-size:136px;line-height:132px}
+.lede{font-size:34px!important;line-height:50px!important;letter-spacing:-.012em;max-width:1000px}
+
+.cols{display:grid;grid-template-columns:1fr 1fr;column-gap:96px;margin-top:64px;align-items:start}
+.cols-61{grid-template-columns:1.3fr 1fr}
+.measure{max-width:760px}
+
+/* the image slide: words left, the picture bleeds off the right and the foot */
+.bleed{position:absolute;top:0;right:0;bottom:0;width:46%;background:var(--panel);overflow:hidden}
+.bleed img{width:100%;height:100%;object-fit:cover}
+.bleed + .body{right:calc(46% + 96px)}
+
+/* figures: four large light numerals across the measure */
+.figs{display:grid;grid-template-columns:repeat(4,1fr);column-gap:48px;margin-top:40px;border-top:1.5px solid var(--rule);padding-top:22px}
+.figs .v{display:block;margin-top:14px;font-size:120px;line-height:120px;font-weight:200;letter-spacing:-.05em;white-space:nowrap;font-feature-settings:"tnum"}
+
+/* tables: aligned, a rule under the head and nothing per row */
+.tbl{width:100%;border-collapse:collapse}
+.tbl th,.tbl td{padding:12px 0;text-align:left;vertical-align:baseline;font-weight:400}
+.tbl thead th{font:500 17px/24px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--soft);padding-bottom:18px;border-bottom:1.5px solid var(--rule)}
+.tbl tbody tr:first-child td{padding-top:24px}
+.tbl td{font-size:34px;line-height:48px;font-feature-settings:"tnum"}
+.tbl td + td{color:var(--soft)}
+.tbl td.r,.tbl th.r{text-align:right}
+
+/* the statement slide: the one reversed ground */
+.slide.inv{background:var(--ink);color:#fff}
+.slide.inv .top{border-color:#fff}
+.slide.inv .label{color:rgba(255,255,255,.62)}
+.slide.inv .top .label,.slide.inv .top .ref{color:#fff}
+.slide.inv .foot{color:rgba(255,255,255,.62)}
+
+/* the closing band: hangs from one heavy rule */
+.band{border-top:4px solid var(--ink);padding-top:24px}
+.band-grid{display:grid;grid-template-columns:repeat(4,1fr);column-gap:48px}
+.band-grid .fv{display:block;margin-top:12px;font-size:32px;line-height:44px;white-space:nowrap}
+
+.foot{position:absolute;left:120px;right:120px;bottom:64px;display:flex;justify-content:space-between;font:500 17px/24px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+.foot .num::before{content:counter(slide) " of 7"}
+.bleed ~ .foot{right:calc(46% + 96px)}
+
+@media print{
+  @page{size:1920px 1080px;margin:0}
+  html,body{background:none}
+  .deck{padding:0;gap:0}
+  .slide{zoom:1;box-shadow:none;break-after:page}
+  .slide:last-child{break-after:auto}
+  html,.slide{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+}

@@ -153,7 +153,35 @@ img{display:block;max-width:100%}
 .parties .v{display:block;margin-top:1.5mm;font-size:12.5pt;line-height:6mm;font-weight:400;letter-spacing:-.01em;white-space:nowrap}
 
 .foot{position:absolute;left:20mm;right:20mm;bottom:11mm;display:flex;justify-content:space-between;font:500 7.5pt/4mm var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
-.foot .num::before{content:counter(sheet) " of " var(--annex-total)}
+.foot .num::before{content:counter(sheet) var(--annex-of," of ") var(--annex-total)}
+
+/* ---- section sheets (the VKR annex and anything longer than two sheets) ---- */
+.title.sec{font-size:30pt;line-height:11mm;letter-spacing:-.035em}
+.sub{display:flex;align-items:baseline;gap:3mm;margin-top:8mm;margin-bottom:2.5mm;flex:none}
+.sub .n{font:500 7.5pt/4mm var(--mono);letter-spacing:.12em;color:var(--soft)}
+.sub .t{font-size:11pt;line-height:5mm;font-weight:500;letter-spacing:-.01em}
+.sub + .tbl, .sub + .sign{margin-top:0}
+.tbl.fill{table-layout:fixed}
+.tbl.fill tbody tr{border-bottom:.25mm solid var(--rule)}
+.tbl.fill tbody td{height:6.4mm;padding:0;vertical-align:middle}
+.tbl.fill tbody td:first-child{font:400 8.5pt/1 var(--mono);color:var(--soft);width:12mm}
+.tbl.fill tbody td.w{white-space:normal}
+.tbl.fill tbody tr:first-child td{padding-top:0}
+.tbl.fill.open tbody td{height:8mm}
+.tbl.fill.open tbody td:first-child{font:inherit;color:inherit;width:auto}
+.sign.in{margin-top:0}
+.sign.in > div{padding-top:1mm;margin-top:9mm}
+.sign.in{column-gap:5mm}
+.stat{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:8mm;align-items:end;margin-top:10mm;padding-top:3mm;border-top:.25mm solid var(--rule);flex:none}
+.stat .big{font-size:96pt;line-height:30mm;font-weight:200;letter-spacing:-.05em;font-feature-settings:"tnum"}
+.stat .big small{font-size:40pt;letter-spacing:-.02em;margin-left:1mm}
+.stat p{padding-bottom:4mm}
+.lead-stat{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);column-gap:10mm;margin-top:8mm;align-items:start;flex:none}
+.lead-stat .lede{max-width:none}
+.lead-stat .stat{margin-top:0;grid-template-columns:1fr;border-top:.25mm solid var(--rule);padding-top:2.5mm}
+.lead-stat .stat .big{font-size:72pt;line-height:24mm}
+.lead-stat .stat .big small{font-size:28pt}
+.lead-stat .stat p{padding-bottom:0;margin-top:1mm!important}
 
 @media screen and (max-width:819px){.sheet{zoom:.88}}
 @media screen and (max-width:767px){.sheet{zoom:.70}}
@@ -167,3 +195,5 @@ img{display:block;max-width:100%}
   .sheet:last-child{break-after:auto}
   html,.sheet{print-color-adjust:exact;-webkit-print-color-adjust:exact}
 }
+.body > :not(.spacer){flex-shrink:0}
+.tbl.fill th{white-space:normal;line-height:4mm;vertical-align:bottom}
