@@ -3430,6 +3430,34 @@ Four changes came out of the skills:
 - **No en dashes.** `2023-2027` takes a hyphen, per 9.G.
 - **`Last word` became `Closing`.** The old label was a cute one.
 
+**Lab B, the same day, because A was correct and not good enough.**
+The owner's note was that the skills pass did not raise the level, and
+he was right: A is one row grammar used six times, every object at the
+same middle volume, which reads as a form. B sits beside it so the two
+can be compared, and A is untouched.
+
+- `lab/annex/annex-lab-b.css` and `lab/annex/_build_b.py`, which writes
+  `annex/_lab-template-b/` (private) and `lab/annex/sample-b/` (public,
+  `noindex, nofollow`) from one source with the same leak assertion.
+  `annex/_lab-review-b/` is the review on B.
+- **One focal point per sheet.** The title is 40 pt, medium, tight, on
+  three hand-broken lines. The unit's own line drawing is the one big
+  picture and bleeds off the right edge (RSC). The review's three counts
+  are 96 pt light numerals.
+- **No label column.** Content runs the full measure in two columns;
+  labels sit over what they name.
+- **Facts out of prose.** The specification is a table of five standards,
+  the record four large light figures across the measure, the review's
+  document facts a table.
+- **Two heavy rules close each sheet** and almost nothing else draws a
+  line.
+
+Measured: all six sheets at zero overflow, nothing past the right
+margin except the drawing, which bleeds on purpose; three PDFs of two A4
+pages; `pdftotext` on the sample finds none of the redacted strings.
+The review's counts read `00` until filled, because `[[n]]` at 96 pt runs
+off the sheet.
+
 **Body was 10 pt on 5 mm at first, not the 6 mm baseline**, so the annex spec's
 baseline figures describe the live sheets, not the lab. Delete the lab
 when it wins or falls behind.

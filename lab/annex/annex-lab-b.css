@@ -1,0 +1,153 @@
+/* ==========================================================
+   LAB B, the annex with a point of view. A sandbox beside A.
+
+   A was correct and quiet: one row grammar used six times, every
+   object at the same middle volume. B commits, the way the four
+   references do:
+
+   - A cover moment. The title is very large and tight (Eveo); the
+     unit's own line drawing sits beside it as the one big picture
+     and runs off the sheet's right edge (RSC).
+   - Facts out of prose. The specification is a table of standards
+     (Cartier, RSC), the record is four large light figures across
+     the full measure.
+   - Contrast, not hairlines. Very large against small, ink against
+     white space. Two heavy rules close the sheet and almost nothing
+     else draws a line.
+
+   Neutral and unsigned: white stock, Inter and IBM Plex Mono, no
+   mark of ours. Body 9.5 pt, above the 9 pt competition floor.
+   ========================================================== */
+
+:root{
+  --paper:#FFFFFF; --surround:#E6E6E3; --panel:#F1F1EE;
+  --ink:#121212; --soft:#5C5C5A; --faint:#8C8C89; --accent:#C7392F;
+  --rule:rgba(18,18,18,.16); --heavy:#121212;
+  --sans:"Inter","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--surround)}
+img{display:block;max-width:100%}
+.annex{counter-reset:sheet;--annex-total:"2";display:flex;flex-direction:column;align-items:center;gap:8mm;padding-block:8mm}
+.sheet{counter-increment:sheet;position:relative;width:210mm;height:297mm;flex:0 0 auto;overflow:hidden;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-optical-sizing:auto;font-feature-settings:"cv11","ss01";-webkit-font-smoothing:antialiased;
+  box-shadow:0 1px 2px rgba(0,0,0,.10),0 8px 26px rgba(0,0,0,.14)}
+.body{position:absolute;left:20mm;right:20mm;top:16mm;bottom:24mm;display:flex;flex-direction:column}
+
+.sheet p{margin:0;font-size:9.5pt;line-height:4.9mm}
+.sheet p + p{margin-top:2.4mm}
+.soft{color:var(--soft)}
+.sheet .small{font-size:9pt;line-height:4.4mm}
+.label{display:block;font:500 7.5pt/4mm var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+.label + *{margin-top:1.5mm}
+.required{color:var(--accent)}
+
+/* top line: identity left, reference right, one heavy rule */
+.top{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:2.5mm;border-bottom:.6mm solid var(--heavy);flex:none}
+.top .label{color:var(--ink)}
+.top .ref{font:400 10pt/4mm var(--mono);letter-spacing:.04em}
+
+/* the cover moment */
+.cover{margin-top:9mm;flex:none}
+.title{margin:0;font-size:40pt;line-height:14.5mm;font-weight:500;letter-spacing:-.04em}
+.feature{display:grid;grid-template-columns:minmax(0,1fr) 98mm;column-gap:8mm;margin-top:7mm;flex:none;align-items:end}
+.hero{position:relative;height:54mm;margin-right:-20mm;background:var(--ink);overflow:hidden}
+.hero.off{background:var(--panel)}
+.hero img{width:100%;height:100%;object-fit:cover;object-position:30% 50%}
+.hero .withheld{position:absolute;inset:0;display:grid;place-items:center;font:500 7.5pt/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.hero-cap{margin-top:2mm}
+
+.lede{max-width:128mm;font-size:13pt!important;line-height:6.4mm!important;font-weight:400;letter-spacing:-.012em}
+.lede + .label{margin-top:5mm}
+
+/* the review's count: three very large light numerals */
+.count3{display:grid;grid-template-columns:repeat(3,1fr);column-gap:8mm;margin-top:16mm;flex:none;border-top:.25mm solid var(--rule);padding-top:3mm}
+.count3 .big{display:block;margin-top:1mm;font-size:96pt;line-height:32mm;font-weight:200;letter-spacing:-.05em;font-feature-settings:"tnum"}
+
+/* review findings: numeral, crop, words */
+.finds{margin-top:8mm;flex:none}
+.find{display:grid;grid-template-columns:16mm 62mm minmax(0,1fr);column-gap:6mm;padding-top:3mm;border-top:.25mm solid var(--rule)}
+.find + .find{margin-top:5mm}
+.find .no{font-size:22pt;line-height:9mm;font-weight:200;letter-spacing:-.03em}
+.find .crop{height:38mm;border:.25mm solid var(--rule);background:var(--panel);overflow:hidden}
+.find .crop img{width:100%;height:100%;object-fit:contain}
+.find .claim{font-size:12.5pt!important;line-height:6mm!important;font-weight:500;letter-spacing:-.01em}
+.find .meta{margin-top:1mm}
+.sheet .quote{margin-top:2.5mm;font:400 8.5pt/4.4mm var(--mono)}
+.sheet .quote + p{margin-top:2mm}
+
+/* two columns of content, no label column */
+.cols{display:grid;grid-template-columns:1fr 1fr;column-gap:10mm;margin-top:8mm;flex:none}
+.cols-61{grid-template-columns:1.35fr 1fr}
+
+/* tables: aligned, no rule per row */
+.tbl{width:100%;border-collapse:collapse;font-size:9.5pt;line-height:4.9mm}
+.tbl th,.tbl td{padding:1mm 0;text-align:left;vertical-align:baseline;font-weight:400}
+.tbl th{font:500 7.5pt/4.9mm var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--soft);padding-right:4mm;white-space:nowrap}
+.tbl td.r,.tbl th.r{text-align:right}
+.tbl td{font-feature-settings:"tnum";white-space:nowrap}
+.tbl thead th{padding-bottom:2mm;border-bottom:.25mm solid var(--rule)}
+.tbl tbody tr:first-child td,.tbl tbody tr:first-child th{padding-top:2mm}
+.tbl tr.total td{border-top:.25mm solid var(--heavy);padding-top:2mm;font-weight:500}
+.spec td{font-weight:400}
+.spec td .std{color:var(--soft);margin-left:2mm}
+
+.ident{display:grid;grid-template-columns:auto 1fr;column-gap:6mm;row-gap:.5mm;margin-top:4mm;align-items:baseline}
+.ident .label + *{margin-top:0}
+.ident p{font:400 8.5pt/4.4mm var(--mono)!important;white-space:nowrap}
+
+/* figures */
+.photo{position:relative;height:32mm;background:var(--panel);overflow:hidden;margin-top:6mm;flex:none}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:50% 62%}
+.photo .withheld{position:absolute;inset:0;display:grid;place-items:center;font:500 7.5pt/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.disc{position:absolute;left:3mm;top:3mm;width:6mm;height:6mm;border-radius:50%;background:var(--ink);color:#fff;font:500 7.5pt/6mm var(--mono);text-align:center;z-index:1}
+.hero .disc{background:#fff;color:var(--ink)}
+.caps{display:grid;grid-template-columns:1fr 1fr;column-gap:10mm;margin-top:2mm;flex:none}
+.cap{display:flex;gap:2mm;align-items:baseline}
+.cap b{font:500 7.5pt/4mm var(--mono);letter-spacing:.1em}
+
+/* the record: four large light figures across the measure */
+.record{display:grid;grid-template-columns:1.6fr 1.25fr 1fr .8fr;column-gap:5mm;margin-top:8mm;flex:none}
+.record .v{display:block;margin-top:1.5mm;font-size:18pt;line-height:7.5mm;font-weight:300;letter-spacing:-.02em;white-space:nowrap;font-feature-settings:"tnum"}
+.blank{display:block;margin-top:1.5mm;height:7.5mm;border-bottom:.25mm solid var(--heavy)}
+
+.spacer{flex:1}
+.foot-rule{border:0;height:.6mm;background:var(--heavy);margin:0;flex:none}
+.note{margin-top:2.5mm!important;flex:none}
+
+/* declaration and write-in lines */
+.declare{border:.25mm solid var(--heavy);padding:5mm 6mm;margin-top:10mm;flex:none}
+.declare .label{color:var(--ink)}
+.sign{display:grid;grid-template-columns:1fr 1fr;column-gap:8mm;margin-top:8mm}
+.sign > div{border-top:.25mm solid var(--heavy);padding-top:1mm}
+.sign-wide{grid-template-columns:1fr 2fr}
+.sign-4{grid-template-columns:repeat(4,1fr);column-gap:5mm}
+.sign + .sign{margin-top:7mm}
+.redact{display:inline-block;height:.72em;vertical-align:-.08em;background:var(--ink)}
+.r4{width:2em}.r8{width:4em}.r12{width:6em}.r16{width:8em}
+.sign-filled > div{border-top:0;padding-top:0}
+.sign-filled .redact{display:block;height:4.5mm;width:62%;margin-bottom:1mm}
+.sign-filled .redact.full{width:88%}
+.sign-filled .label{border-top:.25mm solid var(--heavy);padding-top:1mm}
+.sign-filled.sign{margin-top:4mm}
+.sign-filled.sign + .sign-filled.sign{margin-top:3mm}
+
+.parties{display:grid;grid-template-columns:repeat(4,1fr);column-gap:5mm;margin-top:10mm;flex:none}
+.parties .v{display:block;margin-top:1.5mm;font-size:12.5pt;line-height:6mm;font-weight:400;letter-spacing:-.01em;white-space:nowrap}
+
+.foot{position:absolute;left:20mm;right:20mm;bottom:11mm;display:flex;justify-content:space-between;font:500 7.5pt/4mm var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+.foot .num::before{content:counter(sheet) " of " var(--annex-total)}
+
+@media screen and (max-width:819px){.sheet{zoom:.88}}
+@media screen and (max-width:767px){.sheet{zoom:.70}}
+@media screen and (max-width:639px){.sheet{zoom:.55}}
+@media screen and (max-width:499px){.sheet{zoom:.42}}
+@media print{
+  @page{size:A4;margin:0}
+  html,body{background:none}
+  .annex{padding:0;gap:0}
+  .sheet{box-shadow:none;break-after:page;break-inside:avoid}
+  .sheet:last-child{break-after:auto}
+  html,.sheet{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+}
