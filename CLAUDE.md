@@ -3410,6 +3410,39 @@ unlocks.
 **Word versions of the portrait documents** are made by
 `_tools/annex/docx.js` and kept in `annex/_word/`. See that section below.
 
+### The Word editions, 19 November
+
+**The owner asked for a Word version of each portrait document**, so
+`annex/_word/` holds five `.docx` files, private like everything behind
+the underscore: `reference-annex`, `reference-annex-sample`,
+`document-review-ENG`, `document-review-NOR` and `vedlegg-5-vkr`.
+
+    NODE_PATH=$(npm root -g) node _tools/annex/docx.js
+    python3 -I _tools/annex/docx_fix.py annex/_word/*.docx
+
+- **Built from Word's own parts**, so a client can fill them: one section
+  per sheet with its own header and foot, tables for facts, ruled rows
+  and lines to write on. Same faces, sizes and order as the pages, and
+  the same page counts, checked by converting each file to PDF.
+- **The strings are copied into the script from the pages.** A change
+  to a page belongs in `docx.js` in the same commit.
+- **Inter and IBM Plex Mono are embedded**, five static TrueType files
+  in `_tools/annex/fonts/` (OFL). `docx_fix.py` handles the two schema
+  traps recorded from the 18 November templates, the upper-case
+  `fontKey` and the place of `embedTrueTypeFonts`, and adds that
+  setting, which docx-js 9.7 leaves out.
+- **The sample's redactions are solid block glyphs**, not shaded spaces.
+  A renderer drops trailing spaces at the end of a line, shading and
+  all, which left the redacted figure blank. The glyphs stand for
+  nothing, the redacted strings are not in the file, and the build is
+  checked by grepping `document.xml` and the PDF.
+- **The photographs are pre-cut** to their frames in `_tools/annex/img/`,
+  because a Word image cannot be cropped by the layout the way
+  `object-fit` crops it.
+- **Checked in LibreOffice, not in Word.** The page numbers in the foot
+  render slightly larger there, because LibreOffice styles page-number
+  fields its own way. Open one in Word before sending it.
+
 Everything from here to the brand book is the lab's record, kept for its
 reasoning. Read `lab/annex/sample-b/` as `annex/sample/`, the lab
 template and review folders as their live paths, and
