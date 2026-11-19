@@ -3414,6 +3414,22 @@ them, and the title 10 mm. Both sheets are now at the page budget, so
 more air than this means fewer words or a third sheet. The record is two
 by two at 15 pt, because four abreast ran past the right margin.
 
+**Third pass, with the design skills.** `taste-skill` and
+`ui-ux-pro-max` were run against the lab. The typography search
+returned Public Sans, Source Sans 3 and Lato for formal and government
+documents. Inter stays: the skill discourages it as a default but allows
+it for a neutral, trust-first brief, and it beats all three at 9.5 pt.
+Four changes came out of the skills:
+
+- **The red dot by the document's label is gone.** It was decoration,
+  which 9.F bans. Red is now spent only on the required asterisk.
+- **No rule under every table or list row.** That is the skill's
+  "laziest layout". The tables now have one rule under the head and one
+  above the total, and the figures are tabular. That is also the Cartier
+  receipt's own method.
+- **No en dashes.** `2023-2027` takes a hyphen, per 9.G.
+- **`Last word` became `Closing`.** The old label was a cute one.
+
 **Body was 10 pt on 5 mm at first, not the 6 mm baseline**, so the annex spec's
 baseline figures describe the live sheets, not the lab. Delete the lab
 when it wins or falls behind.

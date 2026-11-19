@@ -14,13 +14,14 @@
      letter's label column; the RSC mission sidebar.)
    - Facts are fields: a small mono label, a large light value.
      (RSC "Launch year / 1995".)
-   - Tables are hairline rows with figures set right, tabular.
-     (The Cartier receipt.)
+   - Tables carry no rule per row: columns aligned, figures set
+     right in tabular numerals, one rule under the head and one
+     above the total. (The Cartier receipt.)
    - Figures sit in pale panels with a numbered disc. (Eveo.)
-   - The reference number is the largest object on the sheet and
-     it is set light, in ink. Red is spent once: the dot on the
-     document's label, and the asterisk on a field that voids the
-     reference if it is left blank.
+   - The title is the largest object on the sheet; the reference is
+     a filing mark, 13 pt mono, top right. Red is spent once: the
+     asterisk on a field that voids the reference if left blank.
+     No decorative dots (taste-skill 9.F), no en or em dashes (9.G).
 
    Page 210 x 297 mm. Margins 20 mm sides, 24 mm head, 27 mm foot.
    Content 170 x 246 mm. Body 10 pt on 5 mm. Nothing read is under
@@ -68,7 +69,6 @@ img{display:block;max-width:100%}
   letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);
 }
 .label-ink{color:var(--ink)}
-.dot{display:inline-block;width:1.6mm;height:1.6mm;border-radius:50%;background:var(--accent);margin-right:2mm;vertical-align:.25mm}
 
 .title{margin:0;font-size:31pt;font-weight:300;line-height:12mm;letter-spacing:-.028em;color:var(--ink)}
 .heading{margin:0 0 1.5mm;font-size:13pt;font-weight:400;line-height:6mm;letter-spacing:-.01em}
@@ -116,8 +116,8 @@ img{display:block;max-width:100%}
 .of-rec .value{font-size:15pt;line-height:6.5mm;white-space:nowrap}
 /* a compact definition list: label left, value right, a hairline under each */
 .dl{display:grid;grid-template-columns:1fr 1fr;column-gap:var(--g)}
-.dl > div{display:flex;justify-content:space-between;align-items:baseline;gap:3mm;padding:1.5mm 0;border-bottom:.25mm solid var(--rule)}
-.dl > div > :last-child{font-size:11pt;line-height:5mm;font-variant-numeric:tabular-nums;text-align:right}
+.dl > div{display:flex;justify-content:space-between;align-items:baseline;gap:3mm;padding:1.2mm 0}
+.dl > div > :last-child{font-size:11pt;line-height:5mm;font-feature-settings:"tnum";text-align:right}
 .dl .blank{flex:1;max-width:45mm;height:5mm;border-bottom:.25mm solid var(--rule-heavy)}
 .field .value{display:block;margin-top:1mm;font-size:16pt;font-weight:300;font-feature-settings:"tnum";line-height:7mm;letter-spacing:-.015em;font-variant-numeric:tabular-nums}
 .field .value-blank{display:block;margin-top:1mm;height:7mm;border-bottom:.25mm solid var(--rule-heavy)}
@@ -145,12 +145,14 @@ img{display:block;max-width:100%}
 
 /* ---------- tables: hairline rows, figures set right ---------- */
 .tbl{width:100%;border-collapse:collapse;font-size:10pt;line-height:5mm}
-.tbl th,.tbl td{padding:1.5mm 0;border-bottom:.25mm solid var(--rule);text-align:left;vertical-align:baseline;font-weight:400}
+.tbl th,.tbl td{padding:1.2mm 0;text-align:left;vertical-align:baseline;font-weight:400}
+.tbl thead th{border-bottom:.25mm solid var(--rule);padding-bottom:1.5mm}
+.tbl tbody tr:first-child th,.tbl tbody tr:first-child td{padding-top:2mm}
 .tbl thead th{padding-top:0}
 .tbl th{white-space:nowrap;font-family:var(--mono);font-size:8pt;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
 .tbl td.r,.tbl th.r{text-align:right}
-.tbl td{font-variant-numeric:tabular-nums}
-.tbl tr.total td{border-top:.6mm solid var(--rule-heavy);border-bottom:0;font-weight:500}
+.tbl td{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+.tbl tr.total td{border-top:.25mm solid var(--rule-heavy);padding-top:2mm;font-weight:500}
 
 /* ---------- the declaration and the write-in lines ---------- */
 .declare{border:.25mm solid var(--rule-heavy);padding:4mm 5mm 4mm}

@@ -74,7 +74,7 @@ def page(sample):
   <section class="sheet">
     <div class="sheet-body">
       <header class="mast">
-        <div><span class="label label-ink"><i class="dot"></i>Annex 04</span><span class="label">Reference project</span></div>
+        <div><span class="label label-ink">Annex 04</span><span class="label">Reference project</span></div>
         <p class="ref">1322/2026</p>
       </header>
       <hr class="rule-heavy">
@@ -119,7 +119,7 @@ def page(sample):
         <div class="v v-stack"><div class="fields of-rec">
           <div class="field"><span class="label">Recipient</span><span class="value">{R("City of Norrvik")}<span class="required">*</span></span></div>
           <div class="field"><span class="label">Delivered</span><span class="value">EUR {R("612,400", "8")}</span></div>
-          <div class="field"><span class="label">Framework</span><span class="value">2023&ndash;2027</span></div>
+          <div class="field"><span class="label">Framework</span><span class="value">2023-2027</span></div>
           <div class="field"><span class="label">Certificate</span><span class="value">Sheet 2</span></div>
         </div>
         <p class="small soft"><span class="required">*</span> Public or private. Dir. 2014/24/EU, Annex XII Part II(a).{ceiling} The figure shown is value delivered, which is the figure an evaluator scores.</p></div>
@@ -134,7 +134,7 @@ def page(sample):
   <section class="sheet">
     <div class="sheet-body">
       <header class="mast">
-        <div><span class="label label-ink"><i class="dot"></i>Certificate</span><span class="label">Annex 04, sheet 2</span></div>
+        <div><span class="label label-ink">Certificate</span><span class="label">Annex 04, sheet 2</span></div>
         <p class="ref">1322/2026</p>
       </header>
       <hr class="rule-heavy">
@@ -147,7 +147,7 @@ def page(sample):
         <div class="k"><span class="label n">01</span><span class="label">Parties</span></div>
         <div class="v dl">
           <div><span class="label">Framework</span><span>{R("NRV-2023-0148")}</span></div>
-          <div><span class="label">Period</span><span>2023&ndash;2025</span></div>
+          <div><span class="label">Period</span><span>2023-2025</span></div>
           <div><span class="label">Recipient</span><span>{R("City of Norrvik")}</span></div>
           <div><span class="label">Supplier</span>{supplier_field}</div>
         </div>
@@ -168,7 +168,7 @@ def page(sample):
             <tbody>
               <tr><th>Units delivered</th><td class="r">340</td></tr>
               <tr><th>Material</th><td class="r">S355J2</td></tr>
-              <tr><th>Finish</th><td class="r">EN ISO 1461 + RAL 7024</td></tr>
+              <tr><th>Finish</th><td class="r">EN ISO 1461<br>+ RAL 7024</td></tr>
               <tr><th>Delivery windows</th><td class="r">18 of 18</td></tr>
             </tbody>
           </table>
