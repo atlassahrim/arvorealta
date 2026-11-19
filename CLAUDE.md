@@ -3406,7 +3406,7 @@ published.
 **On 19 November the owner retired the working edition.** He does not
 need the dark book with its private notes. From now on the book is
 changed in a lab copy and then published. **So `brand/book/index.html` is
-now the source**, and the two paragraphs above, and *Then the public
+now the source**, and the two paragraphs above, and *The public
 edition is generated, never edited* below, are history. The lab follows
 this file's sandbox rule: a copy of the live page, `noindex, nofollow`, an
 underscore name if it must stay off the site, and diffed against the live
