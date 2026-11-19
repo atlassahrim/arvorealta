@@ -3415,6 +3415,15 @@ unlocks.
   `annex/proposta-motorhome/` alone**, which is still on the old system.
 - `assets/img/doc-annex-1-520.webp` shows the old sample. No published
   page uses it; redraw it if the paused document fold returns.
+- **The brand book shows the tender set, since 19 November.** Its
+  `Tender annexes` card shows `brand/book/img/doc-annex-2-520.webp`, the
+  first sheet of the new sample, and `-1` is deleted. The card and the
+  Documents rule name the tender set, Inter and IBM Plex Mono on white,
+  and the card says each one comes as a page and a Word file. `reviews`
+  left the book's lists of documents in the brand's three faces, because
+  the review is on the tender set; the line that a review carries our
+  domain in its last foot stays. The owner approved the copy first. It
+  was changed in place, not through a lab, at his word.
 
 **Word versions of the portrait documents** are made by
 `_tools/annex/docx.js` and kept in `annex/_word/`. See that section below.
