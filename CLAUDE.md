@@ -3410,9 +3410,11 @@ now the source**, and the two paragraphs above, and *The public
 edition is generated, never edited* below, are history. The lab follows
 this file's sandbox rule: a copy of the live page, `noindex, nofollow`, an
 underscore name if it must stay off the site, and diffed against the live
-page before it is promoted. The `Arvorealta Working Book` artifact was not
-deleted, and `_tools/book/` still works if the working edition ever comes
-back. The last working-book note is not on any page now: the black
+page before it is promoted. **Both private artifacts, `Arvorealta Working
+Book` and `Arvorealta Brand Book`, were deleted later the same day, at the
+owner's word.** They cannot be restored. The site page is the only copy,
+plus git. Every mention below of the two artifacts is history.
+`_tools/book/` still runs, but nothing is left for it to read. The last working-book note is not on any page now: the black
 question (`#000000` or `#070D0B`) and the open uploads. The versions file
 in Drive (`00 Start here`) lists the uploads.
 
@@ -3434,6 +3436,13 @@ On publication: 34 live buttons and 9 waiting. **A Drive link survives a
 new version uploaded with Manage versions, so replacing a file needs no
 change here. A new file does need one**: its button gets the file's id
 and loses `off`.
+
+**The mark's fifth version card is `Icon`, since 19 November, at the
+owner's word**, and it was `One colour`. The card holds the one-colour
+symbol SVGs and the three app icon PNGs (32, 180, 512), which moved there
+from `Symbol`. Its description still says one flat colour. Its `For` line
+now starts with the app icon and favicon. The Drive file names did not
+change.
 
 **Montserrat is self-hosted for the book only**: `assets/fonts/montserrat.css`,
 variable, latin and latin-ext. The book also needs Geist Mono at 600, which
