@@ -3354,6 +3354,20 @@ when the buttons went. `Denne er lukket. Vent på den neste.` and `Tämä
 on sulkeutunut. Odota seuraavaa.` are a session's. The paragraphs below
 that say the attachments stay linked are history.
 
+**Since the evening of 19 November the closed state reads differently,
+approved by the owner before it went live.** The eyebrow is `Tenders to
+take part in`, from `Closed`; he wrote `tenders to participate`, which
+needs an `in`. The headline is `This one has closed.` / `Watch for the
+next one.`, hand-broken with `<br>` in the string, so `tick()` writes
+`#openH2` with `innerHTML` now rather than `textContent`. `Anbud å delta
+i` / `Denne er lukket.` / `Følg med på den neste.` and `Tarjouskilpailuja,
+joihin osallistua` / `Tämä on sulkeutunut.` / `Pidä silmällä seuraavaa.`
+are a session's. Measured at six sizes in three languages: the headline
+on exactly two lines, the eyebrow on one, every fold the same height as
+before, no page errors. **The spine's second rung no longer reads
+`Closed`**, so the paragraphs elsewhere that say it does describe the
+page before this change.
+
 **On 28 October 2026 `index.html` carried `27 Oct 2026, 12:00` under an
 eyebrow reading `Open now`, and the deadline had passed the day before.**
 That is the third of the three things this file says to flag, because the page

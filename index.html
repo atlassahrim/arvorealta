@@ -1455,9 +1455,9 @@ const EXTRA = {
        _r0:"Bids", _r1:"Tender", _r2:"Documents", _r3:"Scored", _r4:"Cost", _r5:"Start",
        _uDays:"days", _uHours:"hours", _uMin:"minutes",
        _tlA:"Questions close", _tlB:"Tender deadline",
-       _left:"until the tender deadline", _shutEyebrow:"Closed",
+       _left:"until the tender deadline", _shutEyebrow:"Tenders to take part in",
        _shut:"Closed.", _shutWhen:"The deadline passed on",
-       _shutH2:"This one has closed. Wait for the next one.",
+       _shutH2:"This one has closed.<br>Watch for the next one.",
        _window:"The bidding window runs from the question deadline to the tender deadline.",
        _docH2:"One standard.<br>Every document a bid needs.",
        _docA:"Tender annex", _docB:"Proposal", _docC:"Deck",
@@ -1466,9 +1466,9 @@ const EXTRA = {
        _r0:"Tilbud", _r1:"Konkurranse", _r2:"Dokumenter", _r3:"Vekting", _r4:"Pris", _r5:"Start",
        _uDays:"dager", _uHours:"timer", _uMin:"minutter",
        _tlA:"Frist for spørsmål", _tlB:"Tilbudsfrist",
-       _left:"til tilbudsfristen", _shutEyebrow:"Lukket",
+       _left:"til tilbudsfristen", _shutEyebrow:"Anbud å delta i",
        _shut:"Lukket.", _shutWhen:"Fristen gikk ut",
-       _shutH2:"Denne er lukket. Vent på den neste.",
+       _shutH2:"Denne er lukket.<br>Følg med på den neste.",
        _window:"Tilbudsvinduet går fra spørsmålsfristen til tilbudsfristen.",
        _docH2:"Én standard.<br>Hvert dokument et tilbud trenger.",
        _docA:"Tilbudsvedlegg", _docB:"Tilbud", _docC:"Presentasjon",
@@ -1477,9 +1477,9 @@ const EXTRA = {
        _r0:"Tarjoukset", _r1:"Tarjouspyyntö", _r2:"Asiakirjat", _r3:"Pisteet", _r4:"Hinta", _r5:"Aloita",
        _uDays:"päivää", _uHours:"tuntia", _uMin:"minuuttia",
        _tlA:"Kysymysten määräaika", _tlB:"Tarjousten määräaika",
-       _left:"tarjousten määräaikaan", _shutEyebrow:"Suljettu",
+       _left:"tarjousten määräaikaan", _shutEyebrow:"Tarjouskilpailuja, joihin osallistua",
        _shut:"Suljettu.", _shutWhen:"Määräaika umpeutui",
-       _shutH2:"Tämä on sulkeutunut. Odota seuraavaa.",
+       _shutH2:"Tämä on sulkeutunut.<br>Pidä silmällä seuraavaa.",
        _window:"Tarjousikkuna kulkee kysymysten määräajasta tarjousten määräaikaan.",
        _docH2:"Yksi standardi.<br>Jokainen tarjouksen tarvitsema asiakirja.",
        _docA:"Tarjousliite", _docB:"Tarjous", _docC:"Esitys",
@@ -1675,7 +1675,7 @@ function tick(){
   const shut = now >= b;
 
   $("#openEyebrow").textContent = shut ? x._shutEyebrow : t.open.eyebrow;
-  $("#openH2").textContent = shut ? x._shutH2 : t.open.h2;
+  $("#openH2").innerHTML = shut ? x._shutH2 : t.open.h2;
   clock.classList.toggle("shut", shut);
   $("#tlAv").textContent = fmt(TENDER.questions);
   $("#tlBv").textContent = fmt(TENDER.deadline);
