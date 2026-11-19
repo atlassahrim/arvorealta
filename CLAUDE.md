@@ -3313,9 +3313,12 @@ owner's word.** `renderLists` writes them as `<span class="file off"
 aria-disabled="true">` with no `href`, dashed and at half strength, so
 they cannot be clicked or tabbed to. The labels are unchanged. **The
 files are still public** at `/assets/vedlegg-5/`, so anyone holding
-the old link can open them. The closed headline still says the
-attachment `is still here`, and nothing on the page explains the dimmed
-buttons.
+the old link can open them. **The closed headline is the owner's, since
+the same day**: `This one has closed. Wait for the next one.`, in place
+of `The attachment it needed is still here.`, which stopped being true
+when the buttons went. `Denne er lukket. Vent på den neste.` and `Tämä
+on sulkeutunut. Odota seuraavaa.` are a session's. The paragraphs below
+that say the attachments stay linked are history.
 
 **On 28 October 2026 `index.html` carried `27 Oct 2026, 12:00` under an
 eyebrow reading `Open now`, and the deadline had passed the day before.**
