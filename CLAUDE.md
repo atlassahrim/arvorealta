@@ -3403,7 +3403,18 @@ rule is unchanged.
 
 Measured: all six sheets fit at zero overflow, and print to two A4 pages
 each. `pdftotext` on the sample finds none of the redacted strings.
-**Body is 10 pt on 5 mm, not the 6 mm baseline**, so the annex spec's
+**Second pass, the same day, on the owner's five notes.** The title is
+now the largest object: 31 pt light, the full measure. The reference
+dropped to 13 pt mono in the masthead, a filing mark rather than a
+headline. **The body face is Inter**, with optical sizes, at 9.5 pt on
+5 mm, which is still above the 9 pt competition floor. IBM Plex Mono stays
+for labels. `The product is the specification.` is off the annex: a
+slogan has no place in a scored document. The rows have 6 mm of air above
+them, and the title 10 mm. Both sheets are now at the page budget, so
+more air than this means fewer words or a third sheet. The record is two
+by two at 15 pt, because four abreast ran past the right margin.
+
+**Body was 10 pt on 5 mm at first, not the 6 mm baseline**, so the annex spec's
 baseline figures describe the live sheets, not the lab. Delete the lab
 when it wins or falls behind.
 

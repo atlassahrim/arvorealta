@@ -64,7 +64,7 @@ def page(sample):
 {head}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:opsz,wght@14..32,300..600&display=swap">
 <link rel="stylesheet" href="/lab/annex/annex-lab.css">
 </head>
 <body>
@@ -88,7 +88,6 @@ def page(sample):
         <div class="v v-read">
           <p>Planter and planter-bench units in S355J2 structural steel to EN 10025-2. Fabrication is CE marked under EN 1090-1 at execution class EXC2, with welding quality to EN ISO 3834-2. Units are hot dip galvanised to EN ISO 1461 and powder coated in RAL 7024.</p>
           <p>Units are bolted, not welded, on site. A damaged panel is replaced as a single part without removing the frame or disturbing the planting.</p>
-          <p class="pull">The product is the specification.</p>
         </div>
       </div>
 
@@ -117,7 +116,7 @@ def page(sample):
 
       <div class="row">
         <div class="k"><span class="label n">04</span><span class="label">Record</span></div>
-        <div class="v v-stack"><div class="fields of-2x2">
+        <div class="v v-stack"><div class="fields of-rec">
           <div class="field"><span class="label">Recipient</span><span class="value">{R("City of Norrvik")}<span class="required">*</span></span></div>
           <div class="field"><span class="label">Delivered</span><span class="value">EUR {R("612,400", "8")}</span></div>
           <div class="field"><span class="label">Framework</span><span class="value">2023&ndash;2027</span></div>
@@ -195,7 +194,7 @@ def page(sample):
       </div>
 
       <div class="spacer"></div>
-      <div class="row" style="margin-top:4mm">
+      <div class="row" style="margin-top:2.5mm">
         <div class="k"><span class="label n">05</span><span class="label">Supplier</span></div>
         <div class="v">{sign_supplier}</div>
       </div>

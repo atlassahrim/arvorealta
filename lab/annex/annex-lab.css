@@ -37,9 +37,9 @@
   --accent:#C7392F;
   --rule:rgba(20,20,20,.18);
   --rule-heavy:#141414;
-  --sans:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  --sans:"Inter","Helvetica Neue",Arial,sans-serif;
   --mono:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;
-  --k:40mm;                /* the label column */
+  --k:36mm;                /* the label column */
   --g:6mm;                 /* the gutter beside it */
 }
 
@@ -53,12 +53,12 @@ img{display:block;max-width:100%}
   counter-increment:sheet;position:relative;width:210mm;height:297mm;flex:0 0 auto;overflow:hidden;
   background:var(--paper);color:var(--ink);font-family:var(--sans);
   box-shadow:0 1px 2px rgba(0,0,0,.10),0 8px 26px rgba(0,0,0,.14);
-  -webkit-font-smoothing:antialiased;
+  -webkit-font-smoothing:antialiased;font-optical-sizing:auto;font-feature-settings:"cv11","ss01";
 }
 .sheet-body{position:absolute;left:20mm;right:20mm;top:20mm;bottom:27mm;display:flex;flex-direction:column}
 
 /* ---------- type ---------- */
-.sheet p{margin:0;font-size:10pt;line-height:5mm;font-weight:400}
+.sheet p{margin:0;font-size:9.5pt;line-height:5mm;font-weight:400;letter-spacing:-.003em}
 .sheet p + p{margin-top:2.5mm}
 .sheet .soft{color:var(--ink-soft)}
 .sheet .small{font-size:9pt;line-height:4.5mm}
@@ -70,8 +70,8 @@ img{display:block;max-width:100%}
 .label-ink{color:var(--ink)}
 .dot{display:inline-block;width:1.6mm;height:1.6mm;border-radius:50%;background:var(--accent);margin-right:2mm;vertical-align:.25mm}
 
-.title{margin:0;font-size:25pt;font-weight:300;line-height:10mm;letter-spacing:-.022em;color:var(--ink)}
-.heading{margin:0 0 1.5mm;font-size:14pt;font-weight:400;line-height:6mm;letter-spacing:-.01em}
+.title{margin:0;font-size:31pt;font-weight:300;line-height:12mm;letter-spacing:-.028em;color:var(--ink)}
+.heading{margin:0 0 1.5mm;font-size:13pt;font-weight:400;line-height:6mm;letter-spacing:-.01em}
 
 /* the line the sheet exists to support: display size, light, no bar */
 .pull{margin-top:4mm!important;font-size:15pt!important;line-height:6.5mm!important;font-weight:300!important;letter-spacing:-.012em}
@@ -80,7 +80,7 @@ img{display:block;max-width:100%}
 .mast{display:grid;grid-template-columns:var(--k) 1fr;column-gap:var(--g);align-items:end;padding-bottom:3mm;flex:none}
 .mast .label + .label{margin-top:.5mm}
 .sheet .ref{
-  margin:0;justify-self:end;font-size:40pt;font-weight:300;line-height:13mm;letter-spacing:-.03em;
+  margin:0;justify-self:end;font-family:var(--mono);font-size:13pt;font-weight:400;line-height:5mm;letter-spacing:.02em;
   font-variant-numeric:tabular-nums;color:var(--ink);
 }
 .ref small{font-size:.42em;letter-spacing:.02em;color:var(--ink-soft);font-weight:400;margin-left:2mm}
@@ -89,9 +89,9 @@ img{display:block;max-width:100%}
 
 /* ---------- the row: a hairline, a label column, the content ---------- */
 .row{display:grid;grid-template-columns:var(--k) minmax(0,1fr);column-gap:var(--g);flex:none;
-  margin-top:4mm;padding-top:2.5mm;border-top:.25mm solid var(--rule)}
+  margin-top:6mm;padding-top:3mm;border-top:.25mm solid var(--rule)}
 /* the title runs the full measure under the masthead, like a cover */
-.row-title{display:block;margin-top:0;border-top:0;padding-top:6mm;padding-bottom:1mm}
+.row-title{display:block;margin-top:0;border-top:0;padding-top:10mm;padding-bottom:3mm}
 .row-first{margin-top:0;border-top:0;padding-top:5mm}
 .row > .k .label + .label{margin-top:.5mm}
 .row > .k .n{color:var(--ink)}
@@ -99,10 +99,10 @@ img{display:block;max-width:100%}
 .v-read{max-width:118mm}
 
 /* content with an aside on the right: text, then a narrow column */
-.v-aside{display:grid;grid-template-columns:minmax(0,1fr) 42mm;column-gap:var(--g)}
+.v-aside{display:grid;grid-template-columns:minmax(0,1fr) 38mm;column-gap:var(--g)}
 .aside{border-left:.25mm solid var(--rule);padding-left:4mm}
 .aside .label + p{margin-top:.5mm}
-.v-half{display:grid;grid-template-columns:1fr 1fr;column-gap:var(--g);align-items:start}
+.v-half{display:grid;grid-template-columns:1.25fr 1fr;column-gap:var(--g);align-items:start}
 .sheet .v-stack > * + *{margin-top:3mm}
 
 /* ---------- fields: small label, large light value ---------- */
@@ -111,12 +111,15 @@ img{display:block;max-width:100%}
 .of-3{grid-template-columns:repeat(3,1fr)}
 .of-4{grid-template-columns:repeat(4,1fr)}
 .of-2x2{grid-template-columns:repeat(2,1fr)}
+/* the record on one line: the widest value gets the widest column */
+.of-rec{grid-template-columns:repeat(2,1fr);row-gap:3mm}
+.of-rec .value{font-size:15pt;line-height:6.5mm;white-space:nowrap}
 /* a compact definition list: label left, value right, a hairline under each */
 .dl{display:grid;grid-template-columns:1fr 1fr;column-gap:var(--g)}
 .dl > div{display:flex;justify-content:space-between;align-items:baseline;gap:3mm;padding:1.5mm 0;border-bottom:.25mm solid var(--rule)}
 .dl > div > :last-child{font-size:11pt;line-height:5mm;font-variant-numeric:tabular-nums;text-align:right}
 .dl .blank{flex:1;max-width:45mm;height:5mm;border-bottom:.25mm solid var(--rule-heavy)}
-.field .value{display:block;margin-top:1mm;font-size:16pt;font-weight:300;line-height:7mm;letter-spacing:-.015em;font-variant-numeric:tabular-nums}
+.field .value{display:block;margin-top:1mm;font-size:16pt;font-weight:300;font-feature-settings:"tnum";line-height:7mm;letter-spacing:-.015em;font-variant-numeric:tabular-nums}
 .field .value-blank{display:block;margin-top:1mm;height:7mm;border-bottom:.25mm solid var(--rule-heavy)}
 .sheet .ident{font-family:var(--mono);font-size:9pt;line-height:4.5mm;color:var(--ink);margin-top:1mm}
 .ident span{color:var(--ink-soft)}
@@ -125,7 +128,7 @@ img{display:block;max-width:100%}
 /* ---------- figures: pale panels, a numbered disc ---------- */
 .figs{display:grid;grid-template-columns:1fr 1fr;column-gap:4mm}
 .fig{margin:0}
-.panel{position:relative;height:37mm;background:var(--panel);overflow:hidden;display:grid;place-items:center}
+.panel{position:relative;height:29mm;background:var(--panel);overflow:hidden;display:grid;place-items:center}
 .panel img{width:100%;height:100%;object-fit:cover}
 .panel.ink{background:var(--ink)}
 .panel.ink img{object-fit:contain}
@@ -150,21 +153,22 @@ img{display:block;max-width:100%}
 .tbl tr.total td{border-top:.6mm solid var(--rule-heavy);border-bottom:0;font-weight:500}
 
 /* ---------- the declaration and the write-in lines ---------- */
-.declare{border:.25mm solid var(--rule-heavy);padding:4mm 5mm 5mm}
-.sign{display:grid;grid-template-columns:1fr 1fr;column-gap:6mm;margin-top:9mm}
+.declare{border:.25mm solid var(--rule-heavy);padding:4mm 5mm 4mm}
+.sign{display:grid;grid-template-columns:1fr 1fr;column-gap:6mm;margin-top:7mm}
 .sign > div{border-top:.25mm solid var(--rule-heavy);padding-top:1mm}
 .sign-wide{grid-template-columns:1fr 2fr}
 .sign-4{grid-template-columns:repeat(4,1fr);column-gap:4mm}
-.sign + .sign{margin-top:8mm}
+.sign + .sign{margin-top:6mm}
 
 /* ---------- redaction: removed, not covered ---------- */
 .redact{display:inline-block;height:.72em;vertical-align:-.08em;background:var(--ink)}
 .redact-4{width:2em}.redact-8{width:4em}.redact-12{width:6em}.redact-16{width:8em}
 .sign-filled > div{border-top:0;padding-top:0}
-.sign-filled .redact{display:block;height:5mm;width:62%;margin-bottom:1.5mm}
+.sign-filled .redact{display:block;height:4.5mm;width:62%;margin-bottom:1mm}
 .sign-filled .redact-full{width:88%}
 .sign-filled .label{border-top:.25mm solid var(--rule-heavy);padding-top:1mm}
-.sign-filled.sign{margin-top:4mm}
+.sign-filled.sign{margin-top:3mm}
+.sign-filled.sign + .sign-filled.sign{margin-top:3mm}
 
 /* ---------- the review: a finding is a crop beside its reading ---------- */
 .v-find{display:grid;grid-template-columns:46mm minmax(0,1fr);column-gap:5mm;align-items:start}
