@@ -3442,6 +3442,12 @@ the underscore: `reference-annex`, `reference-annex-sample`,
 - **Checked in LibreOffice, not in Word.** The page numbers in the foot
   render slightly larger there, because LibreOffice styles page-number
   fields its own way. Open one in Word before sending it.
+- **A copy lives in Drive for easy access, since 19 November, at the
+  owner's word**: `Product tenders / Tender set`, private, holding the
+  five `.docx` files, a PDF of each, and `technical-deck.pdf`. Not the
+  `Arvorealta Brand` folder, which anyone with its link can read. **Drive
+  does not update itself**: after a rebuild, upload the new file with
+  Manage versions so its link survives, as the brand book's files do.
 
 Everything from here to the brand book is the lab's record, kept for its
 reasoning. Read `lab/annex/sample-b/` as `annex/sample/`, the lab
