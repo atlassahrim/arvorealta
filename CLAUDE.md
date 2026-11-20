@@ -4026,6 +4026,42 @@ history.
   (Open Sans, indigo ink, a creme card) and the components fold, through
   one appended style block.
 
+**A second round the same evening, at the owner's word.**
+
+- **Both books lose two things.** The cover's `Feito por` and `Cobre`
+  fields (on `/brand/book-arv/` that is `Covers`; it has no maker field),
+  and the line under section 01, `Se você ler só uma parte, leia esta.` /
+  `If you read nothing else, read this.` The first block there takes the
+  line's 36px instead, so the headline does not sit on it. **The
+  Arvorealta book was changed in place, not through a lab**, at his word;
+  two deletions.
+- **Section 01's three rules and the culture come from the project PDF**,
+  because the old three were rules for making the book, not for using the
+  brand. They read `A ocasião vem primeiro.`, `Toda peça é datada e
+  numerada.` and `Discreta, nunca ostensiva.`, from the project's own
+  lines: the event as the converging centre, annual series signed and
+  dated, and the high houses as traditional and discreet. The culture is
+  `Cerimônia e reconhecimento` / `Legado presente, hoje.` No people,
+  prices, market or plan from the PDF reached the page.
+- **The supplied screen versions are on the page**: in
+  `Eliria BRAND/01 Mark/Screen`, the symbol, the wordmark and the lockup
+  as SVG in blue `#101938`, sand `#F3DABD`, camel `#8E7557` and black, and
+  the icon as PNG on grass, sand and camel at 32, 180 and 512. The page
+  holds only the files it shows, `eliria-{symbol,wordmark,lockup}-*-1.svg`
+  and `eliria-icon-grass-1-360.webp`; every file is reachable from its 28
+  live download buttons. **The
+  files' values differ slightly from the palette's**: blue `#101938`
+  against indigo `#0E1834`, sand `#F3DABD` against creme `#EFDBC0`. The
+  swatches say which file word each colour carries. **One file name has
+  a typo**, `eiria_mark_symbol_blue.svg`; it was not renamed in Drive.
+- **The cover carries the wordmark under the gold mark**, as the
+  Arvorealta cover does, and the size test has its symbol toggle back.
+- **Documents use the one-colour symbol**, in blue: the letter, the
+  invitation, the certificate and their thumbnails, and the card's emboss
+  is the symbol's silhouette. The piece in Applications shows the camel
+  symbol, the profile photo the grass icon, the email signature the blue
+  wordmark.
+
 ## The pricing ladder
 
 **There are two ladders on this domain and this section is the euro one.**
