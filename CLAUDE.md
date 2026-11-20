@@ -3991,6 +3991,41 @@ like `/brand/book-arv/`. So:
   meaning of Thalla and Eliria. They are strategy, not colour, design or
   logos. The motifs and the cautions are gone.
 
+**The palette, the type and the name were settled the same day, at the
+owner's word**, from the palette image and the fonts he put in
+`Eliria BRAND/03 Type`. The sampled Sombra, Prata and Ouro above are
+history.
+
+- **The name is Eliria alone.** Thalla is dropped, so its meaning block is
+  gone, and so is `O mar canta para o Altíssimo.`, whose sea came from
+  Thalla. The one line is now `Vincular ocasiões e joias exclusivas.` The
+  meaning of Eliria stays.
+- **Three colours from the client's six: Indigo `#0E1834` 70, Creme
+  `#EFDBC0` 20, Camel `#8E7657` 10.** Sacramento `#042217` went because it
+  measures 1.04:1 against the indigo, two darks doing one job; the teal
+  and the rosé are mid-tones that carry no text. Indigo was chosen over
+  the green because blue is gold's complement and the mark lights up on
+  it. Measured: creme on indigo 13.0:1, camel on indigo 4.1:1 (large type
+  only), camel on creme 3.2:1 and on white 4.3:1 (never small text),
+  indigo on white 17.5:1. Indigo and camel carry the client's RGB and CMYK;
+  the creme was read off the image, so its CMYK is open.
+- **Two faces: Carla Sans and Open Sans.** Playfair Display went: a second
+  display voice, weak small and on engraving. **Carla Sans is caps-only**:
+  its lower case maps to the capitals without the accents, so `Coleção`
+  typed in lower case sets `COLECAO`. **Its `liga` feature is on by
+  default and joins CA, LA, RA, GA and about ninety other pairs**, so the
+  book says ligatures off unless chosen. It has no `·`, `–` or `º`.
+- **Carla Sans is never served**, because its files still carry no
+  licence. Every Carla line on the page is an SVG outline drawn by
+  `_tools/book/carla_svg.py` with ligatures off, from the font files in
+  Drive, which are not in this repository. **Open Sans is self-hosted**,
+  OFL, as two variable woff2 files (weight 300 to 800, width 75 to 100)
+  in `brand/book-eli/fonts/`.
+- **The page chrome is still the Arvorealta book's**, as instructed. The
+  client's values reach the brand tokens `--b-*`, the document drawings
+  (Open Sans, indigo ink, a creme card) and the components fold, through
+  one appended style block.
+
 ## The pricing ladder
 
 **There are two ladders on this domain and this section is the euro one.**

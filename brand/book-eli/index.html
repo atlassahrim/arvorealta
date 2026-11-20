@@ -29,8 +29,8 @@
    Layout: a sticky side index beside one reading column. */
 :root{
   /* the brand's own values: content, identical in both editions */
-  --b-ink:#300E02; --b-ink2:#300E02; --b-paper:#B4B1A4; --b-bone:#EFEAE1;
-  --b-pink:#300E02; --b-amber:#A77448; --b-brick:#7A5530;
+  --b-ink:#0E1834; --b-ink2:#0E1834; --b-paper:#EFDBC0; --b-bone:#EFEAE1;
+  --b-pink:#0E1834; --b-amber:#8E7657; --b-brick:#7A5530;
   --f-disp:"EB Garamond",Garamond,Georgia,serif;
   --f-text:"Montserrat",ui-sans-serif,system-ui,sans-serif;
   --f-mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -485,6 +485,30 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
 .dls[hidden]{display:none}
 @media (prefers-reduced-motion:reduce){.dl{transition:none}}
 </style>
+<style>
+/* Eliria's own faces and inks, appended after the template's sheet.
+   Open Sans is self-hosted (OFL, variable in weight and width). Carla Sans
+   carries no licence, so it is never served: its lines are SVG outlines. */
+@font-face{font-family:"Open Sans";font-style:normal;font-weight:300 800;font-stretch:75% 100%;font-display:swap;src:url(fonts/open-sans-var-latin.woff2) format("woff2")}
+@font-face{font-family:"Open Sans";font-style:italic;font-weight:300 800;font-stretch:75% 100%;font-display:swap;src:url(fonts/open-sans-italic-var-latin.woff2) format("woff2")}
+.os,.mini .ex.os{font-family:"Open Sans",ui-sans-serif,system-ui,sans-serif}
+.osc,.mini .ex.osc,.sp-m.osc{font-family:"Open Sans",ui-sans-serif,system-ui,sans-serif;font-stretch:75%;letter-spacing:.02em}
+.sp-d img.carla{display:block;width:min(100%,9.6em);height:auto}
+.mini .ex img.carla{display:block;height:.62em;width:auto}
+.mini .ex.lig{display:flex;gap:.6em;align-items:center}
+.opener .hd img.carla{display:block;height:.82em;width:auto;margin:0 auto}
+#components{--f-mono:"Open Sans",ui-sans-serif,system-ui,sans-serif;--f-text:"Open Sans",ui-sans-serif,system-ui,sans-serif}
+#components .opener .eb{letter-spacing:.2em;color:rgba(239,219,192,.72)}
+.pg{--f-disp:"Open Sans",ui-sans-serif,sans-serif;--f-text:"Open Sans",ui-sans-serif,sans-serif;--f-mono:"Open Sans",ui-sans-serif,sans-serif;color:#0E1834}
+.pg .t-lede{font-weight:300}
+.pg .t-lbl{font-weight:600;letter-spacing:.12em;color:rgba(14,24,52,.72)}
+.pg .t-lbl.mk{color:#0E1834}
+.pg .t-note{color:rgba(14,24,52,.72)}
+.pg .flds .t-head{font-stretch:75%}
+.pg .rl,.pg .trow:first-child{border-top-color:#0E1834}
+.pg .trow{border-bottom-color:rgba(14,24,52,.2)}
+.pg.card,.pg.card .emb i{background:#EFDBC0}
+</style>
 </head>
 <body class="public">
 <div class="shell">
@@ -505,7 +529,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
     <li><a href="#applications"><span class="nn">11</span>Aplicações</a></li>
     <li><a href="#files"><span class="nn">12</span>Arquivos e Drive</a></li>
   </ol>
-  <p class="ed lbl">Edição 0.1</p>
+  <p class="ed lbl">Edição 0.2</p>
 </nav>
 
 <main>
@@ -519,7 +543,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
   <h1>Livro da marca</h1>
   <p class="stmt">Eliria liga ocasiões e joias exclusivas. Este livro diz como a marca é usada, para que qualquer pessoa que faça algo em seu nome acerte da primeira vez.</p>
   <dl class="fields">
-    <div><dt>Edição</dt><dd>0.1</dd></div>
+    <div><dt>Edição</dt><dd>0.2</dd></div>
     <div><dt>Data</dt><dd>20 de novembro de 2026</dd></div>
     <div><dt>Marca</dt><dd>Eliria</dd></div>
     <div><dt>Feito por</dt><dd>Arvorealta</dd></div>
@@ -536,9 +560,9 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
     <div class="block" style="margin-top:0"><span class="lbl">Como</span><p>Ligando gestos de reconhecimento no tempo.</p></div>
   </div>
   <div class="four">
-    <div><span class="lbl">Regra 1 · Mensagem</span><span class="k">Uma linha, dita</span><p>O mar canta para o Altíssimo.</p></div>
-    <div><span class="lbl">Regra 2 · Cor · Sugestão</span><span class="k">Sombra, prata, ouro</span><p>Usadas a 70, 20 e 10 por cento.</p></div>
-    <div><span class="lbl">Regra 3 · Tipografia · Sugestão</span><span class="k">Três famílias, três funções</span><p>EB Garamond, Montserrat, Geist Mono.</p></div>
+    <div><span class="lbl">Regra 1 · Mensagem</span><span class="k">Uma linha, dita</span><p>Vincular ocasiões e joias exclusivas.</p></div>
+    <div><span class="lbl">Regra 2 · Cor</span><span class="k">Indigo, creme, camel</span><p>Usadas a 70, 20 e 10 por cento.</p></div>
+    <div><span class="lbl">Regra 3 · Tipografia</span><span class="k">Duas famílias, duas funções</span><p>Carla Sans e Open Sans.</p></div>
     <div><span class="lbl">Regra 4 · Cultura</span><span class="k">Ainda não</span><p>Vestuário, música e arte: a definir com a Eliria.</p></div>
   </div>
   <ol class="rules">
@@ -552,15 +576,11 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
 <section id="message">
   <div class="sh"><span class="sn">02</span><h2>A mensagem</h2></div>
   <p class="why">Uma linha que a marca existe para tornar verdade. Ela é dita, nunca explicada.</p>
-  <p class="line">O mar canta<br>para o Altíssimo.</p>
+  <p class="line">Vincular ocasiões<br>e joias exclusivas.</p>
   <div class="lines">
     <div><span class="lbl">Em uma frase</span><span class="say">Diferenciamos ocasiões com alta classe, ligando gestos de reconhecimento no tempo.</span></div>
-    <div><span class="lbl">Em uma linha</span><span class="say">Vincular ocasiões e joias exclusivas.</span></div>
   </div>
-  <div class="two">
-    <div class="block"><span class="lbl">Thalla</span><p>Do grego <em>thalassa</em>, o mar: infinito, continuidade e mistério. <em>Thallo</em> quer dizer «eu irei».</p></div>
-    <div class="block"><span class="lbl">Eliria</span><p>De <em>Eli</em>, raiz hebraica para «ascendido» ou «meu Deus», e de <em>lyrikos</em>, a poesia feita para ser cantada com a lira.</p></div>
-  </div>
+  <div class="block"><span class="lbl">O nome · Eliria</span><p>De <em>Eli</em>, raiz hebraica para «ascendido» ou «meu Deus», e de <em>lyrikos</em>, a poesia feita para ser cantada com a lira.</p></div>
   <div class="versus">
     <div>Legado</div><div>não tendência</div>
     <div>Reconhecimento</div><div>não promoção</div>
@@ -579,7 +599,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
   <div class="sh"><span class="sn">03</span><h2>A marca</h2></div>
   <p class="why">O símbolo em ouro é a assinatura. Aparece uma vez por superfície, em bom tamanho, e nunca é redesenhado.</p>
   <div class="marks">
-    <div class="tile t-ink"><img class="fan" src="img/eliria-mark-1-600.webp" alt="O símbolo em ouro sobre sombra" width="600" height="282"><span class="lbl">A marca · símbolo em ouro</span></div>
+    <div class="tile t-ink"><img class="fan" src="img/eliria-mark-1-600.webp" alt="O símbolo em ouro sobre indigo" width="600" height="282"><span class="lbl">A marca · símbolo em ouro</span></div>
     <div class="tile t-paper"><span class="wordmark">ainda não</span><span class="lbl">O nome · desenhado, a fornecer</span></div>
   </div>
 
@@ -635,11 +655,11 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
     <p class="note">Abaixo de 120 px na tela, ou 25 mm no papel, o fio de prata some e o brilho vira mancha. Nesses tamanhos vai o símbolo em uma cor, que ainda não existe.</p>
   </div>
 
-  <div class="block"><span class="lbl">Sobre as três cores · Sugestão</span>
+  <div class="block"><span class="lbl">Sobre as cores da marca</span>
     <div class="grounds">
-      <div class="tile" style="background:#300E02"><img class="fan" src="img/eliria-mark-1-600.webp" alt="" width="600" height="282"><span class="lbl">Sombra</span></div>
-      <div class="tile" style="background:#B4B1A4"><img class="fan" src="img/eliria-mark-1-600.webp" alt="" width="600" height="282"><span class="lbl" style="color:rgba(48,14,2,.7)">Prata</span></div>
-      <div class="tile" style="background:#FFFFFF;box-shadow:inset 0 0 0 1px var(--rule)"><img class="fan" src="img/eliria-mark-1-600.webp" alt="" width="600" height="282"><span class="lbl" style="color:rgba(48,14,2,.6)">Branco</span></div>
+      <div class="tile" style="background:#0E1834"><img class="fan" src="img/eliria-mark-1-600.webp" alt="" width="600" height="282"><span class="lbl">Indigo</span></div>
+      <div class="tile" style="background:#EFDBC0"><img class="fan" src="img/eliria-mark-1-600.webp" alt="" width="600" height="282"><span class="lbl" style="color:rgba(14,24,52,.7)">Creme</span></div>
+      <div class="tile" style="background:#FFFFFF;box-shadow:inset 0 0 0 1px var(--rule)"><img class="fan" src="img/eliria-mark-1-600.webp" alt="" width="600" height="282"><span class="lbl" style="color:rgba(14,24,52,.6)">Branco</span></div>
     </div>
   </div>
 
@@ -649,7 +669,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
       <figure><div class="tile t-ink x-stretch"><img class="fan" src="img/eliria-mark-1-600.webp" alt="" width="600" height="282"></div><figcaption>Esticada ou achatada</figcaption></figure>
       <figure><div class="tile t-ink x-hue"><img class="fan" src="img/eliria-mark-1-600.webp" alt="" width="600" height="282"></div><figcaption>Com outra cor</figcaption></figure>
       <figure><div class="tile t-ink x-fx"><img class="fan" src="img/eliria-mark-1-600.webp" alt="" width="600" height="282"></div><figcaption>Brilho, sombra, efeitos</figcaption></figure>
-      <figure><div class="tile" style="background:#A77448"><img class="fan" src="img/eliria-mark-1-600.webp" alt="" width="600" height="282"></div><figcaption>Sobre um fundo do mesmo tom</figcaption></figure>
+      <figure><div class="tile" style="background:#8E7657"><img class="fan" src="img/eliria-mark-1-600.webp" alt="" width="600" height="282"></div><figcaption>Sobre um fundo do mesmo tom</figcaption></figure>
       <figure><div class="tile t-ink x-rot"><img class="fan" src="img/eliria-mark-1-600.webp" alt="" width="600" height="282"></div><figcaption>Girada</figcaption></figure>
     </div>
   </div>
@@ -658,16 +678,16 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
 <!-- 04 ───────────────────────────────────────────── -->
 <section id="colour">
   <div class="sh"><span class="sn">04</span><h2>Cor</h2></div>
-  <p class="why">Três cores lidas no próprio símbolo, numa proporção fixa. Sugestão do estúdio: os valores saem do arquivo novo da marca; a escolha final é da Eliria.</p>
-  <div class="prop" role="img" aria-label="Sombra 70 por cento, prata 20 por cento, ouro 10 por cento">
-    <div style="background:#300E02;color:#B4B1A4"><b>Sombra</b><span>70</span></div>
-    <div style="background:#B4B1A4;color:#300E02"><b>Prata</b><span>20</span></div>
-    <div style="background:#A77448;color:#300E02"><b>Ouro</b><span>10</span></div>
+  <p class="why">Três cores numa proporção fixa, escolhidas entre as seis da paleta da Eliria. O verde sacramento sai porque, ao lado do indigo, mede 1,04:1: dois escuros fazendo o mesmo trabalho. O teal e o rosé saem porque são tons médios que não carregam texto.</p>
+  <div class="prop" role="img" aria-label="Indigo 70 por cento, creme 20 por cento, camel 10 por cento">
+    <div style="background:#0E1834;color:#EFDBC0"><b>Indigo</b><span>70</span></div>
+    <div style="background:#EFDBC0;color:#0E1834"><b>Creme</b><span>20</span></div>
+    <div style="background:#8E7657;color:#0E1834"><b>Camel</b><span>10</span></div>
   </div>
   <div class="sw" style="grid-template-columns:repeat(3,minmax(0,1fr))">
-    <div><div class="c" style="background:#300E02"></div><h3>Sombra</h3><p>A sombra da lâmina escura. O fundo, e o texto sobre prata ou branco.</p><button class="copy" data-v="#300E02">#300E02</button></div>
-    <div><div class="c" style="background:#B4B1A4"></div><h3>Prata</h3><p>O fio entre as lâminas. O segundo fundo, e o texto sobre sombra, a 8:1.</p><button class="copy" data-v="#B4B1A4">#B4B1A4</button></div>
-    <div><div class="c" style="background:#A77448"></div><h3>Ouro</h3><p>O tom médio do metal, para desenhos chapados. Sobre sombra, só títulos grandes.</p><button class="copy" data-v="#A77448">#A77448</button></div>
+    <div><div class="c" style="background:#0E1834"></div><h3>Indigo</h3><p>O fundo, e o texto sobre creme ou branco. Azul é o complemento do ouro: o símbolo acende sobre ele. RGB 14 24 52 · CMYK 95 86 48 61.</p><button class="copy" data-v="#0E1834">#0E1834</button></div>
+    <div><div class="c" style="background:#EFDBC0"></div><h3>Creme</h3><p>O segundo fundo, e o texto sobre indigo, a 13:1. Valor lido da paleta; o CMYK está a definir.</p><button class="copy" data-v="#EFDBC0">#EFDBC0</button></div>
+    <div><div class="c" style="background:#8E7657"></div><h3>Camel</h3><p>A cor chapada do ouro: filetes, detalhes, o símbolo em uma cor. RGB 142 118 87 · CMYK 41 47 59 15.</p><button class="copy" data-v="#8E7657">#8E7657</button></div>
   </div>
   <div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>ASE</b>Paleta<i>Ainda não</i></span></div>
 
@@ -676,36 +696,37 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
       <div class="pick">
         <div><span class="lbl">Texto</span><div class="row" id="ckT"></div></div>
         <div><span class="lbl">Fundo</span><div class="row" id="ckG"></div></div>
-        <div class="verdict" aria-live="polite"><b id="ckR">8.2:1</b><span id="ckV">Serve para qualquer texto.</span></div>
+        <div class="verdict" aria-live="polite"><b id="ckR">13:1</b><span id="ckV">Serve para qualquer texto.</span></div>
       </div>
-      <div class="preview" id="ckP"><span class="pv-l">O mar canta para o Altíssimo.</span><span class="pv-s">Um texto pequeno, a catorze pixels, lê assim.</span></div>
+      <div class="preview" id="ckP"><span class="pv-l">Vincular ocasiões e joias exclusivas.</span><span class="pv-s">Um texto pequeno, a catorze pixels, lê assim.</span></div>
     </div>
   </div>
   <ol class="rules">
-    <li><span><b>Mantenha a proporção.</b> Se o ouro começa a parecer tema, há ouro demais.</span></li>
-    <li><span><b>O ouro chapado nunca é texto sobre prata.</b> Mede 1,9:1 ali; sobre sombra mede 4,4:1, o bastante só para títulos grandes.</span></li>
-    <li><span><b>O metal é o símbolo.</b> O ouro renderizado não vira cor de fundo, de faixa ou de texto.</span></li>
-    <li><span><b>Impresso, sobre branco.</b> Sombra sobre branco mede 17,7:1.</span></li>
+    <li><span><b>Mantenha a proporção.</b> Se o camel começa a parecer tema, há camel demais.</span></li>
+    <li><span><b>Camel nunca é texto pequeno.</b> Mede 3,2:1 sobre creme e 4,3:1 sobre branco; sobre indigo mede 4,1:1, o bastante só para títulos grandes.</span></li>
+    <li><span><b>O metal é o símbolo.</b> O ouro renderizado não vira cor de fundo, de faixa ou de texto; quando a peça pede uma cor chapada, é o camel.</span></li>
+    <li><span><b>Impresso, sobre branco ou creme.</b> Indigo sobre branco mede 17,5:1, sobre creme 13,0:1.</span></li>
   </ol>
 </section>
 
 <!-- 05 ───────────────────────────────────────────── -->
 <section id="type">
   <div class="sh"><span class="sn">05</span><h2>Tipografia</h2></div>
-  <p class="why">Três famílias, uma função cada. Sugestão do estúdio: as mesmas famílias deste livro, todas gratuitas e de licença aberta, para que qualquer pessoa possa instalá-las.</p>
+  <p class="why">Duas famílias, uma função cada, as duas da pasta <span class="mono">03 Type</span>. Carla Sans dá o nome e os títulos; Open Sans faz todo o resto. A Playfair Display sai: era uma segunda voz de título, e é fraca em tamanhos pequenos, em certificados e na gravação.</p>
   <div class="faces">
-    <div class="face"><div class="who"><b>EB Garamond</b><span>Títulos e nomes de coleções</span><div class="dls"><a class="dl" href="https://fonts.google.com/specimen/EB+Garamond" target="_blank" rel="noopener"><b>Fonte</b>Google Fonts</a></div></div><p class="sp-d">O mar canta para o Altíssimo.</p></div>
-    <div class="face"><div class="who"><b>Montserrat</b><span>Tudo o que é lido</span><div class="dls"><a class="dl" href="https://fonts.google.com/specimen/Montserrat" target="_blank" rel="noopener"><b>Fonte</b>Google Fonts</a></div></div><p class="sp-t">Cada peça é gravada com o ano e as iniciais de quem a recebe.</p></div>
-    <div class="face"><div class="who"><b>Geist Mono</b><span>Rótulos e números</span><div class="dls"><a class="dl" href="https://fonts.google.com/specimen/Geist+Mono" target="_blank" rel="noopener"><b>Fonte</b>Google Fonts</a></div></div><p class="sp-m">COLEÇÃO 2026 · Nº 007</p></div>
+    <div class="face"><div class="who"><b>Carla Sans</b><span>O nome e os títulos, sempre em caixa alta</span><div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>Fonte</b><i>A confirmar</i></span></div></div><p class="sp-d"><img class="carla" src="img/carla-colecao-1.svg" alt="COLEÇÃO OFICIAL 2026" width="12701" height="1190"></p></div>
+    <div class="face"><div class="who"><b>Open Sans</b><span>Tudo o que é lido, e a largura condensada para números</span><div class="dls"><a class="dl" href="https://fonts.google.com/specimen/Open+Sans" target="_blank" rel="noopener"><b>Fonte</b>Google Fonts</a></div></div><div><p class="sp-t os">Cada peça é gravada com o ano e as iniciais de quem a recebe.</p><p class="sp-m osc">Nº 007 / 120 • Coleção 2026</p></div></div>
   </div>
   <div class="minis">
-    <div class="mini"><span class="lbl">Ênfase em itálico, nunca em cor</span><span class="ex">o mar <em>canta</em>.</span></div>
-    <div class="mini"><span class="lbl">Quebre os títulos à mão</span><span class="ex">O mar canta<br>para o Altíssimo.</span></div>
-    <div class="mini"><span class="lbl">Ano e número no serifado</span><span class="ex">2026 · Nº 007</span></div>
-    <div class="mini"><span class="lbl">Em mono, só rótulos</span><span class="ex m">COLEÇÃO 2026</span></div>
+    <div class="mini"><span class="lbl">Carla Sans só em caixa alta</span><span class="ex"><img class="carla" src="img/carla-edicao-1.svg" alt="EDIÇÃO 2026" width="7997" height="1190"></span></div>
+    <div class="mini"><span class="lbl">Ligaduras desligadas, e ligadas</span><span class="ex lig"><img class="carla" src="img/carla-carla-off-1.svg" alt="CARLA, sem ligaduras" width="3435" height="762"><img class="carla" src="img/carla-carla-on-1.svg" alt="CARLA, com ligaduras" width="3349" height="762"></span></div>
+    <div class="mini"><span class="lbl">Ênfase em itálico, no Open Sans</span><span class="ex os">gravada com <em>o ano</em>.</span></div>
+    <div class="mini"><span class="lbl">Números no Open Sans condensado</span><span class="ex osc">Nº 007 / 120</span></div>
   </div>
   <ol class="rules">
-    <li><span><b>Rótulos em caixa alta, com espaço largo.</b> Uma frase nunca.</span></li>
+    <li><span><b>Carla Sans sempre em caixa alta.</b> As minúsculas dela são as próprias maiúsculas, sem os acentos: «Coleção» digitado assim sai COLECAO.</span></li>
+    <li><span><b>Ligaduras desligadas por padrão.</b> Com elas ligadas, CA, LA, RA, GA e outros pares viram um desenho só. Use de propósito, num título, nunca por acaso.</span></li>
+    <li><span><b>Carla Sans não tem «·», «–» nem «º».</b> O separador é «•»; o resto vai em Open Sans.</span></li>
     <li><span><b>Cada quebra de linha num título é escolhida.</b> Não deixe um título quebrar sozinho.</span></li>
     <li><span><b>O nome Eliria é desenhado, nunca digitado.</b> Até o desenho chegar, use o símbolo sozinho.</span></li>
   </ol>
@@ -764,7 +785,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
 <!-- 07 ───────────────────────────────────────────── -->
 <section id="documents">
   <div class="sh"><span class="sn">07</span><h2>Documentos</h2></div>
-  <p class="why">Um sistema para tudo o que a Eliria entrega em papel: carta, convite, certificado e cartão, nas três famílias. Toda página é feita sobre a mesma grade, para que o leitor a aprenda uma vez. Sugestão do estúdio; os textos dos desenhos são exemplos.</p>
+  <p class="why">Um sistema para tudo o que a Eliria entrega em papel: carta, convite, certificado e cartão, nas duas famílias. Toda página é feita sobre a mesma grade, para que o leitor a aprenda uma vez. Sugestão do estúdio; os textos dos desenhos são exemplos.</p>
 
   <div class="bar">
     <div class="seg" role="group" aria-label="Página" id="pgPick"><button type="button" aria-pressed="true" data-p="letter">Carta</button><button type="button" aria-pressed="false" data-p="cover">Convite</button><button type="button" aria-pressed="false" data-p="page">Certificado</button><button type="button" aria-pressed="false" data-p="card">Cartão</button></div>
@@ -791,12 +812,13 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
     <div class="tblw"><table class="tbl">
       <thead><tr><th>Função</th><th>Família</th><th>A4</th><th>Uso</th></tr></thead>
       <tbody>
-        <tr><td>Título</td><td>EB Garamond</td><td class="m">40 / 45 pt</td><td>Uma vez, na capa ou no convite</td></tr>
-        <tr><td>Cabeçalho</td><td>EB Garamond</td><td class="m">22 / 30 pt</td><td>Abre uma seção. Um número num campo também</td></tr>
-        <tr><td>Abertura</td><td>EB Garamond</td><td class="m">15 / 20 pt</td><td>A frase sob um título</td></tr>
-        <tr><td>Texto</td><td>Montserrat</td><td class="m">10 / 15 pt</td><td>Tudo o que é lido</td></tr>
-        <tr><td>Nota</td><td>Montserrat</td><td class="m">8 / 12 pt</td><td>Legendas, notas, fontes</td></tr>
-        <tr><td>Rótulo</td><td>Geist Mono, caixa alta</td><td class="m">8 / 15 pt</td><td>Achado, não lido: nomes de campos, rodapé</td></tr>
+        <tr><td>Título</td><td>Carla Sans, caixa alta</td><td class="m">40 / 45 pt</td><td>Uma vez, no convite ou na capa</td></tr>
+        <tr><td>Cabeçalho</td><td>Carla Sans, caixa alta</td><td class="m">22 / 30 pt</td><td>Abre uma seção</td></tr>
+        <tr><td>Abertura</td><td>Open Sans Light</td><td class="m">15 / 20 pt</td><td>A frase sob um título</td></tr>
+        <tr><td>Texto</td><td>Open Sans</td><td class="m">10 / 15 pt</td><td>Tudo o que é lido</td></tr>
+        <tr><td>Nota</td><td>Open Sans</td><td class="m">8 / 12 pt</td><td>Legendas, notas, fontes</td></tr>
+        <tr><td>Rótulo</td><td>Open Sans SemiBold, caixa alta</td><td class="m">8 / 15 pt</td><td>Achado, não lido: nomes de campos, rodapé</td></tr>
+        <tr><td>Número</td><td>Open Sans Condensed</td><td class="m">22 / 30 pt</td><td>O número da peça e o ano, nos campos</td></tr>
       </tbody>
     </table></div>
   </div>
@@ -832,7 +854,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
   <div class="sh"><span class="sn">09</span><h2>Imagem e movimento</h2></div>
   <p class="why">A peça fotografada, mostrada grande. Luz baixa e quente, fundo escuro, a joia em primeiro plano: o ouro precisa de sombra para brilhar. Sugestão do estúdio; as fotografias ainda não existem.</p>
   <div class="imgs">
-    <figure><div class="tile t-ink" style="height:clamp(150px,21vw,290px)"><img class="fan" src="img/eliria-mark-1-600.webp" alt="O símbolo em ouro sobre sombra" width="600" height="282"></div><figcaption>O metal sobre a sombra: a regra de toda foto.</figcaption></figure>
+    <figure><div class="tile t-ink" style="height:clamp(150px,21vw,290px)"><img class="fan" src="img/eliria-mark-1-600.webp" alt="O símbolo em ouro sobre indigo" width="600" height="282"></div><figcaption>O metal sobre a sombra: a regra de toda foto.</figcaption></figure>
     <figure><div class="tile" style="height:clamp(150px,21vw,290px);background:var(--panel)"><span class="lbl" style="position:static">Ainda não</span></div><figcaption>A peça, de perto.</figcaption><div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>JPG</b>Peça<i>Ainda não</i></span></div></figure>
     <figure><div class="tile" style="height:clamp(150px,21vw,290px);background:var(--panel)"><span class="lbl" style="position:static">Ainda não</span></div><figcaption>A ocasião: a peça na mão de quem a recebe.</figcaption><div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>JPG</b>Ocasião<i>Ainda não</i></span></div></figure>
   </div>
@@ -860,7 +882,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
   </div>
 
   <div class="comp"><span class="lbl">Abertura de seção</span>
-    <div class="stage"><div class="opener"><span class="eb">Coleção oficial</span><span class="hd">Cada uma, única.</span><span class="ld">Gravada com o ano e as iniciais de quem a recebe.</span></div></div>
+    <div class="stage"><div class="opener"><span class="eb">Coleção oficial</span><span class="hd"><img class="carla" src="img/carla-unica-1.svg" alt="CADA UMA, ÚNICA." width="9525" height="1190"></span><span class="ld">Gravada com o ano e as iniciais de quem a recebe.</span></div></div>
   </div>
 </section>
 
@@ -871,14 +893,14 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
   <div class="apps">
     <div class="app"><div class="th" style="background:var(--b-ink)"><img src="img/eliria-mark-1-600.webp" alt="O símbolo em ouro" width="600" height="282" style="width:58%;height:auto;object-fit:contain"></div><h3>A peça</h3>
       <ul><li>O símbolo em uma cor, gravado no metal.</li><li>O ano e as iniciais de quem recebe, ao lado.</li></ul></div>
-    <div class="app"><div class="th" style="background:var(--b-paper)"><img src="img/eliria-mark-1-600.webp" alt="O símbolo em ouro sobre prata" width="600" height="282" style="width:44%;height:auto;object-fit:contain"></div><h3>Estojo</h3>
-      <ul><li>Sombra por fora, o símbolo em relevo seco na tampa.</li><li>Nada impresso além disso.</li></ul></div>
+    <div class="app"><div class="th" style="background:var(--b-paper)"><img src="img/eliria-mark-1-600.webp" alt="O símbolo em ouro sobre creme" width="600" height="282" style="width:44%;height:auto;object-fit:contain"></div><h3>Estojo</h3>
+      <ul><li>Indigo por fora, o símbolo em relevo seco na tampa.</li><li>Nada impresso além disso.</li></ul></div>
     <div class="app"><div class="th" data-mini="page"></div><h3>Certificado</h3>
       <ul><li>A4 na grade dos documentos.</li><li>O número da peça e o ano como campos, nunca numa frase.</li></ul></div>
     <div class="app"><div class="th" data-mini="cover"></div><h3>Convite</h3>
-      <ul><li>A marca no alto, o nome da ocasião em EB Garamond.</li><li>Impresso sobre branco ou sobre prata.</li></ul></div>
-    <div class="app"><div class="th" style="background:var(--b-ink)"><div style="width:42%;aspect-ratio:1/1;border-radius:50%;background:#300E02;box-shadow:inset 0 0 0 1px rgba(239,234,225,.25);display:grid;place-items:center"><img src="img/eliria-mark-1-600.webp" alt="" width="600" height="282" style="width:72%;height:auto;object-fit:contain"></div></div><h3>Redes sociais</h3>
-      <ul><li>Foto de perfil: o símbolo sobre sombra, centrado no círculo.</li><li>Cinco formatos, na tabela abaixo.</li></ul><div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>PNG</b>Redes<i>Ainda não</i></span></div></div>
+      <ul><li>A marca no alto, o nome da ocasião em Carla Sans, caixa alta.</li><li>Impresso sobre branco ou sobre creme.</li></ul></div>
+    <div class="app"><div class="th" style="background:var(--b-ink)"><div style="width:42%;aspect-ratio:1/1;border-radius:50%;background:#0E1834;box-shadow:inset 0 0 0 1px rgba(239,234,225,.25);display:grid;place-items:center"><img src="img/eliria-mark-1-600.webp" alt="" width="600" height="282" style="width:72%;height:auto;object-fit:contain"></div></div><h3>Redes sociais</h3>
+      <ul><li>Foto de perfil: o símbolo sobre indigo, centrado no círculo.</li><li>Cinco formatos, na tabela abaixo.</li></ul><div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>PNG</b>Redes<i>Ainda não</i></span></div></div>
     <div class="app"><div class="th sig"><span class="n">Nome Sobrenome</span><span class="w">ELIRIA</span><span>contato · e-mail</span></div><h3>Assinatura de e-mail</h3>
       <ul><li>Só texto: imagens na assinatura são bloqueadas pela maioria dos programas de e-mail.</li><li>Nome, marca, uma linha de contato.</li></ul><div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>HTML</b>Assinatura<i>Ainda não</i></span></div></div>
   </div>
@@ -904,9 +926,8 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
   <div class="tblw"><table class="tbl">
     <thead><tr><th>Família</th><th>Uso</th><th>Licença</th><th>Onde</th></tr></thead>
     <tbody>
-      <tr><td>EB Garamond</td><td>Títulos, coleções</td><td>Open Font Licence</td><td><a href="https://fonts.google.com/specimen/EB+Garamond" target="_blank" rel="noopener">Google Fonts</a></td></tr>
-      <tr><td>Montserrat</td><td>Texto corrido</td><td>Open Font Licence</td><td><a href="https://fonts.google.com/specimen/Montserrat" target="_blank" rel="noopener">Google Fonts</a></td></tr>
-      <tr><td>Geist Mono</td><td>Rótulos, números</td><td>Open Font Licence</td><td><a href="https://fonts.google.com/specimen/Geist+Mono" target="_blank" rel="noopener">Google Fonts</a></td></tr>
+      <tr><td>Carla Sans</td><td>Nome, títulos</td><td>A confirmar: os arquivos não trazem licença</td><td>Drive, <span class="mono">03 Type</span></td></tr>
+      <tr><td>Open Sans</td><td>Texto, rótulos, números</td><td>Open Font Licence</td><td><a href="https://fonts.google.com/specimen/Open+Sans" target="_blank" rel="noopener">Google Fonts</a></td></tr>
     </tbody>
   </table></div>
   <div class="block"><span class="lbl">A pasta no Drive</span>
@@ -916,13 +937,13 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
 │  ├─ Master/                    <span class="f">eliria_mark_master.afdesign</span>
 │  │                             <span class="f">eliria_mark_primary_gold_4800w.png</span>
 │  ├─ Screen/                    <span class="f">eliria_mark_primary_gold_{600w,1200w,2400w}.png</span>
-│  │                             <span class="f">eliria_mark_symbol_{sombra,prata,ouro}.svg</span>
-│  │                             <span class="f">eliria_mark_wordmark_{sombra,prata}.svg</span>
-│  │                             <span class="f">eliria_mark_lockup_{sombra,prata}.svg</span>
-│  │                             <span class="f">eliria_mark_icon_sombra_{32x32,180x180,512x512}.png</span>
-│  └─ Print/                     <span class="f">eliria_mark_{symbol,lockup}_sombra_cmyk.pdf</span>
+│  │                             <span class="f">eliria_mark_symbol_{indigo,creme,camel}.svg</span>
+│  │                             <span class="f">eliria_mark_wordmark_{indigo,creme}.svg</span>
+│  │                             <span class="f">eliria_mark_lockup_{indigo,creme}.svg</span>
+│  │                             <span class="f">eliria_mark_icon_indigo_{32x32,180x180,512x512}.png</span>
+│  └─ Print/                     <span class="f">eliria_mark_{symbol,lockup}_indigo_cmyk.pdf</span>
 ├─ 02 Colour/                    <span class="f">eliria_colour_palette.ase</span>
-├─ 03 Type/                      <span class="f">eliria_type_faces.zip</span>
+├─ 03 Type/                      <span class="f">eliria_type_{carla-sans,open-sans}.zip</span>
 ├─ 04 Imagery/
 │  ├─ Grounds/
 │  └─ Photography/               <span class="f">eliria_photo_{assunto}_3840w.jpg</span>
@@ -930,7 +951,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
 ├─ 06 Applications/              <span class="f">eliria_card_{front-emboss,back}_85x45mm.pdf</span>
 │                                <span class="f">eliria_social_{link,linkedin-banner,square,portrait,story}_*.png</span>
 └─ 99 Archive/                   <span class="f">o material antigo: não usar</span></div>
-    <p class="note">As pastas seguem a ordem deste livro. Hoje só existem os arquivos do símbolo em ouro, em <span class="mono">01 Mark</span>; o resto é o que cada pasta vai receber. O que está em <span class="mono">99 Archive</span> não vale como marca. Uma chave é abreviação de um arquivo por palavra: <span class="mono">_{sombra,prata}.svg</span> são dois arquivos.</p>
+    <p class="note">As pastas seguem a ordem deste livro. Hoje só existem os arquivos do símbolo em ouro, em <span class="mono">01 Mark</span>; o resto é o que cada pasta vai receber. O que está em <span class="mono">99 Archive</span> não vale como marca. Uma chave é abreviação de um arquivo por palavra: <span class="mono">_{indigo,creme}.svg</span> são dois arquivos.</p>
   </div>
 
   <div class="block"><span class="lbl">Como os arquivos se chamam</span>
@@ -941,7 +962,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
         <tr><td class="m">cliente</td><td>De quem é a marca</td><td class="m">eliria</td></tr>
         <tr><td class="m">peça</td><td>O que é</td><td class="m">mark · colour · type · photo · template · social · card</td></tr>
         <tr><td class="m">versão</td><td>Qual delas</td><td class="m">primary · symbol · lockup · wordmark · certificate</td></tr>
-        <tr><td class="m">cor</td><td>Qual cor, nas marcas. <span class="mono">gold</span> é só o metal renderizado; um desenho chapado leva uma cor da paleta. <span class="mono">cmyk</span> depois dela, para impressão</td><td class="m">gold · sombra · prata · ouro</td></tr>
+        <tr><td class="m">cor</td><td>Qual cor, nas marcas. <span class="mono">gold</span> é só o metal renderizado; um desenho chapado leva uma cor da paleta. <span class="mono">cmyk</span> depois dela, para impressão</td><td class="m">gold · indigo · creme · camel</td></tr>
         <tr><td class="m">tamanho</td><td>Na tela: a largura da imagem, ou os dois lados de um formato fixo. No impresso: o papel, ou milímetros com a unidade. Um vetor não leva</td><td class="m">1200w · 1080x1350 · a4 · 85x45mm</td></tr>
         <tr><td class="m">ext</td><td>O formato</td><td class="m">svg · png · webp · jpg · pdf · mp4 · afdesign · dotx · docx</td></tr>
       </tbody>
@@ -961,7 +982,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
         <label>Cliente<input id="nmC" value="Eliria" autocomplete="off"></label>
         <label>Peça<select id="nmA"><option>mark</option><option>colour</option><option>type</option><option>photo</option><option>template</option><option>social</option><option>card</option></select></label>
         <label>Versão<input id="nmV" value="primary" autocomplete="off"></label>
-        <label>Cor<select id="nmK"><option value="">nenhuma</option><option selected>gold</option><option>sombra</option><option>prata</option><option>ouro</option></select></label>
+        <label>Cor<select id="nmK"><option value="">nenhuma</option><option selected>gold</option><option>indigo</option><option>creme</option><option>camel</option></select></label>
         <label>Para<select id="nmP"><option value="">Tela</option><option value="cmyk">Impressão</option></select></label>
         <label>Tamanho<input id="nmS" value="1200w" autocomplete="off"></label>
         <label>Formato<select id="nmF"><option>png</option><option>webp</option><option>jpg</option><option>svg</option><option>pdf</option><option>mp4</option><option>afdesign</option><option>dotx</option><option>docx</option></select></label>
@@ -979,7 +1000,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
         <tr><td>Símbolo, nome e assinatura</td><td class="m">.afdesign</td><td>SVG; PDF para impressão</td><td class="m">qualquer</td><td>sRGB na tela, CMYK no PDF de impressão</td></tr>
         <tr><td>Ícone</td><td>Do símbolo</td><td>PNG, quadrado</td><td class="m">32 · 180 · 512</td><td>sRGB</td></tr>
         <tr><td>Cor</td><td>Um arquivo de texto com os valores</td><td>.ase, que o Affinity e a Adobe importam</td><td></td><td>HEX e RGB</td></tr>
-        <tr><td>Tipos</td><td>Google Fonts</td><td>Os arquivos das fontes, num zip, com a licença</td><td></td><td>A Open Font Licence permite compartilhar</td></tr>
+        <tr><td>Tipos</td><td>Os arquivos da marca, em 03 Type</td><td>Um zip por família</td><td></td><td>Open Sans: Open Font Licence. Carla Sans: licença a confirmar antes de enviar a terceiros</td></tr>
         <tr><td>Fotografia</td><td>RAW ou TIFF de 16 bits</td><td>JPG a qualidade 90; WebP para a web</td><td class="m">3840w; 720w · 1280w · 1920w</td><td>sRGB</td></tr>
         <tr><td>Documentos</td><td>Modelo do Word, <span class="mono">.dotx</span></td><td>DOCX para preencher; PDF a partir dele</td><td class="m">a4</td><td>As fontes instaladas ou embutidas no arquivo</td></tr>
         <tr><td>Redes</td><td class="m">.afdesign</td><td>PNG</td><td class="m">1200x630 · 1128x191 · 1080x1080 · 1080x1350 · 1080x1920</td><td>sRGB</td></tr>
@@ -993,6 +1014,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
   </div>
   <div class="block"><span class="lbl">Versões</span>
     <div class="tblw"><table class="tbl"><tbody>
+      <tr><td class="m">0.2</td><td>20 nov 2026</td><td>Só Eliria. Indigo, creme e camel; Carla Sans e Open Sans.</td></tr>
       <tr><td class="m">0.1</td><td>20 nov 2026</td><td>Refeito no modelo do livro da Arvorealta, só com os arquivos novos da marca.</td></tr>
     </tbody></table></div>
   </div>
@@ -1022,10 +1044,10 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
   }));
 
   /* the pairing checker computes WCAG contrast from the values */
-  const PAL=[["Sombra","#300E02"],["Prata","#B4B1A4"],["Ouro","#A77448"],["Branco","#FFFFFF"]];
+  const PAL=[["Indigo","#0E1834"],["Creme","#EFDBC0"],["Camel","#8E7657"],["Branco","#FFFFFF"]];
   const lum=h=>{const c=[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)/255).map(x=>x<=.03928?x/12.92:((x+.055)/1.055)**2.4);return .2126*c[0]+.7152*c[1]+.0722*c[2]};
   const ratio=(a,b)=>{const[x,y]=[lum(a),lum(b)].sort((p,q)=>q-p);return(x+.05)/(y+.05)};
-  let T="#B4B1A4",G="#300E02";
+  let T="#EFDBC0",G="#0E1834";
   function build(id,get,set){const row=$(id);PAL.forEach(([n,h])=>{const b=document.createElement("button");b.type="button";b.className="p";
     b.style.background=h;b.title=n;b.setAttribute("aria-label",n);b.setAttribute("aria-pressed",String(h===get()));
     b.addEventListener("click",()=>{set(h);$$("button",row).forEach(x=>x.setAttribute("aria-pressed",String(x===b)));draw()});row.append(b)})}
@@ -1054,6 +1076,8 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
   const L=n=>(20+n*5.2917).toFixed(3), GAP="margin-top:calc(var(--u) * 5.2917)";
   const MARK='<img src="img/eliria-mark-1-600.webp" alt="" width="600" height="282">';
   const OV='<div class="ov ov-g"></div><div class="ov ov-b"></div>';
+  /* Carla Sans is drawn as outlines; w is the line's width in em, s the size in units */
+  const CS=(x,y,s,slug,w,alt,asc=.717)=>B(x,(+y-asc*s).toFixed(3),(w*s).toFixed(3),"",`<img src="img/carla-${slug}-1.svg" alt="${alt}">`);
   const fld=(l,v,c="t-body w5")=>`<div><div class="t-lbl">${l}</div><div class="${c}">${v}</div></div>`;
   const PAGES={
     letter:{label:"Carta A4",html:
@@ -1070,14 +1094,14 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
     cover:{label:"Convite A4",html:
       B(20,20,44,"",MARK)+
       B(20,L(18),141,"t-lbl mk","Convite")+
-      B(20,L(19),141,"t-title","A entrega<br>da coleção 2026")+
+      CS(20,(+L(19)+13.117).toFixed(3),14.11,"entrega",5.783,"A ENTREGA")+CS(20,(+L(19)+28.992).toFixed(3),14.11,"da-colecao",9.265,"DA COLEÇÃO 2026",.98)+
       B(20,L(26),112,"t-lede","Uma noite para reconhecer quem chegou até aqui.")+
       B(20,L(42),170,"rl flds",fld("Para","Nome Sobrenome")+fld("Data","12 dez 2026")+fld("Hora","20h")+fld("Local","A confirmar"))+
       B(20,282.5,170,"t-lbl foot","<span>Convite · EL-V-001</span><span>1 de 1</span>")},
     page:{label:"Certificado A4",html:
       B(20,20,44,"",MARK)+
       B(20,L(14),39.5,"t-lbl mk","Certificado")+
-      B(78,L(14),112,"t-head","Coleção oficial 2026")+
+      CS(78,(+L(14)+7.4).toFixed(3),7.761,"colecao",12.701,"COLEÇÃO OFICIAL 2026",.98)+
       B(78,L(17),112,"t-body","<p>Esta peça foi gravada e entregue pela Eliria, e é única. O número e o ano abaixo são os mesmos gravados no metal.</p>")+
       B(78,L(22),112,"rl flds",fld("Peça","Nº 007","t-head")+fld("Ano","2026","t-head")+fld("Iniciais","N S","t-head"))+
       B(78,L(27),112,"",'<div class="trow t-lbl"><span>Item</span><span>Material</span><span>Ano</span></div><div class="trow t-body"><span>Peça</span><span>A confirmar</span><span>2026</span></div><div class="trow t-body"><span>Estojo</span><span>A confirmar</span><span>2026</span></div>')+
@@ -1089,7 +1113,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
     '<div class="pg card" role="img" aria-label="Frente do cartão, em escala: o símbolo em relevo seco sobre o papel">'+OV+
       C(22.5,13.09,40,"emb","<i></i>","height:calc(var(--u) * 18.82)")+'</div>'+
     '<div class="pg card" role="img" aria-label="Verso do cartão, em escala">'+OV+
-      C(6,6,73,"c-name","Nome Sobrenome")+C(6,12.6,73,"c-role","Função")+
+      CS(6,9.93,5.292,"nome",10.668,"NOME SOBRENOME",.742)+C(6,12.6,73,"c-role","Função")+
       C(6,28.4,73,"c-ct","telefone<br>e-mail<br>endereço")+'</div></div>';
   const pageEl=(k,mini)=>{if(k==="card")return CARD;const p=PAGES[k];return `<div class="pg" role="img" aria-label="${p.label}, em escala">${mini?"":OV}${p.html}</div>`};
   const desk=$("#desk");
