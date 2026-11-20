@@ -4088,6 +4088,28 @@ it yet**: `blue` is `#101938` and `sand` is `#F3DABD`, so the book shows
 them as supplied and names `slate` and `leaf` as the file words for the
 new colours. CMYK for all three new values is open.
 
+**The files match it now, and that last sentence is history.** The owner
+re-exported the symbol, the wordmark and the lockup as `ardosia` and
+`sand`, drawn in exactly `rgb(37,47,55)` and `rgb(216,204,189)`, read off
+the files, and a new grass icon; the `blue` files are gone from Drive. The
+book's pictures took new names (`-ardosia-1`, `-sand-2`, `grass-2`) and the
+buttons point at the new Drive items. The file words are `ardosia` and
+`folha`, not `slate` and `leaf`.
+
+**The lockup's name sits right of centre on purpose, and the book says
+so** under the `Assinatura` card. Measured on the file: the word spans
+from where the two blades meet to the inner curve of the right bracket,
+leaving the thin left point out, so its centre is 190 of 2355 units right
+of the symbol's, 8 per cent of the symbol's width. **Do not recentre it.**
+
+**The version tiles carry no padding.** The tile's own padding pushed
+every picture down inside a fixed 16:9 box, up to 56 px off centre at
+1440; only the wordmark, short enough to absorb it, sat true. Now each
+picture is centred in its box, and the icon fills the box with
+`object-fit:cover`, cut top and bottom about its centre. **An inherited
+rule gives a classless tile image a 32 px top padding**, so the icon's
+own rule sets `padding:0` as well.
+
 ## The pricing ladder
 
 **There are two ladders on this domain and this section is the euro one.**

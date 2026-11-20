@@ -510,6 +510,10 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
 .pg.card,.pg.card .emb i{background:#D8CCBD}
 .grounds.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
 .sw.s4{grid-template-columns:repeat(4,minmax(0,1fr))}
+/* version tiles: no padding, so every picture sits in the true centre of its 16:9 box;
+   the icon fills the box and is cut top and bottom, about its centre */
+.ver .tile{padding:0}
+.ver .tile img.cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;padding:0;margin:0}
 @media (max-width:820px){.grounds.g4,.sw.s4{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 </head>
@@ -532,7 +536,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
     <li><a href="#applications"><span class="nn">11</span>Aplicações</a></li>
     <li><a href="#files"><span class="nn">12</span>Arquivos e Drive</a></li>
   </ol>
-  <p class="ed lbl">Edição 0.5</p>
+  <p class="ed lbl">Edição 0.6</p>
 </nav>
 
 <main>
@@ -541,7 +545,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
   <div class="hero">
     <div class="lk" role="img" aria-label="Eliria: o símbolo em ouro sobre o nome">
       <img class="fan" src="img/eliria-mark-1-1200.webp" alt="" width="1200" height="565">
-      <img class="wmk" src="img/eliria-wordmark-sand-1.svg" alt="" width="3032" height="246">
+      <img class="wmk" src="img/eliria-wordmark-sand-2.svg" alt="" width="3032" height="246">
     </div>
   </div>
   <h1>Livro da marca</h1>
@@ -601,7 +605,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
   <p class="why">O símbolo em ouro é a assinatura. Aparece uma vez por superfície, em bom tamanho, e nunca é redesenhado.</p>
   <div class="marks">
     <div class="tile t-ink"><img class="fan" src="img/eliria-mark-1-600.webp" alt="O símbolo em ouro sobre ardósia" width="600" height="282"><span class="lbl">A marca · símbolo em ouro</span></div>
-    <div class="tile t-paper"><img class="wmi" src="img/eliria-wordmark-blue-1.svg" alt="O nome: ELIRIA em capitulares espaçadas" width="3032" height="246"><span class="lbl">O nome · capitulares espaçadas, desenhado</span></div>
+    <div class="tile t-paper"><img class="wmi" src="img/eliria-wordmark-ardosia-1.svg" alt="O nome: ELIRIA em capitulares espaçadas" width="3032" height="246"><span class="lbl">O nome · capitulares espaçadas, desenhado</span></div>
   </div>
 
   <div class="block"><span class="lbl">Como é feita</span>
@@ -629,18 +633,18 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
       <div class="ver"><div class="tile t-ink"><img class="fan" src="img/eliria-mark-1-600.webp" alt="" width="600" height="282"></div>
         <div class="tx"><h3>Principal</h3><p>O símbolo em ouro, como foi renderizado. A assinatura: capas, estojos, o fecho de uma página.</p>
           <dl><dt>Arquivos</dt><dd>PNG, transparente</dd></dl><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1iYOc10drJN6dpQkN9qmjNnPgGF4ccxP5/view" target="_blank" rel="noopener"><b>PNG</b>600w<i>134 KB</i></a><a class="dl" href="https://drive.google.com/file/d/10I4jVpgnQDW5TfAC8Ks58X9UZJy-2u0l/view" target="_blank" rel="noopener"><b>PNG</b>1200w<i>641 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1aHuGfL7El87G_6Kk6OnYrVQuui_twSY7/view" target="_blank" rel="noopener"><b>PNG</b>2400w<i>1.8 MB</i></a></div></div></div>
-      <div class="ver"><div class="tile t-paper"><img class="wmi" src="img/eliria-wordmark-blue-1.svg" alt="" width="3032" height="246"></div>
+      <div class="ver"><div class="tile t-paper"><img class="wmi" src="img/eliria-wordmark-ardosia-1.svg" alt="" width="3032" height="246"></div>
         <div class="tx"><h3>Nome</h3><p>O nome em capitulares espaçadas, desenhado em contornos. Onde o nome precisa ser lido sozinho.</p>
-          <dl><dt>Arquivos</dt><dd>SVG, quatro cores</dd></dl><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1CAEvjCsyu2smAjTggDQNkMDJLS8QRgKK/view" target="_blank" rel="noopener"><b>SVG</b>Azul<i>3 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1fsF0gJQnBN3zazJpNwVKZM5sE9bv5tFH/view" target="_blank" rel="noopener"><b>SVG</b>Areia<i>3 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1ZNSxaPEoVdnFEhqVqBQb01xKIkAeaF41/view" target="_blank" rel="noopener"><b>SVG</b>Camel<i>3 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1evtMOl15mJuJLJneUkjYNFBQwmsQIoj2/view" target="_blank" rel="noopener"><b>SVG</b>Preto<i>3 KB</i></a></div></div></div>
-      <div class="ver"><div class="tile t-paper"><img class="sv" src="img/eliria-symbol-blue-1.svg" alt="" width="2862" height="1245"></div>
+          <dl><dt>Arquivos</dt><dd>SVG, quatro cores</dd></dl><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1IDut0l4T2WB0LQ_eC49xygCgtRDz_-Qa/view" target="_blank" rel="noopener"><b>SVG</b>Ardósia<i>3 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1o-8o6-woAvjTGJ6hL868GdFP0yYSPBDh/view" target="_blank" rel="noopener"><b>SVG</b>Areia<i>3 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1ZNSxaPEoVdnFEhqVqBQb01xKIkAeaF41/view" target="_blank" rel="noopener"><b>SVG</b>Camel<i>3 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1evtMOl15mJuJLJneUkjYNFBQwmsQIoj2/view" target="_blank" rel="noopener"><b>SVG</b>Preto<i>3 KB</i></a></div></div></div>
+      <div class="ver"><div class="tile t-paper"><img class="sv" src="img/eliria-symbol-ardosia-1.svg" alt="" width="2862" height="1245"></div>
         <div class="tx"><h3>Símbolo</h3><p>O símbolo desenhado em vetor, em uma só cor. Tudo o que o ouro renderizado não pode fazer: gravar, estampar, bordar, relevo seco. É a logo dos documentos.</p>
-          <dl><dt>Para</dt><dd>Abaixo de 120 px, documentos, gravação, carimbo, relevo seco</dd><dt>Arquivos</dt><dd>SVG, quatro cores</dd></dl><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1tf7pIWdT--1aFzk2adJVrb8UgKlr50gH/view" target="_blank" rel="noopener"><b>SVG</b>Azul<i>1 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1VXub9M8TgIBdSPotyTM8dFIVkMXC-fAp/view" target="_blank" rel="noopener"><b>SVG</b>Areia<i>1 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1fBcCofwoNoZqst8ITGMnvNvqyQR5QWwT/view" target="_blank" rel="noopener"><b>SVG</b>Camel<i>1 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1HgMh1zsn1GfBZ7fDcp9hz-31BvR7tOU3/view" target="_blank" rel="noopener"><b>SVG</b>Preto<i>1 KB</i></a></div></div></div>
-      <div class="ver"><div class="tile t-paper"><img class="sv" src="img/eliria-lockup-blue-1.svg" alt="" width="2355" height="1610" style="width:min(220px,52%)"></div>
-        <div class="tx"><h3>Assinatura</h3><p>O símbolo sobre o nome, como um desenho só. Para os lugares onde a marca e o nome viajam juntos.</p>
-          <dl><dt>Para</dt><dd>Convite, certificado, cartão</dd><dt>Arquivos</dt><dd>SVG, quatro cores</dd></dl><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1G7FQzST5Z6F3nQx7RNYbju0nXfLPZZ7S/view" target="_blank" rel="noopener"><b>SVG</b>Azul<i>4 KB</i></a><a class="dl" href="https://drive.google.com/file/d/11gShl9s0asLwWhhNde1Qh99J3keIlbfm/view" target="_blank" rel="noopener"><b>SVG</b>Areia<i>4 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1bu-qQghD7UrSGfuu1qHwYlyRMPgUolkt/view" target="_blank" rel="noopener"><b>SVG</b>Camel<i>4 KB</i></a><a class="dl" href="https://drive.google.com/file/d/197dBWG2iJlmkZV88vsYVVH0sMQzFcLqe/view" target="_blank" rel="noopener"><b>SVG</b>Preto<i>4 KB</i></a></div></div></div>
-      <div class="ver"><div class="tile t-ink"><img src="img/eliria-icon-grass-1-360.webp" alt="" width="360" height="360" style="width:min(150px,40%);height:auto;border-radius:3px"></div>
+          <dl><dt>Para</dt><dd>Abaixo de 120 px, documentos, gravação, carimbo, relevo seco</dd><dt>Arquivos</dt><dd>SVG, quatro cores</dd></dl><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1V7Y_i2fOMNyupmEyNzyqSWYVuZlM7awT/view" target="_blank" rel="noopener"><b>SVG</b>Ardósia<i>1 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1Lqe3Hrz2pY2eg3buLZ50AnS5t2ZsaWMw/view" target="_blank" rel="noopener"><b>SVG</b>Areia<i>1 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1fBcCofwoNoZqst8ITGMnvNvqyQR5QWwT/view" target="_blank" rel="noopener"><b>SVG</b>Camel<i>1 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1HgMh1zsn1GfBZ7fDcp9hz-31BvR7tOU3/view" target="_blank" rel="noopener"><b>SVG</b>Preto<i>1 KB</i></a></div></div></div>
+      <div class="ver"><div class="tile t-paper"><img class="sv" src="img/eliria-lockup-ardosia-1.svg" alt="" width="2355" height="1610" style="width:min(220px,52%)"></div>
+        <div class="tx"><h3>Assinatura</h3><p>O símbolo sobre o nome, como um desenho só. Para os lugares onde a marca e o nome viajam juntos.</p><p>O nome não está no centro do desenho, e é de propósito. A ponta à esquerda é fina e pesa pouco para o olho: centrado na largura toda, o nome pareceria escorregar para a esquerda. Por isso ele começa onde as duas lâminas se encontram e termina na curva do colchete, à direita. Fica centrado no corpo do símbolo, não na ponta. Medido no arquivo, o nome está 8% da largura do símbolo à direita do centro. Não recentralize.</p>
+          <dl><dt>Para</dt><dd>Convite, certificado, cartão</dd><dt>Arquivos</dt><dd>SVG, quatro cores</dd></dl><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1aTgnFWO_UdrtvX0ya5WkHToukZeowYyU/view" target="_blank" rel="noopener"><b>SVG</b>Ardósia<i>4 KB</i></a><a class="dl" href="https://drive.google.com/file/d/10JjXqEdD-qmRW5c9Pch8siKdRoSCF3kX/view" target="_blank" rel="noopener"><b>SVG</b>Areia<i>4 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1bu-qQghD7UrSGfuu1qHwYlyRMPgUolkt/view" target="_blank" rel="noopener"><b>SVG</b>Camel<i>4 KB</i></a><a class="dl" href="https://drive.google.com/file/d/197dBWG2iJlmkZV88vsYVVH0sMQzFcLqe/view" target="_blank" rel="noopener"><b>SVG</b>Preto<i>4 KB</i></a></div></div></div>
+      <div class="ver"><div class="tile t-ink"><img class="cover" src="img/eliria-icon-grass-2-360.webp" alt="" width="360" height="360"></div>
         <div class="tx"><h3>Ícone</h3><p>O símbolo num quadrado, sobre três fundos: grama, areia e camel. Para a foto de perfil e a aba do navegador.</p>
-          <dl><dt>Para</dt><dd>Foto de perfil, favicon</dd><dt>Arquivos</dt><dd>PNG, quadrado</dd></dl><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1a-ooihYIVUvHapkyn36--nNI6jChkSS7/view" target="_blank" rel="noopener"><b>PNG</b>Grama 32<i>2 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1Ir2z4qUvyBrYMAICjZhiKJM5Mf9YDILC/view" target="_blank" rel="noopener"><b>PNG</b>Grama 180<i>43 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1-7hc6OuhiFeKsqjDcG5_doJKiNiPw0uD/view" target="_blank" rel="noopener"><b>PNG</b>Grama 512<i>444 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1HflRfzuHdMiYwdzB3bnrlBIzAAV937l6/view" target="_blank" rel="noopener"><b>PNG</b>Areia 32<i>2 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1p8_ESQw70EjOCaXGHztHh-Iq-dy9LYqx/view" target="_blank" rel="noopener"><b>PNG</b>Areia 180<i>64 KB</i></a><a class="dl" href="https://drive.google.com/file/d/19vdhtex3iU_1iPIt0PVIN8IDcKqlLUcK/view" target="_blank" rel="noopener"><b>PNG</b>Areia 512<i>522 KB</i></a><a class="dl" href="https://drive.google.com/file/d/186WlVEjWdhru8HoH8gpe8kgsV8D16fdQ/view" target="_blank" rel="noopener"><b>PNG</b>Camel 32<i>3 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1G0GuAF9Kmi7dHbHRZGa5Q2a4RumtE-YU/view" target="_blank" rel="noopener"><b>PNG</b>Camel 180<i>77 KB</i></a><a class="dl" href="https://drive.google.com/file/d/17f_QGycn4MFwCeJIDee4ekR4TjMS2qWQ/view" target="_blank" rel="noopener"><b>PNG</b>Camel 512<i>522 KB</i></a></div></div></div>
+          <dl><dt>Para</dt><dd>Foto de perfil, favicon</dd><dt>Arquivos</dt><dd>PNG, quadrado</dd></dl><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1Ocdig386pBnOsqav-vFvnlfVIKxEiHxf/view" target="_blank" rel="noopener"><b>PNG</b>Grama 32<i>2 KB</i></a><a class="dl" href="https://drive.google.com/file/d/16B0QSfwVwtxeNhiaI5NQNkiEGRAUx7xY/view" target="_blank" rel="noopener"><b>PNG</b>Grama 180<i>43 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1XrXZFXtBFd5uIIFcYVJTw4I_ibIIfXwz/view" target="_blank" rel="noopener"><b>PNG</b>Grama 512<i>444 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1HflRfzuHdMiYwdzB3bnrlBIzAAV937l6/view" target="_blank" rel="noopener"><b>PNG</b>Areia 32<i>2 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1p8_ESQw70EjOCaXGHztHh-Iq-dy9LYqx/view" target="_blank" rel="noopener"><b>PNG</b>Areia 180<i>64 KB</i></a><a class="dl" href="https://drive.google.com/file/d/19vdhtex3iU_1iPIt0PVIN8IDcKqlLUcK/view" target="_blank" rel="noopener"><b>PNG</b>Areia 512<i>522 KB</i></a><a class="dl" href="https://drive.google.com/file/d/186WlVEjWdhru8HoH8gpe8kgsV8D16fdQ/view" target="_blank" rel="noopener"><b>PNG</b>Camel 32<i>3 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1G0GuAF9Kmi7dHbHRZGa5Q2a4RumtE-YU/view" target="_blank" rel="noopener"><b>PNG</b>Camel 180<i>77 KB</i></a><a class="dl" href="https://drive.google.com/file/d/17f_QGycn4MFwCeJIDee4ekR4TjMS2qWQ/view" target="_blank" rel="noopener"><b>PNG</b>Camel 512<i>522 KB</i></a></div></div></div>
     </div>
   </div>
 
@@ -688,10 +692,10 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
     <div style="background:#8E7657;color:#252F37"><b>Camel</b><span>10</span></div>
   </div>
   <div class="sw s4">
-    <div><div class="c" style="background:#252F37"></div><h3>Ardósia</h3><p>O fundo, e o texto sobre areia ou branco. Um azul de pedra comum, de saturação baixa; o ouro fica mais quente sobre ele. RGB 37 47 55 · CMYK a definir. Nos arquivos: <span class="mono">slate</span>.</p><button class="copy" data-v="#252F37">#252F37</button></div>
+    <div><div class="c" style="background:#252F37"></div><h3>Ardósia</h3><p>O fundo, e o texto sobre areia ou branco. Um azul de pedra comum, de saturação baixa; o ouro fica mais quente sobre ele. RGB 37 47 55 · CMYK a definir. Nos arquivos: <span class="mono">ardosia</span>.</p><button class="copy" data-v="#252F37">#252F37</button></div>
     <div><div class="c" style="background:#D8CCBD"></div><h3>Areia</h3><p>O segundo fundo, e o texto sobre ardósia, a 8,6:1. RGB 216 204 189 · CMYK a definir. Nos arquivos: <span class="mono">sand</span>.</p><button class="copy" data-v="#D8CCBD">#D8CCBD</button></div>
     <div><div class="c" style="background:#8E7657"></div><h3>Camel</h3><p>A cor chapada do ouro: filetes, detalhes, o símbolo em uma cor. RGB 142 118 87 · CMYK 41 47 59 15.</p><button class="copy" data-v="#8E7657">#8E7657</button></div>
-    <div><div class="c" style="background:#273121"></div><h3>Folha madura</h3><p>Fora da proporção. Substitui a ardósia em ocasiões especiais, nos mesmos 70 por cento, com a areia e o camel de sempre. RGB 39 49 33 · CMYK a definir. Nos arquivos: <span class="mono">leaf</span>.</p><button class="copy" data-v="#273121">#273121</button></div>
+    <div><div class="c" style="background:#273121"></div><h3>Folha madura</h3><p>Fora da proporção. Substitui a ardósia em ocasiões especiais, nos mesmos 70 por cento, com a areia e o camel de sempre. RGB 39 49 33 · CMYK a definir. Nos arquivos: <span class="mono">folha</span>.</p><button class="copy" data-v="#273121">#273121</button></div>
   </div>
   <div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>ASE</b>Paleta<i>Ainda não</i></span></div>
 
@@ -904,9 +908,9 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
       <ul><li>A4 na grade dos documentos.</li><li>O número da peça e o ano como campos, nunca numa frase.</li></ul></div>
     <div class="app"><div class="th" data-mini="cover"></div><h3>Convite</h3>
       <ul><li>A marca no alto, o nome da ocasião em Carla Sans, caixa alta.</li><li>Impresso sobre branco ou sobre areia.</li></ul></div>
-    <div class="app"><div class="th" style="background:var(--b-ink)"><div style="width:42%;aspect-ratio:1/1;border-radius:50%;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(239,234,225,.25)"><img src="img/eliria-icon-grass-1-360.webp" alt="" width="360" height="360" style="width:100%;height:100%;object-fit:cover"></div></div><h3>Redes sociais</h3>
+    <div class="app"><div class="th" style="background:var(--b-ink)"><div style="width:42%;aspect-ratio:1/1;border-radius:50%;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(239,234,225,.25)"><img src="img/eliria-icon-grass-2-360.webp" alt="" width="360" height="360" style="width:100%;height:100%;object-fit:cover"></div></div><h3>Redes sociais</h3>
       <ul><li>Foto de perfil: o ícone, centrado no círculo.</li><li>Cinco formatos, na tabela abaixo.</li></ul><div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>PNG</b>Redes<i>Ainda não</i></span></div></div>
-    <div class="app"><div class="th sig"><span class="n">Lia Noleto</span><img src="img/eliria-wordmark-blue-1.svg" alt="ELIRIA" width="3032" height="246" style="width:min(160px,44%);height:auto;margin:6px auto 4px"><span>contato · e-mail</span></div><h3>Assinatura de e-mail</h3>
+    <div class="app"><div class="th sig"><span class="n">Lia Noleto</span><img src="img/eliria-wordmark-ardosia-1.svg" alt="ELIRIA" width="3032" height="246" style="width:min(160px,44%);height:auto;margin:6px auto 4px"><span>contato · e-mail</span></div><h3>Assinatura de e-mail</h3>
       <ul><li>Só texto: imagens na assinatura são bloqueadas pela maioria dos programas de e-mail.</li><li>Nome, marca, uma linha de contato.</li></ul><div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>HTML</b>Assinatura<i>Ainda não</i></span></div></div>
   </div>
 
@@ -942,11 +946,11 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
 │  ├─ Master/                    <span class="f">eliria_mark_master.afdesign</span>
 │  │                             <span class="f">eliria_mark_primary_gold_4800w.png</span>
 │  ├─ Screen/                    <span class="f">eliria_mark_primary_gold_{600w,1200w,2400w}.png</span>
-│  │                             <span class="f">eliria_mark_symbol_{blue,sand,camel,black}.svg</span>
-│  │                             <span class="f">eliria_mark_wordmark_{blue,sand,camel,black}.svg</span>
-│  │                             <span class="f">eliria_mark_lockup_{blue,sand,camel,black}.svg</span>
+│  │                             <span class="f">eliria_mark_symbol_{ardosia,sand,camel,black}.svg</span>
+│  │                             <span class="f">eliria_mark_wordmark_{ardosia,sand,camel,black}.svg</span>
+│  │                             <span class="f">eliria_mark_lockup_{ardosia,sand,camel,black}.svg</span>
 │  │                             <span class="f">eliria_mark_icon_{grass,sand,camel}_{32x32,180x180,512x512}.png</span>
-│  └─ Print/                     <span class="f">eliria_mark_{symbol,lockup}_slate_cmyk.pdf</span>
+│  └─ Print/                     <span class="f">eliria_mark_{symbol,lockup}_ardosia_cmyk.pdf</span>
 ├─ 02 Colour/                    <span class="f">eliria_colour_palette.ase</span>
 ├─ 03 Type/                      <span class="f">eliria_type_{carla-sans,open-sans}.zip</span>
 ├─ 04 Imagery/
@@ -967,7 +971,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
         <tr><td class="m">cliente</td><td>De quem é a marca</td><td class="m">eliria</td></tr>
         <tr><td class="m">peça</td><td>O que é</td><td class="m">mark · colour · type · photo · template · social · card</td></tr>
         <tr><td class="m">versão</td><td>Qual delas</td><td class="m">primary · symbol · lockup · wordmark · certificate</td></tr>
-        <tr><td class="m">cor</td><td>Qual cor, nas marcas. <span class="mono">gold</span> é só o metal renderizado; um desenho chapado leva uma cor da paleta. <span class="mono">cmyk</span> depois dela, para impressão</td><td class="m">gold · slate · leaf · blue · sand · camel · black · grass</td></tr>
+        <tr><td class="m">cor</td><td>Qual cor, nas marcas. <span class="mono">gold</span> é só o metal renderizado; um desenho chapado leva uma cor da paleta. <span class="mono">cmyk</span> depois dela, para impressão</td><td class="m">gold · ardosia · folha · sand · camel · black · grass</td></tr>
         <tr><td class="m">tamanho</td><td>Na tela: a largura da imagem, ou os dois lados de um formato fixo. No impresso: o papel, ou milímetros com a unidade. Um vetor não leva</td><td class="m">1200w · 1080x1350 · a4 · 85x45mm</td></tr>
         <tr><td class="m">ext</td><td>O formato</td><td class="m">svg · png · webp · jpg · pdf · mp4 · afdesign · dotx · docx</td></tr>
       </tbody>
@@ -987,7 +991,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
         <label>Cliente<input id="nmC" value="Eliria" autocomplete="off"></label>
         <label>Peça<select id="nmA"><option>mark</option><option>colour</option><option>type</option><option>photo</option><option>template</option><option>social</option><option>card</option></select></label>
         <label>Versão<input id="nmV" value="primary" autocomplete="off"></label>
-        <label>Cor<select id="nmK"><option value="">nenhuma</option><option selected>gold</option><option>slate</option><option>leaf</option><option>blue</option><option>sand</option><option>camel</option><option>black</option></select></label>
+        <label>Cor<select id="nmK"><option value="">nenhuma</option><option selected>gold</option><option>ardosia</option><option>folha</option><option>sand</option><option>camel</option><option>black</option></select></label>
         <label>Para<select id="nmP"><option value="">Tela</option><option value="cmyk">Impressão</option></select></label>
         <label>Tamanho<input id="nmS" value="1200w" autocomplete="off"></label>
         <label>Formato<select id="nmF"><option>png</option><option>webp</option><option>jpg</option><option>svg</option><option>pdf</option><option>mp4</option><option>afdesign</option><option>dotx</option><option>docx</option></select></label>
@@ -1019,6 +1023,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
   </div>
   <div class="block"><span class="lbl">Versões</span>
     <div class="tblw"><table class="tbl"><tbody>
+      <tr><td class="m">0.6</td><td>20 nov 2026</td><td>As versões em ardósia e o novo areia; as imagens das versões centradas; o deslocamento do nome na assinatura, explicado.</td></tr>
       <tr><td class="m">0.5</td><td>20 nov 2026</td><td>Ardósia, areia e camel; a folha madura como quarta cor, para ocasiões especiais.</td></tr>
       <tr><td class="m">0.4</td><td>20 nov 2026</td><td>Lia Noleto nas peças; logos dos impressos 50% menores; o ícone inteiro e centralizado.</td></tr>
       <tr><td class="m">0.3</td><td>20 nov 2026</td><td>As versões da marca para tela; regras e cultura do projeto; o símbolo em uma cor nos documentos.</td></tr>
@@ -1067,7 +1072,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
   /* the mark's size test: gold render or the drawn symbol */
   document.querySelectorAll("#mark .seg button").forEach(b=>b.addEventListener("click",()=>{
     document.querySelectorAll("#mark .seg button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));
-    document.querySelectorAll("#sizes img").forEach(i=>{i.src=b.dataset.v==="s"?"img/eliria-symbol-sand-1.svg":"img/eliria-mark-1-600.webp"})}));
+    document.querySelectorAll("#sizes img").forEach(i=>{i.src=b.dataset.v==="s"?"img/eliria-symbol-sand-2.svg":"img/eliria-mark-1-600.webp"})}));
 
   /* the measure: the slider sets a line length in real characters, from
      the paragraph's own average character width, not from the ch unit */
@@ -1087,7 +1092,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
   /* the document pages, drawn in millimetres. Every text is an example */
   const B=(x,y,w,cls,html,st="")=>`<div class="${cls}" style="left:calc(var(--u) * ${x});top:calc(var(--u) * ${y});width:calc(var(--u) * ${w});${st}">${html}</div>`;
   const L=n=>(20+n*5.2917).toFixed(3), GAP="margin-top:calc(var(--u) * 5.2917)";
-  const MARK='<img src="img/eliria-symbol-blue-1.svg" alt="" width="2862" height="1245">';
+  const MARK='<img src="img/eliria-symbol-ardosia-1.svg" alt="" width="2862" height="1245">';
   const OV='<div class="ov ov-g"></div><div class="ov ov-b"></div>';
   /* Carla Sans is drawn as outlines; w is the line's width in em, s the size in units */
   const CS=(x,y,s,slug,w,alt,asc=.717)=>B(x,(+y-asc*s).toFixed(3),(w*s).toFixed(3),"",`<img src="img/carla-${slug}-1.svg" alt="${alt}">`);
