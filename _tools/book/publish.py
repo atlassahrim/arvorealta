@@ -1,7 +1,7 @@
 """Put a public brand book on the site, at a hidden path.
 
     python3 -I _tools/book/make_public.py working.html public.html
-    python3 -I _tools/book/publish.py public.html <img dir> brand/book
+    python3 -I _tools/book/publish.py public.html <img dir> brand/book-arv
 
 The working book (dark, every section) lives as a private claude.ai
 artifact and never enters this repository. Only its public edition does,

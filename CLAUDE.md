@@ -213,8 +213,9 @@ alone.** Checked against every published page's own tag:
 
 | path | tag | what it is |
 |---|---|---|
-| `brand/book/` | `noindex, nofollow` | the public brand book, reached only by a link the owner sends |
-| `eliria/` | `noindex, nofollow` | a client's brand book, Eliria, reached only by a link the owner sends |
+| `brand/book-arv/` | `noindex, nofollow` | the public brand book, reached only by a link the owner sends |
+| `brand/book-eli/` | `noindex, nofollow` | a client's brand book, Eliria, reached only by a link the owner sends |
+| `brand/book/`, `eliria/` | `noindex, nofollow` | stubs forwarding to the two books' old paths, since 20 November |
 | `reference/` | `noindex` | the first offer page, kept for the owner |
 | `branding/` | `noindex, follow` | the stub for the one-day `/branding/` path |
 | `home/` | `noindex, follow` | a stub redirecting `/home/` to `/` |
@@ -3468,7 +3469,7 @@ unlocks.
 - `assets/img/doc-annex-1-520.webp` shows the old sample. No published
   page uses it; redraw it if the paused document fold returns.
 - **The brand book shows the tender set, since 19 November.** Its
-  `Tender annexes` card shows `brand/book/img/doc-annex-2-520.webp`, the
+  `Tender annexes` card shows `brand/book-arv/img/doc-annex-2-520.webp`, the
   first sheet of the new sample, and `-1` is deleted. The card and the
   Documents rule name the tender set, Inter and IBM Plex Mono on white,
   and the card says each one comes as a page and a Word file. `reviews`
@@ -3714,7 +3715,7 @@ edition from the working book, removing the working-only blocks.
 `_tools/book/publish.py` then wraps it as a site page. It gives the page a
 full head with the robots tag and loads the fonts from `/assets/fonts/`
 instead of Google Fonts. It also copies every image the page names into
-`brand/book/img/` and deletes any it no longer names. The working book's
+`brand/book-arv/img/` and deletes any it no longer names. The working book's
 source comes from its artifact, never from a file in this repository.
 **Anything in the working book that is not wrapped in `<!--M-->` reaches
 the public page**, so that marker is the line between private and
@@ -3722,7 +3723,7 @@ published.
 
 **On 19 November the owner retired the working edition.** He does not
 need the dark book with its private notes. From now on the book is
-changed in a lab copy and then published. **So `brand/book/index.html` is
+changed in a lab copy and then published. **So `brand/book-arv/index.html` is
 now the source**, and the two paragraphs above, and *The public
 edition is generated, never edited* below, are history. The lab follows
 this file's sandbox rule: a copy of the live page, `noindex, nofollow`, an
@@ -3908,13 +3909,28 @@ colours. Brick `#8E4A45` and bronze sit 1.01 apart in luminance and
 both clear 4.5:1 on paper, so they do the same job and read as one
 family; nothing new is made in brick.
 
+## The books moved under `/brand/`, 20 November
+
+**At the owner's word, the two books live at `/brand/book-arv/` (ours)
+and `/brand/book-eli/` (Eliria's).** A client's book goes the same way
+from now on: `/brand/book-<three letters>/`, `noindex, nofollow`, linked
+from nowhere. Both folders moved whole with `git mv`; their pictures and
+fonts use relative paths, so nothing inside them changed.
+
+**The old paths keep stubs**, because both links had been sent. `brand/book/`
+and `eliria/` each hold one `noindex, nofollow` page with a canonical, a
+meta refresh, a real link and a `location.replace` that keeps the hash, so
+`/brand/book/#files` lands on `/brand/book-arv/#files`. Delete a stub only
+when something says nobody is holding the old link. Wherever this file
+says `arvorealta.com/brand/book/` or `/eliria/` below, read the new path.
+
 ## The first client book: Eliria, 19 November
 
-**`eliria/index.html` is the first client book**, built at the owner's
+**`brand/book-eli/index.html` is the first client book**, built at the owner's
 word from the brand book's template: one self-contained page, `noindex,
 nofollow`, linked from nowhere, in Portuguese because the client is
-Brazilian. Its pictures and fonts sit in `eliria/img/` and
-`eliria/fonts/`. Its sources are the client's own files in Drive
+Brazilian. Its pictures and fonts sit in `brand/book-eli/img/` and
+`brand/book-eli/fonts/`. Its sources are the client's own files in Drive
 (`Eliria BRAND`, with the old package in `99 Archive`) and the project
 deck.
 
@@ -4013,12 +4029,15 @@ index.html              offer page. One self-contained file, hand-written
 brand/index.html        brand portfolio. Same shape of file. Dark, with a
                         paper close. Six folds locked to the viewport by
                         scroll snap, three languages
-eliria/index.html       a client's brand book, Eliria, noindex, nofollow,
+brand/book-eli/index.html
+                        a client's brand book, Eliria, noindex, nofollow,
                         linked from nowhere. Portuguese
-brand/book/index.html   the public brand book: noindex, nofollow, linked
+brand/book/, eliria/    stubs forwarding to the two books' old paths
+brand/book-arv/index.html
+                        the public brand book: noindex, nofollow, linked
                         from nowhere. The source since 19 November: change
                         it in a lab, then promote. Download buttons point
-                        at single Drive files. Pictures in brand/book/img/
+                        at single Drive files. Pictures in brand/book-arv/img/
 branding/index.html     a noindex stub redirecting to /brand/
 home/index.html         a noindex stub redirecting /home/ to /
 proposta-motorhome/index.html
