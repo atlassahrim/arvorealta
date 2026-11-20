@@ -4061,6 +4061,17 @@ history.
   is the symbol's silhouette. The piece in Applications shows the camel
   symbol, the profile photo the grass icon, the email signature the blue
   wordmark.
+- **A third round, the same night, at the owner's word.** The signatory
+  on the pieces is `Lia Noleto`: the letter's and the certificate's
+  signature, the card (`carla-lia-1.svg`) and the email signature. The
+  recipients stay `Nome Sobrenome`, since they are whoever receives the
+  piece. **The logo on every printed document is half its size**: the
+  symbol 15 mm on the letter, 22 mm on the invitation and certificate, and
+  the card's emboss 20 mm. **The icon tile shows the whole square,
+  centred**: it was set to `object-fit:cover` in a 16:9 tile, which cut
+  the square and pushed the symbol low. Every other image on the page was
+  measured and is centred in its box; the vectors are cropped tight to
+  their drawing.
 
 ## The pricing ladder
 

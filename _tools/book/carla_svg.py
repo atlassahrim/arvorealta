@@ -88,7 +88,7 @@ LINES = {
     "entrega": ("A ENTREGA", "light", "#0E1834", False, 0.02),
     "da-colecao": ("DA COLEÇÃO 2026", "light", "#0E1834", False, 0.02),
     "colecao": ("COLEÇÃO OFICIAL 2026", "regular", "#0E1834", False, 0.04),
-    "nome": ("NOME SOBRENOME", "regular", "#0E1834", False, 0.04),
+    "lia": ("LIA NOLETO", "regular", "#0E1834", False, 0.04),
     "carla-on": ("CARLA", "regular", "#0E1834", True, 0.02),
     "carla-off": ("CARLA", "regular", "#0E1834", False, 0.02),
     "edicao": ("EDIÇÃO 2026", "semibold", "#0E1834", False, 0.12),
