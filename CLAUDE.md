@@ -4073,6 +4073,21 @@ history.
   measured and is centred in its box; the vectors are cropped tight to
   their drawing.
 
+**The palette changed again the same night, at the owner's word**, and
+Indigo / Creme above is history. It is **Ardósia `#252F37` 70, Areia
+`#D8CCBD` 20, Camel `#8E7657` 10**, plus **Folha madura `#273121` as a
+fourth colour outside the proportion**: it replaces the ardósia in the
+same 70 per cent for special occasions, and the two never share a
+surface (1.0:1 between them). Both darks are low-saturation (20 per
+cent), a common stone and a mature leaf, tuned to measure the same:
+areia on either 8.6:1, camel on either 3.2:1, either on white 13.6:1.
+**Camel on areia is 2.7:1**, under even the graphic floor, so on areia
+the rules are drawn in ardósia. The areia is the owner's value; the two
+darks were proposed here and he chose. **The supplied files do not match
+it yet**: `blue` is `#101938` and `sand` is `#F3DABD`, so the book shows
+them as supplied and names `slate` and `leaf` as the file words for the
+new colours. CMYK for all three new values is open.
+
 ## The pricing ladder
 
 **There are two ladders on this domain and this section is the euro one.**

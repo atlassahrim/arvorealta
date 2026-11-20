@@ -50,7 +50,7 @@ def ligatures(t):
                         out[tuple([first] + l.Component)] = l.LigGlyph
     return out
 
-def draw(text, weight="regular", fill="#0E1834", liga=False, track=0.0):
+def draw(text, weight="regular", fill="#252F37", liga=False, track=0.0):
     t = TTFont(fontdir / FILES[weight]); gs = t.getGlyphSet(); cm = t.getBestCmap()
     hm = t["hmtx"]; kern = kern_table(t)
     glyphs = [cm[ord(c)] for c in text]
@@ -85,14 +85,14 @@ def draw(text, weight="regular", fill="#0E1834", liga=False, track=0.0):
 
 LINES = {
     # slug: text, weight, fill, liga, tracking
-    "entrega": ("A ENTREGA", "light", "#0E1834", False, 0.02),
-    "da-colecao": ("DA COLEÇÃO 2026", "light", "#0E1834", False, 0.02),
-    "colecao": ("COLEÇÃO OFICIAL 2026", "regular", "#0E1834", False, 0.04),
-    "lia": ("LIA NOLETO", "regular", "#0E1834", False, 0.04),
-    "carla-on": ("CARLA", "regular", "#0E1834", True, 0.02),
-    "carla-off": ("CARLA", "regular", "#0E1834", False, 0.02),
-    "edicao": ("EDIÇÃO 2026", "semibold", "#0E1834", False, 0.12),
-    "unica": ("CADA UMA, ÚNICA.", "light", "#EFDBC0", False, 0.04),
+    "entrega": ("A ENTREGA", "light", "#252F37", False, 0.02),
+    "da-colecao": ("DA COLEÇÃO 2026", "light", "#252F37", False, 0.02),
+    "colecao": ("COLEÇÃO OFICIAL 2026", "regular", "#252F37", False, 0.04),
+    "lia": ("LIA NOLETO", "regular", "#252F37", False, 0.04),
+    "carla-on": ("CARLA", "regular", "#252F37", True, 0.02),
+    "carla-off": ("CARLA", "regular", "#252F37", False, 0.02),
+    "edicao": ("EDIÇÃO 2026", "semibold", "#252F37", False, 0.12),
+    "unica": ("CADA UMA, ÚNICA.", "light", "#D8CCBD", False, 0.04),
 }
 meta = {}
 outdir.mkdir(parents=True, exist_ok=True)
