@@ -3954,6 +3954,43 @@ deck.
 - **Publishing a client's book needs the client's permission.** The owner
   asked for this one to go live so he could see it.
 
+**Rebuilt on 20 November, at the owner's word, and the list above is
+history.** Two instructions: nothing from `99 Archive` or the project doc
+is used for colour, design or logos, and the page is designed exactly
+like `/brand/book-arv/`. So:
+
+- **The page is the Arvorealta book's own head, CSS and script**, written
+  by `assemble.py` (kept in the session scratchpad, not the repo) from
+  `brand/book-arv/index.html`. Six things differ: `lang`, the title, the
+  brand content tokens `--b-*`, the hero (a flat ground in place of our
+  water footage), the card's emboss mask (the Eliria mark), and the
+  script, which keeps the side index, the copy buttons, the pairing
+  checker, the measure, the document drawings and the namer, in
+  Portuguese, and drops the three Arvorealta-only widgets: languages,
+  measured bar and the size test's symbol toggle. Same twelve sections in
+  the same order. The edition tokens (paper ground, forest type) are the
+  Arvorealta book's, unchanged.
+- **The only Eliria files are the new gold mark**, `eliria_mark_primary_
+  gold_{600w,1200w,2400w}.png` in `Eliria BRAND/01 Mark/Screen`, cut to
+  `img/eliria-mark-1-{600,1200}.webp`. The three PNGs are the page's only
+  live download buttons. Every lockup, symbol, pattern and wordmark from
+  the archive, and every archive font, is deleted from `brand/book-eli/`.
+  The name, symbol, lockup, icon, palette file, templates and photographs
+  read `Ainda não`.
+- **The colours are read off the new mark and labelled `Sugestão`**:
+  Sombra `#300E02` (the dark blade's shadow), Prata `#B4B1A4` (the band
+  between the blades), Ouro `#A77448` (the metal's mid-tone), at
+  70 / 20 / 10. Measured: prata on sombra 8.2:1, ouro on sombra 4.4:1
+  (large type only), ouro on prata 1.9:1 (never text), sombra on white
+  17.7:1. They fill `--b-*`, so tiles, stages and buttons show them.
+- **The type is the template's three faces, as a suggestion.** Montserrat
+  was also in the archive's list; it is here because the template uses
+  it, not because the archive did.
+- **Kept from the project doc, and flagged to the owner**: the message
+  (`Diferenciamos ocasiões…`, `O mar canta para o Altíssimo.`) and the
+  meaning of Thalla and Eliria. They are strategy, not colour, design or
+  logos. The motifs and the cautions are gone.
+
 ## The pricing ladder
 
 **There are two ladders on this domain and this section is the euro one.**

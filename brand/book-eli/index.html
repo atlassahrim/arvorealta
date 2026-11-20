@@ -5,409 +5,1115 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Eliria · Livro da marca</title>
-<meta name="theme-color" content="#16263A">
-<link rel="icon" href="img/eliria-symbol-bronze-1.svg" type="image/svg+xml">
+<meta name="theme-color" content="#102F27">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/fonts/ebgaramond.css">
+<link rel="stylesheet" href="/assets/fonts/geist.css">
 <link rel="stylesheet" href="/assets/fonts/montserrat.css">
 <style>
-/* Eliria brand book. A client book on the Arvorealta template: one
-   self-contained page, noindex and linked from nowhere, on the client's own
-   faces and colours. Everything marked "Sugestão" is a proposal by the
-   studio and not yet approved by the client. */
-@font-face{font-family:"Playfair Display";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/playfair-display-regular-latin.woff2) format("woff2")}
-@font-face{font-family:"Playfair Display";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/playfair-display-italic-latin.woff2) format("woff2")}
-@font-face{font-family:"Open Sans Condensed";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/open-sans-condensed-regular-latin.woff2) format("woff2")}
-@font-face{font-family:"Playfair Display";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/playfair-display-medium-latin.woff2) format("woff2")}
+/* Geist Mono 600, which the book's labels use and the site's geist.css does
+   not carry. Declared here only, so the live pages render as before. */
+@font-face{font-family:"Geist Mono";font-style:normal;font-weight:600;font-display:swap;
+  src:url(/assets/fonts/geist-mono-600-latin.woff2) format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Geist Mono";font-style:normal;font-weight:600;font-display:swap;
+  src:url(/assets/fonts/geist-mono-600-latin-ext.woff2) format("woff2");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+</style>
+<style>
+/* One source, two editions. The working book (body.master) is dark, near
+   black and white, and holds everything; the public book (body.public) is
+   on paper and is made from it by removing every block marked
+   master-only, so nothing unfinished reaches it. Colour appears only
+   where it is the content.
+   Layout: a sticky side index beside one reading column. */
 :root{
-  /* the four colours named in the project; ouro is read off the files,
-     the other three are the studio's proposal */
-  --navy:#16263A; --moss:#3F4A33; --bordo:#5C1F2B; --gold:#8E7657;
-  --paper:#F2EDE4; --paper2:#E8E1D5; --ink:#16263A;
-  --dim:rgba(22,38,58,.72); --faint:rgba(22,38,58,.62); --rule:rgba(22,38,58,.16);
-  --f-disp:"Playfair Display",Georgia,serif;
+  /* the brand's own values: content, identical in both editions */
+  --b-ink:#300E02; --b-ink2:#300E02; --b-paper:#B4B1A4; --b-bone:#EFEAE1;
+  --b-pink:#300E02; --b-amber:#A77448; --b-brick:#7A5530;
+  --f-disp:"EB Garamond",Garamond,Georgia,serif;
   --f-text:"Montserrat",ui-sans-serif,system-ui,sans-serif;
+  --f-mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  /* edition tokens, public book: paper. Quiet ink at 68 and 62 per cent
+     measures 5.9:1 and 4.8:1; numbers take the brick, 5.5:1 */
+  --bg:#EFEAE1; --fg:#102F27; --dim:rgba(16,47,39,.68); --faint:rgba(16,47,39,.62);
+  --rule:rgba(16,47,39,.14); --panel:#E5DED2; --accent:#7A5530;
+  --hero:#102F27;
+}
+/* working book: dark, near black and white. Bone at 64 and 50 per cent
+   measures 7.0:1 and 4.7:1 */
+:root:has(body.master){color-scheme:dark}
+body.master{
+  --bg:#101111; --fg:#ECECEA; --dim:rgba(236,236,234,.64); --faint:rgba(236,236,234,.5);
+  --rule:rgba(236,236,234,.13); --panel:#1A1B1B; --accent:#ECECEA;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.65 var(--f-text);-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.6 var(--f-text);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
 img{display:block;max-width:100%;height:auto}
 a{color:inherit}
-:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
 h1,h2,h3{font-family:var(--f-disp);font-weight:400;margin:0;text-wrap:balance}
 p{margin:0}
-.lbl{font:600 10.5px/1.3 var(--f-text);letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
-.sug{display:inline-block;font:600 9.5px/1 var(--f-text);letter-spacing:.18em;text-transform:uppercase;
-  color:var(--bordo);border:1px solid rgba(92,31,43,.4);border-radius:999px;padding:5px 9px 4px;vertical-align:middle}
-.skip{position:absolute;left:-9999px}
-.skip:focus{left:16px;top:16px;z-index:20;background:var(--paper);padding:8px 12px}
+.mono{font-family:var(--f-mono)}
+.lbl{font:500 11px/1.3 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
 
-/* cover */
-.cover{background:var(--navy);color:var(--paper);padding:clamp(56px,10vw,120px) max(16px,4vw) clamp(48px,8vw,96px);text-align:center}
-.cover .mark{width:min(560px,82vw);margin:0 auto}
-.cover .wmk{width:min(300px,56vw);margin:clamp(28px,5vw,48px) auto 0}
-.cover h1{font-size:clamp(34px,5vw,58px);line-height:1.08;margin-top:clamp(40px,7vw,72px)}
-.cover .stmt{max-width:46ch;margin:18px auto 0;color:rgba(242,237,228,.8);font-size:clamp(15px,1.6vw,17px)}
-.cover .meta{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 36px;margin-top:36px}
-.cover .meta div{display:grid;gap:4px}
-.cover .meta dt{font:600 10px/1 var(--f-text);letter-spacing:.2em;text-transform:uppercase;color:rgba(242,237,228,.62)}
-.cover .meta dd{margin:0;font-size:14px}
-.cover dl{margin:0}
-
-/* shell */
-.shell{display:grid;grid-template-columns:190px minmax(0,1fr);gap:clamp(28px,5vw,72px);max-width:1180px;margin:0 auto;
-  padding:0 max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
-.side{position:sticky;top:0;align-self:start;padding-block:48px}
-.side ol{list-style:none;margin:0;padding:0;display:grid;gap:2px}
-.side a{display:flex;gap:10px;text-decoration:none;font-size:13px;padding:5px 0;color:var(--dim)}
-.side a:hover{color:var(--ink)}
-.side .nn{font:600 10.5px/2 var(--f-text);letter-spacing:.1em;color:var(--bordo);min-width:20px}
+/* ── shell: side index + reading column ── */
+.shell{display:grid;grid-template-columns:200px minmax(0,1fr);gap:clamp(28px,5vw,80px);max-width:1220px;margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.side{position:sticky;top:env(safe-area-inset-top,0px);align-self:start;max-height:100vh;overflow:auto;padding-block:44px}
+.side .brand{display:flex;align-items:center;gap:10px;margin-bottom:28px}
+.side .brand img{width:44px}
+.side .brand span{font:500 10px/1 var(--f-mono);letter-spacing:.32em}
+.side ol{list-style:none;margin:0;padding:0;display:grid}
+.side a{display:grid;grid-template-columns:30px 1fr;padding:7px 0;text-decoration:none;color:var(--dim);
+  font:500 12px/1.3 var(--f-mono);letter-spacing:.04em;border-left:0}
+.side a .nn{color:var(--faint)}
+.side a:hover{color:var(--fg)}
+.side a.on{color:var(--fg)}
+.side a.on .nn{color:var(--accent)}
+.side .ed{margin-top:28px;padding-top:14px;border-top:1px solid var(--rule)}
 main{min-width:0;padding-bottom:96px}
-section{padding-top:clamp(56px,8vw,96px)}
-.sh{display:flex;align-items:baseline;gap:16px;border-top:1px solid var(--rule);padding-top:18px}
-.sh .sn{font:600 11px/1 var(--f-text);letter-spacing:.14em;color:var(--bordo)}
-.sh h2{font-size:clamp(28px,3.6vw,40px);line-height:1.1}
-.why{margin-top:14px;max-width:60ch;color:var(--dim);font-size:16.5px}
-.block{margin-top:36px}
-.block > .lbl{display:block;margin-bottom:12px}
-.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:20px}
-.card{background:var(--paper2);border-radius:3px;padding:22px}
-.card h3{font-size:22px;line-height:1.2;margin-bottom:8px}
-.card p{color:var(--dim);font-size:14.5px}
-.rules{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:0;counter-reset:r}
-.rules li{counter-increment:r;display:grid;grid-template-columns:36px minmax(0,1fr);gap:12px;padding:14px 0;border-top:1px solid var(--rule)}
-.rules li::before{content:counter(r,decimal-leading-zero);font:600 11px/1.9 var(--f-text);letter-spacing:.1em;color:var(--bordo)}
-.rules b{font-weight:600}
-.rules span{color:var(--dim)}
-.rules span b{color:var(--ink)}
-
-/* one page */
-.op{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:28px}
-.op > div{background:var(--paper);padding:22px;display:grid;gap:10px;align-content:start}
-.op .say{font-family:var(--f-disp);font-size:22px;line-height:1.25}
-.op .sw{display:flex;gap:6px}
-.op .sw i{width:34px;height:34px;border-radius:2px}
-
-/* message */
-.dir{display:grid;grid-template-columns:minmax(0,180px) minmax(0,1fr);border-top:1px solid var(--rule);margin-top:28px}
-.dir dt,.dir dd{padding:14px 0;border-bottom:1px solid var(--rule);margin:0}
-.dir dt{font:600 10.5px/1.9 var(--f-text);letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
-.dir dd{font-family:var(--f-disp);font-size:clamp(20px,2.2vw,24px);line-height:1.3}
-.dir dd ul{margin:0;padding:0;list-style:none;font-family:var(--f-text);font-size:15px;line-height:1.8;color:var(--dim)}
-.motto{margin-top:40px;background:var(--navy);color:var(--paper);border-radius:3px;padding:clamp(32px,6vw,64px);text-align:center}
-.motto p{font-family:var(--f-disp);font-style:italic;font-size:clamp(26px,3.6vw,40px);line-height:1.2}
-.motto .lbl{color:rgba(242,237,228,.62);display:block;margin-bottom:16px}
-.names{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:24px;margin-top:28px}
-.names h3{font-size:26px;letter-spacing:.06em}
-.names p{margin-top:8px;color:var(--dim);font-size:15px}
-
-/* mark */
-.versions{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px;margin-top:28px}
-.ver{display:grid;gap:12px;align-content:start}
-.ver .th{aspect-ratio:16/10;border-radius:3px;display:grid;place-items:center;overflow:hidden;padding:8%}
-.ver .th.dark{background:var(--navy)}
-.ver .th.white{background:#fff}
-.ver .th.paper{background:var(--paper2)}
-.ver .th.pat{padding:0;background:#fff url(img/eliria-pattern-1.svg) 0 0/660px auto repeat}
-.ver h3{font-size:20px}
-.ver p{color:var(--dim);font-size:14px}
-.ver .for{font-size:12.5px;color:var(--faint)}
-.dl{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
-.dl a,.dl span{font:600 10px/1 var(--f-text);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;
-  border:1px solid var(--rule);border-radius:999px;padding:8px 11px 7px;color:var(--ink)}
-.dl a:hover{border-color:var(--ink)}
-.dl span{border-style:dashed;color:var(--faint);cursor:not-allowed}
-.space{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px;margin-top:28px}
-.space .th{background:var(--paper2);border-radius:3px;aspect-ratio:16/10;display:grid;place-items:center;position:relative}
-.space .th .box{position:relative;width:52%;outline:1px dashed rgba(92,31,43,.55);outline-offset:clamp(14px,3vw,30px)}
-
-/* colour */
-.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:16px;margin-top:28px}
-.swatch .chip{aspect-ratio:4/3;border-radius:3px;display:flex;align-items:flex-end;padding:14px;color:var(--paper);font:600 10.5px/1 var(--f-text);letter-spacing:.16em;text-transform:uppercase}
-.swatch h3{font-size:20px;margin-top:12px}
-.swatch p{font-size:13.5px;color:var(--dim)}
-.swatch .v{font-size:12.5px;color:var(--faint);margin-top:4px}
-.prop{display:grid;grid-template-columns:70fr 20fr 10fr;height:84px;border-radius:3px;overflow:hidden;margin-top:12px}
-.prop i{display:flex;align-items:flex-end;padding:10px;font:600 10px/1 var(--f-text);letter-spacing:.14em;color:rgba(242,237,228,.85);font-style:normal}
-
-/* type */
-.faces{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:28px}
-.face{background:var(--paper);display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px;padding:24px}
-.face .spec{color:var(--ink);margin:0;font-size:clamp(30px,4.4vw,52px);line-height:1.1;overflow-wrap:anywhere}
-.face h3{font-size:20px}
-.face p{color:var(--dim);font-size:14px;margin-top:6px}
-.face .wm{width:min(320px,100%);margin-top:6px}
-
-/* imagery */
-.motifs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));column-gap:20px;margin-top:28px}
-.motifs div{border-top:1px solid var(--rule);padding:14px 0 16px}
-.motifs h3{font-size:19px}
-.motifs p{color:var(--dim);font-size:13.5px;margin-top:4px}
-
-/* care */
-.care{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:16px;margin-top:28px}
-.care div{border-top:2px solid var(--bordo);padding-top:14px}
-.care h3{font-size:19px;margin-bottom:6px}
-.care p{color:var(--dim);font-size:14px}
-
-/* social */
-.sizes{width:100%;border-collapse:collapse;margin-top:12px;font-size:14px}
-.sizes th,.sizes td{text-align:left;padding:10px 12px 10px 0;border-bottom:1px solid var(--rule);vertical-align:top}
-.sizes th{font:600 10px/1.4 var(--f-text);letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
-.sizes td:first-child{font-size:12.5px;overflow-wrap:anywhere}
-.sizes td:nth-child(2){white-space:nowrap}
-
-/* files */
-.tree{font:500 12.5px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--paper2);border-radius:3px;padding:20px;overflow-x:auto;margin-top:28px;white-space:pre}
-.name{font:600 clamp(14px,2vw,18px)/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--navy);color:var(--paper);border-radius:3px;padding:18px 20px;margin-top:16px;overflow-wrap:anywhere}
-.contact{margin-top:28px;display:flex;flex-wrap:wrap;gap:12px 32px;align-items:baseline}
-.contact a{font-family:var(--f-disp);font-size:22px}
-footer{border-top:1px solid var(--rule);margin-top:72px;padding-top:18px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-
 @media (max-width:900px){
-  .shell{grid-template-columns:minmax(0,1fr)}
-  .side{display:none}
-  .face{grid-template-columns:minmax(0,1fr)}
-  .dir{grid-template-columns:minmax(0,1fr)}
-  .dir dt{border-bottom:0;padding-bottom:0}
+  .shell{grid-template-columns:minmax(0,1fr);gap:0}
+  .side{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;max-height:none;overflow:visible;padding-block:10px;
+    background:var(--bg);border-bottom:1px solid var(--rule)}
+  .side .brand,.side .ed{display:none}
+  .side ol{display:flex;gap:18px;overflow-x:auto;scrollbar-width:none}
+  .side a{display:flex;gap:6px;white-space:nowrap}
 }
+
+/* ── sections ── */
+section{padding-block:clamp(56px,8vw,88px);border-top:1px solid var(--rule);scroll-margin-top:56px}
+.sh{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.sn{font:600 12px/1 var(--f-mono);letter-spacing:.1em;color:var(--accent)}
+h2{font-size:clamp(32px,4vw,46px);line-height:1.04;letter-spacing:-.02em}
+h3{font-size:22px;line-height:1.15;letter-spacing:-.01em}
+.why{color:var(--dim);font-size:17px;max-width:58ch;margin:14px 0 36px}
+.chip{font:600 9.5px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;padding:5px 8px 4px;border:1px solid var(--fg);border-radius:2px;align-self:center}
+.chip.ready{background:var(--fg);color:var(--bg)}
+.chip.proposed,.chip.supply,.chip.draft{background:none}
+.chip.supply{border-style:dashed}
+.note{margin-top:20px;padding:12px 16px;border-left:2px solid var(--fg);background:var(--panel);font-size:14px;color:var(--dim);max-width:62ch}
+.block{margin-top:44px}
+.block>.lbl{display:block;margin-bottom:14px}
+
+/* rules: the one list shape in the book */
+ol.rules{list-style:none;margin:32px 0 0;padding:0;border-top:1px solid var(--rule);counter-reset:r}
+ol.rules li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:4px;padding:13px 0;border-bottom:1px solid var(--rule);counter-increment:r}
+ol.rules li::before{content:counter(r,decimal-leading-zero);font:500 11px/1.9 var(--f-mono);color:var(--faint)}
+ol.rules b{font-weight:600}
+.dd{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:28px}
+.dd>div{padding:18px 20px;border:1px solid var(--rule);display:grid;gap:8px;align-content:start}
+.dd .lbl{color:var(--fg)}
+.dd .dont .lbl::after{content:"";display:inline-block;width:22px;height:1px;background:currentColor;vertical-align:middle;margin-left:8px}
+.dd p{font-size:15px}
+@media (max-width:620px){.dd{grid-template-columns:minmax(0,1fr)}}
+
+/* ── 00 cover ── */
+.cover{border-top:0;padding-top:clamp(32px,5vw,56px)}
+.hero{position:relative;display:grid;place-items:center;gap:22px;padding:clamp(56px,10vw,120px) 20px;
+  background:var(--hero);border-radius:3px;overflow:hidden;isolation:isolate}
+body.public .hero{background:var(--b-ink)}
+body.public .hero::after{content:none}
+/* the cover lockup, in the owner's lockup proportions, measured off
+   arvorealta_mark_lockup_forest.svg: the wordmark is 78.2 per cent of the
+   symbol's width, centred, and stands 8.1 per cent of that width below it */
+.lk{width:min(460px,78%);display:grid;justify-items:center}
+.lk .fan{width:100%;height:auto}
+.lk .wmk{width:78.2%;height:auto;margin-top:8.1%}
+.cover h1{font-size:clamp(44px,6.4vw,78px);line-height:.98;letter-spacing:-.025em;margin-top:44px}
+.cover .stmt{font-size:clamp(18px,1.6vw,21px);color:var(--dim);max-width:46ch;margin-top:16px}
+dl.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin:40px 0 0;border-top:1px solid var(--fg)}
+dl.fields div{padding:12px 16px 14px 0;border-bottom:1px solid var(--rule)}
+dl.fields dt{font:500 10px/1.3 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
+dl.fields dd{margin:0;font-size:15px;font-weight:500}
+
+/* ── 01 one page ── */
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,4vw,48px)}
+.two p{font-size:17px}
+.four{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--rule);margin-top:40px}
+.four>div{padding:20px 18px 22px;display:grid;gap:10px;align-content:start;border-right:1px solid var(--rule)}
+.four>div:last-child{border-right:0}
+.four .k{font-family:var(--f-disp);font-size:24px;line-height:1.1}
+.four p{font-size:14px;color:var(--dim)}
+@media (max-width:820px){.four{grid-template-columns:repeat(2,minmax(0,1fr))}.four>div:nth-child(2){border-right:0}.four>div:nth-child(-n+2){border-bottom:1px solid var(--rule)}}
+@media (max-width:620px){.two{grid-template-columns:minmax(0,1fr)}}
+
+/* ── 02 message ── */
+.line{font-family:var(--f-disp);font-size:clamp(40px,6vw,72px);line-height:1;letter-spacing:-.025em}
+.line em{font-style:italic}
+.lines{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:28px}
+.lines>div{border-top:1px solid var(--fg);padding-top:12px;display:grid;gap:8px}
+.lines .say{font-family:var(--f-disp);font-size:26px;line-height:1.1}
+.versus{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--rule);margin-top:40px}
+.versus div{padding:11px 0;border-bottom:1px solid var(--rule);font-size:15px}
+.versus div:nth-child(odd){padding-right:16px}
+.versus div:nth-child(even){color:var(--faint)}
+@media (max-width:620px){.lines{grid-template-columns:minmax(0,1fr)}}
+
+/* ── 03 mark ── */
+.marks{display:grid;grid-template-columns:3fr 2fr;gap:16px}
+.tile{border-radius:3px;display:grid;place-items:center;padding:clamp(28px,5vw,56px) 20px;min-height:220px;position:relative;overflow:hidden}
+.tile .lbl{position:absolute;left:14px;bottom:12px}
+.t-ink{background:var(--b-ink)} .t-ink .lbl{color:rgba(239,234,225,.5)}
+.t-paper{background:var(--b-paper)} .t-paper .lbl{color:rgba(16,47,39,.5)}
+.t-photo{background:center/cover}
+.tile img.fan{width:min(300px,80%)}
+.tile img.wmi{width:min(340px,80%);height:auto}
+.tile img.sv{width:min(300px,64%);height:auto}
+.tile .wordmark{font:500 clamp(14px,2vw,20px)/1 var(--f-mono);letter-spacing:.42em;padding-left:.42em;color:var(--b-pink)}
+.grounds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+.grounds .tile{min-height:170px;aspect-ratio:16/9;min-height:0}
+.grounds .tile img.fan{width:58%}
+.grounds .lbl{color:rgba(239,234,225,.75)}
+.misuse{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.misuse .tile{min-height:0;aspect-ratio:4/3;padding:20px}
+.misuse .tile img.fan{width:62%}
+.misuse figcaption{font-size:13px;margin-top:8px;color:var(--dim)}
+.misuse figure{margin:0}
+.misuse .ok figcaption{color:var(--fg);font-weight:500}
+.x-stretch img{transform:scaleX(1.55) scaleY(.8)}
+.x-hue img{filter:hue-rotate(150deg) saturate(1.6)}
+.x-fx img{filter:drop-shadow(0 0 14px rgba(255,215,140,.9)) drop-shadow(0 6px 4px rgba(0,0,0,.8))}
+.x-rot img{transform:rotate(-16deg)}
+.space{position:relative;display:inline-block;padding:clamp(18px,3vw,30px);outline:1px dashed rgba(239,234,225,.45)}
+.space img{width:min(240px,60vw)}
+@media (max-width:720px){.marks,.grounds{grid-template-columns:minmax(0,1fr)}.misuse{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ── 04 colour ── */
+.prop{display:grid;grid-template-columns:70fr 20fr 10fr;height:clamp(130px,16vw,180px);border-radius:3px;overflow:hidden}
+.prop div{padding:14px;display:flex;flex-direction:column;justify-content:space-between}
+.prop b{font:600 11px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase}
+.prop span{font-family:var(--f-disp);font-size:clamp(26px,3vw,40px);line-height:1}
+.sw{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:16px}
+.sw>div{display:grid;gap:8px;align-content:start}
+.sw .c{aspect-ratio:1/1;border-radius:3px;box-shadow:inset 0 0 0 1px var(--rule)}
+.sw h3{font-size:19px}
+.sw p{font-size:13px;color:var(--dim)}
+.copy{justify-self:start;font:500 11px/1 var(--f-mono);letter-spacing:.06em;background:none;color:var(--fg);border:1px solid var(--rule);
+  border-radius:2px;padding:7px 9px;cursor:pointer}
+.copy:hover{border-color:var(--fg)}
+.copy.done{background:var(--fg);color:var(--bg)}
+@media (max-width:820px){.sw{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:480px){.sw{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.check{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:20px;border:1px solid var(--rule);padding:20px}
+.check .pick{display:grid;gap:16px;align-content:start}
+.check .row{display:flex;flex-wrap:wrap;gap:6px}
+.check button.p{width:34px;height:34px;border-radius:50%;border:1px solid var(--rule);cursor:pointer;padding:0}
+.check button.p[aria-pressed="true"]{outline:2px solid var(--fg);outline-offset:2px}
+.preview{border-radius:3px;padding:24px;display:grid;gap:10px;align-content:center;min-height:180px}
+.preview .pv-l{font-family:var(--f-disp);font-size:30px;line-height:1.05}
+.preview .pv-s{font-size:14px}
+.verdict{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.verdict b{font:600 22px/1 var(--f-mono)}
+.verdict span{font-size:14px;color:var(--dim)}
+@media (max-width:720px){.check{grid-template-columns:minmax(0,1fr)}}
+
+/* ── 05 typeface ── */
+.faces{border-top:1px solid var(--rule)}
+.face{display:grid;grid-template-columns:200px minmax(0,1fr);gap:24px;padding:28px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.face .who{display:grid;gap:6px}
+.face .who b{font-weight:600}
+.face .who span{font-size:14px;color:var(--dim)}
+.sp-d{font-family:var(--f-disp);font-size:clamp(38px,5vw,62px);line-height:1;letter-spacing:-.02em}
+.sp-t{font-size:18px;line-height:1.6;max-width:52ch}
+.sp-m{font:500 13px/1.6 var(--f-mono);letter-spacing:.2em;text-transform:uppercase}
+@media (max-width:720px){.face{grid-template-columns:minmax(0,1fr);gap:10px}}
+.minis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}
+.mini{border:1px solid var(--rule);padding:18px;display:grid;gap:10px;align-content:start}
+.mini .ex{font-family:var(--f-disp);font-size:30px;line-height:1.02}
+.mini .ex.m{font:500 26px/1 var(--f-mono)}
+@media (max-width:620px){.minis{grid-template-columns:minmax(0,1fr)}}
+
+/* ── 06 voice ── */
+.pr{border-top:1px solid var(--rule)}
+.pr>div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);gap:20px;padding:20px 0;border-bottom:1px solid var(--rule)}
+.pr h3{font-size:21px}
+.pr .y,.pr .n{font-size:15px;display:grid;gap:4px}
+.pr .n{color:var(--faint)}
+.pr .n q{text-decoration:line-through;text-decoration-thickness:1px}
+.pr q{quotes:"\201C" "\201D"}
+@media (max-width:760px){.pr>div{grid-template-columns:minmax(0,1fr);gap:8px}}
+.words{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:28px}
+.words div{border-top:1px solid var(--fg);padding-top:12px;font-size:15px;line-height:1.9}
+.words div:last-child{color:var(--faint)}
+
+/* ── 07 culture ── */
+.refs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border-top:1px solid var(--rule)}
+.refs>div{padding:18px 18px 20px 0;border-bottom:1px solid var(--rule);display:grid;gap:6px}
+.refs>div:nth-child(even){padding-left:18px;border-left:1px solid var(--rule)}
+.refs p{font-size:14px;color:var(--dim)}
+@media (max-width:620px){.refs{grid-template-columns:minmax(0,1fr)}.refs>div:nth-child(even){padding-left:0;border-left:0}}
+
+/* ── 08 imagery ── */
+.imgs{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px}
+.imgs figure{margin:0;display:grid;gap:8px}
+.imgs img{width:100%;height:clamp(150px,21vw,290px);object-fit:cover;border-radius:3px}
+.imgs figcaption{font-size:13px;color:var(--dim)}
+@media (max-width:720px){.imgs{grid-template-columns:repeat(2,minmax(0,1fr))}.imgs figure:first-child{grid-column:1/-1}}
+
+/* ── 09 components: every stage is the brand's own ground ── */
+.stage{background:var(--b-ink);color:var(--b-bone);border-radius:3px;padding:clamp(22px,4vw,40px)}
+.stage.paper{background:var(--b-paper);color:var(--b-pink)}
+.stage .lbl{color:rgba(239,234,225,.5)}
+.stage.paper .lbl{color:rgba(16,47,39,.5)}
+.comp{display:grid;gap:14px;margin-top:44px}
+.comp:first-of-type{margin-top:0}
+.comp>.lbl{color:var(--faint)}
+.row-btn{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:12px;padding:14px 24px;border-radius:999px;border:1px solid rgba(239,234,225,.9);
+  background:none;color:var(--b-bone);font:600 11px/1 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;cursor:pointer;
+  transition:background .3s,color .3s}
+.btn::after{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.7}
+.btn:hover,.btn:focus-visible{background:var(--b-bone);color:var(--b-ink)}
+.btn.q{border:0;box-shadow:inset 0 0 0 1px rgba(239,234,225,.2);color:rgba(239,234,225,.66);font-size:10px;font-weight:400;letter-spacing:.18em;padding:12px 22px}
+.btn.q::after{opacity:.45}
+.btn.q:hover,.btn.q:focus-visible{background:rgba(239,234,225,.05);color:rgba(239,234,225,.92);box-shadow:inset 0 0 0 1px rgba(239,234,225,.4)}
+.stage.paper .btn{border-color:var(--b-pink);color:var(--b-pink)}
+.stage.paper .btn:hover,.stage.paper .btn:focus-visible{background:var(--b-pink);color:var(--b-paper)}
+.stage :focus-visible{outline:1px solid rgba(239,234,225,.5);outline-offset:4px}
+.stage.paper :focus-visible{outline-color:rgba(16,47,39,.5)}
+.langs{display:flex;gap:4px}
+.langs button{font:600 11px/1 var(--f-mono);letter-spacing:.12em;padding:9px 10px;border-radius:3px;border:0;background:none;color:rgba(239,234,225,.55);cursor:pointer}
+.langs button[aria-pressed="true"]{background:rgba(239,234,225,.12);color:var(--b-bone)}
+.lang-h{font-family:var(--f-disp);font-size:clamp(34px,4.6vw,56px);line-height:.92;letter-spacing:-.025em;margin-top:22px}
+.lang-h em{font-style:italic}
+.opener{display:grid;gap:14px;justify-items:center;text-align:center}
+.opener .eb{font:600 11px/1 var(--f-mono);letter-spacing:.26em;text-transform:uppercase;color:rgba(189,144,89,.78)}
+.opener .hd{font-family:var(--f-disp);font-size:clamp(34px,4.4vw,52px);line-height:1.02;letter-spacing:-.022em}
+.opener .ld{color:rgba(239,234,225,.62);font-size:15px;max-width:44ch}
+.ladder{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:34px}
+.rg{display:grid;gap:12px;align-content:start;padding-inline:clamp(14px,2.4vw,30px)}
+.rg:first-child{padding-left:0}.rg:last-child{padding-right:0}
+.rg .st{font:600 10px/1 var(--f-mono);letter-spacing:.24em;text-transform:uppercase;color:rgba(189,144,89,.7)}
+.rg.lead .st{color:var(--b-amber)}
+.rg .nm{font-family:var(--f-disp);font-size:24px;line-height:1.1;letter-spacing:-.018em}
+.rg .tm{font-size:13.5px;line-height:1.55;color:rgba(239,234,225,.62)}
+.rg .cost{padding-left:16px;display:grid;gap:6px}
+.rg .pr{font-family:var(--f-disp);font-size:clamp(32px,3vw,40px);line-height:1;letter-spacing:-.03em}
+.rg .pr .cur{font-size:.5em;vertical-align:.62em;margin-right:.08em;color:rgba(239,234,225,.7)}
+.rg .wh{font:500 10px/1 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:rgba(239,234,225,.46)}
+.rg .nt{font-size:12.5px;line-height:1.5;color:rgba(239,234,225,.46)}
+.rg ul{list-style:none;margin:6px 0 0;padding:0}
+.rg li{font-size:13px;line-height:1.45;padding:7px 0;border-top:1px solid rgba(239,234,225,.10);color:rgba(239,234,225,.86)}
+.rg li:last-child{border-bottom:1px solid rgba(239,234,225,.10)}
+.free{display:grid;justify-items:center;gap:14px;margin-top:36px;text-align:center}
+.free p{font-size:13.5px;color:rgba(239,234,225,.62)}
+@media (max-width:760px){.ladder{grid-template-columns:minmax(0,1fr);row-gap:48px}.rg{padding-inline:0}}
+.wb{position:relative;overflow:hidden;border-radius:10px}
+.wb .segs{display:grid;grid-template-columns:30fr 35fr 35fr;gap:1px;background:rgba(239,234,225,.1)}
+.wb .s{min-height:78px;padding:14px;display:flex;align-items:flex-end}
+.wb .s b{font-family:var(--f-disp);font-weight:400;font-size:28px;line-height:1}
+.wb .curtain{position:absolute;inset:0;background:var(--b-ink);transform:translateX(101%)}
+.wb.play .curtain{animation:sweep 1.8s cubic-bezier(.16,1,.3,1) both}
+@keyframes sweep{from{transform:translateX(0)}to{transform:translateX(101%)}}
+.wn{display:grid;grid-template-columns:30fr 35fr 35fr;margin-top:10px}
+.wn span{font:400 10px/1.4 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:rgba(239,234,225,.6);padding-inline:14px 6px}
+.dim{display:grid;grid-template-columns:65fr 35fr;margin-bottom:10px}
+.dim div{display:flex;align-items:center;gap:10px;font:500 10px/1 var(--f-mono);color:rgba(239,234,225,.46)}
+.dim div::before,.dim div::after{content:"";flex:1;height:1px;background:rgba(239,234,225,.22)}
+.dim i{font:400 30px/1 var(--f-disp);color:var(--b-bone);font-style:normal}
+@media (prefers-reduced-motion:reduce){.wb.play .curtain{animation:none;transform:translateX(101%)}.btn{transition:none}}
+
+/* on the dark working book the page is nearly ink already, so a stage
+   and the hero take a hairline, or their edges disappear */
+body.master .stage:not(.paper),body.master .t-ink,body.master .hero{box-shadow:inset 0 0 0 1px var(--rule)}
+
+/* ── 10 applications ── */
+.apps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 20px}
+.app{display:grid;gap:12px;align-content:start}
+.app .th{border-radius:3px;overflow:hidden;background:var(--panel);aspect-ratio:16/10;display:grid;place-items:center}
+.app .th img{width:100%;height:100%;object-fit:cover}
+.app .th.doc img{width:auto;height:88%;object-fit:contain;box-shadow:0 6px 24px rgba(0,0,0,.25)}
+.app ul{margin:0;padding-left:18px;font-size:14px;color:var(--dim);display:grid;gap:4px}
+.sig{background:#fff;color:#151515;padding:22px;display:grid;gap:4px;align-content:center;font-size:13px;line-height:1.5}
+.sig .n{font:400 21px/1.1 var(--f-disp)}
+.sig .w{font:500 10px/1 var(--f-mono);letter-spacing:.32em;margin:6px 0 8px}
+.app.wide{grid-column:1/-1}
+.app .th.card{aspect-ratio:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(12px,3vw,32px);padding:clamp(20px,5vw,56px)}
+.app .th.card img{width:100%;height:auto;object-fit:initial;border-radius:2px;box-shadow:0 2px 4px rgba(0,0,0,.18),0 12px 30px rgba(0,0,0,.2)}
+@media (max-width:640px){.apps{grid-template-columns:minmax(0,1fr)}}
+
+/* ── 11 files ── */
+.tbl{width:100%;border-collapse:collapse;font-size:15px}
+.tblw{overflow-x:auto}
+.tbl th,.tbl td{text-align:left;padding:11px 12px 11px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+.tbl th{font:500 10px/1.3 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint);font-weight:500}
+.tbl td.m{font-family:var(--f-mono);font-size:13px}
+.tbl.wide{min-width:760px}
+.contact{display:flex;flex-wrap:wrap;gap:12px;align-items:center;font-size:17px}
+.contact span{user-select:all}
+
+/* ── shared controls: segmented buttons in the edition's own two values ── */
+.seg{display:inline-flex;flex-wrap:wrap;gap:4px;padding:3px;border:1px solid var(--rule);border-radius:4px}
+.seg button{font:500 11px/1 var(--f-mono);letter-spacing:.08em;padding:8px 11px;border:0;border-radius:2px;background:none;color:var(--dim);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.bar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;margin-bottom:14px}
+
+/* ── 03 mark: anatomy, versions, size test ── */
+.anat{background:var(--b-ink);border-radius:3px;padding:clamp(36px,6vw,64px) clamp(20px,5vw,56px) clamp(40px,6vw,64px)}
+.anat .fig{position:relative;width:min(540px,100%);margin:0 auto}
+.anat .fig img{width:100%}
+.anat .dot{position:absolute;transform:translate(-50%,-50%);width:22px;height:22px;border-radius:50%;display:grid;place-items:center;
+  background:var(--b-ink);border:1px solid rgba(239,234,225,.7);color:var(--b-bone);font:600 10px/1 var(--f-mono)}
+ol.legend{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px;counter-reset:l}
+ol.legend li{display:grid;grid-template-columns:30px minmax(0,1fr);padding:12px 0;border-bottom:1px solid var(--rule);counter-increment:l;font-size:15px}
+ol.legend li::before{content:counter(l);font:600 11px/1.7 var(--f-mono);color:var(--accent)}
+ol.legend b{font-weight:600}
+@media (max-width:640px){ol.legend{grid-template-columns:minmax(0,1fr)}}
+.vers{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.ver{border:1px solid var(--rule);display:grid;grid-template-rows:auto 1fr}
+.ver .tile{min-height:0;aspect-ratio:16/9;border-radius:0}
+.ver .tile img.fan{width:62%}
+.ver .slot{display:grid;place-items:center;aspect-ratio:16/9;border-bottom:1px dashed var(--rule);font:500 10px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.ver .tx{padding:14px 16px 16px;display:grid;gap:6px;align-content:start}
+.ver .tx p{font-size:14px;color:var(--dim)}
+.ver dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:6px 0 0;font-size:13px}
+.ver dt{font:500 10px/1.6 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.ver dd{margin:0}
+.sizes{display:flex;flex-wrap:wrap;align-items:flex-end;gap:clamp(18px,3.4vw,40px);padding:clamp(28px,5vw,48px) clamp(20px,4vw,40px)}
+.sizes figure{margin:0;display:grid;gap:10px;justify-items:start}
+.sizes figcaption{font:500 10px/1 var(--f-mono);letter-spacing:.12em;color:rgba(239,234,225,.6)}
+.sizes figure.low figcaption{color:rgba(239,234,225,.38)}
+.sizes.sil img{filter:brightness(0) invert(.93)}
+
+/* ── 06 space and shape ── */
+.scale{display:grid;gap:0;border-top:1px solid var(--rule)}
+.scale>div{display:grid;grid-template-columns:64px minmax(0,1fr) minmax(0,1.3fr);gap:16px;align-items:center;padding:10px 0;border-bottom:1px solid var(--rule)}
+.scale b{font:600 13px/1 var(--f-mono)}
+.scale i{display:block;height:10px;background:var(--fg);border-radius:1px}
+.scale span{font-size:14px;color:var(--dim)}
+@media (max-width:620px){.scale>div{grid-template-columns:48px minmax(0,1fr)}.scale span{grid-column:1/-1}}
+.meas{border:1px solid var(--rule);padding:clamp(18px,3vw,28px);overflow:hidden}
+.meas input{width:100%;accent-color:var(--fg)}
+.meas .txt{font-size:16px;line-height:1.55;margin-top:18px;max-width:100%;transition:width .15s}
+.meas .out{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.meas .out b{font:600 22px/1 var(--f-mono)}
+.meas .out span{font-size:14px;color:var(--dim)}
+.shapes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.shapes figure{margin:0;display:grid;gap:10px;align-content:start}
+.shapes .sp{height:96px;background:var(--panel);box-shadow:inset 0 0 0 1px var(--rule)}
+.shapes figcaption{font-size:14px}
+.shapes figcaption span{display:block;font-size:13px;color:var(--dim)}
+@media (max-width:720px){.shapes{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.rulew{display:grid;gap:18px;margin-top:8px}
+.rulew div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:16px;align-items:center;font-size:14px;color:var(--dim)}
+.rulew hr{border:0;margin:0}
+
+/* ── 07 documents: pages drawn to scale. Inside a page one unit is one
+   millimetre (A4) or one pixel (the 1920 deck), so every figure in the
+   spec table is the figure in the drawing ── */
+.desk{background:var(--panel);border-radius:3px;padding:clamp(18px,4vw,44px);display:grid;place-items:center;min-height:200px}
+.pg{position:relative;container-type:inline-size;width:min(460px,100%);aspect-ratio:210/297;overflow:hidden;background:#FFFFFF;color:#102F27;
+  box-shadow:0 1px 2px rgba(0,0,0,.14),0 14px 36px rgba(0,0,0,.18);
+  --u:calc(100cqw / 210);
+  --s-title:14.11;--l-title:15.875;--s-head:7.761;--l-head:10.583;--s-lede:5.292;--l-lede:7.056;
+  --s-body:3.528;--l-body:5.2917;--s-note:2.822;--l-note:4.233;--s-lbl:2.822;--l-lbl:5.2917;
+  --gx:20;--gy:20;--gw:170;--gh:254;--gp:14.5;--gc:10.5;--bp:5.2917}
+.pg.slide{aspect-ratio:16/9;width:min(760px,100%);background:#EFEAE1;--u:calc(100cqw / 1920);
+  --s-title:96;--l-title:100;--s-head:56;--l-head:60;--s-lede:36;--l-lede:48;--s-body:26;--l-body:40;--s-note:20;--l-note:30;--s-lbl:16;--l-lbl:40;
+  --gx:140;--gy:100;--gw:1640;--gh:880;--gp:140;--gc:100;--bp:40}
+.pg>*{position:absolute;margin:0}
+.pg img{display:block;width:100%}
+.pg .t-title{font:400 calc(var(--u) * var(--s-title))/calc(var(--u) * var(--l-title)) var(--f-disp);letter-spacing:-.015em}
+.pg .t-head{font:400 calc(var(--u) * var(--s-head))/calc(var(--u) * var(--l-head)) var(--f-disp);letter-spacing:-.01em}
+.pg .t-lede{font:400 calc(var(--u) * var(--s-lede))/calc(var(--u) * var(--l-lede)) var(--f-disp)}
+.pg .t-body{font:400 calc(var(--u) * var(--s-body))/calc(var(--u) * var(--l-body)) var(--f-text)}
+.pg .t-body p+p{margin-top:calc(var(--u) * var(--l-body))}
+.pg .t-note{font:400 calc(var(--u) * var(--s-note))/calc(var(--u) * var(--l-note)) var(--f-text);color:rgba(16,47,39,.72)}
+.pg .t-lbl{font:500 calc(var(--u) * var(--s-lbl))/calc(var(--u) * var(--l-lbl)) var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(16,47,39,.7)}
+.pg .t-lbl.mk{color:#7A5530}
+.pg .w5{font-weight:500}
+.pg .foot{display:flex;justify-content:space-between}
+.pg .rl{border-top:calc(var(--u) * .265) solid #102F27}
+.pg.slide .rl{border-top-width:2px}
+.pg .flds{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;column-gap:calc(var(--u) * 4)}
+.pg .trow{display:grid;grid-template-columns:5fr 3fr 2fr;border-bottom:calc(var(--u) * .09) solid rgba(16,47,39,.2)}
+.pg .trow:first-child{border-top:calc(var(--u) * .265) solid #102F27}
+.pg .kick{display:flex;align-items:center;gap:calc(var(--u) * 24)}
+.pg .kick::after{content:"";flex:1;border-top:1px solid rgba(16,47,39,.18)}
+.pg .ov{inset:auto;left:calc(var(--u) * var(--gx));top:calc(var(--u) * var(--gy));width:calc(var(--u) * var(--gw));height:calc(var(--u) * var(--gh));
+  pointer-events:none;opacity:0;transition:opacity .25s}
+.pg .ov-g{background:repeating-linear-gradient(90deg,rgba(189,144,89,.18) 0 calc(var(--u) * var(--gc)),transparent calc(var(--u) * var(--gc)) calc(var(--u) * var(--gp)));
+  outline:1px dashed rgba(122,85,48,.55)}
+.pg .ov-b{background:repeating-linear-gradient(180deg,transparent 0 calc(var(--u) * var(--bp) - 1px),rgba(122,85,48,.4) calc(var(--u) * var(--bp) - 1px) calc(var(--u) * var(--bp)))}
+.pg .win{border:1px dashed rgba(122,85,48,.7);opacity:0;transition:opacity .25s}
+.desk.g .ov-g,.desk.g .win,.desk.b .ov-b{opacity:1}
+.pair{display:flex;flex-wrap:wrap;gap:clamp(16px,3vw,32px);justify-content:center;width:100%}
+.pg.card{aspect-ratio:85/45;width:min(380px,100%);background:#EFEAE1;--u:calc(100cqw / 85);
+  --gx:6;--gy:6;--gw:73;--gh:33;--gp:73;--gc:73;--bp:3.528}
+.pg.card .c-name{font:400 calc(var(--u) * 5.292)/1 var(--f-disp);letter-spacing:-.01em}
+.pg.card .c-role{font:500 calc(var(--u) * 2.646)/1 var(--f-text);letter-spacing:.02em}
+.pg.card .c-ct{font:400 calc(var(--u) * 2.469)/calc(var(--u) * 3.528) var(--f-mono);letter-spacing:.02em}
+.pg.card .emb{filter:drop-shadow(calc(var(--u) * -.12) calc(var(--u) * -.12) 0 rgba(255,255,255,.95)) drop-shadow(calc(var(--u) * .16) calc(var(--u) * .2) calc(var(--u) * .1) rgba(70,52,30,.32)) drop-shadow(calc(var(--u) * .3) calc(var(--u) * .4) calc(var(--u) * .5) rgba(70,52,30,.12))}
+.pg.card .emb i{position:absolute;inset:0;background:#EFEAE1;-webkit-mask:url(img/eliria-mark-1-600.webp) center/contain no-repeat;mask:url(img/eliria-mark-1-600.webp) center/contain no-repeat}
+.pg.card .side{left:calc(var(--u) * 3);bottom:calc(var(--u) * -6);font:500 10px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(16,47,39,.45)}
+@media (prefers-reduced-motion:reduce){.pg .ov,.pg .win{transition:none}}
+.app .th .pg{width:auto;height:88%;box-shadow:0 6px 24px rgba(0,0,0,.25)}
+.app .th .pg.slide{width:84%;height:auto}
+
+/* ── 13 files: the Drive tree and the name builder ── */
+.tree{font:400 13px/1.85 var(--f-mono);border:1px solid var(--rule);padding:18px 20px;overflow-x:auto;white-space:pre;color:var(--fg)}
+.tree .c{color:var(--faint)}
+.tree .f{color:var(--dim)}
+.namer{border:1px solid var(--rule);padding:clamp(18px,3vw,26px);display:grid;gap:18px}
+.namer .ins{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.namer label{display:grid;gap:6px;font:500 10px/1.3 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.namer input,.namer select{font:400 14px/1.2 var(--f-text);color:var(--fg);background:var(--bg);border:1px solid var(--rule);border-radius:3px;padding:9px 10px;min-width:0;width:100%}
+.namer input:focus,.namer select:focus{outline:2px solid var(--fg);outline-offset:1px}
+.namer .res{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding-top:16px;border-top:1px solid var(--rule)}
+.namer output{font:500 clamp(13px,1.6vw,16px)/1.4 var(--f-mono);word-break:break-all}
+.namer .hint{font-size:13px;color:var(--dim)}
+
+/* ── downloads: each button opens one file. Fonts open Google Fonts;
+   every other file opens its own Drive item. A file that does not exist
+   yet keeps its button, dashed and not clickable. No button opens the
+   folder. A pill, because a download is an action ── */
+.dls{display:grid;gap:6px;margin-top:16px;max-width:340px}
+.dl{display:grid;grid-template-columns:4.2em minmax(0,1fr) auto;align-items:baseline;gap:8px;padding:9px 14px 8px;border:1px solid var(--fg);border-radius:999px;
+  font:500 11px/1 var(--f-mono);letter-spacing:.04em;color:var(--fg);text-decoration:none;white-space:nowrap;transition:background .2s,color .2s}
+.dl b{font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.dl i{font-style:normal;color:var(--faint);text-align:right}
+a.dl:hover,a.dl:focus-visible{background:var(--fg);color:var(--bg)}
+a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
+.dl.off{border:1px dashed var(--rule);color:var(--faint);cursor:not-allowed;user-select:none}
+.dl.off i::before{content:"· "}
+.ver .dls{margin-top:10px}
+.face .who .dls{margin-top:6px;max-width:220px}
+.dls[data-for]{margin-inline:auto}
+.dls[hidden]{display:none}
+@media (prefers-reduced-motion:reduce){.dl{transition:none}}
 </style>
 </head>
-<body>
-<a class="skip" href="#um">Ir para o conteúdo</a>
-
-<header class="cover" id="capa">
-  <div role="img" aria-label="Eliria: o símbolo em ouro sobre a assinatura">
-    <img class="mark" src="img/eliria-mark-1-1200.webp" alt="" width="1200" height="565">
-    <img class="wmk" src="img/eliria-wordmark-paper-1.svg" alt="" width="1012" height="72">
-  </div>
-  <h1>Livro da marca</h1>
-  <p class="stmt">Eliria diferencia ocasiões com alta classe, ligando gestos de reconhecimento no tempo. Este livro diz como a marca é usada, para que quem fizer algo em seu nome acerte da primeira vez.</p>
-  <dl class="meta">
-    <div><dt>Edição</dt><dd>0.1, rascunho</dd></div>
-    <div><dt>Data</dt><dd>19 nov 2026</dd></div>
-    <div><dt>Marca</dt><dd>Eliria · Thalla Eliria</dd></div>
-    <div><dt>Setor</dt><dd>Joias cerimoniais</dd></div>
-  </dl>
-</header>
-
+<body class="public">
 <div class="shell">
-<nav class="side" aria-label="Índice">
+<nav class="side" aria-label="Sumário">
+  <div class="brand"><img src="img/eliria-mark-1-600.webp" alt="" width="600" height="282"><span>ELIRIA</span></div>
   <ol>
-    <li><a href="#um"><span class="nn">01</span>Em uma página</a></li>
-    <li><a href="#mensagem"><span class="nn">02</span>Mensagem</a></li>
-    <li><a href="#marca"><span class="nn">03</span>A marca</a></li>
-    <li><a href="#cores"><span class="nn">04</span>Cores</a></li>
-    <li><a href="#tipografia"><span class="nn">05</span>Tipografia</a></li>
-    <li><a href="#imagens"><span class="nn">06</span>Imagens</a></li>
-    <li><a href="#voz"><span class="nn">07</span>Voz</a></li>
-    <li><a href="#cuidados"><span class="nn">08</span>Cuidados</a></li>
-    <li><a href="#aplicacoes"><span class="nn">09</span>Aplicações</a></li>
-    <li><a href="#arquivos"><span class="nn">10</span>Arquivos</a></li>
+    <li><a href="#cover"><span class="nn">00</span>Capa</a></li>
+    <li><a href="#onepage"><span class="nn">01</span>Em uma página</a></li>
+    <li><a href="#message"><span class="nn">02</span>Mensagem</a></li>
+    <li><a href="#mark"><span class="nn">03</span>Marca</a></li>
+    <li><a href="#colour"><span class="nn">04</span>Cor</a></li>
+    <li><a href="#type"><span class="nn">05</span>Tipografia</a></li>
+    <li><a href="#space"><span class="nn">06</span>Espaço e forma</a></li>
+    <li><a href="#documents"><span class="nn">07</span>Documentos</a></li>
+    <li><a href="#voice"><span class="nn">08</span>Voz</a></li>
+    <li><a href="#imagery"><span class="nn">09</span>Imagem</a></li>
+    <li><a href="#components"><span class="nn">10</span>Componentes</a></li>
+    <li><a href="#applications"><span class="nn">11</span>Aplicações</a></li>
+    <li><a href="#files"><span class="nn">12</span>Arquivos e Drive</a></li>
   </ol>
+  <p class="ed lbl">Edição 0.1</p>
 </nav>
 
 <main>
-<!-- 01 -->
-<section id="um">
-  <div class="sh"><span class="sn">01</span><h2>Em uma página</h2></div>
-  <p class="why">O essencial, para quem só tem um minuto.</p>
-  <div class="op">
-    <div><span class="lbl">O que fazemos</span><p class="say">Diferenciamos ocasiões com alta classe.</p></div>
-    <div><span class="lbl">Como</span><p class="say">Ligando gestos de reconhecimento no tempo.</p></div>
-    <div><span class="lbl">A marca</span><img src="img/eliria-lockup-horizontal-1-1600.webp" alt="Assinatura horizontal da Eliria" width="1600" height="301" style="mix-blend-mode:multiply"></div>
-    <div><span class="lbl">Cores</span><div class="sw"><i style="background:var(--navy)"></i><i style="background:var(--moss)"></i><i style="background:var(--bordo)"></i><i style="background:var(--gold)"></i></div><p style="font-size:13.5px;color:var(--dim)">Azul marítimo, verde musgo, vermelho bordô, ouro.</p></div>
-    <div><span class="lbl">Tipografia</span><p class="say">Playfair Display e Montserrat</p><p style="font-size:13.5px;color:var(--dim)">Carla Sans só na assinatura.</p></div>
-    <div><span class="lbl">Lema</span><p class="say"><i>O mar canta para o Altíssimo.</i></p></div>
+<!-- 00 ───────────────────────────────────────────── -->
+<section class="cover" id="cover">
+  <div class="hero">
+    <div class="lk" role="img" aria-label="Eliria: o símbolo em ouro">
+      <img class="fan" src="img/eliria-mark-1-1200.webp" alt="" width="1200" height="565">
+    </div>
   </div>
-</section>
-
-<!-- 02 -->
-<section id="mensagem">
-  <div class="sh"><span class="sn">02</span><h2>Mensagem</h2></div>
-  <p class="why">A direção da marca em uma frase, e o que cada parte do nome carrega.</p>
-  <dl class="dir">
-    <dt>Verbo</dt><dd>Diferenciamos</dd>
-    <dt>Razão de ser</dt><dd>ocasiões com alta classe,</dd>
-    <dt>Benefício principal</dt><dd>ligando gestos de reconhecimento no tempo.</dd>
-    <dt>Benefícios</dt><dd><ul>
-      <li>Criar expectativa</li><li>Eliminar o trabalho de escolha</li><li>Elevar a relevância dos eventos</li>
-      <li>Aprofundar a exclusividade das ocasiões</li><li>Oferecer coleções anuais limitadas</li><li>Trocar convites por joias</li></ul></dd>
-    <dt>Em uma linha</dt><dd>Vincular ocasiões e joias exclusivas.</dd>
+  <h1>Livro da marca</h1>
+  <p class="stmt">Eliria liga ocasiões e joias exclusivas. Este livro diz como a marca é usada, para que qualquer pessoa que faça algo em seu nome acerte da primeira vez.</p>
+  <dl class="fields">
+    <div><dt>Edição</dt><dd>0.1</dd></div>
+    <div><dt>Data</dt><dd>20 de novembro de 2026</dd></div>
+    <div><dt>Marca</dt><dd>Eliria</dd></div>
+    <div><dt>Feito por</dt><dd>Arvorealta</dd></div>
+    <div><dt>Cobre</dt><dd>Peças, papelaria, redes</dd></div>
   </dl>
-  <div class="names">
-    <div><h3>THALLA</h3><p>Do grego <i>thalassa</i> ou <i>thalatta</i>, o mar: infinito, continuidade e mistério. <i>Thallo</i> quer dizer «eu irei». O som evoca elegância e prestígio.</p></div>
-    <div><h3>ELIRIA</h3><p>De <i>Eli</i>, raiz hebraica que significa «ascendido» ou «meu Deus», sinal de liderança, e de <i>lyrikos</i>, a poesia feita para ser cantada com a lira. Autoridade e elegância poética.</p></div>
-  </div>
-  <div class="motto"><span class="lbl">Thalla Eliria, em outras palavras</span><p>O mar canta para o Altíssimo.</p></div>
 </section>
 
-<!-- 03 -->
-<section id="marca">
+<!-- 01 ───────────────────────────────────────────── -->
+<section id="onepage">
+  <div class="sh"><span class="sn">01</span><h2>A marca em uma página</h2></div>
+  <p class="why">Se você ler só uma parte, leia esta.</p>
+  <div class="two">
+    <div class="block" style="margin-top:0"><span class="lbl">O que fazemos</span><p>Diferenciamos ocasiões com alta classe.</p></div>
+    <div class="block" style="margin-top:0"><span class="lbl">Como</span><p>Ligando gestos de reconhecimento no tempo.</p></div>
+  </div>
+  <div class="four">
+    <div><span class="lbl">Regra 1 · Mensagem</span><span class="k">Uma linha, dita</span><p>O mar canta para o Altíssimo.</p></div>
+    <div><span class="lbl">Regra 2 · Cor · Sugestão</span><span class="k">Sombra, prata, ouro</span><p>Usadas a 70, 20 e 10 por cento.</p></div>
+    <div><span class="lbl">Regra 3 · Tipografia · Sugestão</span><span class="k">Três famílias, três funções</span><p>EB Garamond, Montserrat, Geist Mono.</p></div>
+    <div><span class="lbl">Regra 4 · Cultura</span><span class="k">Ainda não</span><p>Vestuário, música e arte: a definir com a Eliria.</p></div>
+  </div>
+  <ol class="rules">
+    <li><span><b>Nunca altere a marca.</b> Sem cor nova, sem efeito, sem esticar.</span></li>
+    <li><span><b>Só os arquivos novos.</b> Nada da pasta <span class="mono">99 Archive</span> vale como marca, cor ou tipografia.</span></li>
+    <li><span><b>Nunca gere uma imagem da peça.</b> Uma joia mostrada é uma joia fotografada.</span></li>
+  </ol>
+</section>
+
+<!-- 02 ───────────────────────────────────────────── -->
+<section id="message">
+  <div class="sh"><span class="sn">02</span><h2>A mensagem</h2></div>
+  <p class="why">Uma linha que a marca existe para tornar verdade. Ela é dita, nunca explicada.</p>
+  <p class="line">O mar canta<br>para o Altíssimo.</p>
+  <div class="lines">
+    <div><span class="lbl">Em uma frase</span><span class="say">Diferenciamos ocasiões com alta classe, ligando gestos de reconhecimento no tempo.</span></div>
+    <div><span class="lbl">Em uma linha</span><span class="say">Vincular ocasiões e joias exclusivas.</span></div>
+  </div>
+  <div class="two">
+    <div class="block"><span class="lbl">Thalla</span><p>Do grego <em>thalassa</em>, o mar: infinito, continuidade e mistério. <em>Thallo</em> quer dizer «eu irei».</p></div>
+    <div class="block"><span class="lbl">Eliria</span><p>De <em>Eli</em>, raiz hebraica para «ascendido» ou «meu Deus», e de <em>lyrikos</em>, a poesia feita para ser cantada com a lira.</p></div>
+  </div>
+  <div class="versus">
+    <div>Legado</div><div>não tendência</div>
+    <div>Reconhecimento</div><div>não promoção</div>
+    <div>Raro</div><div>não abundante</div>
+    <div>Gravado</div><div>não impresso</div>
+  </div>
+  <ol class="rules">
+    <li><span><b>Use a linha como está escrita.</b> Sem adjetivo a mais, sem palavra trocada.</span></li>
+    <li><span><b>Uma linha por superfície.</b> Uma página, um convite ou um estojo carrega uma mensagem, nunca as duas.</span></li>
+    <li><span><b>Diga, depois mostre.</b> A peça embaixo é a explicação.</span></li>
+  </ol>
+</section>
+
+<!-- 03 ───────────────────────────────────────────── -->
+<section id="mark">
   <div class="sh"><span class="sn">03</span><h2>A marca</h2></div>
-  <p class="why">Cinco versões, cada uma com uma função. O símbolo em ouro é uma peça de metal fotografada, não um desenho: por isso existe também uma versão vetorial em uma cor, para gravar, estampar e bordar.</p>
-  <div class="versions">
-    <div class="ver"><div class="th dark"><img src="img/eliria-mark-1-1200.webp" alt="Símbolo da Eliria em ouro" width="1200" height="565" loading="lazy"></div>
-      <h3>Principal</h3><p>O símbolo em ouro. É a marca em sua forma mais completa: use sempre que a peça for vista de perto e a imagem puder ser impressa ou exibida em cor.</p>
-      <p class="for">Para: site, redes, embalagem, peças de destaque</p>
-      <div class="dl"><a href="https://drive.google.com/file/d/1iYOc10drJN6dpQkN9qmjNnPgGF4ccxP5/view" target="_blank" rel="noopener">PNG 600</a><a href="https://drive.google.com/file/d/10I4jVpgnQDW5TfAC8Ks58X9UZJy-2u0l/view" target="_blank" rel="noopener">PNG 1200</a><a href="https://drive.google.com/file/d/1aHuGfL7El87G_6Kk6OnYrVQuui_twSY7/view" target="_blank" rel="noopener">PNG 2400</a></div></div>
-    <div class="ver"><div class="th white"><img src="img/eliria-lockup-vertical-1-1200.webp" alt="Assinatura vertical: o símbolo sobre ELIRIA" width="1200" height="820" loading="lazy" style="width:76%"></div>
-      <h3>Assinatura vertical</h3><p>O símbolo sobre o nome. A versão de apresentação, para quando há espaço em torno.</p>
-      <p class="for">Para: capas, convites, certificados</p>
-      <div class="dl"><span title="Ainda não está na pasta nova">Ainda não</span></div></div>
-    <div class="ver"><div class="th white"><img src="img/eliria-lockup-horizontal-1-1600.webp" alt="Assinatura horizontal: o símbolo ao lado de ELIRIA" width="1600" height="301" loading="lazy"></div>
-      <h3>Assinatura horizontal</h3><p>O símbolo ao lado do nome. Para faixas estreitas, onde a vertical ficaria pequena demais.</p>
-      <p class="for">Para: cabeçalho do site, assinatura de e-mail, rodapés</p>
-      <div class="dl"><span title="Ainda não está na pasta nova">Ainda não</span></div></div>
-    <div class="ver"><div class="th paper"><img src="img/eliria-symbol-bronze-1.svg" alt="Símbolo em uma cor, vetorial" width="440" height="191" style="width:70%"></div>
-      <h3>Símbolo em uma cor</h3><p>O desenho vetorial do símbolo, em uma só cor. É a versão que vai para o metal, o couro e o tecido.</p>
-      <p class="for">Para: gravação, relevo seco, carimbo, bordado, favicon</p>
-      <div class="dl"><span title="Ainda não está na pasta nova">SVG ainda não</span></div></div>
-    <div class="ver"><div class="th pat" role="img" aria-label="Padrão: o símbolo repetido em grade"></div>
-      <h3>Padrão</h3><p>O símbolo em grade, com uma linha fina entre cada um. Um fundo, nunca a marca em si.</p>
-      <p class="for">Para: interior de estojos, papel de seda, verso de cartões</p>
-      <div class="dl"><span title="Ainda não está na pasta nova">Ainda não</span></div></div>
+  <p class="why">O símbolo em ouro é a assinatura. Aparece uma vez por superfície, em bom tamanho, e nunca é redesenhado.</p>
+  <div class="marks">
+    <div class="tile t-ink"><img class="fan" src="img/eliria-mark-1-600.webp" alt="O símbolo em ouro sobre sombra" width="600" height="282"><span class="lbl">A marca · símbolo em ouro</span></div>
+    <div class="tile t-paper"><span class="wordmark">ainda não</span><span class="lbl">O nome · desenhado, a fornecer</span></div>
+  </div>
+
+  <div class="block"><span class="lbl">Como é feita</span>
+    <div class="anat">
+      <div class="fig">
+        <img src="img/eliria-mark-1-600.webp" alt="O símbolo em ouro, com as suas partes numeradas" width="600" height="282">
+        <span class="dot" style="left:-2%;top:50%">1</span>
+        <span class="dot" style="left:58%;top:24%">2</span>
+        <span class="dot" style="left:58%;top:53%">3</span>
+        <span class="dot" style="left:58%;top:80%">4</span>
+        <span class="dot" style="left:50%;top:calc(100% + 16px)">5</span>
+      </div>
+    </div>
+    <ol class="legend">
+      <li><span><b>A ponta.</b> Tudo parte de um ponto à esquerda e se abre para a direita. É o que faz a peça ler como um objeto em movimento.</span></li>
+      <li><span><b>A lâmina clara.</b> Metal fosco que recebe a luz. É a maior superfície do símbolo.</span></li>
+      <li><span><b>O fio.</b> Uma faixa fina de prata entre as duas lâminas. É o detalhe mais fino, e o primeiro a sumir quando a marca diminui.</span></li>
+      <li><span><b>A lâmina escura.</b> Metal polido que espelha a sombra. O contraste entre as duas lâminas é o que dá volume.</span></li>
+      <li><span><b>A proporção.</b> 2,1 vezes mais larga que alta, com o lado direito cortado reto. Assenta sobre uma linha, por isso se alinha com o texto.</span></li>
+    </ol>
+  </div>
+
+  <div class="block"><span class="lbl">As versões, e a função de cada uma</span>
+    <div class="vers">
+      <div class="ver"><div class="tile t-ink"><img class="fan" src="img/eliria-mark-1-600.webp" alt="" width="600" height="282"></div>
+        <div class="tx"><h3>Principal</h3><p>O símbolo em ouro, como foi renderizado. A assinatura: capas, estojos, o fecho de uma página.</p>
+          <dl><dt>Arquivos</dt><dd>PNG, transparente</dd></dl><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1iYOc10drJN6dpQkN9qmjNnPgGF4ccxP5/view" target="_blank" rel="noopener"><b>PNG</b>600w<i>134 KB</i></a><a class="dl" href="https://drive.google.com/file/d/10I4jVpgnQDW5TfAC8Ks58X9UZJy-2u0l/view" target="_blank" rel="noopener"><b>PNG</b>1200w<i>641 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1aHuGfL7El87G_6Kk6OnYrVQuui_twSY7/view" target="_blank" rel="noopener"><b>PNG</b>2400w<i>1.8 MB</i></a></div></div></div>
+      <div class="ver"><div class="tile t-paper"><span class="wordmark">ainda não</span></div>
+        <div class="tx"><h3>Nome</h3><p>O nome Eliria, desenhado em contornos. Onde o nome precisa ser lido sozinho.</p>
+          <dl><dt>Arquivos</dt><dd>SVG</dd></dl><div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>SVG</b>Nome<i>Ainda não</i></span></div></div></div>
+      <div class="ver"><div class="tile t-paper"><span class="wordmark">ainda não</span></div>
+        <div class="tx"><h3>Símbolo em uma cor</h3><p>O símbolo desenhado em vetor, em uma só cor. Tudo o que o ouro renderizado não pode fazer: gravar, estampar, bordar, relevo seco.</p>
+          <dl><dt>Para</dt><dd>Abaixo de 120 px, gravação, carimbo, relevo seco, favicon</dd><dt>Arquivos</dt><dd>SVG</dd></dl><div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>SVG</b>Símbolo<i>Ainda não</i></span></div></div></div>
+      <div class="ver"><div class="tile t-paper"><span class="wordmark">ainda não</span></div>
+        <div class="tx"><h3>Assinatura</h3><p>O símbolo junto ao nome, como um desenho só. Para os lugares onde a marca e o nome viajam juntos.</p>
+          <dl><dt>Para</dt><dd>Convite, certificado, cartão</dd><dt>Arquivos</dt><dd>SVG</dd></dl><div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>SVG</b>Assinatura<i>Ainda não</i></span></div></div></div>
+      <div class="ver"><div class="tile t-ink"><span class="wordmark" style="color:rgba(239,234,225,.6)">ainda não</span></div>
+        <div class="tx"><h3>Ícone</h3><p>O símbolo em uma cor, num quadrado, para a foto de perfil e a aba do navegador.</p>
+          <dl><dt>Para</dt><dd>Foto de perfil, favicon</dd><dt>Arquivos</dt><dd>PNG, quadrado</dd></dl><div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>PNG</b>Ícone 512<i>Ainda não</i></span></div></div></div>
+    </div>
+  </div>
+
+  <div class="block"><span class="lbl">O teste de tamanho · Sugestão</span>
+    <div class="stage" style="padding:0"><div class="sizes" id="sizes">
+      <figure><img src="img/eliria-mark-1-600.webp" alt="" width="240" height="113" style="width:240px"><figcaption>240 px</figcaption></figure>
+      <figure><img src="img/eliria-mark-1-600.webp" alt="" width="160" height="75" style="width:160px"><figcaption>160 px</figcaption></figure>
+      <figure><img src="img/eliria-mark-1-600.webp" alt="" width="120" height="57" style="width:120px"><figcaption>120 px</figcaption></figure>
+      <figure class="low"><img src="img/eliria-mark-1-600.webp" alt="" width="64" height="30" style="width:64px"><figcaption>64</figcaption></figure>
+      <figure class="low"><img src="img/eliria-mark-1-600.webp" alt="" width="32" height="15" style="width:32px"><figcaption>32</figcaption></figure>
+      <figure class="low"><img src="img/eliria-mark-1-600.webp" alt="" width="16" height="8" style="width:16px"><figcaption>16</figcaption></figure>
+    </div></div>
+    <p class="note">Abaixo de 120 px na tela, ou 25 mm no papel, o fio de prata some e o brilho vira mancha. Nesses tamanhos vai o símbolo em uma cor, que ainda não existe.</p>
+  </div>
+
+  <div class="block"><span class="lbl">Sobre as três cores · Sugestão</span>
+    <div class="grounds">
+      <div class="tile" style="background:#300E02"><img class="fan" src="img/eliria-mark-1-600.webp" alt="" width="600" height="282"><span class="lbl">Sombra</span></div>
+      <div class="tile" style="background:#B4B1A4"><img class="fan" src="img/eliria-mark-1-600.webp" alt="" width="600" height="282"><span class="lbl" style="color:rgba(48,14,2,.7)">Prata</span></div>
+      <div class="tile" style="background:#FFFFFF;box-shadow:inset 0 0 0 1px var(--rule)"><img class="fan" src="img/eliria-mark-1-600.webp" alt="" width="600" height="282"><span class="lbl" style="color:rgba(48,14,2,.6)">Branco</span></div>
+    </div>
+  </div>
+
+  <div class="block"><span class="lbl">Nunca</span>
+    <div class="misuse">
+      <figure class="ok"><div class="tile t-ink"><img class="fan" src="img/eliria-mark-1-600.webp" alt="" width="600" height="282"></div><figcaption>Como foi entregue</figcaption></figure>
+      <figure><div class="tile t-ink x-stretch"><img class="fan" src="img/eliria-mark-1-600.webp" alt="" width="600" height="282"></div><figcaption>Esticada ou achatada</figcaption></figure>
+      <figure><div class="tile t-ink x-hue"><img class="fan" src="img/eliria-mark-1-600.webp" alt="" width="600" height="282"></div><figcaption>Com outra cor</figcaption></figure>
+      <figure><div class="tile t-ink x-fx"><img class="fan" src="img/eliria-mark-1-600.webp" alt="" width="600" height="282"></div><figcaption>Brilho, sombra, efeitos</figcaption></figure>
+      <figure><div class="tile" style="background:#A77448"><img class="fan" src="img/eliria-mark-1-600.webp" alt="" width="600" height="282"></div><figcaption>Sobre um fundo do mesmo tom</figcaption></figure>
+      <figure><div class="tile t-ink x-rot"><img class="fan" src="img/eliria-mark-1-600.webp" alt="" width="600" height="282"></div><figcaption>Girada</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 04 ───────────────────────────────────────────── -->
+<section id="colour">
+  <div class="sh"><span class="sn">04</span><h2>Cor</h2></div>
+  <p class="why">Três cores lidas no próprio símbolo, numa proporção fixa. Sugestão do estúdio: os valores saem do arquivo novo da marca; a escolha final é da Eliria.</p>
+  <div class="prop" role="img" aria-label="Sombra 70 por cento, prata 20 por cento, ouro 10 por cento">
+    <div style="background:#300E02;color:#B4B1A4"><b>Sombra</b><span>70</span></div>
+    <div style="background:#B4B1A4;color:#300E02"><b>Prata</b><span>20</span></div>
+    <div style="background:#A77448;color:#300E02"><b>Ouro</b><span>10</span></div>
+  </div>
+  <div class="sw" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+    <div><div class="c" style="background:#300E02"></div><h3>Sombra</h3><p>A sombra da lâmina escura. O fundo, e o texto sobre prata ou branco.</p><button class="copy" data-v="#300E02">#300E02</button></div>
+    <div><div class="c" style="background:#B4B1A4"></div><h3>Prata</h3><p>O fio entre as lâminas. O segundo fundo, e o texto sobre sombra, a 8:1.</p><button class="copy" data-v="#B4B1A4">#B4B1A4</button></div>
+    <div><div class="c" style="background:#A77448"></div><h3>Ouro</h3><p>O tom médio do metal, para desenhos chapados. Sobre sombra, só títulos grandes.</p><button class="copy" data-v="#A77448">#A77448</button></div>
+  </div>
+  <div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>ASE</b>Paleta<i>Ainda não</i></span></div>
+
+  <div class="block"><span class="lbl">Teste uma combinação</span>
+    <div class="check">
+      <div class="pick">
+        <div><span class="lbl">Texto</span><div class="row" id="ckT"></div></div>
+        <div><span class="lbl">Fundo</span><div class="row" id="ckG"></div></div>
+        <div class="verdict" aria-live="polite"><b id="ckR">8.2:1</b><span id="ckV">Serve para qualquer texto.</span></div>
+      </div>
+      <div class="preview" id="ckP"><span class="pv-l">O mar canta para o Altíssimo.</span><span class="pv-s">Um texto pequeno, a catorze pixels, lê assim.</span></div>
+    </div>
   </div>
   <ol class="rules">
-    <li><span><b>Área de proteção</b> <span class="sug">Sugestão</span> Deixe livre em volta da marca, de cada lado, metade da altura do símbolo. Nada entra nesse espaço.</span></li>
-    <li><span><b>Tamanho mínimo</b> <span class="sug">Sugestão</span> O símbolo em ouro, no mínimo 120 px de largura na tela e 25 mm no papel. Abaixo disso o brilho vira mancha: use o símbolo em uma cor.</span></li>
-    <li><span><b>Fundo</b> O ouro funciona melhor sobre azul marítimo, sobre preto ou sobre papel claro. Evite fundos com fotografia atrás do símbolo.</span></li>
-    <li><span><b>Não altere</b> Não gire, não estique, não troque a cor do ouro, não acrescente sombra nem contorno.</span></li>
+    <li><span><b>Mantenha a proporção.</b> Se o ouro começa a parecer tema, há ouro demais.</span></li>
+    <li><span><b>O ouro chapado nunca é texto sobre prata.</b> Mede 1,9:1 ali; sobre sombra mede 4,4:1, o bastante só para títulos grandes.</span></li>
+    <li><span><b>O metal é o símbolo.</b> O ouro renderizado não vira cor de fundo, de faixa ou de texto.</span></li>
+    <li><span><b>Impresso, sobre branco.</b> Sombra sobre branco mede 17,7:1.</span></li>
   </ol>
 </section>
 
-<!-- 04 -->
-<section id="cores">
-  <div class="sh"><span class="sn">04</span><h2>Cores</h2></div>
-  <p class="why">Quatro cores, cada uma com um sentido. O ouro é o da assinatura, lido nos arquivos da marca. Os valores das outras três são a proposta do estúdio para os nomes que o projeto definiu. <span class="sug">Sugestão</span></p>
-  <div class="swatches">
-    <div class="swatch"><div class="chip" style="background:var(--navy)">Autoridade</div><h3>Azul marítimo</h3><p>O fundo da marca. O mar de Thalla.</p><p class="v">HEX #16263A · RGB 22 38 58</p></div>
-    <div class="swatch"><div class="chip" style="background:var(--moss)">Fortuna</div><h3>Verde musgo</h3><p>Apoio. Natureza e permanência.</p><p class="v">HEX #3F4A33 · RGB 63 74 51</p></div>
-    <div class="swatch"><div class="chip" style="background:var(--bordo)">Status</div><h3>Vermelho bordô</h3><p>Destaque raro. Selos, fitas, lacres.</p><p class="v">HEX #5C1F2B · RGB 92 31 43</p></div>
-    <div class="swatch"><div class="chip" style="background:var(--gold)">Valor</div><h3>Ouro</h3><p>A assinatura. Lido nos arquivos.</p><p class="v">HEX #8E7657 · RGB 142 118 87</p></div>
-  </div>
-  <div class="block"><span class="lbl">Proporção <span class="sug">Sugestão</span></span>
-    <div class="prop"><i style="background:var(--navy)">70</i><i style="background:var(--gold)">20</i><i style="background:var(--bordo)">10</i></div>
-    <p class="why" style="font-size:14.5px">Azul marítimo como fundo, ouro na marca e nos detalhes, bordô em um ponto só. O verde musgo entra no lugar do azul quando a peça pede natureza.</p></div>
-  <ol class="rules">
-    <li><span><b>Texto pequeno não vai em ouro sobre papel claro.</b> O contraste não chega ao que a leitura pede. Ouro é para a marca, títulos grandes e filetes.</span></li>
-  </ol>
-</section>
-
-<!-- 05 -->
-<section id="tipografia">
+<!-- 05 ───────────────────────────────────────────── -->
+<section id="type">
   <div class="sh"><span class="sn">05</span><h2>Tipografia</h2></div>
-  <p class="why">Três famílias no dia a dia e uma reservada para a assinatura. As funções de cada uma são a proposta do estúdio. <span class="sug">Sugestão</span></p>
+  <p class="why">Três famílias, uma função cada. Sugestão do estúdio: as mesmas famílias deste livro, todas gratuitas e de licença aberta, para que qualquer pessoa possa instalá-las.</p>
   <div class="faces">
-    <div class="face"><div><img class="wm" src="img/eliria-wordmark-bronze-1.svg" alt="ELIRIA em Carla Sans" width="1012" height="72"></div>
-      <div><h3>Carla Sans</h3><p>Só a assinatura, com espaçamento largo entre as letras. Não use em textos: o nome é desenhado, não digitado.</p><div class="dl"><span title="Licença a confirmar">Com o estúdio</span></div></div></div>
-    <div class="face"><p class="spec" style="font-family:var(--f-disp)">Coleções oficiais, <i>legado presente</i>.</p>
-      <div><h3>Playfair Display</h3><p>Títulos, nomes de coleções, frases curtas. O itálico para uma palavra que pede ênfase.</p><div class="dl"><a href="https://fonts.google.com/specimen/Playfair+Display" target="_blank" rel="noopener">Google Fonts</a></div></div></div>
-    <div class="face"><p class="spec" style="font-family:var(--f-text);font-size:clamp(20px,2.4vw,26px);line-height:1.5">Cada peça é gravada com o ano e as iniciais do anfitrião.</p>
-      <div><h3>Montserrat</h3><p>Textos corridos, legendas, rótulos em caixa alta com espaçamento.</p><div class="dl"><a href="https://fonts.google.com/specimen/Montserrat" target="_blank" rel="noopener">Google Fonts</a></div></div></div>
-    <div class="face"><p class="spec" style="font-family:'Open Sans Condensed',var(--f-text);font-size:clamp(18px,2vw,22px);line-height:1.5">EDIÇÃO 2026 · Nº 007 / 120</p>
-      <div><h3>Open Sans</h3><p>Apoio técnico: numeração de peças, certificados, tabelas. As versões condensadas cabem em espaços estreitos.</p><div class="dl"><a href="https://fonts.google.com/specimen/Open+Sans" target="_blank" rel="noopener">Google Fonts</a></div></div></div>
+    <div class="face"><div class="who"><b>EB Garamond</b><span>Títulos e nomes de coleções</span><div class="dls"><a class="dl" href="https://fonts.google.com/specimen/EB+Garamond" target="_blank" rel="noopener"><b>Fonte</b>Google Fonts</a></div></div><p class="sp-d">O mar canta para o Altíssimo.</p></div>
+    <div class="face"><div class="who"><b>Montserrat</b><span>Tudo o que é lido</span><div class="dls"><a class="dl" href="https://fonts.google.com/specimen/Montserrat" target="_blank" rel="noopener"><b>Fonte</b>Google Fonts</a></div></div><p class="sp-t">Cada peça é gravada com o ano e as iniciais de quem a recebe.</p></div>
+    <div class="face"><div class="who"><b>Geist Mono</b><span>Rótulos e números</span><div class="dls"><a class="dl" href="https://fonts.google.com/specimen/Geist+Mono" target="_blank" rel="noopener"><b>Fonte</b>Google Fonts</a></div></div><p class="sp-m">COLEÇÃO 2026 · Nº 007</p></div>
   </div>
-</section>
-
-<!-- 06 -->
-<section id="imagens">
-  <div class="sh"><span class="sn">06</span><h2>Imagens</h2></div>
-  <p class="why">Os motivos que a marca pode usar, cada um com o que significa. Uma peça escolhe um motivo, nunca vários.</p>
-  <div class="motifs">
-    <div><h3>Águas</h3><p>Leveza e flexibilidade</p></div>
-    <div><h3>Pássaros</h3><p>Leveza e precisão</p></div>
-    <div><h3>Brasões</h3><p>Família e estabilidade</p></div>
-    <div><h3>Veado</h3><p>Liberdade e bondade</p></div>
-    <div><h3>Cavalos</h3><p>Liberdade e poder</p></div>
-    <div><h3>Chaves</h3><p>Segredo e escassez</p></div>
-    <div><h3>Flores</h3><p>Beleza e leveza</p></div>
-    <div><h3>Coroas</h3><p>Status e vitória</p></div>
-    <div><h3>Estrelas</h3><p>Divindade e escassez</p></div>
-    <div><h3>Borboletas</h3><p>Leveza e fragilidade</p></div>
-    <div><h3>Leões</h3><p>Status e poder</p></div>
+  <div class="minis">
+    <div class="mini"><span class="lbl">Ênfase em itálico, nunca em cor</span><span class="ex">o mar <em>canta</em>.</span></div>
+    <div class="mini"><span class="lbl">Quebre os títulos à mão</span><span class="ex">O mar canta<br>para o Altíssimo.</span></div>
+    <div class="mini"><span class="lbl">Ano e número no serifado</span><span class="ex">2026 · Nº 007</span></div>
+    <div class="mini"><span class="lbl">Em mono, só rótulos</span><span class="ex m">COLEÇÃO 2026</span></div>
   </div>
   <ol class="rules">
-    <li><span><b>Fotografia</b> <span class="sug">Sugestão</span> Luz baixa e quente, fundo escuro, a peça em primeiro plano. O ouro precisa de sombra para brilhar.</span></li>
+    <li><span><b>Rótulos em caixa alta, com espaço largo.</b> Uma frase nunca.</span></li>
+    <li><span><b>Cada quebra de linha num título é escolhida.</b> Não deixe um título quebrar sozinho.</span></li>
+    <li><span><b>O nome Eliria é desenhado, nunca digitado.</b> Até o desenho chegar, use o símbolo sozinho.</span></li>
   </ol>
 </section>
 
-<!-- 07 -->
-<section id="voz">
-  <div class="sh"><span class="sn">07</span><h2>Voz</h2></div>
-  <p class="why">Como a marca fala. <span class="sug">Sugestão</span></p>
-  <div class="cols" style="margin-top:28px">
-    <div class="card"><h3>Pouco e exato</h3><p>Frases curtas. Um fato por frase. A marca não explica o luxo, mostra.</p></div>
-    <div class="card"><h3>Tempo, não moda</h3><p>Fala de legado, ano, ocasião e reconhecimento. Nunca de tendência ou novidade.</p></div>
-    <div class="card"><h3>Reverência</h3><p>Trata quem recebe a peça como convidado de honra. Sem pressa e sem preço em destaque.</p></div>
+<!-- 06 ───────────────────────────────────────────── -->
+<section id="space">
+  <div class="sh"><span class="sn">06</span><h2>Espaço e forma</h2></div>
+  <p class="why">O espaço é o que torna uma página agradável de ler. Uma unidade, uma largura de linha que o olho acompanha, dois pesos de filete e quatro formas, cada uma com uma função. Sugestão do estúdio.</p>
+
+  <div class="block" style="margin-top:0"><span class="lbl">Uma unidade, e os passos que ela faz</span>
+    <div class="scale">
+      <div><b>8</b><i style="width:7.7%"></i><span>Um rótulo e o que ele nomeia. São um objeto só.</span></div>
+      <div><b>16</b><i style="width:15.4%"></i><span>Linhas dentro de um grupo.</span></div>
+      <div><b>24</b><i style="width:23%"></i><span>Grupos dentro de um bloco.</span></div>
+      <div><b>40</b><i style="width:38.5%"></i><span>Entre blocos.</span></div>
+      <div><b>64</b><i style="width:61.5%"></i><span>Abre uma seção.</span></div>
+      <div><b>104</b><i style="width:100%"></i><span>O ar em volta de uma tela inteira.</span></div>
+    </div>
+    <p class="note">Pixels de tela. Acima de 24, cada passo é cerca de 1,6 vez o anterior, então um espaço maior sempre separa algo maior. Num documento a unidade é a linha de base, 15 pt, e o espaço se conta em linhas.</p>
   </div>
-  <div class="cols" style="margin-top:20px">
-    <div><span class="lbl">Dizemos</span><p style="margin-top:8px">coleção oficial · legado · reconhecimento · ocasião · gravado · numerado · exclusivo</p></div>
-    <div><span class="lbl">Evitamos</span><p style="margin-top:8px">promoção · desconto · barato · tendência · imperdível</p></div>
+
+  <div class="block"><span class="lbl">A largura da linha</span>
+    <div class="meas">
+      <div class="out" aria-live="polite"><b id="msN">62</b><span id="msV">caracteres por linha. Confortável.</span></div>
+      <input type="range" id="msR" min="28" max="110" value="62" aria-label="Largura da linha em caracteres" style="margin-top:14px">
+      <p class="txt" id="msT">Uma peça Eliria é entregue numa ocasião, com o ano e as iniciais de quem a recebe. O convite, o certificado e o estojo chegam antes dela e falam por ela. Uma página na largura certa é lida até o fim, porque o olho encontra o começo da linha seguinte sem procurar.</p>
+    </div>
+  </div>
+
+  <div class="block"><span class="lbl">Quatro formas</span>
+    <div class="shapes">
+      <figure><div class="sp" style="border-radius:0"></div><figcaption>Reto<span>Documentos e impressos. O papel tem cantos.</span></figcaption></figure>
+      <figure><div class="sp" style="border-radius:3px"></div><figcaption>3 px<span>Fotografias e vídeo.</span></figcaption></figure>
+      <figure><div class="sp" style="border-radius:16px"></div><figcaption>16 px<span>Cartões e painéis na tela.</span></figcaption></figure>
+      <figure><div class="sp" style="border-radius:999px;height:52px;margin-top:22px;margin-bottom:22px"></div><figcaption>Pílula<span>Ações, e mais nada.</span></figcaption></figure>
+    </div>
+  </div>
+
+  <div class="block"><span class="lbl">Dois pesos de filete</span>
+    <div class="rulew">
+      <div><hr style="border-top:2px solid var(--fg)"><span><b style="color:var(--fg)">Fecha.</b> 0,75 pt em tinta no impresso, 1 a 2 px na tela. Acima do bloco de título e abaixo do último.</span></div>
+      <div><hr style="border-top:1px solid var(--rule)"><span><b style="color:var(--fg)">Divide.</b> 0,25 pt a 20 por cento no impresso, 1 px a 14 por cento na tela. Entre linhas de uma tabela.</span></div>
+    </div>
+  </div>
+
+  <ol class="rules">
+    <li><span><b>Todo espaço está na escala.</b> Se um espaço não é um dos passos, está errado.</span></li>
+    <li><span><b>O espaço diz o que anda junto.</b> O espaço dentro de um grupo é sempre menor que o espaço em volta.</span></li>
+    <li><span><b>De 45 a 75 caracteres por linha, 62 como alvo.</b> Texto corrido com entrelinha de 1,5, títulos de 1,0 a 1,05.</span></li>
+    <li><span><b>Dois filetes, nunca um terceiro.</b> Um terceiro peso é enfeite.</span></li>
+    <li><span><b>A forma diz o que faz.</b> Uma pílula se aperta; um retângulo se lê.</span></li>
+  </ol>
+</section>
+
+<!-- 07 ───────────────────────────────────────────── -->
+<section id="documents">
+  <div class="sh"><span class="sn">07</span><h2>Documentos</h2></div>
+  <p class="why">Um sistema para tudo o que a Eliria entrega em papel: carta, convite, certificado e cartão, nas três famílias. Toda página é feita sobre a mesma grade, para que o leitor a aprenda uma vez. Sugestão do estúdio; os textos dos desenhos são exemplos.</p>
+
+  <div class="bar">
+    <div class="seg" role="group" aria-label="Página" id="pgPick"><button type="button" aria-pressed="true" data-p="letter">Carta</button><button type="button" aria-pressed="false" data-p="cover">Convite</button><button type="button" aria-pressed="false" data-p="page">Certificado</button><button type="button" aria-pressed="false" data-p="card">Cartão</button></div>
+    <div class="seg" role="group" aria-label="Guias" id="pgGuide"><button type="button" aria-pressed="false" data-g="g">Grade</button><button type="button" aria-pressed="false" data-g="b">Linha de base</button></div>
+  </div>
+  <div class="desk" id="desk"></div>
+  <div class="dls" data-for="letter"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>DOTX</b>Carta<i>Ainda não</i></span></div>
+  <div class="dls" data-for="cover" hidden><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>PDF</b>Convite<i>Ainda não</i></span></div>
+  <div class="dls" data-for="page" hidden><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>DOTX</b>Certificado<i>Ainda não</i></span></div>
+  <div class="dls" data-for="card" hidden><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>PDF</b>Cartão<i>Ainda não</i></span></div>
+  <p class="note">Desenhado em escala: dentro da página uma unidade é um milímetro; o cartão aparece no corte, então cada medida abaixo é a medida do desenho. Ligue a grade e a linha de base para ver o que segura a página.</p>
+
+  <div class="block"><span class="lbl">As páginas</span>
+    <div class="tblw"><table class="tbl wide">
+      <thead><tr><th></th><th>Página</th><th>Margens</th><th>Grade</th><th>Linha de base</th><th>Coluna de leitura</th></tr></thead>
+      <tbody>
+        <tr><td>Carta, convite, certificado</td><td class="m">A4 · 210 × 297 mm</td><td>20 mm em cima e dos lados, 23 mm embaixo</td><td>12 colunas de 10,5 mm, entrelinhas de 4 mm</td><td class="m">15 pt · 48 linhas</td><td>Colunas 5 a 12: 112 mm, cerca de 62 caracteres</td></tr>
+        <tr><td>Cartão</td><td class="m">85 × 45 mm + 3 mm de sangria</td><td>6 mm dentro do corte</td><td>Nenhuma: três blocos</td><td class="m">10 pt</td><td>Frente: o símbolo em relevo seco, 40 mm de largura. Verso: nome, função e contato</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="block"><span class="lbl">Os tipos</span>
+    <div class="tblw"><table class="tbl">
+      <thead><tr><th>Função</th><th>Família</th><th>A4</th><th>Uso</th></tr></thead>
+      <tbody>
+        <tr><td>Título</td><td>EB Garamond</td><td class="m">40 / 45 pt</td><td>Uma vez, na capa ou no convite</td></tr>
+        <tr><td>Cabeçalho</td><td>EB Garamond</td><td class="m">22 / 30 pt</td><td>Abre uma seção. Um número num campo também</td></tr>
+        <tr><td>Abertura</td><td>EB Garamond</td><td class="m">15 / 20 pt</td><td>A frase sob um título</td></tr>
+        <tr><td>Texto</td><td>Montserrat</td><td class="m">10 / 15 pt</td><td>Tudo o que é lido</td></tr>
+        <tr><td>Nota</td><td>Montserrat</td><td class="m">8 / 12 pt</td><td>Legendas, notas, fontes</td></tr>
+        <tr><td>Rótulo</td><td>Geist Mono, caixa alta</td><td class="m">8 / 15 pt</td><td>Achado, não lido: nomes de campos, rodapé</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <ol class="rules">
+    <li><span><b>Rótulos à esquerda, texto à direita.</b> O olho procura descendo pela esquerda e lê à direita.</span></li>
+    <li><span><b>Fatos são campos, não frases.</b> Um rótulo com o valor embaixo, para que um ano ou um número se encontre sem ler.</span></li>
+    <li><span><b>O espaço se conta em linhas.</b> Nada entre um rótulo e o seu valor, uma linha entre blocos, duas antes de um cabeçalho.</span></li>
+    <li><span><b>Toda página diz o que é no rodapé.</b> Documento, referência, número da página.</span></li>
+    <li><span><b>A marca uma vez.</b> No alto da carta ou no centro do convite.</span></li>
+    <li><span><b>O cartão é o próprio papel.</b> Nada impresso na frente: o símbolo sobe do papel em relevo seco. O verso leva o nome e o contato.</span></li>
+  </ol>
+</section>
+
+<!-- 08 ───────────────────────────────────────────── -->
+<section id="voice">
+  <div class="sh"><span class="sn">08</span><h2>Voz</h2></div>
+  <p class="why">A marca fala pouco e com exatidão. Não explica o luxo, mostra. Sugestão do estúdio.</p>
+  <div class="pr">
+    <div><h3>Mostre, não elogie</h3><p class="y"><span class="lbl">Escreva</span><q>Gravada com o ano e as iniciais de quem a recebe.</q></p><p class="n"><span class="lbl">Não</span><q>A joia mais exclusiva do mercado.</q></p></div>
+    <div><h3>Tempo, não moda</h3><p class="y"><span class="lbl">Escreva</span><q>Coleção oficial 2026.</q></p><p class="n"><span class="lbl">Não</span><q>A tendência da estação.</q></p></div>
+    <div><h3>Quem recebe é convidado de honra</h3><p class="y"><span class="lbl">Escreva</span><q>Uma peça para quem foi reconhecido.</q></p><p class="n"><span class="lbl">Não</span><q>Aproveite, últimas unidades!</q></p></div>
+    <div><h3>Escreva o que continua verdade</h3><p class="y"><span class="lbl">Escreva</span><q>Cada uma, única.</q></p><p class="n"><span class="lbl">Não</span><q>Cento e vinte peças.</q></p></div>
+  </div>
+  <div class="words">
+    <div><span class="lbl">Dizemos</span><br>coleção oficial · legado · reconhecimento · ocasião · gravado · numerado</div>
+    <div><span class="lbl">Evitamos</span><br>promoção · desconto · barato · tendência · imperdível · luxo acessível</div>
   </div>
 </section>
 
-<!-- 08 -->
-<section id="cuidados">
-  <div class="sh"><span class="sn">08</span><h2>Cuidados</h2></div>
-  <p class="why">A marca representa a identidade e os valores da Eliria. Antes de colocá-la em qualquer objeto, pense em onde ela vai parar.</p>
-  <div class="care">
-    <div><h3>Não pise na marca</h3><p>Tapetes e capachos são pisados, sujos e gastos. A marca não vai onde alguém pode pisar.</p></div>
-    <div><h3>Não descarte a marca</h3><p>Nada de copos, guardanapos ou embalagens descartáveis, nem lixeiras. A marca não vai para o lixo.</p></div>
-    <div><h3>Não exponha a marca</h3><p>Nada de roupas íntimas ou objetos que a liguem a um contexto pessoal demais.</p></div>
-    <div><h3>Não coma a marca</h3><p>Nada de bolos, biscoitos ou alimentos. Uma marca mordida ou cortada perde a dignidade.</p></div>
+<!-- 09 ───────────────────────────────────────────── -->
+<section id="imagery">
+  <div class="sh"><span class="sn">09</span><h2>Imagem e movimento</h2></div>
+  <p class="why">A peça fotografada, mostrada grande. Luz baixa e quente, fundo escuro, a joia em primeiro plano: o ouro precisa de sombra para brilhar. Sugestão do estúdio; as fotografias ainda não existem.</p>
+  <div class="imgs">
+    <figure><div class="tile t-ink" style="height:clamp(150px,21vw,290px)"><img class="fan" src="img/eliria-mark-1-600.webp" alt="O símbolo em ouro sobre sombra" width="600" height="282"></div><figcaption>O metal sobre a sombra: a regra de toda foto.</figcaption></figure>
+    <figure><div class="tile" style="height:clamp(150px,21vw,290px);background:var(--panel)"><span class="lbl" style="position:static">Ainda não</span></div><figcaption>A peça, de perto.</figcaption><div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>JPG</b>Peça<i>Ainda não</i></span></div></figure>
+    <figure><div class="tile" style="height:clamp(150px,21vw,290px);background:var(--panel)"><span class="lbl" style="position:static">Ainda não</span></div><figcaption>A ocasião: a peça na mão de quem a recebe.</figcaption><div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>JPG</b>Ocasião<i>Ainda não</i></span></div></figure>
+  </div>
+  <ol class="rules">
+    <li><span><b>A joia real, fotografada.</b> Nunca uma peça gerada ou montada.</span></li>
+    <li><span><b>Mostre a peça grande.</b> Meça como parte do quadro, não como miniatura ao lado do texto.</span></li>
+    <li><span><b>Sombra antes de luz.</b> Um fundo claro achata o metal.</span></li>
+    <li><span><b>Teste o texto sobre a própria foto.</b> Contra a parte mais clara que fica atrás dele.</span></li>
+    <li><span><b>Um movimento lento por tela.</b> Nada se mexe para quem pediu menos movimento.</span></li>
+  </ol>
+</section>
+
+<!-- 10 ───────────────────────────────────────────── -->
+<section id="components">
+  <div class="sh"><span class="sn">10</span><h2>Componentes</h2></div>
+  <p class="why">As peças de uma página da Eliria na tela, vivas. Passe o mouse, toque e use. Sugestão do estúdio, nas três cores.</p>
+
+  <div class="comp"><span class="lbl">Ações</span>
+    <div class="stage"><div class="row-btn">
+      <button class="btn" type="button">Conhecer a coleção</button>
+      <button class="btn q" type="button">Conhecer a coleção</button>
+    </div></div>
+    <div class="stage paper"><div class="row-btn"><button class="btn" type="button">Falar com a Eliria</button></div></div>
+    <p class="note" style="margin-top:0">Um texto para uma intenção: as mesmas palavras em todo botão que faz a mesma coisa. A pílula com contorno é a ação; a pílula discreta fica dentro de uma seção calma.</p>
+  </div>
+
+  <div class="comp"><span class="lbl">Abertura de seção</span>
+    <div class="stage"><div class="opener"><span class="eb">Coleção oficial</span><span class="hd">Cada uma, única.</span><span class="ld">Gravada com o ano e as iniciais de quem a recebe.</span></div></div>
   </div>
 </section>
 
-<!-- 09 -->
-<section id="aplicacoes">
-  <div class="sh"><span class="sn">09</span><h2>Aplicações</h2></div>
-  <p class="why">Onde a marca aparece primeiro, e a versão que cada lugar pede. <span class="sug">Sugestão</span></p>
-  <div class="cols" style="margin-top:28px">
-    <div class="card"><h3>A peça</h3><p>Símbolo em uma cor, gravado. Ano e iniciais do anfitrião ao lado, em Open Sans.</p></div>
-    <div class="card"><h3>Estojo</h3><p>Azul marítimo por fora, símbolo em relevo seco. Padrão por dentro.</p></div>
-    <div class="card"><h3>Certificado</h3><p>Assinatura vertical no topo, número da peça em Open Sans condensada, lacre bordô.</p></div>
-    <div class="card"><h3>Convite</h3><p>Papel claro, assinatura vertical, Playfair Display para o nome da ocasião.</p></div>
+<!-- 11 ───────────────────────────────────────────── -->
+<section id="applications">
+  <div class="sh"><span class="sn">11</span><h2>Aplicações</h2></div>
+  <p class="why">Onde a marca aparece, e as duas ou três regras que cada superfície acrescenta. Sugestão do estúdio.</p>
+  <div class="apps">
+    <div class="app"><div class="th" style="background:var(--b-ink)"><img src="img/eliria-mark-1-600.webp" alt="O símbolo em ouro" width="600" height="282" style="width:58%;height:auto;object-fit:contain"></div><h3>A peça</h3>
+      <ul><li>O símbolo em uma cor, gravado no metal.</li><li>O ano e as iniciais de quem recebe, ao lado.</li></ul></div>
+    <div class="app"><div class="th" style="background:var(--b-paper)"><img src="img/eliria-mark-1-600.webp" alt="O símbolo em ouro sobre prata" width="600" height="282" style="width:44%;height:auto;object-fit:contain"></div><h3>Estojo</h3>
+      <ul><li>Sombra por fora, o símbolo em relevo seco na tampa.</li><li>Nada impresso além disso.</li></ul></div>
+    <div class="app"><div class="th" data-mini="page"></div><h3>Certificado</h3>
+      <ul><li>A4 na grade dos documentos.</li><li>O número da peça e o ano como campos, nunca numa frase.</li></ul></div>
+    <div class="app"><div class="th" data-mini="cover"></div><h3>Convite</h3>
+      <ul><li>A marca no alto, o nome da ocasião em EB Garamond.</li><li>Impresso sobre branco ou sobre prata.</li></ul></div>
+    <div class="app"><div class="th" style="background:var(--b-ink)"><div style="width:42%;aspect-ratio:1/1;border-radius:50%;background:#300E02;box-shadow:inset 0 0 0 1px rgba(239,234,225,.25);display:grid;place-items:center"><img src="img/eliria-mark-1-600.webp" alt="" width="600" height="282" style="width:72%;height:auto;object-fit:contain"></div></div><h3>Redes sociais</h3>
+      <ul><li>Foto de perfil: o símbolo sobre sombra, centrado no círculo.</li><li>Cinco formatos, na tabela abaixo.</li></ul><div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>PNG</b>Redes<i>Ainda não</i></span></div></div>
+    <div class="app"><div class="th sig"><span class="n">Nome Sobrenome</span><span class="w">ELIRIA</span><span>contato · e-mail</span></div><h3>Assinatura de e-mail</h3>
+      <ul><li>Só texto: imagens na assinatura são bloqueadas pela maioria dos programas de e-mail.</li><li>Nome, marca, uma linha de contato.</li></ul><div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>HTML</b>Assinatura<i>Ainda não</i></span></div></div>
   </div>
+
   <div class="block"><span class="lbl">Redes sociais: cinco formatos</span>
-    <table class="sizes">
+    <div class="tblw"><table class="tbl">
       <thead><tr><th>Arquivo</th><th>Tamanho</th><th>Para</th></tr></thead>
       <tbody>
-        <tr><td>eliria_social_link_1200x630.png</td><td>1200 × 630</td><td>Prévia de link: WhatsApp, LinkedIn, Facebook</td></tr>
-        <tr><td>eliria_social_linkedin-banner_1128x191.png</td><td>1128 × 191</td><td>Capa da página da empresa no LinkedIn</td></tr>
-        <tr><td>eliria_social_square_1080x1080.png</td><td>1080 × 1080</td><td>Post quadrado</td></tr>
-        <tr><td>eliria_social_portrait_1080x1350.png</td><td>1080 × 1350</td><td>Post vertical no feed</td></tr>
-        <tr><td>eliria_social_story_1080x1920.png</td><td>1080 × 1920</td><td>Stories e Reels</td></tr>
+        <tr><td class="m">eliria_social_link_1200x630.png</td><td class="m">1200 × 630</td><td>Prévia de link: WhatsApp, LinkedIn, Facebook</td></tr>
+        <tr><td class="m">eliria_social_linkedin-banner_1128x191.png</td><td class="m">1128 × 191</td><td>Capa da página da empresa no LinkedIn</td></tr>
+        <tr><td class="m">eliria_social_square_1080x1080.png</td><td class="m">1080 × 1080</td><td>Post quadrado</td></tr>
+        <tr><td class="m">eliria_social_portrait_1080x1350.png</td><td class="m">1080 × 1350</td><td>Post vertical no feed</td></tr>
+        <tr><td class="m">eliria_social_story_1080x1920.png</td><td class="m">1080 × 1920</td><td>Stories e Reels</td></tr>
       </tbody>
-    </table>
-    <p class="why" style="font-size:14px">A foto de perfil é o símbolo em um quadrado azul marítimo, centralizado dentro do círculo.</p></div>
+    </table></div>
+  </div>
 </section>
 
-<!-- 10 -->
-<section id="arquivos">
-  <div class="sh"><span class="sn">10</span><h2>Arquivos</h2></div>
-  <p class="why">Onde cada arquivo fica e como se chama, para que qualquer pessoa encontre o certo sem perguntar.</p>
+<!-- 12 ───────────────────────────────────────────── -->
+<section id="files">
+  <div class="sh"><span class="sn">12</span><h2>Arquivos, Drive e contato</h2></div>
+  <p class="why">Onde cada arquivo fica, como se chama e qual o tamanho, para que qualquer pessoa encontre o certo sem perguntar.</p>
+  <div class="tblw"><table class="tbl">
+    <thead><tr><th>Família</th><th>Uso</th><th>Licença</th><th>Onde</th></tr></thead>
+    <tbody>
+      <tr><td>EB Garamond</td><td>Títulos, coleções</td><td>Open Font Licence</td><td><a href="https://fonts.google.com/specimen/EB+Garamond" target="_blank" rel="noopener">Google Fonts</a></td></tr>
+      <tr><td>Montserrat</td><td>Texto corrido</td><td>Open Font Licence</td><td><a href="https://fonts.google.com/specimen/Montserrat" target="_blank" rel="noopener">Google Fonts</a></td></tr>
+      <tr><td>Geist Mono</td><td>Rótulos, números</td><td>Open Font Licence</td><td><a href="https://fonts.google.com/specimen/Geist+Mono" target="_blank" rel="noopener">Google Fonts</a></td></tr>
+    </tbody>
+  </table></div>
+  <div class="block"><span class="lbl">A pasta no Drive</span>
 <div class="tree">Eliria BRAND/
-├─ 00 Start here/
+├─ 00 Start here/                <span class="f">eliria_readme.txt</span>
 ├─ 01 Mark/
-│  ├─ Master/   eliria_mark_master.afdesign
-│  │            eliria_mark_primary_gold_4800w.png
-│  ├─ Screen/   eliria_mark_primary_gold_{600w,1200w,2400w}.png
-│  │            eliria_mark_symbol_{gold,navy,paper,black}.svg
-│  │            eliria_mark_lockup-{vertical,horizontal}_{gold,navy}.svg
-│  └─ Print/    eliria_mark_{symbol,lockup-vertical}_gold_cmyk.pdf
-├─ 02 Colour/   eliria_colour_palette.ase
-├─ 03 Type/     eliria_type_{playfair-display,montserrat,open-sans}.zip
+│  ├─ Master/                    <span class="f">eliria_mark_master.afdesign</span>
+│  │                             <span class="f">eliria_mark_primary_gold_4800w.png</span>
+│  ├─ Screen/                    <span class="f">eliria_mark_primary_gold_{600w,1200w,2400w}.png</span>
+│  │                             <span class="f">eliria_mark_symbol_{sombra,prata,ouro}.svg</span>
+│  │                             <span class="f">eliria_mark_wordmark_{sombra,prata}.svg</span>
+│  │                             <span class="f">eliria_mark_lockup_{sombra,prata}.svg</span>
+│  │                             <span class="f">eliria_mark_icon_sombra_{32x32,180x180,512x512}.png</span>
+│  └─ Print/                     <span class="f">eliria_mark_{symbol,lockup}_sombra_cmyk.pdf</span>
+├─ 02 Colour/                    <span class="f">eliria_colour_palette.ase</span>
+├─ 03 Type/                      <span class="f">eliria_type_faces.zip</span>
 ├─ 04 Imagery/
-├─ 05 Documents/
-├─ 06 Applications/  eliria_social_*.png
-└─ 99 Archive/</div>
+│  ├─ Grounds/
+│  └─ Photography/               <span class="f">eliria_photo_{assunto}_3840w.jpg</span>
+├─ 05 Documents/                 <span class="f">eliria_template_{letter,certificate}_a4.dotx</span>
+├─ 06 Applications/              <span class="f">eliria_card_{front-emboss,back}_85x45mm.pdf</span>
+│                                <span class="f">eliria_social_{link,linkedin-banner,square,portrait,story}_*.png</span>
+└─ 99 Archive/                   <span class="f">o material antigo: não usar</span></div>
+    <p class="note">As pastas seguem a ordem deste livro. Hoje só existem os arquivos do símbolo em ouro, em <span class="mono">01 Mark</span>; o resto é o que cada pasta vai receber. O que está em <span class="mono">99 Archive</span> não vale como marca. Uma chave é abreviação de um arquivo por palavra: <span class="mono">_{sombra,prata}.svg</span> são dois arquivos.</p>
+  </div>
+
   <div class="block"><span class="lbl">Como os arquivos se chamam</span>
-    <p class="name">cliente_peça_versão_cor_tamanho.ext</p>
-    <p class="why" style="font-size:14.5px">Minúsculas, sem acentos, sem espaços. Exemplo: <b>eliria_mark_primary_gold_1200w.png</b>. Nada de data ou versão no nome: um arquivo novo substitui o antigo no Drive, e o antigo vai para <b>99 Archive</b>.</p></div>
-  <div class="contact"><span class="lbl">Dúvidas e aprovações</span><a href="mailto:atlas@arvorealta.com">atlas@arvorealta.com</a></div>
-  <footer><span class="lbl">Eliria · Livro da marca · Edição 0.1</span><span class="lbl">Feito por Arvorealta</span></footer>
+    <p class="line" style="font:500 clamp(15px,2.2vw,22px)/1.3 var(--f-mono);letter-spacing:0;word-break:break-all">cliente_peca_versao_cor_tamanho.ext</p>
+    <div class="tblw" style="margin-top:18px"><table class="tbl">
+      <thead><tr><th>Campo</th><th>Diz</th><th>Exemplos</th></tr></thead>
+      <tbody>
+        <tr><td class="m">cliente</td><td>De quem é a marca</td><td class="m">eliria</td></tr>
+        <tr><td class="m">peça</td><td>O que é</td><td class="m">mark · colour · type · photo · template · social · card</td></tr>
+        <tr><td class="m">versão</td><td>Qual delas</td><td class="m">primary · symbol · lockup · wordmark · certificate</td></tr>
+        <tr><td class="m">cor</td><td>Qual cor, nas marcas. <span class="mono">gold</span> é só o metal renderizado; um desenho chapado leva uma cor da paleta. <span class="mono">cmyk</span> depois dela, para impressão</td><td class="m">gold · sombra · prata · ouro</td></tr>
+        <tr><td class="m">tamanho</td><td>Na tela: a largura da imagem, ou os dois lados de um formato fixo. No impresso: o papel, ou milímetros com a unidade. Um vetor não leva</td><td class="m">1200w · 1080x1350 · a4 · 85x45mm</td></tr>
+        <tr><td class="m">ext</td><td>O formato</td><td class="m">svg · png · webp · jpg · pdf · mp4 · afdesign · dotx · docx</td></tr>
+      </tbody>
+    </table></div>
+    <ol class="rules">
+      <li><span><b>Minúsculas, sem espaços, sem acentos.</b> Ç vira <span class="mono">c</span>, &amp; vira <span class="mono">and</span>.</span></li>
+      <li><span><b>Sublinhado entre campos, hífen dentro de um.</b> <span class="mono">linkedin-banner</span> é um campo só.</span></li>
+      <li><span><b>Deixe de fora o campo que não se aplica.</b> Nunca escreva <span class="mono">none</span> nem <span class="mono">final</span>.</span></li>
+      <li><span><b>Nada de versão ou data no nome.</b> Uma versão nova sobe por cima da antiga, em Gerenciar versões, e todo link já enviado continua funcionando.</span></li>
+      <li><span><b>Cada prancheta do Affinity tem o nome do arquivo que exporta.</b> Assim ninguém digita um nome duas vezes.</span></li>
+    </ol>
+  </div>
+
+  <div class="block"><span class="lbl">Dê nome a um arquivo</span>
+    <div class="namer">
+      <div class="ins">
+        <label>Cliente<input id="nmC" value="Eliria" autocomplete="off"></label>
+        <label>Peça<select id="nmA"><option>mark</option><option>colour</option><option>type</option><option>photo</option><option>template</option><option>social</option><option>card</option></select></label>
+        <label>Versão<input id="nmV" value="primary" autocomplete="off"></label>
+        <label>Cor<select id="nmK"><option value="">nenhuma</option><option selected>gold</option><option>sombra</option><option>prata</option><option>ouro</option></select></label>
+        <label>Para<select id="nmP"><option value="">Tela</option><option value="cmyk">Impressão</option></select></label>
+        <label>Tamanho<input id="nmS" value="1200w" autocomplete="off"></label>
+        <label>Formato<select id="nmF"><option>png</option><option>webp</option><option>jpg</option><option>svg</option><option>pdf</option><option>mp4</option><option>afdesign</option><option>dotx</option><option>docx</option></select></label>
+      </div>
+      <div class="res"><output id="nmOut" aria-live="polite">eliria_mark_primary_gold_1200w.png</output><button class="copy" type="button" id="nmCopy" data-v="eliria_mark_primary_gold_1200w.png">Copiar</button></div>
+      <p class="hint" id="nmHint"></p>
+    </div>
+  </div>
+
+  <div class="block"><span class="lbl">Formatos, tamanhos e resolução</span>
+    <div class="tblw"><table class="tbl wide">
+      <thead><tr><th>Peça</th><th>Mestre</th><th>Entregue como</th><th>Tamanhos</th><th>Cor e resolução</th></tr></thead>
+      <tbody>
+        <tr><td>Marca, principal</td><td>O render, PNG de 4800 px</td><td>PNG, transparente</td><td class="m">600w · 1200w · 2400w</td><td>sRGB. Com 2400w imprime cerca de 200 mm a 300 ppi</td></tr>
+        <tr><td>Símbolo, nome e assinatura</td><td class="m">.afdesign</td><td>SVG; PDF para impressão</td><td class="m">qualquer</td><td>sRGB na tela, CMYK no PDF de impressão</td></tr>
+        <tr><td>Ícone</td><td>Do símbolo</td><td>PNG, quadrado</td><td class="m">32 · 180 · 512</td><td>sRGB</td></tr>
+        <tr><td>Cor</td><td>Um arquivo de texto com os valores</td><td>.ase, que o Affinity e a Adobe importam</td><td></td><td>HEX e RGB</td></tr>
+        <tr><td>Tipos</td><td>Google Fonts</td><td>Os arquivos das fontes, num zip, com a licença</td><td></td><td>A Open Font Licence permite compartilhar</td></tr>
+        <tr><td>Fotografia</td><td>RAW ou TIFF de 16 bits</td><td>JPG a qualidade 90; WebP para a web</td><td class="m">3840w; 720w · 1280w · 1920w</td><td>sRGB</td></tr>
+        <tr><td>Documentos</td><td>Modelo do Word, <span class="mono">.dotx</span></td><td>DOCX para preencher; PDF a partir dele</td><td class="m">a4</td><td>As fontes instaladas ou embutidas no arquivo</td></tr>
+        <tr><td>Redes</td><td class="m">.afdesign</td><td>PNG</td><td class="m">1200x630 · 1128x191 · 1080x1080 · 1080x1350 · 1080x1920</td><td>sRGB</td></tr>
+        <tr><td>Cartão</td><td>Uma página HTML, impressa em PDF</td><td>Dois PDFs: o verso, e a faca do relevo da frente em 100% preto</td><td class="m">85x45mm + 3 mm de sangria</td><td>Fontes embutidas; a faca é vetor</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="block"><span class="lbl">Dúvidas e aprovações</span>
+    <div class="contact"><span id="mail">atlas@arvorealta.com</span><button class="copy" data-v="atlas@arvorealta.com">Copiar</button></div>
+  </div>
+  <div class="block"><span class="lbl">Versões</span>
+    <div class="tblw"><table class="tbl"><tbody>
+      <tr><td class="m">0.1</td><td>20 nov 2026</td><td>Refeito no modelo do livro da Arvorealta, só com os arquivos novos da marca.</td></tr>
+    </tbody></table></div>
+  </div>
 </section>
+
 </main>
 </div>
+
+<script>
+(()=>{
+  const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+
+  /* the side index follows the reading position */
+  const links=$$(".side a"), secs=links.map(a=>$(a.getAttribute("href"))).filter(Boolean);
+  let tick=false;
+  function spy(){tick=false;const y=innerHeight*.3;let cur=secs[0];
+    for(const s of secs){if(s.getBoundingClientRect().top<=y)cur=s}
+    links.forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+cur.id));}
+  addEventListener("scroll",()=>{if(!tick){tick=true;requestAnimationFrame(spy)}},{passive:true});spy();
+
+  /* copy buttons */
+  $$(".copy").forEach(b=>b.addEventListener("click",()=>{
+    const v=b.dataset.v, t=b.textContent;
+    const ok=()=>{b.classList.add("done");b.textContent="Copiado";setTimeout(()=>{b.classList.remove("done");b.textContent=t},1400)};
+    const sel=()=>{const r=document.createRange();r.selectNodeContents(b);const s=getSelection();s.removeAllRanges();s.addRange(r)};
+    try{navigator.clipboard.writeText(v).then(ok,sel)}catch(e){sel()}
+  }));
+
+  /* the pairing checker computes WCAG contrast from the values */
+  const PAL=[["Sombra","#300E02"],["Prata","#B4B1A4"],["Ouro","#A77448"],["Branco","#FFFFFF"]];
+  const lum=h=>{const c=[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)/255).map(x=>x<=.03928?x/12.92:((x+.055)/1.055)**2.4);return .2126*c[0]+.7152*c[1]+.0722*c[2]};
+  const ratio=(a,b)=>{const[x,y]=[lum(a),lum(b)].sort((p,q)=>q-p);return(x+.05)/(y+.05)};
+  let T="#B4B1A4",G="#300E02";
+  function build(id,get,set){const row=$(id);PAL.forEach(([n,h])=>{const b=document.createElement("button");b.type="button";b.className="p";
+    b.style.background=h;b.title=n;b.setAttribute("aria-label",n);b.setAttribute("aria-pressed",String(h===get()));
+    b.addEventListener("click",()=>{set(h);$$("button",row).forEach(x=>x.setAttribute("aria-pressed",String(x===b)));draw()});row.append(b)})}
+  build("#ckT",()=>T,h=>T=h);build("#ckG",()=>G,h=>G=h);
+  function draw(){const r=ratio(T,G),p=$("#ckP");p.style.background=G;p.style.color=T;$("#ckR").textContent=String(Math.round(r*10)/10).replace(".",",")+":1";
+    $("#ckV").textContent=T===G?"A mesma cor: nada se lê.":r>=4.5?"Serve para qualquer texto.":r>=3?"Só títulos e números grandes.":"Não use para palavras."}
+  draw();
+
+  /* the measure: the slider sets a line length in real characters, from
+     the paragraph's own average character width, not from the ch unit */
+  const msT=$("#msT"),msR=$("#msR");
+  const probe=document.createElement("span");probe.style.cssText="position:absolute;left:0;top:0;visibility:hidden;white-space:nowrap;font:inherit";
+  probe.textContent=msT.textContent;msT.style.position="relative";msT.append(probe);
+  function meas(){const avg=probe.getBoundingClientRect().width/probe.textContent.length;
+    const box=msT.parentElement,cs=getComputedStyle(box);
+    const room=box.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
+    const w=Math.min(msR.value*avg,room);msT.style.width=w+"px";
+    const n=Math.round(w/avg);
+    $("#msN").textContent=n;
+    $("#msV").textContent="caracteres por linha. "+(n<45?"Curta demais: o olho volta a cada poucas palavras.":n>75?"Longa demais: o olho perde a linha seguinte.":"Confortável.")}
+  msR.addEventListener("input",meas);addEventListener("resize",meas);
+  (document.fonts?document.fonts.ready:Promise.resolve()).then(meas);meas();
+
+  /* the document pages, drawn in millimetres. Every text is an example */
+  const B=(x,y,w,cls,html,st="")=>`<div class="${cls}" style="left:calc(var(--u) * ${x});top:calc(var(--u) * ${y});width:calc(var(--u) * ${w});${st}">${html}</div>`;
+  const L=n=>(20+n*5.2917).toFixed(3), GAP="margin-top:calc(var(--u) * 5.2917)";
+  const MARK='<img src="img/eliria-mark-1-600.webp" alt="" width="600" height="282">';
+  const OV='<div class="ov ov-g"></div><div class="ov ov-b"></div>';
+  const fld=(l,v,c="t-body w5")=>`<div><div class="t-lbl">${l}</div><div class="${c}">${v}</div></div>`;
+  const PAGES={
+    letter:{label:"Carta A4",html:
+      B(20,20,30,"",MARK)+
+      B(132,L(0),58,"t-lbl","Eliria<br>Coleção oficial","text-align:right")+
+      B(20,45,85,"win","","height:calc(var(--u) * 45)")+
+      B(20,L(6),85,"t-body","Nome Sobrenome<br>Empresa Ltda.<br>Rua Exemplo, 12<br>01000-000 São Paulo")+
+      B(20,L(16),39.5,"",`<div class="t-lbl">Data</div><div class="t-body">20 nov 2026</div><div class="t-lbl" style="${GAP}">Referência</div><div class="t-body">EL-C-001</div>`)+
+      B(78,L(16),112,"t-lede","A coleção oficial de 2026")+
+      B(78,L(18),112,"t-body","<p>Obrigado por receber a Eliria. Esta carta confirma a ocasião e a peça escolhida, para que os dois lados tenham por escrito.</p><p>Cada peça é gravada com o ano e as iniciais de quem a recebe, e entregue no estojo, com o certificado.</p>")+
+      B(78,L(34),112,"t-body","Com estima,")+
+      B(78,L(37),112,"",'<div class="t-body w5">Nome Sobrenome</div><div class="t-lbl">Eliria</div>')+
+      B(20,282.5,170,"t-lbl foot","<span>Carta · EL-C-001</span><span>1 de 1</span>")},
+    cover:{label:"Convite A4",html:
+      B(20,20,44,"",MARK)+
+      B(20,L(18),141,"t-lbl mk","Convite")+
+      B(20,L(19),141,"t-title","A entrega<br>da coleção 2026")+
+      B(20,L(26),112,"t-lede","Uma noite para reconhecer quem chegou até aqui.")+
+      B(20,L(42),170,"rl flds",fld("Para","Nome Sobrenome")+fld("Data","12 dez 2026")+fld("Hora","20h")+fld("Local","A confirmar"))+
+      B(20,282.5,170,"t-lbl foot","<span>Convite · EL-V-001</span><span>1 de 1</span>")},
+    page:{label:"Certificado A4",html:
+      B(20,20,44,"",MARK)+
+      B(20,L(14),39.5,"t-lbl mk","Certificado")+
+      B(78,L(14),112,"t-head","Coleção oficial 2026")+
+      B(78,L(17),112,"t-body","<p>Esta peça foi gravada e entregue pela Eliria, e é única. O número e o ano abaixo são os mesmos gravados no metal.</p>")+
+      B(78,L(22),112,"rl flds",fld("Peça","Nº 007","t-head")+fld("Ano","2026","t-head")+fld("Iniciais","N S","t-head"))+
+      B(78,L(27),112,"",'<div class="trow t-lbl"><span>Item</span><span>Material</span><span>Ano</span></div><div class="trow t-body"><span>Peça</span><span>A confirmar</span><span>2026</span></div><div class="trow t-body"><span>Estojo</span><span>A confirmar</span><span>2026</span></div>')+
+      B(78,L(37),112,"",'<div class="t-body w5">Nome Sobrenome</div><div class="t-lbl">Eliria</div>')+
+      B(20,282.5,170,"t-lbl foot","<span>Certificado · EL-K-007</span><span>1 de 1</span>")}
+  };
+  const C=(x,y,w,cls,html,st="")=>B(x,y,w,cls,html,st);
+  const CARD='<div class="pair">'+
+    '<div class="pg card" role="img" aria-label="Frente do cartão, em escala: o símbolo em relevo seco sobre o papel">'+OV+
+      C(22.5,13.09,40,"emb","<i></i>","height:calc(var(--u) * 18.82)")+'</div>'+
+    '<div class="pg card" role="img" aria-label="Verso do cartão, em escala">'+OV+
+      C(6,6,73,"c-name","Nome Sobrenome")+C(6,12.6,73,"c-role","Função")+
+      C(6,28.4,73,"c-ct","telefone<br>e-mail<br>endereço")+'</div></div>';
+  const pageEl=(k,mini)=>{if(k==="card")return CARD;const p=PAGES[k];return `<div class="pg" role="img" aria-label="${p.label}, em escala">${mini?"":OV}${p.html}</div>`};
+  const desk=$("#desk");
+  const showPage=k=>{desk.innerHTML=pageEl(k,false);$$("[data-for]").forEach(d=>{d.hidden=!d.dataset.for.split(" ").includes(k)})};showPage("letter");
+  $$("#pgPick button").forEach(b=>b.addEventListener("click",()=>{$$("#pgPick button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));showPage(b.dataset.p)}));
+  $$("#pgGuide button").forEach(b=>b.addEventListener("click",()=>{const on=b.getAttribute("aria-pressed")!=="true";b.setAttribute("aria-pressed",String(on));desk.classList.toggle(b.dataset.g,on)}));
+  $$("[data-mini]").forEach(t=>{t.innerHTML=pageEl(t.dataset.mini,true)});
+
+  /* the file namer: the naming rules, applied */
+  const slug=v=>v.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/&/g," and ").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
+  const nm=["#nmC","#nmA","#nmV","#nmK","#nmP","#nmS","#nmF"].map(s=>$(s));
+  function name(){const [c,a,v,k,p,sz,f]=nm.map(e=>e.value);
+    const parts=[slug(c),slug(a),slug(v),k,p,slug(sz)].filter(Boolean);
+    const out=(parts.join("_")||"nome")+"."+f;
+    $("#nmOut").textContent=out;$("#nmCopy").dataset.v=out;
+    const vec=f==="svg"||(f==="afdesign"&&/^\d+w$/.test(slug(sz)));
+    $("#nmHint").textContent=vec&&sz?(f==="svg"?"Um vetor não leva tamanho: deixe o tamanho de fora.":"Um mestre não tem largura em pixels: dê o formato, como a4 ou 1080x1350, ou nada."):
+      p&&/png|webp|jpg/.test(f)?"Arquivos de impressão são PDF.":
+      f==="mp4"&&!/^\d+x\d+$/.test(slug(sz))?"Vídeo leva os dois lados, como 1920x1080.":
+      !c.trim()?"Todo nome começa pelo cliente.":""}
+  nm.forEach(e=>e.addEventListener("input",name));name();
+
+})();
+</script>
 </body>
+
 </html>
