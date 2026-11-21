@@ -1,5 +1,5 @@
 // Print Eliria's pieces to PDF at true size, from the book's own drawings.
-// Card, folder and envelope carry 3 mm of bleed on every side.
+// Only the invitation now; the press pieces come from press.py.
 const {chromium} = require('playwright');
 const OUT = (process.argv[2] || __dirname + '/out') + '/';  // needs the site served on :8766
 const BOOK = 'http://localhost:8766/brand/book-eli/';
@@ -32,20 +32,6 @@ async function print(p, name, w, h, html, css = '') {
   const [inv] = await grab('cover');
   await print(p, 'eliria_template_invitation_a4.pdf', 210, 297, inv, '#print .pg{width:210mm!important}');
 
-  // card, 85 x 45 mm, front and back as two files
-  const [front, back] = await grab('card');
-  const cardCss = 'html,body{background:#D8CCBD!important}#print .bleed{width:91mm;height:51mm;background:#D8CCBD;position:relative;overflow:hidden}#print .bleed .pg{position:absolute;left:3mm;top:3mm;width:85mm!important}';
-  await print(p, 'eliria_card_front_85x45mm.pdf', 91, 51, `<div class=bleed>${front}</div>`, cardCss);
-  await print(p, 'eliria_card_back_85x45mm.pdf', 91, 51, `<div class=bleed>${back}</div>`, cardCss);
-
-  // folder face, 230 x 310 mm: ardósia, the symbol in areia, 32 mm, centred
-  await print(p, 'eliria_folder_230x310mm.pdf', 236, 316,
-    `<div class=f><img src="${SAND_SYM}" alt=""></div>`,
-    `html,body{background:${ARD}!important}#print .f{width:236mm;height:316mm;background:${ARD};display:grid;place-items:center}#print .f img{width:32mm;display:block}`);
-
-  // DL envelope front, 110 x 220 mm standing: the symbol in areia, 40 mm, point up
-  await print(p, 'eliria_envelope_110x220mm.pdf', 116, 226,
-    `<div class=e><img src="${SAND_SYM}" alt=""></div>`,
-    `html,body{background:${ARD}!important}#print .e{width:116mm;height:226mm;background:${ARD};position:relative}#print .e img{position:absolute;left:50%;top:50%;width:40mm;transform:translate(-50%,-50%) rotate(90deg)}`);
+  // card, folder and envelope are press files now: see press.py (CMYK, PDF/X-1a, FOGRA39)
   await b.close();
 })();

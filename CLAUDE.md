@@ -4008,6 +4008,29 @@ in git; it is not repeated here.**
     its button needs the new id.
   - **`03 Type` holds `eliria_type_tenor-sans.zip`**: the TTF and its
     OFL licence.
+  - **The card, the folder and the envelope are press files, since
+    21 November**: PDF/X-1a:2003, CMYK only, fonts embedded, 3 mm bleed,
+    crop marks in the slug, TrimBox and BleedBox set, and a FOGRA39
+    output intent. `_tools/book/eliria/press.py` builds them with
+    reportlab and pikepdf; `check.py` confirms no RGB operator and the
+    intent. The symbol's SVG paths are drawn straight onto the canvas,
+    because svglib's renderer leaks an RGB default and a Times reference.
+    `eliria_print_spec.txt` goes to the printer with them, in Portuguese:
+    the folder and envelope files are the printed face only, and the die
+    is the printer's. The card back's contact lines are still examples.
+  - **The CMYK values are FOGRA39**, chosen by colour difference to the
+    screen value with a profile built by ArgyllCMS from Fogra's own
+    FOGRA39L data (`FOGRA39L.icc`): Ardósia C66 M36 Y20 K90 (ΔE 0),
+    Areia C19 M19 Y27 K0 (no black, so a light ground stays clean),
+    Folha madura C58 M28 Y82 K91. **Camel keeps the client's C41 M47 Y59
+    K15**, which came with the brand; the FOGRA39 match would have been
+    C20 M34 Y56 K45. On uncoated stock the printer converts to its own
+    profile.
+  - **On 21 November the two card files did not reach Drive**: the
+    session's safety check refused those two uploads. The folder,
+    envelope and spec went up beside the earlier screen versions, which
+    are still there under the same names; the book's buttons point at
+    the new folder and envelope and the old card.
 - **Imagery**: the three primary grounds only (pedra, ardósia, areia),
   at 4:5.
 - **No `Versões` table.** The cover keeps its edition number.
