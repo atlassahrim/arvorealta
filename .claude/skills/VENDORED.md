@@ -16,8 +16,8 @@ network fetch.
 Vendored: `banner-design`, `brand`, `design`, `design-system`, `slides`,
 `ui-styling`, `ui-ux-pro-max`.
 
-Ours, and unrelated to the bundle: `audit`, `eu-tender-documents`, `plan`,
-`profile`, `research`, `taste-skill`.
+Ours, and unrelated to the bundle: `audit`, `eu-tender-documents`,
+`midjourney-prompt`, `plan`, `profile`, `research`, `taste-skill`.
 
 ## To update
 

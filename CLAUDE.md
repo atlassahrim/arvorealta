@@ -5509,12 +5509,21 @@ it is the part worth having checked before the page is used in an approach.
 
 ## Skills, and which one wins
 
-`.claude/skills/` holds six of ours and seven vendored from one upstream
+`.claude/skills/` holds seven of ours and seven vendored from one upstream
 bundle. `.claude/skills/VENDORED.md` carries the source, the commit, the
 licence and what was checked before installing.
 
-Ours: `audit`, `eu-tender-documents`, `plan`, `profile`, `research`,
-`taste-skill`.
+Ours: `audit`, `eu-tender-documents`, `midjourney-prompt`, `plan`,
+`profile`, `research`, `taste-skill`.
+
+**`midjourney-prompt`, since 21 November 2026**, turns a 400-character brief
+into three Midjourney prompts for midjourney.com on V8.2: background, mood,
+person, architecture, interface and painting. `scripts/check.py` counts the
+brief and the prompt so a figure in a reply is measured.
+`references/tool-state.md` is dated and goes stale with Midjourney itself;
+refresh it when it is more than three months old. It carries this file's
+rule on generated images: abstract grounds may be published, and nothing
+generated is shown as a client's work.
 
 Vendored from `ui-ux-pro-max-skill`: `banner-design`, `brand`, `design`,
 `design-system`, `slides`, `ui-styling`, `ui-ux-pro-max`.
