@@ -1,0 +1,202 @@
+{
+  "code": "mre",
+  "name": "Mulheres Reais",
+  "slug": "mulheresreais",
+  "lang": "pt-BR",
+  "drive_folder": "Mulheres Reais BRAND",
+  "template": "eli",
+  "line": null,
+  "words": {
+    "not_yet": "Ainda não",
+    "not_yet_title": "Ainda não disponível",
+    "page_of": "de",
+    "book_title": "Livro da marca"
+  },
+  "tokens": {
+    "--b-ink": "#252F37",
+    "--b-ink2": "#252F37",
+    "--b-pink": "#252F37",
+    "--b-paper": "#D8CCBD",
+    "--b-bone": "#EFEAE1",
+    "--b-amber": "#8E7657",
+    "--b-brick": "#7A5530"
+  },
+  "palette": [],
+  "dark": null,
+  "light": null,
+  "doc_soft": "#666D73",
+  "doc_rule": "#C9CCCF",
+  "fonts": {
+    "title": {
+      "name": "Tenor Sans",
+      "file": "TenorSans-Regular.ttf",
+      "single": 1.25
+    },
+    "regular": {
+      "name": "Open Sans",
+      "file": "OpenSans-Regular.ttf"
+    },
+    "light": {
+      "name": "Open Sans Light",
+      "file": "OpenSans-Light.ttf"
+    },
+    "medium": {
+      "name": "Open Sans Medium",
+      "file": "OpenSans-Medium.ttf"
+    },
+    "semibold": {
+      "name": "Open Sans SemiBold",
+      "file": "OpenSans-SemiBold.ttf"
+    },
+    "condensed": {
+      "name": "Open Sans Condensed",
+      "file": "OpenSans-Condensed.ttf"
+    }
+  },
+  "logo_font": null,
+  "symbol": {
+    "svg": "symbol.svg",
+    "png": "symbol.png",
+    "alt": null
+  },
+  "signatory": {
+    "name": null,
+    "role": null,
+    "contact": null,
+    "contact_final": false
+  },
+  "documents": {
+    "description": "Modelo Mulheres Reais. Os textos são exemplos.",
+    "letter": {
+      "title": "Carta Mulheres Reais",
+      "header": [
+        "Mulheres Reais",
+        "Coleção oficial"
+      ],
+      "foot": "Carta · EL-C-001",
+      "address": [
+        "Nome Sobrenome",
+        "Empresa Ltda.",
+        "Rua Exemplo, 12",
+        "01000-000 São Paulo"
+      ],
+      "fields": [
+        [
+          "Data",
+          "20 nov 2026"
+        ],
+        [
+          "Referência",
+          "EL-C-001"
+        ]
+      ],
+      "heading": "A coleção oficial de 2026",
+      "body": [
+        "Obrigado por receber a Mulheres Reais. Esta carta confirma a ocasião e a peça escolhida, para que os dois lados tenham por escrito.",
+        "Cada peça é gravada com o ano e as iniciais de quem a recebe, e entregue no estojo, com o certificado."
+      ],
+      "closing": "Com estima,",
+      "sign_label": "Mulheres Reais"
+    },
+    "invitation": {
+      "title": "Convite Mulheres Reais",
+      "foot": "Convite · EL-V-001",
+      "label": "Convite",
+      "heading": [
+        "A entrega",
+        "da coleção 2026"
+      ],
+      "sub": "Uma noite para reconhecer quem chegou até aqui.",
+      "fields": [
+        [
+          "Para",
+          "Nome Sobrenome"
+        ],
+        [
+          "Data",
+          "12 dez 2026"
+        ],
+        [
+          "Hora",
+          "20h"
+        ],
+        [
+          "Local",
+          "A confirmar"
+        ]
+      ]
+    },
+    "certificate": {
+      "title": "Certificado Mulheres Reais",
+      "foot": "Certificado · EL-K-007",
+      "label": "Certificado",
+      "heading": "Coleção oficial 2026",
+      "body": "Esta peça foi gravada e entregue pela Mulheres Reais, e é única. O número e o ano abaixo são os mesmos gravados no metal.",
+      "fields": [
+        [
+          "Peça",
+          "Nº 007"
+        ],
+        [
+          "Ano",
+          "2026"
+        ],
+        [
+          "Iniciais",
+          "N S"
+        ]
+      ],
+      "table": [
+        [
+          "Item",
+          "Material",
+          "Ano"
+        ],
+        [
+          "Peça",
+          "A confirmar",
+          "2026"
+        ],
+        [
+          "Estojo",
+          "A confirmar",
+          "2026"
+        ]
+      ],
+      "sign_label": "Mulheres Reais"
+    }
+  },
+  "press": {
+    "card": {
+      "ground": "light",
+      "symbol": "dark",
+      "symbol_mm": 20,
+      "label_front": "cartão, frente",
+      "label_back": "cartão, verso"
+    },
+    "folder": {
+      "ground": "dark",
+      "symbol": "light",
+      "symbol_mm": 32,
+      "label": "pasta, capa"
+    },
+    "envelope": {
+      "ground": "dark",
+      "symbol": "light",
+      "symbol_mm": 40,
+      "rotate": -90,
+      "label": "envelope DL, frente"
+    },
+    "trim": "corte",
+    "bleed": "sangria"
+  },
+  "_draft": [
+    "tokens",
+    "fonts",
+    "documents",
+    "press",
+    "doc_soft",
+    "doc_rule",
+    "words"
+  ]
+}
