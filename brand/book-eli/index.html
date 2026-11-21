@@ -534,6 +534,12 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
 /* cover: the name sits under the gold mark as the supplied lockup sets it, from where the
    blades meet to the inner curve of the bracket, so right of the mark's centre */
 .lk .wmk{justify-self:start;width:72.93%;margin-left:21.77%;margin-top:15.2%}
+/* the cover is centred on the name, not on the block: the name's centre sits
+   at 21.77 + 72.93 / 2 = 58.235 per cent of the lockup, so the lockup moves
+   8.235 per cent of its own width left and the mark rides with it */
+.lk{transform:translateX(-8.235%)}
+/* the cover ground is the client's ardósia photograph */
+.hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1}
 .grounds.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
 .sw.s4{grid-template-columns:repeat(4,minmax(0,1fr))}
 /* version tiles: no padding, so every picture sits in the true centre of its 16:9 box;
@@ -569,6 +575,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
 <!-- 00 ───────────────────────────────────────────── -->
 <section class="cover" id="cover">
   <div class="hero">
+    <img class="bg" src="img/eliria-cover-ardosia-1-1670.webp" srcset="img/eliria-cover-ardosia-1-900.webp 900w, img/eliria-cover-ardosia-1-1670.webp 1670w" sizes="(max-width:1000px) 100vw, 920px" alt="" width="1670" height="1100">
     <div class="lk" role="img" aria-label="Eliria: o símbolo em ouro sobre o nome">
       <img class="fan" src="img/eliria-mark-1-1200.webp" alt="" width="1200" height="565">
       <img class="wmk" src="img/eliria-wordmark-sand-2.svg" alt="" width="3032" height="246">

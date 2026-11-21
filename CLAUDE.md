@@ -3970,6 +3970,13 @@ in git; it is not repeated here.**
     8 per cent of the symbol's width off centre. Never recentre it.
   - **The cover repeats that alignment** under the gold mark: `.lk .wmk`
     at 21.77 per cent in, 72.93 per cent wide and 15.2 per cent below.
+    **The cover is centred on the name, not on the block**: `.lk` moves
+    8.235 per cent of its own width left, so the name's centre is the
+    cover's centre and the mark sits a little left with it. Measured at
+    0.0 px off centre at 1440, 820 and 390.
+  - **The cover ground is the ardósia photograph**, cut from the Drive
+    original to `img/eliria-cover-ardosia-1-{900,1670}.webp`, centred,
+    with the board's right edge cut off.
   - **Version tiles carry no padding**, and each picture is centred in
     its tile. The icon fills its tile with `object-fit: cover`.
 - **Documents**, all drawn to scale. Paper and card are settled: change
