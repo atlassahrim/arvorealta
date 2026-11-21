@@ -4130,6 +4130,22 @@ scaled to the gold render's ink box (41 to 1172 of 1200): the word starts
 21.77 per cent in, runs 72.93 per cent of the box, and sits 15.2 per cent
 of the box's width under the image, as `.lk .wmk` in `assemble.py`.
 
+**The documents fold has a folder and an envelope, since 21 November**, at
+the owner's word and from his reference image. The letter and the card
+did not change. Both are drawn to scale, in ardósia with the symbol in
+areia (`eliria-symbol-sand-2.svg`) and nothing else printed:
+
+- **Pasta**, 230 × 310 mm for A4, the symbol 32 mm wide in the centre,
+  with the letter showing 32 mm above it, its own symbol visible.
+- **Envelope**, DL 110 × 220 mm standing up, as a pair: the back with
+  its flap along the long side in a darker `#1D252B`, and the front with
+  the symbol 40 mm long, turned 90° so its point is up.
+
+Both are labelled as the studio's suggestion, like the rest of the fold,
+and each has a waiting `PDF` button. Neither takes the grid or baseline
+guides. Rule 05 said `O símbolo em azul`, left from the old palette; it
+reads `ardósia` now.
+
 ## The favicon, 21 November
 
 **Every published page carries `assets/favicon.svg`**, the old mark in ink

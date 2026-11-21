@@ -518,6 +518,14 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
 .pg.card .c-role,.pg.card .c-ct{font-family:"Open Sans",ui-sans-serif,sans-serif}
 .sig,.sig .w{font-family:"Open Sans",ui-sans-serif,system-ui,sans-serif}
 .sig .n{font:600 19px/1.15 "Open Sans",ui-sans-serif,system-ui,sans-serif}
+/* the folder and the DL envelope: ardósia with the symbol in areia */
+.pg.fold{aspect-ratio:230/342;width:min(440px,100%);background:none;box-shadow:none;overflow:visible;--u:calc(100cqw / 230)}
+.pg.fold .sheet{left:calc(var(--u) * 10);top:0;width:calc(var(--u) * 210);height:calc(var(--u) * 297);background:#FFFFFF;box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.pg.fold .body{left:0;top:calc(var(--u) * 32);width:calc(var(--u) * 230);height:calc(var(--u) * 310);background:#252F37;display:grid;place-items:center;box-shadow:0 -1px 3px rgba(0,0,0,.18),0 14px 36px rgba(0,0,0,.2)}
+.pg.fold .body img{width:calc(var(--u) * 32)}
+.pg.env{aspect-ratio:110/220;width:min(230px,42%);background:#252F37;--u:calc(100cqw / 110)}
+.pg.env .flap{inset:0;background:#1D252B;clip-path:polygon(0 0,36.4% 11.4%,36.4% 88.6%,0 100%)}
+.pg.env .sym{left:50%;top:50%;width:calc(var(--u) * 40);transform:translate(-50%,-50%) rotate(90deg)}
 /* the three primary grounds, portrait */
 .imgs.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .imgs.g3 figure:first-child{grid-column:auto}
@@ -812,10 +820,10 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
 <!-- 07 ───────────────────────────────────────────── -->
 <section id="documents">
   <div class="sh"><span class="sn">07</span><h2>Documentos</h2></div>
-  <p class="why">Um sistema para tudo o que a Eliria entrega em papel: carta, convite, certificado e cartão, nas duas famílias, com o símbolo em uma cor. Toda página é feita sobre a mesma grade, para que o leitor a aprenda uma vez. Sugestão do estúdio; os textos dos desenhos são exemplos.</p>
+  <p class="why">Um sistema para tudo o que a Eliria entrega em papel: carta, convite, certificado, cartão, pasta e envelope, nas duas famílias, com o símbolo em uma cor. Toda página é feita sobre a mesma grade, para que o leitor a aprenda uma vez. Sugestão do estúdio; os textos dos desenhos são exemplos.</p>
 
   <div class="bar">
-    <div class="seg" role="group" aria-label="Página" id="pgPick"><button type="button" aria-pressed="true" data-p="letter">Carta</button><button type="button" aria-pressed="false" data-p="cover">Convite</button><button type="button" aria-pressed="false" data-p="page">Certificado</button><button type="button" aria-pressed="false" data-p="card">Cartão</button></div>
+    <div class="seg" role="group" aria-label="Página" id="pgPick"><button type="button" aria-pressed="true" data-p="letter">Carta</button><button type="button" aria-pressed="false" data-p="cover">Convite</button><button type="button" aria-pressed="false" data-p="page">Certificado</button><button type="button" aria-pressed="false" data-p="card">Cartão</button><button type="button" aria-pressed="false" data-p="folder">Pasta</button><button type="button" aria-pressed="false" data-p="envelope">Envelope</button></div>
     <div class="seg" role="group" aria-label="Guias" id="pgGuide"><button type="button" aria-pressed="false" data-g="g">Grade</button><button type="button" aria-pressed="false" data-g="b">Linha de base</button></div>
   </div>
   <div class="desk" id="desk"></div>
@@ -823,7 +831,9 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
   <div class="dls" data-for="cover" hidden><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>PDF</b>Convite<i>Ainda não</i></span></div>
   <div class="dls" data-for="page" hidden><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>DOTX</b>Certificado<i>Ainda não</i></span></div>
   <div class="dls" data-for="card" hidden><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>PDF</b>Cartão<i>Ainda não</i></span></div>
-  <p class="note">Desenhado em escala: dentro da página uma unidade é um milímetro; o cartão aparece no corte, então cada medida abaixo é a medida do desenho. Ligue a grade e a linha de base para ver o que segura a página.</p>
+  <div class="dls" data-for="folder" hidden><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>PDF</b>Pasta<i>Ainda não</i></span></div>
+  <div class="dls" data-for="envelope" hidden><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>PDF</b>Envelope<i>Ainda não</i></span></div>
+  <p class="note">Desenhado em escala: dentro da página uma unidade é um milímetro; o cartão, a pasta e o envelope aparecem no corte, então cada medida abaixo é a medida do desenho. Ligue a grade e a linha de base para ver o que segura a página.</p>
 
   <div class="block"><span class="lbl">As páginas</span>
     <div class="tblw"><table class="tbl wide">
@@ -831,6 +841,8 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
       <tbody>
         <tr><td>Carta, convite, certificado</td><td class="m">A4 · 210 × 297 mm</td><td>20 mm em cima e dos lados, 23 mm embaixo</td><td>12 colunas de 10,5 mm, entrelinhas de 4 mm</td><td class="m">15 pt · 48 linhas</td><td>Colunas 5 a 12: 112 mm, cerca de 62 caracteres</td></tr>
         <tr><td>Cartão</td><td class="m">85 × 45 mm + 3 mm de sangria</td><td>6 mm dentro do corte</td><td>Nenhuma: três blocos</td><td class="m">10 pt</td><td>Frente: o símbolo em ardósia, 20 mm de largura. Verso: nome, função e contato</td></tr>
+        <tr><td>Pasta</td><td class="m">230 × 310 mm, para A4</td><td>Nenhuma: só o símbolo</td><td>O centro da pasta</td><td class="m">—</td><td>Ardósia inteira. O símbolo em areia, 32 mm de largura, no centro. A carta aparece acima dela</td></tr>
+        <tr><td>Envelope</td><td class="m">DL · 110 × 220 mm</td><td>Nenhuma: só o símbolo</td><td>O centro do envelope</td><td class="m">—</td><td>De pé, aba na lateral. Frente: o símbolo em areia, 40 mm, girado com a ponta para cima. Verso: só a aba</td></tr>
       </tbody>
     </table></div>
   </div>
@@ -855,8 +867,9 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
     <li><span><b>Fatos são campos, não frases.</b> Um rótulo com o valor embaixo, para que um ano ou um número se encontre sem ler.</span></li>
     <li><span><b>O espaço se conta em linhas.</b> Nada entre um rótulo e o seu valor, uma linha entre blocos, duas antes de um cabeçalho.</span></li>
     <li><span><b>Toda página diz o que é no rodapé.</b> Documento, referência, número da página.</span></li>
-    <li><span><b>A marca uma vez, em uma cor.</b> O símbolo em azul, no alto da carta ou do convite. O ouro renderizado não vai para o papel.</span></li>
+    <li><span><b>A marca uma vez, em uma cor.</b> O símbolo em ardósia, no alto da carta ou do convite. O ouro renderizado não vai para o papel.</span></li>
     <li><span><b>O cartão é o próprio papel.</b> Na frente, só o símbolo, em ardósia. O verso leva o nome e o contato, em Open Sans.</span></li>
+    <li><span><b>A pasta e o envelope são o fundo.</b> Ardósia de ponta a ponta e o símbolo em areia, sem mais nada impresso: o que é lido fica na carta que vai dentro.</span></li>
   </ol>
 </section>
 
@@ -1141,7 +1154,16 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
     '<div class="pg card" role="img" aria-label="Verso do cartão, em escala">'+OV+
       C(6,6.4,73,"c-nm","Lia Noleto")+C(6,12.6,73,"c-role","Função")+
       C(6,28.4,73,"c-ct","telefone<br>e-mail<br>endereço")+'</div></div>';
-  const pageEl=(k,mini)=>{if(k==="card")return CARD;const p=PAGES[k];return `<div class="pg" role="img" aria-label="${p.label}, em escala">${mini?"":OV}${p.html}</div>`};
+  const SAND='<img src="img/eliria-symbol-sand-2.svg" alt="" width="2862" height="1245">';
+  /* the folder: 230 x 310 mm, the letter showing 32 mm above it */
+  const FOLDER='<div class="pg fold" role="img" aria-label="Pasta, em escala: ardósia com o símbolo em areia, a carta aparecendo acima">'+
+    '<div class="sheet"></div>'+B(30,20,15,"",MARK)+
+    '<div class="body">'+SAND+'</div></div>';
+  /* the DL envelope standing up, 110 x 220 mm: the back with its flap, the front with the symbol point up */
+  const ENV='<div class="pair">'+
+    '<div class="pg env" role="img" aria-label="Verso do envelope, em escala: a aba na lateral"><div class="flap"></div></div>'+
+    '<div class="pg env" role="img" aria-label="Frente do envelope, em escala: o símbolo em areia, de pé"><div class="sym">'+SAND+'</div></div></div>';
+  const pageEl=(k,mini)=>{if(k==="card")return CARD;if(k==="folder")return FOLDER;if(k==="envelope")return ENV;const p=PAGES[k];return `<div class="pg" role="img" aria-label="${p.label}, em escala">${mini?"":OV}${p.html}</div>`};
   const desk=$("#desk");
   const showPage=k=>{desk.innerHTML=pageEl(k,false);$$("[data-for]").forEach(d=>{d.hidden=!d.dataset.for.split(" ").includes(k)})};showPage("letter");
   $$("#pgPick button").forEach(b=>b.addEventListener("click",()=>{$$("#pgPick button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));showPage(b.dataset.p)}));
