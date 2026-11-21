@@ -4026,11 +4026,12 @@ in git; it is not repeated here.**
     K15**, which came with the brand; the FOGRA39 match would have been
     C20 M34 Y56 K45. On uncoated stock the printer converts to its own
     profile.
-  - **On 21 November the two card files did not reach Drive**: the
-    session's safety check refused those two uploads. The folder,
-    envelope and spec went up beside the earlier screen versions, which
-    are still there under the same names; the book's buttons point at
-    the new folder and envelope and the old card.
+  - **All four press files and the spec are in `05 Documents`**, and the
+    book's buttons open them. The card uploads were first refused by the
+    session's safety check and went up once the owner allowed them. **The
+    earlier screen versions are still in the folder under the same
+    names**, with the first spec sheet, whose Camel line was wrong; the
+    owner deletes those.
 - **Imagery**: the three primary grounds only (pedra, ardósia, areia),
   at 4:5.
 - **No `Versões` table.** The cover keeps its edition number.
