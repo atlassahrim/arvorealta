@@ -507,7 +507,20 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
 .pg .flds .t-head{font-stretch:75%}
 .pg .rl,.pg .trow:first-child{border-top-color:#252F37}
 .pg .trow{border-bottom-color:rgba(37,47,55,.2)}
-.pg.card,.pg.card .emb i{background:#D8CCBD}
+.pg.card{background:#D8CCBD}
+/* the card front carries the symbol printed in ardósia, not blind */
+.pg.card .emb{filter:none}
+.pg.card .emb i{background:#252F37}
+/* card back and email signature: Open Sans in every field */
+.pg.card .c-nm{font:600 calc(var(--u) * 4.2)/1 "Open Sans",ui-sans-serif,sans-serif;letter-spacing:.01em;color:#252F37}
+.pg.card .c-role,.pg.card .c-ct{font-family:"Open Sans",ui-sans-serif,sans-serif}
+.sig,.sig .w{font-family:"Open Sans",ui-sans-serif,system-ui,sans-serif}
+.sig .n{font:600 19px/1.15 "Open Sans",ui-sans-serif,system-ui,sans-serif}
+/* the three primary grounds, portrait */
+.imgs.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.imgs.g3 figure:first-child{grid-column:auto}
+.imgs.g3 img{height:auto;aspect-ratio:4/5}
+@media (max-width:720px){.imgs.g3{grid-template-columns:minmax(0,1fr)}.imgs.g3 img{aspect-ratio:16/10}}
 .grounds.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
 .sw.s4{grid-template-columns:repeat(4,minmax(0,1fr))}
 /* version tiles: no padding, so every picture sits in the true centre of its 16:9 box;
@@ -812,7 +825,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
       <thead><tr><th></th><th>Página</th><th>Margens</th><th>Grade</th><th>Linha de base</th><th>Coluna de leitura</th></tr></thead>
       <tbody>
         <tr><td>Carta, convite, certificado</td><td class="m">A4 · 210 × 297 mm</td><td>20 mm em cima e dos lados, 23 mm embaixo</td><td>12 colunas de 10,5 mm, entrelinhas de 4 mm</td><td class="m">15 pt · 48 linhas</td><td>Colunas 5 a 12: 112 mm, cerca de 62 caracteres</td></tr>
-        <tr><td>Cartão</td><td class="m">85 × 45 mm + 3 mm de sangria</td><td>6 mm dentro do corte</td><td>Nenhuma: três blocos</td><td class="m">10 pt</td><td>Frente: o símbolo em relevo seco, 20 mm de largura. Verso: nome, função e contato</td></tr>
+        <tr><td>Cartão</td><td class="m">85 × 45 mm + 3 mm de sangria</td><td>6 mm dentro do corte</td><td>Nenhuma: três blocos</td><td class="m">10 pt</td><td>Frente: o símbolo em ardósia, 20 mm de largura. Verso: nome, função e contato</td></tr>
       </tbody>
     </table></div>
   </div>
@@ -838,7 +851,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
     <li><span><b>O espaço se conta em linhas.</b> Nada entre um rótulo e o seu valor, uma linha entre blocos, duas antes de um cabeçalho.</span></li>
     <li><span><b>Toda página diz o que é no rodapé.</b> Documento, referência, número da página.</span></li>
     <li><span><b>A marca uma vez, em uma cor.</b> O símbolo em azul, no alto da carta ou do convite. O ouro renderizado não vai para o papel.</span></li>
-    <li><span><b>O cartão é o próprio papel.</b> Nada impresso na frente: o símbolo sobe do papel em relevo seco. O verso leva o nome e o contato.</span></li>
+    <li><span><b>O cartão é o próprio papel.</b> Na frente, só o símbolo, em ardósia. O verso leva o nome e o contato, em Open Sans.</span></li>
   </ol>
 </section>
 
@@ -861,11 +874,11 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
 <!-- 09 ───────────────────────────────────────────── -->
 <section id="imagery">
   <div class="sh"><span class="sn">09</span><h2>Imagem e movimento</h2></div>
-  <p class="why">A peça fotografada, mostrada grande. Luz baixa e quente, fundo escuro, a joia em primeiro plano: o ouro precisa de sombra para brilhar. Sugestão do estúdio; as fotografias ainda não existem.</p>
-  <div class="imgs">
-    <figure><div class="tile t-ink" style="height:clamp(150px,21vw,290px)"><img class="fan" src="img/eliria-mark-1-600.webp" alt="O símbolo em ouro sobre ardósia" width="600" height="282"></div><figcaption>O metal sobre a sombra: a regra de toda foto.</figcaption></figure>
-    <figure><div class="tile" style="height:clamp(150px,21vw,290px);background:var(--panel)"><span class="lbl" style="position:static">Ainda não</span></div><figcaption>A peça, de perto.</figcaption><div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>JPG</b>Peça<i>Ainda não</i></span></div></figure>
-    <figure><div class="tile" style="height:clamp(150px,21vw,290px);background:var(--panel)"><span class="lbl" style="position:static">Ainda não</span></div><figcaption>A ocasião: a peça na mão de quem a recebe.</figcaption><div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>JPG</b>Ocasião<i>Ainda não</i></span></div></figure>
+  <p class="why">Os três fundos primários da marca: pedra, ardósia e areia. Matérias naturais, de saturação baixa, que carregam a marca e a peça. As fotografias da peça ainda não existem.</p>
+  <div class="imgs g3">
+    <figure><img src="img/eliria-ground-black-1-800.webp" alt="Pedra preta, de perto" width="800" height="1000" loading="lazy"><figcaption>Pedra</figcaption><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1O0KW9PSOqttXxQGF06HnbbATRYAt3btw/view" target="_blank" rel="noopener"><b>JPG</b>Pedra<i>2.4 MB</i></a></div></figure>
+    <figure><img src="img/eliria-ground-ardosia-1-800.webp" alt="Ardósia, uma superfície azul acinzentada" width="800" height="1000" loading="lazy"><figcaption>Ardósia</figcaption><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1gTxmaBwuLyGjP90QnT3JkhHyRRRTv4v_/view" target="_blank" rel="noopener"><b>JPG</b>Ardósia<i>2.3 MB</i></a></div></figure>
+    <figure><img src="img/eliria-ground-sand-1-800.webp" alt="Areia, uma duna de perto" width="800" height="1000" loading="lazy"><figcaption>Areia</figcaption><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1aFBQVdzXj_uXVCJIeAdJaAmtc_3KhU34/view" target="_blank" rel="noopener"><b>JPG</b>Areia<i>1.9 MB</i></a></div></figure>
   </div>
   <ol class="rules">
     <li><span><b>A joia real, fotografada.</b> Nunca uma peça gerada ou montada.</span></li>
@@ -1021,16 +1034,6 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
   <div class="block"><span class="lbl">Dúvidas e aprovações</span>
     <div class="contact"><span id="mail">atlas@arvorealta.com</span><button class="copy" data-v="atlas@arvorealta.com">Copiar</button></div>
   </div>
-  <div class="block"><span class="lbl">Versões</span>
-    <div class="tblw"><table class="tbl"><tbody>
-      <tr><td class="m">0.6</td><td>20 nov 2026</td><td>As versões em ardósia e o novo areia; as imagens das versões centradas; o deslocamento do nome na assinatura, explicado.</td></tr>
-      <tr><td class="m">0.5</td><td>20 nov 2026</td><td>Ardósia, areia e camel; a folha madura como quarta cor, para ocasiões especiais.</td></tr>
-      <tr><td class="m">0.4</td><td>20 nov 2026</td><td>Lia Noleto nas peças; logos dos impressos 50% menores; o ícone inteiro e centralizado.</td></tr>
-      <tr><td class="m">0.3</td><td>20 nov 2026</td><td>As versões da marca para tela; regras e cultura do projeto; o símbolo em uma cor nos documentos.</td></tr>
-      <tr><td class="m">0.2</td><td>20 nov 2026</td><td>Só Eliria. Indigo, creme e camel; Carla Sans e Open Sans.</td></tr>
-      <tr><td class="m">0.1</td><td>20 nov 2026</td><td>Refeito no modelo do livro da Arvorealta, só com os arquivos novos da marca.</td></tr>
-    </tbody></table></div>
-  </div>
 </section>
 
 </main>
@@ -1128,10 +1131,10 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
   };
   const C=(x,y,w,cls,html,st="")=>B(x,y,w,cls,html,st);
   const CARD='<div class="pair">'+
-    '<div class="pg card" role="img" aria-label="Frente do cartão, em escala: o símbolo em relevo seco sobre o papel">'+OV+
+    '<div class="pg card" role="img" aria-label="Frente do cartão, em escala: o símbolo em ardósia sobre o papel">'+OV+
       C(32.5,18.15,20,"emb","<i></i>","height:calc(var(--u) * 8.7)")+'</div>'+
     '<div class="pg card" role="img" aria-label="Verso do cartão, em escala">'+OV+
-      CS(6,9.93,5.292,"lia",6.444,"LIA NOLETO",.742)+C(6,12.6,73,"c-role","Função")+
+      C(6,6.4,73,"c-nm","Lia Noleto")+C(6,12.6,73,"c-role","Função")+
       C(6,28.4,73,"c-ct","telefone<br>e-mail<br>endereço")+'</div></div>';
   const pageEl=(k,mini)=>{if(k==="card")return CARD;const p=PAGES[k];return `<div class="pg" role="img" aria-label="${p.label}, em escala">${mini?"":OV}${p.html}</div>`};
   const desk=$("#desk");

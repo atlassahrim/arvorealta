@@ -88,7 +88,6 @@ LINES = {
     "entrega": ("A ENTREGA", "light", "#252F37", False, 0.02),
     "da-colecao": ("DA COLEÇÃO 2026", "light", "#252F37", False, 0.02),
     "colecao": ("COLEÇÃO OFICIAL 2026", "regular", "#252F37", False, 0.04),
-    "lia": ("LIA NOLETO", "regular", "#252F37", False, 0.04),
     "carla-on": ("CARLA", "regular", "#252F37", True, 0.02),
     "carla-off": ("CARLA", "regular", "#252F37", False, 0.02),
     "edicao": ("EDIÇÃO 2026", "semibold", "#252F37", False, 0.12),

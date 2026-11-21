@@ -4110,6 +4110,19 @@ picture is centred in its box, and the icon fills the box with
 rule gives a classless tile image a 32 px top padding**, so the icon's
 own rule sets `padding:0` as well.
 
+**On 21 November, at the owner's word:** `folha` stays the file word. The
+card front carries the symbol **printed in ardósia**, not blind-embossed,
+so the emboss filter is off and the documents fold says so. **The card
+back and the email signature are Open Sans in every field**: the name is
+live text now and `carla-lia-1.svg` is deleted with its line in
+`carla_svg.py`. The wordmark in the signature stays, as the logo it is.
+**Section 09 shows the three primary grounds** from `Eliria BRAND/04
+Imagery/Grounds`: pedra (`black`), ardósia and areia (`sand2`), cut to
+4:5 webp at 800 × 1000 about the centre, each with its Drive button. The
+two `secondary` files are not on the page, by his instruction. **The
+`Versões` table is gone**, as unnecessary; the cover's edition number
+stays.
+
 ## The pricing ladder
 
 **There are two ladders on this domain and this section is the euro one.**
