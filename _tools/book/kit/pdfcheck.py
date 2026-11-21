@@ -1,3 +1,7 @@
+"""Press PDFs: no RGB operator, fonts embedded, the FOGRA39 intent, PDF/X-1a keys.
+
+    python3 -I _tools/book/kit/pdfcheck.py <file.pdf>...
+"""
 import sys, pikepdf, re
 for f in sys.argv[1:]:
     pdf = pikepdf.open(f); ops = set(); fonts = set()

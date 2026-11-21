@@ -1,9 +1,15 @@
-// Print Eliria's pieces to PDF at true size, from the book's own drawings.
-// The three A4 documents; the press pieces come from press.py.
+// Print a client's three A4 documents to PDF at true size, from the book's own
+// drawings. The press pieces come from press.py.
+//   NODE_PATH=$(npm root -g) node kit/pdfs.js <code> [outdir]    needs the site served on :8766 (build.sh does it)
+const fs = require('fs'), path = require('path');
 const {chromium} = require('playwright');
-const OUT = (process.argv[2] || __dirname + '/out') + '/';  // needs the site served on :8766
-const BOOK = 'http://localhost:8766/brand/book-eli/';
-const ARD = '#252F37', SAND_SYM = 'img/eliria-symbol-sand-2.svg', ARD_SYM = 'img/eliria-symbol-ardosia-1.svg';
+const CODE = process.argv[2];
+if (!CODE) { console.error('usage: node pdfs.js <code> [outdir]'); process.exit(2); }
+const C_DIR = path.join(__dirname, '..', 'clients', CODE);
+const C = JSON.parse(fs.readFileSync(path.join(C_DIR, 'client.json'), 'utf8'));
+const OUT = (process.argv[3] || path.join(C_DIR, 'out')) + '/';
+fs.mkdirSync(OUT, {recursive: true});
+const BOOK = `http://localhost:${process.env.PORT || 8766}/brand/book-${CODE}/`;
 const BASE = `html,body{margin:0!important;padding:0!important;background:none!important;scroll-snap-type:none!important}
   body>*:not(#print){display:none!important}
   #print .pg{box-shadow:none!important;margin:0!important}
@@ -28,16 +34,11 @@ async function print(p, name, w, h, html, css = '') {
   const grab = async k => { await p.evaluate(() => document.querySelectorAll('#print,#printcss').forEach(e => e.remove())); await p.click(`#pgPick button[data-p=${k}]`); await p.waitForTimeout(200);
     return p.evaluate(() => [...document.querySelectorAll('#desk .pg')].map(e => e.outerHTML)); };
 
-  // invitation, A4, no bleed: it prints on an office printer
-  const [inv] = await grab('cover');
-  await print(p, 'eliria_template_invitation_a4.pdf', 210, 297, inv, '#print .pg{width:210mm!important}');
-
-  // letter and certificate, A4, the same way: each also ships as a .dotx
-  const [letter] = await grab('letter');
-  await print(p, 'eliria_template_letter_a4.pdf', 210, 297, letter, '#print .pg{width:210mm!important}');
-  const [cert] = await grab('page');
-  await print(p, 'eliria_template_certificate_a4.pdf', 210, 297, cert, '#print .pg{width:210mm!important}');
-
-  // card, folder and envelope are press files now: see press.py (CMYK, PDF/X-1a, FOGRA39)
+  // A4, no bleed: they print on an office printer, and each also ships as a .dotx.
+  // The keys are the book's own page picker: cover = invitation, page = certificate.
+  for (const [key, n] of [['cover', 'invitation'], ['letter', 'letter'], ['page', 'certificate']]) {
+    const [pg] = await grab(key);
+    await print(p, `${C.slug}_template_${n}_a4.pdf`, 210, 297, pg, '#print .pg{width:210mm!important}');
+  }
   await b.close();
 })();

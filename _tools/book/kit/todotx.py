@@ -1,4 +1,7 @@
-"""docx -> dotx: the main part's content type becomes the template one."""
+"""docx -> dotx: the main part's content type becomes the template one.
+
+    python3 -I _tools/book/kit/todotx.py <file.docx>...
+"""
 import sys, zipfile
 for src in sys.argv[1:]:
     dst = src[:-5] + '.dotx'

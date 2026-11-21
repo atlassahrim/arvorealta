@@ -1,11 +1,11 @@
-ELIRIA · ESPECIFICAÇÃO PARA A GRÁFICA
+{NAME_UPPER} · ESPECIFICAÇÃO PARA A GRÁFICA
 Arquivos de impressão: cartão (frente e verso), pasta (capa) e envelope DL (frente).
 
 ARQUIVOS
-  eliria_card_front_85x45mm.pdf     cartão, frente     corte 85 × 45 mm
-  eliria_card_back_85x45mm.pdf      cartão, verso      corte 85 × 45 mm
-  eliria_folder_230x310mm.pdf       pasta, capa        corte 230 × 310 mm
-  eliria_envelope_110x220mm.pdf     envelope DL, frente corte 110 × 220 mm
+  {SLUG}_card_front_85x45mm.pdf     cartão, frente     corte 85 × 45 mm
+  {SLUG}_card_back_85x45mm.pdf      cartão, verso      corte 85 × 45 mm
+  {SLUG}_folder_230x310mm.pdf       pasta, capa        corte 230 × 310 mm
+  {SLUG}_envelope_110x220mm.pdf     envelope DL, frente corte 110 × 220 mm
 
 FORMATO
   PDF/X-1a:2003, tudo em CMYK, fontes incorporadas, sem transparência.
@@ -20,18 +20,15 @@ CORTE, SANGRIA E MARGEM
   Margem de segurança: nenhum texto ou símbolo a menos de 6 mm do corte.
 
 CORES (CMYK, FOGRA39)
-  Ardósia        C66 M36 Y20 K90   fundo da pasta e do envelope; texto e símbolo no cartão
-  Areia          C19 M19 Y27 K0    fundo do cartão; símbolo na pasta e no envelope
-  Camel          C41 M47 Y59 K15   valor da marca (não usado nestes arquivos)
-  Folha madura   C58 M28 Y82 K91   (substitui a ardósia em edições especiais)
-  Carga máxima de tinta nestes arquivos: 212 %.
+{COLOURS}
+  Carga máxima de tinta nestes arquivos: {INK_LOAD} %.
   Para uma prova fiel, imprimir uma prova de contrato antes da tiragem.
 
 OBSERVAÇÕES
   Pasta e envelope: os arquivos trazem só a face impressa. A faca (bolsos,
   abas, vinco, lombada, colagem) é da gráfica: aplicar a arte sobre a faca
   dela, com o símbolo centrado na capa.
-  Cartão, verso: nome, função e contato ainda são exemplos. Confirmar os
+{IF_CONTACT_EXAMPLE}  Cartão, verso: nome, função e contato ainda são exemplos. Confirmar os
   dados finais antes de imprimir.
-  O texto pequeno do verso (7 pt) está em ardósia, em quatro cores; pedir
+{/IF}  O texto pequeno do verso (7 pt) está em {DARK}, em quatro cores; pedir
   registro preciso.

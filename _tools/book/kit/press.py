@@ -1,6 +1,7 @@
-"""Eliria's printed pieces as press-ready PDF/X-1a:2003 files, all in CMYK.
+"""A client's printed pieces as press-ready PDF/X-1a:2003 files, all in CMYK,
+plus the printer's spec sheet in the client's language.
 
-    python3 -I press.py <outdir>
+    python3 -I kit/press.py <code> [outdir]
 
 Card (85 x 45 mm, front and back), folder face (230 x 310 mm) and DL envelope
 front (110 x 220 mm). Every file carries:
@@ -9,10 +10,11 @@ front (110 x 220 mm). Every file carries:
 - MediaBox, BleedBox and TrimBox set, so the RIP knows the cut
 - a FOGRA39 output intent with its ICC profile embedded
 - fonts embedded, no RGB, no transparency
-Colours are the brand's CMYK values, chosen against FOGRA39 by colour
-difference to the screen values; see CLAUDE.md.
+Colours, faces, symbol, words and sizes come from clients/<code>/client.json.
+The CMYK values are the client's, or chosen against FOGRA39 by colour
+difference to the screen value (see the brand-book skill's reference).
 """
-import sys, os, re, io, datetime
+import sys, os, re, io, json
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import mm
 from reportlab.lib.colors import CMYKColor
@@ -21,26 +23,39 @@ from reportlab.pdfbase.ttfonts import TTFont
 from svglib.svglib import svg2rlg
 import pikepdf
 
+from fontTools.ttLib import TTFont as FTFont
+
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, 'out')
+if len(sys.argv) < 2: sys.exit('usage: press.py <code> [outdir]')
+CDIR = os.path.join(HERE, '..', 'clients', sys.argv[1])
+C = json.load(open(os.path.join(CDIR, 'client.json'), encoding='utf-8'))
+OUT = sys.argv[2] if len(sys.argv) > 2 else os.path.join(CDIR, 'out')
 os.makedirs(OUT, exist_ok=True)
 ICC = os.path.join(HERE, 'FOGRA39L.icc')
+NAME, STEM, PR = C['name'], C['slug'], C['press']
 
 def cmyk(c, m, y, k): return CMYKColor(c / 100, m / 100, y / 100, k / 100)
-ARDOSIA = cmyk(66, 36, 20, 90)
-AREIA = cmyk(19, 19, 27, 0)
+WORD = {p['word']: p for p in C['palette']}
+INK = {'dark': WORD[C['dark']], 'light': WORD[C['light']]}
+COL = {k: cmyk(*p['cmyk']) for k, p in INK.items()}
 REG = cmyk(100, 100, 100, 100)          # registration, for the marks only
 
-for name, f in (('OS', 'OpenSans-Regular.ttf'), ('OS-Medium', 'OpenSans-Medium.ttf'), ('OS-SemiBold', 'OpenSans-SemiBold.ttf')):
-    pdfmetrics.registerFont(TTFont(name, os.path.join(HERE, 'fonts', f)))
+METRIC = {}
+for name, role in (('OS', 'regular'), ('OS-Medium', 'medium'), ('OS-SemiBold', 'semibold')):
+    f = os.path.join(CDIR, 'fonts', C['fonts'][role]['file'])
+    pdfmetrics.registerFont(TTFont(name, f))
+    t = FTFont(f); u = t['head'].unitsPerEm; h = t['hhea']
+    METRIC[name] = ((h.ascent - h.descent + h.lineGap) / u, h.ascent / u)   # single line, ascent
 
 BLEED, SLUG = 3, 9                       # mm
 SVG = os.path.join(OUT, '.symbol-sized.svg')
-open(SVG, 'w').write(open(os.path.join(HERE, 'symbol.svg')).read().replace('width="100%" height="100%"', 'width="2862" height="1245"'))
-SYM_W, SYM_H = 2862, 1245
+_svg = open(os.path.join(CDIR, C['symbol']['svg'])).read()
+SYM_W, SYM_H = [float(v) for v in re.search(r'viewBox="[\d.\s-]*?\s([\d.]+)\s+([\d.]+)"', _svg).groups()]
+open(SVG, 'w').write(re.sub(r'(<svg[^>]*?)\swidth="[^"]*"\s+height="[^"]*"', r'\1', _svg, count=1)
+                     .replace('<svg ', '<svg width="%g" height="%g" ' % (SYM_W, SYM_H), 1))
 
 def symbol(c, cx, cy, width, colour, rotate=0):
-    """The Eliria symbol, centred at (cx, cy) mm, `width` mm wide, one flat CMYK colour.
+    """The symbol, centred at (cx, cy) mm, `width` mm wide, one flat CMYK colour.
     The SVG's own paths are drawn straight onto the canvas, so nothing but the
     CMYK fill reaches the file."""
     from reportlab.graphics.shapes import Group, Path
@@ -98,11 +113,12 @@ def slugline(c, o, text):
 
 def text_top(c, x, top, size_mm, font, s, th, o, lead_mm=None):
     """Place text as the book does: `top` is the CSS line-box top in mm from the
-    trim's top edge, line-height 1 unless a leading is given (Open Sans metrics)."""
+    trim's top edge, line-height 1 unless a leading is given (the face's hhea metrics)."""
     lines = s.split('\n')
     lh = lead_mm or size_mm
-    half = (lh - 1.362 * size_mm) / 2
-    base = top + half + 1.069 * size_mm
+    line, asc = METRIC[font]
+    half = (lh - line * size_mm) / 2
+    base = top + half + asc * size_mm
     c.setFont(font, size_mm * 72 / 25.4)
     for i, line in enumerate(lines):
         c.drawString((o + x) * mm, (o + th - base - i * lh) * mm, line)
@@ -110,11 +126,11 @@ def text_top(c, x, top, size_mm, font, s, th, o, lead_mm=None):
 def build(name, tw, th, art, label):
     path = os.path.join(OUT, name)
     c = canvas.Canvas(path, pdfVersion=(1, 4), initialFontName='OS', initialFontSize=5)
-    c.setTitle(name[:-4]); c.setAuthor('Eliria'); c.setCreator('Arvorealta')
+    c.setTitle(name[:-4]); c.setAuthor(NAME); c.setCreator('Arvorealta')
     o, W, H = page(c, tw, th)
     art(c, o)
     marks(c, tw, th, o)
-    slugline(c, o, f'{label}  ·  corte {tw} × {th} mm  ·  sangria {BLEED} mm  ·  FOGRA39')
+    slugline(c, o, f"{NAME} · {label}  ·  {PR['trim']} {tw} × {th} mm  ·  {PR['bleed']} {BLEED} mm  ·  FOGRA39")
     c.showPage(); c.save()
     pdfx(path)
     print('wrote', path)
@@ -154,28 +170,45 @@ def pdfx(path):
 # ── the card, 85 x 45 mm ──
 CW, CH = 85, 45
 def card_front(c, o):
-    ground(c, CW, CH, o, AREIA)
-    symbol(c, o + CW / 2, o + CH / 2, 20, ARDOSIA)          # 20 mm wide, centred, printed in ardósia
+    p = PR['card']
+    ground(c, CW, CH, o, COL[p['ground']])
+    symbol(c, o + CW / 2, o + CH / 2, p['symbol_mm'], COL[p['symbol']])
 def card_back(c, o):
-    ground(c, CW, CH, o, AREIA)
-    c.setFillColor(ARDOSIA)
-    text_top(c, 6, 6.4, 4.2, 'OS-SemiBold', 'Lia Noleto', CH, o)
-    text_top(c, 6, 12.6, 2.646, 'OS-Medium', 'Função', CH, o)
-    text_top(c, 6, 28.4, 2.469, 'OS', 'telefone\ne-mail\nendereço', CH, o, lead_mm=3.528)
+    p, s = PR['card'], C['signatory']
+    ground(c, CW, CH, o, COL[p['ground']])
+    c.setFillColor(COL[p['symbol']])
+    text_top(c, 6, 6.4, 4.2, 'OS-SemiBold', s['name'], CH, o)
+    text_top(c, 6, 12.6, 2.646, 'OS-Medium', s['role'], CH, o)
+    text_top(c, 6, 28.4, 2.469, 'OS', '\n'.join(s['contact']), CH, o, lead_mm=3.528)
 
-# ── the folder face, 230 x 310 mm ──
-FW, FH = 230, 310
-def folder(c, o):
-    ground(c, FW, FH, o, ARDOSIA)
-    symbol(c, o + FW / 2, o + FH / 2, 32, AREIA)
+# ── the folder face, 230 x 310 mm, and the DL envelope front, 110 x 220 mm standing ──
+FW, FH, EW, EH = 230, 310, 110, 220
+def face(key, w, h):
+    def art(c, o):
+        p = PR[key]
+        ground(c, w, h, o, COL[p['ground']])
+        symbol(c, o + w / 2, o + h / 2, p['symbol_mm'], COL[p['symbol']], rotate=p.get('rotate', 0))
+    return art
 
-# ── the DL envelope front, 110 x 220 mm standing ──
-EW, EH = 110, 220
-def envelope(c, o):
-    ground(c, EW, EH, o, ARDOSIA)
-    symbol(c, o + EW / 2, o + EH / 2, 40, AREIA, rotate=-90)  # turned so its point is up
+build(f'{STEM}_card_front_{CW}x{CH}mm.pdf', CW, CH, card_front, PR['card']['label_front'])
+build(f'{STEM}_card_back_{CW}x{CH}mm.pdf', CW, CH, card_back, PR['card']['label_back'])
+build(f'{STEM}_folder_{FW}x{FH}mm.pdf', FW, FH, face('folder', FW, FH), PR['folder']['label'])
+build(f'{STEM}_envelope_{EW}x{EH}mm.pdf', EW, EH, face('envelope', EW, EH), PR['envelope']['label'])
 
-build('eliria_card_front_85x45mm.pdf', CW, CH, card_front, 'Eliria · cartão, frente')
-build('eliria_card_back_85x45mm.pdf', CW, CH, card_back, 'Eliria · cartão, verso')
-build('eliria_folder_230x310mm.pdf', FW, FH, folder, 'Eliria · pasta, capa')
-build('eliria_envelope_110x220mm.pdf', EW, EH, envelope, 'Eliria · envelope DL, frente')
+# ── the printer's spec sheet, from kit/spec/<lang>.txt ──
+spec = os.path.join(HERE, 'spec', C['lang'] + '.txt')
+if not os.path.exists(spec):
+    print('no spec template for', C['lang'], '- translate kit/spec/pt-BR.txt to kit/spec/%s.txt' % C['lang'])
+else:
+    t = open(spec, encoding='utf-8').read()
+    w = max(len(p['name']) for p in C['palette']) + 3
+    cols = '\n'.join('  ' + p['name'].ljust(w) + ('C%d M%d Y%d K%d' % tuple(p['cmyk'])).ljust(18) + p['print_use'] for p in C['palette'])
+    load = max(sum(INK[k]['cmyk']) for k in INK)
+    blocks = re.findall(r'\{IF_CONTACT_EXAMPLE\}(.*?)\{/IF\}', t, re.S)
+    for b in blocks:
+        t = t.replace('{IF_CONTACT_EXAMPLE}' + b + '{/IF}', '' if C['signatory'].get('contact_final') else b)
+    t = t.replace('{NAME_UPPER}', NAME.upper()).replace('{SLUG}', STEM).replace('{COLOURS}', cols).replace('{INK_LOAD}', str(load))
+    t = t.replace('{DARK}', INK['dark']['name'].lower())
+    path = os.path.join(OUT, f'{STEM}_print_spec.txt')
+    open(path, 'w', encoding='utf-8').write(t)
+    print('wrote', path)
