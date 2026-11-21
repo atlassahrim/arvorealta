@@ -13,19 +13,85 @@
     "book_title": "Livro da marca"
   },
   "tokens": {
-    "--b-ink": "#252F37",
-    "--b-ink2": "#252F37",
-    "--b-pink": "#252F37",
-    "--b-paper": "#D8CCBD",
-    "--b-bone": "#EFEAE1",
-    "--b-amber": "#8E7657",
-    "--b-brick": "#7A5530"
+    "--b-ink": "#332415",
+    "--b-ink2": "#332415",
+    "--b-pink": "#332415",
+    "--b-paper": "#F2ECDE",
+    "--b-bone": "#F2ECDE",
+    "--b-amber": "#D3B67C",
+    "--b-brick": "#935234"
   },
-  "palette": [],
-  "dark": null,
-  "light": null,
-  "doc_soft": "#666D73",
-  "doc_rule": "#C9CCCF",
+  "palette": [
+    {
+      "name": "Algodão",
+      "word": "algodao",
+      "hex": "#F2ECDE",
+      "cmyk": [
+        6,
+        6,
+        14,
+        0
+      ],
+      "share": 70,
+      "print_use": "fundo do cartão; símbolo na pasta e no envelope"
+    },
+    {
+      "name": "Raiz",
+      "word": "raiz",
+      "hex": "#332415",
+      "cmyk": [
+        40,
+        68,
+        100,
+        90
+      ],
+      "share": 20,
+      "print_use": "fundo da pasta e do envelope; texto e símbolo no cartão"
+    },
+    {
+      "name": "Barro",
+      "word": "barro",
+      "hex": "#935234",
+      "cmyk": [
+        2,
+        60,
+        76,
+        52
+      ],
+      "share": 10,
+      "print_use": "links, rótulos, filetes (não usado nestes arquivos)"
+    },
+    {
+      "name": "Eucalipto",
+      "word": "eucalipto",
+      "hex": "#779989",
+      "cmyk": [
+        62,
+        30,
+        52,
+        0
+      ],
+      "share": 10,
+      "print_use": "fundos de destaque (não usado nestes arquivos)"
+    },
+    {
+      "name": "Palha",
+      "word": "palha",
+      "hex": "#D3B67C",
+      "cmyk": [
+        24,
+        26,
+        60,
+        0
+      ],
+      "share": 10,
+      "print_use": "fundos de destaque; símbolo sobre raiz (não usado nestes arquivos)"
+    }
+  ],
+  "dark": "raiz",
+  "light": "algodao",
+  "doc_soft": "#70665B",
+  "doc_rule": "#D6D3D0",
   "fonts": {
     "title": {
       "name": "Tenor Sans",
@@ -191,12 +257,9 @@
     "bleed": "sangria"
   },
   "_draft": [
-    "tokens",
     "fonts",
     "documents",
     "press",
-    "doc_soft",
-    "doc_rule",
     "words"
   ]
 }
