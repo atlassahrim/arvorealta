@@ -3915,6 +3915,12 @@ family; nothing new is made in brick.
 state is listed after them. The day-by-day record before 21 November is
 in git; it is not repeated here.**
 
+**A new client book starts from `_tools/book/NEW_CLIENT.md`**: a prompt
+to paste into a new session, with the client's name, a three-letter code,
+the language and the Drive folder. It sets up the Drive tree, copies
+`brand/book-eli/` and `_tools/book/eliria/`, and works through the
+supplied files in order.
+
 1. **Where it lives.** `/brand/book-<three letters>/`, `noindex,
    nofollow`, linked from nowhere. The owner sends the link. Ours is
    `/brand/book-arv/`, Eliria's is `/brand/book-eli/`. `brand/book/` and
