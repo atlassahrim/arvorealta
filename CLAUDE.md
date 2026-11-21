@@ -3956,11 +3956,16 @@ in git; it is not repeated here.**
   it is never used there, and rules on areia are drawn in ardósia. The
   file words are `ardosia`, `sand`, `camel` and `folha`. CMYK is still
   open.
-- **Type**: Carla Sans for display and Open Sans for everything typed.
-  - **Carla Sans** is caps only and set with ligatures off. It is never
-    served, because its files carry no licence: every Carla line is an
-    SVG outline drawn by `_tools/book/carla_svg.py` from the fonts in
-    Drive.
+- **Type: three faces, one job each, since 21 November.**
+  - **Carla Sans is the logo only.** It lives inside the supplied
+    wordmark and lockup files and is never typed or served, because its
+    files carry no licence. Never touch the logo files' lettering.
+  - **Tenor Sans sets every title** (OFL, self-hosted in
+    `brand/book-eli/fonts/tenor-sans-latin{,-ext}.woff2`), in capitals
+    with about .06em of tracking through the `.ts` class, `.04em` inside
+    the document drawings. One weight: no bold, no italic. It replaced
+    Carla Sans in every title, chosen as the closest free match. The
+    Carla SVG outlines and `_tools/book/carla_svg.py` are deleted.
   - **Open Sans** is self-hosted (OFL). Every field of live text is Open
     Sans, the card back and the email signature included.
 - **Mark**: symbol, wordmark and lockup as SVG in ardósia, sand, camel

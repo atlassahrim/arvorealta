@@ -489,16 +489,22 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
 </style>
 <style>
 /* Eliria's own faces and inks, appended after the template's sheet.
-   Open Sans is self-hosted (OFL, variable in weight and width). Carla Sans
-   carries no licence, so it is never served: its lines are SVG outlines. */
+   Open Sans and Tenor Sans are self-hosted (OFL). Carla Sans carries no
+   licence and lives only inside the supplied logo files; it is never served. */
+@font-face{font-family:"Tenor Sans";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/tenor-sans-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Tenor Sans";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/tenor-sans-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
 @font-face{font-family:"Open Sans";font-style:normal;font-weight:300 800;font-stretch:75% 100%;font-display:swap;src:url(fonts/open-sans-var-latin.woff2) format("woff2")}
 @font-face{font-family:"Open Sans";font-style:italic;font-weight:300 800;font-stretch:75% 100%;font-display:swap;src:url(fonts/open-sans-italic-var-latin.woff2) format("woff2")}
 .os,.mini .ex.os{font-family:"Open Sans",ui-sans-serif,system-ui,sans-serif}
 .osc,.mini .ex.osc,.sp-m.osc{font-family:"Open Sans",ui-sans-serif,system-ui,sans-serif;font-stretch:75%;letter-spacing:.02em}
-.sp-d img.carla{display:block;width:min(100%,9.6em);height:auto}
-.mini .ex img.carla{display:block;height:.62em;width:auto}
-.mini .ex.lig{display:flex;gap:.6em;align-items:center}
-.opener .hd img.carla{display:block;height:.82em;width:auto;margin:0 auto}
+/* Tenor Sans sets every title, in capitals with open tracking */
+.ts,.sp-d.ts,.mini .ex.ts,.opener .hd.ts{font-family:"Tenor Sans",ui-sans-serif,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.06em}
+.sp-d.ts{font-size:clamp(30px,4vw,50px);line-height:1.05}
+.mini .ex.ts{font-size:26px}
+.mini .ex.ts.lc{text-transform:none;letter-spacing:.01em}
+.opener .hd.ts{font-size:clamp(28px,3.6vw,44px);line-height:1.05}
+.sp-d img.logo{display:block;width:min(100%,6em);height:auto}
+.pg .ts{font-family:"Tenor Sans",ui-sans-serif,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.04em}
 #components{--f-mono:"Open Sans",ui-sans-serif,system-ui,sans-serif;--f-text:"Open Sans",ui-sans-serif,system-ui,sans-serif}
 #components .opener .eb{letter-spacing:.2em;color:rgba(216,204,189,.72)}
 .pg{--f-disp:"Open Sans",ui-sans-serif,sans-serif;--f-text:"Open Sans",ui-sans-serif,sans-serif;--f-mono:"Open Sans",ui-sans-serif,sans-serif;color:#252F37}
@@ -600,7 +606,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
   <div class="four">
     <div><span class="lbl">Regra 1 · Mensagem</span><span class="k">Uma linha, dita</span><p>Vincular ocasiões e joias exclusivas.</p></div>
     <div><span class="lbl">Regra 2 · Cor</span><span class="k">Ardósia, areia, camel</span><p>Usadas a 70, 20 e 10 por cento. A folha madura substitui a ardósia em ocasiões especiais.</p></div>
-    <div><span class="lbl">Regra 3 · Tipografia</span><span class="k">Duas famílias, duas funções</span><p>Carla Sans e Open Sans.</p></div>
+    <div><span class="lbl">Regra 3 · Tipografia</span><span class="k">Três famílias, três funções</span><p>Carla Sans no logo, Tenor Sans nos títulos, Open Sans no texto.</p></div>
     <div><span class="lbl">Regra 4 · Cultura</span><span class="k">Cerimônia e reconhecimento</span><p>Legado presente, hoje.</p></div>
   </div>
   <ol class="rules">
@@ -754,21 +760,22 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
 <!-- 05 ───────────────────────────────────────────── -->
 <section id="type">
   <div class="sh"><span class="sn">05</span><h2>Tipografia</h2></div>
-  <p class="why">Duas famílias, uma função cada, as duas da pasta <span class="mono">03 Type</span>. Carla Sans dá o nome e os títulos; Open Sans faz todo o resto. A Playfair Display sai: era uma segunda voz de título, e é fraca em tamanhos pequenos, em certificados e na gravação.</p>
+  <p class="why">Três famílias, uma função cada. Carla Sans é só o logo: o nome Eliria, já desenhado nos arquivos da marca. Tenor Sans dá os títulos. Open Sans faz todo o resto.</p>
   <div class="faces">
-    <div class="face"><div class="who"><b>Carla Sans</b><span>O nome e os títulos, sempre em caixa alta</span><div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>Fonte</b><i>A confirmar</i></span></div></div><p class="sp-d"><img class="carla" src="img/carla-colecao-1.svg" alt="COLEÇÃO OFICIAL 2026" width="12701" height="1190"></p></div>
+    <div class="face"><div class="who"><b>Carla Sans</b><span>Só o logo. O nome Eliria vem desenhado nos arquivos da marca, nunca digitado</span></div><p class="sp-d"><img class="logo" src="img/eliria-wordmark-ardosia-1.svg" alt="ELIRIA, o nome desenhado" width="3032" height="246"></p></div>
+    <div class="face"><div class="who"><b>Tenor Sans</b><span>Os títulos, em caixa alta com espaçamento aberto</span><div class="dls"><a class="dl" href="https://fonts.google.com/specimen/Tenor+Sans" target="_blank" rel="noopener"><b>Fonte</b>Google Fonts</a></div></div><p class="sp-d ts">Coleção oficial 2026</p></div>
     <div class="face"><div class="who"><b>Open Sans</b><span>Tudo o que é lido, e a largura condensada para números</span><div class="dls"><a class="dl" href="https://fonts.google.com/specimen/Open+Sans" target="_blank" rel="noopener"><b>Fonte</b>Google Fonts</a></div></div><div><p class="sp-t os">Cada peça é gravada com o ano e as iniciais de quem a recebe.</p><p class="sp-m osc">Nº 007 / 120 • Coleção 2026</p></div></div>
   </div>
   <div class="minis">
-    <div class="mini"><span class="lbl">Carla Sans só em caixa alta</span><span class="ex"><img class="carla" src="img/carla-edicao-1.svg" alt="EDIÇÃO 2026" width="7997" height="1190"></span></div>
-    <div class="mini"><span class="lbl">Ligaduras desligadas, e ligadas</span><span class="ex lig"><img class="carla" src="img/carla-carla-off-1.svg" alt="CARLA, sem ligaduras" width="3435" height="762"><img class="carla" src="img/carla-carla-on-1.svg" alt="CARLA, com ligaduras" width="3349" height="762"></span></div>
+    <div class="mini"><span class="lbl">Títulos em Tenor Sans, caixa alta</span><span class="ex ts">Edição 2026</span></div>
+    <div class="mini"><span class="lbl">A Tenor Sans tem minúsculas, para títulos longos</span><span class="ex ts lc">Cada uma, única</span></div>
     <div class="mini"><span class="lbl">Ênfase em itálico, no Open Sans</span><span class="ex os">gravada com <em>o ano</em>.</span></div>
     <div class="mini"><span class="lbl">Números no Open Sans condensado</span><span class="ex osc">Nº 007 / 120</span></div>
   </div>
   <ol class="rules">
-    <li><span><b>Carla Sans sempre em caixa alta.</b> As minúsculas dela são as próprias maiúsculas, sem os acentos: «Coleção» digitado assim sai COLECAO.</span></li>
-    <li><span><b>Ligaduras desligadas por padrão.</b> Com elas ligadas, CA, LA, RA, GA e outros pares viram um desenho só. Use de propósito, num título, nunca por acaso.</span></li>
-    <li><span><b>Carla Sans não tem «·», «–» nem «º».</b> O separador é «•»; o resto vai em Open Sans.</span></li>
+    <li><span><b>Carla Sans só no logo.</b> Ela vive nos arquivos do nome e do símbolo; nunca é digitada, e os arquivos dela não trazem licença.</span></li>
+    <li><span><b>Tenor Sans nos títulos, em caixa alta.</b> Com espaçamento aberto, cerca de 6 por cento do corpo, para ficar perto do desenho do nome.</span></li>
+    <li><span><b>Tenor Sans só em um peso.</b> Não force negrito nem itálico nela; ênfase vai no Open Sans.</span></li>
     <li><span><b>Cada quebra de linha num título é escolhida.</b> Não deixe um título quebrar sozinho.</span></li>
     <li><span><b>O nome Eliria é desenhado, nunca digitado.</b> Use o arquivo do nome, não a fonte.</span></li>
   </ol>
@@ -858,8 +865,8 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
     <div class="tblw"><table class="tbl">
       <thead><tr><th>Função</th><th>Família</th><th>A4</th><th>Uso</th></tr></thead>
       <tbody>
-        <tr><td>Título</td><td>Carla Sans, caixa alta</td><td class="m">40 / 45 pt</td><td>Uma vez, no convite ou na capa</td></tr>
-        <tr><td>Cabeçalho</td><td>Carla Sans, caixa alta</td><td class="m">22 / 30 pt</td><td>Abre uma seção</td></tr>
+        <tr><td>Título</td><td>Tenor Sans, caixa alta</td><td class="m">40 / 45 pt</td><td>Uma vez, no convite ou na capa</td></tr>
+        <tr><td>Cabeçalho</td><td>Tenor Sans, caixa alta</td><td class="m">22 / 30 pt</td><td>Abre uma seção</td></tr>
         <tr><td>Abertura</td><td>Open Sans Light</td><td class="m">15 / 20 pt</td><td>A frase sob um título</td></tr>
         <tr><td>Texto</td><td>Open Sans</td><td class="m">10 / 15 pt</td><td>Tudo o que é lido</td></tr>
         <tr><td>Nota</td><td>Open Sans</td><td class="m">8 / 12 pt</td><td>Legendas, notas, fontes</td></tr>
@@ -929,7 +936,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
   </div>
 
   <div class="comp"><span class="lbl">Abertura de seção</span>
-    <div class="stage"><div class="opener"><span class="eb">Coleção oficial</span><span class="hd"><img class="carla" src="img/carla-unica-1.svg" alt="CADA UMA, ÚNICA." width="9525" height="1190"></span><span class="ld">Gravada com o ano e as iniciais de quem a recebe.</span></div></div>
+    <div class="stage"><div class="opener"><span class="eb">Coleção oficial</span><span class="hd ts">Cada uma, única.</span><span class="ld">Gravada com o ano e as iniciais de quem a recebe.</span></div></div>
   </div>
 </section>
 
@@ -945,7 +952,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
     <div class="app"><div class="th" data-mini="page"></div><h3>Certificado</h3>
       <ul><li>A4 na grade dos documentos.</li><li>O número da peça e o ano como campos, nunca numa frase.</li></ul></div>
     <div class="app"><div class="th" data-mini="cover"></div><h3>Convite</h3>
-      <ul><li>A marca no alto, o nome da ocasião em Carla Sans, caixa alta.</li><li>Impresso sobre branco ou sobre areia.</li></ul></div>
+      <ul><li>A marca no alto, o nome da ocasião em Tenor Sans, caixa alta.</li><li>Impresso sobre branco ou sobre areia.</li></ul></div>
     <div class="app"><div class="th" style="background:var(--b-ink)"><div style="width:42%;aspect-ratio:1/1;border-radius:50%;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(239,234,225,.25)"><img src="img/eliria-icon-grass-2-360.webp" alt="" width="360" height="360" style="width:100%;height:100%;object-fit:cover"></div></div><h3>Redes sociais</h3>
       <ul><li>Foto de perfil: o ícone, centrado no círculo.</li><li>Cinco formatos, na tabela abaixo.</li></ul><div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>PNG</b>Redes<i>Ainda não</i></span></div></div>
     <div class="app"><div class="th sig"><span class="n">Lia Noleto</span><img src="img/eliria-wordmark-ardosia-1.svg" alt="ELIRIA" width="3032" height="246" style="width:min(160px,44%);height:auto;margin:6px auto 4px"><span>contato · e-mail</span></div><h3>Assinatura de e-mail</h3>
@@ -973,7 +980,8 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
   <div class="tblw"><table class="tbl">
     <thead><tr><th>Família</th><th>Uso</th><th>Licença</th><th>Onde</th></tr></thead>
     <tbody>
-      <tr><td>Carla Sans</td><td>Nome, títulos</td><td>A confirmar: os arquivos não trazem licença</td><td>Drive, <span class="mono">03 Type</span></td></tr>
+      <tr><td>Carla Sans</td><td>Só o logo, já desenhado nos arquivos</td><td>A confirmar: os arquivos não trazem licença</td><td>Drive, <span class="mono">03 Type</span></td></tr>
+      <tr><td>Tenor Sans</td><td>Títulos</td><td>Open Font Licence</td><td><a href="https://fonts.google.com/specimen/Tenor+Sans" target="_blank" rel="noopener">Google Fonts</a></td></tr>
       <tr><td>Open Sans</td><td>Texto, rótulos, números</td><td>Open Font Licence</td><td><a href="https://fonts.google.com/specimen/Open+Sans" target="_blank" rel="noopener">Google Fonts</a></td></tr>
     </tbody>
   </table></div>
@@ -1047,7 +1055,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
         <tr><td>Símbolo, nome e assinatura</td><td class="m">.afdesign</td><td>SVG; PDF para impressão</td><td class="m">qualquer</td><td>sRGB na tela, CMYK no PDF de impressão</td></tr>
         <tr><td>Ícone</td><td>Do símbolo</td><td>PNG, quadrado</td><td class="m">32 · 180 · 512</td><td>sRGB</td></tr>
         <tr><td>Cor</td><td>Um arquivo de texto com os valores</td><td>.ase, que o Affinity e a Adobe importam</td><td></td><td>HEX e RGB</td></tr>
-        <tr><td>Tipos</td><td>Os arquivos da marca, em 03 Type</td><td>Um zip por família</td><td></td><td>Open Sans: Open Font Licence. Carla Sans: licença a confirmar antes de enviar a terceiros</td></tr>
+        <tr><td>Tipos</td><td>Os arquivos da marca, em 03 Type</td><td>Um zip por família</td><td></td><td>Open Sans e Tenor Sans: Open Font Licence. Carla Sans: só no logo; licença a confirmar antes de enviar a terceiros</td></tr>
         <tr><td>Fotografia</td><td>RAW ou TIFF de 16 bits</td><td>JPG a qualidade 90; WebP para a web</td><td class="m">3840w; 720w · 1280w · 1920w</td><td>sRGB</td></tr>
         <tr><td>Documentos</td><td>Modelo do Word, <span class="mono">.dotx</span></td><td>DOCX para preencher; PDF a partir dele</td><td class="m">a4</td><td>As fontes instaladas ou embutidas no arquivo</td></tr>
         <tr><td>Redes</td><td class="m">.afdesign</td><td>PNG</td><td class="m">1200x630 · 1128x191 · 1080x1080 · 1080x1350 · 1080x1920</td><td>sRGB</td></tr>
@@ -1122,8 +1130,6 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
   const L=n=>(20+n*5.2917).toFixed(3), GAP="margin-top:calc(var(--u) * 5.2917)";
   const MARK='<img src="img/eliria-symbol-ardosia-1.svg" alt="" width="2862" height="1245">';
   const OV='<div class="ov ov-g"></div><div class="ov ov-b"></div>';
-  /* Carla Sans is drawn as outlines; w is the line's width in em, s the size in units */
-  const CS=(x,y,s,slug,w,alt,asc=.717)=>B(x,(+y-asc*s).toFixed(3),(w*s).toFixed(3),"",`<img src="img/carla-${slug}-1.svg" alt="${alt}">`);
   const fld=(l,v,c="t-body w5")=>`<div><div class="t-lbl">${l}</div><div class="${c}">${v}</div></div>`;
   const PAGES={
     letter:{label:"Carta A4",html:
@@ -1140,14 +1146,14 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
     cover:{label:"Convite A4",html:
       B(20,20,22,"",MARK)+
       B(20,L(18),141,"t-lbl mk","Convite")+
-      CS(20,(+L(19)+13.117).toFixed(3),14.11,"entrega",5.783,"A ENTREGA")+CS(20,(+L(19)+28.992).toFixed(3),14.11,"da-colecao",9.265,"DA COLEÇÃO 2026",.98)+
+      B(20,L(19),170,"t-title ts","A entrega<br>da coleção 2026")+
       B(20,L(26),112,"t-lede","Uma noite para reconhecer quem chegou até aqui.")+
       B(20,L(42),170,"rl flds",fld("Para","Nome Sobrenome")+fld("Data","12 dez 2026")+fld("Hora","20h")+fld("Local","A confirmar"))+
       B(20,282.5,170,"t-lbl foot","<span>Convite · EL-V-001</span><span>1 de 1</span>")},
     page:{label:"Certificado A4",html:
       B(20,20,22,"",MARK)+
       B(20,L(14),39.5,"t-lbl mk","Certificado")+
-      CS(78,(+L(14)+7.4).toFixed(3),7.761,"colecao",12.701,"COLEÇÃO OFICIAL 2026",.98)+
+      B(78,(+L(14)+1.5).toFixed(3),112,"t-head ts","Coleção oficial 2026")+
       B(78,L(17),112,"t-body","<p>Esta peça foi gravada e entregue pela Eliria, e é única. O número e o ano abaixo são os mesmos gravados no metal.</p>")+
       B(78,L(22),112,"rl flds",fld("Peça","Nº 007","t-head")+fld("Ano","2026","t-head")+fld("Iniciais","N S","t-head"))+
       B(78,L(27),112,"",'<div class="trow t-lbl"><span>Item</span><span>Material</span><span>Ano</span></div><div class="trow t-body"><span>Peça</span><span>A confirmar</span><span>2026</span></div><div class="trow t-body"><span>Estojo</span><span>A confirmar</span><span>2026</span></div>')+
