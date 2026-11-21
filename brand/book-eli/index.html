@@ -841,12 +841,12 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
     <div class="seg" role="group" aria-label="Guias" id="pgGuide"><button type="button" aria-pressed="false" data-g="g">Grade</button><button type="button" aria-pressed="false" data-g="b">Linha de base</button></div>
   </div>
   <div class="desk" id="desk"></div>
-  <div class="dls" data-for="letter"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>DOTX</b>Carta<i>Ainda não</i></span></div>
-  <div class="dls" data-for="cover" hidden><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>PDF</b>Convite<i>Ainda não</i></span></div>
-  <div class="dls" data-for="page" hidden><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>DOTX</b>Certificado<i>Ainda não</i></span></div>
-  <div class="dls" data-for="card" hidden><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>PDF</b>Cartão<i>Ainda não</i></span></div>
-  <div class="dls" data-for="folder" hidden><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>PDF</b>Pasta<i>Ainda não</i></span></div>
-  <div class="dls" data-for="envelope" hidden><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>PDF</b>Envelope<i>Ainda não</i></span></div>
+  <div class="dls" data-for="letter"><a class="dl" href="https://drive.google.com/file/d/1bC8GAqqp5VmpwsCmYlpogV1Y5m1eZett/view" target="_blank" rel="noopener"><b>DOTX</b>Carta<i>A4</i></a></div>
+  <div class="dls" data-for="cover" hidden><a class="dl" href="https://drive.google.com/file/d/1QXdW8FstV1vKDWvkZCc1d6cYHD_TRQH_/view" target="_blank" rel="noopener"><b>PDF</b>Convite<i>A4</i></a></div>
+  <div class="dls" data-for="page" hidden><a class="dl" href="https://drive.google.com/file/d/1B6ZFtgDdNQXAriG8ooJcLOc2ZWPIeDkd/view" target="_blank" rel="noopener"><b>DOTX</b>Certificado<i>A4</i></a></div>
+  <div class="dls" data-for="card" hidden><a class="dl" href="https://drive.google.com/file/d/11uN1W2gKZQAhUlEbJ88v8ix-XtGGAd-A/view" target="_blank" rel="noopener"><b>PDF</b>Cartão, frente<i>85 × 45 mm</i></a><a class="dl" href="https://drive.google.com/file/d/1DgtCvFqvjUoG8ZWMs0NR26DX9ORPwQG6/view" target="_blank" rel="noopener"><b>PDF</b>Cartão, verso<i>85 × 45 mm</i></a></div>
+  <div class="dls" data-for="folder" hidden><a class="dl" href="https://drive.google.com/file/d/1Ghtg-6p5RPiY9Xy2eeK3ux1DxQVERBVl/view" target="_blank" rel="noopener"><b>PDF</b>Pasta<i>230 × 310 mm</i></a></div>
+  <div class="dls" data-for="envelope" hidden><a class="dl" href="https://drive.google.com/file/d/1vpCvt0XCj66CE-4sHKCeb_gczAbj1xRb/view" target="_blank" rel="noopener"><b>PDF</b>Envelope<i>DL</i></a></div>
   <p class="note">Desenhado em escala: dentro da página uma unidade é um milímetro; o cartão, a pasta e o envelope aparecem no corte, então cada medida abaixo é a medida do desenho. Ligue a grade e a linha de base para ver o que segura a página.</p>
 
   <div class="block"><span class="lbl">As páginas</span>
@@ -998,15 +998,18 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
 │  │                             <span class="f">eliria_mark_icon_{grass,sand,camel}_{32x32,180x180,512x512}.png</span>
 │  └─ Print/                     <span class="f">eliria_mark_{symbol,lockup}_ardosia_cmyk.pdf</span>
 ├─ 02 Colour/                    <span class="f">eliria_colour_palette.ase</span>
-├─ 03 Type/                      <span class="f">eliria_type_{carla-sans,open-sans}.zip</span>
+├─ 03 Type/                      <span class="f">eliria_type_{carla-sans,open-sans,tenor-sans}.zip</span>
 ├─ 04 Imagery/
 │  ├─ Grounds/
 │  └─ Photography/               <span class="f">eliria_photo_{assunto}_3840w.jpg</span>
 ├─ 05 Documents/                 <span class="f">eliria_template_{letter,certificate}_a4.dotx</span>
-├─ 06 Applications/              <span class="f">eliria_card_{front-emboss,back}_85x45mm.pdf</span>
-│                                <span class="f">eliria_social_{link,linkedin-banner,square,portrait,story}_*.png</span>
+│                                <span class="f">eliria_template_invitation_a4.pdf</span>
+│                                <span class="f">eliria_card_{front,back}_85x45mm.pdf</span>
+│                                <span class="f">eliria_folder_230x310mm.pdf</span>
+│                                <span class="f">eliria_envelope_110x220mm.pdf</span>
+├─ 06 Applications/              <span class="f">eliria_social_{link,linkedin-banner,square,portrait,story}_*.png</span>
 └─ 99 Archive/                   <span class="f">o material antigo: não usar</span></div>
-    <p class="note">As pastas seguem a ordem deste livro. Hoje existem os arquivos da marca, em <span class="mono">01 Mark</span>; o resto é o que cada pasta vai receber. O que está em <span class="mono">99 Archive</span> não vale como marca. Uma chave é abreviação de um arquivo por palavra: <span class="mono">_{blue,sand}.svg</span> são dois arquivos.</p>
+    <p class="note">As pastas seguem a ordem deste livro. Hoje existem <span class="mono">01 Mark</span>, <span class="mono">03 Type</span>, <span class="mono">04 Imagery</span> e <span class="mono">05 Documents</span>; o resto é o que cada pasta vai receber. O que está em <span class="mono">99 Archive</span> não vale como marca. Uma chave é abreviação de um arquivo por palavra: <span class="mono">_{blue,sand}.svg</span> são dois arquivos.</p>
   </div>
 
   <div class="block"><span class="lbl">Como os arquivos se chamam</span>

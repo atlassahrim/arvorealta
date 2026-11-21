@@ -3994,6 +3994,20 @@ in git; it is not repeated here.**
     Both are ardósia with the symbol in areia, at 32 mm and 40 mm, and
     nothing else printed.
   - **The signatory is `Lia Noleto`.** Recipients read `Nome Sobrenome`.
+  - **The files are in Drive, `Eliria BRAND/05 Documents`, since
+    21 November**, and each document's button in the book opens its own
+    file: the letter and the certificate as Word templates (`.dotx`,
+    Tenor Sans and Open Sans embedded), the invitation as an A4 PDF, and
+    the card (front and back), the folder and the DL envelope as PDFs at
+    size with 3 mm of bleed. Colours are RGB; a printer needs CMYK
+    values, which are still open. `_tools/book/eliria/` rebuilds them all
+    from the book's own drawings: `dotx.js`, then `docx_fix.py` and
+    `todotx.py` for the templates, and `pdfs.js` against the site served
+    on port 8766 for the PDFs. **Rebuild and re-upload when a document
+    changes in the book**; a new upload is a new file with a new link, so
+    its button needs the new id.
+  - **`03 Type` holds `eliria_type_tenor-sans.zip`**: the TTF and its
+    OFL licence.
 - **Imagery**: the three primary grounds only (pedra, ardósia, areia),
   at 4:5.
 - **No `Versões` table.** The cover keeps its edition number.
