@@ -4130,17 +4130,23 @@ scaled to the gold render's ink box (41 to 1172 of 1200): the word starts
 21.77 per cent in, runs 72.93 per cent of the box, and sits 15.2 per cent
 of the box's width under the image, as `.lk .wmk` in `assemble.py`.
 
-## The favicon is the app icon, on every page, since 21 November
+## The favicon, 21 November
 
-**At the owner's word, every published page carries the Arvorealta app
-icon**, the amber fan on forest from `Arvorealta Brand/01 Mark`, the
-brand books included, Eliria's too. `assets/icon-arvo-2-{32,180,512}.png`
-are linked as two `rel="icon"` sizes and an `apple-touch-icon`, and a
-`favicon.ico` at the root (16, 32, 48) covers anything that asks for
-`/favicon.ico` without a link, PDFs included. `assets/favicon.svg`, the
-old ink-and-paper mark, is deleted. **A new page takes the same three
-`<link>` lines**; `brand/book-eli/` gets them from `book-arv`'s head
-through `assemble.py`, so its assertion now checks for `img/arvo-` only.
+**Every published page carries `assets/favicon.svg`**, the old mark in ink
+for light tabs and paper for dark ones, as one `rel="icon"` line. For part
+of a day the app icon (the amber fan on forest, as three PNGs and a root
+`favicon.ico`) replaced it everywhere; **the owner preferred the old one**,
+so it is back and the PNGs and the `.ico` are deleted. What that day left
+behind: the pages that had no favicon before now carry the old one too,
+the stubs, the annexes, the deck and `templates/` included. **A new page
+takes the same line.**
+
+**Eliria's book carries Eliria's icon**, at the owner's word: the grass
+icon from `Eliria BRAND/01 Mark/Screen`, cut to
+`brand/book-eli/img/eliria-icon-grass-2-{32,180,512}.png` and linked as two
+`rel="icon"` sizes and an `apple-touch-icon`. `assemble.py` swaps the
+favicon line it inherits from `book-arv`'s head, and its assertion checks
+for `img/arvo-` only. **A client's book takes the client's icon.**
 
 ## The pricing ladder
 
