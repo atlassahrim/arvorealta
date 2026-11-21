@@ -4123,6 +4123,25 @@ two `secondary` files are not on the page, by his instruction. **The
 `Versões` table is gone**, as unnecessary; the cover's edition number
 stays.
 
+**The cover sets the name the way the lockup does**, at the owner's word:
+under the gold mark, from where the blades meet to the inner curve of the
+bracket, not centred on the mark. The figures are the lockup file's,
+scaled to the gold render's ink box (41 to 1172 of 1200): the word starts
+21.77 per cent in, runs 72.93 per cent of the box, and sits 15.2 per cent
+of the box's width under the image, as `.lk .wmk` in `assemble.py`.
+
+## The favicon is the app icon, on every page, since 21 November
+
+**At the owner's word, every published page carries the Arvorealta app
+icon**, the amber fan on forest from `Arvorealta Brand/01 Mark`, the
+brand books included, Eliria's too. `assets/icon-arvo-2-{32,180,512}.png`
+are linked as two `rel="icon"` sizes and an `apple-touch-icon`, and a
+`favicon.ico` at the root (16, 32, 48) covers anything that asks for
+`/favicon.ico` without a link, PDFs included. `assets/favicon.svg`, the
+old ink-and-paper mark, is deleted. **A new page takes the same three
+`<link>` lines**; `brand/book-eli/` gets them from `book-arv`'s head
+through `assemble.py`, so its assertion now checks for `img/arvo-` only.
+
 ## The pricing ladder
 
 **There are two ladders on this domain and this section is the euro one.**
