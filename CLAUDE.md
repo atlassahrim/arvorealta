@@ -3954,8 +3954,10 @@ in git; it is not repeated here.**
   with it. Areia on either dark measures 8.6:1. Camel on either measures
   3.2:1, so it is for large type only. Camel on areia measures 2.7:1, so
   it is never used there, and rules on areia are drawn in ardósia. The
-  file words are `ardosia`, `sand`, `camel` and `folha`. CMYK is still
-  open.
+  file words are `ardosia`, `sand`, `camel` and `folha`. The CMYK values
+  are under the press files below, and `02 Colour` holds
+  `eliria_colour_palette.ase` with both sets, RGB and CMYK FOGRA39, built
+  by `_tools/book/eliria/ase.py`.
 - **Type: three faces, one job each, since 21 November.**
   - **Carla Sans is the logo only.** It lives inside the supplied
     wordmark and lockup files and is never typed or served, because its
@@ -3996,14 +3998,15 @@ in git; it is not repeated here.**
   - **The signatory is `Lia Noleto`.** Recipients read `Nome Sobrenome`.
   - **The files are in Drive, `Eliria BRAND/05 Documents`, since
     21 November**, and each document's button in the book opens its own
-    file: the letter and the certificate as Word templates (`.dotx`,
-    Tenor Sans and Open Sans embedded), the invitation as an A4 PDF, and
-    the card (front and back), the folder and the DL envelope as PDFs at
-    size with 3 mm of bleed. Colours are RGB; a printer needs CMYK
-    values, which are still open. `_tools/book/eliria/` rebuilds them all
-    from the book's own drawings: `dotx.js`, then `docx_fix.py` and
-    `todotx.py` for the templates, and `pdfs.js` against the site served
-    on port 8766 for the PDFs. **Rebuild and re-upload when a document
+    file. **Each A4 document (letter, invitation, certificate) comes as a
+    Word template and a PDF**, since 21 November at the owner's word: the
+    `.dotx` with Tenor Sans and Open Sans embedded, matched to the
+    drawing within a point, and the PDF printed from the drawing itself.
+    The card, folder and envelope are press PDFs, below.
+    `_tools/book/eliria/` rebuilds them all: `dotx.js`, then
+    `docx_fix.py` and `todotx.py` for the templates, `pdfs.js` against
+    the site served on port 8766 for the A4 PDFs, and `press.py` for the
+    press files. **Rebuild and re-upload when a document
     changes in the book**; a new upload is a new file with a new link, so
     its button needs the new id.
   - **`03 Type` holds `eliria_type_tenor-sans.zip`**: the TTF and its
@@ -4030,7 +4033,10 @@ in git; it is not repeated here.**
     book's buttons open them. The card uploads were first refused by the
     session's safety check and went up once the owner allowed them. The
     earlier screen versions and the first spec sheet went to the bin at
-    the owner's word, so the folder holds eight files, one of each.
+    the owner's word. With the A4 PDFs and the invitation template added
+    the same day, `05 Documents` holds eleven files, one of each. The
+    book's only waiting buttons are the social images and the email
+    signature.
 - **Imagery**: the three primary grounds only (pedra, ardósia, areia),
   at 4:5.
 - **No `Versões` table.** The cover keeps its edition number.

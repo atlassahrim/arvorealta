@@ -1,5 +1,5 @@
 // Print Eliria's pieces to PDF at true size, from the book's own drawings.
-// Only the invitation now; the press pieces come from press.py.
+// The three A4 documents; the press pieces come from press.py.
 const {chromium} = require('playwright');
 const OUT = (process.argv[2] || __dirname + '/out') + '/';  // needs the site served on :8766
 const BOOK = 'http://localhost:8766/brand/book-eli/';
@@ -31,6 +31,12 @@ async function print(p, name, w, h, html, css = '') {
   // invitation, A4, no bleed: it prints on an office printer
   const [inv] = await grab('cover');
   await print(p, 'eliria_template_invitation_a4.pdf', 210, 297, inv, '#print .pg{width:210mm!important}');
+
+  // letter and certificate, A4, the same way: each also ships as a .dotx
+  const [letter] = await grab('letter');
+  await print(p, 'eliria_template_letter_a4.pdf', 210, 297, letter, '#print .pg{width:210mm!important}');
+  const [cert] = await grab('page');
+  await print(p, 'eliria_template_certificate_a4.pdf', 210, 297, cert, '#print .pg{width:210mm!important}');
 
   // card, folder and envelope are press files now: see press.py (CMYK, PDF/X-1a, FOGRA39)
   await b.close();
