@@ -4028,10 +4028,9 @@ in git; it is not repeated here.**
     profile.
   - **All four press files and the spec are in `05 Documents`**, and the
     book's buttons open them. The card uploads were first refused by the
-    session's safety check and went up once the owner allowed them. **The
-    earlier screen versions are still in the folder under the same
-    names**, with the first spec sheet, whose Camel line was wrong; the
-    owner deletes those.
+    session's safety check and went up once the owner allowed them. The
+    earlier screen versions and the first spec sheet went to the bin at
+    the owner's word, so the folder holds eight files, one of each.
 - **Imagery**: the three primary grounds only (pedra, ardósia, areia),
   at 4:5.
 - **No `Versões` table.** The cover keeps its edition number.
