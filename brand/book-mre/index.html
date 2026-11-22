@@ -551,6 +551,10 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
 .pg.env .sym{left:50%;top:50%;width:calc(var(--u) * 40);transform:translate(-50%,-50%) rotate(90deg)}
 /* the three primary grounds, portrait */
 .imgs.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.imgs.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.imgs.g4 figure:first-child{grid-column:auto}
+.imgs.g4 img{height:auto;aspect-ratio:4/5}
+@media (max-width:820px){.imgs.g4{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .imgs.g3 figure:first-child{grid-column:auto}
 .imgs.g3 img{height:auto;aspect-ratio:4/5}
 @media (max-width:720px){.imgs.g3{grid-template-columns:minmax(0,1fr)}.imgs.g3 img{aspect-ratio:16/10}}
@@ -563,11 +567,12 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
    their centre is at 48.3 per cent), so the picture moves 1.7 per cent right to put the
    horse itself, not its box, on the axis */
 .lk .fan{transform:translateX(1.7%)}
-.hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;z-index:-2;opacity:0;animation:cv 24s linear infinite both}
+.hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;z-index:-2;opacity:0;animation:cv 32s linear infinite both}
 .hero .bg:nth-of-type(1){animation-delay:-1s}
 .hero .bg:nth-of-type(2){animation-delay:7s}
 .hero .bg:nth-of-type(3){animation-delay:15s}
-@keyframes cv{0%{opacity:0}6%{opacity:1}33%{opacity:1}39%{opacity:0}100%{opacity:0}}
+.hero .bg:nth-of-type(4){animation-delay:23s}
+@keyframes cv{0%{opacity:0}5%{opacity:1}25%{opacity:1}30%{opacity:0}100%{opacity:0}}
 /* a soft ink wash keeps the gold and the name clear of the pictures' lights */
 body.public .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 50% 50%,rgba(51,36,21,.55),rgba(51,36,21,.25) 70%)}
 @media (prefers-reduced-motion:reduce){.hero .bg{animation:none}.hero .bg:nth-of-type(1){opacity:1}}
@@ -606,9 +611,10 @@ body.public .hero::after{content:"";position:absolute;inset:0;z-index:-1;backgro
 <!-- 00 ───────────────────────────────────────────── -->
 <section class="cover" id="cover">
   <div class="hero">
-    <img class="bg" src="img/mulheresreais-cover-leitura-1-1670.webp" srcset="img/mulheresreais-cover-leitura-1-900.webp 900w, img/mulheresreais-cover-leitura-1-1670.webp 1670w" sizes="(max-width:1000px) 100vw, 920px" alt="" width="1670" height="959">
-    <img class="bg" src="img/mulheresreais-cover-passos-1-1670.webp" srcset="img/mulheresreais-cover-passos-1-900.webp 900w, img/mulheresreais-cover-passos-1-1670.webp 1670w" sizes="(max-width:1000px) 100vw, 920px" alt="" width="1670" height="959" loading="lazy">
-    <img class="bg" src="img/mulheresreais-cover-colheita-1-1670.webp" srcset="img/mulheresreais-cover-colheita-1-900.webp 900w, img/mulheresreais-cover-colheita-1-1670.webp 1670w" sizes="(max-width:1000px) 100vw, 920px" alt="" width="1670" height="959" loading="lazy">
+    <img class="bg" src="img/mulheresreais-cover-passos-2-1670.webp" srcset="img/mulheresreais-cover-passos-2-900.webp 900w, img/mulheresreais-cover-passos-2-1670.webp 1670w" sizes="(max-width:1000px) 100vw, 920px" alt="" width="1670" height="959">
+    <img class="bg" src="img/mulheresreais-cover-beleza-1-1670.webp" srcset="img/mulheresreais-cover-beleza-1-900.webp 900w, img/mulheresreais-cover-beleza-1-1670.webp 1670w" sizes="(max-width:1000px) 100vw, 920px" alt="" width="1670" height="959" loading="lazy">
+    <img class="bg" src="img/mulheresreais-cover-cozinha-1-1670.webp" srcset="img/mulheresreais-cover-cozinha-1-900.webp 900w, img/mulheresreais-cover-cozinha-1-1670.webp 1670w" sizes="(max-width:1000px) 100vw, 920px" alt="" width="1670" height="959" loading="lazy">
+    <img class="bg" src="img/mulheresreais-cover-colheita-2-1670.webp" srcset="img/mulheresreais-cover-colheita-2-900.webp 900w, img/mulheresreais-cover-colheita-2-1670.webp 1670w" sizes="(max-width:1000px) 100vw, 920px" alt="" width="1670" height="959" loading="lazy">
     <div class="lk" role="img" aria-label="Mulheres Reais: a marca em ouro sobre o nome">
       <img class="fan" src="img/mulheresreais-mark-1-1200.webp" alt="" width="1200" height="864">
       <img class="wmk" src="img/mulheresreais-wordmark-algodao-1.svg" alt="" width="3207" height="132">
@@ -810,7 +816,7 @@ body.public .hero::after{content:"";position:absolute;inset:0;z-index:-1;backgro
     <li><span><b>Números alinhados nos campos e tabelas.</b> O Cormorant desenha números de texto, que descem abaixo da linha; ficam bem num convite, mas um número ou uma data num campo usa os alinhados.</span></li>
     <li><span><b>A Alegreya Sans é miúda.</b> No mesmo corpo parece menor que outras; no texto de um documento, use um ponto a mais do que o costume.</span></li>
     <li><span><b>Cada quebra de linha num título é escolhida.</b> Não deixe um título quebrar sozinho.</span></li>
-    <li><span><b>O nome Mulheres Reais é desenhado, nunca digitado.</b> Use o arquivo do nome, não a fonte. A única exceção é a assinatura de e-mail, que não leva imagem: lá ele vai em capitulares espaçadas.</span></li>
+    <li><span><b>O nome Mulheres Reais é desenhado, nunca digitado.</b> Use o arquivo do nome, não a fonte. A única exceção é a assinatura de e-mail, que não leva imagem: lá ele vai digitado em caixa alta, e o contato numa fonte de máquina do próprio computador.</span></li>
   </ol>
 </section>
 
@@ -939,16 +945,17 @@ body.public .hero::after{content:"";position:absolute;inset:0;z-index:-1;backgro
 <!-- 09 ───────────────────────────────────────────── -->
 <section id="imagery">
   <div class="sh"><span class="sn">09</span><h2>Imagem e movimento</h2></div>
-  <p class="why">Os três fundos da marca: uma imagem em tons de terra, sempre com as mesmas linhas em ouro, os arcos, no mesmo lugar. A marca se centra no eixo dos arcos.</p>
-  <div class="imgs g3">
-    <figure><img src="img/mulheresreais-ground-passos-1-800.webp" alt="Fundo Passos, com os arcos em ouro" width="800" height="1000" loading="lazy"><figcaption>Passos</figcaption><div class="dls"><a class="dl" href="https://drive.google.com/file/d/184qlvIePUpCdo7FI4PpmgADOQF037plY/view" target="_blank" rel="noopener"><b>JPG</b>Passos<i>2,2 MB</i></a></div></figure>
-    <figure><img src="img/mulheresreais-ground-leitura-1-800.webp" alt="Fundo Leitura, com os arcos em ouro" width="800" height="1000" loading="lazy"><figcaption>Leitura</figcaption><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1wTESbL52dFzLHMqC6nE76vvzjFpbWL8z/view" target="_blank" rel="noopener"><b>JPG</b>Leitura<i>2,0 MB</i></a></div></figure>
-    <figure><img src="img/mulheresreais-ground-colheita-1-800.webp" alt="Fundo Colheita, com os arcos em ouro" width="800" height="1000" loading="lazy"><figcaption>Colheita</figcaption><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1JM2wXqJ6QzBApNI0KCf6xkLAYdGO8NC5/view" target="_blank" rel="noopener"><b>JPG</b>Colheita<i>1,6 MB</i></a></div></figure>
+  <p class="why">Os quatro fundos da marca: pinturas em tons de terra, sempre com as mesmas linhas em ouro, os arcos, no mesmo lugar. A marca se centra no eixo dos arcos.</p>
+  <div class="imgs g4">
+    <figure><img src="img/mulheresreais-ground-passos-2-800.webp" alt="Fundo Passos: três mulheres num campo de trigo, com os arcos em ouro" width="800" height="1000" loading="lazy"><figcaption>Passos</figcaption><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1S16vYtjOO5MyGsC_T0mKiL5P6XaMOZ6O/view" target="_blank" rel="noopener"><b>JPG</b>Passos<i>3,3 MB</i></a></div></figure>
+    <figure><img src="img/mulheresreais-ground-beleza-1-800.webp" alt="Fundo Beleza: um retrato, a gola de renda e uma mão no ombro, com os arcos em ouro" width="800" height="1000" loading="lazy"><figcaption>Beleza</figcaption><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1Nou0QzTHjxWBHXMIDp9k34T02mrHhEaG/view" target="_blank" rel="noopener"><b>JPG</b>Beleza<i>2,9 MB</i></a></div></figure>
+    <figure><img src="img/mulheresreais-ground-cozinha-1-800.webp" alt="Fundo Cozinha: uma mulher na cozinha, com um cesto de frutas, com os arcos em ouro" width="800" height="1000" loading="lazy"><figcaption>Cozinha</figcaption><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1XIa4SSsPxQVE-4yfFJR9egal5bihVqZP/view" target="_blank" rel="noopener"><b>JPG</b>Cozinha<i>3,2 MB</i></a></div></figure>
+    <figure><img src="img/mulheresreais-ground-colheita-2-800.webp" alt="Fundo Colheita: uma moça com um ganso e um cesto de maçãs, com os arcos em ouro" width="800" height="1000" loading="lazy"><figcaption>Colheita</figcaption><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1dBOz1kCK0KFI5_3iV4GUGVWluHUXNJES/view" target="_blank" rel="noopener"><b>JPG</b>Colheita<i>1,3 MB</i></a></div></figure>
   </div>
   <ol class="rules">
     <li><span><b>Gente de verdade, com permissão.</b> Nenhuma mulher aparece sem ter escolhido: só áudio, vídeo ou nada. Nunca uma pessoa gerada por computador.</span></li>
     <li><span><b>Os arcos ficam no lugar.</b> Toda imagem de fundo leva as mesmas linhas em ouro, na mesma posição; a marca se centra no eixo delas.</span></li>
-    <li><span><b>Tons de terra, luz baixa.</b> Imagens quentes e escuras, como as três de fundo; o ouro precisa de sombra para brilhar.</span></li>
+    <li><span><b>Tons de terra, luz baixa.</b> Imagens quentes e escuras, como os quatro fundos; o ouro precisa de sombra para brilhar.</span></li>
     <li><span><b>Teste o texto sobre a própria foto.</b> Contra a parte mais clara que fica atrás dele.</span></li>
     <li><span><b>Um movimento lento por tela.</b> Nada se mexe para quem pediu menos movimento.</span></li>
   </ol>
@@ -986,10 +993,10 @@ body.public .hero::after{content:"";position:absolute;inset:0;z-index:-1;backgro
       <ul><li>A4 na grade dos documentos.</li><li>A escolha (só áudio, vídeo ou nada) em campos para marcar, nunca numa frase.</li></ul></div>
     <div class="app"><div class="th" data-mini="cover"></div><h3>Convite</h3>
       <ul><li>A marca no alto, o nome da roda em Cormorant Garamond.</li><li>Impresso sobre branco ou sobre algodão.</li></ul></div>
-    <div class="app"><div class="th" style="background:var(--b-ink);padding:0"><img src="img/mulheresreais-social-link-1-720.webp" alt="A imagem de prévia de link: a marca em ouro sobre um dos fundos, com o nome" width="720" height="378" style="width:100%;height:100%;object-fit:cover"></div><h3>Redes sociais</h3>
-      <ul><li>Foto de perfil: o ícone, centrado no círculo.</li><li>Cinco imagens prontas, uma por formato, na tabela abaixo. A marca fica no eixo dos arcos.</li></ul><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1GC47Qh5NOv9f5K2vHAoJwsL7biHx_MNZ/view" target="_blank" rel="noopener"><b>PNG</b>Link 1200×630<i>1,1 MB</i></a><a class="dl" href="https://drive.google.com/file/d/1bWgJqVc8W09eb-4sm3A9RlpTbXvOaELt/view" target="_blank" rel="noopener"><b>PNG</b>LinkedIn 1128×191<i>16 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1MY1eGGOkeOnhr5qDlTNDbYif3XfMARB2/view" target="_blank" rel="noopener"><b>PNG</b>Quadrado 1080<i>1,6 MB</i></a><a class="dl" href="https://drive.google.com/file/d/1F4A-RLQ8gcr4WhDA61J7J_nnDun4l6sK/view" target="_blank" rel="noopener"><b>PNG</b>Vertical 1080×1350<i>1,8 MB</i></a><a class="dl" href="https://drive.google.com/file/d/1qcrY0ifoDsSX8aNactY8adbghQYUOYov/view" target="_blank" rel="noopener"><b>PNG</b>Story 1080×1920<i>2,6 MB</i></a></div></div>
-    <div class="app"><div class="th sig" style="justify-items:start;text-align:left"><span class="n" style="font:400 21px/1.1 'Cormorant Garamond',Georgia,serif">Nome Sobrenome</span><span style="color:#70665B">Coordenação</span><span style="background:#332415;padding:9px 12px;margin:8px 0 6px;display:grid;gap:4px"><span style="font:400 9px/1 'Cormorant Garamond',Georgia,serif;letter-spacing:.42em;color:#DFB67C">MULHERES&nbsp;&nbsp;REAIS</span><span style="font:italic 500 15px/1.1 'Cormorant Garamond',Georgia,serif;color:#F2ECDE">Ela é a origem.</span></span><span>+55 11 0000-0000</span><span style="color:#935234">nome@exemplo.com.br</span></div><h3>Assinatura de e-mail</h3>
-      <ul><li>Sem imagens: o nome e a linha numa faixa raiz, tudo em texto, então nenhum programa de e-mail bloqueia nada.</li><li>Abra o arquivo no navegador, copie a assinatura e cole nas configurações do e-mail.</li></ul><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1Zg3-0SeA76OGIgSXIO-CgNPntEtIKaBX/view" target="_blank" rel="noopener"><b>HTML</b>Assinatura<i>3 KB</i></a></div></div>
+    <div class="app"><div class="th" style="background:var(--b-ink);padding:0"><img src="img/mulheresreais-social-link-2-720.webp" alt="A imagem de prévia de link: a marca em ouro sobre um dos fundos, com o nome" width="720" height="378" style="width:100%;height:100%;object-fit:cover"></div><h3>Redes sociais</h3>
+      <ul><li>Foto de perfil: o ícone, centrado no círculo.</li><li>Cinco imagens prontas, uma por formato, na tabela abaixo. A marca fica no eixo dos arcos.</li></ul><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1qUWbNloIwGtYy4fVhesvxzLYjVhFmVAj/view" target="_blank" rel="noopener"><b>PNG</b>Link 1200×630<i>1,2 MB</i></a><a class="dl" href="https://drive.google.com/file/d/1bWgJqVc8W09eb-4sm3A9RlpTbXvOaELt/view" target="_blank" rel="noopener"><b>PNG</b>LinkedIn 1128×191<i>16 KB</i></a><a class="dl" href="https://drive.google.com/file/d/1oijsJ5b4qMjhT8vskSkAmhwPhH3fG7vX/view" target="_blank" rel="noopener"><b>PNG</b>Quadrado 1080<i>1,7 MB</i></a><a class="dl" href="https://drive.google.com/file/d/1dK4BBbGUXqHZfc1ylE4oMhlCCOBRH5Rd/view" target="_blank" rel="noopener"><b>PNG</b>Vertical 1080×1350<i>2,2 MB</i></a><a class="dl" href="https://drive.google.com/file/d/1FPERtfw5vknfKnXfP5s9PaZn1zfv9Cic/view" target="_blank" rel="noopener"><b>PNG</b>Story 1080×1920<i>2,3 MB</i></a></div></div>
+    <div class="app"><div class="th sig" style="justify-items:start;text-align:left;color:#332415;gap:2px"><span style="display:flex;align-items:center;gap:14px;font:700 15px/1.2 'Alegreya Sans',Helvetica,Arial,sans-serif;letter-spacing:.09em;margin-bottom:8px">MULHERES&nbsp;&nbsp;REAIS<i style="display:block;width:22px;border-top:2px solid #332415"></i></span><span style="font:400 12px/1.65 ui-monospace,Menlo,Consolas,'Courier New',monospace">Nome Sobrenome, Coordenação<br>+55 11 0000-0000<br>nome@exemplo.com.br</span></div><h3>Assinatura de e-mail</h3>
+      <ul><li>Só texto, em raiz: o nome da marca em caixa alta com um traço curto, e três linhas de contato em fonte de máquina. Nada para o programa de e-mail bloquear.</li><li>Abra o arquivo no navegador, copie a assinatura e cole nas configurações do e-mail.</li></ul><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1Z28d-K5FkhEjMW3rn__YeAgwSa6PBm8P/view" target="_blank" rel="noopener"><b>HTML</b>Assinatura<i>2 KB</i></a></div></div>
   </div>
 
   <div class="block"><span class="lbl">Redes sociais: cinco formatos</span>
@@ -1034,7 +1041,7 @@ body.public .hero::after{content:"";position:absolute;inset:0;z-index:-1;backgro
 ├─ 02 Colour/                    <span class="f">mulheresreais_colour_palette.ase</span>
 ├─ 03 Type/                      <span class="f">mulheresreais_type_{cormorant-unicase,cormorant-garamond,alegreya-sans}.zip</span>
 ├─ 04 Imagery/
-│  ├─ Grounds/                   <span class="f">mulheresreais_ground_{passos,leitura,colheita}_2654w.jpg</span>
+│  ├─ Grounds/                   <span class="f">mulheresreais_ground_{passos,beleza,cozinha,colheita}_2654w.jpg</span>
 │  └─ Photography/               <span class="f">mulheresreais_photo_{assunto}_3840w.jpg</span>
 ├─ 05 Documents/                 <span class="f">mulheresreais_template_{letter,invitation,terms}_a4.{dotx,pdf}</span>
 │                                <span class="f">mulheresreais_card_{front,back}_85x45mm.pdf</span>

@@ -198,6 +198,21 @@ Reais BRAND`. Config: `client.json` here. Started from Eliria on
   table says where to keep the important part in each format. 42 buttons
   live, none waiting.
 
+- **22 November, night. Four grounds**, the owner's new files in
+  `04 Imagery/Grounds`: passos (three women in a wheat field), beleza,
+  cozinha, colheita, all paintings, same arch motif at the same axis
+  (x 1300.5-1300.75). Leitura is gone, and passos and colheita are new
+  files. The cover cross-fades the four (32 s); the imagery section shows the
+  four, two by two below 820 px. Their names are the owner's.
+- **22 November. Social images rebuilt on the new grounds**: link passos,
+  square beleza, portrait cozinha, story colheita; the LinkedIn banner is
+  unchanged. Old files in the bin.
+- **22 November. Email signature after the owner's reference** (a Casa
+  Bosques card): MULHERES REAIS in bold sans capitals with a short 2 px rule,
+  then three lines in the computer's own monospace (name and role, phone,
+  e-mail), all in raiz. Monospace is outside the brand's three families; it
+  is the reference's look, at the owner's word, and the type rule says so.
+
 ## Waiting for
 
 Nothing on the page. Open: the lawyer (LGPD, electoral identification) and the client's permission to keep the book live. The mark section's anatomy and size note, and the imagery rules (jewellery), are still Eliria's text. `check.py mre`
