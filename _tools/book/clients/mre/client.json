@@ -132,10 +132,15 @@
     "alt": "Três mulheres num cavalo a galope"
   },
   "signatory": {
-    "name": null,
-    "role": null,
-    "contact": null,
-    "contact_final": false
+    "name": "Nome Sobrenome",
+    "role": "Coordenação",
+    "contact": [
+      "telefone",
+      "e-mail",
+      "endereço"
+    ],
+    "contact_final": false,
+    "_note": "an example, at the owner's word: whoever uses the template fills it in"
   },
   "documents": {
     "description": "Modelo Mulheres Reais. Os textos são exemplos.",

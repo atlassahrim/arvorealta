@@ -115,7 +115,21 @@ Reais BRAND`. Config: `client.json` here. Started from Eliria on
   `documents.certificate.file` (`terms`); `pdfs.js` reads `file` too. The
   Word build needs `signatory`, still empty.
 
+- **22 November, afternoon. The owner's re-exports, checked.** Right now:
+  symbol algodão, wordmark raiz, the four lockups outlined (no live text), the
+  monogram in raiz, algodão and black, the icons (now the gold render on raiz),
+  the primary PNGs and the grounds renamed. Still wrong: every `_palha` file is
+  `#DFB67C` (palha is `#D3B67C`), and `lockup_raiz` carries no fill, so it is
+  black. Not renamed yet: `icon_32x32`, `icon_180x180`, `icon_512` and
+  `Master/primary_raiz_4800w.png`. The icon at 32 px is the gold render, which
+  the book's own size rule says loses its detail below 120 px; flagged.
+- **22 November. Signatory is an example**, at the owner's word: `Nome
+  Sobrenome`, `Coordenação`, `telefone / e-mail / endereço` (a list, one line
+  each; a string printed one letter per line on the card). The hand-out files
+  are built: three .dotx and .pdf, the card, folder and envelope as PDF/X-1a,
+  the print spec. `press.py` needs svglib, pikepdf and fonttools installed.
+
 ## Waiting for
 
-Signatory (name, role, contact); the logo fixes listed above. The mark section's anatomy and size note, and the imagery rules (jewellery), are still Eliria's text. `check.py mre`
+Palha files in `#D3B67C`; lockup raiz in raiz; three icon renames; upload of the built files to `05 Documents`. The mark section's anatomy and size note, and the imagery rules (jewellery), are still Eliria's text. `check.py mre`
 has the full list.
