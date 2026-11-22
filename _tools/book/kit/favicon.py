@@ -5,8 +5,9 @@ a dark one, as one square SVG that switches with prefers-color-scheme.
 
 The symbol is centred in a square with a little air, so a wide mark is not cut.
 Colours are forced with !important because Affinity writes fills inline.
-Browsers that take no SVG favicon (older Safari) fall back to the PNG icon the
-page also links, which carries its own ground.
+The light colour is white (#FFFFFF) and there is no ground. Do not link a PNG
+icon as rel="icon" beside it: its square ground would show where a browser
+prefers it.
 """
 import re, sys
 

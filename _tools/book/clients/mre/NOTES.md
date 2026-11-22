@@ -224,8 +224,8 @@ Reais BRAND`. Config: `client.json` here. Started from Eliria on
   live at the owner's word (`icon-raiz-4-*`).
 
 - **22 November. Favicon**: the symbol, raiz on a light browser and
-  algodão on a dark one (`img/mulheresreais-favicon-1.svg`, by
-  `kit/favicon.py`); the flat 32 px icon is the fallback.
+  white on a dark one, no ground (`img/mulheresreais-favicon-2.svg`, by
+  `kit/favicon.py`); no PNG fallback, at the owner's word.
 
 ## Waiting for
 

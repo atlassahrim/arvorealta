@@ -3935,15 +3935,16 @@ new page takes the same line. The app icon was tried as the favicon on
 21 November and the owner preferred the old mark.
 
 **The brand books are the exception, since 22 November, at the owner's
-word: each book's favicon is its own logo's symbol, dark on a light browser
-and light on a dark one.** One square SVG switches with
-`prefers-color-scheme`, written by `_tools/book/kit/favicon.py` from the
-symbol file and the brand's dark and light colours:
-`brand/book-arv/img/arvo-favicon-1.svg` (forest and paper),
-`book-eli/img/eliria-favicon-1.svg` (ardósia and areia) and
-`book-mre/img/mulheresreais-favicon-1.svg` (raiz and algodão). The client
-books also keep their 32 px icon PNG, for browsers that take no SVG
-favicon, and their 180 px icon as the home-screen icon.
+word: each book's favicon is its own logo's symbol, in the brand's dark
+on a light browser and in white on a dark one, with no ground behind it.**
+One square, transparent SVG switches with `prefers-color-scheme`, written
+by `_tools/book/kit/favicon.py` from the symbol file, the brand's dark and
+`#FFFFFF`: `brand/book-arv/img/arvo-favicon-2.svg` (forest),
+`book-eli/img/eliria-favicon-2.svg` (ardósia) and
+`book-mre/img/mulheresreais-favicon-2.svg` (raiz). **No PNG `rel="icon"`
+sits beside it**, since that square icon carries a ground and some
+browsers prefer it; the first build kept one and the owner saw the ground.
+The client books keep their 180 px icon as the home-screen icon only.
 
 ## The pricing ladder
 

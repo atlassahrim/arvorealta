@@ -116,19 +116,20 @@ section 01's three rules and its culture line.
   (`18K0_ahXcEkM6Uuw-uAQ-nt2MrkMmik8f`). Contact lines are examples.
 
 - **22 November. Favicon**: the symbol, ardósia on a light browser and
-  areia on a dark one (`img/eliria-favicon-1.svg`, by `kit/favicon.py`);
-  the 32 px grass icon stays as the fallback, the 180 px as the home-screen
-  icon.
+  white on a dark one, no ground (`img/eliria-favicon-2.svg`, by
+  `kit/favicon.py`); no PNG fallback, the 180 px grass icon is the
+  home-screen icon only.
 - **22 November. Social images**, on the Mulheres Reais model: the gold mark
   and the sand wordmark in the cover's own geometry (name centred, mark
   8.235 per cent left), on the three primary grounds from Drive: link
   ardósia, square pedra, portrait areia (ardósia wordmark and the line in
   Tenor Sans capitals), story ardósia with the line; LinkedIn banner flat
-  ardósia. Four in `06 Applications`. The runner is `social/` here.
+  ardósia. All five in `06 Applications`; the story is a JPG at q88
+  (644 KB, `19funqgzP6VCsJxHV4BKRasNBrQu9KbRE`), because the PNG was over
+  the upload limit. The runner is `social/` here.
 
 ## Open
 
-- The social story (3.9 MB) is built but not uploaded: over the session's per-upload limit. One button waits.
 - The card back's contact lines are examples (`contact_final: false`).
 - The CMYK values were chosen before `kit/cmyk.py` existed, at 1 per cent
   steps; `cmyk.py` proposes values within a few points of them. Keep the
