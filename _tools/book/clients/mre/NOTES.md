@@ -145,7 +145,20 @@ Reais BRAND`. Config: `client.json` here. Started from Eliria on
   stays). `Em uma frase` reads `Mulheres Reais dá eco à conversa que já
   acontece entre mulheres, e deixa cada história abrir seu caminho.`
 
+- **22 November. Raiz 70 · Algodão 20 · accents 10**, at the owner's word,
+  reversing the earlier Algodão 70. The mark lives on dark (the gold needs
+  shadow, which the imagery rules already say); algodão is the paper of the
+  documents and the text on raiz; documents and long text stay on algodão.
+  Palette order in `client.json` and the .ase is now raiz first. The palette
+  went up again (`1gkjAAhB73dEQTl4wAo-gR-njbHmODhBw`); the previous upload is
+  in the bin.
+- **22 November. Icons: one colour, three sizes**, at the owner's word: the
+  icon is a square with its own ground, so raiz alone (32 tab, 180 home
+  screen, 512 profile). The eucalipto and palha icon buttons came from Eliria
+  and are gone. Still suggested: the 32 px icon as the flat symbol, since the
+  gold render blurs there.
+
 ## Waiting for
 
-Lockup raiz in raiz; three icon renames and the master PNG; icons on eucalipto and palha; social images; the email signature. The mark section's anatomy and size note, and the imagery rules (jewellery), are still Eliria's text. `check.py mre`
+Lockup raiz in raiz; three icon renames and the master PNG; social images; the email signature. The mark section's anatomy and size note, and the imagery rules (jewellery), are still Eliria's text. `check.py mre`
 has the full list.

@@ -23,19 +23,6 @@
   },
   "palette": [
     {
-      "name": "Algodão",
-      "word": "algodao",
-      "hex": "#F2ECDE",
-      "cmyk": [
-        6,
-        6,
-        14,
-        0
-      ],
-      "share": 70,
-      "print_use": "fundo do cartão; símbolo na pasta e no envelope"
-    },
-    {
       "name": "Raiz",
       "word": "raiz",
       "hex": "#332415",
@@ -45,8 +32,21 @@
         100,
         90
       ],
-      "share": 20,
+      "share": 70,
       "print_use": "fundo da pasta e do envelope; texto e símbolo no cartão"
+    },
+    {
+      "name": "Algodão",
+      "word": "algodao",
+      "hex": "#F2ECDE",
+      "cmyk": [
+        6,
+        6,
+        14,
+        0
+      ],
+      "share": 20,
+      "print_use": "fundo do cartão; símbolo na pasta e no envelope"
     },
     {
       "name": "Barro",
