@@ -238,3 +238,8 @@ Reais BRAND`. Config: `client.json` here. Started from Eliria on
 
 Nothing on the page. Open: the lawyer (LGPD, electoral identification) and the client's permission to keep the book live. The mark section's anatomy and size note, and the imagery rules (jewellery), are still Eliria's text. `check.py mre`
 has the full list.
+
+- **22 November. No `Sugestão` labels**, at the owner's word: the studio's
+  proposals are no longer marked on the page. They were the name, the mark's
+  anatomy, the size test, space and shape, documents, voice, components and
+  applications. These remain the studio's proposals.

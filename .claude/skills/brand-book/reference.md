@@ -19,8 +19,10 @@ commit. A client's own decisions go in `_tools/book/clients/<code>/NOTES.md`.
    book only if it is copied across.
 4. **The page names the brand and nothing else.** The repository is public:
    no people, prices, market or plans from the client's project documents.
-5. **What the studio proposed is labelled `Sugestão`** (or the language's
-   word). What the client supplied is not.
+5. **No `Sugestão` labels on the page**, since 22 November at the owner's
+   word: what the studio proposed and what the client supplied read the
+   same. Record in the client's `NOTES.md` which parts are the studio's,
+   because the page no longer says.
 6. **Copy is shown to the owner before it goes live.** Show it as a
    before → after table.
 7. **A new picture gets a new filename** (`<slug>-<piece>-<colour>-<version>-<width>.<ext>`),

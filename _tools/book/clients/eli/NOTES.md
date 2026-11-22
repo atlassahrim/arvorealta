@@ -128,6 +128,11 @@ section 01's three rules and its culture line.
   (644 KB, `19funqgzP6VCsJxHV4BKRasNBrQu9KbRE`), because the PNG was over
   the upload limit. The runner is `social/` here.
 
+- **22 November. No `Sugestão` labels**, at the owner's word: the studio's
+  proposals are no longer marked on the page. They were the size test, space
+  and shape, documents, voice, components and applications.
+  These remain the studio's proposals.
+
 ## Open
 
 - The card back's contact lines are examples (`contact_final: false`).
