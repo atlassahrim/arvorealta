@@ -1,0 +1,20 @@
+<!doctype html><meta charset="utf-8"><style>
+@font-face{font-family:CG;font-style:italic;font-weight:500;src:url(cormorant-garamond-latin-500-italic.woff2)}
+html,body{margin:0}
+.f{position:relative;overflow:hidden;width:var(--w);height:var(--h);background:#332415;display:grid;place-items:center}
+.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%}
+.wash{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(51,36,21,.55),rgba(51,36,21,.25) 70%)}
+.lk{position:relative;display:grid;justify-items:center;width:var(--mw);transform:translateY(var(--dy,0))}
+.lk .m{width:100%;transform:translateX(1.7%)}
+.lk .w{width:100%;margin-top:9%}
+.lk .l{font:italic 500 var(--ls)/1.15 CG,Georgia,serif;color:#F2ECDE;margin-top:var(--lg);letter-spacing:.005em;white-space:nowrap}
+.flat .lp{width:var(--mw)}
+</style>
+<div class="f" id="f"></div>
+<script>
+const q=new URLSearchParams(location.search), w=+q.get('w'), h=+q.get('h'), f=document.getElementById('f');
+f.style.setProperty('--w',w+'px');f.style.setProperty('--h',h+'px');
+for(const k of ['mw','ls','lg','dy']) if(q.get(k)) f.style.setProperty('--'+k,q.get(k));
+if(q.get('flat')){f.classList.add('flat');f.innerHTML='<img class="lp" src="lockup-palha.svg">'}
+else f.innerHTML=`<img class="bg" src="ground-${q.get('g')}.jpg"><div class="wash"></div><div class="lk"><img class="m" src="mark.png"><img class="w" src="wordmark.svg">${q.get('line')?'<div class="l">Ela é a origem.</div>':''}</div>`;
+</script>
