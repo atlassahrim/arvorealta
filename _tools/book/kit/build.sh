@@ -18,5 +18,6 @@ sleep 1
 node _tools/book/kit/pdfs.js "$code" "$out"
 python3 -I _tools/book/kit/press.py "$code" "$out"
 python3 -I _tools/book/kit/ase.py "$code" "$out"
+python3 -I _tools/book/kit/signature.py "$code" "$out"
 python3 -I _tools/book/kit/pdfcheck.py "$out"/*mm.pdf
 echo "built: $out"

@@ -6,80 +6,264 @@
   "drive_folder": "Eliria BRAND",
   "template": "eli",
   "line": "Vincular ocasiões e joias exclusivas.",
-
   "words": {
     "not_yet": "Ainda não",
     "not_yet_title": "Ainda não disponível",
     "page_of": "de",
     "book_title": "Livro da marca"
   },
-
   "tokens": {
-    "--b-ink": "#252F37", "--b-ink2": "#252F37", "--b-pink": "#252F37",
-    "--b-paper": "#D8CCBD", "--b-bone": "#EFEAE1",
-    "--b-amber": "#8E7657", "--b-brick": "#7A5530"
+    "--b-ink": "#252F37",
+    "--b-ink2": "#252F37",
+    "--b-pink": "#252F37",
+    "--b-paper": "#D8CCBD",
+    "--b-bone": "#EFEAE1",
+    "--b-amber": "#8E7657",
+    "--b-brick": "#7A5530"
   },
-
   "palette": [
-    {"name": "Ardósia", "word": "ardosia", "hex": "#252F37", "cmyk": [66, 36, 20, 90], "share": 70,
-     "print_use": "fundo da pasta e do envelope; texto e símbolo no cartão"},
-    {"name": "Areia", "word": "sand", "hex": "#D8CCBD", "cmyk": [19, 19, 27, 0], "share": 20,
-     "print_use": "fundo do cartão; símbolo na pasta e no envelope"},
-    {"name": "Camel", "word": "camel", "hex": "#8E7657", "cmyk": [41, 47, 59, 15], "share": 10, "cmyk_from": "client",
-     "print_use": "valor da marca (não usado nestes arquivos)"},
-    {"name": "Folha madura", "word": "folha", "hex": "#273121", "cmyk": [58, 28, 82, 91], "share": "outside",
-     "print_use": "(substitui a ardósia em edições especiais)"}
+    {
+      "name": "Ardósia",
+      "word": "ardosia",
+      "hex": "#252F37",
+      "cmyk": [
+        66,
+        36,
+        20,
+        90
+      ],
+      "share": 70,
+      "print_use": "fundo da pasta e do envelope; texto e símbolo no cartão"
+    },
+    {
+      "name": "Areia",
+      "word": "sand",
+      "hex": "#D8CCBD",
+      "cmyk": [
+        19,
+        19,
+        27,
+        0
+      ],
+      "share": 20,
+      "print_use": "fundo do cartão; símbolo na pasta e no envelope"
+    },
+    {
+      "name": "Camel",
+      "word": "camel",
+      "hex": "#8E7657",
+      "cmyk": [
+        41,
+        47,
+        59,
+        15
+      ],
+      "share": 10,
+      "cmyk_from": "client",
+      "print_use": "valor da marca (não usado nestes arquivos)"
+    },
+    {
+      "name": "Folha madura",
+      "word": "folha",
+      "hex": "#273121",
+      "cmyk": [
+        58,
+        28,
+        82,
+        91
+      ],
+      "share": "outside",
+      "print_use": "(substitui a ardósia em edições especiais)"
+    }
   ],
   "dark": "ardosia",
   "light": "sand",
   "doc_soft": "#666D73",
   "doc_rule": "#C9CCCF",
-
   "fonts": {
-    "title":     {"name": "Tenor Sans", "file": "TenorSans-Regular.ttf", "single": 1.25},
-    "regular":   {"name": "Open Sans", "file": "OpenSans-Regular.ttf"},
-    "light":     {"name": "Open Sans Light", "file": "OpenSans-Light.ttf"},
-    "medium":    {"name": "Open Sans Medium", "file": "OpenSans-Medium.ttf"},
-    "semibold":  {"name": "Open Sans SemiBold", "file": "OpenSans-SemiBold.ttf"},
-    "condensed": {"name": "Open Sans Condensed", "file": "OpenSans-Condensed.ttf"}
+    "title": {
+      "name": "Tenor Sans",
+      "file": "TenorSans-Regular.ttf",
+      "single": 1.25
+    },
+    "regular": {
+      "name": "Open Sans",
+      "file": "OpenSans-Regular.ttf"
+    },
+    "light": {
+      "name": "Open Sans Light",
+      "file": "OpenSans-Light.ttf"
+    },
+    "medium": {
+      "name": "Open Sans Medium",
+      "file": "OpenSans-Medium.ttf"
+    },
+    "semibold": {
+      "name": "Open Sans SemiBold",
+      "file": "OpenSans-SemiBold.ttf"
+    },
+    "condensed": {
+      "name": "Open Sans Condensed",
+      "file": "OpenSans-Condensed.ttf"
+    }
   },
-  "logo_font": {"name": "Carla Sans", "note": "logo only, no licence: never typed or served"},
-
-  "symbol": {"svg": "symbol.svg", "png": "symbol.png", "alt": "O símbolo da Eliria"},
-
-  "signatory": {"name": "Lia Noleto", "role": "Função", "contact": ["telefone", "e-mail", "endereço"], "contact_final": false},
-
+  "logo_font": {
+    "name": "Carla Sans",
+    "note": "logo only, no licence: never typed or served"
+  },
+  "symbol": {
+    "svg": "symbol.svg",
+    "png": "symbol.png",
+    "alt": "O símbolo da Eliria"
+  },
+  "signatory": {
+    "name": "Lia Noleto",
+    "role": "Função",
+    "contact": [
+      "telefone",
+      "e-mail",
+      "endereço"
+    ],
+    "contact_final": false
+  },
   "documents": {
     "description": "Modelo Eliria. Os textos são exemplos.",
     "letter": {
-      "title": "Carta Eliria", "header": ["Eliria", "Coleção oficial"], "foot": "Carta · EL-C-001",
-      "address": ["Nome Sobrenome", "Empresa Ltda.", "Rua Exemplo, 12", "01000-000 São Paulo"],
-      "fields": [["Data", "20 nov 2026"], ["Referência", "EL-C-001"]],
+      "title": "Carta Eliria",
+      "header": [
+        "Eliria",
+        "Coleção oficial"
+      ],
+      "foot": "Carta · EL-C-001",
+      "address": [
+        "Nome Sobrenome",
+        "Empresa Ltda.",
+        "Rua Exemplo, 12",
+        "01000-000 São Paulo"
+      ],
+      "fields": [
+        [
+          "Data",
+          "20 nov 2026"
+        ],
+        [
+          "Referência",
+          "EL-C-001"
+        ]
+      ],
       "heading": "A coleção oficial de 2026",
-      "body": ["Obrigado por receber a Eliria. Esta carta confirma a ocasião e a peça escolhida, para que os dois lados tenham por escrito.",
-               "Cada peça é gravada com o ano e as iniciais de quem a recebe, e entregue no estojo, com o certificado."],
-      "closing": "Com estima,", "sign_label": "Eliria"
+      "body": [
+        "Obrigado por receber a Eliria. Esta carta confirma a ocasião e a peça escolhida, para que os dois lados tenham por escrito.",
+        "Cada peça é gravada com o ano e as iniciais de quem a recebe, e entregue no estojo, com o certificado."
+      ],
+      "closing": "Com estima,",
+      "sign_label": "Eliria"
     },
     "invitation": {
-      "title": "Convite Eliria", "foot": "Convite · EL-V-001", "label": "Convite",
-      "heading": ["A entrega", "da coleção 2026"],
+      "title": "Convite Eliria",
+      "foot": "Convite · EL-V-001",
+      "label": "Convite",
+      "heading": [
+        "A entrega",
+        "da coleção 2026"
+      ],
       "sub": "Uma noite para reconhecer quem chegou até aqui.",
-      "fields": [["Para", "Nome Sobrenome"], ["Data", "12 dez 2026"], ["Hora", "20h"], ["Local", "A confirmar"]]
+      "fields": [
+        [
+          "Para",
+          "Nome Sobrenome"
+        ],
+        [
+          "Data",
+          "12 dez 2026"
+        ],
+        [
+          "Hora",
+          "20h"
+        ],
+        [
+          "Local",
+          "A confirmar"
+        ]
+      ]
     },
     "certificate": {
-      "title": "Certificado Eliria", "foot": "Certificado · EL-K-007", "label": "Certificado",
+      "title": "Certificado Eliria",
+      "foot": "Certificado · EL-K-007",
+      "label": "Certificado",
       "heading": "Coleção oficial 2026",
       "body": "Esta peça foi gravada e entregue pela Eliria, e é única. O número e o ano abaixo são os mesmos gravados no metal.",
-      "fields": [["Peça", "Nº 007"], ["Ano", "2026"], ["Iniciais", "N S"]],
-      "table": [["Item", "Material", "Ano"], ["Peça", "A confirmar", "2026"], ["Estojo", "A confirmar", "2026"]],
+      "fields": [
+        [
+          "Peça",
+          "Nº 007"
+        ],
+        [
+          "Ano",
+          "2026"
+        ],
+        [
+          "Iniciais",
+          "N S"
+        ]
+      ],
+      "table": [
+        [
+          "Item",
+          "Material",
+          "Ano"
+        ],
+        [
+          "Peça",
+          "A confirmar",
+          "2026"
+        ],
+        [
+          "Estojo",
+          "A confirmar",
+          "2026"
+        ]
+      ],
       "sign_label": "Eliria"
     }
   },
-
   "press": {
-    "card":     {"ground": "light", "symbol": "dark", "symbol_mm": 20, "label_front": "cartão, frente", "label_back": "cartão, verso"},
-    "folder":   {"ground": "dark", "symbol": "light", "symbol_mm": 32, "label": "pasta, capa"},
-    "envelope": {"ground": "dark", "symbol": "light", "symbol_mm": 40, "rotate": -90, "label": "envelope DL, frente"},
-    "trim": "corte", "bleed": "sangria"
+    "card": {
+      "ground": "light",
+      "symbol": "dark",
+      "symbol_mm": 20,
+      "label_front": "cartão, frente",
+      "label_back": "cartão, verso"
+    },
+    "folder": {
+      "ground": "dark",
+      "symbol": "light",
+      "symbol_mm": 32,
+      "label": "pasta, capa"
+    },
+    "envelope": {
+      "ground": "dark",
+      "symbol": "light",
+      "symbol_mm": 40,
+      "rotate": -90,
+      "label": "envelope DL, frente"
+    },
+    "trim": "corte",
+    "bleed": "sangria"
+  },
+  "signature": {
+    "lines": [
+      {
+        "text": "Lia Noleto"
+      },
+      {
+        "text": "+55 11 0000-0000",
+        "href": "tel:+5511000000000"
+      },
+      {
+        "text": "contato@exemplo.com.br",
+        "href": "mailto:contato@exemplo.com.br"
+      }
+    ]
   }
 }

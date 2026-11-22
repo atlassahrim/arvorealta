@@ -274,5 +274,20 @@
     "trim": "corte",
     "bleed": "sangria"
   },
-  "_draft": []
+  "_draft": [],
+  "signature": {
+    "lines": [
+      {
+        "text": "Nome Sobrenome, Coordenação"
+      },
+      {
+        "text": "+55 11 0000-0000",
+        "href": "tel:+5511000000000"
+      },
+      {
+        "text": "nome@exemplo.com.br",
+        "href": "mailto:nome@exemplo.com.br"
+      }
+    ]
+  }
 }

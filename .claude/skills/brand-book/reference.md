@@ -87,6 +87,14 @@ commit. A client's own decisions go in `_tools/book/clients/<code>/NOTES.md`.
 
 ## The files the book hands out
 
+- **The email signature** is text only, never an image: the brand name in
+  bold capitals in the client's sans with a 28 px rule beside it, then three
+  lines (name and role, phone, e-mail) in the computer's monospace, all in
+  the dark colour. `signature.py` writes it; the owner chose this model on
+  Mulheres Reais.
+- **The icon is one ground in three sizes** (32, 180, 512): it is a square
+  that carries its own ground, so more colours add nothing.
+
 - **A4 letter, invitation and certificate**: a `.dotx` and a `.pdf` each.
   - The `.pdf` is printed from the book's own drawing.
   - The `.dotx` is built to match the drawing within a point, with its faces
@@ -115,6 +123,7 @@ commit. A client's own decisions go in `_tools/book/clients/<code>/NOTES.md`.
 | `cmyk.py "#hex:k0"` | FOGRA39 values for a colour with no CMYK |
 | `build.sh <code>` | all hand-out files into `clients/<code>/out/` |
 | `live.py <code> "<b>TYPE</b>Label" <id> <size>` | points one button at its Drive file |
+| `signature.py <code>` | the email signature: brand name in bold capitals with a short rule, three monospace lines, text only (`signature` in client.json) |
 
 `build.sh` runs `dotx.js`, `_tools/annex/docx_fix.py`, `todotx.py`, `pdfs.js`
 (against the site on port 8766), `press.py`, `ase.py` and `pdfcheck.py`.

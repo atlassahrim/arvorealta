@@ -105,9 +105,19 @@ section 01's three rules and its culture line.
   at 4:5.
 - **No `Versões` table.** The cover keeps its edition number.
 
+- **22 November. Icon: one ground, three sizes**, at the owner's word, the
+  same decision as Mulheres Reais: the icon is a square with its own ground,
+  so grama alone (32 tab, 180 home screen, 512 profile). The areia and camel
+  icon buttons are off the page; their files stay in Drive.
+- **22 November. Email signature**, on the Mulheres Reais model at the owner's
+  word: ELIRIA in bold Open Sans capitals with a short rule, then three lines
+  in the computer's monospace, in ardósia. Built by `kit/signature.py` from
+  `signature` in client.json; in `06 Applications`
+  (`18K0_ahXcEkM6Uuw-uAQ-nt2MrkMmik8f`). Contact lines are examples.
+
 ## Open
 
-- The social images and the email signature: two buttons still wait.
+- The social images: one button still waits.
 - The card back's contact lines are examples (`contact_final: false`).
 - The CMYK values were chosen before `kit/cmyk.py` existed, at 1 per cent
   steps; `cmyk.py` proposes values within a few points of them. Keep the
