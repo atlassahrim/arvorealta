@@ -223,6 +223,13 @@ Reais BRAND`. Config: `client.json` here. Started from Eliria on
   raiz; and the cool smoke sits outside the earth palette. On the page and
   live at the owner's word (`icon-raiz-4-*`).
 
+- **22 November. 180 and 512 icons replaced by the owner**: the gold mark
+  over a painting ground, no flat raiz square. New Drive files
+  (`17I70PNxDQa0EyuX4xN68ic8qSBGGQhjJ`, `1jn-rYPTnbtG34aEYZqMMDghL3ThKm-mS`);
+  the old two are in the bin. On the page as `icon-raiz-5-*`. The 32 px
+  flat palha symbol on raiz is unchanged. The card's text still says "Um
+  quadrado raiz"; a rewrite was proposed to the owner.
+
 - **22 November. Favicon**: the symbol, raiz on a light browser and
   white on a dark one, no ground (`img/mulheresreais-favicon-2.svg`, by
   `kit/favicon.py`); no PNG fallback, at the owner's word.
