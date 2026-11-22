@@ -49,6 +49,28 @@ Reais BRAND`. Config: `client.json` here. Started from Eliria on
   exclusivas.` is `A linha da marca, a confirmar.`, and Carla Sans (Eliria's
   logo face) is `Fonte do logo`, to be confirmed with the logo files.
 
+- **22 November. Palette uploaded** to `02 Colour` as
+  `mulheresreais_colour_palette.ase` (Drive id `1MRr7l9JbEGoSsDchdTchozefLH9_rtqf`).
+- **22 November. The owner's logo files, checked.** The mark is three women
+  riding one galloping horse. The primary is a gold metal render (PNG, sRGB,
+  transparent), so its colour word is `gold`, as in Eliria's rule; the page
+  says `primary_gold`. The logo face is **Cormorant Unicase** (OFL, Google
+  Fonts), read from the lockup files. Faults found, reported to the owner:
+  - `symbol_algodao` is drawn in `#D8CCBD` (Eliria's Areia), not `#F2ECDE`.
+  - every `_palha` file, and the icon's symbol, is `#D7AE6E`, not `#D3B67C`.
+  - `wordmark_raiz` and `lockup_raiz` are drawn in Barro `#935234`.
+  - the four lockups carry the name as live text in Cormorant Unicase, so
+    any device without the face draws it in another font. Convert to curves.
+  - names: primary `_dark_` (screen) and `_raiz_` (master) for a gold
+    render; icons `icon_32x32`, `icon_180x180`, `icon_512` with no colour.
+  The page's web copies of `symbol-algodao-1`, `symbol-palha-1` and
+  `wordmark-raiz-1` are recoloured to the palette (geometry untouched); their
+  download buttons stay waiting until the Drive files are fixed. Live:
+  primary PNG 600/1200/2400, wordmark algodão and black, symbol raiz and
+  black, the palette.
+- **22 November. "Como é feita" is hidden** (`display:none`): its numbered
+  parts described Eliria's fan. It returns with copy written for this mark.
+
 ## Waiting for
 
 Mark (in progress, owner, named as in section 12), type, imagery, words,

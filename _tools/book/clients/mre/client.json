@@ -119,11 +119,15 @@
       "file": "OpenSans-Condensed.ttf"
     }
   },
-  "logo_font": null,
+  "logo_font": {
+    "name": "Cormorant Unicase",
+    "licence": "OFL",
+    "use": "only inside the logo files"
+  },
   "symbol": {
     "svg": "symbol.svg",
     "png": "symbol.png",
-    "alt": null
+    "alt": "Três mulheres num cavalo a galope"
   },
   "signatory": {
     "name": null,
