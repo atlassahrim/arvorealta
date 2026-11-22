@@ -178,7 +178,27 @@ Reais BRAND`. Config: `client.json` here. Started from Eliria on
   break in a short line or document title. The invitation was rebuilt and
   re-uploaded; the old pair is in the bin.
 
+- **22 November. Icon names fixed in Drive** by this session, at the owner's
+  word: `mulheresreais_mark_icon_raiz_{32x32,180x180,512x512}.png`.
+- **22 November. Email signature redesigned, no images**, at the owner's
+  word (the first version hosted a wordmark PNG; deleted). Name in Cormorant
+  Garamond with Georgia behind it, role in Alegreya Sans, and a raiz band
+  with MULHERES REAIS in palha spaced capitals and the line in algodão
+  italic; phone and e-mail on their own lines, e-mail in barro. 320 px wide,
+  fits a phone. The type rule now names the signature as the one place the
+  name is typed. Drive `1Zg3-0SeA76OGIgSXIO-CgNPntEtIKaBX`; the earlier file
+  is in the bin.
+- **22 November. Social images, all five formats**, made by this session from
+  the grounds, the gold render and the wordmark, centred on the arches' axis:
+  link (leitura), square (passos), portrait and story (with the line), and a
+  flat raiz LinkedIn banner with the palha lockup. `social/t.html` and
+  `social/r.js` are the template and runner (their assets were in the
+  scratchpad: the grounds cut to 2601 wide, `primary_gold_2400w`, the
+  wordmark and the palha lockup). In `06 Applications`, one button each; the
+  table says where to keep the important part in each format. 42 buttons
+  live, none waiting.
+
 ## Waiting for
 
-Social images; three icon names without spaces. The mark section's anatomy and size note, and the imagery rules (jewellery), are still Eliria's text. `check.py mre`
+Nothing on the page. Open: the lawyer (LGPD, electoral identification) and the client's permission to keep the book live. The mark section's anatomy and size note, and the imagery rules (jewellery), are still Eliria's text. `check.py mre`
 has the full list.
