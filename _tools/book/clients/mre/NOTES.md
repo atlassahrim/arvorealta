@@ -158,7 +158,27 @@ Reais BRAND`. Config: `client.json` here. Started from Eliria on
   and are gone. Still suggested: the 32 px icon as the flat symbol, since the
   gold render blurs there.
 
+- **22 November, evening. Checked:** `lockup_raiz` is raiz now (live);
+  the 32 px icon is the flat palha symbol on raiz (`icon-raiz-3-32`, the
+  favicon); the master PNG is `primary_gold_4800w`. Three icon names still
+  carry spaces: `mulheresreais_mark_ icon_raiz_32x32.png`,
+  `mulheresreais_mark_icon_ raiz_ 180x180.png`, `mulheresreais_mark_icon_ raiz_ 512.png`.
+- **22 November. Email signature**: `clients/mre/signature.html`, uploaded
+  to `06 Applications` (`1jeWvC3yZ0_Mf12p3JiEPpjtZyd743fpw`). Tables and
+  inline styles; one image, the drawn name, hosted at
+  `/brand/book-mre/img/mulheresreais-signature-wordmark-raiz-1-520.png`, with
+  `MULHERES REAIS` as alt text; the brand faces first, system faces behind.
+  The image lives on arvorealta.com, so a reader of the email's source sees
+  the book's folder; move it to the client's own site when there is one.
+- **22 November. The layout follows the text**, at the owner's word: `.line`
+  is `max-width:18ch; text-wrap:balance` and carries no `<br>` (`Ela é a
+  origem.` sits on one line), the invitation title is one string and its lede
+  flows after it. The same CSS and flow went into the template client (Eliria
+  renders as before; her breaks are in her copy). `check.py` now flags a hand
+  break in a short line or document title. The invitation was rebuilt and
+  re-uploaded; the old pair is in the bin.
+
 ## Waiting for
 
-Lockup raiz in raiz; three icon renames and the master PNG; social images; the email signature. The mark section's anatomy and size note, and the imagery rules (jewellery), are still Eliria's text. `check.py mre`
+Social images; three icon names without spaces. The mark section's anatomy and size note, and the imagery rules (jewellery), are still Eliria's text. `check.py mre`
 has the full list.

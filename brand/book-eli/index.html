@@ -143,7 +143,9 @@ dl.fields dd{margin:0;font-size:15px;font-weight:500}
 @media (max-width:620px){.two{grid-template-columns:minmax(0,1fr)}}
 
 /* ── 02 message ── */
-.line{font-family:var(--f-disp);font-size:clamp(40px,6vw,72px);line-height:1;letter-spacing:-.025em}
+/* the line sets to its own length: one line when it is short, balanced lines when it is long.
+   Never hand-break it; a break written for one client's line is wrong for the next */
+.line{font-family:var(--f-disp);font-size:clamp(40px,6vw,72px);line-height:1;letter-spacing:-.025em;max-width:18ch;text-wrap:balance}
 .line em{font-style:italic}
 .lines{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:28px}
 .lines>div{border-top:1px solid var(--fg);padding-top:12px;display:grid;gap:8px}
@@ -1148,8 +1150,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
     cover:{label:"Convite A4",html:
       B(20,20,22,"",MARK)+
       B(20,L(18),141,"t-lbl mk","Convite")+
-      B(20,L(19),170,"t-title ts","A entrega<br>da coleção 2026")+
-      B(20,L(26),112,"t-lede","Uma noite para reconhecer quem chegou até aqui.")+
+      B(20,L(19),170,"",`<div class="t-title ts">A entrega<br>da coleção 2026</div><div class="t-lede" style="width:calc(var(--u) * 112);${GAP}">Uma noite para reconhecer quem chegou até aqui.</div>`)+
       B(20,L(42),170,"rl flds",fld("Para","Nome Sobrenome")+fld("Data","12 dez 2026")+fld("Hora","20h")+fld("Local","A confirmar"))+
       B(20,282.5,170,"t-lbl foot","<span>Convite · EL-V-001</span><span>1 de 1</span>")},
     page:{label:"Certificado A4",html:

@@ -27,6 +27,13 @@ commit. A client's own decisions go in `_tools/book/clients/<code>/NOTES.md`.
    because a browser caches the old one under the old name.
 8. **The favicon is the client's icon**, PNG at 32, 180 and 512.
 9. **Verify at 1440 and 390**: no page errors, no sideways scroll.
+10. **The layout follows the length of the client's text.** The line sets in
+    `max-width:18ch` with `text-wrap:balance`, so a short line stays on one
+    line and a long one breaks evenly. Never carry a hand break from the
+    template's text: Eliria's two-line line and invitation title were her
+    copy, not the layout. A document title is one string unless it is long;
+    the lede under it flows after it. `check.py` flags a hand break in any
+    line or document title of 24 characters or fewer.
 
 ## Drive
 

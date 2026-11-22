@@ -73,6 +73,24 @@ if C['template'] != code:
         n = len(re.findall(re.escape(s), where, re.I))
         if n: missing.append(f'leftover from {T["name"]}: "{s}" ×{n}')
 
+# ── line breaks: a short line set on two lines is a break carried over from another client ──
+SHORT = 24
+for m in re.finditer(r'<p class="line">(.*?)</p>', html, re.S):
+    t = re.sub(r'<[^>]+>', ' ', m.group(1)); t = ' '.join(t.split())
+    if '<br' in m.group(1) and len(t) <= SHORT:
+        missing.append(f'line break: "{t}" is {len(t)} characters and hand-broken; take the <br> out, the page balances it')
+for m in re.finditer(r'"t-title[^"]*",\s*["`](.*?)["`]', html):
+    t = ' '.join(re.sub(r'<[^>]+>', ' ', m.group(1)).split())
+    if '<br' in m.group(1) and len(t) <= SHORT:
+        missing.append(f'line break: document title "{t}" is hand-broken; set it as one line')
+for m in re.finditer(r'<div class="t-title[^"]*">(.*?)</div>', html):
+    t = ' '.join(re.sub(r'<[^>]+>', ' ', m.group(1)).split())
+    if '<br' in m.group(1) and len(t) <= SHORT:
+        missing.append(f'line break: document title "{t}" is hand-broken; set it as one line')
+hd = ((C.get('documents') or {}).get('invitation') or {}).get('heading') or []
+if len(hd) > 1 and len(' '.join(hd)) <= SHORT:
+    missing.append(f'line break: documents.invitation.heading "{" ".join(hd)}" is split into {len(hd)} lines; make it one')
+
 # ── download buttons ──
 live = re.findall(r'<a class="dl" href="https://drive\.google\.com/file/d/([\w-]+)/view"[^>]*><b>([^<]*)</b>([^<]*)<i>', html)
 wait = re.findall(r'<span class="dl off"[^>]*><b>([^<]*)</b>([^<]*)<i>([^<]*)</i>', html)
