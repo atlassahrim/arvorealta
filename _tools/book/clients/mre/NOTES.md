@@ -129,7 +129,18 @@ Reais BRAND`. Config: `client.json` here. Started from Eliria on
   are built: three .dotx and .pdf, the card, folder and envelope as PDF/X-1a,
   the print spec. `press.py` needs svglib, pikepdf and fonttools installed.
 
+- **22 November. Palha is `#DFB67C`**, at the owner's word, the value his
+  re-exported files carry (it was `#D3B67C`). CMYK 20 30 60 0 (FOGRA39, ΔE
+  0.6). Raiz on palha 7.9:1; palha/algodão 1.6, eucalipto/palha 1.7. The four
+  palha files are live; the page's palha symbol is the Drive file
+  (`symbol-palha-2`).
+- **22 November. Uploaded, at the owner's word**: the palette again to
+  `02 Colour` (`1pEKlu3pgifrz3qlSInHJOR-7PlzQKg1l`; the earlier upload, with
+  the old palha, is in the bin), and to `05 Documents` the three .dotx and
+  .pdf, the card front and back, folder and envelope (PDF/X-1a) and
+  `mulheresreais_print_spec.txt`. 35 buttons live, 9 waiting.
+
 ## Waiting for
 
-Palha files in `#D3B67C`; lockup raiz in raiz; three icon renames; upload of the built files to `05 Documents`. The mark section's anatomy and size note, and the imagery rules (jewellery), are still Eliria's text. `check.py mre`
+Lockup raiz in raiz; three icon renames and the master PNG; icons on eucalipto and palha; social images; the email signature. The mark section's anatomy and size note, and the imagery rules (jewellery), are still Eliria's text. `check.py mre`
 has the full list.

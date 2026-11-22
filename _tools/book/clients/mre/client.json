@@ -18,7 +18,7 @@
     "--b-pink": "#332415",
     "--b-paper": "#F2ECDE",
     "--b-bone": "#F2ECDE",
-    "--b-amber": "#D3B67C",
+    "--b-amber": "#DFB67C",
     "--b-brick": "#935234"
   },
   "palette": [
@@ -77,10 +77,10 @@
     {
       "name": "Palha",
       "word": "palha",
-      "hex": "#D3B67C",
+      "hex": "#DFB67C",
       "cmyk": [
-        24,
-        26,
+        20,
+        30,
         60,
         0
       ],
