@@ -97,8 +97,25 @@ Reais BRAND`. Config: `client.json` here. Started from Eliria on
 - **22 November.** The cover's Eliria sentence (`liga ocasiões e joias
   exclusivas`) is gone; edition 0.1, dated 22 November.
 
+- **22 November. The words, approved by the owner.** He supplied the
+  project's concept in the conversation; it is not stored in this public
+  repository, and the book carries only its public posture and voice, never
+  the electoral strategy. Decisions: the name stays **Mulheres Reais**; the
+  line is **A história é dela.**; the mark's reading (the three, the crown,
+  the outstretched arm, the horse, the proportion) goes in as `Sugestão`; the
+  documents are letter, invitation and **Termo de uso da história** in place
+  of Eliria's certificate. Eliria's text in sections 01, 02, 03, 07, 08, 09,
+  10 and 11 is replaced. The monogram has its own card (black file live).
+- **22 November. Flagged to the owner, not settled:** the Termo needs a
+  lawyer (LGPD treats political opinion as sensitive data), and printed
+  campaign material needs the identification electoral law asks for in the
+  official period.
+- **22 November. Kit:** `dotx.js` reads `fonts.title.caps` (false here;
+  Eliria unchanged), `documents.certificate.after` and
+  `documents.certificate.file` (`terms`); `pdfs.js` reads `file` too. The
+  Word build needs `signatory`, still empty.
+
 ## Waiting for
 
-Mark (in progress, owner, named as in section 12), type, imagery, words,
-signatory. The mark section's anatomy and size note, and the imagery rules (jewellery), are still Eliria's text. `check.py mre`
+Signatory (name, role, contact); the logo fixes listed above. The mark section's anatomy and size note, and the imagery rules (jewellery), are still Eliria's text. `check.py mre`
 has the full list.

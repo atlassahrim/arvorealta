@@ -41,6 +41,8 @@ const NOB = { top: NONE, bottom: NONE, left: NONE, right: NONE, insideHorizontal
 
 const run = (text, o = {}) => new TextRun({ text, font: o.font || OS, size: pt(o.size || 10), color: o.color || INK,
   allCaps: o.caps, characterSpacing: o.track, break: o.br });
+// titles in capitals unless the client's title face says otherwise (Eliria: capitals)
+const TCAPS = C.fonts.title.caps !== false;
 const lab = (text, o = {}) => run(text, { font: OSS, size: 8, color: o.color || SOFT, caps: true, track: 16, ...o });
 // leading in pt -> a multiple of the face's single line (240 = 1.0)
 const P = (runs, o = {}) => {
@@ -97,7 +99,7 @@ const v = C.documents.invitation, vW = Math.floor(W / 4);
 const vfield = (k, x) => cell([P([lab(k)], LAB), P([run(x, { font: OSM })], { font: OSM })], vW, { borders: TOPRULE });
 const invite = doc(v.title, header(22), footer(v.foot), [
   P([lab(v.label)], { ...LAB, before: INV_BEFORE }),
-  ...v.heading.map(t => P([run(t, { font: TEN, size: 40, caps: true, track: 24 })], { font: TEN, size: 40, lead: 45 })),
+  ...v.heading.map(t => P([run(t, { font: TEN, size: 40, caps: TCAPS, track: TCAPS ? 24 : 0 })], { font: TEN, size: 40, lead: 45 })),
   table([new TableRow({ children: [cell([P([run(v.sub, { font: OSL, size: 15 })], { font: OSL, size: 15, lead: 20, before: 18 })], R), cell([P([run('')])], W - R)] })], [R, W - R]),
   P([run('')], { lead: 15, before: INV_GAP }),
   table([new TableRow({ children: v.fields.map(([k, x]) => vfield(k, x)) })], [vW, vW, vW, W - 3 * vW]),
@@ -110,18 +112,19 @@ const trow = (cells, head) => new TableRow({ children: cells.map((t, i) => cell(
   { borders: { top: head ? TOPRULE.top : NONE, bottom: { style: BorderStyle.SINGLE, size: 2, color: RULE }, left: NONE, right: NONE } })) });
 const cert = doc(c.title, header(22), footer(c.foot), [
   twoCol([P([lab(c.label)], { ...LAB, before: 128 })], [
-    P([run(c.heading, { font: TEN, size: 22, caps: true, track: 18 })], { font: TEN, size: 22, lead: 30, before: 122 }),
+    P([run(c.heading, { font: TEN, size: 22, caps: TCAPS, track: TCAPS ? 18 : 0 })], { font: TEN, size: 22, lead: 30, before: 122 }),
     P([run(c.body)], { before: 8 }),
     P([run('')], { lead: 15, after: 15 }),
     table([new TableRow({ children: c.fields.map(([k, x]) => field(k, x)) })], [fW, fW, R - 2 * fW], { borders: { ...NOB, top: TOPRULE.top } }),
     P([run('')], { lead: 15, after: 10 }),
     table(c.table.map((r, i) => trow(r, i === 0)), TW),
+    ...(c.after ? [P([run(c.after)], { before: 15 })] : []),
     ...sign(c, 60),
   ]),
 ]);
 
 (async () => {
-  for (const [d, n] of [[letter, 'letter'], [invite, 'invitation'], [cert, 'certificate']]) {
+  for (const [d, n] of [[letter, 'letter'], [invite, 'invitation'], [cert, c.file || 'certificate']]) {
     const name = `${C.slug}_template_${n}_a4.docx`;
     fs.writeFileSync(path.join(OUTDIR, name), await Packer.toBuffer(d)); console.log('wrote', name);
   }

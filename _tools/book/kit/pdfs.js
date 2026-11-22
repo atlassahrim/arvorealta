@@ -36,7 +36,7 @@ async function print(p, name, w, h, html, css = '') {
 
   // A4, no bleed: they print on an office printer, and each also ships as a .dotx.
   // The keys are the book's own page picker: cover = invitation, page = certificate.
-  for (const [key, n] of [['cover', 'invitation'], ['letter', 'letter'], ['page', 'certificate']]) {
+  for (const [key, n] of [['cover', 'invitation'], ['letter', 'letter'], ['page', (C.documents.certificate.file || 'certificate')]]) {
     const [pg] = await grab(key);
     await print(p, `${C.slug}_template_${n}_a4.pdf`, 210, 297, pg, '#print .pg{width:210mm!important}');
   }

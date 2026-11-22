@@ -5,7 +5,7 @@
   "lang": "pt-BR",
   "drive_folder": "Mulheres Reais BRAND",
   "template": "eli",
-  "line": null,
+  "line": "A história é dela.",
   "words": {
     "not_yet": "Ainda não",
     "not_yet_title": "Ainda não disponível",
@@ -95,7 +95,8 @@
   "fonts": {
     "title": {
       "name": "Cormorant Garamond Medium",
-      "file": "CormorantGaramond-Medium.ttf"
+      "file": "CormorantGaramond-Medium.ttf",
+      "caps": false
     },
     "regular": {
       "name": "Alegreya Sans",
@@ -142,42 +143,42 @@
       "title": "Carta Mulheres Reais",
       "header": [
         "Mulheres Reais",
-        "Coleção oficial"
+        "Roda de histórias"
       ],
-      "foot": "Carta · EL-C-001",
+      "foot": "Carta · MR-C-001",
       "address": [
         "Nome Sobrenome",
-        "Empresa Ltda.",
         "Rua Exemplo, 12",
+        "Bairro",
         "01000-000 São Paulo"
       ],
       "fields": [
         [
           "Data",
-          "20 nov 2026"
+          "22 nov 2026"
         ],
         [
           "Referência",
-          "EL-C-001"
+          "MR-C-001"
         ]
       ],
-      "heading": "A coleção oficial de 2026",
+      "heading": "Obrigada por abrir sua casa",
       "body": [
-        "Obrigado por receber a Mulheres Reais. Esta carta confirma a ocasião e a peça escolhida, para que os dois lados tenham por escrito.",
-        "Cada peça é gravada com o ano e as iniciais de quem a recebe, e entregue no estojo, com o certificado."
+        "Esta carta confirma a roda de histórias que você vai receber, para que as duas tenham por escrito a data, a hora e quem vem.",
+        "Você convida oito a doze mulheres que já conhece. Três contam uma história cada. No fim, a próxima roda já sai marcada, na casa de outra anfitriã."
       ],
-      "closing": "Com estima,",
+      "closing": "Até a roda,",
       "sign_label": "Mulheres Reais"
     },
     "invitation": {
       "title": "Convite Mulheres Reais",
-      "foot": "Convite · EL-V-001",
+      "foot": "Convite · MR-V-001",
       "label": "Convite",
       "heading": [
-        "A entrega",
-        "da coleção 2026"
+        "Roda de",
+        "histórias"
       ],
-      "sub": "Uma noite para reconhecer quem chegou até aqui.",
+      "sub": "Vem uma roda de histórias, organizada por gente que tem lado.",
       "fields": [
         [
           "Para",
@@ -189,52 +190,60 @@
         ],
         [
           "Hora",
-          "20h"
+          "16h"
         ],
         [
-          "Local",
-          "A confirmar"
+          "Na casa de",
+          "Nome Sobrenome"
         ]
       ]
     },
     "certificate": {
-      "title": "Certificado Mulheres Reais",
-      "foot": "Certificado · EL-K-007",
-      "label": "Certificado",
-      "heading": "Coleção oficial 2026",
-      "body": "Esta peça foi gravada e entregue pela Mulheres Reais, e é única. O número e o ano abaixo são os mesmos gravados no metal.",
+      "_note": "the terms of use of a story; kept under the certificate key, which the kit and pdfs.js read as 'page'",
+      "title": "Termo de uso da história",
+      "foot": "Termo · MR-T-007",
+      "label": "Termo",
+      "heading": "Termo de uso da história",
+      "body": "Você escolhe se a sua história circula, e como. Nada foi gravado antes desta escolha.",
       "fields": [
         [
-          "Peça",
-          "Nº 007"
+          "Encontro",
+          "Nº 07"
         ],
         [
-          "Ano",
-          "2026"
+          "Data",
+          "12 dez"
         ],
         [
-          "Iniciais",
-          "N S"
+          "Local",
+          "SP"
         ]
       ],
       "table": [
         [
-          "Item",
-          "Material",
-          "Ano"
+          "Forma de uso",
+          "Marque uma",
+          ""
         ],
         [
-          "Peça",
-          "A confirmar",
-          "2026"
+          "Só áudio",
+          "( )",
+          ""
         ],
         [
-          "Estojo",
-          "A confirmar",
-          "2026"
+          "Vídeo",
+          "( )",
+          ""
+        ],
+        [
+          "Nada",
+          "( )",
+          ""
         ]
       ],
-      "sign_label": "Mulheres Reais"
+      "after": "Você pode retirar a qualquer momento, sem justificar. A história continua sua; temos licença de uso, não propriedade.",
+      "sign_label": "Quem contou",
+      "file": "terms"
     }
   },
   "press": {
@@ -261,9 +270,5 @@
     "trim": "corte",
     "bleed": "sangria"
   },
-  "_draft": [
-    "documents",
-    "press",
-    "words"
-  ]
+  "_draft": []
 }
