@@ -213,6 +213,16 @@ Reais BRAND`. Config: `client.json` here. Started from Eliria on
   e-mail), all in raiz. Monospace is outside the brand's three families; it
   is the reference's look, at the owner's word, and the type rule says so.
 
+- **22 November, late.** The colour preview reads the line, `Ela é a
+  origem.` (it still said `a confirmar`). The type specimens follow the
+  brand: `A conversa que já acontece`, `Roda de histórias`, `de quem contou`
+  (italic), `contada em primeira pessoa`, `Roda nº 07 · 12 dez 2026`.
+- **22 November. New 180 and 512 icons from the owner**: the gold render in a
+  smoky night scene with sparks. Flagged: the ground is a cool blue-black
+  (`rgb(2,9,15)` to `rgb(21,31,40)`), not raiz, while the file names say
+  raiz; and the cool smoke sits outside the earth palette. On the page and
+  live at the owner's word (`icon-raiz-4-*`).
+
 ## Waiting for
 
 Nothing on the page. Open: the lawyer (LGPD, electoral identification) and the client's permission to keep the book live. The mark section's anatomy and size note, and the imagery rules (jewellery), are still Eliria's text. `check.py mre`
