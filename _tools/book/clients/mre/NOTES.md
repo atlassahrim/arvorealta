@@ -227,8 +227,8 @@ Reais BRAND`. Config: `client.json` here. Started from Eliria on
   over a painting ground, no flat raiz square. New Drive files
   (`17I70PNxDQa0EyuX4xN68ic8qSBGGQhjJ`, `1jn-rYPTnbtG34aEYZqMMDghL3ThKm-mS`);
   the old two are in the bin. On the page as `icon-raiz-5-*`. The 32 px
-  flat palha symbol on raiz is unchanged. The card's text still says "Um
-  quadrado raiz"; a rewrite was proposed to the owner.
+  flat palha symbol on raiz is unchanged. The card's text was rewritten
+  to match, approved by the owner. Drive names keep `raiz`, at his word.
 
 - **22 November. Favicon**: the symbol, raiz on a light browser and
   white on a dark one, no ground (`img/mulheresreais-favicon-2.svg`, by
