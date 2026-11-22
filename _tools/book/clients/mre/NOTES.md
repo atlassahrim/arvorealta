@@ -140,6 +140,11 @@ Reais BRAND`. Config: `client.json` here. Started from Eliria on
   .pdf, the card front and back, folder and envelope (PDF/X-1a) and
   `mulheresreais_print_spec.txt`. 35 buttons live, 9 waiting.
 
+- **22 November. The line is now `Ela é a origem.`**, at the owner's word,
+  replacing `A história é dela.` (the rule `A história é de quem contou`
+  stays). `Em uma frase` reads `Mulheres Reais dá eco à conversa que já
+  acontece entre mulheres, e deixa cada história abrir seu caminho.`
+
 ## Waiting for
 
 Lockup raiz in raiz; three icon renames and the master PNG; icons on eucalipto and palha; social images; the email signature. The mark section's anatomy and size note, and the imagery rules (jewellery), are still Eliria's text. `check.py mre`
