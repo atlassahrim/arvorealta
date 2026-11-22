@@ -25,7 +25,10 @@ commit. A client's own decisions go in `_tools/book/clients/<code>/NOTES.md`.
    before → after table.
 7. **A new picture gets a new filename** (`<slug>-<piece>-<colour>-<version>-<width>.<ext>`),
    because a browser caches the old one under the old name.
-8. **The favicon is the client's icon**, PNG at 32, 180 and 512.
+8. **The favicon is the logo's symbol**, dark on a light browser and light on
+   a dark one: `kit/favicon.py <symbol.svg> <dark> <light> <out.svg>` writes
+   one SVG that switches with `prefers-color-scheme`. The page also links the
+   32 px icon PNG as a fallback and the 180 px icon as `apple-touch-icon`.
 9. **Verify at 1440 and 390**: no page errors, no sideways scroll.
 10. **The layout follows the length of the client's text.** The line sets in
     `max-width:18ch` with `text-wrap:balance`, so a short line stays on one

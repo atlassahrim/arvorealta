@@ -3932,9 +3932,18 @@ the old link is still held.
 **Every published page carries `<link rel="icon"
 href="/assets/favicon.svg" type="image/svg+xml">`**, the old mark, and a
 new page takes the same line. The app icon was tried as the favicon on
-21 November and the owner preferred the old mark. **A client's book takes
-the client's icon**: Eliria's links
-`brand/book-eli/img/eliria-icon-grass-2-{32,180,512}.png`.
+21 November and the owner preferred the old mark.
+
+**The brand books are the exception, since 22 November, at the owner's
+word: each book's favicon is its own logo's symbol, dark on a light browser
+and light on a dark one.** One square SVG switches with
+`prefers-color-scheme`, written by `_tools/book/kit/favicon.py` from the
+symbol file and the brand's dark and light colours:
+`brand/book-arv/img/arvo-favicon-1.svg` (forest and paper),
+`book-eli/img/eliria-favicon-1.svg` (ardósia and areia) and
+`book-mre/img/mulheresreais-favicon-1.svg` (raiz and algodão). The client
+books also keep their 32 px icon PNG, for browsers that take no SVG
+favicon, and their 180 px icon as the home-screen icon.
 
 ## The pricing ladder
 

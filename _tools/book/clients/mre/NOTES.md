@@ -223,6 +223,10 @@ Reais BRAND`. Config: `client.json` here. Started from Eliria on
   raiz; and the cool smoke sits outside the earth palette. On the page and
   live at the owner's word (`icon-raiz-4-*`).
 
+- **22 November. Favicon**: the symbol, raiz on a light browser and
+  algodão on a dark one (`img/mulheresreais-favicon-1.svg`, by
+  `kit/favicon.py`); the flat 32 px icon is the fallback.
+
 ## Waiting for
 
 Nothing on the page. Open: the lawyer (LGPD, electoral identification) and the client's permission to keep the book live. The mark section's anatomy and size note, and the imagery rules (jewellery), are still Eliria's text. `check.py mre`

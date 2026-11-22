@@ -1,0 +1,21 @@
+<!doctype html><meta charset="utf-8"><style>
+@font-face{font-family:TS;src:url(tenor-sans-latin.woff2)}
+html,body{margin:0}
+.f{position:relative;overflow:hidden;width:var(--w);height:var(--h);background:#252F37;display:grid;place-items:center}
+.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.in{position:relative;display:grid;justify-items:center;transform:translateY(var(--dy,0))}
+/* Eliria's cover lockup: the name is centred, the mark rides 8.235 % left with it */
+.lk{width:var(--mw);display:grid;transform:translateX(-8.235%)}
+.lk .m{width:100%;height:auto}
+.lk .w{justify-self:start;width:72.93%;margin-left:21.77%;margin-top:15.2%}
+.l{font:400 var(--ls)/1.3 TS,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:var(--lc,#D8CCBD);margin-top:var(--lg);text-align:center;max-width:var(--lw,none)}
+</style>
+<div class="f" id="f"></div>
+<script>
+const q=new URLSearchParams(location.search),w=+q.get('w'),h=+q.get('h'),f=document.getElementById('f');
+f.style.setProperty('--w',w+'px');f.style.setProperty('--h',h+'px');
+for(const k of ['mw','ls','lg','dy','lc','lw']) if(q.get(k)) f.style.setProperty('--'+k,q.get(k));
+const wm=q.get('wm')||'eliria-wordmark-sand-2.svg';
+const bg=q.get('g')?`<img class="bg" src="ground-${q.get('g')}.jpg">`:'';
+f.innerHTML=bg+`<div class="in"><div class="lk"><img class="m" src="eliria-mark-1-1200.webp"><img class="w" src="${wm}"></div>${q.get('line')?'<div class="l">Vincular ocasiões e joias exclusivas.</div>':''}</div>`;
+</script>
