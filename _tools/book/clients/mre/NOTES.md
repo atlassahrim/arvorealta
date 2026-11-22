@@ -71,8 +71,34 @@ Reais BRAND`. Config: `client.json` here. Started from Eliria on
 - **22 November. "Como é feita" is hidden** (`display:none`): its numbered
   parts described Eliria's fan. It returns with copy written for this mark.
 
+- **22 November. Type, approved by the owner**: Cormorant Garamond for
+  titles (Medium) and field figures (SemiBold, lining), Alegreya Sans for
+  everything read (Light, Regular, Medium, Bold; Italic). Both OFL. Chosen
+  because Cormorant Garamond shares the logo's family (Cormorant Unicase) and
+  its contrast matches the monogram's hairlines. Kit roles: semibold maps to
+  Alegreya Sans Bold (no 600), condensed to Cormorant Garamond SemiBold (no
+  condensed width). TTFs from @expo-google-fonts, woff2 from @fontsource
+  (latin, latin-ext). Tenor Sans and Open Sans, the template's, are gone.
+  Alegreya Sans runs small: a point larger in documents.
+- **22 November. The monogram** is in Drive as `symbol_alt.svg`, black only;
+  suggested name `monogram`. Its hairlines vanish at 32 px. Not on the page
+  yet.
+- **22 November. Cover and grounds, at the owner's word**: the three files in
+  `04 Imagery/Grounds` (`Untitled line .jpg`, `line2`, `line3`, all
+  2654 × 1493) share one gold arch motif, measured centred at x 1300.5. The
+  cover cross-fades them (24 s, off under reduced motion) under a soft ink
+  wash, each cut to 2601 px wide so the arches' axis is the picture's centre;
+  the gold mark and the name sit on that axis (the render is moved 1.7 per
+  cent right, because its opaque pixels centre at 48.3 per cent of its file).
+  Eliria's off-centre lockup offsets are gone. The same three, cut 4:5 on the
+  axis, are the imagery section's grounds, named by this session `passos`,
+  `leitura` and `colheita` (the owner can rename). Their rights are the
+  owner's to confirm: two look like film stills and one like a painting.
+- **22 November.** The cover's Eliria sentence (`liga ocasiões e joias
+  exclusivas`) is gone; edition 0.1, dated 22 November.
+
 ## Waiting for
 
 Mark (in progress, owner, named as in section 12), type, imagery, words,
-signatory. The mark section still describes Eliria's gold render. `check.py mre`
+signatory. The mark section's anatomy and size note, and the imagery rules (jewellery), are still Eliria's text. `check.py mre`
 has the full list.

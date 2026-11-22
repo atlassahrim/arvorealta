@@ -489,41 +489,56 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
 </style>
 <style>
 /* Mulheres Reais's own faces and inks, appended after the template's sheet.
-   Open Sans and Tenor Sans are self-hosted (OFL). Cormorant Unicase (OFL) is
-   the logo's face and lives only inside the supplied logo files; it is never served. */
-@font-face{font-family:"Tenor Sans";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/tenor-sans-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:"Tenor Sans";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/tenor-sans-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:"Open Sans";font-style:normal;font-weight:300 800;font-stretch:75% 100%;font-display:swap;src:url(fonts/open-sans-var-latin.woff2) format("woff2")}
-@font-face{font-family:"Open Sans";font-style:italic;font-weight:300 800;font-stretch:75% 100%;font-display:swap;src:url(fonts/open-sans-italic-var-latin.woff2) format("woff2")}
-.os,.mini .ex.os{font-family:"Open Sans",ui-sans-serif,system-ui,sans-serif}
-.osc,.mini .ex.osc,.sp-m.osc{font-family:"Open Sans",ui-sans-serif,system-ui,sans-serif;font-stretch:75%;letter-spacing:.02em}
-/* Tenor Sans sets every title, in capitals with open tracking */
-.ts,.sp-d.ts,.mini .ex.ts,.opener .hd.ts{font-family:"Tenor Sans",ui-sans-serif,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.06em}
-.sp-d.ts{font-size:clamp(30px,4vw,50px);line-height:1.05}
-.mini .ex.ts{font-size:26px}
-.mini .ex.ts.lc{text-transform:none;letter-spacing:.01em}
-.opener .hd.ts{font-size:clamp(28px,3.6vw,44px);line-height:1.05}
+   Cormorant Garamond (titles, field figures) and Alegreya Sans (everything
+   read) are self-hosted (OFL). Cormorant Unicase (OFL) is the logo's face and
+   lives only inside the supplied logo files; it is never served. */
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-display:swap;font-weight:500;src:url(fonts/cormorant-garamond-latin-ext-500-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-display:swap;font-weight:500;src:url(fonts/cormorant-garamond-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-display:swap;font-weight:600;src:url(fonts/cormorant-garamond-latin-ext-600-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-display:swap;font-weight:600;src:url(fonts/cormorant-garamond-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Cormorant Garamond";font-style:italic;font-display:swap;font-weight:500;src:url(fonts/cormorant-garamond-latin-ext-500-italic.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Cormorant Garamond";font-style:italic;font-display:swap;font-weight:500;src:url(fonts/cormorant-garamond-latin-500-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Alegreya Sans";font-style:normal;font-display:swap;font-weight:300;src:url(fonts/alegreya-sans-latin-ext-300-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Alegreya Sans";font-style:normal;font-display:swap;font-weight:300;src:url(fonts/alegreya-sans-latin-300-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Alegreya Sans";font-style:normal;font-display:swap;font-weight:400;src:url(fonts/alegreya-sans-latin-ext-400-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Alegreya Sans";font-style:normal;font-display:swap;font-weight:400;src:url(fonts/alegreya-sans-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Alegreya Sans";font-style:normal;font-display:swap;font-weight:500;src:url(fonts/alegreya-sans-latin-ext-500-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Alegreya Sans";font-style:normal;font-display:swap;font-weight:500;src:url(fonts/alegreya-sans-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Alegreya Sans";font-style:normal;font-display:swap;font-weight:700;src:url(fonts/alegreya-sans-latin-ext-700-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Alegreya Sans";font-style:normal;font-display:swap;font-weight:700;src:url(fonts/alegreya-sans-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Alegreya Sans";font-style:italic;font-display:swap;font-weight:400;src:url(fonts/alegreya-sans-latin-ext-400-italic.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Alegreya Sans";font-style:italic;font-display:swap;font-weight:400;src:url(fonts/alegreya-sans-latin-400-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+.os,.mini .ex.os{font-family:"Alegreya Sans",ui-sans-serif,system-ui,sans-serif}
+/* no condensed width in this system: figures in fields take the title face, lining */
+.sp-m.osc{font-size:17px;letter-spacing:.08em}
+.osc,.mini .ex.osc,.sp-m.osc{font-family:"Cormorant Garamond",Garamond,Georgia,serif;font-weight:600;font-variant-numeric:lining-nums tabular-nums;letter-spacing:.01em}
+/* Cormorant Garamond sets every title, upper and lower case, at Medium */
+.ts,.sp-d.ts,.mini .ex.ts,.opener .hd.ts{font-family:"Cormorant Garamond",Garamond,Georgia,serif;font-weight:500;letter-spacing:-.005em}
+.sp-d.ts{font-size:clamp(34px,4.6vw,58px);line-height:1.02}
+.mini .ex.ts{font-size:30px}
+.mini .ex.ts.lc{font-style:italic}
+.opener .hd.ts{font-size:clamp(32px,4.2vw,52px);line-height:1.02}
 .sp-d img.logo{display:block;width:min(100%,6em);height:auto}
-.pg .ts{font-family:"Tenor Sans",ui-sans-serif,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.04em}
-#components{--f-mono:"Open Sans",ui-sans-serif,system-ui,sans-serif;--f-text:"Open Sans",ui-sans-serif,system-ui,sans-serif}
+.pg .ts{font-family:"Cormorant Garamond",Garamond,Georgia,serif;font-weight:500;letter-spacing:-.005em}
+#components{--f-mono:"Alegreya Sans",ui-sans-serif,system-ui,sans-serif;--f-text:"Alegreya Sans",ui-sans-serif,system-ui,sans-serif}
 #components .opener .eb{letter-spacing:.2em;color:rgba(242,236,222,.72)}
-.pg{--f-disp:"Open Sans",ui-sans-serif,sans-serif;--f-text:"Open Sans",ui-sans-serif,sans-serif;--f-mono:"Open Sans",ui-sans-serif,sans-serif;color:#332415}
+.pg{--f-disp:"Cormorant Garamond",Garamond,Georgia,serif;--f-text:"Alegreya Sans",ui-sans-serif,sans-serif;--f-mono:"Alegreya Sans",ui-sans-serif,sans-serif;color:#332415}
 .pg .t-lede{font-weight:300}
-.pg .t-lbl{font-weight:600;letter-spacing:.12em;color:rgba(51,36,21,.72)}
+.pg .t-lbl{font-weight:700;letter-spacing:.12em;color:rgba(51,36,21,.72)}
 .pg .t-lbl.mk{color:#332415}
 .pg .t-note{color:rgba(51,36,21,.72)}
-.pg .flds .t-head{font-stretch:75%}
+.pg .flds .t-head{font-family:"Cormorant Garamond",Garamond,Georgia,serif;font-weight:600;font-variant-numeric:lining-nums}
 .pg .rl,.pg .trow:first-child{border-top-color:#332415}
 .pg .trow{border-bottom-color:rgba(51,36,21,.2)}
 .pg.card{background:#F2ECDE}
 /* the card front carries the symbol printed in raiz, not blind */
 .pg.card .emb{filter:none}
 .pg.card .emb i{background:#332415}
-/* card back and email signature: Open Sans in every field */
-.pg.card .c-nm{font:600 calc(var(--u) * 4.2)/1 "Open Sans",ui-sans-serif,sans-serif;letter-spacing:.01em;color:#332415}
-.pg.card .c-role,.pg.card .c-ct{font-family:"Open Sans",ui-sans-serif,sans-serif}
-.sig,.sig .w{font-family:"Open Sans",ui-sans-serif,system-ui,sans-serif}
-.sig .n{font:600 19px/1.15 "Open Sans",ui-sans-serif,system-ui,sans-serif}
+/* card back and email signature: Alegreya Sans in every field */
+.pg.card .c-nm{font:700 calc(var(--u) * 4.4)/1 "Alegreya Sans",ui-sans-serif,sans-serif;letter-spacing:.01em;color:#332415}
+.pg.card .c-role,.pg.card .c-ct{font-family:"Alegreya Sans",ui-sans-serif,sans-serif}
+.sig,.sig .w{font-family:"Alegreya Sans",ui-sans-serif,system-ui,sans-serif}
+.sig .n{font:700 20px/1.15 "Alegreya Sans",ui-sans-serif,system-ui,sans-serif}
 /* the folder and the DL envelope: raiz with the symbol in algodão */
 .pg.fold{aspect-ratio:230/342;width:min(440px,100%);background:none;box-shadow:none;overflow:visible;--u:calc(100cqw / 230)}
 .pg.fold .sheet{left:calc(var(--u) * 10);top:0;width:calc(var(--u) * 210);height:calc(var(--u) * 297);background:#FFFFFF;box-shadow:0 1px 2px rgba(0,0,0,.12)}
@@ -537,15 +552,23 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
 .imgs.g3 figure:first-child{grid-column:auto}
 .imgs.g3 img{height:auto;aspect-ratio:4/5}
 @media (max-width:720px){.imgs.g3{grid-template-columns:minmax(0,1fr)}.imgs.g3 img{aspect-ratio:16/10}}
-/* cover: the name sits under the gold mark as the supplied lockup sets it, from where the
-   blades meet to the inner curve of the bracket, so right of the mark's centre */
-.lk .wmk{justify-self:start;width:72.93%;margin-left:21.77%;margin-top:15.2%}
-/* the cover is centred on the name, not on the block: the name's centre sits
-   at 21.77 + 72.93 / 2 = 58.235 per cent of the lockup, so the lockup moves
-   8.235 per cent of its own width left and the mark rides with it */
-.lk{transform:translateX(-8.235%)}
-/* the cover ground is the client's raiz photograph */
-.hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1}
+/* cover: mark and name share one centre line, the vertical axis of the
+   grounds' arches. Each ground is cut so that axis is the picture's centre
+   (measured: the arches centre at x 1300.5 of 2654), so it holds at any width */
+.lk{position:relative;z-index:1;width:min(440px,74%)}
+.lk .wmk{width:100%;margin-top:9%}
+/* the render sits left in its own file (opaque pixels end 40 px short of the right edge;
+   their centre is at 48.3 per cent), so the picture moves 1.7 per cent right to put the
+   horse itself, not its box, on the axis */
+.lk .fan{transform:translateX(1.7%)}
+.hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;z-index:-2;opacity:0;animation:cv 24s linear infinite both}
+.hero .bg:nth-of-type(1){animation-delay:-1s}
+.hero .bg:nth-of-type(2){animation-delay:7s}
+.hero .bg:nth-of-type(3){animation-delay:15s}
+@keyframes cv{0%{opacity:0}6%{opacity:1}33%{opacity:1}39%{opacity:0}100%{opacity:0}}
+/* a soft ink wash keeps the gold and the name clear of the pictures' lights */
+body.public .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 50% 50%,rgba(51,36,21,.55),rgba(51,36,21,.25) 70%)}
+@media (prefers-reduced-motion:reduce){.hero .bg{animation:none}.hero .bg:nth-of-type(1){opacity:1}}
 .grounds.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
 .sw.s4{grid-template-columns:repeat(4,minmax(0,1fr))}
 /* version tiles: no padding, so every picture sits in the true centre of its 16:9 box;
@@ -581,17 +604,19 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
 <!-- 00 ───────────────────────────────────────────── -->
 <section class="cover" id="cover">
   <div class="hero">
-    <img class="bg" src="img/mulheresreais-cover-raiz-1-1670.webp" srcset="img/mulheresreais-cover-raiz-1-900.webp 900w, img/mulheresreais-cover-raiz-1-1670.webp 1670w" sizes="(max-width:1000px) 100vw, 920px" alt="" width="1670" height="1100">
-    <div class="lk" role="img" aria-label="Mulheres Reais: o símbolo em ouro sobre o nome">
+    <img class="bg" src="img/mulheresreais-cover-leitura-1-1670.webp" srcset="img/mulheresreais-cover-leitura-1-900.webp 900w, img/mulheresreais-cover-leitura-1-1670.webp 1670w" sizes="(max-width:1000px) 100vw, 920px" alt="" width="1670" height="959">
+    <img class="bg" src="img/mulheresreais-cover-passos-1-1670.webp" srcset="img/mulheresreais-cover-passos-1-900.webp 900w, img/mulheresreais-cover-passos-1-1670.webp 1670w" sizes="(max-width:1000px) 100vw, 920px" alt="" width="1670" height="959" loading="lazy">
+    <img class="bg" src="img/mulheresreais-cover-colheita-1-1670.webp" srcset="img/mulheresreais-cover-colheita-1-900.webp 900w, img/mulheresreais-cover-colheita-1-1670.webp 1670w" sizes="(max-width:1000px) 100vw, 920px" alt="" width="1670" height="959" loading="lazy">
+    <div class="lk" role="img" aria-label="Mulheres Reais: a marca em ouro sobre o nome">
       <img class="fan" src="img/mulheresreais-mark-1-1200.webp" alt="" width="1200" height="864">
       <img class="wmk" src="img/mulheresreais-wordmark-algodao-1.svg" alt="" width="3207" height="132">
     </div>
   </div>
   <h1>Livro da marca</h1>
-  <p class="stmt">Mulheres Reais liga ocasiões e joias exclusivas. Este livro diz como a marca é usada, para que qualquer pessoa que faça algo em seu nome acerte da primeira vez.</p>
+  <p class="stmt">Este livro diz como a marca Mulheres Reais é usada, para que qualquer pessoa que faça algo em seu nome acerte da primeira vez.</p>
   <dl class="fields">
-    <div><dt>Edição</dt><dd>0.6</dd></div>
-    <div><dt>Data</dt><dd>20 de novembro de 2026</dd></div>
+    <div><dt>Edição</dt><dd>0.1</dd></div>
+    <div><dt>Data</dt><dd>22 de novembro de 2026</dd></div>
     <div><dt>Marca</dt><dd>Mulheres Reais</dd></div>
   </dl>
 </section>
@@ -606,7 +631,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
   <div class="four">
     <div><span class="lbl">Regra 1 · Mensagem</span><span class="k">Uma linha, dita</span><p>A linha da marca, a confirmar.</p></div>
     <div><span class="lbl">Regra 2 · Cor</span><span class="k">Algodão, raiz e três acentos</span><p>Usadas a 70, 20 e 10 por cento. Barro, eucalipto e palha dividem os 10, um por peça.</p></div>
-    <div><span class="lbl">Regra 3 · Tipografia</span><span class="k">Três famílias, três funções</span><p>Cormorant Unicase no logo, Tenor Sans nos títulos, Open Sans no texto.</p></div>
+    <div><span class="lbl">Regra 3 · Tipografia</span><span class="k">Três famílias, três funções</span><p>Cormorant Unicase no logo, Cormorant Garamond nos títulos, Alegreya Sans no texto.</p></div>
     <div><span class="lbl">Regra 4 · Cultura</span><span class="k">Cerimônia e reconhecimento</span><p>Legado presente, hoje.</p></div>
   </div>
   <ol class="rules">
@@ -680,7 +705,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
         <div class="tx"><h3>Símbolo</h3><p>O símbolo desenhado em vetor, em uma só cor. Tudo o que o ouro renderizado não pode fazer: gravar, estampar, bordar, relevo seco. É a logo dos documentos.</p>
           <dl><dt>Para</dt><dd>Abaixo de 120 px, documentos, gravação, carimbo, relevo seco</dd><dt>Arquivos</dt><dd>SVG, quatro cores</dd></dl><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1m5hEnUbL-d_zBHxETPa1azpoPLljnrbM/view" target="_blank" rel="noopener"><b>SVG</b>Raiz<i>15 KB</i></a><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>SVG</b>Algodão<i>Ainda não</i></span><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>SVG</b>Palha<i>Ainda não</i></span><a class="dl" href="https://drive.google.com/file/d/1OQ2-cm7Q7fffP6ehez4UlaCNnMDKWKFE/view" target="_blank" rel="noopener"><b>SVG</b>Preto<i>15 KB</i></a></div></div></div>
       <div class="ver"><div class="tile t-paper"><img class="sv" src="img/mulheresreais-lockup-raiz-1.svg" alt="" width="3187" height="793" style="width:88%"></div>
-        <div class="tx"><h3>Assinatura</h3><p>O símbolo sobre o nome, como um desenho só. Para os lugares onde a marca e o nome viajam juntos.</p><p>O nome não está no centro do desenho, e é de propósito. A ponta à esquerda é fina e pesa pouco para o olho: centrado na largura toda, o nome pareceria escorregar para a esquerda. Por isso ele começa onde as duas lâminas se encontram e termina na curva do colchete, à direita. Fica centrado no corpo do símbolo, não na ponta. Medido no arquivo, o nome está 8% da largura do símbolo à direita do centro. Não recentralize.</p>
+        <div class="tx"><h3>Assinatura</h3><p>O símbolo entre as duas palavras do nome, como um desenho só, tudo sobre o mesmo eixo. Para os lugares onde a marca e o nome viajam juntos.</p>
           <dl><dt>Para</dt><dd>Convite, certificado, cartão</dd><dt>Arquivos</dt><dd>SVG, quatro cores</dd></dl><div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>SVG</b>Raiz<i>Ainda não</i></span><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>SVG</b>Algodão<i>Ainda não</i></span><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>SVG</b>Palha<i>Ainda não</i></span><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>SVG</b>Preto<i>Ainda não</i></span></div></div></div>
       <div class="ver"><div class="tile t-ink"><img class="cover" src="img/mulheresreais-icon-raiz-1-360.webp" alt="" width="360" height="360"></div>
         <div class="tx"><h3>Ícone</h3><p>O símbolo num quadrado, sobre três fundos: raiz, eucalipto e palha. Para a foto de perfil e a aba do navegador.</p>
@@ -763,22 +788,23 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
 <!-- 05 ───────────────────────────────────────────── -->
 <section id="type">
   <div class="sh"><span class="sn">05</span><h2>Tipografia</h2></div>
-  <p class="why">Três famílias, uma função cada. Cormorant Unicase é só o logo: o nome Mulheres Reais, já desenhado nos arquivos da marca. Tenor Sans dá os títulos. Open Sans faz todo o resto.</p>
+  <p class="why">Três famílias, uma função cada. Cormorant Unicase é só o logo: o nome Mulheres Reais, já desenhado nos arquivos da marca. Cormorant Garamond, da mesma família, dá os títulos. Alegreya Sans faz todo o resto.</p>
   <div class="faces">
     <div class="face"><div class="who"><b>Cormorant Unicase</b><span>Só o logo. O nome Mulheres Reais vem desenhado nos arquivos da marca, nunca digitado</span></div><p class="sp-d"><img class="logo" src="img/mulheresreais-wordmark-raiz-1.svg" alt="MULHERES REAIS, o nome desenhado" width="3207" height="132"></p></div>
-    <div class="face"><div class="who"><b>Tenor Sans</b><span>Os títulos, em caixa alta com espaçamento aberto</span><div class="dls"><a class="dl" href="https://fonts.google.com/specimen/Tenor+Sans" target="_blank" rel="noopener"><b>Fonte</b>Google Fonts</a></div></div><p class="sp-d ts">Coleção oficial 2026</p></div>
-    <div class="face"><div class="who"><b>Open Sans</b><span>Tudo o que é lido, e a largura condensada para números</span><div class="dls"><a class="dl" href="https://fonts.google.com/specimen/Open+Sans" target="_blank" rel="noopener"><b>Fonte</b>Google Fonts</a></div></div><div><p class="sp-t os">Cada peça é gravada com o ano e as iniciais de quem a recebe.</p><p class="sp-m osc">Nº 007 / 120 • Coleção 2026</p></div></div>
+    <div class="face"><div class="who"><b>Cormorant Garamond</b><span>Os títulos, em Medium, e os números dos campos, em SemiBold</span><div class="dls"><a class="dl" href="https://fonts.google.com/specimen/Cormorant+Garamond" target="_blank" rel="noopener"><b>Fonte</b>Google Fonts</a></div></div><p class="sp-d ts">Uma noite para lembrar</p></div>
+    <div class="face"><div class="who"><b>Alegreya Sans</b><span>Tudo o que é lido: texto, rótulos, legendas</span><div class="dls"><a class="dl" href="https://fonts.google.com/specimen/Alegreya+Sans" target="_blank" rel="noopener"><b>Fonte</b>Google Fonts</a></div></div><div><p class="sp-t os">O texto corrido, com acentos e cedilhas no mesmo tom: ação, coração, mãos.</p><p class="sp-m osc">Nº 007 / 120 · Edição 2026</p></div></div>
   </div>
   <div class="minis">
-    <div class="mini"><span class="lbl">Títulos em Tenor Sans, caixa alta</span><span class="ex ts">Edição 2026</span></div>
-    <div class="mini"><span class="lbl">A Tenor Sans tem minúsculas, para títulos longos</span><span class="ex ts lc">Cada uma, única</span></div>
-    <div class="mini"><span class="lbl">Ênfase em itálico, no Open Sans</span><span class="ex os">gravada com <em>o ano</em>.</span></div>
-    <div class="mini"><span class="lbl">Números no Open Sans condensado</span><span class="ex osc">Nº 007 / 120</span></div>
+    <div class="mini"><span class="lbl">Títulos em Cormorant Garamond</span><span class="ex ts">Edição 2026</span></div>
+    <div class="mini"><span class="lbl">O itálico do Cormorant, para um destaque no título</span><span class="ex ts lc">Cada uma, inteira</span></div>
+    <div class="mini"><span class="lbl">Ênfase em itálico, na Alegreya Sans</span><span class="ex os">escrita com <em>cuidado</em>.</span></div>
+    <div class="mini"><span class="lbl">Números dos campos, alinhados</span><span class="ex osc">Nº 007 / 120</span></div>
   </div>
   <ol class="rules">
     <li><span><b>Cormorant Unicase só no logo.</b> Ela vive nos arquivos do nome e da assinatura, desenhada; nunca é digitada no lugar deles.</span></li>
-    <li><span><b>Tenor Sans nos títulos, em caixa alta.</b> Com espaçamento aberto, cerca de 6 por cento do corpo, para ficar perto do desenho do nome.</span></li>
-    <li><span><b>Tenor Sans só em um peso.</b> Não force negrito nem itálico nela; ênfase vai no Open Sans.</span></li>
+    <li><span><b>Cormorant Garamond nos títulos, em maiúsculas e minúsculas.</b> Em Medium; o Light some na tela e no papel fino. O nome, em capitulares espaçadas, é a única linha em caixa alta.</span></li>
+    <li><span><b>Números alinhados nos campos e tabelas.</b> O Cormorant desenha números de texto, que descem abaixo da linha; ficam bem num convite, mas um número de peça ou uma data num campo usa os alinhados.</span></li>
+    <li><span><b>A Alegreya Sans é miúda.</b> No mesmo corpo parece menor que outras; no texto de um documento, use um ponto a mais do que o costume.</span></li>
     <li><span><b>Cada quebra de linha num título é escolhida.</b> Não deixe um título quebrar sozinho.</span></li>
     <li><span><b>O nome Mulheres Reais é desenhado, nunca digitado.</b> Use o arquivo do nome, não a fonte.</span></li>
   </ol>
@@ -868,13 +894,13 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
     <div class="tblw"><table class="tbl">
       <thead><tr><th>Função</th><th>Família</th><th>A4</th><th>Uso</th></tr></thead>
       <tbody>
-        <tr><td>Título</td><td>Tenor Sans, caixa alta</td><td class="m">40 / 45 pt</td><td>Uma vez, no convite ou na capa</td></tr>
-        <tr><td>Cabeçalho</td><td>Tenor Sans, caixa alta</td><td class="m">22 / 30 pt</td><td>Abre uma seção</td></tr>
-        <tr><td>Abertura</td><td>Open Sans Light</td><td class="m">15 / 20 pt</td><td>A frase sob um título</td></tr>
-        <tr><td>Texto</td><td>Open Sans</td><td class="m">10 / 15 pt</td><td>Tudo o que é lido</td></tr>
-        <tr><td>Nota</td><td>Open Sans</td><td class="m">8 / 12 pt</td><td>Legendas, notas, fontes</td></tr>
-        <tr><td>Rótulo</td><td>Open Sans SemiBold, caixa alta</td><td class="m">8 / 15 pt</td><td>Achado, não lido: nomes de campos, rodapé</td></tr>
-        <tr><td>Número</td><td>Open Sans Condensed</td><td class="m">22 / 30 pt</td><td>O número da peça e o ano, nos campos</td></tr>
+        <tr><td>Título</td><td>Cormorant Garamond Medium</td><td class="m">40 / 45 pt</td><td>Uma vez, no convite ou na capa</td></tr>
+        <tr><td>Cabeçalho</td><td>Cormorant Garamond Medium</td><td class="m">22 / 30 pt</td><td>Abre uma seção</td></tr>
+        <tr><td>Abertura</td><td>Alegreya Sans Light</td><td class="m">15 / 20 pt</td><td>A frase sob um título</td></tr>
+        <tr><td>Texto</td><td>Alegreya Sans</td><td class="m">10 / 15 pt</td><td>Tudo o que é lido</td></tr>
+        <tr><td>Nota</td><td>Alegreya Sans</td><td class="m">8 / 12 pt</td><td>Legendas, notas, fontes</td></tr>
+        <tr><td>Rótulo</td><td>Alegreya Sans Bold, caixa alta</td><td class="m">8 / 15 pt</td><td>Achado, não lido: nomes de campos, rodapé</td></tr>
+        <tr><td>Número</td><td>Cormorant Garamond SemiBold, números alinhados</td><td class="m">22 / 30 pt</td><td>O número da peça e o ano, nos campos</td></tr>
       </tbody>
     </table></div>
   </div>
@@ -885,7 +911,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
     <li><span><b>O espaço se conta em linhas.</b> Nada entre um rótulo e o seu valor, uma linha entre blocos, duas antes de um cabeçalho.</span></li>
     <li><span><b>Toda página diz o que é no rodapé.</b> Documento, referência, número da página.</span></li>
     <li><span><b>A marca uma vez, em uma cor.</b> O símbolo em raiz, no alto da carta ou do convite.</span></li>
-    <li><span><b>O cartão é o próprio papel.</b> Na frente, só o símbolo, em raiz. O verso leva o nome e o contato, em Open Sans.</span></li>
+    <li><span><b>O cartão é o próprio papel.</b> Na frente, só o símbolo, em raiz. O verso leva o nome e o contato, em Alegreya Sans.</span></li>
     <li><span><b>A pasta e o envelope são o fundo.</b> Raiz de ponta a ponta e o símbolo em algodão, sem mais nada impresso: o que é lido fica na carta que vai dentro.</span></li>
   </ol>
 </section>
@@ -909,11 +935,11 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
 <!-- 09 ───────────────────────────────────────────── -->
 <section id="imagery">
   <div class="sh"><span class="sn">09</span><h2>Imagem e movimento</h2></div>
-  <p class="why">Os três fundos primários da marca, um por cor: raiz, eucalipto e palha. Matérias naturais, que carregam a marca e a peça. As fotografias ainda não existem.</p>
+  <p class="why">Os três fundos da marca: uma imagem em tons de terra, sempre com as mesmas linhas em ouro, os arcos, no mesmo lugar. A marca se centra no eixo dos arcos.</p>
   <div class="imgs g3">
-    <figure><img src="img/mulheresreais-ground-raiz-1-800.webp" alt="O fundo em raiz" width="800" height="1000" loading="lazy"><figcaption>Raiz</figcaption><div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>JPG</b>Raiz<i>Ainda não</i></span></div></figure>
-    <figure><img src="img/mulheresreais-ground-eucalipto-1-800.webp" alt="O fundo em eucalipto" width="800" height="1000" loading="lazy"><figcaption>Eucalipto</figcaption><div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>JPG</b>Eucalipto<i>Ainda não</i></span></div></figure>
-    <figure><img src="img/mulheresreais-ground-palha-1-800.webp" alt="O fundo em palha" width="800" height="1000" loading="lazy"><figcaption>Palha</figcaption><div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>JPG</b>Palha<i>Ainda não</i></span></div></figure>
+    <figure><img src="img/mulheresreais-ground-passos-1-800.webp" alt="Fundo Passos, com os arcos em ouro" width="800" height="1000" loading="lazy"><figcaption>Passos</figcaption><div class="dls"><a class="dl" href="https://drive.google.com/file/d/184qlvIePUpCdo7FI4PpmgADOQF037plY/view" target="_blank" rel="noopener"><b>JPG</b>Passos<i>2,2 MB</i></a></div></figure>
+    <figure><img src="img/mulheresreais-ground-leitura-1-800.webp" alt="Fundo Leitura, com os arcos em ouro" width="800" height="1000" loading="lazy"><figcaption>Leitura</figcaption><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1wTESbL52dFzLHMqC6nE76vvzjFpbWL8z/view" target="_blank" rel="noopener"><b>JPG</b>Leitura<i>2,0 MB</i></a></div></figure>
+    <figure><img src="img/mulheresreais-ground-colheita-1-800.webp" alt="Fundo Colheita, com os arcos em ouro" width="800" height="1000" loading="lazy"><figcaption>Colheita</figcaption><div class="dls"><a class="dl" href="https://drive.google.com/file/d/1JM2wXqJ6QzBApNI0KCf6xkLAYdGO8NC5/view" target="_blank" rel="noopener"><b>JPG</b>Colheita<i>1,6 MB</i></a></div></figure>
   </div>
   <ol class="rules">
     <li><span><b>A joia real, fotografada.</b> Nunca uma peça gerada ou montada.</span></li>
@@ -955,7 +981,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
     <div class="app"><div class="th" data-mini="page"></div><h3>Certificado</h3>
       <ul><li>A4 na grade dos documentos.</li><li>O número da peça e o ano como campos, nunca numa frase.</li></ul></div>
     <div class="app"><div class="th" data-mini="cover"></div><h3>Convite</h3>
-      <ul><li>A marca no alto, o nome da ocasião em Tenor Sans, caixa alta.</li><li>Impresso sobre branco ou sobre algodão.</li></ul></div>
+      <ul><li>A marca no alto, o nome da ocasião em Cormorant Garamond.</li><li>Impresso sobre branco ou sobre algodão.</li></ul></div>
     <div class="app"><div class="th" style="background:var(--b-ink)"><div style="width:42%;aspect-ratio:1/1;border-radius:50%;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(239,234,225,.25)"><img src="img/mulheresreais-icon-raiz-1-360.webp" alt="" width="360" height="360" style="width:100%;height:100%;object-fit:cover"></div></div><h3>Redes sociais</h3>
       <ul><li>Foto de perfil: o ícone, centrado no círculo.</li><li>Cinco formatos, na tabela abaixo.</li></ul><div class="dls"><span class="dl off" aria-disabled="true" title="Ainda não disponível"><b>PNG</b>Redes<i>Ainda não</i></span></div></div>
     <div class="app"><div class="th sig"><span class="n">Nome Sobrenome</span><img src="img/mulheresreais-wordmark-raiz-1.svg" alt="MULHERES REAIS" width="3207" height="132" style="width:min(160px,44%);height:auto;margin:6px auto 4px"><span>contato · e-mail</span></div><h3>Assinatura de e-mail</h3>
@@ -984,8 +1010,8 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
     <thead><tr><th>Família</th><th>Uso</th><th>Licença</th><th>Onde</th></tr></thead>
     <tbody>
       <tr><td>Cormorant Unicase</td><td>Só o logo, já desenhada nos arquivos</td><td>Open Font Licence</td><td><a href="https://fonts.google.com/specimen/Cormorant+Unicase" target="_blank" rel="noopener">Google Fonts</a></td></tr>
-      <tr><td>Tenor Sans</td><td>Títulos</td><td>Open Font Licence</td><td><a href="https://fonts.google.com/specimen/Tenor+Sans" target="_blank" rel="noopener">Google Fonts</a></td></tr>
-      <tr><td>Open Sans</td><td>Texto, rótulos, números</td><td>Open Font Licence</td><td><a href="https://fonts.google.com/specimen/Open+Sans" target="_blank" rel="noopener">Google Fonts</a></td></tr>
+      <tr><td>Cormorant Garamond</td><td>Títulos, números dos campos</td><td>Open Font Licence</td><td><a href="https://fonts.google.com/specimen/Cormorant+Garamond" target="_blank" rel="noopener">Google Fonts</a></td></tr>
+      <tr><td>Alegreya Sans</td><td>Texto, rótulos, legendas</td><td>Open Font Licence</td><td><a href="https://fonts.google.com/specimen/Alegreya+Sans" target="_blank" rel="noopener">Google Fonts</a></td></tr>
     </tbody>
   </table></div>
   <div class="block"><span class="lbl">A pasta no Drive</span>
@@ -1001,9 +1027,9 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
 │  │                             <span class="f">mulheresreais_mark_icon_{raiz,eucalipto,palha}_{32x32,180x180,512x512}.png</span>
 │  └─ Print/                     <span class="f">mulheresreais_mark_{symbol,lockup}_raiz_cmyk.pdf</span>
 ├─ 02 Colour/                    <span class="f">mulheresreais_colour_palette.ase</span>
-├─ 03 Type/                      <span class="f">mulheresreais_type_{cormorant-unicase,open-sans,tenor-sans}.zip</span>
+├─ 03 Type/                      <span class="f">mulheresreais_type_{cormorant-unicase,cormorant-garamond,alegreya-sans}.zip</span>
 ├─ 04 Imagery/
-│  ├─ Grounds/                   <span class="f">mulheresreais_ground_{raiz,eucalipto,palha}_3840w.jpg</span>
+│  ├─ Grounds/                   <span class="f">mulheresreais_ground_{passos,leitura,colheita}_2654w.jpg</span>
 │  └─ Photography/               <span class="f">mulheresreais_photo_{assunto}_3840w.jpg</span>
 ├─ 05 Documents/                 <span class="f">mulheresreais_template_{letter,invitation,certificate}_a4.{dotx,pdf}</span>
 │                                <span class="f">mulheresreais_card_{front,back}_85x45mm.pdf</span>
@@ -1061,7 +1087,7 @@ a.dl:hover i,a.dl:focus-visible i{color:inherit;opacity:.72}
         <tr><td>Símbolo, nome e assinatura</td><td class="m">.afdesign</td><td>SVG; PDF para impressão</td><td class="m">qualquer</td><td>sRGB na tela, CMYK no PDF de impressão</td></tr>
         <tr><td>Ícone</td><td>Do símbolo</td><td>PNG, quadrado</td><td class="m">32 · 180 · 512</td><td>sRGB</td></tr>
         <tr><td>Cor</td><td>Um arquivo de texto com os valores</td><td>.ase, que o Affinity e a Adobe importam</td><td></td><td>HEX e RGB</td></tr>
-        <tr><td>Tipos</td><td>Os arquivos da marca, em 03 Type</td><td>Um zip por família</td><td></td><td>Cormorant Unicase, Open Sans e Tenor Sans: Open Font Licence. O nome no logo é desenhado, nunca digitado</td></tr>
+        <tr><td>Tipos</td><td>Os arquivos da marca, em 03 Type</td><td>Um zip por família</td><td></td><td>Cormorant Unicase, Cormorant Garamond e Alegreya Sans: Open Font Licence. O nome no logo é desenhado, nunca digitado</td></tr>
         <tr><td>Fotografia</td><td>RAW ou TIFF de 16 bits</td><td>JPG a qualidade 90; WebP para a web</td><td class="m">3840w; 720w · 1280w · 1920w</td><td>sRGB</td></tr>
         <tr><td>Documentos</td><td>Modelo do Word, <span class="mono">.dotx</span></td><td>DOCX para preencher; PDF a partir dele</td><td class="m">a4</td><td>As fontes instaladas ou embutidas no arquivo</td></tr>
         <tr><td>Redes</td><td class="m">.afdesign</td><td>PNG</td><td class="m">1200x630 · 1128x191 · 1080x1080 · 1080x1350 · 1080x1920</td><td>sRGB</td></tr>

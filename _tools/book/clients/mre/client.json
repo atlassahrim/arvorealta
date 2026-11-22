@@ -94,29 +94,30 @@
   "doc_rule": "#D6D3D0",
   "fonts": {
     "title": {
-      "name": "Tenor Sans",
-      "file": "TenorSans-Regular.ttf",
-      "single": 1.25
+      "name": "Cormorant Garamond Medium",
+      "file": "CormorantGaramond-Medium.ttf"
     },
     "regular": {
-      "name": "Open Sans",
-      "file": "OpenSans-Regular.ttf"
+      "name": "Alegreya Sans",
+      "file": "AlegreyaSans-Regular.ttf"
     },
     "light": {
-      "name": "Open Sans Light",
-      "file": "OpenSans-Light.ttf"
+      "name": "Alegreya Sans Light",
+      "file": "AlegreyaSans-Light.ttf"
     },
     "medium": {
-      "name": "Open Sans Medium",
-      "file": "OpenSans-Medium.ttf"
+      "name": "Alegreya Sans Medium",
+      "file": "AlegreyaSans-Medium.ttf"
     },
     "semibold": {
-      "name": "Open Sans SemiBold",
-      "file": "OpenSans-SemiBold.ttf"
+      "name": "Alegreya Sans Bold",
+      "file": "AlegreyaSans-Bold.ttf",
+      "_note": "no 600 weight; Bold stands in"
     },
     "condensed": {
-      "name": "Open Sans Condensed",
-      "file": "OpenSans-Condensed.ttf"
+      "name": "Cormorant Garamond SemiBold",
+      "file": "CormorantGaramond-SemiBold.ttf",
+      "_note": "no condensed width; field figures take the title face at 600, lining"
     }
   },
   "logo_font": {
@@ -261,7 +262,6 @@
     "bleed": "sangria"
   },
   "_draft": [
-    "fonts",
     "documents",
     "press",
     "words"
