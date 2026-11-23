@@ -1,3 +1,6 @@
+// Before running, copy beside t.html: ground-{ardosia,pedra,areia}.jpg from Drive
+// (05 Imagery), and eliria-mark-1-1200.webp and eliria-wordmark-{sand-2,ardosia-1}.svg
+// from brand/book-eli/img/. They are not kept in the repository.
 const {chromium}=require('playwright');
 const D=__dirname, OUT='/home/user/arvorealta/_tools/book/clients/eli/out/';
 const J=[['link','1200x630','g=ardosia&mw=460px'],

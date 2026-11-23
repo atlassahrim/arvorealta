@@ -13,8 +13,9 @@ section 01's three rules and its culture line.
 
 ## As it stands on 21 November
 
-- **Name**: Eliria alone; Thalla is dropped. Line: `Vincular ocasiões e
-  joias exclusivas.`
+- **Name**: Eliria alone; Thalla is dropped. Line: **`Encontro marcado.`**
+  since 22 November, at the owner's word (was `Vincular ocasiões e joias
+  exclusivas.`)
 - **Palette, 70 / 20 / 10**: Ardósia `#252F37`, Areia `#D8CCBD`, Camel
   `#8E7657`. **Folha madura `#273121`** is outside the proportion: it
   replaces the ardósia on special occasions and never shares a surface
@@ -132,6 +133,14 @@ section 01's three rules and its culture line.
   proposals are no longer marked on the page. They were the size test, space
   and shape, documents, voice, components and applications.
   These remain the studio's proposals.
+
+- **22 November. Line is `Encontro marcado.`**: the owner wrote "encontra
+  marcado" and confirmed the correction. Changed in sections 01, 02 and the
+  colour check's preview, in `client.json`, and in the portrait and story
+  social images, re-uploaded as new Drive files
+  (`1xZTlm6h4sV-847YJmeAIGX3eTqgNNWPj`, `19OLp0YpFZA_X-a9ORA3TAAdIA7x_3Ldg`);
+  the old two are in the bin. The section 02 line no longer carries a hand
+  break.
 
 ## Open
 
