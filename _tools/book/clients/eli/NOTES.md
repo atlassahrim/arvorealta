@@ -142,6 +142,11 @@ section 01's three rules and its culture line.
   the old two are in the bin. The section 02 line no longer carries a hand
   break.
 
+- **22 November. 180 and 512 icons replaced by the owner** in Drive as new
+  files (`1627ovFW6kpt-wO3ZnYy6MKh20Jv-LKaY`, `1HucvGjvmeoTbr-taoVonwZ0SY18CJG2m`),
+  the old two binned. The page caught up on 23 November: picture, home-screen
+  icon and both buttons, as `icon-grass-3-*`. The 32 px is unchanged.
+
 ## Open
 
 - The card back's contact lines are examples (`contact_final: false`).
