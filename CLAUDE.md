@@ -3944,7 +3944,10 @@ by `_tools/book/kit/favicon.py` from the symbol file, the brand's dark and
 `book-mre/img/mulheresreais-favicon-2.svg` (raiz). **No PNG `rel="icon"`
 sits beside it**, since that square icon carries a ground and some
 browsers prefer it; the first build kept one and the owner saw the ground.
-The client books keep their 180 px icon as the home-screen icon only.
+**No `apple-touch-icon` either, since 23 November, at the owner's word**:
+Safari shows it in tabs and on its start page, so the photographic 180 px
+icon was being read as the favicon. The symbol SVG is the only icon in each
+book's head; a page saved to a home screen gets the browser's own tile.
 
 ## The pricing ladder
 

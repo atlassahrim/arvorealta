@@ -243,3 +243,8 @@ has the full list.
   proposals are no longer marked on the page. They were the name, the mark's
   anatomy, the size test, space and shape, documents, voice, components and
   applications. These remain the studio's proposals.
+
+- **23 November. The symbol SVG is the only icon in the head**, at the
+  owner's word: the `apple-touch-icon` (the photographic 180 px) is gone,
+  because Safari showed it as the tab icon. The icon PNGs stay in Drive for
+  profile pictures.

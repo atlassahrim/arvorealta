@@ -147,6 +147,11 @@ section 01's three rules and its culture line.
   the old two binned. The page caught up on 23 November: picture, home-screen
   icon and both buttons, as `icon-grass-3-*`. The 32 px is unchanged.
 
+- **23 November. The symbol SVG is the only icon in the head**, at the
+  owner's word: the `apple-touch-icon` (the photographic 180 px) is gone,
+  because Safari showed it as the tab icon. The icon PNGs stay in Drive for
+  profile pictures.
+
 ## Open
 
 - The card back's contact lines are examples (`contact_final: false`).
