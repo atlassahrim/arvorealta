@@ -3958,8 +3958,11 @@ symbol on forest) for the whole domain. Checked at
 `t1.gstatic.com/faviconV2?...&url=https://arvorealta.com/brand/book-mre/`:
 a 16 px forest square for every path. Clearing the browser does not clear
 it. The PNGs come first and the SVG last with `sizes="any"`, so a browser
-that reads SVG still gets the light and dark switch; one that does not gets
-the dark symbol, which is faint on a dark tab bar.
+that reads SVG still gets the light and dark switch. **The PNGs switch too, by script**: each has a
+`-light` twin in white, and one line after the links swaps `href` to it
+when `prefers-color-scheme: dark` matches, and back on a change, because
+Chrome on iOS honours neither SVG nor `media` on an icon link. Without
+script a browser gets the dark pair.
 
 ## The pricing ladder
 

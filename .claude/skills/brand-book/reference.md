@@ -32,9 +32,11 @@ commit. A client's own decisions go in `_tools/book/clients/<code>/NOTES.md`.
    `kit/favicon.py <symbol.svg> <dark> '#FFFFFF' <out.svg>` writes one
    transparent SVG that switches with `prefers-color-scheme`. Then
    `node kit/favicon_png.js <favicon.svg> <img/slug-favicon-N>` writes the
-   same symbol as transparent 32 and 192 px PNGs in the dark, for Chrome on
-   iPad, which takes no SVG favicon. Head order: the two PNGs, then the SVG
-   with `sizes="any"`. No `apple-touch-icon` and never the brand's icon PNGs,
+   same symbol as transparent 32 and 192 px PNGs, dark and `-light` (white),
+   for Chrome on iPad, which takes no SVG favicon. Head order: the two dark
+   PNGs carrying `data-fav="img/slug-favicon-N{v}-32.png"`, the SVG with
+   `sizes="any"`, then the one-line script that swaps `{v}` to `-light` in
+   dark mode (copy it from `brand/book-eli/index.html`). No `apple-touch-icon` and never the brand's icon PNGs,
    which carry a ground or a photograph.
 9. **Verify at 1440 and 390**: no page errors, no sideways scroll.
 10. **The layout follows the length of the client's text.** The line sets in
