@@ -3946,8 +3946,20 @@ sits beside it**, since that square icon carries a ground and some
 browsers prefer it; the first build kept one and the owner saw the ground.
 **No `apple-touch-icon` either, since 23 November, at the owner's word**:
 Safari shows it in tabs and on its start page, so the photographic 180 px
-icon was being read as the favicon. The symbol SVG is the only icon in each
-book's head; a page saved to a home screen gets the browser's own tile.
+icon was being read as the favicon. A page saved to a home screen gets the
+browser's own tile.
+
+**Since 23 November the SVG has two transparent PNGs beside it**,
+`<slug>-favicon-2-32.png` and `-192.png`: the same one-colour symbol in the
+brand's dark, no ground, written by `_tools/book/kit/favicon_png.js`. **Chrome
+on iPad takes no SVG favicon**, so with the SVG alone it asked Google's
+favicon server, and that server still holds the 21 November app icon (the
+symbol on forest) for the whole domain. Checked at
+`t1.gstatic.com/faviconV2?...&url=https://arvorealta.com/brand/book-mre/`:
+a 16 px forest square for every path. Clearing the browser does not clear
+it. The PNGs come first and the SVG last with `sizes="any"`, so a browser
+that reads SVG still gets the light and dark switch; one that does not gets
+the dark symbol, which is faint on a dark tab bar.
 
 ## The pricing ladder
 

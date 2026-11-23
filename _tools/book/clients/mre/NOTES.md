@@ -248,3 +248,7 @@ has the full list.
   owner's word: the `apple-touch-icon` (the photographic 180 px) is gone,
   because Safari showed it as the tab icon. The icon PNGs stay in Drive for
   profile pictures.
+
+- **23 November. Transparent PNG favicons beside the SVG**: the dark symbol
+  at 32 and 192 px, for Chrome on iPad, which showed Google's cached
+  Arvorealta icon instead of the SVG.

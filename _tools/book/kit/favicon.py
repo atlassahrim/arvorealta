@@ -5,9 +5,9 @@ a dark one, as one square SVG that switches with prefers-color-scheme.
 
 The symbol is centred in a square with a little air, so a wide mark is not cut.
 Colours are forced with !important because Affinity writes fills inline.
-The light colour is white (#FFFFFF) and there is no ground. Do not link a PNG
-icon as rel="icon" beside it: its square ground would show where a browser
-prefers it.
+The light colour is white (#FFFFFF) and there is no ground. Then run
+favicon_png.js on the result for the transparent PNGs Chrome on iPad needs.
+Never link the brand's icon PNGs as rel="icon": they carry a ground.
 """
 import re, sys
 

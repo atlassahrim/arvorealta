@@ -30,10 +30,12 @@ commit. A client's own decisions go in `_tools/book/clients/<code>/NOTES.md`.
 8. **The favicon is the logo's symbol**, the brand's dark on a light browser
    and white on a dark one, with no ground:
    `kit/favicon.py <symbol.svg> <dark> '#FFFFFF' <out.svg>` writes one
-   transparent SVG that switches with `prefers-color-scheme`. **It is the
-   only icon in the head**: no PNG `rel="icon"` and no `apple-touch-icon`,
-   because Safari shows the touch icon in tabs and on its start page, and
-   the brand's icon PNGs carry a ground or a photograph.
+   transparent SVG that switches with `prefers-color-scheme`. Then
+   `node kit/favicon_png.js <favicon.svg> <img/slug-favicon-N>` writes the
+   same symbol as transparent 32 and 192 px PNGs in the dark, for Chrome on
+   iPad, which takes no SVG favicon. Head order: the two PNGs, then the SVG
+   with `sizes="any"`. No `apple-touch-icon` and never the brand's icon PNGs,
+   which carry a ground or a photograph.
 9. **Verify at 1440 and 390**: no page errors, no sideways scroll.
 10. **The layout follows the length of the client's text.** The line sets in
     `max-width:18ch` with `text-wrap:balance`, so a short line stays on one

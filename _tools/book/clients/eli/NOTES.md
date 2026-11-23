@@ -152,6 +152,10 @@ section 01's three rules and its culture line.
   because Safari showed it as the tab icon. The icon PNGs stay in Drive for
   profile pictures.
 
+- **23 November. Transparent PNG favicons beside the SVG**: the dark symbol
+  at 32 and 192 px, for Chrome on iPad, which showed Google's cached
+  Arvorealta icon instead of the SVG.
+
 ## Open
 
 - The card back's contact lines are examples (`contact_final: false`).
