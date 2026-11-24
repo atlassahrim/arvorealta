@@ -3440,6 +3440,45 @@ the dialog opens, focus lands on the field rather than the close button, the
 body locks, the two validation messages fire in order, Escape closes and
 unlocks.
 
+### The tender fold features Søre Sunnmøre and keeps a record, 24 November
+
+**The open tender is `800976-2026`, Søre Sunnmøre Reinhaldsverk IKS**: a
+four-year framework for waste bins, closing **18 December 2026, 12:00**.
+The owner asked for a new tender to be featured and for **the last one to
+stay on the page**, so the fold now shows a record of earlier tenders
+under the card.
+
+- **`TENDER` is now `TENDERS`.** The open tender comes first and the record
+  follows, newest first; `TENDER` is `TENDERS[0]`, so the clock is
+  unchanged. **A new tender goes on top and the old one stays.** Each
+  record row is `STR.<lang>.open.past[i]` paired with `TENDERS[i + 1]`,
+  and its date is the tender's own deadline, formatted, never typed.
+- **The rail runs from publication (17 Nov) to the deadline.** SSR sets no
+  question deadline: the buyer answers everyone no later than six days
+  before the deadline (konkurransegrunnlag §1.4). `_tlA` reads
+  `Published` / `Kunngjort` / `Julkaistu`. The field keeps its old name,
+  `questions`, because the clock reads it.
+- **The two dead file buttons are gone.** In their place is one live link
+  to the TED notice. Valdres's files are still in `assets/vedlegg-5/`.
+- **The weights fold reads this tender's weights: price 50, quality 20,
+  climate and environment 30.** The headline is `Half the score is not the
+  price.`, because `Most of the score` became false at 50. **The `65` on
+  the dimension line is derived from the data now**, as the first two
+  segments summed, and reads 50. The body's claim that the tender weights
+  climate on the 30% floor still holds.
+- **The record row carries no reveal.** It sits low in the fold, under the
+  gate of the reveal sweep. The snap holds the page there, so the row
+  would have stayed at opacity 0. This is the gate trap recorded above.
+- **The record is labelled `Earlier`, not `Tenders we took part in`.**
+  Arvorealta did not bid on Valdres and no bidder took the offer, so the
+  label claims only that the tender came first.
+- **A short laptop gets a wider headline and body line** (`max-height:860px`),
+  so the extra row costs no height. Measured: the fold is one screen at
+  1440 × 900, 1280 × 720 and 1180 × 720 in all three languages. Phones
+  scroll freely below 980px; the fold runs about 0.1 screen longer there
+  than before.
+- **The Norwegian and Finnish are a session's**, with the standing caveat.
+
 ## The tender set, promoted on 19 November (it was the annex lab)
 
 **The owner said promote, and the lab is deleted.** What is live now:

@@ -348,6 +348,20 @@ ul{padding:0;list-style:none}
 .file i{font-style:normal;font-family:"Geist Mono",monospace;font-size:9.5px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--ink-soft)}
 .open .foot{font-size:14px;color:var(--ink-soft);margin-top:18px;max-width:58ch}
+/* the record. Earlier tenders stay on the page, one ruled row each under the
+   card, at the owner's word: the fold shows the open one and keeps the ones
+   that closed. Data, not copy -- a row is TENDERS[n] and its date is derived */
+.past{margin-top:clamp(14px,2.4vh,26px);display:grid;gap:8px}
+.past .lbl{font-family:"Geist Mono",monospace;font-size:9.5px;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ink-soft)}
+.past .row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 24px;align-items:baseline;
+  border-top:1px solid var(--rule);padding-top:10px;font-size:14px;color:var(--ink-soft)}
+.past .row b{font-weight:500;color:var(--ink)}
+.past .row a{color:inherit;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
+.past .row a:hover{text-decoration-color:currentColor}
+.past .when{font-family:"Geist Mono",monospace;font-size:10px;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;white-space:nowrap}
+@media (max-width:599px){.past .row{grid-template-columns:minmax(0,1fr)}}
 .quote{font-family:"Geist Mono",monospace;font-size:12.5px;line-height:1.55;color:var(--ink-soft);
   border-left:2px solid var(--rule);padding-left:14px}
 .quote b{display:block;font-weight:600;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
@@ -679,6 +693,10 @@ body{background:var(--b-ink)}
   .ladder .rung li{font-size:13.5px}
   .ladder #rungs{padding-top:18px}
   .ladder .cmp{margin-top:14px}
+  /* the record under the tender card costs a row, so on a short laptop the
+     headline and the card's line run wider rather than taller */
+  .open h2{max-width:30ch;margin-bottom:clamp(16px,2.6vh,30px)}
+  .open .tender .body{max-width:84ch}
 }
 /* the hero fits its own fold. The fold is 100svh and its air was written
    in vh, and on iOS Safari vh is the LARGE viewport, the one with the
@@ -967,17 +985,17 @@ body{background:var(--b-ink)}
 <section class="open" id="open" data-tone="light">
   <div class="wrap">
     <p class="eyebrow rv" id="openEyebrow" data-t="open.eyebrow">Open now</p>
-    <h2 class="rv" id="openH2" data-t="open.h2">If you are bidding on this one, the hard attachment is already written.</h2>
+    <h2 class="rv" id="openH2" data-t="open.h2">If you are bidding on this one, 30 points sit on four answers.</h2>
 
     <div class="tender rv">
       <div class="top">
         <div style="display:grid;gap:16px">
-          <p class="tt" data-t="open.title">Supply of waste containers</p>
+          <p class="tt" data-t="open.title">Waste bins, four-year framework</p>
           <p class="quote">
             <b data-t="open.official">Named in the competition documents as</b>
-            <span lang="nb">Anskaffelse av avfallsbeholdere</span>
+            <span lang="nn">Rammeavtale for fire år på kjøp av avfallsdunkar</span>
           </p>
-          <p class="body" data-t="open.buyer">Valdres Kommunale Renovasjon IKS, Norway.</p>
+          <p class="body" data-t="open.buyer">Søre Sunnmøre Reinhaldsverk IKS, Norway.</p>
         </div>
 
         <div class="clock" id="clock">
@@ -995,15 +1013,15 @@ body{background:var(--b-ink)}
         <i class="fill" id="tlFill"></i>
         <i class="stop a"></i><i class="stop b"></i>
         <i class="now" id="tlNow"></i>
-        <span class="lab a"><span data-t="_tlA">Questions close</span><b id="tlAv">&nbsp;</b></span>
+        <span class="lab a"><span data-t="_tlA">Published</span><b id="tlAv">&nbsp;</b></span>
         <span class="lab b"><span data-t="_tlB">Tender deadline</span><b id="tlBv">&nbsp;</b></span>
       </div>
       <p class="sr" id="tlSr"></p>
 
-      <p class="body" data-t="open.body">Two of the three annexes are handed out as finished forms.</p>
+      <p class="body" data-t="open.body">Climate and environment carries 30 of the 100 points.</p>
       <div class="files" id="openFiles" data-render="files"></div>
     </div>
-    <p class="foot rv" data-t="open.foot">One tender today. Another when there is one worth writing for.</p>
+    <div class="past" id="openPast"></div>
   </div>
 </section>
 
@@ -1021,7 +1039,7 @@ body{background:var(--b-ink)}
         <div class="dim" id="dim">
           <div class="span" id="dimSpan">
             <i class="ruleL"></i>
-            <span class="fig">65</span><span class="of">/ 100</span>
+            <span class="fig">50</span><span class="of">/ 100</span>
             <i class="ruleR"></i>
           </div>
         </div>
@@ -1150,20 +1168,19 @@ const STR = {
     ],
     open: {
       eyebrow: "Open now",
-      h2: "If you are bidding on this one, the hard attachment is already written.",
-      title: "Supply of waste containers", official: "Named in the competition documents as",
-      buyer: "Valdres Kommunale Renovasjon IKS, Norway. Framework agreement, four years.",
-      body: "Two of the three annexes are handed out as finished forms. The third is not, and it is the one where the quality and the environment weight is read.",
-      seeEx: "See a filled example", getTpl: "Download the template",
-      exMeta: "PDF, 5 sheets, 132 KB", tplMeta: "Word, 14 KB, fill it in",
-      fields: [["Tender deadline", "27 Oct 2026, 12:00"], ["Questions close", "19 Oct 2026"]],
-      foot: "One tender today. Another when there is one worth writing for."
+      h2: "If you are bidding on this one, 30 points sit on four answers.",
+      title: "Waste bins, four-year framework", official: "Named in the competition documents as",
+      buyer: "Søre Sunnmøre Reinhaldsverk IKS, Norway. Framework agreement, four years.",
+      body: "Climate and environment carries 30 of the 100 points, and it is scored on four requirements: an EPD or equivalent, a seven-year guarantee, expected lifetime and packaging.",
+      notice: "Read the notice", noticeMeta: "TED 800976-2026, opens in a new tab",
+      pastLabel: "Earlier", closed: "Closed",
+      past: [["Supply of waste containers", "Valdres Kommunale Renovasjon IKS"]]
     },
     weigh: {
       eyebrow: "How it is scored",
-      alt: "The award is scored out of 100 points. Climate and environment carries 30, quality 35 and price 35, so 65 of the 100 are not the price.",
-      h2: "Most of the score is not the price.",
-      segs: [["Climate and environment", 30], ["Quality", 35], ["Price", 35]],
+      alt: "The award is scored out of 100 points. Climate and environment carries 30, quality 20 and price 50, so half of the 100 is not the price.",
+      h2: "Half the score is not the price.",
+      segs: [["Climate and environment", 30], ["Quality", 20], ["Price", 50]],
       body: "Read from the award criteria in the notice itself. Norwegian authorities have had to weight climate and environment at a minimum of 30% since January 2024, and this tender weights it exactly on that floor."
     },
     mail: {
@@ -1255,20 +1272,19 @@ const STR = {
     ],
     open: {
       eyebrow: "Åpen nå",
-      h2: "Leverer du tilbud i denne, er det vanskeligste vedlegget allerede skrevet.",
-      title: "Leveranse av avfallsbeholdere", official: null,
-      buyer: "Valdres Kommunale Renovasjon IKS, Norge. Rammeavtale, fire år.",
-      body: "To av de tre vedleggene er utlevert som ferdige skjema. Det tredje er det ikke, og det er der kvalitets- og miljøvekten leses.",
-      seeEx: "Se et utfylt eksempel", getTpl: "Last ned malen",
-      exMeta: "PDF, 5 sider, 132 KB", tplMeta: "Word, 14 KB, fyll den ut",
-      fields: [["Tilbudsfrist", "27. okt. 2026, 12:00"], ["Frist for spørsmål", "19. okt. 2026"]],
-      foot: "Én konkurranse i dag. Flere når det finnes en det er verdt å skrive for."
+      h2: "Leverer du tilbud i denne, ligger 30 poeng i fire svar.",
+      title: "Avfallsdunker, rammeavtale for fire år", official: "Navn i konkurransegrunnlaget",
+      buyer: "Søre Sunnmøre Reinhaldsverk IKS, Norge. Rammeavtale, fire år.",
+      body: "Klima og miljø teller 30 av 100 poeng og vurderes på fire krav: EPD eller tilsvarende, sju års garanti, forventet levetid og emballasje.",
+      notice: "Les kunngjøringen", noticeMeta: "TED 800976-2026, åpnes i ny fane",
+      pastLabel: "Tidligere", closed: "Lukket",
+      past: [["Leveranse av avfallsbeholdere", "Valdres Kommunale Renovasjon IKS"]]
     },
     weigh: {
       eyebrow: "Slik vektes det",
-      alt: "Konkurransen gir 100 poeng. Klima og miljø teller 30, kvalitet 35 og pris 35, så 65 av de 100 er ikke prisen.",
-      h2: "Mesteparten av poengsummen er ikke prisen.",
-      segs: [["Klima og miljø", 30], ["Kvalitet", 35], ["Pris", 35]],
+      alt: "Konkurransen gir 100 poeng. Klima og miljø teller 30, kvalitet 20 og pris 50, så halvparten av de 100 er ikke prisen.",
+      h2: "Halve poengsummen er ikke prisen.",
+      segs: [["Klima og miljø", 30], ["Kvalitet", 20], ["Pris", 50]],
       body: "Lest fra tildelingskriteriene i selve kunngjøringen. Norske oppdragsgivere har siden januar 2024 måttet vekte klima og miljø med minst 30 prosent, og denne konkurransen ligger akkurat på den grensen."
     },
     mail: {
@@ -1360,20 +1376,19 @@ const STR = {
     ],
     open: {
       eyebrow: "Avoinna nyt",
-      h2: "Jos jätät tarjouksen tähän, vaikein liite on jo kirjoitettu.",
-      title: "Jäteastioiden toimitus", official: "Kilpailuasiakirjoissa nimellä",
-      buyer: "Valdres Kommunale Renovasjon IKS, Norja. Puitejärjestely, neljä vuotta.",
-      body: "Kaksi kolmesta liitteestä annetaan valmiina lomakkeina. Kolmatta ei anneta, ja juuri siinä luetaan laadun ja ympäristön paino.",
-      seeEx: "Katso täytetty esimerkki", getTpl: "Lataa malli",
-      exMeta: "PDF, 5 sivua, 132 KB", tplMeta: "Word, 14 KB, täytä se",
-      fields: [["Tarjousten määräaika", "27.10.2026, 12:00"], ["Kysymysten määräaika", "19.10.2026"]],
-      foot: "Yksi tarjouspyyntö tänään. Lisää, kun löytyy sellainen jolle kannattaa kirjoittaa."
+      h2: "Jos jätät tarjouksen tähän, 30 pistettä ratkeaa neljässä vastauksessa.",
+      title: "Jäteastiat, nelivuotinen puitejärjestely", official: "Kilpailuasiakirjoissa nimellä",
+      buyer: "Søre Sunnmøre Reinhaldsverk IKS, Norja. Puitejärjestely, neljä vuotta.",
+      body: "Ilmasto ja ympäristö painaa 30 pistettä sadasta, ja se pisteytetään neljän vaatimuksen perusteella: EPD tai vastaava, seitsemän vuoden takuu, odotettu käyttöikä ja pakkaus.",
+      notice: "Lue ilmoitus", noticeMeta: "TED 800976-2026, avautuu uuteen välilehteen",
+      pastLabel: "Aiemmat", closed: "Suljettu",
+      past: [["Jäteastioiden toimitus", "Valdres Kommunale Renovasjon IKS"]]
     },
     weigh: {
       eyebrow: "Näin se pisteytetään",
-      alt: "Kilpailussa on 100 pistettä. Ilmasto ja ympäristö painaa 30, laatu 35 ja hinta 35, joten 65 pistettä sadasta ei ole hinta.",
-      h2: "Suurin osa pisteistä ei ole hinta.",
-      segs: [["Ilmasto ja ympäristö", 30], ["Laatu", 35], ["Hinta", 35]],
+      alt: "Kilpailussa on 100 pistettä. Ilmasto ja ympäristö painaa 30, laatu 20 ja hinta 50, joten puolet sadasta pisteestä ei ole hinta.",
+      h2: "Puolet pisteistä ei ole hinta.",
+      segs: [["Ilmasto ja ympäristö", 30], ["Laatu", 20], ["Hinta", 50]],
       body: "Luettu itse ilmoituksen vertailuperusteista. Norjalaisten hankintayksiköiden on tammikuusta 2024 lähtien pitänyt painottaa ilmastoa ja ympäristöä vähintään 30 prosentilla, ja tämä tarjouspyyntö on tasan sillä rajalla."
     },
     mail: {
@@ -1454,33 +1469,33 @@ const EXTRA = {
   en:{ _scroll:"Scroll", _docNav:"What it looks like", _docEyebrow:"What it looks like",
        _r0:"Bids", _r1:"Tender", _r2:"Documents", _r3:"Scored", _r4:"Cost", _r5:"Start",
        _uDays:"days", _uHours:"hours", _uMin:"minutes",
-       _tlA:"Questions close", _tlB:"Tender deadline",
+       _tlA:"Published", _tlB:"Tender deadline",
        _left:"until the tender deadline", _shutEyebrow:"Tenders to take part in",
        _shut:"Closed.", _shutWhen:"The deadline passed on",
        _shutH2:"This one has closed.<br>Watch for the next one.",
-       _window:"The bidding window runs from the question deadline to the tender deadline.",
+       _window:"The rail runs from the day the tender was published to its deadline.",
        _docH2:"One standard.<br>Every document a bid needs.",
        _docA:"Tender annex", _docB:"Proposal", _docC:"Deck",
        _docNote:"All three are published on this site and open in a new tab. The annex is the redacted sample: the client, the sums and the notice numbers are removed from the file rather than covered over." },
   nb:{ _scroll:"Rull", _docNav:"Slik ser det ut", _docEyebrow:"Slik ser det ut",
        _r0:"Tilbud", _r1:"Konkurranse", _r2:"Dokumenter", _r3:"Vekting", _r4:"Pris", _r5:"Start",
        _uDays:"dager", _uHours:"timer", _uMin:"minutter",
-       _tlA:"Frist for spørsmål", _tlB:"Tilbudsfrist",
+       _tlA:"Kunngjort", _tlB:"Tilbudsfrist",
        _left:"til tilbudsfristen", _shutEyebrow:"Anbud å delta i",
        _shut:"Lukket.", _shutWhen:"Fristen gikk ut",
        _shutH2:"Denne er lukket.<br>Følg med på den neste.",
-       _window:"Tilbudsvinduet går fra spørsmålsfristen til tilbudsfristen.",
+       _window:"Linjen går fra dagen konkurransen ble kunngjort, til tilbudsfristen.",
        _docH2:"Én standard.<br>Hvert dokument et tilbud trenger.",
        _docA:"Tilbudsvedlegg", _docB:"Tilbud", _docC:"Presentasjon",
        _docNote:"Alle tre er publisert på dette nettstedet og åpnes i ny fane. Vedlegget er det sladdede eksempelet: oppdragsgiver, beløpene og kunngjøringsnumrene er fjernet fra filen, ikke dekket over." },
   fi:{ _scroll:"Vieritä", _docNav:"Miltä se näyttää", _docEyebrow:"Miltä se näyttää",
        _r0:"Tarjoukset", _r1:"Tarjouspyyntö", _r2:"Asiakirjat", _r3:"Pisteet", _r4:"Hinta", _r5:"Aloita",
        _uDays:"päivää", _uHours:"tuntia", _uMin:"minuuttia",
-       _tlA:"Kysymysten määräaika", _tlB:"Tarjousten määräaika",
+       _tlA:"Julkaistu", _tlB:"Tarjousten määräaika",
        _left:"tarjousten määräaikaan", _shutEyebrow:"Tarjouskilpailuja, joihin osallistua",
        _shut:"Suljettu.", _shutWhen:"Määräaika umpeutui",
        _shutH2:"Tämä on sulkeutunut.<br>Pidä silmällä seuraavaa.",
-       _window:"Tarjousikkuna kulkee kysymysten määräajasta tarjousten määräaikaan.",
+       _window:"Aikajana kulkee tarjouspyynnön julkaisupäivästä sen määräaikaan.",
        _docH2:"Yksi standardi.<br>Jokainen tarjouksen tarvitsema asiakirja.",
        _docA:"Tarjousliite", _docB:"Tarjous", _docC:"Esitys",
        _docNote:"Kaikki kolme on julkaistu tällä sivustolla ja avautuvat uuteen välilehteen. Liite on peitetty näyte: hankkija, summat ja ilmoitusnumerot on poistettu tiedostosta, ei peitetty päältä." }
@@ -1502,10 +1517,21 @@ const dig = (o, path) => path.split(".").reduce((a, k) => (a == null ? a : a[k])
    question deadline is +02:00 and the tender deadline, two days after the
    change, is +01:00. Everything the reader sees about timing is derived from
    these; nothing about the date is typed into copy. */
-const TENDER = {
-  questions: new Date("2026-10-19T23:59:00+02:00"),
-  deadline:  new Date("2026-10-27T12:00:00+01:00")
-};
+/* The open tender first, then the record, newest first. A new tender goes on
+   top and the old one stays. Søre Sunnmøre sets no question deadline (the
+   buyer answers everyone no later than six days before the tender deadline,
+   konkurransegrunnlag §1.4), so its rail runs from publication, 17 November,
+   to the deadline. The field keeps its old name, `questions`, because the
+   clock reads it. */
+const TENDERS = [
+  { questions: new Date("2026-11-17T12:00:00+01:00"),
+    deadline:  new Date("2026-12-18T12:00:00+01:00"),
+    notice: "https://ted.europa.eu/en/notice/-/detail/800976-2026" },
+  { questions: new Date("2026-10-19T23:59:00+02:00"),
+    deadline:  new Date("2026-10-27T12:00:00+01:00"),
+    notice: "https://ted.europa.eu/en/notice/-/detail/663737-2026" }
+];
+const TENDER = TENDERS[0];
 
 const INTAKE = "https://usebasin.com/f/945efcd39804";
 const MAX_MB = 10, MAX_BYTES = MAX_MB * 1024 * 1024;
@@ -1527,12 +1553,12 @@ function renderLists(){
     `<div class="rv"><h3>${esc(h)}</h3><p>${esc(p)}</p></div>`).join(""));
 
   put("#openFiles",
-    /* unavailable since 19 November, at the owner's word: no href, so they
-       cannot be clicked, tabbed to or opened. The files stay in assets/ */
-    `<span class="file off" aria-disabled="true">
-       <b>${esc(t.open.seeEx)}</b><i>${esc(t.open.exMeta)}</i></span>
-     <span class="file off" aria-disabled="true">
-       <b>${esc(t.open.getTpl)}</b><i>${esc(t.open.tplMeta)}</i></span>`);
+    `<a class="file" href="${TENDER.notice}" target="_blank" rel="noopener">
+       <b>${esc(t.open.notice)}</b><i>${esc(t.open.noticeMeta)}</i></a>`);
+  put("#openPast", `<p class="lbl">${esc(t.open.pastLabel)}</p>` +
+    t.open.past.map(([title, buyer], i) => { const d = TENDERS[i + 1]; return `
+    <p class="row"><span><a href="${d.notice}" target="_blank" rel="noopener"><b>${esc(title)}</b></a>, ${esc(buyer)}</span>
+      <span class="when">${esc(t.open.closed)} ${esc(fmt(d.deadline))}</span></p>`; }).join(""));
 
   /* the bar's track widths come from the data, and every track is
      minmax(0,Nfr): an fr track takes its min-content width as a floor, so a
@@ -1546,6 +1572,7 @@ function renderLists(){
   $("#names").style.gridTemplateColumns = cols;
   $("#names").style.gridAutoFlow = "column";
   $("#dim").style.gridTemplateColumns = `minmax(0,${segs[0][1] + segs[1][1]}fr) minmax(0,${segs[2][1]}fr)`;
+  $("#dimSpan .fig").textContent = segs[0][1] + segs[1][1];
   put("#segs", segs.map(([, p], i) =>
     `<div class="s" data-s="${i}"><b>${p}</b></div>`).join("") + `<div class="curtain" id="curtain"></div>`);
   put("#names", segs.map(([n]) => `<span>${esc(n)}</span>`).join(""));
