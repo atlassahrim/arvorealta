@@ -56,7 +56,10 @@ jobs:
           find . \( -name .git -o -name .github \) -prune -o \
                -name '_*' -print
 
-      - uses: actions/upload-pages-artifact@v3
+      # v4 since 24 November: on v3 the deploy step found no artifact three
+      # times in a row once GitHub began forcing these actions onto Node 24.
+      # v4 also leaves dotfiles out, and nothing published needs one.
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: .
 
