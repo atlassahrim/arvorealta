@@ -5456,9 +5456,9 @@ it is the part worth having checked before the page is used in an approach.
 
 ## Skills, and which one wins
 
-`.claude/skills/` holds seven of ours and seven vendored from one upstream
-bundle. `.claude/skills/VENDORED.md` carries the source, the commit, the
-licence and what was checked before installing.
+`.claude/skills/` holds seven of ours, seven vendored from one upstream
+bundle and four copied from ECC. `.claude/skills/VENDORED.md` carries the
+source, the commit, the licence and what was checked before installing.
 
 Ours: `arv-audit`, `arv-brand-book`, `arv-eu-tender-documents`, `arv-plan`,
 `arv-profile`, `arv-research`, `arv-taste-skill`.
@@ -5466,6 +5466,9 @@ Ours: `arv-audit`, `arv-brand-book`, `arv-eu-tender-documents`, `arv-plan`,
 Vendored from `ui-ux-pro-max-skill`: `arv-banner-design`, `arv-brand`,
 `arv-design`, `arv-design-system`, `arv-slides`, `arv-ui-styling`,
 `arv-ui-ux-pro-max`.
+
+From ECC: `arv-seo`, `arv-accessibility`, `arv-benchmark`,
+`arv-security-scan`.
 
 **Every skill in `.claude/skills/` carries `arv-`, since 26 November, at the
 owner's word**, so ours can never be confused with ECC's. The prefix is on
@@ -5496,62 +5499,48 @@ Use them for what they are good at, which is breadth — font pairings, chart
 forms, platform sizes, stack-specific patterns — and resolve every conflict in
 favour of this file.
 
-### ECC, installed on 26 November
+### ECC, installed and trimmed on 26 November
 
-**Affaan Mustafa's Everything Claude Code is installed in full, hooks
-included, at the owner's word.** It is a plugin, `ecc@ecc`, declared in
-`.claude/settings.json` and pinned to tag `v2.2.3`. Claude Code fetches it
-when a session starts, so nothing of it is committed except its rule packs
-in `.claude/rules/ecc/common/` and `web/`. A plugin cannot carry rules, and
-ECC's own install notes say to copy them in. The source, the commit, the
-update steps and what was checked are in `.claude/skills/VENDORED.md`.
+**Affaan Mustafa's Everything Claude Code was installed in full on
+26 November and trimmed the same day, both at the owner's word.** What is
+left is four skills and a guard:
 
-**Its names arrive under `ecc:`**, and ours carry `arv-`, so its `plan` and
-its `design-system` sit beside ours rather than replacing them. Step 02 of
-the copy pipeline is `/arv-plan`. ECC's is `/ecc:plan`.
+- **`arv-seo`**: titles, descriptions, structured data, sitemap.
+- **`arv-accessibility`**: WCAG 2.2 AA, beyond the contrast figures this
+  file records.
+- **`arv-benchmark`**: page speed. Its baselines go in `_benchmarks/`, so
+  they stay off the site.
+- **`arv-security-scan`**: audits `.claude/` with AgentShield, pinned at
+  1.6.0. It downloads that package from npm each time it runs.
+- **The secret guard**, `.claude/hooks/secret-guard.js`, which is ours.
+  Before any `git commit` Claude runs, it reads the added lines of every
+  staged file and blocks the commit if one looks like a key or a token,
+  naming the file and line without printing the value. A line that is truly
+  safe can carry `secret-guard: allow`.
 
-**It costs about 44,834 tokens in every session**, measured with `claude
-plugin details ecc@ecc`. Nothing else added to this repo's sessions comes
-close.
+**Why it was trimmed, in figures.** The plugin cost about 44,834 tokens in
+every session, measured with `claude plugin details ecc@ecc`, and its
+`common` rules about 4,600 more. The four skills cost about 340. Most of the
+rest assumed a test suite and a build step, which this site has neither of.
+Two of its rules contradicted this file: test-first coding with 80 per cent
+coverage, and `feat:` commit subjects. Its GateGuard hook stopped the first
+edit of each file to ask questions.
 
-**What the hooks do here, on the default `standard` profile:**
+**ECC's own secret check never watched this repo.** It read only `.js`,
+`.ts`, `.py`, `.go` and `.rs` files, so a key pasted into `index.html`,
+`CLAUDE.md` or a client's `client.json` would have gone through. This file
+said for one turn that it protected the repo, and that was wrong. The guard
+that replaced it reads every staged text file. Run across all 354 tracked
+text files, it flags nothing, and in a live session it blocked a staged
+fake key.
 
-- **GateGuard refuses the first Edit or Write of each file** and asks
-  questions about it first. Expect one extra round per file per session.
-- **The pre-commit hook warns** that `Area: what changed` is not a
-  conventional commit. It is a warning and never blocks. It does block a
-  commit that looks like it holds a secret.
-- **A doc-file warning** fires when a file named like a scratch note
-  (`NOTES.md`, `TODO.md`, `DRAFT.md` and five others) is written outside
-  `docs/`, `.claude/`, `skills/`, `templates/` and a few other folders. Here
-  that means each client's `_tools/book/clients/<code>/NOTES.md`. It only
-  warns.
-- **Session summaries, cost notes and continuous learning** write under
-  `~/.claude`. That is inside the container, so in a cloud session they are
-  lost when it ends.
-- **The Prettier and `tsc` hooks do nothing here.** The site has no
-  TypeScript and no `package.json`.
+**Two limits.** The guard needs Node 18 or newer where Claude Code runs;
+without it the hook errors, and Claude Code shows the error and lets the
+commit through. And it guards commits Claude makes, not commits made outside
+Claude Code.
 
-**The off switches** are environment variables, and also `/plugin configure
-ecc@ecc`. `ECC_HOOK_PROFILE=minimal` keeps the lightest set,
-`ECC_DISABLED_HOOKS=<id,id>` removes single hooks by the IDs in its
-`hooks/hooks.metadata.json` (GateGuard's is `pre:edit-write:gateguard-fact-force`),
-and `ECC_HOOKS_ENABLED=false` turns all of them off while keeping the skills.
-
-**This file outranks ECC's skills, agents and rules**, as it outranks the
-vendored bundle. Two of its rules contradict how this repo works, and the
-repo wins until the owner says otherwise:
-
-- `common/testing.md` makes TDD and 80 per cent coverage mandatory. The site
-  has no test suite. It is verified by measuring the rendered page.
-- `common/git-workflow.md` asks for `feat:` and `fix:` subjects. This repo
-  writes `Area: what changed`.
-
-**This could not be checked from inside the session that installed it:**
-whether a fresh cloud session installs the plugin on start without a prompt.
-At the start of the next session, look for `ecc:` skills in the list, or run
-`/plugin`. If they are missing, run `claude plugin install ecc@ecc --scope
-project` once.
+The install, its hook list and its off switches are in git at commit
+`94f565f`, and in `.claude/skills/VENDORED.md` under its history.
 
 ## How to report back
 

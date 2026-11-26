@@ -46,52 +46,61 @@ bundle's own tests, its token validators, and `arv-ui-styling/scripts/shadcn_add
 which shells out to `npx shadcn add` — **that one installs npm packages, so
 read what it is adding before running it in a repo that has no build step.**
 
-# ECC, a plugin rather than a copy
+# Four skills from ECC
 
-**Everything Claude Code (ECC)** by Affaan Mustafa is installed as a Claude
-Code plugin at project scope, at the owner's word on 26 November 2026 ("full
-install, hooks included"). Unlike the bundle above, it is **not committed**:
-`.claude/settings.json` declares where it lives, and Claude Code fetches it
-when a session starts. Only its rule packs are copied in, because a plugin
-cannot carry rules.
+**Everything Claude Code (ECC)** by Affaan Mustafa was installed as a
+project plugin on 26 November 2026, at the owner's word, and trimmed the
+same day, also at his word, to the four skills below. Nothing of the plugin
+is left: `.claude/settings.json` no longer declares it, and its rule packs
+are deleted.
 
 | | |
 |---|---|
 | Source | https://github.com/affaan-m/ECC (formerly `everything-claude-code`) |
-| Plugin | `ecc@ecc` 2.2.3 |
-| Pinned to | tag `v2.2.3`, commit `c05b2d6614f62f6db0047669aa4eefb223d478f9`, 1 October 2026 |
+| Copied from | tag `v2.2.3`, commit `c05b2d6614f62f6db0047669aa4eefb223d478f9`, 1 October 2026 |
 | Licence | MIT |
-| Installed | 26 November 2026, `claude plugin marketplace add 'affaan-m/ECC#v2.2.3' --scope project`, then `claude plugin install ecc@ecc --scope project` |
-| Contents | 387 skills and command shims, 68 agents, hooks on 7 events, one MCP definition (`chrome-devtools`) |
-| Always-on cost | about 44,834 tokens in every session, from `claude plugin details ecc@ecc` |
-| Copied in | `.claude/rules/ecc/common/` and `.claude/rules/ecc/web/`, 84 KB, byte-identical to the tag |
+| Copied | 26 November 2026 |
+| Skills | `arv-seo`, `arv-accessibility`, `arv-benchmark`, `arv-security-scan`: one `SKILL.md` each, from upstream `skills/<name>/` |
+| Always-on cost | about 340 tokens, the four descriptions in the skill list |
+
+**What changed from upstream:**
+
+- Each `name:` takes `arv-`.
+- `arv-benchmark` keeps its baselines in `_benchmarks/`, not
+  `.ecc/benchmarks/`, so the underscore keeps them off the site. It calls
+  itself `/arv-benchmark`. Two lines pointing at `/canary-watch` and
+  `/browser-qa`, which are not installed, are removed.
+- `arv-security-scan` pins its scanner to `ecc-agentshield@1.6.0` on all 13
+  calls; 1.6.0 was published by 10 September 2026. **It still downloads that
+  package from npm each time it runs.** The pin only means it is the same code
+  every time.
+
+## The secret guard is ours, not ECC's
+
+`.claude/hooks/secret-guard.js`, run by `.claude/settings.json` before every
+Bash command. It acts only on `git commit`: it reads the added lines of every
+staged file and blocks the commit if one looks like a key or a token. Its
+patterns and its placeholder rule are adapted from ECC's
+`scripts/hooks/pre-bash-commit-quality.js`, which only read `.js`, `.ts`,
+`.py`, `.go` and `.rs` files, so it never saw this repo's HTML, Markdown,
+JSON or CSS. Tested on 10 cases in a throwaway repo, and live in a session
+with a dry-run commit. Run across all 354 tracked text files, it flags
+nothing.
 
 ## To update
 
-1. Change `ref` in `.claude/settings.json` to the new tag. Pin a tag, never
-   `main`: the hooks run code on every tool call.
-2. Copy `rules/common` and `rules/web` from that tag over
-   `.claude/rules/ecc/`.
-3. Repeat the check below on the new tag, and update this table.
+Copy upstream `skills/<name>/SKILL.md` from a new tag over
+`arv-<name>/SKILL.md` for the four names above, run
+`python3 -I _tools/skills/arv_prefix.py .` to put the prefix back on each
+`name:`, and make the edits listed above again. Before moving the scanner
+pin, check that the new `ecc-agentshield` version is at least two weeks old.
 
-## What was checked before installing
+## History: the full plugin, for one day
 
-The check ran on `scripts/hooks/` and `scripts/lib/` at the pinned tag, in
-the copy Claude Code installed (`~/.claude/plugins/cache/ecc/ecc/2.2.3/`).
-
-- **Network.** One outbound request in the hooks, in
-  `plan-canvas-pending.js`, and it goes to a loopback port the plugin opens
-  itself. The other `fetch` calls are browser code for its local canvas
-  pages. There is no telemetry upload. The cost tracker writes to local
-  files.
-- **Credentials.** No hook reads `~/.ssh`, `.netrc`, cloud keys or API
-  tokens. The two places that mention `GITHUB_TOKEN` delete it from a child
-  process's environment. GateGuard lists credential filenames so it can stop
-  edits to them.
-- **Deletes.** Every `rmSync` or `unlinkSync` in the hooks removes the
-  plugin's own state, temp or quarantine files.
-- **Blocking.** The hooks that can stop a tool call are GateGuard, which
-  refuses the first Edit or Write of each file until questions about it are
-  answered; the dev-server blocker; config protection on linter files; and
-  the secret check in the pre-commit hook. Commit-message format is a
-  warning, never a block.
+It was `ecc@ecc` 2.2.3, declared in `.claude/settings.json` and pinned to
+the same tag. It held 387 skills and command shims, 68 agents and hooks on
+7 events, and cost about 44,834 tokens in every session, plus about 4,600
+for its `common` rules in `.claude/rules/ecc/`. The check run on its hook
+code before installing found no outbound request except to loopback, no
+credential reads, and deletes only of its own state files. That entry, and
+the install, are in git at commit `94f565f`.
