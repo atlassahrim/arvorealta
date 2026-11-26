@@ -3,7 +3,7 @@
 The first client book, and the template `new.py` copies. Page:
 `brand/book-eli/index.html`, Portuguese. Drive: `Eliria BRAND`. Config:
 `client.json` here. The rules every book follows are in
-`.claude/skills/brand-book/reference.md`. This file is only what is
+`.claude/skills/arv-brand-book/reference.md`. This file is only what is
 Eliria's. The day-by-day record before 21 November is in git.
 
 **Where it lives**: `/brand/book-eli/`. `/eliria/` is a stub forwarding

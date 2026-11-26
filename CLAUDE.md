@@ -3951,8 +3951,8 @@ family; nothing new is made in brick.
 ## Client brand books
 
 **Client brand books have their own pipeline, and it lives outside this
-file.** The owner types `/brand-book <Client>`, which is the skill in
-`.claude/skills/brand-book/`: `SKILL.md` is the workflow, and it asks for
+file.** The owner types `/arv-brand-book <Client>`, which is the skill in
+`.claude/skills/arv-brand-book/`: `SKILL.md` is the workflow, and it asks for
 what is missing. `reference.md` beside it holds the rules every client
 book follows. The scripts are in `_tools/book/kit/`. Each client has
 `_tools/book/clients/<code>/`, holding `client.json` (everything that
@@ -5460,13 +5460,24 @@ it is the part worth having checked before the page is used in an approach.
 bundle. `.claude/skills/VENDORED.md` carries the source, the commit, the
 licence and what was checked before installing.
 
-Ours: `audit`, `brand-book`, `eu-tender-documents`, `plan`, `profile`,
-`research`, `taste-skill`.
+Ours: `arv-audit`, `arv-brand-book`, `arv-eu-tender-documents`, `arv-plan`,
+`arv-profile`, `arv-research`, `arv-taste-skill`.
 
-Vendored from `ui-ux-pro-max-skill`: `banner-design`, `brand`, `design`,
-`design-system`, `slides`, `ui-styling`, `ui-ux-pro-max`.
+Vendored from `ui-ux-pro-max-skill`: `arv-banner-design`, `arv-brand`,
+`arv-design`, `arv-design-system`, `arv-slides`, `arv-ui-styling`,
+`arv-ui-ux-pro-max`.
 
-**This file outranks every one of them, and `taste-skill` outranks the
+**Every skill in `.claude/skills/` carries `arv-`, since 26 November, at the
+owner's word**, so ours can never be confused with ECC's. The prefix is on
+the folder and on the `name:` in each `SKILL.md`, and every reference was
+changed with it: the copy pipeline is `/arv-research`, `/arv-profile`,
+`/arv-plan` and `/arv-audit`, and the vendored skills call each other as
+`arv-brand` and `../arv-design-system/`. **Sections written before that
+date use the old names**: read `taste-skill` as `arv-taste-skill`,
+`ui-ux-pro-max` as `arv-ui-ux-pro-max`, and so on. A new skill of ours takes
+the prefix too.
+
+**This file outranks every one of them, and `arv-taste-skill` outranks the
 vendored seven.** They are reference material, not a mandate, and several of
 them will suggest things this site has decided against:
 
@@ -5495,9 +5506,9 @@ in `.claude/rules/ecc/common/` and `web/`. A plugin cannot carry rules, and
 ECC's own install notes say to copy them in. The source, the commit, the
 update steps and what was checked are in `.claude/skills/VENDORED.md`.
 
-**Its names arrive under `ecc:`**, so the two that matched ours, its `plan`
-and its `design-system`, sit beside ours rather than replacing them. `/plan`
-is still step 02 of the copy pipeline. ECC's is `/ecc:plan`.
+**Its names arrive under `ecc:`**, and ours carry `arv-`, so its `plan` and
+its `design-system` sit beside ours rather than replacing them. Step 02 of
+the copy pipeline is `/arv-plan`. ECC's is `/ecc:plan`.
 
 **It costs about 44,834 tokens in every session**, measured with `claude
 plugin details ecc@ecc`. Nothing else added to this repo's sessions comes

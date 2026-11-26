@@ -13,16 +13,26 @@ network fetch.
 | Installed | 4 October 2026 |
 | Size | 11 MB, most of it the font and icon catalogues |
 
-Vendored: `banner-design`, `brand`, `design`, `design-system`, `slides`,
-`ui-styling`, `ui-ux-pro-max`.
+Vendored: `arv-banner-design`, `arv-brand`, `arv-design`,
+`arv-design-system`, `arv-slides`, `arv-ui-styling`, `arv-ui-ux-pro-max`.
+Upstream they are the same names without `arv-`.
 
-Ours, and unrelated to the bundle: `audit`, `eu-tender-documents`, `plan`,
-`profile`, `research`, `taste-skill`.
+Ours, and unrelated to the bundle: `arv-audit`, `arv-brand-book`,
+`arv-eu-tender-documents`, `arv-plan`, `arv-profile`, `arv-research`,
+`arv-taste-skill`.
+
+**Every folder here carries `arv-` since 26 November 2026, at the owner's
+word**, so none can be confused with the ECC plugin's skills. The prefix is
+on the folder and on each `SKILL.md`'s `name:`.
 
 ## To update
 
-Clone the repo at a new tag and copy `.claude/skills/*` over the seven names
-above. Do not copy the repo's own `src/` or root `scripts/` — those are its
+Clone the repo at a new tag and copy each upstream `.claude/skills/<name>`
+over `arv-<name>` here, for the seven names above. **Then run
+`python3 -I _tools/skills/arv_prefix.py .`** from the repo root: the upstream
+files arrive unprefixed, and it puts the prefix back on each `name:`, on the
+`../<name>/` paths and on the names the skills use to call each other. Do
+not copy the repo's own `src/` or root `scripts/` — those are its
 maintenance tooling, not skills, and the root `scripts/refresh-*.py` reach out
 to Google Fonts and Phosphor to rebuild catalogues. Nothing under the seven
 installed skills makes a network request.
@@ -32,7 +42,7 @@ installed skills makes a network request.
 Every script under the seven skills was scanned for outbound requests, for
 reads of environment variables, credentials, `~/.ssh` or `~/.netrc`, and for
 destructive file operations. There are none. The `subprocess` calls are the
-bundle's own tests, its token validators, and `ui-styling/scripts/shadcn_add.py`,
+bundle's own tests, its token validators, and `arv-ui-styling/scripts/shadcn_add.py`,
 which shells out to `npx shadcn add` — **that one installs npm packages, so
 read what it is adding before running it in a repo that has no build step.**
 

@@ -3,7 +3,7 @@
 Page: `brand/book-mre/index.html`, Portuguese (pt-BR). Drive: `Mulheres
 Reais BRAND`. Config: `client.json` here. Started from Eliria on
 21 November. The rules every book follows are in
-`.claude/skills/brand-book/reference.md`.
+`.claude/skills/arv-brand-book/reference.md`.
 
 ## Decisions
 
